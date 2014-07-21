@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="BaseControlStyles/ButtonStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/CheckboxStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/ContextMenuStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/DataGridStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/ScrollBarStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/TabControlStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/ToolTipStyle.xaml" />
+        <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

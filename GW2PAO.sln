@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.API", "GW2PAO.API\GW2PAO.API.csproj", "{65064198-8A49-4693-BEE2-FF6376F24188}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.PresentationCore", "GW2PAO.PresentationCore\GW2PAO.PresentationCore.csproj", "{1CEDDC1B-A058-4828-B333-ED79A69C4172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO", "GW2PAO\GW2PAO.csproj", "{500715F3-12A8-46A4-81E8-CE7978352E38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.UnitTest", "GW2PAO.UnitTest\GW2PAO.UnitTest.csproj", "{23D4706D-C382-4FC5-826F-8BAB13BC4C65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.API.UnitTest", "GW2PAO.API.UnitTest\GW2PAO.API.UnitTest.csproj", "{44E72AA9-EF37-444C-A60D-62908364DA09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.PresentationCore.UnitTest", "GW2PAO.PresentationCore.UnitTest\GW2PAO.PresentationCore.UnitTest.csproj", "{DEFE5C6E-E3C2-4A64-AB2A-7D133D39C616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.StickyWindows", "GW2PAO.StickyWindows\GW2PAO.StickyWindows.csproj", "{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://shurne.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = GW2PAO.API\\GW2PAO.API.csproj
+		SccProjectName1 = GW2PAO.API
+		SccLocalPath1 = GW2PAO.API
+		SccProjectUniqueName2 = GW2PAO.PresentationCore\\GW2PAO.PresentationCore.csproj
+		SccProjectName2 = GW2PAO.PresentationCore
+		SccLocalPath2 = GW2PAO.PresentationCore
+		SccProjectUniqueName3 = GW2PAO\\GW2PAO.csproj
+		SccProjectName3 = GW2PAO
+		SccLocalPath3 = GW2PAO
+		SccProjectUniqueName4 = GW2PAO.UnitTest\\GW2PAO.UnitTest.csproj
+		SccProjectName4 = GW2PAO.UnitTest
+		SccLocalPath4 = GW2PAO.UnitTest
+		SccProjectUniqueName5 = GW2PAO.API.UnitTest\\GW2PAO.API.UnitTest.csproj
+		SccProjectName5 = GW2PAO.API.UnitTest
+		SccLocalPath5 = GW2PAO.API.UnitTest
+		SccProjectUniqueName6 = GW2PAO.PresentationCore.UnitTest\\GW2PAO.PresentationCore.UnitTest.csproj
+		SccProjectName6 = GW2PAO.PresentationCore.UnitTest
+		SccLocalPath6 = GW2PAO.PresentationCore.UnitTest
+		SccProjectUniqueName7 = GW2PAO.StickyWindows\\GW2PAO.StickyWindows.csproj
+		SccProjectName7 = GW2PAO.StickyWindows
+		SccLocalPath7 = GW2PAO.StickyWindows
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65064198-8A49-4693-BEE2-FF6376F24188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65064198-8A49-4693-BEE2-FF6376F24188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65064198-8A49-4693-BEE2-FF6376F24188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65064198-8A49-4693-BEE2-FF6376F24188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CEDDC1B-A058-4828-B333-ED79A69C4172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CEDDC1B-A058-4828-B333-ED79A69C4172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CEDDC1B-A058-4828-B333-ED79A69C4172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CEDDC1B-A058-4828-B333-ED79A69C4172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{500715F3-12A8-46A4-81E8-CE7978352E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{500715F3-12A8-46A4-81E8-CE7978352E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{500715F3-12A8-46A4-81E8-CE7978352E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{500715F3-12A8-46A4-81E8-CE7978352E38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23D4706D-C382-4FC5-826F-8BAB13BC4C65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D4706D-C382-4FC5-826F-8BAB13BC4C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D4706D-C382-4FC5-826F-8BAB13BC4C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D4706D-C382-4FC5-826F-8BAB13BC4C65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E72AA9-EF37-444C-A60D-62908364DA09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E72AA9-EF37-444C-A60D-62908364DA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E72AA9-EF37-444C-A60D-62908364DA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E72AA9-EF37-444C-A60D-62908364DA09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEFE5C6E-E3C2-4A64-AB2A-7D133D39C616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEFE5C6E-E3C2-4A64-AB2A-7D133D39C616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEFE5C6E-E3C2-4A64-AB2A-7D133D39C616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEFE5C6E-E3C2-4A64-AB2A-7D133D39C616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
