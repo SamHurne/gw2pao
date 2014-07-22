@@ -92,7 +92,7 @@ namespace GW2PAO
             dummyWindow.Hide();
 
             // Show a notification that the program is now running
-            TrayIcon.DisplayNotification("GW2 Info Overlay is now running", "Click here for options", TrayInfoMessageType.None);
+            TrayIcon.DisplayNotification("GW2 Personal Assistant Overlay is now running", "Click here for options", TrayInfoMessageType.None);
 
             logger.Info("Program startup complete");
         }
