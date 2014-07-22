@@ -79,7 +79,7 @@
                     <Image.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Reset Hidden Events" Command="{Binding ResetHiddenEventsCommand}" />
-                            <MenuItem Header="Show Inactive Events" IsCheckable="True" IsChecked="{Binding UserOptions.AreInactiveEventsVisible}" />
+                            <MenuItem Header="Show Inactive Events" IsCheckable="True" IsChecked="{Binding UserSettings.AreInactiveEventsVisible}" />
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
                         </ContextMenu>

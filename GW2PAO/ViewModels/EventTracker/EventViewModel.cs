@@ -25,7 +25,7 @@ namespace GW2PAO.ViewModels.EventTracker
         private EventState state;
         private TimeSpan timerValue;
         private bool isVisible;
-        private EventTrackerSettings userOptions;
+        private EventTrackerSettings userSettings;
 
         /// <summary>
         /// The primary model object containing the event information
@@ -85,19 +85,19 @@ namespace GW2PAO.ViewModels.EventTracker
         /// </summary>
         public bool IsTreasureObtained
         {
-            get { return this.userOptions.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
+            get { return this.userSettings.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
             set
             {
-                if (value && !this.userOptions.EventsWithTreasureObtained.Contains(this.EventModel.ID))
+                if (value && !this.userSettings.EventsWithTreasureObtained.Contains(this.EventModel.ID))
                 {
                     logger.Debug("Adding \"{0}\" to EventsWithTreasureObtained", this.EventName);
-                    this.userOptions.EventsWithTreasureObtained.Add(this.EventModel.ID);
+                    this.userSettings.EventsWithTreasureObtained.Add(this.EventModel.ID);
                     this.RaisePropertyChanged();
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from EventsWithTreasureObtained", this.EventName);
-                    if (this.userOptions.EventsWithTreasureObtained.Remove(this.EventModel.ID))
+                    if (this.userSettings.EventsWithTreasureObtained.Remove(this.EventModel.ID))
                         this.RaisePropertyChanged();
                 }
             }
@@ -121,13 +121,13 @@ namespace GW2PAO.ViewModels.EventTracker
         public EventViewModel(WorldEvent eventData, EventTrackerSettings userSettings)
         {
             this.EventModel = eventData;
-            this.userOptions = userSettings;
+            this.userSettings = userSettings;
             this.IsVisible = true;
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;
-            this.userOptions.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userOptions.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace GW2PAO.ViewModels.EventTracker
         private void AddToHiddenEvents()
         {
             logger.Debug("Adding \"{0}\" to hidden events", this.EventName);
-            this.userOptions.HiddenEvents.Add(this.EventModel.ID);
+            this.userSettings.HiddenEvents.Add(this.EventModel.ID);
         }
 
         /// <summary>
@@ -145,11 +145,11 @@ namespace GW2PAO.ViewModels.EventTracker
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.EventName);
-            if (this.userOptions.HiddenEvents.Any(id => id == this.EventId))
+            if (this.userSettings.HiddenEvents.Any(id => id == this.EventId))
             {
                 this.IsVisible = false;
             }
-            else if (!this.userOptions.AreInactiveEventsVisible
+            else if (!this.userSettings.AreInactiveEventsVisible
                     && this.State == EventState.Inactive)
             {
                 this.IsVisible = false;

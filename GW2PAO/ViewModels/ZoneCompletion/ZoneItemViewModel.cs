@@ -26,7 +26,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private double distanceFromPlayer;
         private double directionFromPlayer;
         private bool isVisible;
-        private ZoneCompletionSettings userOptions;
+        private ZoneCompletionSettings userSettings;
 
         /// <summary>
         /// The primary model object containing the zone item's information
@@ -80,19 +80,19 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         public bool IsUnlocked
         {
-            get { return this.userOptions.UnlockedZoneItems.Contains(this.ItemModel); }
+            get { return this.userSettings.UnlockedZoneItems.Contains(this.ItemModel); }
             set
             {
-                if (value && !this.userOptions.UnlockedZoneItems.Contains(this.ItemModel))
+                if (value && !this.userSettings.UnlockedZoneItems.Contains(this.ItemModel))
                 {
                     logger.Debug("Adding \"{0}\" to UnlockedZoneItems", this.ItemId);
-                    this.userOptions.UnlockedZoneItems.Add(this.ItemModel);
+                    this.userSettings.UnlockedZoneItems.Add(this.ItemModel);
                     this.RaisePropertyChanged();
                 }
-                else if (this.userOptions.UnlockedZoneItems.Contains(this.ItemModel))
+                else if (this.userSettings.UnlockedZoneItems.Contains(this.ItemModel))
                 {
                     logger.Debug("Removing \"{0}\" from UnlockedZoneItems", this.ItemId);
-                    this.userOptions.UnlockedZoneItems.Remove(this.ItemModel);
+                    this.userSettings.UnlockedZoneItems.Remove(this.ItemModel);
                     this.RaisePropertyChanged();
                 }
             }
@@ -125,10 +125,10 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         {
             this.DistanceFromPlayer = -1;
             this.ItemModel = zoneItem;
-            this.userOptions = userSettings;
-            this.userOptions.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userOptions.HiddenZoneItems.CollectionChanged += (o, e) => this.RefreshVisibility();
-            this.userOptions.UnlockedZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
+            this.userSettings = userSettings;
+            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.HiddenZoneItems.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.UnlockedZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
             this.RefreshVisibility();
         }
 
@@ -169,7 +169,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void AddToHiddenItems()
         {
             logger.Debug("Adding {0} to HiddenZoneItems", this.ItemId);
-            this.userOptions.HiddenZoneItems.Add(this.ItemModel);
+            this.userSettings.HiddenZoneItems.Add(this.ItemModel);
         }
 
         /// <summary>
@@ -178,11 +178,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.ItemId);
-            if (this.userOptions.HiddenZoneItems.Any(item => item.ID == this.ItemId))
+            if (this.userSettings.HiddenZoneItems.Any(item => item.ID == this.ItemId))
             {
                 this.IsVisible = false;
             }
-            else if (this.IsUnlocked && !this.userOptions.ShowUnlockedPoints)
+            else if (this.IsUnlocked && !this.userSettings.ShowUnlockedPoints)
             {
                 this.IsVisible = false;
             }
@@ -191,19 +191,19 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 switch (this.ItemType)
                 {
                     case ZoneItemType.HeartQuest:
-                        this.IsVisible = this.userOptions.AreHeartsVisible;
+                        this.IsVisible = this.userSettings.AreHeartsVisible;
                         break;
                     case ZoneItemType.PointOfInterest:
-                        this.IsVisible = this.userOptions.ArePoisVisible;
+                        this.IsVisible = this.userSettings.ArePoisVisible;
                         break;
                     case ZoneItemType.SkillChallenge:
-                        this.IsVisible = this.userOptions.AreSkillChallengesVisible;
+                        this.IsVisible = this.userSettings.AreSkillChallengesVisible;
                         break;
                     case ZoneItemType.Vista:
-                        this.IsVisible = this.userOptions.AreVistasVisible;
+                        this.IsVisible = this.userSettings.AreVistasVisible;
                         break;
                     case ZoneItemType.Waypoint:
-                        this.IsVisible = this.userOptions.AreWaypointsVisible;
+                        this.IsVisible = this.userSettings.AreWaypointsVisible;
                         break;
                     default:
                         this.IsVisible = true;

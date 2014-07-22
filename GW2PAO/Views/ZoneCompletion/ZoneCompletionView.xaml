@@ -87,21 +87,21 @@
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Automatic Unlock">
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserOptions.AutoUnlockWaypoints}" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserOptions.AutoUnlockPois}" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserOptions.AutoUnlockVistas}" />
+                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" />
+                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" />
+                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Show Unlocked Zone Points" IsCheckable="True" IsChecked="{Binding UserOptions.ShowUnlockedPoints}" />
+                            <MenuItem Header="Show Unlocked Zone Points" IsCheckable="True" IsChecked="{Binding UserSettings.ShowUnlockedPoints}" />
                             <MenuItem Header="Show">
                                 <MenuItem Header="Show All" Command="{Binding ShowAllCommand}" />
                                 <MenuItem Header="Show None" Command="{Binding ShowNoneCommand}" />
                                 <Separator />
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserOptions.AreWaypointsVisible}" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserOptions.ArePoisVisible}" />
-                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserOptions.AreHeartsVisible}" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserOptions.AreVistasVisible}" />
-                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserOptions.AreSkillChallengesVisible}" />
+                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AreWaypointsVisible}" />
+                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.ArePoisVisible}" />
+                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AreHeartsVisible}" />
+                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AreVistasVisible}" />
+                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AreSkillChallengesVisible}" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
