@@ -88,6 +88,12 @@ namespace GW2PAO.Controllers
         private ZoneCompletionView zoneCompletionView;
 
         /// <summary>
+        /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
+        /// running as administrator - prevents spamming the error message
+        /// </summary>
+        private bool runningAsAdminErrorShown = false;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()
@@ -197,9 +203,28 @@ namespace GW2PAO.Controllers
         /// <returns></returns>
         private bool CanDisplayZoneAssistant()
         {
-            // TODO: Possibly check for an exception here, which can happen if GW2 is running as admin
-            // If that occurs, we should probably display a notification and NOT CRASH
-            return (this.SystemService.IsGw2Running && this.PlayerService.HasValidMapId);
+            bool canDisplayZoneAssistant = false;
+
+            try
+            {
+                canDisplayZoneAssistant = (this.SystemService.IsGw2Running && this.PlayerService.HasValidMapId);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                // An exception can happen if GW2 is running as admin
+                // If that occurs, display a notification
+                if (ex.NativeErrorCode == 5 && !this.runningAsAdminErrorShown)
+                {
+                    App.TrayIcon.DisplayNotification("Warning", "The Zone Completion Assistant cannot be started because GW2 is running as administrator.", TrayIcon.TrayInfoMessageType.Warning);
+                    logger.Warn(ex);
+                    this.runningAsAdminErrorShown = true;
+                }
+            }
+
+            if (canDisplayZoneAssistant)
+                this.runningAsAdminErrorShown = false;
+
+            return canDisplayZoneAssistant;
         }
     }
 }

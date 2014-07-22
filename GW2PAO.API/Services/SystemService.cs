@@ -58,17 +58,7 @@ namespace GW2PAO.API.Services
             {
                 if (this.Gw2Process != null)
                 {
-                    try
-                    {
-                        return !this.gw2Process.HasExited;
-                    }
-                    catch (System.ComponentModel.Win32Exception ex)
-                    {
-                        // TODO: Change this so we pop up some sort of message
-                        // GW2 is running as administrator, and we aren't, so we don't have permissions to know this.
-                        logger.Warn(ex);
-                        return false;
-                    }
+                    return !this.gw2Process.HasExited;
                 }
                 else
                 {
