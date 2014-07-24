@@ -18,15 +18,12 @@ namespace GW2PAO.Views
         /// </summary>
         private StickyWindow stickyWindow;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public OverlayWindow()
         {
-            // For sticky window support
             this.Loaded += OverlayWindowBase_Loaded;
-            this.LocationChanged += OverlayWindowBase_LocationChanged;
-
-            // To make a window truely top-most, we have to periodically set the window as top-most using a User32 call
-            // So, to do this, we'll create a thread to do it periodically, as long as the window isn't closed
-            this.Loaded += (o, e) => Task.Factory.StartNew(this.TopMostThread, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>
@@ -43,12 +40,18 @@ namespace GW2PAO.Views
 
         private void OverlayWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
+            // For sticky window support
             this.stickyWindow = new StickyWindow(this);
             this.stickyWindow.StickGap = 10;
             this.stickyWindow.StickToScreen = true;
             this.stickyWindow.StickToOther = true;
             this.stickyWindow.StickOnResize = true;
             this.stickyWindow.StickOnMove = true;
+            this.LocationChanged += OverlayWindowBase_LocationChanged;
+
+            // To make a window truely top-most, we have to periodically set the window as top-most using a User32 call
+            // So, to do this, we'll create a thread to do it periodically, as long as the window isn't closed
+            Task.Factory.StartNew(this.TopMostThread, TaskCreationOptions.LongRunning);
         }
 
         private void OverlayWindowBase_LocationChanged(object sender, EventArgs e)
