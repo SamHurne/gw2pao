@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Blue.Private.Win32Imports;
-using Blue.Windows;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.ZoneCompletion;
@@ -24,17 +22,12 @@ namespace GW2PAO.Views.ZoneCompletion
     /// <summary>
     /// Interaction logic for ZoneCompletionView.xaml
     /// </summary>
-    public partial class ZoneCompletionView : Window
+    public partial class ZoneCompletionView : OverlayWindow
     {
         /// <summary>
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        /// <summary>
-        /// StickyWindow helper object
-        /// </summary>
-        private StickyWindow stickyWindow;
 
         /// <summary>
         /// True if the user is resizing the window, else false
@@ -66,25 +59,6 @@ namespace GW2PAO.Views.ZoneCompletion
                 this.Width = Properties.Settings.Default.ZoneAssistantWidth;
             this.Left = Properties.Settings.Default.ZoneAssistantX;
             this.Top = Properties.Settings.Default.ZoneAssistantY;
-
-            // For sticky window support
-            this.Loaded += (o, e) =>
-            {
-                this.stickyWindow = new StickyWindow(this);
-                this.stickyWindow.StickGap = 10;
-                this.stickyWindow.StickToScreen = true;
-                this.stickyWindow.StickToOther = true;
-                this.stickyWindow.StickOnResize = true;
-                this.stickyWindow.StickOnMove = true;
-            };
-            this.LocationChanged += (o, e) =>
-            {
-                System.Windows.Point MousePoint = Mouse.GetPosition(this);
-                System.Windows.Point ScreenPoint = this.PointToScreen(MousePoint);
-
-                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
-                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
-            };
         }
 
         private void ZoneCompletionView_Closing(object sender, System.ComponentModel.CancelEventArgs e)

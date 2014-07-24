@@ -13,8 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Blue.Private.Win32Imports;
-using Blue.Windows;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.ViewModels.EventTracker;
 using NLog;
@@ -24,17 +22,12 @@ namespace GW2PAO.Views.EventTracker
     /// <summary>
     /// Interaction logic for EventTrackerView.xaml
     /// </summary>
-    public partial class EventTrackerView : Window
+    public partial class EventTrackerView : OverlayWindow
     {
         /// <summary>
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        /// <summary>
-        /// StickyWindow helper object
-        /// </summary>
-        private StickyWindow stickyWindow;
 
         /// <summary>
         /// True if the user is resizing the window, else false
@@ -71,25 +64,6 @@ namespace GW2PAO.Views.EventTracker
                 this.Width = Properties.Settings.Default.EventTrackerWidth;
             this.Left = Properties.Settings.Default.EventTrackerX;
             this.Top = Properties.Settings.Default.EventTrackerY;
-
-            // For sticky window support
-            this.Loaded += (o, e) =>
-                {
-                    this.stickyWindow = new StickyWindow(this);
-                    this.stickyWindow.StickGap = 10;
-                    this.stickyWindow.StickToScreen = true;
-                    this.stickyWindow.StickToOther = true;
-                    this.stickyWindow.StickOnResize = true;
-                    this.stickyWindow.StickOnMove = true;
-                };
-            this.LocationChanged += (o, e) =>
-                {
-                    System.Windows.Point MousePoint = Mouse.GetPosition(this);
-                    System.Windows.Point ScreenPoint = this.PointToScreen(MousePoint);
-
-                    Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
-                    Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
-                };
         }
 
         private void EventTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
