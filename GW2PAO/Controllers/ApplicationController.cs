@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using GW2PAO.API.Services;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
+using GW2PAO.Utility;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.TrayIcon;
 using GW2PAO.ViewModels.ZoneCompletion;
+using GW2PAO.Views;
 using GW2PAO.Views.EventTracker;
 using GW2PAO.Views.ZoneCompletion;
 using NLog;
@@ -49,7 +51,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Event tracker controller
         /// </summary>
-        public IEventTrackerController EventTrackerController { get; private set; }
+        public IEventsController EventsController { get; private set; }
 
         /// <summary>
         /// Zone completion controller
@@ -64,7 +66,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Event tracker settings
         /// </summary>
-        public EventTrackerSettings EventTrackerSettings { get; private set; }
+        public EventSettings EventSettings { get; private set; }
 
         /// <summary>
         /// Zone completion settings
@@ -105,18 +107,14 @@ namespace GW2PAO.Controllers
             this.SystemService = new SystemService();
             this.ZoneService = new ZoneService();
 
-            // When we first start up, we'll initialize the events cache
-            // TODO: Possibly add a splash screen or some sort of loading indication, as this can sometimes take a little while
-            //this.EventsService.LoadTable(); 2014-07-17 - Removed for now, as this is handled by the events controller
-
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
 
             // Load user settings
             logger.Debug("Loading event tracker user settings");
-            this.EventTrackerSettings = EventTrackerSettings.LoadSettings();
-            if (this.EventTrackerSettings == null)
-                this.EventTrackerSettings = new EventTrackerSettings();
+            this.EventSettings = EventSettings.LoadSettings();
+            if (this.EventSettings == null)
+                this.EventSettings = new EventSettings();
 
             logger.Debug("Loading zone completion assistant user settings");
             this.ZoneCompletionSettings = ZoneCompletionSettings.LoadSettings();
@@ -125,12 +123,14 @@ namespace GW2PAO.Controllers
 
             // Enable autosave on the user settings
             logger.Debug("Enabling autosave of user settings");
-            this.EventTrackerSettings.EnableAutoSave();
+            this.EventSettings.EnableAutoSave();
             this.ZoneCompletionSettings.EnableAutoSave();
 
             // Create the controllers
-            logger.Debug("Creating event tracker controller");
-            this.EventTrackerController = new EventTrackerController(this.EventsService, this.EventTrackerSettings);
+            logger.Debug("Creating events controller");
+            this.EventsController = new EventsController(this.EventsService, this.EventSettings);
+            this.EventsController.EventNotificationEvent += EventsController_EventNotificationEvent;
+            this.EventsController.Start(); // Get it started for event notifications
 
             logger.Debug("Creating zone completion assistant controller");
             this.ZoneCompletionController = new ZoneCompletionController(this.ZoneService, this.PlayerService, this.SystemService, this.ZoneName, this.ZoneCompletionSettings);
@@ -138,6 +138,7 @@ namespace GW2PAO.Controllers
             // Initialize the menu items
             logger.Debug("Initializing application menu items");
             this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
+            this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
             this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
 
             logger.Info("Application controller initialized");
@@ -160,8 +161,8 @@ namespace GW2PAO.Controllers
         {
             if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
             {
-                this.EventTrackerController.Start();
-                this.eventTrackerView = new EventTrackerView(this.EventTrackerController);
+                this.EventsController.Start();
+                this.eventTrackerView = new EventTrackerView(this.EventsController);
                 this.eventTrackerView.Show();
             }
             else
@@ -225,6 +226,18 @@ namespace GW2PAO.Controllers
                 this.runningAsAdminErrorShown = false;
 
             return canDisplayZoneAssistant;
+        }
+
+        /// <summary>
+        /// Event handler for the event
+        /// </summary>
+        private void EventsController_EventNotificationEvent(object sender, EventNotificationArgs e)
+        {
+            if (this.EventSettings.AreEventNotificationsEnabled)
+            {
+                // TODO: We may need to change how we show these and use an actual window, as it's possible for 2 events to be active at the same time, so we need to be able to show more than 1 event at once
+                Threading.BeginInvokeOnUI(() => App.TrayIcon.DisplayCustomNotification(new EventNotificationView(e.EventData)));
+            }
         }
     }
 }

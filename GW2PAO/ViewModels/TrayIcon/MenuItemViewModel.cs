@@ -16,6 +16,8 @@ namespace GW2PAO.ViewModels.TrayIcon
     public class MenuItemViewModel : NotifyPropertyChangedBase, IMenuViewModel
     {
         private string header;
+        private Func<bool> getIsChecked;
+        private Action<bool> setIsChecked;
         private DelegateCommand command;
         private ObservableCollection<IMenuViewModel> subMenuItems = new ObservableCollection<IMenuViewModel>();
 
@@ -45,14 +47,44 @@ namespace GW2PAO.ViewModels.TrayIcon
         }
 
         /// <summary>
+        /// True if the menu item is checkable, else false
+        /// </summary>
+        public bool IsCheckable { get; private set; }
+
+        /// <summary>
+        /// True if the menu item is checked, else false
+        /// </summary>
+        public bool IsChecked
+        {
+            get
+            {
+                if (this.getIsChecked != null)
+                    return this.getIsChecked.Invoke();
+                else
+                    return false;
+            }
+            set
+            {
+                if (this.setIsChecked != null)
+                    this.setIsChecked(value);
+            }
+        }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="header">Header text for the menu item</param>
         /// <param name="action">On-click action to perform</param>
-        public MenuItemViewModel(string header, Action action)
+        /// <param name="isCheckable">True if the menu item is checkable, else false</param>
+        /// <param name="getIsChecked">Getter function used to get the value of the IsChecked property</param>
+        /// <param name="setIsChecked">Setter action used to set the value of the IsChecked property</param>
+        public MenuItemViewModel(string header, Action action, bool isCheckable = false, Func<bool> getIsChecked = null, Action<bool> setIsChecked = null)
         {
             this.header = header;
             this.command = new DelegateCommand(action);
+            this.IsCheckable = isCheckable;
+            this.getIsChecked = getIsChecked;
+            this.setIsChecked = setIsChecked;
         }
 
         /// <summary>
@@ -61,10 +93,16 @@ namespace GW2PAO.ViewModels.TrayIcon
         /// <param name="header">Header text for the menu item</param>
         /// <param name="action">On-click action to perform</param>
         /// <param name="canExcuteAction">CanExecute function</param>
-        public MenuItemViewModel(string header, Action action, Func<bool> canExcuteAction)
+        /// <param name="isCheckable">True if the menu item is checkable, else false</param>
+        /// <param name="getIsChecked">Getter function used to get the value of the IsChecked property</param>
+        /// <param name="setIsChecked">Setter action used to set the value of the IsChecked property</param>
+        public MenuItemViewModel(string header, Action action, Func<bool> canExcuteAction, bool isCheckable = false, Func<bool> getIsChecked = null, Action<bool> setIsChecked = null)
         {
             this.header = header;
             this.command = new DelegateCommand(action, canExcuteAction);
+            this.IsCheckable = isCheckable;
+            this.getIsChecked = getIsChecked;
+            this.setIsChecked = setIsChecked;
         }
     }
 }

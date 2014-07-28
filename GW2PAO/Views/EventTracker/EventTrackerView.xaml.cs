@@ -37,7 +37,7 @@ namespace GW2PAO.Views.EventTracker
         /// <summary>
         /// Event tracker controller
         /// </summary>
-        private IEventTrackerController controller;
+        private IEventsController controller;
 
         /// <summary>
         /// Event tracker view model
@@ -48,7 +48,7 @@ namespace GW2PAO.Views.EventTracker
         /// Default constructor
         /// </summary>
         /// <param name="eventListController">The event tracker controller</param>
-        public EventTrackerView(IEventTrackerController eventListController)
+        public EventTrackerView(IEventsController eventListController)
         {
             logger.Debug("New EventTrackerView created");
             this.controller = eventListController;

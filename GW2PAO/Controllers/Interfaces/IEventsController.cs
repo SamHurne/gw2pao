@@ -15,7 +15,7 @@ namespace GW2PAO.Controllers.Interfaces
     /// Event tracker controller interface.
     /// Defines primary public functionality of the event tracker controller.
     /// </summary>
-    public interface IEventTrackerController
+    public interface IEventsController
     {
         /// <summary>
         /// The collection of World Events
@@ -30,7 +30,12 @@ namespace GW2PAO.Controllers.Interfaces
         /// <summary>
         /// The event tracker user settings
         /// </summary>
-        EventTrackerSettings UserSettings { get; }
+        EventSettings UserSettings { get; }
+
+        /// <summary>
+        /// Event raised when a world event is soon active
+        /// </summary>
+        event EventHandler<EventNotificationArgs> EventNotificationEvent;
 
         /// <summary>
         /// Starts the controller

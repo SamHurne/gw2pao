@@ -10,7 +10,7 @@ using GW2PAO.Models;
 using GW2PAO.PresentationCore;
 using NLog;
 
-namespace GW2PAO.ViewModels.EventTracker
+namespace GW2PAO.ViewModels
 {
     /// <summary>
     /// View model for an event shown by the event tracker
@@ -25,7 +25,9 @@ namespace GW2PAO.ViewModels.EventTracker
         private EventState state;
         private TimeSpan timerValue;
         private bool isVisible;
-        private EventTrackerSettings userSettings;
+        private bool isNotificationVisible;
+        private bool isNotificationShown;
+        private EventSettings userSettings;
 
         /// <summary>
         /// The primary model object containing the event information
@@ -104,6 +106,26 @@ namespace GW2PAO.ViewModels.EventTracker
         }
 
         /// <summary>
+        /// Visiblity of the notification for this event
+        /// This is configured by the user by showing/hiding specific event notifications
+        /// TODO: Implement UI for user to configure/set this
+        /// </summary>
+        public bool IsNotificationVisible
+        {
+            get { return this.isNotificationVisible; }
+            set { SetField(ref this.isNotificationVisible, value); }
+        }
+
+        /// <summary>
+        /// True if the notification for this event has already been shown, else false
+        /// </summary>
+        public bool IsNotificationShown
+        {
+            get { return this.isNotificationShown; }
+            set { SetField(ref this.isNotificationShown, value); }
+        }
+
+        /// <summary>
         /// Command to hide the event
         /// </summary>
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenEvents); } }
@@ -118,11 +140,13 @@ namespace GW2PAO.ViewModels.EventTracker
         /// </summary>
         /// <param name="eventData">The event's details/data</param>
         /// <param name="userSettings">Event tracker user settings</param>
-        public EventViewModel(WorldEvent eventData, EventTrackerSettings userSettings)
+        public EventViewModel(WorldEvent eventData, EventSettings userSettings)
         {
             this.EventModel = eventData;
             this.userSettings = userSettings;
             this.IsVisible = true;
+            this.IsNotificationVisible = true;
+            this.IsNotificationShown = false;
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;

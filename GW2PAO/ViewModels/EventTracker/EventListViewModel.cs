@@ -30,7 +30,7 @@ namespace GW2PAO.ViewModels.EventTracker
         /// <summary>
         /// The Event Tracker controller
         /// </summary>
-        private IEventTrackerController controller;
+        private IEventsController controller;
 
         /// <summary>
         /// Collection of all World Events
@@ -45,13 +45,13 @@ namespace GW2PAO.ViewModels.EventTracker
         /// <summary>
         /// Event Tracker user settings
         /// </summary>
-        public EventTrackerSettings UserSettings { get { return this.controller.UserSettings; } }
+        public EventSettings UserSettings { get { return this.controller.UserSettings; } }
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="eventTrackerController">The event tracker controller</param>
-        public EventTrackerViewModel(IEventTrackerController eventTrackerController)
+        public EventTrackerViewModel(IEventsController eventTrackerController)
         {
             this.controller = eventTrackerController;
         }

@@ -54,9 +54,6 @@ namespace GW2PAO
             logger.Debug("Registering last chance exception handlers");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            // Initialize the application controller
-            ApplicationController appController = new ApplicationController();
-
             // Create the tray icon
             logger.Debug("Creating tray icon");
             TaskbarIcon trayIcon = (TaskbarIcon)this.FindResource("TrayIcon");
@@ -66,6 +63,9 @@ namespace GW2PAO
             trayIcon.ContextMenu.ItemsSource = TrayIconVm.MenuItems;
             App.TrayIcon = new ApplicationTrayIcon(trayIcon);
             logger.Debug("Tray icon created");
+
+            // Initialize the application controller
+            ApplicationController appController = new ApplicationController();
 
             // Set up the menu items
             logger.Debug("Initializing menu items");

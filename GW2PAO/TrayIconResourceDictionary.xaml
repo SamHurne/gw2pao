@@ -35,7 +35,10 @@
                 <ContextMenu.ItemContainerStyle>
                     <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
                         <Setter Property="Command" Value="{Binding OnClickCommand}" />
+                        <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+                        <Setter Property="IsChecked" Value="{Binding IsChecked}" />
                         <Setter Property="Header" Value="{Binding Header}" />
+                        <Setter Property="ItemsSource" Value="{Binding SubMenuItems}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding}" Value="{x:Null}">
                                 <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />

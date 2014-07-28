@@ -24,6 +24,16 @@ namespace GW2PAO.ViewModels.Interfaces
         string Header { get; }
 
         /// <summary>
+        /// True if the menu item is checkable, else false
+        /// </summary>
+        bool IsCheckable { get; }
+
+        /// <summary>
+        /// True if the menu item is checked, else false
+        /// </summary>
+        bool IsChecked { get; set; }
+
+        /// <summary>
         /// The on-click command
         /// </summary>
         IRefreshableCommand OnClickCommand { get; }

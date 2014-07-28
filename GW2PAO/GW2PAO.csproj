@@ -87,8 +87,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controllers\EventTrackerController.cs" />
-    <Compile Include="Controllers\Interfaces\IEventTrackerController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\Interfaces\IEventsController.cs" />
     <Compile Include="Controllers\Interfaces\IZoneCompletionController.cs" />
     <Compile Include="Controllers\ZoneCompletionController.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
@@ -96,17 +96,18 @@
     <Compile Include="Converters\TimespanConverter.cs" />
     <Compile Include="Converters\TreasureCheckboxConverter.cs" />
     <Compile Include="Converters\ZoneItemTypeImageSrcConverter.cs" />
-    <Compile Include="Models\EventTrackerSettings.cs" />
+    <Compile Include="Models\EventSettings.cs" />
     <Compile Include="Models\ZoneCompletionSettings.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="TrayIcon\ApplicationTrayIcon.cs" />
     <Compile Include="TrayIcon\IApplicationTrayIcon.cs" />
     <Compile Include="TrayIcon\TrayInfoMessageType.cs" />
+    <Compile Include="Controllers\EventNotificationArgs.cs" />
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
-    <Compile Include="ViewModels\EventTracker\EventViewModel.cs" />
+    <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
@@ -116,6 +117,9 @@
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventNotificationView.xaml.cs">
+      <DependentUpon>EventNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EventTracker\EventTrackerView.xaml.cs">
       <DependentUpon>EventTrackerView.xaml</DependentUpon>
@@ -177,6 +181,10 @@
     <Page Include="Views\AboutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EventNotificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EventTracker\EventTrackerView.xaml">
       <Generator>MSBuild:Compile</Generator>

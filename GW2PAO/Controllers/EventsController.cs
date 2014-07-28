@@ -13,6 +13,7 @@ using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
 using GW2PAO.Utility;
+using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.EventTracker;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.ZoneCompletion;
@@ -21,9 +22,10 @@ using NLog;
 namespace GW2PAO.Controllers
 {
     /// <summary>
-    /// The Event Tracker controller. Handles refresh of events, including state and timer values.
+    /// The Events controller. Handles refresh of events, including state and timer values
+    /// Also handles notifications and notification states
     /// </summary>
-    public class EventTrackerController : IEventTrackerController
+    public class EventsController : IEventsController
     {
         /// <summary>
         /// Default logger
@@ -48,7 +50,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// The user settings
         /// </summary>
-        private EventTrackerSettings userSettings;
+        private EventSettings userSettings;
 
         /// <summary>
         /// Keeps track of how many times Start() has been called in order
@@ -74,14 +76,19 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// The event tracker user settings
         /// </summary>
-        public EventTrackerSettings UserSettings { get { return this.userSettings; } }
+        public EventSettings UserSettings { get { return this.userSettings; } }
+
+        /// <summary>
+        /// Event raised when a world event is soon active
+        /// </summary>
+        public event EventHandler<EventNotificationArgs> EventNotificationEvent;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="eventsService">The events service</param>
         /// <param name="userSettings">The user settings</param>
-        public EventTrackerController(IEventsService eventsService, EventTrackerSettings userSettings)
+        public EventsController(IEventsService eventsService, EventSettings userSettings)
         {
             logger.Debug("Initializing Event Tracker Controller");
             this.eventsService = eventsService;
@@ -159,6 +166,8 @@ namespace GW2PAO.Controllers
                 }));
         }
 
+        //private static int test = 0;
+
         /// <summary>
         /// Refreshes all events within the events collection
         /// This is the primary function of the EventTrackerController
@@ -168,7 +177,7 @@ namespace GW2PAO.Controllers
             lock (refreshTimerLock)
             {
                 // Refresh the state of all world events
-                foreach (var worldEvent in WorldEvents)
+                foreach (var worldEvent in this.WorldEvents)
                 {
                     var newState = this.eventsService.GetState(worldEvent.EventModel);
                     Threading.BeginInvokeOnUI(() => worldEvent.State = newState);
@@ -182,6 +191,27 @@ namespace GW2PAO.Controllers
                     {
                         var timeUntilActive = this.eventsService.GetTimeUntilActive(worldEvent.EventModel);
                         Threading.BeginInvokeOnUI(() => worldEvent.TimerValue = timeUntilActive);
+
+                        // Check to see if we need to display a notification for this event
+                        if (timeUntilActive.CompareTo(TimeSpan.FromMinutes(1)) < 0)
+                        {
+                            if (!worldEvent.IsNotificationShown)
+                            {
+                                worldEvent.IsNotificationShown = true;
+                                this.RaiseEventActiveNotification(worldEvent);
+                            }
+                        }
+                        else
+                        {
+                            //test++;
+                            //if (test == 121)
+                            //{
+                            //    test = 0;
+                            //    this.RaiseEventActiveNotification(worldEvent);
+                            //}
+                            // Reset the IsNotificationShown state
+                            worldEvent.IsNotificationShown = false;
+                        }
                     }
                 }
 
@@ -200,6 +230,18 @@ namespace GW2PAO.Controllers
                 }
 
                 this.eventRefreshTimer.Change(this.EventRefreshInterval, Timeout.Infinite);
+            }
+        }
+
+        /// <summary>
+        /// Raises the EventActiveNotificationEvent
+        /// </summary>
+        /// <param name="eventData">Event data of the event to raise the notification for</param>
+        private void RaiseEventActiveNotification(EventViewModel eventData)
+        {
+            if (this.EventNotificationEvent != null)
+            {
+                this.EventNotificationEvent(this, new EventNotificationArgs(eventData));
             }
         }
     }

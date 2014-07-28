@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using GW2PAO.Utility;
 using Hardcodet.Wpf.TaskbarNotification;
 using NLog;
@@ -72,6 +73,25 @@ namespace GW2PAO.TrayIcon
             }
 
             Threading.BeginInvokeOnUI(() => this.taskbarIcon.ShowBalloonTip(title, text, icon));
+        }
+
+        /// <summary>
+        /// Displays a custom pop-up notification
+        /// </summary>
+        /// <param name="notificationView">Control to use for the pop-up notification</param>
+        /// <param name="animation">Animation to use when displaying the notification</param>
+        /// <param name="timeout">Timeout for how long the notification should remain displayed, in ms</param>
+        public void DisplayCustomNotification(UIElement notificationView, PopupAnimation animation = PopupAnimation.Fade, int? timeout = 10000)
+        {
+            Threading.BeginInvokeOnUI(() => this.taskbarIcon.ShowCustomBalloon(notificationView, animation, timeout));
+        }
+
+        /// <summary>
+        /// Closes any displayed custom notifications
+        /// </summary>
+        public void CloseCustomNotification()
+        {
+            Threading.BeginInvokeOnUI(() => this.taskbarIcon.CloseBalloon());
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GW2PAO.Models
     /// User settings for the Event Tracker
     /// </summary>
     [Serializable]
-    public class EventTrackerSettings : NotifyPropertyChangedBase
+    public class EventSettings : NotifyPropertyChangedBase
     {
         /// <summary>
         /// Default logger
@@ -27,9 +27,10 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".EventTrackerSettings.xml"; } }
+        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".EventSettings.xml"; } }
 
         private bool areInactiveEventsVisible;
+        private bool areEventNotificationsEnabled;
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
@@ -41,6 +42,15 @@ namespace GW2PAO.Models
         {
             get { return this.areInactiveEventsVisible; }
             set { SetField(ref this.areInactiveEventsVisible, value); }
+        }
+
+        /// <summary>
+        /// True if event notifications are enabled, else false
+        /// </summary>
+        public bool AreEventNotificationsEnabled
+        {
+            get { return this.areEventNotificationsEnabled; }
+            set { SetField(ref this.areEventNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -65,9 +75,10 @@ namespace GW2PAO.Models
         /// <summary>
         /// Default constructor
         /// </summary>
-        public EventTrackerSettings()
+        public EventSettings()
         {
             this.AreInactiveEventsVisible = true;
+            this.AreEventNotificationsEnabled = true;
             this.LastResetDateTime = DateTime.UtcNow;
         }
 
@@ -77,20 +88,20 @@ namespace GW2PAO.Models
         public void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => EventTrackerSettings.SaveSettings(this);
-            this.HiddenEvents.CollectionChanged += (o, e) => EventTrackerSettings.SaveSettings(this);
-            this.EventsWithTreasureObtained.CollectionChanged += (o, e) => EventTrackerSettings.SaveSettings(this);
+            this.PropertyChanged += (o, e) => EventSettings.SaveSettings(this);
+            this.HiddenEvents.CollectionChanged += (o, e) => EventSettings.SaveSettings(this);
+            this.EventsWithTreasureObtained.CollectionChanged += (o, e) => EventSettings.SaveSettings(this);
         }
 
         /// <summary>
         /// Loads the user settings
         /// </summary>
         /// <returns>The loaded EventTrackerSettings, or null if the load fails</returns>
-        public static EventTrackerSettings LoadSettings()
+        public static EventSettings LoadSettings()
         {
             logger.Debug("Loading user settings");
 
-            XmlSerializer deserializer = new XmlSerializer(typeof(EventTrackerSettings));
+            XmlSerializer deserializer = new XmlSerializer(typeof(EventSettings));
             object loadedSettings = null;
 
             if (File.Exists(Filename))
@@ -111,7 +122,7 @@ namespace GW2PAO.Models
             if (loadedSettings != null)
             {
                 logger.Info("Settings successfully loaded");
-                return loadedSettings as EventTrackerSettings;
+                return loadedSettings as EventSettings;
             }
             else
             {
@@ -123,10 +134,10 @@ namespace GW2PAO.Models
         /// Saves the user settings
         /// </summary>
         /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(EventTrackerSettings settings)
+        public static void SaveSettings(EventSettings settings)
         {
             logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(EventTrackerSettings));
+            XmlSerializer serializer = new XmlSerializer(typeof(EventSettings));
             using (TextWriter writer = new StreamWriter(Filename))
             {
                 serializer.Serialize(writer, settings);
