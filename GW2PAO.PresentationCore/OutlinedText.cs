@@ -265,7 +265,7 @@ namespace GW2PAO.PresentationCore
             }
 
             this.formattedText = new FormattedText(
-                this.Text.Replace(' ', System.Convert.ToChar(160)),
+                this.Text,//.Replace(' ', System.Convert.ToChar(160)),
                 CultureInfo.CurrentUICulture,
                 this.FlowDirection,
                 new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, FontStretches.Normal),
@@ -282,9 +282,9 @@ namespace GW2PAO.PresentationCore
                 return;
             }
 
-            this.formattedText.MaxLineCount = this.TextWrapping == TextWrapping.NoWrap ? 1 : int.MaxValue;
             this.formattedText.TextAlignment = this.TextAlignment;
-            //this.formattedText.Trimming = this.TextTrimming;
+            if (this.TextWrapping != System.Windows.TextWrapping.NoWrap)
+                this.formattedText.Trimming = System.Windows.TextTrimming.None;
 
             this.formattedText.SetFontSize(this.FontSize);
             this.formattedText.SetFontStyle(this.FontStyle);
