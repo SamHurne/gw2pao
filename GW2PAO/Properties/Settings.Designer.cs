@@ -25,18 +25,6 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool IsLoggingEnabled {
-            get {
-                return ((bool)(this["IsLoggingEnabled"]));
-            }
-            set {
-                this["IsLoggingEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public double ZoneAssistantHeight {
             get {
@@ -128,6 +116,42 @@ namespace GW2PAO.Properties {
             }
             set {
                 this["EventTrackerY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsLoggingEnabled {
+            get {
+                return ((bool)(this["IsLoggingEnabled"]));
+            }
+            set {
+                this["IsLoggingEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double EventNotificationX {
+            get {
+                return ((double)(this["EventNotificationX"]));
+            }
+            set {
+                this["EventNotificationX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double EventNotificationY {
+            get {
+                return ((double)(this["EventNotificationY"]));
+            }
+            set {
+                this["EventNotificationY"] = value;
             }
         }
     }

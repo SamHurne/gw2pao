@@ -142,23 +142,19 @@
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="{Binding ElementName=EventsContainer, Path=ActualWidth}">
-
-                <ItemsControl Name="WorldEventsControl"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  ItemsSource="{Binding Source={StaticResource WorldEventsView}}"
-                                  Margin="0,0,0,5">
-
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <View:WorldEventView DataContext="{Binding}"
+                <StackPanel Width="{Binding ElementName=EventsContainer, Path=ActualWidth}">
+                    <ItemsControl Name="WorldEventsControl"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}"
+                                      Margin="0,0,0,5">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <View:WorldEventView DataContext="{Binding}"
                                                      Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-
-                </ItemsControl>
-
-            </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
 

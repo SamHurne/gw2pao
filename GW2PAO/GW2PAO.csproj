@@ -62,6 +62,7 @@
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -70,6 +71,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -106,6 +108,7 @@
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
     <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
@@ -118,8 +121,11 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventNotificationView.xaml.cs">
+    <Compile Include="Views\EventNotification\EventNotificationView.xaml.cs">
       <DependentUpon>EventNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventNotification\EventNotificationWindow.xaml.cs">
+      <DependentUpon>EventNotificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EventTracker\EventTrackerView.xaml.cs">
       <DependentUpon>EventTrackerView.xaml</DependentUpon>
@@ -182,7 +188,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EventNotificationView.xaml">
+    <Page Include="Views\EventNotification\EventNotificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EventNotification\EventNotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

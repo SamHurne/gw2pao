@@ -23,6 +23,11 @@ namespace GW2PAO.Controllers.Interfaces
         ObservableCollection<EventViewModel> WorldEvents { get; }
 
         /// <summary>
+        /// The collection of events for event notifications
+        /// </summary>
+        ObservableCollection<EventViewModel> EventNotifications { get; }
+
+        /// <summary>
         /// The interval by which to refresh events (in ms)
         /// </summary>
         int EventRefreshInterval { get; set; }
@@ -31,11 +36,6 @@ namespace GW2PAO.Controllers.Interfaces
         /// The event tracker user settings
         /// </summary>
         EventSettings UserSettings { get; }
-
-        /// <summary>
-        /// Event raised when a world event is soon active
-        /// </summary>
-        event EventHandler<EventNotificationArgs> EventNotificationEvent;
 
         /// <summary>
         /// Starts the controller

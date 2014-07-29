@@ -56,11 +56,14 @@ namespace GW2PAO.Views
 
         private void OverlayWindowBase_LocationChanged(object sender, EventArgs e)
         {
-            System.Windows.Point MousePoint = Mouse.GetPosition(this);
-            System.Windows.Point ScreenPoint = this.PointToScreen(MousePoint);
+            if (this.IsMouseOver)
+            {
+                System.Windows.Point MousePoint = Mouse.GetPosition(this);
+                System.Windows.Point ScreenPoint = this.PointToScreen(MousePoint);
 
-            Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
-            Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
+                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
+                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
+            }
         }
     }
 }

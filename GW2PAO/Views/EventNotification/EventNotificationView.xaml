@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GW2PAO.Views.EventNotificationView"
+﻿<UserControl x:Class="GW2PAO.Views.EventNotification.EventNotificationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,13 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              mc:Ignorable="d" 
-             MinHeight="60" MaxHeight="150" Height="Auto"
-             MinWidth="200" MaxWidth="225" Width="Auto" >
+             TextOptions.TextFormattingMode="Display"
+             Height="60" Width="215" >
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Style/ResourceLibrary.xaml" />
+                <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <converters:EventStateConverter x:Key="StateConverter" />
@@ -90,7 +90,7 @@
                             Width="16" Height="17" Padding="0"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
-                            Click="CloseButton_Click" />
+                            Command="{Binding CloseNotificationCommand}"/>
 
                     <!-- TODO: Add method of configuring whether or not event is ever shown -->
                     <!-- TODO: Add configuration menu options in tray menu: Enable All, Disable All, notify on warmup, notify on near active, notify on active -->
@@ -124,9 +124,9 @@
                                                             <Setter Property="Effect">
                                                                 <Setter.Value>
                                                                     <DropShadowEffect ShadowDepth="0"
-                                                                                      Color="Orange"
+                                                                                      Color="Goldenrod"
                                                                                       Opacity="0"
-                                                                                      BlurRadius="10"/>
+                                                                                      BlurRadius="15"/>
                                                                 </Setter.Value>
                                                             </Setter>
                                                             <Style.Triggers>

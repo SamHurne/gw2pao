@@ -7,10 +7,12 @@ using GW2PAO.API.Services;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
 using GW2PAO.Utility;
+using GW2PAO.ViewModels.EventNotification;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.TrayIcon;
 using GW2PAO.ViewModels.ZoneCompletion;
 using GW2PAO.Views;
+using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
 using GW2PAO.Views.ZoneCompletion;
 using NLog;
@@ -90,6 +92,11 @@ namespace GW2PAO.Controllers
         private ZoneCompletionView zoneCompletionView;
 
         /// <summary>
+        /// The event notifications window containing all event notifications
+        /// </summary>
+        private EventNotificationWindow eventNotificationsView;
+
+        /// <summary>
         /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
         /// running as administrator - prevents spamming the error message
         /// </summary>
@@ -129,11 +136,15 @@ namespace GW2PAO.Controllers
             // Create the controllers
             logger.Debug("Creating events controller");
             this.EventsController = new EventsController(this.EventsService, this.EventSettings);
-            this.EventsController.EventNotificationEvent += EventsController_EventNotificationEvent;
             this.EventsController.Start(); // Get it started for event notifications
 
             logger.Debug("Creating zone completion assistant controller");
             this.ZoneCompletionController = new ZoneCompletionController(this.ZoneService, this.PlayerService, this.SystemService, this.ZoneName, this.ZoneCompletionSettings);
+
+            // Create the event notifications view
+            logger.Debug("Initializing event notifications");
+            this.eventNotificationsView = new EventNotificationWindow(this.EventsController);
+            this.eventNotificationsView.Show(); // Transparent window, just go ahead and show it
 
             // Initialize the menu items
             logger.Debug("Initializing application menu items");
@@ -226,18 +237,6 @@ namespace GW2PAO.Controllers
                 this.runningAsAdminErrorShown = false;
 
             return canDisplayZoneAssistant;
-        }
-
-        /// <summary>
-        /// Event handler for the event
-        /// </summary>
-        private void EventsController_EventNotificationEvent(object sender, EventNotificationArgs e)
-        {
-            if (this.EventSettings.AreEventNotificationsEnabled)
-            {
-                // TODO: We may need to change how we show these and use an actual window, as it's possible for 2 events to be active at the same time, so we need to be able to show more than 1 event at once
-                Threading.BeginInvokeOnUI(() => App.TrayIcon.DisplayCustomNotification(new EventNotificationView(e.EventData)));
-            }
         }
     }
 }

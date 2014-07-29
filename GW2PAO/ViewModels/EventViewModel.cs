@@ -27,6 +27,7 @@ namespace GW2PAO.ViewModels
         private bool isVisible;
         private bool isNotificationVisible;
         private bool isNotificationShown;
+        private ICollection<EventViewModel> displayedNotifications;
         private EventSettings userSettings;
 
         /// <summary>
@@ -136,14 +137,21 @@ namespace GW2PAO.ViewModels
         public DelegateCommand CopyWaypointCommand { get { return new DelegateCommand(this.CopyWaypointCode); } }
 
         /// <summary>
+        /// Closes the displayed notification
+        /// </summary>
+        public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="eventData">The event's details/data</param>
         /// <param name="userSettings">Event tracker user settings</param>
-        public EventViewModel(WorldEvent eventData, EventSettings userSettings)
+        /// <param name="displayedNotificationsCollection">Collection of displayed event notifications</param>
+        public EventViewModel(WorldEvent eventData, EventSettings userSettings, ICollection<EventViewModel> displayedNotificationsCollection)
         {
             this.EventModel = eventData;
             this.userSettings = userSettings;
+            this.displayedNotifications = displayedNotificationsCollection;
             this.IsVisible = true;
             this.IsNotificationVisible = true;
             this.IsNotificationShown = false;
@@ -192,6 +200,14 @@ namespace GW2PAO.ViewModels
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.EventName, this.EventModel.WaypointCode);
             System.Windows.Clipboard.SetText(this.EventModel.WaypointCode);
+        }
+
+        /// <summary>
+        /// Removes this event from the collection of displayed notifications
+        /// </summary>
+        private void CloseNotification()
+        {
+            this.displayedNotifications.Remove(this);
         }
 
     }

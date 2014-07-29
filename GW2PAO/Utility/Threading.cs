@@ -19,13 +19,16 @@ namespace GW2PAO.Utility
         /// <param name="action">The action to invoke</param>
         public static void InvokeOnUI(Action action)
         {
-            if (Application.Current.Dispatcher.CheckAccess())
+            if (Application.Current != null)
             {
-                action.Invoke();
-            }
-            else
-            {
-                Application.Current.Dispatcher.Invoke(action);
+                if (Application.Current.Dispatcher.CheckAccess())
+                {
+                    action.Invoke();
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(action);
+                }
             }
         }
 
@@ -36,13 +39,16 @@ namespace GW2PAO.Utility
         /// <param name="action">The action to invoke</param>
         public static void BeginInvokeOnUI(Action action)
         {
-            if (Application.Current.Dispatcher.CheckAccess())
+            if (Application.Current != null)
             {
-                action.Invoke();
-            }
-            else
-            {
-                Application.Current.Dispatcher.BeginInvoke(action);
+                if (Application.Current.Dispatcher.CheckAccess())
+                {
+                    action.Invoke();
+                }
+                else
+                {
+                    Application.Current.Dispatcher.BeginInvoke(action);
+                }
             }
         }
     }

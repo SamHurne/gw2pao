@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GW2PAO.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="IsLoggingEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="ZoneAssistantHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
@@ -28,6 +25,15 @@
     </Setting>
     <Setting Name="EventTrackerY" Type="System.Double" Scope="User">
       <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="IsLoggingEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EventNotificationX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="EventNotificationY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

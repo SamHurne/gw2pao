@@ -69,6 +69,16 @@ namespace GW2PAO.Controllers
         public ObservableCollection<EventViewModel> WorldEvents { get { return this.worldEvents; } }
 
         /// <summary>
+        /// Backing store of the Event Notifications collection
+        /// </summary>
+        private ObservableCollection<EventViewModel> eventNotifications = new ObservableCollection<EventViewModel>();
+
+        /// <summary>
+        /// The collection of events for event notifications
+        /// </summary>
+        public ObservableCollection<EventViewModel> EventNotifications { get { return this.eventNotifications; } }
+
+        /// <summary>
         /// The interval by which to refresh events (in ms)
         /// </summary>
         public int EventRefreshInterval { get; set; }
@@ -77,11 +87,6 @@ namespace GW2PAO.Controllers
         /// The event tracker user settings
         /// </summary>
         public EventSettings UserSettings { get { return this.userSettings; } }
-
-        /// <summary>
-        /// Event raised when a world event is soon active
-        /// </summary>
-        public event EventHandler<EventNotificationArgs> EventNotificationEvent;
 
         /// <summary>
         /// Default constructor
@@ -161,12 +166,10 @@ namespace GW2PAO.Controllers
                     foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
                     {
                         logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                        this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings));
+                        this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
                     }
                 }));
         }
-
-        //private static int test = 0;
 
         /// <summary>
         /// Refreshes all events within the events collection
@@ -198,17 +201,11 @@ namespace GW2PAO.Controllers
                             if (!worldEvent.IsNotificationShown)
                             {
                                 worldEvent.IsNotificationShown = true;
-                                this.RaiseEventActiveNotification(worldEvent);
+                                this.DisplayEventNotification(worldEvent);
                             }
                         }
                         else
                         {
-                            //test++;
-                            //if (test == 121)
-                            //{
-                            //    test = 0;
-                            //    this.RaiseEventActiveNotification(worldEvent);
-                            //}
                             // Reset the IsNotificationShown state
                             worldEvent.IsNotificationShown = false;
                         }
@@ -234,14 +231,31 @@ namespace GW2PAO.Controllers
         }
 
         /// <summary>
-        /// Raises the EventActiveNotificationEvent
+        /// Adds an event to the event notifications collection, and then removes the event 10 seconds later
         /// </summary>
-        /// <param name="eventData">Event data of the event to raise the notification for</param>
-        private void RaiseEventActiveNotification(EventViewModel eventData)
+        private void DisplayEventNotification(EventViewModel eventData)
         {
-            if (this.EventNotificationEvent != null)
+            if (this.UserSettings.AreEventNotificationsEnabled)
             {
-                this.EventNotificationEvent(this, new EventNotificationArgs(eventData));
+                Task.Factory.StartNew(() =>
+                    {
+                        logger.Debug("Adding notification for \"{0}\"", eventData.EventName);
+                        Threading.InvokeOnUI(() => this.EventNotifications.Add(eventData));
+
+                        // For 10 seconds, loop and sleep, with checks to see if notifications have been disabled
+                        for (int i = 0; i < 40; i++)
+                        {
+                            System.Threading.Thread.Sleep(250);
+                            if (!this.UserSettings.AreEventNotificationsEnabled)
+                            {
+                                logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
+                                Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+                            }
+                        }
+
+                        logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
+                        Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+                    }, TaskCreationOptions.LongRunning);
             }
         }
     }
