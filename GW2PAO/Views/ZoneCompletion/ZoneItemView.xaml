@@ -12,7 +12,7 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
+                <core:SharedResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
 

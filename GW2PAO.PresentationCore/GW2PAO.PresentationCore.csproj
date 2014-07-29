@@ -57,6 +57,7 @@
     <Compile Include="NotifyPropertyChangedBase.cs" />
     <Compile Include="OutlinedText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedResourceDictionary.cs" />
     <Compile Include="TypeOfConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

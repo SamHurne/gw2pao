@@ -4,7 +4,7 @@
                     xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Style/BaseControlStyles/ContextMenuStyle.xaml" />
+        <core:SharedResourceDictionary Source="Style/BaseControlStyles/ContextMenuStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="MenuSeparatorTemplate">
