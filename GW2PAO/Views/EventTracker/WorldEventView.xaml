@@ -37,14 +37,11 @@
             <Style TargetType="Border">
                 <Setter Property="Effect">
                     <Setter.Value>
-                        <DropShadowEffect ShadowDepth="0"
-                                              Color="LawnGreen"
-                                              Opacity="0"
-                                              BlurRadius="30"/>
+                        <DropShadowEffect ShadowDepth="0" Color="LawnGreen"
+                                          Opacity="0" BlurRadius="30"/>
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-
                     <DataTrigger Binding="{Binding ElementName=StateTextblock, Path=Text}" Value="Active">
                         <DataTrigger.EnterActions>
                             <BeginStoryboard>
@@ -90,7 +87,7 @@
         </Border.Style>
 
         <Border.BorderBrush>
-            <LinearGradientBrush Opacity="{Binding State, Converter={StaticResource StateConverter}}">
+            <LinearGradientBrush Opacity="0.65">
                 <GradientStop Color="#FFFFA500" Offset="0.5"/>
                 <GradientStop Color="#00FFA500" Offset="1"/>
             </LinearGradientBrush>

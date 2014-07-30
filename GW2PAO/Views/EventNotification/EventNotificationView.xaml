@@ -62,7 +62,10 @@
             </Border.Background>
 
             <Border.BorderBrush>
-                <SolidColorBrush Color="Orange" Opacity="0.75" />
+                <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                    <GradientStop Color="#00FFA500" Offset="0"/>
+                    <GradientStop Color="#FFFFA500" Offset="1.5"/>
+                </RadialGradientBrush>
             </Border.BorderBrush>
 
             <Border.Effect>
