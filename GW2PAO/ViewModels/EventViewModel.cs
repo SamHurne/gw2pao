@@ -27,6 +27,7 @@ namespace GW2PAO.ViewModels
         private bool isVisible;
         private bool isNotificationVisible;
         private bool isNotificationShown;
+        private bool isRemovingNotification;
         private ICollection<EventViewModel> displayedNotifications;
         private EventSettings userSettings;
 
@@ -127,6 +128,16 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// True if the notification for this event is about to be removed, else false
+        /// TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+        /// </summary>
+        public bool IsRemovingNotification
+        {
+            get { return this.isRemovingNotification; }
+            set { SetField(ref this.isRemovingNotification, value); }
+        }
+
+        /// <summary>
         /// Command to hide the event
         /// </summary>
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenEvents); } }
@@ -155,6 +166,7 @@ namespace GW2PAO.ViewModels
             this.IsVisible = true;
             this.IsNotificationVisible = true;
             this.IsNotificationShown = false;
+            this.IsRemovingNotification = false;
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;

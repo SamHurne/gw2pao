@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
-             Height="60" Width="215" >
+             Height="60" Width="215">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,8 +17,33 @@
 
             <converters:EventStateConverter x:Key="StateConverter" />
             <converters:TimespanConverter x:Key="TimeConverter" />
+
+            <Storyboard x:Key="AddAnimation">
+                <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+            </Storyboard>
+            <Storyboard x:Key="RemoveAnimation">
+                <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+            </Storyboard>
+
         </ResourceDictionary>
     </UserControl.Resources>
+    
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Opacity" Value="0" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource AddAnimation}" Name="AddStoryboard" />
+                </EventTrigger>
+                <DataTrigger Binding="{Binding IsRemovingNotification}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard  BeginStoryboardName="AddStoryboard" />
+                        <BeginStoryboard Storyboard="{StaticResource RemoveAnimation}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
 
     <!--See code-behind for DataContext/ViewModel details-->
     <Grid Background="Transparent">
@@ -29,9 +54,6 @@
                 Margin="5"
                 Padding="5">
 
-            <!--<Border.Background>
-                <SolidColorBrush Color="Black" Opacity="0.75" />
-            </Border.Background>-->
             <Border.Background>
                 <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
                     <GradientStop Color="#015B4411" Offset="0"/>

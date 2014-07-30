@@ -171,6 +171,8 @@ namespace GW2PAO.Controllers
                 }));
         }
 
+        private static int test = 0;
+
         /// <summary>
         /// Refreshes all events within the events collection
         /// This is the primary function of the EventTrackerController
@@ -206,6 +208,15 @@ namespace GW2PAO.Controllers
                         }
                         else
                         {
+                            //////////// FOR DEBUG //////////////
+                            //test++;
+                            //if (test == 141)
+                            //{
+                            //    test = 0;
+                            //    this.DisplayEventNotification(worldEvent);
+                            //}
+                            /////////////////////////////////////
+
                             // Reset the IsNotificationShown state
                             worldEvent.IsNotificationShown = false;
                         }
@@ -254,7 +265,18 @@ namespace GW2PAO.Controllers
                         }
 
                         logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-                        Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+
+                        // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+                        // This makes it so that the notifications can fade out before they are removed from the notification window
+                        Trace.WriteLine("Setting IsRemovingNotification to true");
+                        Threading.InvokeOnUI(() => eventData.IsRemovingNotification = true);
+                        System.Threading.Thread.Sleep(250);
+                        Threading.InvokeOnUI(() => 
+                            {
+                                this.EventNotifications.Remove(eventData);
+                                eventData.IsRemovingNotification = false;
+                                Trace.WriteLine("Setting IsRemovingNotification to false");
+                            });
                     }, TaskCreationOptions.LongRunning);
             }
         }
