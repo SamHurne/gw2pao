@@ -7,7 +7,7 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <core:SharedResourceDictionary Source="TrayIconResourceDictionary.xaml" />
+                <ResourceDictionary Source="TrayIconResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
