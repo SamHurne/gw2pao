@@ -87,7 +87,7 @@
                                HorizontalAlignment="Right"
                                Margin="0,10,0,0"
                                FontSize="11">
-                        <Hyperlink>Help</Hyperlink>
+                        <Hyperlink Command="{Binding HelpCommand}">Help</Hyperlink>
                     </TextBlock>
                 </Grid>
             </Grid>

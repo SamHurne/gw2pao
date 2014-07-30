@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GW2PAO.PresentationCore;
 using NLog;
 
 namespace GW2PAO.ViewModels
@@ -37,6 +39,11 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Command to open help
+        /// </summary>
+        public DelegateCommand HelpCommand { get { return new DelegateCommand(this.OpenHelpPage); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public AboutViewModel()
@@ -44,6 +51,14 @@ namespace GW2PAO.ViewModels
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             this.Version = fvi.ProductVersion;
+        }
+
+        /// <summary>
+        /// Opens the Help page (https://gw2pao.codeplex.com/documentation) using the default browser
+        /// </summary>
+        private void OpenHelpPage()
+        {
+            Process.Start("https://gw2pao.codeplex.com/documentation");
         }
     }
 }
