@@ -6,7 +6,7 @@
       <ID>02925582-23e7-4a3a-afb3-f6ab327ea24f</ID>
       <Location>Plains of Ashford</Location>
       <MinimumLevel>30</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BIYBAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Ascalonian_Catacombs</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -44,7 +44,7 @@
       <ID>9c7b2c25-ac7c-4550-9037-bd28d243f198</ID>
       <Location>Queensdale</Location>
       <MinimumLevel>40</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BPoAAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Caudecus%27s_Manor</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -82,7 +82,7 @@
       <ID>31ea83ee-8a77-47f8-ab23-564490d05c39</ID>
       <Location>Caledon Forest</Location>
       <MinimumLevel>50</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BEEFAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Twilight_Arbor</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -120,7 +120,7 @@
       <ID>8a316b3a-364e-4448-b2c4-197c3956c375</ID>
       <Location>Dredgehaunt Cliffs</Location>
       <MinimumLevel>60</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BD8FAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Sorrow%27s_Embrace</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -158,7 +158,7 @@
       <ID>21394ee0-0e0b-4180-b646-7b9c230961f2</ID>
       <Location>Fireheart Rise</Location>
       <MinimumLevel>70</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BEAFAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Citadel_of_Flame</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -196,7 +196,7 @@
       <ID>0bb31538-fc72-49b1-85e3-6875887efab7</ID>
       <Location>Frostgorge Sound</Location>
       <MinimumLevel>76</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BEMFAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Honor_of_the_Waves</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -234,7 +234,7 @@
       <ID>fbfb7d59-aec5-46a8-b40a-1c0f4576c6cc</ID>
       <Location>Mount Maelstrom</Location>
       <MinimumLevel>78</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BEIFAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Crucible_of_Eternity</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -272,7 +272,7 @@
       <ID>34cd9086-0d94-492d-a4ea-567d372cc9b2</ID>
       <Location>Cursed Shore</Location>
       <MinimumLevel>80</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BCADAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/The_Ruined_City_of_Arah</WikiUrl>
       <Paths>
         <DungeonPath>
@@ -317,7 +317,7 @@
       <ID>1fc09382-1fe9-4f4b-91fd-f50ebe3143fa</ID>
       <Location>Lion's Arch</Location>
       <MinimumLevel>1</MinimumLevel>
-      <WaypointCode>[TBD]</WaypointCode>
+      <WaypointCode><![CDATA[[&BDIEAAA=]]]></WaypointCode>
       <WikiUrl>http://wiki.guildwars2.com/wiki/Fractals_of_the_Mists</WikiUrl>
       <Paths>
         <DungeonPath>

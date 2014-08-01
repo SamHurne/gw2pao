@@ -54,6 +54,11 @@ namespace GW2PAO.ViewModels.DungeonTracker
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenDungeons); } }
 
         /// <summary>
+        /// Command to copy the nearest waypoint's chat code to the clipboard
+        /// </summary>
+        public DelegateCommand CopyWaypointCommand { get { return new DelegateCommand(this.CopyWaypointCode); } }
+
+        /// <summary>
         /// Command to open the wiki page for this dungeon
         /// </summary>
         public DelegateCommand OpenWikiPageCommand { get { return new DelegateCommand(this.OpenWikiPage); } }
@@ -104,6 +109,15 @@ namespace GW2PAO.ViewModels.DungeonTracker
         {
             logger.Debug("Adding \"{0}\" to hidden dungeons", this.DungeonName);
             this.userSettings.HiddenDungeons.Add(this.DungeonId);
+        }
+
+        /// <summary>
+        /// Copies the nearest waypoint's chat code to the clipboard
+        /// </summary>
+        private void CopyWaypointCode()
+        {
+            logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.DungeonName, this.DungeonModel.WaypointCode);
+            System.Windows.Clipboard.SetText(this.DungeonModel.WaypointCode);
         }
 
         /// <summary>
