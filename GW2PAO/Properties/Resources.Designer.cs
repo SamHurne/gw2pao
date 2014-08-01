@@ -93,6 +93,26 @@ namespace GW2PAO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dungeons {
+            get {
+                object obj = ResourceManager.GetObject("dungeons", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gold_coin {
+            get {
+                object obj = ResourceManager.GetObject("gold_coin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hearts {
             get {
                 object obj = ResourceManager.GetObject("hearts", resourceCulture);
@@ -126,6 +146,16 @@ namespace GW2PAO.Properties {
         internal static System.Drawing.Bitmap poi_gray {
             get {
                 object obj = ResourceManager.GetObject("poi_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap silver_coin {
+            get {
+                object obj = ResourceManager.GetObject("silver_coin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

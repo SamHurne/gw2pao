@@ -12,6 +12,7 @@ using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.TrayIcon;
 using GW2PAO.ViewModels.ZoneCompletion;
 using GW2PAO.Views;
+using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
 using GW2PAO.Views.ZoneCompletion;
@@ -51,7 +52,12 @@ namespace GW2PAO.Controllers
         public ZoneService ZoneService { get; private set; }
 
         /// <summary>
-        /// Event tracker controller
+        /// Service responsible for Dungeon information
+        /// </summary>
+        public DungeonsService DungeonsService { get; private set; }
+
+        /// <summary>
+        /// Events controller
         /// </summary>
         public IEventsController EventsController { get; private set; }
 
@@ -61,12 +67,17 @@ namespace GW2PAO.Controllers
         public IZoneCompletionController ZoneCompletionController { get; private set; }
 
         /// <summary>
+        /// Dungeons controller
+        /// </summary>
+        public IDungeonsController DungeonsController { get; private set; }
+
+        /// <summary>
         /// Object that displays the current zone's name (used for the Zone Completion Assistant)
         /// </summary>
         public IHasZoneName ZoneName { get; private set; }
 
         /// <summary>
-        /// Event tracker settings
+        /// Event settings
         /// </summary>
         public EventSettings EventSettings { get; private set; }
 
@@ -74,6 +85,11 @@ namespace GW2PAO.Controllers
         /// Zone completion settings
         /// </summary>
         public ZoneCompletionSettings ZoneCompletionSettings { get; private set; }
+
+        /// <summary>
+        /// Dungeon settings
+        /// </summary>
+        public DungeonSettings DungeonSettings { get; private set; }
 
         /// <summary>
         /// Main functionality menu items, including those for the Event Tracker 
@@ -97,6 +113,11 @@ namespace GW2PAO.Controllers
         private EventNotificationWindow eventNotificationsView;
 
         /// <summary>
+        /// The Dungeon Tracker view
+        /// </summary>
+        private DungeonTrackerView dungeonTrackerView;
+
+        /// <summary>
         /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
         /// running as administrator - prevents spamming the error message
         /// </summary>
@@ -113,12 +134,13 @@ namespace GW2PAO.Controllers
             this.PlayerService = new PlayerService();
             this.SystemService = new SystemService();
             this.ZoneService = new ZoneService();
+            this.DungeonsService = new DungeonsService();
 
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
 
             // Load user settings
-            logger.Debug("Loading event tracker user settings");
+            logger.Debug("Loading event user settings");
             this.EventSettings = EventSettings.LoadSettings();
             if (this.EventSettings == null)
                 this.EventSettings = new EventSettings();
@@ -128,10 +150,16 @@ namespace GW2PAO.Controllers
             if (this.ZoneCompletionSettings == null)
                 this.ZoneCompletionSettings = new ZoneCompletionSettings();
 
+            logger.Debug("Loading dungeon user settings");
+            this.DungeonSettings = DungeonSettings.LoadSettings();
+            if (this.DungeonSettings == null)
+                this.DungeonSettings = new DungeonSettings();
+
             // Enable autosave on the user settings
             logger.Debug("Enabling autosave of user settings");
             this.EventSettings.EnableAutoSave();
             this.ZoneCompletionSettings.EnableAutoSave();
+            this.DungeonSettings.EnableAutoSave();
 
             // Create the controllers
             logger.Debug("Creating events controller");
@@ -140,6 +168,9 @@ namespace GW2PAO.Controllers
 
             logger.Debug("Creating zone completion assistant controller");
             this.ZoneCompletionController = new ZoneCompletionController(this.ZoneService, this.PlayerService, this.SystemService, this.ZoneName, this.ZoneCompletionSettings);
+
+            logger.Debug("Creating dungeons controller");
+            this.DungeonsController = new DungeonsController(this.DungeonsService, this.DungeonSettings);
 
             // Create the event notifications view
             logger.Debug("Initializing event notifications");
@@ -151,6 +182,7 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
             this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
             this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
+            this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
 
             logger.Info("Application controller initialized");
         }
@@ -237,6 +269,33 @@ namespace GW2PAO.Controllers
                 this.runningAsAdminErrorShown = false;
 
             return canDisplayZoneAssistant;
+        }
+
+        /// <summary>
+        /// Displays the Dungeon Tracker window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayDungeonTracker()
+        {
+            if (this.dungeonTrackerView == null || !this.dungeonTrackerView.IsVisible)
+            {
+                this.DungeonsController.Start();
+                this.dungeonTrackerView = new DungeonTrackerView(this.DungeonsController);
+                this.dungeonTrackerView.Show();
+            }
+            else
+            {
+                this.dungeonTrackerView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the dungeon tracker can be displayed
+        /// </summary>
+        /// <returns></returns>
+        private bool CanDisplayDungeonTracker()
+        {
+            return true;
         }
     }
 }

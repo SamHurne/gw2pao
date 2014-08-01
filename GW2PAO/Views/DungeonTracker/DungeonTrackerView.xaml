@@ -1,36 +1,27 @@
-﻿<src:OverlayWindow x:Class="GW2PAO.Views.EventTracker.EventTrackerView"
-        x:Name="EventTrackerViewWindow"
+﻿<src:OverlayWindow x:Class="GW2PAO.Views.DungeonTracker.DungeonTrackerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:View="clr-namespace:GW2PAO.Views.EventTracker"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:view="clr-namespace:GW2PAO.Views.DungeonTracker"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        MinHeight="84" MaxHeight="380" Height="125"
-        MinWidth="250" MaxWidth="250" Width="250"
+        MinHeight="84" MaxHeight="275" Height="125"
+        MinWidth="280" MaxWidth="280" Width="280"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResize"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">
-
+    
     <src:OverlayWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <converters:EventStateConverter x:Key="StateConverter" />
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-            <core:AutoRefreshCollectionViewSource Source="{Binding WorldEvents}" x:Key="WorldEventsView">
-                <CollectionViewSource.SortDescriptions>
-                    <scm:SortDescription PropertyName="State" />
-                    <scm:SortDescription PropertyName="TimerValue" />
-                </CollectionViewSource.SortDescriptions>
-            </core:AutoRefreshCollectionViewSource>
+            <core:AutoRefreshCollectionViewSource Source="{Binding Dungeons}" x:Key="DungeonsCollection" />
 
         </ResourceDictionary>
     </src:OverlayWindow.Resources>
@@ -66,12 +57,12 @@
                        VerticalAlignment="Center"
                        Height="30" Width="30"
                        Margin="0,0,0,0"
-                       Source="/Resources/bosses.png"
+                       Source="/Resources/dungeons.png"
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Reset Hidden Events" Command="{Binding ResetHiddenEventsCommand}" />
-                            <MenuItem Header="Show Inactive Events" IsCheckable="True" IsChecked="{Binding UserSettings.AreInactiveEventsVisible}" />
+                            <MenuItem Header="Reset Hidden Dungeons" Command="{Binding ResetHiddenDungeonsCommand}" />
+                            <MenuItem Header="Reset Completed Paths" Command="{Binding ResetCompletedPathsCommand}" />
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -116,7 +107,7 @@
                                         VerticalAlignment="Center"
                                         Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
                                         FontFamily="Candara" FontSize="17"
-                                        Text="World Events" />
+                                        Text="Dungeons" />
 
                 <Button Name="MinimizeWindowButton"
                     Grid.Column="2"
@@ -134,19 +125,18 @@
             </Grid>
         </Border>
 
-        <Grid Name="EventsContainer" Grid.Row="1">
+        <Grid Name="DungeonsContainer" Grid.Row="1">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Auto">
-                <StackPanel Width="{Binding ElementName=EventsContainer, Path=ActualWidth}">
-                    <ItemsControl Name="WorldEventsControl"
-                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}"
-                                      Margin="0,0,0,5">
+                <StackPanel Width="{Binding ElementName=DungeonsContainer, Path=ActualWidth}">
+                    <ItemsControl Name="DungeonsControl"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ItemsSource="{Binding Source={StaticResource DungeonsCollection}}"
+                                  Margin="0,0,0,5">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <View:WorldEventView DataContext="{Binding}"
-                                                     Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

@@ -89,7 +89,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\DungeonsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\Interfaces\IDungeonsController.cs" />
     <Compile Include="Controllers\Interfaces\IEventsController.cs" />
     <Compile Include="Controllers\Interfaces\IZoneCompletionController.cs" />
     <Compile Include="Controllers\ZoneCompletionController.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Converters\TimespanConverter.cs" />
     <Compile Include="Converters\TreasureCheckboxConverter.cs" />
     <Compile Include="Converters\ZoneItemTypeImageSrcConverter.cs" />
+    <Compile Include="Models\DungeonSettings.cs" />
     <Compile Include="Models\EventSettings.cs" />
     <Compile Include="Models\ZoneCompletionSettings.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
@@ -108,6 +111,9 @@
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\DungeonTracker\DungeonTrackerViewModel.cs" />
+    <Compile Include="ViewModels\DungeonTracker\DungeonViewModel.cs" />
+    <Compile Include="ViewModels\DungeonTracker\PathViewModel.cs" />
     <Compile Include="ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
     <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
@@ -120,6 +126,12 @@
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DungeonTracker\DungeonTrackerView.xaml.cs">
+      <DependentUpon>DungeonTrackerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DungeonTracker\DungeonView.xaml.cs">
+      <DependentUpon>DungeonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EventNotification\EventNotificationView.xaml.cs">
       <DependentUpon>EventNotificationView.xaml</DependentUpon>
@@ -188,6 +200,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DungeonTracker\DungeonTrackerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DungeonTracker\DungeonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EventNotification\EventNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,6 +247,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\silver_coin.png" />
+    <Resource Include="Resources\gold_coin.png" />
+    <Resource Include="Resources\dungeons.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

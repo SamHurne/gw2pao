@@ -30,7 +30,7 @@
         </ContextMenu>
     </UserControl.ContextMenu>
 
-    <!--Note: DataContext is set by the EventListView-->
+    <!--Note: DataContext is set by the EventTrackerView-->
     <Border CornerRadius="0" Margin="0,0,5,0" Padding="15,0,5,5" BorderThickness="0,1,0,0">
 
         <Border.Style>

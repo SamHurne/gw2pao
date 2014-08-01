@@ -154,5 +154,53 @@ namespace GW2PAO.Properties {
                 this["EventNotificationY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTrackerHeight {
+            get {
+                return ((double)(this["DungeonTrackerHeight"]));
+            }
+            set {
+                this["DungeonTrackerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTrackerWidth {
+            get {
+                return ((double)(this["DungeonTrackerWidth"]));
+            }
+            set {
+                this["DungeonTrackerWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTrackerX {
+            get {
+                return ((double)(this["DungeonTrackerX"]));
+            }
+            set {
+                this["DungeonTrackerX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTrackerY {
+            get {
+                return ((double)(this["DungeonTrackerY"]));
+            }
+            set {
+                this["DungeonTrackerY"] = value;
+            }
+        }
     }
 }

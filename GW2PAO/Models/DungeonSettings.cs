@@ -7,17 +7,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using GW2PAO.API.Data;
 using GW2PAO.PresentationCore;
 using NLog;
 
 namespace GW2PAO.Models
 {
     /// <summary>
-    /// User settings for the Events Tracker and Event Notifications
+    /// User settings for the Dungeons Tracker
     /// </summary>
     [Serializable]
-    public class EventSettings : NotifyPropertyChangedBase
+    public class DungeonSettings : NotifyPropertyChangedBase
     {
         /// <summary>
         /// Default logger
@@ -27,31 +26,11 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".EventSettings.xml"; } }
+        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".DungeonSettings.xml"; } }
 
-        private bool areInactiveEventsVisible;
-        private bool areEventNotificationsEnabled;
         private DateTime lastResetDateTime;
-        private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
-        private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
-
-        /// <summary>
-        /// True if inactive events are visible, else false
-        /// </summary>
-        public bool AreInactiveEventsVisible
-        {
-            get { return this.areInactiveEventsVisible; }
-            set { SetField(ref this.areInactiveEventsVisible, value); }
-        }
-
-        /// <summary>
-        /// True if event notifications are enabled, else false
-        /// </summary>
-        public bool AreEventNotificationsEnabled
-        {
-            get { return this.areEventNotificationsEnabled; }
-            set { SetField(ref this.areEventNotificationsEnabled, value); }
-        }
+        private ObservableCollection<Guid> hiddenDungeons = new ObservableCollection<Guid>();
+        private ObservableCollection<Guid> completedPaths = new ObservableCollection<Guid>();
 
         /// <summary>
         /// The last recorded server-reset date/time
@@ -63,22 +42,20 @@ namespace GW2PAO.Models
         }
 
         /// <summary>
-        /// Collection of user-configured Hidden Events
+        /// Collection of user-configured Hidden Dungeons
         /// </summary>
-        public ObservableCollection<Guid> HiddenEvents { get { return this.hiddenEvents; } }
+        public ObservableCollection<Guid> HiddenDungeons { get { return this.hiddenDungeons; } }
 
         /// <summary>
-        /// Collection of user-configured events with treasures already obtained
+        /// Collection of user-configured completed dungeon paths
         /// </summary>
-        public ObservableCollection<Guid> EventsWithTreasureObtained { get { return this.eventsWithTreasureObtained; } }
+        public ObservableCollection<Guid> CompletedPaths { get { return this.completedPaths; } }
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public EventSettings()
+        public DungeonSettings()
         {
-            this.AreInactiveEventsVisible = true;
-            this.AreEventNotificationsEnabled = true;
             this.LastResetDateTime = DateTime.UtcNow;
         }
 
@@ -88,20 +65,20 @@ namespace GW2PAO.Models
         public void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => EventSettings.SaveSettings(this);
-            this.HiddenEvents.CollectionChanged += (o, e) => EventSettings.SaveSettings(this);
-            this.EventsWithTreasureObtained.CollectionChanged += (o, e) => EventSettings.SaveSettings(this);
+            this.PropertyChanged += (o, e) => DungeonSettings.SaveSettings(this);
+            this.HiddenDungeons.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this);
+            this.CompletedPaths.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this);
         }
 
         /// <summary>
         /// Loads the user settings
         /// </summary>
-        /// <returns>The loaded EventTrackerSettings, or null if the load fails</returns>
-        public static EventSettings LoadSettings()
+        /// <returns>The loaded DungeonSettings, or null if the load fails</returns>
+        public static DungeonSettings LoadSettings()
         {
             logger.Debug("Loading user settings");
 
-            XmlSerializer deserializer = new XmlSerializer(typeof(EventSettings));
+            XmlSerializer deserializer = new XmlSerializer(typeof(DungeonSettings));
             object loadedSettings = null;
 
             if (File.Exists(Filename))
@@ -122,7 +99,7 @@ namespace GW2PAO.Models
             if (loadedSettings != null)
             {
                 logger.Info("Settings successfully loaded");
-                return loadedSettings as EventSettings;
+                return loadedSettings as DungeonSettings;
             }
             else
             {
@@ -134,10 +111,10 @@ namespace GW2PAO.Models
         /// Saves the user settings
         /// </summary>
         /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(EventSettings settings)
+        public static void SaveSettings(DungeonSettings settings)
         {
             logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(EventSettings));
+            XmlSerializer serializer = new XmlSerializer(typeof(DungeonSettings));
             using (TextWriter writer = new StreamWriter(Filename))
             {
                 serializer.Serialize(writer, settings);

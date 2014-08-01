@@ -2,23 +2,31 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">Scroll</PopupAnimation>
+    
     <Style TargetType="ToolTip">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="HasDropShadow" Value="True"/>
-        <Setter Property="TextBlock.Foreground" Value="White"/>
-        <!--<Setter Property="TextBlock.FontWeight" Value="Bold"/>-->
+        <Setter Property="TextBlock.Foreground" Value="Black"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
-                    <Border Name="Border"
-                            Background="Transparent"
-                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <ContentPresenter Margin="2"
-                                          HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Border Name="Border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                            BorderThickness="0,1,0,1">
+                        <Border.Background>
+                            <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                                <GradientStop Color="#FF5B4411" Offset="0.25"/>
+                                <GradientStop Color="#015B4411" Offset="1.25"/>
+                            </RadialGradientBrush>
+                        </Border.Background>
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="Goldenrod" Opacity="0.75" />
+                        </Border.BorderBrush>
+                        <ContentPresenter Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="true">
-                            <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+                            <Setter TargetName="Border" Property="CornerRadius" Value="0"/>
                             <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -27,15 +35,11 @@
         </Setter>
 
         <Style.Triggers>
-            <Trigger Property="Content"
-                 Value="{x:Static sys:String.Empty}">
-                <Setter Property="Visibility"
-                    Value="Collapsed" />
+            <Trigger Property="Content" Value="{x:Static sys:String.Empty}">
+                <Setter Property="Visibility" Value="Collapsed" />
             </Trigger>
-            <Trigger Property="Content"
-                 Value="{x:Null}">
-                <Setter Property="Visibility"
-                    Value="Collapsed" />
+            <Trigger Property="Content" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -35,5 +35,17 @@
     <Setting Name="EventNotificationY" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
+    <Setting Name="DungeonTrackerHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="DungeonTrackerWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="DungeonTrackerX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="DungeonTrackerY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

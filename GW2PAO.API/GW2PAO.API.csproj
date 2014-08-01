@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\DynamicEvent.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
@@ -60,8 +61,11 @@
     <Compile Include="Data\Resolution.cs" />
     <Compile Include="Data\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DungeonsService.cs" />
+    <Compile Include="Services\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
     <Compile Include="Data\WorldEvent.cs" />
+    <Compile Include="Services\Interfaces\IDungeonsService.cs" />
     <Compile Include="Services\Interfaces\IEventsService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\Interfaces\ISystemService.cs" />
@@ -73,6 +77,9 @@
     <Compile Include="Util\CalcUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dungeons.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="EventTimeTable.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

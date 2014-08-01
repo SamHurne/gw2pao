@@ -169,4 +169,13 @@
   <data name="waypoints_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waypoints_gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dungeons" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dungeons.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gold_coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gold_coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="silver_coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\silver_coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
