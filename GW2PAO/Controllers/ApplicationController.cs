@@ -118,6 +118,11 @@ namespace GW2PAO.Controllers
         private DungeonTrackerView dungeonTrackerView;
 
         /// <summary>
+        /// The web browser view
+        /// </summary>
+        private BrowserView webBrowserView;
+
+        /// <summary>
         /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
         /// running as administrator - prevents spamming the error message
         /// </summary>
@@ -183,6 +188,7 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
             this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
             this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
+            //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser)); Left out for now... will add after WvW features are completed
 
             logger.Info("Application controller initialized");
         }
@@ -294,6 +300,32 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <returns></returns>
         private bool CanDisplayDungeonTracker()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Web Browser window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayWebBrowser()
+        {
+            if (this.webBrowserView == null || !this.webBrowserView.IsVisible)
+            {
+                this.webBrowserView = new BrowserView();
+                this.webBrowserView.Show();
+            }
+            else
+            {
+                this.webBrowserView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the web browser can be displayed
+        /// </summary>
+        /// <returns></returns>
+        private bool CanDisplayWebBrowser()
         {
             return true;
         }

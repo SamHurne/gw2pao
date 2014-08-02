@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Awesomium.Core;
 using GW2PAO.Controllers;
 using GW2PAO.TrayIcon;
 using GW2PAO.ViewModels.TrayIcon;
@@ -53,6 +54,16 @@ namespace GW2PAO
             // Initialize the last chance exception handlers
             logger.Debug("Registering last chance exception handlers");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            // Initialize the WebCore for the web browser
+            logger.Debug("Initializing Awesomium WebCore");
+            if (!WebCore.IsInitialized)
+            {
+                WebCore.Initialize(new WebConfig()
+                {
+                    HomeURL = "http://wiki.guildwars2.com/".ToUri(),
+                });
+            }
 
             // Create the tray icon
             logger.Debug("Creating tray icon");
@@ -103,6 +114,12 @@ namespace GW2PAO
         private void App_Exit(object sender, ExitEventArgs e)
         {
             logger.Info("Program shutting down");
+
+            logger.Debug("Cleaning up Awesomium WebCore");
+            if (WebCore.IsInitialized)
+            {
+                WebCore.Shutdown();
+            }
         }
 
         /// <summary>

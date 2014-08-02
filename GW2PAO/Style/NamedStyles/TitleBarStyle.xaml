@@ -4,8 +4,8 @@
     <Color x:Key="ButtonBackgroundColor">#00FFA500</Color>
     <Color x:Key="ButtonForegroundColor">#FFFFA500</Color>
     <Color x:Key="ButtonBackgroundMouseOverColor">#50FFA500</Color>
-    <Color x:Key="DisabledButtonBackgroundColor">#FFF2F2F2</Color>
-    <Color x:Key="DisabledButtonForegroundColor">#FFBFBFBF</Color>
+    <Color x:Key="DisabledButtonBackgroundColor">#00FFA500</Color>
+    <Color x:Key="DisabledButtonForegroundColor">#FFFFA500</Color>
     <Color x:Key="ButtonPressedBackgroundColor">#FFFFA500</Color>
     <Color x:Key="ButtonPressedForegroundColor">Black</Color>
 
