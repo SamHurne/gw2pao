@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,13 +79,27 @@ namespace GW2PAO.ViewModels.TrayIcon
         /// <param name="isCheckable">True if the menu item is checkable, else false</param>
         /// <param name="getIsChecked">Getter function used to get the value of the IsChecked property</param>
         /// <param name="setIsChecked">Setter action used to set the value of the IsChecked property</param>
-        public MenuItemViewModel(string header, Action action, bool isCheckable = false, Func<bool> getIsChecked = null, Action<bool> setIsChecked = null)
+        /// <param name="isCheckedPropertyChangedObject">Object containing the backing property for the IsChecked property</param>
+        /// <param name="isCheckedPropertyName">Name of the property containing the value of the IsChecked property</param>
+        public MenuItemViewModel(string header, Action action, bool isCheckable = false,
+            Func<bool> getIsChecked = null, Action<bool> setIsChecked = null,
+            INotifyPropertyChanged isCheckedPropertyChangedObject = null,
+            string isCheckedPropertyName = null)
         {
             this.header = header;
             this.command = new DelegateCommand(action);
             this.IsCheckable = isCheckable;
             this.getIsChecked = getIsChecked;
             this.setIsChecked = setIsChecked;
+
+            if (isCheckedPropertyChangedObject != null)
+            {
+                isCheckedPropertyChangedObject.PropertyChanged += (o, e) =>
+                    {
+                        if (e.PropertyName == isCheckedPropertyName)
+                            this.RaisePropertyChanged("IsChecked");
+                    };
+            }
         }
 
         /// <summary>

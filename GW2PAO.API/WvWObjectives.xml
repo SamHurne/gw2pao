@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WvWObjectivesTable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Objectives>
+    <Objective>
+      <ID>1</ID>
+      <Name>Keep</Name>
+      <FullName>Overlook</FullName>
+      <Location>E</Location>
+      <Type>Keep</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>2</ID>
+      <Name>Keep</Name>
+      <FullName>Valley</FullName>
+      <Location>SE</Location>
+      <Type>Keep</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>3</ID>
+      <Name>Keep</Name>
+      <FullName>Lowlands</FullName>
+      <Location>SW</Location>
+      <Type>Keep</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>4</ID>
+      <Name>Green Mill</Name>
+      <FullName>Golanta Clearing</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>5</ID>
+      <Name>Red Mine</Name>
+      <FullName>Pangloss Rise</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>6</ID>
+      <Name>Red Mill</Name>
+      <FullName>Speldan Clearcut</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>7</ID>
+      <Name>Blue Mine</Name>
+      <FullName>Danelon Passage</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>8</ID>
+      <Name>Blue Mill</Name>
+      <FullName>Umberglade Woods</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>9</ID>
+      <Name>Castle</Name>
+      <FullName>Stonemist Castle</FullName>
+      <Location>C</Location>
+      <Type>Castle</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>35</Points>
+    </Objective>
+    <Objective>
+      <ID>10</ID>
+      <Name>Green Mine</Name>
+      <FullName>Rogue's Quarry</FullName>
+      <Location />
+      <Type>Camp</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>11</ID>
+      <Name>Tower</Name>
+      <FullName>Aldon's Ledge</FullName>
+      <Location>W</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>12</ID>
+      <Name>Tower</Name>
+      <FullName>Wildcreek Run</FullName>
+      <Location>W</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>13</ID>
+      <Name>Tower</Name>
+      <FullName>Jerrifer's Slough</FullName>
+      <Location>SW</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>14</ID>
+      <Name>Tower</Name>
+      <FullName>Klovan Gully</FullName>
+      <Location>SW</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>15</ID>
+      <Name>Tower</Name>
+      <FullName>Langor Gulch</FullName>
+      <Location>SE</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>16</ID>
+      <Name>Tower</Name>
+      <FullName>Quentin Lake</FullName>
+      <Location>SE</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>17</ID>
+      <Name>Tower</Name>
+      <FullName>Mendon's Gap</FullName>
+      <Location>NW</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>18</ID>
+      <Name>Tower</Name>
+      <FullName>Anzalias Pass</FullName>
+      <Location>NW</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>19</ID>
+      <Name>Tower</Name>
+      <FullName>Ogrewatch Cut</FullName>
+      <Location>NE</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>20</ID>
+      <Name>Tower</Name>
+      <FullName>Veloka Slope</FullName>
+      <Location>NE</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>21</ID>
+      <Name>Tower</Name>
+      <FullName>Durios Gulch</FullName>
+      <Location>E</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>22</ID>
+      <Name>Tower</Name>
+      <FullName>Bravost Escarpment</FullName>
+      <Location>E</Location>
+      <Type>Tower</Type>
+      <Map>EternalBattlegrounds</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>23</ID>
+      <Name>Keep</Name>
+      <FullName>Garrison</FullName>
+      <Location>C</Location>
+      <Type>Keep</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>24</ID>
+      <Name>Orchard</Name>
+      <FullName>Champion's Demense</FullName>
+      <Location>S</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>25</ID>
+      <Name>Tower</Name>
+      <FullName>Redbriar</FullName>
+      <Location>SW</Location>
+      <Type>Tower</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>26</ID>
+      <Name>Tower</Name>
+      <FullName>Greenlake</FullName>
+      <Location>SE</Location>
+      <Type>Tower</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>27</ID>
+      <Name>Keep</Name>
+      <FullName>Ascension Bay</FullName>
+      <Location>W</Location>
+      <Type>Keep</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>28</ID>
+      <Name>Tower</Name>
+      <FullName>Dawn's Eyrie</FullName>
+      <Location>NE</Location>
+      <Type>Tower</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>29</ID>
+      <Name>Crossroads</Name>
+      <FullName>The Spiritholme</FullName>
+      <Location>N</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>30</ID>
+      <Name>Tower</Name>
+      <FullName>Woodhaven</FullName>
+      <Location>NW</Location>
+      <Type>Tower</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>31</ID>
+      <Name>Keep</Name>
+      <FullName>Askalion Hills</FullName>
+      <Location>E</Location>
+      <Type>Keep</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>32</ID>
+      <Name>Keep</Name>
+      <FullName>Etheron Hills</FullName>
+      <Location>E</Location>
+      <Type>Keep</Type>
+      <Map>RedBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>33</ID>
+      <Name>Keep</Name>
+      <FullName>Dreaming Bay</FullName>
+      <Location>W</Location>
+      <Type>Keep</Type>
+      <Map>RedBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>34</ID>
+      <Name>Orchard</Name>
+      <FullName>Victors's Lodge</FullName>
+      <Location>S</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>35</ID>
+      <Name>Tower</Name>
+      <FullName>Greenbriar</FullName>
+      <Location>SW</Location>
+      <Type>Tower</Type>
+      <Map>RedBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>36</ID>
+      <Name>Tower</Name>
+      <FullName>Bluelake</FullName>
+      <Location>SE</Location>
+      <Type>Tower</Type>
+      <Map>RedBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>37</ID>
+      <Name>Keep</Name>
+      <FullName>Garrison</FullName>
+      <Location>C</Location>
+      <Type>Keep</Type>
+      <Map>RedBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>38</ID>
+      <Name>Tower</Name>
+      <FullName>Longview</FullName>
+      <Location>NW</Location>
+      <Type>Tower</Type>
+      <Map>RedBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>39</ID>
+      <Name>Crossroads</Name>
+      <FullName>The Godsword</FullName>
+      <Location>N</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>40</ID>
+      <Name>Tower</Name>
+      <FullName>Cliffside</FullName>
+      <Location>NE</Location>
+      <Type>Tower</Type>
+      <Map>RedBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>41</ID>
+      <Name>Keep</Name>
+      <FullName>Shadaran Hills</FullName>
+      <Location>E</Location>
+      <Type>Keep</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>42</ID>
+      <Name>Tower</Name>
+      <FullName>Redlake</FullName>
+      <Location>SE</Location>
+      <Type>Tower</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>43</ID>
+      <Name>Orchard</Name>
+      <FullName>Hero's Lodge</FullName>
+      <Location>S</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>44</ID>
+      <Name>Keep</Name>
+      <FullName>Dreadfall Bay</FullName>
+      <Location>W</Location>
+      <Type>Keep</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>45</ID>
+      <Name>Tower</Name>
+      <FullName>Bluebriar</FullName>
+      <Location>SW</Location>
+      <Type>Tower</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>46</ID>
+      <Name>Keep</Name>
+      <FullName>Garrison</FullName>
+      <Location>C</Location>
+      <Type>Keep</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>25</Points>
+    </Objective>
+    <Objective>
+      <ID>47</ID>
+      <Name>Tower</Name>
+      <FullName>Sunnyhill</FullName>
+      <Location>NW</Location>
+      <Type>Tower</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>48</ID>
+      <Name>Quarry</Name>
+      <FullName>Faithleap</FullName>
+      <Location>NW</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>49</ID>
+      <Name>Workshop</Name>
+      <FullName>Bluevale Refuge</FullName>
+      <Location>SW</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>50</ID>
+      <Name>Fishing Village</Name>
+      <FullName>Bluewater Lowlands</FullName>
+      <Location>SE</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>51</ID>
+      <Name>Lumber Mill</Name>
+      <FullName>Astralholme</FullName>
+      <Location>NE</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>52</ID>
+      <Name>Quarry</Name>
+      <FullName>Arah's Hope</FullName>
+      <Location>NW</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>53</ID>
+      <Name>Workshop</Name>
+      <FullName>Greenvale Refuge</FullName>
+      <Location>SW</Location>
+      <Type>Camp</Type>
+      <Map>RedBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>54</ID>
+      <Name>Lumber Mill</Name>
+      <FullName>Foghaven</FullName>
+      <Location>NE</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>55</ID>
+      <Name>Fishing Village</Name>
+      <FullName>Redwater Lowlands</FullName>
+      <Location>SE</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>56</ID>
+      <Name>Crossroads</Name>
+      <FullName>The Titanpaw</FullName>
+      <Location>N</Location>
+      <Type>Camp</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>57</ID>
+      <Name>Tower</Name>
+      <FullName>Cragtop</FullName>
+      <Location>NE</Location>
+      <Type>Tower</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>10</Points>
+    </Objective>
+    <Objective>
+      <ID>58</ID>
+      <Name>Quarry</Name>
+      <FullName>Godslore</FullName>
+      <Location>NW</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>59</ID>
+      <Name>Workshop</Name>
+      <FullName>Redvale Refuge</FullName>
+      <Location>SW</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>60</ID>
+      <Name>Lumber Mill</Name>
+      <FullName>Stargrove</FullName>
+      <Location>NE</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>61</ID>
+      <Name>Fishing Village</Name>
+      <FullName>Greenwater Lowlands</FullName>
+      <Location>SE</Location>
+      <Type>Camp</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>5</Points>
+    </Objective>
+    <Objective>
+      <ID>62</ID>
+      <Name>Temple of Lost Prayers</Name>
+      <FullName>Temple of Lost Prayers</FullName>
+      <Location />
+      <Type>TempleofLostPrayers</Type>
+      <Map>RedBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>63</ID>
+      <Name>Battle's Hollow</Name>
+      <FullName>Battle's Hollow</FullName>
+      <Location />
+      <Type>BattlesHollow</Type>
+      <Map>RedBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>64</ID>
+      <Name>Bauer's Estate</Name>
+      <FullName>Bauer's Estate</FullName>
+      <Location />
+      <Type>BauersEstate</Type>
+      <Map>RedBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>65</ID>
+      <Name>Orchard Overlook</Name>
+      <FullName>Orchard Overlook</FullName>
+      <Location />
+      <Type>OrchardOverlook</Type>
+      <Map>RedBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>66</ID>
+      <Name>Carver's Ascent</Name>
+      <FullName>Carver's Ascent</FullName>
+      <Location />
+      <Type>CarversAscent</Type>
+      <Map>RedBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>67</ID>
+      <Name>Carver's Ascent</Name>
+      <FullName>Carver's Ascent</FullName>
+      <Location />
+      <Type>CarversAscent</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>68</ID>
+      <Name>Orchard Overlook</Name>
+      <FullName>Orchard Overlook</FullName>
+      <Location />
+      <Type>OrchardOverlook</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>69</ID>
+      <Name>Bauer's Estate</Name>
+      <FullName>Bauer's Estate</FullName>
+      <Location />
+      <Type>BauersEstate</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>70</ID>
+      <Name>Battle's Hollow</Name>
+      <FullName>Battle's Hollow</FullName>
+      <Location />
+      <Type>BattlesHollow</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>71</ID>
+      <Name>Temple of Lost Prayers</Name>
+      <FullName>Temple of Lost Prayers</FullName>
+      <Location />
+      <Type>TempleofLostPrayers</Type>
+      <Map>BlueBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>72</ID>
+      <Name>Carver's Ascent</Name>
+      <FullName>Carver's Ascent</FullName>
+      <Location />
+      <Type>CarversAscent</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>73</ID>
+      <Name>Orchard Overlook</Name>
+      <FullName>Orchard Overlook</FullName>
+      <Location />
+      <Type>OrchardOverlook</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>74</ID>
+      <Name>Bauer's Estate</Name>
+      <FullName>Bauer's Estate</FullName>
+      <Location />
+      <Type>BauersEstate</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>75</ID>
+      <Name>Battle's Hollow</Name>
+      <FullName>Battle's Hollow</FullName>
+      <Location />
+      <Type>BattlesHollow</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+    <Objective>
+      <ID>76</ID>
+      <Name>Temple of Lost Prayers</Name>
+      <FullName>Temple of Lost Prayers</FullName>
+      <Location />
+      <Type>TempleofLostPrayers</Type>
+      <Map>GreenBorderlands</Map>
+      <Points>0</Points>
+    </Objective>
+  </Objectives>
+</WvWObjectivesTable>

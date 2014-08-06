@@ -226,8 +226,8 @@ namespace GW2PAO.PresentationCore
                 this.UpdateFormattedText();
 
                 // update the formatted text with the final size
-                this.formattedText.MaxTextWidth = finalSize.Width;
-                this.formattedText.MaxTextHeight = finalSize.Height;
+                this.formattedText.MaxTextWidth = Math.Min(3579139, finalSize.Width);
+                this.formattedText.MaxTextHeight = Math.Max(0.0001d, finalSize.Height);
 
                 // need to re-generate the geometry now that the dimensions have changed
                 this.textGeometry = null;

@@ -181,4 +181,112 @@
   <data name="community" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\community.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BattlesHollow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BattlesHollow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauersEstate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauersEstate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarversAscent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarversAscent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Camp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Camp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keep" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Keep.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tower" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tower.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Castle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Castle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrchardOverlook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OrchardOverlook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TempleofLostPrayers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TempleofLostPrayers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattlesHollow_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BattlesHollow_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattlesHollow_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BattlesHollow_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattlesHollow_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BattlesHollow_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauersEstate_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauersEstate_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauersEstate_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauersEstate_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauersEstate_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauersEstate_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Camp_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Camp_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Camp_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Camp_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Camp_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Camp_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarversAscent_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarversAscent_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarversAscent_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarversAscent_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarversAscent_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarversAscent_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Castle_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Castle_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Castle_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Castle_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Castle_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Castle_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keep_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Keep_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keep_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Keep_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keep_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Keep_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrchardOverlook_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OrchardOverlook_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrchardOverlook_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OrchardOverlook_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrchardOverlook_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OrchardOverlook_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TempleofLostPrayers_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TempleofLostPrayers_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TempleofLostPrayers_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TempleofLostPrayers_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TempleofLostPrayers_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TempleofLostPrayers_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tower_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tower_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tower_g" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tower_g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tower_r" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tower_r.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

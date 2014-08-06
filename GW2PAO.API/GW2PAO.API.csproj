@@ -55,10 +55,15 @@
     <Compile Include="Data\DynamicEvent.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
+    <Compile Include="Data\Enums\ObjectiveType.cs" />
     <Compile Include="Data\Enums\Profession.cs" />
+    <Compile Include="Data\Enums\WorldColor.cs" />
+    <Compile Include="Data\Enums\WvWMap.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
     <Compile Include="Data\Point.cs" />
     <Compile Include="Data\Resolution.cs" />
+    <Compile Include="Data\World.cs" />
+    <Compile Include="Data\WvWObjective.cs" />
     <Compile Include="Data\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DungeonsService.cs" />
@@ -69,10 +74,14 @@
     <Compile Include="Services\Interfaces\IEventsService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\Interfaces\ISystemService.cs" />
+    <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
     <Compile Include="Services\MegaserverEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
+    <Compile Include="Services\WorldsTable.cs" />
+    <Compile Include="Services\WvWObjectivesTable.cs" />
+    <Compile Include="Services\WvWService.cs" />
     <Compile Include="Services\ZoneService.cs" />
     <Compile Include="Util\CalcUtil.cs" />
   </ItemGroup>
@@ -81,6 +90,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="EventTimeTable.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Worlds.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WvWObjectives.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

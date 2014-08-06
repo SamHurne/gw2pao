@@ -15,6 +15,7 @@ using GW2PAO.Views;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
+using GW2PAO.Views.WvWNotification;
 using GW2PAO.Views.ZoneCompletion;
 using NLog;
 
@@ -57,6 +58,11 @@ namespace GW2PAO.Controllers
         public DungeonsService DungeonsService { get; private set; }
 
         /// <summary>
+        /// Service responsible for WvW information
+        /// </summary>
+        public WvWService WvWService { get; private set; }
+
+        /// <summary>
         /// Events controller
         /// </summary>
         public IEventsController EventsController { get; private set; }
@@ -70,6 +76,11 @@ namespace GW2PAO.Controllers
         /// Dungeons controller
         /// </summary>
         public IDungeonsController DungeonsController { get; private set; }
+
+        /// <summary>
+        /// WvW controller
+        /// </summary>
+        public IWvWController WvWController { get; private set; }
 
         /// <summary>
         /// Object that displays the current zone's name (used for the Zone Completion Assistant)
@@ -90,6 +101,11 @@ namespace GW2PAO.Controllers
         /// Dungeon settings
         /// </summary>
         public DungeonSettings DungeonSettings { get; private set; }
+
+        /// <summary>
+        /// WvW Settings
+        /// </summary>
+        public WvWSettings WvWSettings { get; private set; }
 
         /// <summary>
         /// Main functionality menu items, including those for the Event Tracker 
@@ -118,6 +134,11 @@ namespace GW2PAO.Controllers
         private DungeonTrackerView dungeonTrackerView;
 
         /// <summary>
+        /// The WvW notifications window containing all WvW notifications
+        /// </summary>
+        private WvWNotificationWindow wvwNotificationsView;
+
+        /// <summary>
         /// The web browser view
         /// </summary>
         private BrowserView webBrowserView;
@@ -140,6 +161,7 @@ namespace GW2PAO.Controllers
             this.SystemService = new SystemService();
             this.ZoneService = new ZoneService();
             this.DungeonsService = new DungeonsService();
+            this.WvWService = new WvWService();
 
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
@@ -160,11 +182,17 @@ namespace GW2PAO.Controllers
             if (this.DungeonSettings == null)
                 this.DungeonSettings = new DungeonSettings();
 
+            logger.Debug("Loading wvw user settings");
+            this.WvWSettings = WvWSettings.LoadSettings();
+            if (this.WvWSettings == null)
+                this.WvWSettings = new WvWSettings();
+
             // Enable autosave on the user settings
             logger.Debug("Enabling autosave of user settings");
             this.EventSettings.EnableAutoSave();
             this.ZoneCompletionSettings.EnableAutoSave();
             this.DungeonSettings.EnableAutoSave();
+            this.WvWSettings.EnableAutoSave();
 
             // Create the controllers
             logger.Debug("Creating events controller");
@@ -177,10 +205,19 @@ namespace GW2PAO.Controllers
             logger.Debug("Creating dungeons controller");
             this.DungeonsController = new DungeonsController(this.DungeonsService, this.DungeonSettings);
 
+            logger.Debug("Creating wvw controller");
+            this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWSettings);
+            this.WvWController.Start(); // Get it started for wvw notifications
+
             // Create the event notifications view
             logger.Debug("Initializing event notifications");
             this.eventNotificationsView = new EventNotificationWindow(this.EventsController);
             this.eventNotificationsView.Show(); // Transparent window, just go ahead and show it
+
+            // Create the wvw notifications view
+            logger.Debug("Initializing WvV notifications");
+            this.wvwNotificationsView = new WvWNotificationWindow(this.WvWController);
+            this.wvwNotificationsView.Show(); // Transparent window, just go ahead and show it
 
             // Initialize the menu items
             logger.Debug("Initializing application menu items");
@@ -188,6 +225,44 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
             this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
             this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
+            this.menuItems.Add(null); // Null for a seperator
+
+            // Build the WvW menus (these are a bit more complicated)
+
+            // World Selection Menu
+            var wvwWorldSelectionMenu = new MenuItemViewModel("World Selection", null);
+            var naWorlds = new MenuItemViewModel("NA", null);
+            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID < 2000))
+            {
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
+                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
+                    this.WvWSettings, "WorldSelection");
+                naWorlds.SubMenuItems.Add(worldMenuItem);
+            }
+            wvwWorldSelectionMenu.SubMenuItems.Add(naWorlds);
+            var euWorlds = new MenuItemViewModel("EU", null);
+            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID > 2000))
+            {
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
+                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
+                    this.WvWSettings, "WorldSelection");
+                euWorlds.SubMenuItems.Add(worldMenuItem);
+            }
+            wvwWorldSelectionMenu.SubMenuItems.Add(euWorlds);
+            this.menuItems.Add(wvwWorldSelectionMenu);
+
+            // Notifications Menu
+            var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled));
+            this.menuItems.Add(wvwNotificationsMenu);
+
+
+            //this.menuItems.Add(null) // Null for a seperator
             //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser)); Left out for now... will add after WvW features are completed
 
             logger.Info("Application controller initialized");

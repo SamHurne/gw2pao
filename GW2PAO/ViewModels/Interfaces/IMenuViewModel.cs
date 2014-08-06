@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace GW2PAO.ViewModels.Interfaces
     /// <summary>
     /// Interface for a menu view model
     /// </summary>
-    public interface IMenuViewModel
+    public interface IMenuViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// Collection of submenu objects

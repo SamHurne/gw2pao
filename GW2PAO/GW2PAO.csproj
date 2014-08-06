@@ -99,21 +99,31 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\Interfaces\IDungeonsController.cs" />
     <Compile Include="Controllers\Interfaces\IEventsController.cs" />
+    <Compile Include="Controllers\Interfaces\IWvWController.cs" />
     <Compile Include="Controllers\Interfaces\IZoneCompletionController.cs" />
+    <Compile Include="Controllers\WvWController.cs" />
     <Compile Include="Controllers\ZoneCompletionController.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventStateConverter.cs" />
+    <Compile Include="Converters\WvWMapConverter.cs" />
+    <Compile Include="Converters\ObjectiveTypeImageSrcConverter.cs" />
     <Compile Include="Converters\TimespanConverter.cs" />
     <Compile Include="Converters\TreasureCheckboxConverter.cs" />
+    <Compile Include="Converters\WorldColorConverter.cs" />
     <Compile Include="Converters\ZoneItemTypeImageSrcConverter.cs" />
     <Compile Include="Models\DungeonSettings.cs" />
     <Compile Include="Models\EventSettings.cs" />
+    <Compile Include="Models\WvWSettings.cs" />
     <Compile Include="Models\ZoneCompletionSettings.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TrayIcon\ApplicationTrayIcon.cs" />
     <Compile Include="TrayIcon\IApplicationTrayIcon.cs" />
     <Compile Include="TrayIcon\TrayInfoMessageType.cs" />
-    <Compile Include="Controllers\EventNotificationArgs.cs" />
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
@@ -127,6 +137,9 @@
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
+    <Compile Include="ViewModels\WvWNotification\WvWNotificationsWindowViewModel.cs" />
+    <Compile Include="ViewModels\WvWObjectiveViewModel.cs" />
+    <Compile Include="ViewModels\WvWTeamViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneItemViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneCompletionViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
@@ -155,6 +168,12 @@
       <DependentUpon>WorldEventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OverlayWindow.cs" />
+    <Compile Include="Views\WvWNotification\WvWNotificationView.xaml.cs">
+      <DependentUpon>WvWNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WvWNotification\WvWNotificationWindow.xaml.cs">
+      <DependentUpon>WvWNotificationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ZoneCompletion\ZoneItemView.xaml.cs">
       <DependentUpon>ZoneItemView.xaml</DependentUpon>
     </Compile>
@@ -245,6 +264,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\WvWNotification\WvWNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WvWNotification\WvWNotificationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ZoneCompletion\ZoneItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -258,22 +285,54 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Tower_r.png" />
+    <Resource Include="Resources\Tower_g.png" />
+    <Resource Include="Resources\Tower_b.png" />
+    <Resource Include="Resources\TempleofLostPrayers_r.png" />
+    <Resource Include="Resources\TempleofLostPrayers_g.png" />
+    <Resource Include="Resources\TempleofLostPrayers_b.png" />
+    <Resource Include="Resources\OrchardOverlook_r.png" />
+    <Resource Include="Resources\OrchardOverlook_g.png" />
+    <Resource Include="Resources\OrchardOverlook_b.png" />
+    <Resource Include="Resources\Keep_r.png" />
+    <Resource Include="Resources\Keep_g.png" />
+    <Resource Include="Resources\Keep_b.png" />
+    <Resource Include="Resources\Castle_r.png" />
+    <Resource Include="Resources\Castle_g.png" />
+    <Resource Include="Resources\Castle_b.png" />
+    <Resource Include="Resources\CarversAscent_r.png" />
+    <Resource Include="Resources\CarversAscent_g.png" />
+    <Resource Include="Resources\CarversAscent_b.png" />
+    <Resource Include="Resources\Camp_r.png" />
+    <Resource Include="Resources\Camp_g.png" />
+    <Resource Include="Resources\Camp_b.png" />
+    <Resource Include="Resources\BauersEstate_r.png" />
+    <Resource Include="Resources\BauersEstate_g.png" />
+    <Resource Include="Resources\BauersEstate_b.png" />
+    <Resource Include="Resources\BattlesHollow_r.png" />
+    <Resource Include="Resources\BattlesHollow_g.png" />
+    <Resource Include="Resources\BattlesHollow_b.png" />
+    <Resource Include="Resources\TempleofLostPrayers.png" />
+    <Resource Include="Resources\OrchardOverlook.png" />
+    <Resource Include="Resources\Castle.png" />
+    <Resource Include="Resources\Tower.png" />
+    <Resource Include="Resources\Keep.png" />
+    <Resource Include="Resources\Camp.png" />
+    <Resource Include="Resources\CarversAscent.png" />
+    <Resource Include="Resources\BauersEstate.png" />
+    <Resource Include="Resources\BattlesHollow.png" />
     <Resource Include="Resources\community.png" />
     <Resource Include="Resources\silver_coin.png" />
     <Resource Include="Resources\gold_coin.png" />
     <Resource Include="Resources\dungeons.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Content Include="NLog.config">
