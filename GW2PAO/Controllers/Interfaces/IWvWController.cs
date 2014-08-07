@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.API.Data.Enums;
 using GW2PAO.Models;
 using GW2PAO.ViewModels;
 
@@ -11,6 +12,12 @@ namespace GW2PAO.Controllers.Interfaces
 {
     public interface IWvWController
     {
+        /// <summary>
+        /// Map with which to override the player map.
+        /// To disable the override, set this to Unknown
+        /// </summary>
+        WvWMap MapOverride { get; set; }
+
         /// <summary>
         /// The interval by which to refresh the objectives state
         /// </summary>
@@ -27,29 +34,14 @@ namespace GW2PAO.Controllers.Interfaces
         ObservableCollection<WvWTeamViewModel> Teams { get; }
 
         /// <summary>
-        /// The collection of All WvW Objectives
+        /// The collection of all WvW Objectives
         /// </summary>
         ObservableCollection<WvWObjectiveViewModel> AllObjectives { get; }
 
         /// <summary>
-        /// The collection of Blue Borderlands WvW Objectives
+        /// The collection of current WvW Objectives
         /// </summary>
-        ObservableCollection<WvWObjectiveViewModel> BlueBorderlandsObjectives { get; }
-
-        /// <summary>
-        /// The collection of Green Borderlands WvW Objectives
-        /// </summary>
-        ObservableCollection<WvWObjectiveViewModel> GreenBorderlandsObjectives { get; }
-
-        /// <summary>
-        /// The collection of Red Borderlands WvW Objectives
-        /// </summary>
-        ObservableCollection<WvWObjectiveViewModel> RedBorderlandsObjectives { get; }
-
-        /// <summary>
-        /// The collection of Eternal Battlegrounds WvW Objectives
-        /// </summary>
-        ObservableCollection<WvWObjectiveViewModel> EternalBattlegroundsObjectives { get; }
+        ObservableCollection<WvWObjectiveViewModel> CurrentObjectives { get; }
 
         /// <summary>
         /// The collection of WvW Objective Notifications

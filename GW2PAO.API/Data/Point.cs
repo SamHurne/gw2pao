@@ -25,7 +25,7 @@ namespace GW2PAO.API.Data
 
         public override string ToString()
         {
-            return string.Format("[{0},{1},{2}]", this.X, this.Y, this.Z);
+            return string.Format("[{0},{1},{2}]", Math.Round(this.X, 3), Math.Round(this.Y, 3), Math.Round(this.Z, 3));
         }
     }
 }

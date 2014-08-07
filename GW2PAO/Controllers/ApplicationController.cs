@@ -10,12 +10,14 @@ using GW2PAO.Utility;
 using GW2PAO.ViewModels.EventNotification;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.TrayIcon;
+using GW2PAO.ViewModels.WvWTracker;
 using GW2PAO.ViewModels.ZoneCompletion;
 using GW2PAO.Views;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
 using GW2PAO.Views.WvWNotification;
+using GW2PAO.Views.WvWTracker;
 using GW2PAO.Views.ZoneCompletion;
 using NLog;
 
@@ -88,6 +90,11 @@ namespace GW2PAO.Controllers
         public IHasZoneName ZoneName { get; private set; }
 
         /// <summary>
+        /// Object that displays the current WvW Map (used for the WvW Tracker)
+        /// </summary>
+        public IHasWvWMap WvWMap { get; private set; }
+
+        /// <summary>
         /// Event settings
         /// </summary>
         public EventSettings EventSettings { get; private set; }
@@ -134,6 +141,11 @@ namespace GW2PAO.Controllers
         private DungeonTrackerView dungeonTrackerView;
 
         /// <summary>
+        /// The WvW Tracker view
+        /// </summary>
+        private WvWTrackerView wvwTrackerView;
+
+        /// <summary>
         /// The WvW notifications window containing all WvW notifications
         /// </summary>
         private WvWNotificationWindow wvwNotificationsView;
@@ -165,6 +177,9 @@ namespace GW2PAO.Controllers
 
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
+
+            // Create WvWMap view model for the WvW Tracker
+            this.WvWMap = new WvWMapViewModel();
 
             // Load user settings
             logger.Debug("Loading event user settings");
@@ -206,7 +221,7 @@ namespace GW2PAO.Controllers
             this.DungeonsController = new DungeonsController(this.DungeonsService, this.DungeonSettings);
 
             logger.Debug("Creating wvw controller");
-            this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWSettings);
+            this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWMap, this.WvWSettings);
             this.WvWController.Start(); // Get it started for wvw notifications
 
             // Create the event notifications view
@@ -252,6 +267,9 @@ namespace GW2PAO.Controllers
             }
             wvwWorldSelectionMenu.SubMenuItems.Add(euWorlds);
             this.menuItems.Add(wvwWorldSelectionMenu);
+
+            // Tracker view
+            this.menuItems.Add(new MenuItemViewModel("Open WvW Tracker", this.DisplayWvWTracker, this.CanDisplayWvWTracker));
 
             // Notifications Menu
             var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
@@ -340,7 +358,7 @@ namespace GW2PAO.Controllers
                 // If that occurs, display a notification
                 if (ex.NativeErrorCode == 5 && !this.runningAsAdminErrorShown)
                 {
-                    App.TrayIcon.DisplayNotification("Warning", "The Zone Completion Assistant cannot be started because GW2 is running as administrator.", TrayIcon.TrayInfoMessageType.Warning);
+                    App.TrayIcon.DisplayNotification("Warning", "Some features cannot be started because GW2 is running as administrator.", TrayIcon.TrayInfoMessageType.Warning);
                     logger.Warn(ex);
                     this.runningAsAdminErrorShown = true;
                 }
@@ -375,6 +393,32 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <returns></returns>
         private bool CanDisplayDungeonTracker()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the WvW Tracker window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayWvWTracker()
+        {
+            if (this.wvwTrackerView == null || !this.wvwTrackerView.IsVisible)
+            {
+                this.wvwTrackerView = new WvWTrackerView(this.WvWController, this.WvWMap);
+                this.wvwTrackerView.Show();
+            }
+            else
+            {
+                this.wvwTrackerView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the wvw tracker can be displayed
+        /// </summary>
+        /// <returns></returns>
+        private bool CanDisplayWvWTracker()
         {
             return true;
         }

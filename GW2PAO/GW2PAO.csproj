@@ -133,6 +133,7 @@
     <Compile Include="ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
     <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IHasWvWMap.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="ViewModels\WvWNotification\WvWNotificationsWindowViewModel.cs" />
     <Compile Include="ViewModels\WvWObjectiveViewModel.cs" />
     <Compile Include="ViewModels\WvWTeamViewModel.cs" />
+    <Compile Include="ViewModels\WvWTracker\WvWMapViewModel.cs" />
+    <Compile Include="ViewModels\WvWTracker\WvWTrackerViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneItemViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneCompletionViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
@@ -173,6 +176,12 @@
     </Compile>
     <Compile Include="Views\WvWNotification\WvWNotificationWindow.xaml.cs">
       <DependentUpon>WvWNotificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WvWTracker\HorizontalWvWObjectiveView.xaml.cs">
+      <DependentUpon>HorizontalWvWObjectiveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WvWTracker\WvWTrackerView.xaml.cs">
+      <DependentUpon>WvWTrackerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ZoneCompletion\ZoneItemView.xaml.cs">
       <DependentUpon>ZoneItemView.xaml</DependentUpon>
@@ -272,6 +281,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\WvWTracker\HorizontalWvWObjectiveView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WvWTracker\WvWTrackerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ZoneCompletion\ZoneItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -290,6 +307,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\WorldvsWorld.png" />
     <Resource Include="Resources\Tower_r.png" />
     <Resource Include="Resources\Tower_g.png" />
     <Resource Include="Resources\Tower_b.png" />

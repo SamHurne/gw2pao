@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Enums;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -33,6 +35,16 @@ namespace GW2PAO.Models
         private bool areGreenBorderlandsNotificationsEnabled;
         private bool areRedBorderlandsNotificationsEnabled;
         private bool areEternalBattlegroundsNotificationsEnabled;
+        private bool areCastlesShown;
+        private bool areKeepsShown;
+        private bool areTowersShown;
+        private bool areCampsShown;
+        private bool areBloodlustObjectivesShown;
+        private bool areRedObjectivesShown;
+        private bool areGreenObjectivesShown;
+        private bool areBlueObjectivesShown;
+        private bool areNeutralObjectivesShown;
+        private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
 
         /// <summary>
         /// The user's world selection for WvW
@@ -80,6 +92,92 @@ namespace GW2PAO.Models
         }
 
         /// <summary>
+        /// True if Castle objectives are shown in the tracker, else false
+        /// </summary>
+        public bool AreCastlesShown
+        {
+            get { return this.areCastlesShown; }
+            set { SetField(ref this.areCastlesShown, value); }
+        }
+
+        /// <summary>
+        /// True if Keep objectives are shown in the tracker, else false
+        /// </summary>
+        public bool AreKeepsShown
+        {
+            get { return this.areKeepsShown; }
+            set { SetField(ref this.areKeepsShown, value); }
+        }
+
+        /// <summary>
+        /// True if Tower objectives are shown in the tracker, else false
+        /// </summary>
+        public bool AreTowersShown
+        {
+            get { return this.areTowersShown; }
+            set { SetField(ref this.areTowersShown, value); }
+        }
+
+        /// <summary>
+        /// True if Camp objectives are shown in the tracker, else false
+        /// </summary>
+        public bool AreCampsShown
+        {
+            get { return this.areCampsShown; }
+            set { SetField(ref this.areCampsShown, value); }
+        }
+
+        /// <summary>
+        /// True if Bloodlust objectives (Orchard Overlook, Bauer's Estate, etc) are shown in the tracker, else false
+        /// </summary>
+        public bool AreBloodlustObjectivesShown
+        {
+            get { return this.areBloodlustObjectivesShown; }
+            set { SetField(ref this.areBloodlustObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// True if Red-owned objectives are shown, else false
+        /// </summary>
+        public bool AreRedObjectivesShown
+        {
+            get { return this.areRedObjectivesShown; }
+            set { SetField(ref this.areRedObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// True if Green-owned objectives are shown, else false
+        /// </summary>
+        public bool AreGreenObjectivesShown
+        {
+            get { return this.areGreenObjectivesShown; }
+            set { SetField(ref this.areGreenObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// True if Blue-owned objectives are shown, else false
+        /// </summary>
+        public bool AreBlueObjectivesShown
+        {
+            get { return this.areBlueObjectivesShown; }
+            set { SetField(ref this.areBlueObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// True if Neutral objectives are shown, else false
+        /// </summary>
+        public bool AreNeutralObjectivesShown
+        {
+            get { return this.areNeutralObjectivesShown; }
+            set { SetField(ref this.areNeutralObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// Collection of user-configured Hidden Objectives
+        /// </summary>
+        public ObservableCollection<int> HiddenObjectives { get { return this.hiddenObjectives; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public WvWSettings()
@@ -89,6 +187,15 @@ namespace GW2PAO.Models
             this.AreGreenBorderlandsNotificationsEnabled = true;
             this.AreRedBorderlandsNotificationsEnabled = true;
             this.AreEternalBattlegroundsNotificationsEnabled = true;
+            this.AreCastlesShown = true;
+            this.AreKeepsShown = true;
+            this.AreTowersShown = true;
+            this.AreCampsShown = true;
+            this.AreRedObjectivesShown = true;
+            this.AreGreenObjectivesShown = true;
+            this.AreBlueObjectivesShown = true;
+            this.AreNeutralObjectivesShown = true;
+            this.AreBloodlustObjectivesShown = true;
         }
 
         /// <summary>

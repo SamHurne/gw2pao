@@ -14,6 +14,8 @@ using GW2PAO.Utility;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.TrayIcon;
 using GW2PAO.API.Data;
+using GW2PAO.ViewModels.Interfaces;
+using GW2PAO.API.Util;
 
 namespace GW2PAO.Controllers
 {
@@ -23,6 +25,14 @@ namespace GW2PAO.Controllers
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        private const int EternalBattlegroundsMapID = 38;
+        private const int RedBorderlandsMapID = 94;
+        private const int GreenBorderlandsMapID = 95;
+        private const int BlueBorderlandsMapID = 96;
+        private const int EdgeOfMistsMapID = 968;
+
+        private const double DistanceToTimeFactor = 9.4;
 
         /// <summary>
         /// Service responsible for WvW information
@@ -61,6 +71,46 @@ namespace GW2PAO.Controllers
         private WvWSettings userSettings;
 
         /// <summary>
+        /// The object containing the WvWMap shown to the user
+        /// </summary>
+        private IHasWvWMap mapObj;
+
+        /// <summary>
+        /// Previous WvW map
+        /// </summary>
+        private WvWMap prevMap;
+
+        /// <summary>
+        /// The player's current WvWMap
+        /// </summary>
+        private WvWMap PlayerMap
+        {
+            get
+            {
+                var currentMapId = this.playerService.MapId;
+                switch (currentMapId)
+                {
+                    case EternalBattlegroundsMapID:
+                        return WvWMap.EternalBattlegrounds;
+                    case RedBorderlandsMapID:
+                        return WvWMap.RedBorderlands;
+                    case GreenBorderlandsMapID:
+                        return WvWMap.GreenBorderlands;
+                    case BlueBorderlandsMapID:
+                        return WvWMap.BlueBorderlands;
+                    default:
+                        return WvWMap.Unknown;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Map with which to override the player map.
+        /// To disable the override, set this to Unknown
+        /// </summary>
+        public WvWMap MapOverride { get; set; }
+
+        /// <summary>
         /// The interval by which to refresh the objectives state
         /// </summary>
         public int ObjectivesRefreshInterval { get; set; }
@@ -83,52 +133,22 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Backing store of the All WvW Objectives collection
         /// </summary>
-        private ObservableCollection<WvWObjectiveViewModel> allObjectives = new ObservableCollection<WvWObjectiveViewModel>();
+        private ObservableCollection<WvWObjectiveViewModel> allobjectives = new ObservableCollection<WvWObjectiveViewModel>();
 
         /// <summary>
         /// The collection of All WvW Objectives
         /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> AllObjectives { get { return this.allObjectives; } }
+        public ObservableCollection<WvWObjectiveViewModel> AllObjectives { get { return this.allobjectives; } }
 
         /// <summary>
-        /// Backing store of the Blue Borderlands WvW Objectives collection
+        /// Backing store of the current WvW Objectives collection
         /// </summary>
-        private ObservableCollection<WvWObjectiveViewModel> blueBorderlandsObjectives = new ObservableCollection<WvWObjectiveViewModel>();
+        private ObservableCollection<WvWObjectiveViewModel> currentObjectives = new ObservableCollection<WvWObjectiveViewModel>();
 
         /// <summary>
-        /// The collection of Blue Borderlands WvW Objectives
+        /// The collection of current WvW Objectives
         /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> BlueBorderlandsObjectives { get { return this.blueBorderlandsObjectives; } }
-
-        /// <summary>
-        /// Backing store of the Green Borderlands WvW Objectives collection
-        /// </summary>
-        private ObservableCollection<WvWObjectiveViewModel> greenBorderlandsObjectives = new ObservableCollection<WvWObjectiveViewModel>();
-
-        /// <summary>
-        /// The collection of Green Borderlands WvW Objectives
-        /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> GreenBorderlandsObjectives { get { return this.greenBorderlandsObjectives; } }
-
-        /// <summary>
-        /// Backing store of the Red Borderlands WvW Objectives collection
-        /// </summary>
-        private ObservableCollection<WvWObjectiveViewModel> redBorderlandsObjectives = new ObservableCollection<WvWObjectiveViewModel>();
-
-        /// <summary>
-        /// The collection of Red Borderlands WvW Objectives
-        /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> RedBorderlandsObjectives { get { return this.redBorderlandsObjectives; } }
-
-        /// <summary>
-        /// Backing store of the Eternal Battlegrounds WvW Objectives collection
-        /// </summary>
-        private ObservableCollection<WvWObjectiveViewModel> eternalBattlegroundsObjectives = new ObservableCollection<WvWObjectiveViewModel>();
-
-        /// <summary>
-        /// The collection of Eternal Battlegrounds WvW Objectives
-        /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> EternalBattlegroundsObjectives { get { return this.eternalBattlegroundsObjectives; } }
+        public ObservableCollection<WvWObjectiveViewModel> CurrentObjectives { get { return this.currentObjectives; } }
 
         /// <summary>
         /// Backing store of the WvW Notifications collection
@@ -145,16 +165,18 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
         /// <param name="userSettings">The dungeons user settings object</param>
-        public WvWController(IWvWService wvwService, IPlayerService playerService, WvWSettings userSettings)
+        public WvWController(IWvWService wvwService, IPlayerService playerService, IHasWvWMap mapObj, WvWSettings userSettings)
         {
             logger.Debug("Initializing WvW Controller");
             this.wvwService = wvwService;
             this.playerService = playerService;
+            this.mapObj = mapObj;
             this.userSettings = userSettings;
+            this.MapOverride = WvWMap.Unknown;
 
             // Initialize the refresh timer
-            this.objectivesRefreshTimer = new Timer(this.RefreshObjectivesState);
-            this.ObjectivesRefreshInterval = 1000;
+            this.objectivesRefreshTimer = new Timer(this.RefreshObjectives);
+            this.ObjectivesRefreshInterval = 500;
 
             // Initialize the start call count to 0
             this.startCallCount = 0;
@@ -162,7 +184,7 @@ namespace GW2PAO.Controllers
             // Initialize the collections
             this.wvwService.LoadTable();
             this.InitializeTeams();
-            this.InitializeObjectives();
+            this.InitializeAllObjectivesCollection();
 
             logger.Info("WvW Controller initialized");
         }
@@ -179,7 +201,7 @@ namespace GW2PAO.Controllers
                 if (this.startCallCount == 0)
                 {
                     logger.Debug("Starting refresh timers");
-                    this.RefreshObjectivesState();
+                    this.RefreshObjectives();
                 }
 
                 this.startCallCount++;
@@ -223,9 +245,9 @@ namespace GW2PAO.Controllers
         }
 
         /// <summary>
-        /// Initializes all objectives collections
+        /// Initializes the All Objectives collection
         /// </summary>
-        private void InitializeObjectives()
+        private void InitializeAllObjectivesCollection()
         {
             logger.Debug("Initializing objectives");
 
@@ -235,49 +257,37 @@ namespace GW2PAO.Controllers
 
             Threading.InvokeOnUI(() =>
             {
-                // Blue Borderlands
-                foreach (var obj in objectives.Where(obj => obj.Map == WvWMap.BlueBorderlands))
+                foreach (var obj in objectives)
                 {
                     logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                    var vm = new WvWObjectiveViewModel(obj, this.Teams, this.WvWNotifications);
+                    var vm = new WvWObjectiveViewModel(obj, this.UserSettings, this.Teams, this.WvWNotifications);
                     this.AllObjectives.Add(vm);
-                    this.BlueBorderlandsObjectives.Add(vm);
-                }
-
-                // Green Borderlands
-                foreach (var obj in objectives.Where(obj => obj.Map == WvWMap.GreenBorderlands))
-                {
-                    logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                    var vm = new WvWObjectiveViewModel(obj, this.Teams, this.WvWNotifications);
-                    this.AllObjectives.Add(vm);
-                    this.GreenBorderlandsObjectives.Add(vm);
-                }
-
-                // Red Borderlands
-                foreach (var obj in objectives.Where(obj => obj.Map == WvWMap.RedBorderlands))
-                {
-                    logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                    var vm = new WvWObjectiveViewModel(obj, this.Teams, this.WvWNotifications);
-                    this.AllObjectives.Add(vm);
-                    this.RedBorderlandsObjectives.Add(vm);
-                }
-
-                // Eternal Battlegrounds
-                foreach (var obj in objectives.Where(obj => obj.Map == WvWMap.EternalBattlegrounds))
-                {
-                    logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                    var vm = new WvWObjectiveViewModel(obj, this.Teams, this.WvWNotifications);
-                    this.AllObjectives.Add(vm);
-                    this.EternalBattlegroundsObjectives.Add(vm);
                 }
             });
         }
 
         /// <summary>
-        /// Refreshes all dungeons within the dungeons collection
-        /// This is the primary function of the DungeonsController
+        /// Rebuilds the current objectives collections
         /// </summary>
-        private void RefreshObjectivesState(object state = null)
+        private void RebuildCurrentObjectivesCollection(WvWMap map)
+        {
+            logger.Debug("Building objectives collection");
+
+            Threading.InvokeOnUI(() =>
+            {
+                this.CurrentObjectives.Clear();
+                foreach (var objective in this.AllObjectives.Where(obj => obj.Map == map))
+                {
+                    this.CurrentObjectives.Add(objective);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Refreshes all objectives within the objectives collection
+        /// This is the primary function of the WvWController
+        /// </summary>
+        private void RefreshObjectives(object state = null)
         {
             lock (this.objectivesRefreshTimerLock)
             {
@@ -306,6 +316,28 @@ namespace GW2PAO.Controllers
                 }
                 else
                 {
+                    // Check for new WvW Map
+                    if (this.MapOverride != WvWMap.Unknown)
+                    {
+                        if (this.MapOverride != this.prevMap)
+                        {
+                            // Map changed, rebuild the objectives
+                            this.prevMap = this.MapOverride;
+                            this.mapObj.Map = this.MapOverride;
+                            this.RebuildCurrentObjectivesCollection(this.MapOverride);
+                        }
+                    }
+                    else
+                    {
+                        if (this.PlayerMap != this.prevMap)
+                        {
+                            // Map changed, rebuild the objectives
+                            this.prevMap = this.PlayerMap;
+                            this.mapObj.Map = this.PlayerMap;
+                            this.RebuildCurrentObjectivesCollection(this.PlayerMap);
+                        }
+                    }
+
                     // Refresh state of all objectives
                     var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
                     foreach (var objective in this.AllObjectives)
@@ -338,6 +370,22 @@ namespace GW2PAO.Controllers
                         else
                         {
                             Threading.InvokeOnUI(() => objective.IsRIActive = false);
+                        }
+                    }
+
+                    // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
+                    var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
+                    foreach (var objective in this.CurrentObjectives)
+                    {
+                        if (this.PlayerMap == objective.Map)
+                        {
+                            var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
+                            var timeDistance = this.CalculateTimeDistance(newDistance);
+                            objective.DistanceTime = timeDistance;
+                        }
+                        else
+                        {
+                            objective.DistanceTime = TimeSpan.Zero;
                         }
                     }
                 }
@@ -404,6 +452,16 @@ namespace GW2PAO.Controllers
                 default:
                     return false;
             }
+        }
+
+        /// <summary>
+        /// Calculates a time-distance from a given distance in game units
+        /// </summary>
+        /// <param name="distance">The distance in game units</param>
+        /// <returns>The resulting time-distance</returns>
+        private TimeSpan CalculateTimeDistance(double distance)
+        {
+            return TimeSpan.FromSeconds(distance / DistanceToTimeFactor);
         }
     }
 }

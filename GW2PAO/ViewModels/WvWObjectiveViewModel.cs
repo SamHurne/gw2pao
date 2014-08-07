@@ -5,21 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
+using GW2PAO.Models;
 using GW2PAO.PresentationCore;
+using NLog;
 
 namespace GW2PAO.ViewModels
 {
     public class WvWObjectiveViewModel : NotifyPropertyChangedBase
     {
+        /// <summary>
+        /// Default logger
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private IEnumerable<WvWTeamViewModel> wvwTeams;
         private ICollection<WvWObjectiveViewModel> displayedNotificationsCollection;
         private WorldColor prevWorldOwner;
         private DateTime flipTime;
         private TimeSpan timerValue;
+        private TimeSpan distanceTime;
+        private bool isVisible;
         private bool isRIActive;
         private bool isNotificationVisible;
         private bool isNotificationShown;
         private bool isRemovingNotification;
+        private WvWSettings userSettings;
 
         /// <summary>
         /// The primary backing model data for the viewmodel
@@ -150,6 +160,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Player's distance from the objective, in an estimated time
+        /// </summary>
+        public TimeSpan DistanceTime
+        {
+            get { return this.distanceTime; }
+            set { SetField(ref this.distanceTime, value); }
+        }
+
+        /// <summary>
         /// Countdown timer used for Indignation Buff tracking
         /// </summary>
         public TimeSpan TimerValue
@@ -159,23 +178,25 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Visibility of the objective
+        /// Visibility is based on multiple properties, including:
+        ///     - Type and the user configuration for what objective types are shown
+        ///     - Owner and the user configuration for what owner colors are shown
+        ///     - Whether or not the event is user-configured as hidden
+        /// </summary>
+        public bool IsVisible
+        {
+            get { return this.isVisible; }
+            set { SetField(ref this.isVisible, value); }
+        }
+
+        /// <summary>
         /// True if RI is active, else faluse
         /// </summary>
         public bool IsRIActive
         {
             get { return this.isRIActive; }
             set { SetField(ref this.isRIActive, value); }
-        }
-
-        /// <summary>
-        /// Visiblity of the notification for this event
-        /// This is configured by the user by showing/hiding specific event notifications
-        /// TODO: Implement UI for user to configure/set this
-        /// </summary>
-        public bool IsNotificationVisible
-        {
-            get { return this.isNotificationVisible; }
-            set { SetField(ref this.isNotificationVisible, value); }
         }
 
         /// <summary>
@@ -198,6 +219,11 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Command to hide the objective
+        /// </summary>
+        public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenObjectives); } }
+
+        /// <summary>
         /// Closes the displayed notification
         /// </summary>
         public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
@@ -207,11 +233,91 @@ namespace GW2PAO.ViewModels
         /// </summary>
         /// <param name="objective">The objective details</param>
         /// <param name="wvwTeams">Collection containing all of the WvW Teams</param>
-        public WvWObjectiveViewModel(WvWObjective objective, IEnumerable<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
+        public WvWObjectiveViewModel(WvWObjective objective, WvWSettings userSettings, IEnumerable<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
         {
             this.ModelData = objective;
+            this.userSettings = userSettings;
             this.wvwTeams = wvwTeams;
             this.displayedNotificationsCollection = displayedNotificationsCollection;
+
+            this.PrevWorldOwner = WorldColor.None;
+            this.FlipTime = DateTime.UtcNow;
+            this.TimerValue = TimeSpan.Zero;
+            this.DistanceTime = TimeSpan.Zero;
+            this.IsRIActive = false;
+            this.IsNotificationShown = false;
+            this.IsRemovingNotification = false;
+
+            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.HiddenObjectives.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.RefreshVisibility();
+        }
+
+        /// <summary>
+        /// Adds the event to the list of hidden events
+        /// </summary>
+        private void AddToHiddenObjectives()
+        {
+            logger.Debug("Adding \"{0}\" to hidden objectives", this.Name);
+            this.userSettings.HiddenObjectives.Add(this.ID);
+        }
+
+        /// <summary>
+        /// Refreshes the visibility of the event
+        /// </summary>
+        private void RefreshVisibility()
+        {
+            logger.Trace("Refreshing visibility of \"{0}\"", this.Name);
+            if (this.userSettings.HiddenObjectives.Any(id => id == this.ID))
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreRedObjectivesShown && this.WorldOwner == WorldColor.Red)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreGreenObjectivesShown && this.WorldOwner == WorldColor.Green)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreBlueObjectivesShown && this.WorldOwner == WorldColor.Blue)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreNeutralObjectivesShown && this.WorldOwner == WorldColor.None)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreCastlesShown && this.Type == ObjectiveType.Castle)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreKeepsShown && this.Type == ObjectiveType.Keep)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreTowersShown && this.Type == ObjectiveType.Tower)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreCastlesShown && this.Type == ObjectiveType.Camp)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userSettings.AreBloodlustObjectivesShown &&
+                        (this.Type == ObjectiveType.TempleofLostPrayers
+                         || this.Type == ObjectiveType.BattlesHollow
+                         || this.Type == ObjectiveType.BauersEstate
+                         || this.Type == ObjectiveType.OrchardOverlook
+                         || this.Type == ObjectiveType.CarversAscent) )
+            {
+                this.IsVisible = false;
+            }
+            else
+            {
+                this.IsVisible = true;
+            }
+            logger.Trace("IsVisible = {0}", this.IsVisible);
         }
 
         /// <summary>

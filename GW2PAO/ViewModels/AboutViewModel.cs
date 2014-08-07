@@ -30,12 +30,13 @@ namespace GW2PAO.ViewModels
             set
             {
                 Properties.Settings.Default.IsLoggingEnabled = value;
-                Properties.Settings.Default.Save();
 
                 if (!Properties.Settings.Default.IsLoggingEnabled)
                     LogManager.DisableLogging();
                 else
                     LogManager.EnableLogging();
+
+                Properties.Settings.Default.Save();
             }
         }
 

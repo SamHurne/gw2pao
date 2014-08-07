@@ -54,28 +54,27 @@ namespace GW2PAO.Views.WvWNotification
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            // TODO:
-            //Properties.Settings.Default.EventNotificationX = this.Left;
-            //Properties.Settings.Default.EventNotificationY = this.Top;
-            //Properties.Settings.Default.Save();
+            Properties.Settings.Default.WvWNotificationX = this.Left;
+            Properties.Settings.Default.WvWNotificationY = this.Top;
+            Properties.Settings.Default.Save();
         }
 
         private void LoadWindowLocation()
         {
-            // Set the window location TODO
-            //if (Properties.Settings.Default.EventNotificationX == -1
-            //    && Properties.Settings.Default.EventNotificationY == -1)
+            // Set the window location
+            if (Properties.Settings.Default.WvWNotificationX == -1
+                && Properties.Settings.Default.WvWNotificationY == -1)
             {
                 // Use default location (bottom-right corner, without being on top of event notifications)
                 this.Left = System.Windows.SystemParameters.WorkArea.Width - 5 - this.ActualWidth;
                 this.Top = System.Windows.SystemParameters.WorkArea.Height - 5 - (this.ActualHeight * 2);
             }
-            //else TODO
-            //{
-            //    // Use saved location
-            //    this.Left = Properties.Settings.Default.EventNotificationX;
-            //    this.Top = Properties.Settings.Default.EventNotificationY;
-            //}
+            else
+            {
+                // Use saved location
+                this.Left = Properties.Settings.Default.WvWNotificationX;
+                this.Top = Properties.Settings.Default.WvWNotificationY;
+            }
         }
     }
 }

@@ -162,6 +162,7 @@ namespace GW2PAO.API.Services
                             objData.Name = objDetails.Name;
                             objData.FullName = objDetails.FullName;
                             objData.Location = objDetails.Location;
+                            objData.MapLocation = objDetails.MapLocation;
                             objData.Points = objDetails.Points;
                         }
 
@@ -217,6 +218,7 @@ namespace GW2PAO.API.Services
                             objData.Name = objDetails.Name;
                             objData.FullName = objDetails.FullName;
                             objData.Location = objDetails.Location;
+                            objData.MapLocation = objDetails.MapLocation;
                             objData.Points = objDetails.Points;
                         }
 

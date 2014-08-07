@@ -9,10 +9,10 @@ namespace GW2PAO.API.Data.Enums
     public enum ObjectiveType
     {
         Unknown,
-        Camp,
-        Tower,
-        Keep,
         Castle,
+        Keep,
+        Tower,
+        Camp,
         TempleofLostPrayers,
         BattlesHollow,
         BauersEstate,

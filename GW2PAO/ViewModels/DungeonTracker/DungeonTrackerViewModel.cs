@@ -19,27 +19,27 @@ namespace GW2PAO.ViewModels.DungeonTracker
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// The Event Tracker controller
+        /// The Dungeons Tracker controller
         /// </summary>
         private IDungeonsController controller;
 
         /// <summary>
-        /// Collection of all World Events
+        /// Collection of all Dungeons
         /// </summary>
         public ObservableCollection<DungeonViewModel> Dungeons { get { return this.controller.Dungeons; } }
 
         /// <summary>
-        /// Command to reset all hidden events
+        /// Command to reset all hidden dungeons
         /// </summary>
         public DelegateCommand ResetHiddenDungeonsCommand { get { return new DelegateCommand(this.ResetHiddenDungeons); } }
 
         /// <summary>
-        /// Command to reset all hidden events
+        /// Command to reset all completed dungeon paths
         /// </summary>
         public DelegateCommand ResetCompletedPathsCommand { get { return new DelegateCommand(this.ResetCompletedPaths); } }
 
         /// <summary>
-        /// Event Tracker user settings
+        /// Dungeon user settings
         /// </summary>
         public DungeonSettings UserSettings { get { return this.controller.UserSettings; } }
 
@@ -53,7 +53,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         }
 
         /// <summary>
-        /// Resets all hidden events
+        /// Resets all hidden dungeons
         /// </summary>
         private void ResetHiddenDungeons()
         {
@@ -62,7 +62,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         }
 
         /// <summary>
-        /// Resets all hidden events
+        /// Resets all completed dungeon paths
         /// </summary>
         private void ResetCompletedPaths()
         {

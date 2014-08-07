@@ -5,7 +5,12 @@
       <ID>1</ID>
       <Name>Keep</Name>
       <FullName>Overlook</FullName>
-      <Location>E</Location>
+      <Location>N</Location>
+      <MapLocation>
+        <X>4548</X>
+        <Y>17078.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>25</Points>
@@ -15,6 +20,11 @@
       <Name>Keep</Name>
       <FullName>Valley</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>25620</X>
+        <Y>-20251.2</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>25</Points>
@@ -24,6 +34,11 @@
       <Name>Keep</Name>
       <FullName>Lowlands</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-19802.4</X>
+        <Y>-17690.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>25</Points>
@@ -33,6 +48,11 @@
       <Name>Green Mill</Name>
       <FullName>Golanta Clearing</FullName>
       <Location />
+      <MapLocation>
+        <X>-7497.6</X>
+        <Y>-25468.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -42,6 +62,11 @@
       <Name>Red Mine</Name>
       <FullName>Pangloss Rise</FullName>
       <Location />
+      <MapLocation>
+        <X>18393.6</X>
+        <Y>13939.2</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -51,6 +76,11 @@
       <Name>Red Mill</Name>
       <FullName>Speldan Clearcut</FullName>
       <Location />
+      <MapLocation>
+        <X>-16848.72</X>
+        <Y>19048.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -60,6 +90,11 @@
       <Name>Blue Mine</Name>
       <FullName>Danelon Passage</FullName>
       <Location />
+      <MapLocation>
+        <X>13310.4</X>
+        <Y>-28867.2</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -69,6 +104,11 @@
       <Name>Blue Mill</Name>
       <FullName>Umberglade Woods</FullName>
       <Location />
+      <MapLocation>
+        <X>25802.4</X>
+        <Y>-2716.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -78,6 +118,11 @@
       <Name>Castle</Name>
       <FullName>Stonemist Castle</FullName>
       <Location>C</Location>
+      <MapLocation>
+        <X>2690.4</X>
+        <Y>-5174.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Castle</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>35</Points>
@@ -87,6 +132,11 @@
       <Name>Green Mine</Name>
       <FullName>Rogue's Quarry</FullName>
       <Location />
+      <MapLocation>
+        <X>-22010.16</X>
+        <Y>-2349.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>5</Points>
@@ -96,6 +146,11 @@
       <Name>Tower</Name>
       <FullName>Aldon's Ledge</FullName>
       <Location>W</Location>
+      <MapLocation>
+        <X>-26110.56</X>
+        <Y>-12943.2</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -105,6 +160,11 @@
       <Name>Tower</Name>
       <FullName>Wildcreek Run</FullName>
       <Location>W</Location>
+      <MapLocation>
+        <X>-12559.92</X>
+        <Y>-5227.2</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -114,6 +174,11 @@
       <Name>Tower</Name>
       <FullName>Jerrifer's Slough</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>15682.08</X>
+        <Y>-25161.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -123,6 +188,11 @@
       <Name>Tower</Name>
       <FullName>Klovan Gully</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-5013.6</X>
+        <Y>-17596.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -132,6 +202,11 @@
       <Name>Tower</Name>
       <FullName>Langor Gulch</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>21544.8</X>
+        <Y>-27280.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -141,6 +216,11 @@
       <Name>Tower</Name>
       <FullName>Quentin Lake</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>10137.6</X>
+        <Y>-21256.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -150,6 +230,11 @@
       <Name>Tower</Name>
       <FullName>Mendon's Gap</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-5599.2</X>
+        <Y>22768.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -159,6 +244,11 @@
       <Name>Tower</Name>
       <FullName>Anzalias Pass</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-6684</X>
+        <Y>7200</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -168,6 +258,11 @@
       <Name>Tower</Name>
       <FullName>Ogrewatch Cut</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>12072</X>
+        <Y>10622.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -177,6 +272,11 @@
       <Name>Tower</Name>
       <FullName>Veloka Slope</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>13173.6</X>
+        <Y>2058</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -186,6 +286,11 @@
       <Name>Tower</Name>
       <FullName>Durios Gulch</FullName>
       <Location>E</Location>
+      <MapLocation>
+        <X>17412</X>
+        <Y>-5109.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -195,6 +300,11 @@
       <Name>Tower</Name>
       <FullName>Bravost Escarpment</FullName>
       <Location>E</Location>
+      <MapLocation>
+        <X>29232</X>
+        <Y>-11200.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
       <Points>10</Points>
@@ -204,6 +314,11 @@
       <Name>Keep</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
+      <MapLocation>
+        <X>-441.6</X>
+        <Y>9160.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
       <Points>25</Points>
@@ -213,6 +328,11 @@
       <Name>Orchard</Name>
       <FullName>Champion's Demense</FullName>
       <Location>S</Location>
+      <MapLocation>
+        <X>-648</X>
+        <Y>-32762.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -222,6 +342,11 @@
       <Name>Tower</Name>
       <FullName>Redbriar</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-7545.6</X>
+        <Y>-17548.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
       <Points>10</Points>
@@ -231,6 +356,11 @@
       <Name>Tower</Name>
       <FullName>Greenlake</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>11155.2</X>
+        <Y>-16648.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
       <Points>10</Points>
@@ -240,6 +370,11 @@
       <Name>Keep</Name>
       <FullName>Ascension Bay</FullName>
       <Location>W</Location>
+      <MapLocation>
+        <X>-22857.6</X>
+        <Y>-6789.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
       <Points>25</Points>
@@ -249,6 +384,11 @@
       <Name>Tower</Name>
       <FullName>Dawn's Eyrie</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>12969.6</X>
+        <Y>12840</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
       <Points>10</Points>
@@ -258,6 +398,11 @@
       <Name>Crossroads</Name>
       <FullName>The Spiritholme</FullName>
       <Location>N</Location>
+      <MapLocation>
+        <X>232.8</X>
+        <Y>34180.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -267,6 +412,11 @@
       <Name>Tower</Name>
       <FullName>Woodhaven</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-14152.8</X>
+        <Y>14712</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
       <Points>10</Points>
@@ -276,6 +426,11 @@
       <Name>Keep</Name>
       <FullName>Askalion Hills</FullName>
       <Location>E</Location>
+      <MapLocation>
+        <X>22420.8</X>
+        <Y>-5016</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
       <Points>25</Points>
@@ -285,6 +440,11 @@
       <Name>Keep</Name>
       <FullName>Etheron Hills</FullName>
       <Location>E</Location>
+      <MapLocation>
+        <X>22420.8</X>
+        <Y>-5016</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
       <Points>25</Points>
@@ -294,6 +454,11 @@
       <Name>Keep</Name>
       <FullName>Dreaming Bay</FullName>
       <Location>W</Location>
+      <MapLocation>
+        <X>-22857.36</X>
+        <Y>-6789.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
       <Points>25</Points>
@@ -303,6 +468,11 @@
       <Name>Orchard</Name>
       <FullName>Victors's Lodge</FullName>
       <Location>S</Location>
+      <MapLocation>
+        <X>-648</X>
+        <Y>-32762.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -312,6 +482,11 @@
       <Name>Tower</Name>
       <FullName>Greenbriar</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-7545.6</X>
+        <Y>-17548.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
       <Points>10</Points>
@@ -321,6 +496,11 @@
       <Name>Tower</Name>
       <FullName>Bluelake</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>11155.2</X>
+        <Y>-16648.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
       <Points>10</Points>
@@ -330,6 +510,11 @@
       <Name>Keep</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
+      <MapLocation>
+        <X>-441.6</X>
+        <Y>9160.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
       <Points>25</Points>
@@ -339,6 +524,11 @@
       <Name>Tower</Name>
       <FullName>Longview</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-14153.28</X>
+        <Y>14712</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
       <Points>10</Points>
@@ -348,6 +538,11 @@
       <Name>Crossroads</Name>
       <FullName>The Godsword</FullName>
       <Location>N</Location>
+      <MapLocation>
+        <X>232.8</X>
+        <Y>34180.08</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -357,6 +552,11 @@
       <Name>Tower</Name>
       <FullName>Cliffside</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>12969.6</X>
+        <Y>12840</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
       <Points>10</Points>
@@ -366,6 +566,11 @@
       <Name>Keep</Name>
       <FullName>Shadaran Hills</FullName>
       <Location>E</Location>
+      <MapLocation>
+        <X>22421.04</X>
+        <Y>-5016</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
       <Points>25</Points>
@@ -375,6 +580,11 @@
       <Name>Tower</Name>
       <FullName>Redlake</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>11154.72</X>
+        <Y>-16648.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
       <Points>10</Points>
@@ -384,6 +594,11 @@
       <Name>Orchard</Name>
       <FullName>Hero's Lodge</FullName>
       <Location>S</Location>
+      <MapLocation>
+        <X>-648</X>
+        <Y>-32762.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -393,6 +608,11 @@
       <Name>Keep</Name>
       <FullName>Dreadfall Bay</FullName>
       <Location>W</Location>
+      <MapLocation>
+        <X>-22857.36</X>
+        <Y>-6789.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
       <Points>25</Points>
@@ -402,6 +622,11 @@
       <Name>Tower</Name>
       <FullName>Bluebriar</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-7544.64</X>
+        <Y>-17548.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
       <Points>10</Points>
@@ -411,6 +636,11 @@
       <Name>Keep</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
+      <MapLocation>
+        <X>-441.6</X>
+        <Y>9160.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
       <Points>25</Points>
@@ -420,6 +650,11 @@
       <Name>Tower</Name>
       <FullName>Sunnyhill</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-14153.52</X>
+        <Y>14712</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
       <Points>10</Points>
@@ -429,6 +664,11 @@
       <Name>Quarry</Name>
       <FullName>Faithleap</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-21083.28</X>
+        <Y>11462.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -438,6 +678,11 @@
       <Name>Workshop</Name>
       <FullName>Bluevale Refuge</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-19053.12</X>
+        <Y>-18657.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -447,6 +692,11 @@
       <Name>Fishing Village</Name>
       <FullName>Bluewater Lowlands</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>22442.4</X>
+        <Y>-19444.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -456,6 +706,11 @@
       <Name>Lumber Mill</Name>
       <FullName>Astralholme</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>23253.6</X>
+        <Y>12273.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -465,6 +720,11 @@
       <Name>Quarry</Name>
       <FullName>Arah's Hope</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-21083.28</X>
+        <Y>11462.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -474,6 +734,11 @@
       <Name>Workshop</Name>
       <FullName>Greenvale Refuge</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-19053.12</X>
+        <Y>-18657.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
       <Points>5</Points>
@@ -483,6 +748,11 @@
       <Name>Lumber Mill</Name>
       <FullName>Foghaven</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>23253.36</X>
+        <Y>12273.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -492,6 +762,11 @@
       <Name>Fishing Village</Name>
       <FullName>Redwater Lowlands</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>22442.16</X>
+        <Y>-19444.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -501,6 +776,11 @@
       <Name>Crossroads</Name>
       <FullName>The Titanpaw</FullName>
       <Location>N</Location>
+      <MapLocation>
+        <X>232.8</X>
+        <Y>34180.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
       <Points>5</Points>
@@ -510,6 +790,11 @@
       <Name>Tower</Name>
       <FullName>Cragtop</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>12969.6</X>
+        <Y>12840</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
       <Points>10</Points>
@@ -519,6 +804,11 @@
       <Name>Quarry</Name>
       <FullName>Godslore</FullName>
       <Location>NW</Location>
+      <MapLocation>
+        <X>-21084</X>
+        <Y>11462.4</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -528,6 +818,11 @@
       <Name>Workshop</Name>
       <FullName>Redvale Refuge</FullName>
       <Location>SW</Location>
+      <MapLocation>
+        <X>-19053.6</X>
+        <Y>-18657.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -537,6 +832,11 @@
       <Name>Lumber Mill</Name>
       <FullName>Stargrove</FullName>
       <Location>NE</Location>
+      <MapLocation>
+        <X>23253.6</X>
+        <Y>12273.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -546,6 +846,11 @@
       <Name>Fishing Village</Name>
       <FullName>Greenwater Lowlands</FullName>
       <Location>SE</Location>
+      <MapLocation>
+        <X>22442.4</X>
+        <Y>-19444.8</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
       <Points>5</Points>
@@ -564,6 +869,11 @@
       <Name>Battle's Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
+      <MapLocation>
+        <X>-7939.68</X>
+        <Y>-9885.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>RedBorderlands</Map>
       <Points>0</Points>
@@ -627,6 +937,11 @@
       <Name>Battle's Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
+      <MapLocation>
+        <X>-7939.68</X>
+        <Y>-9885.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>BlueBorderlands</Map>
       <Points>0</Points>
@@ -672,6 +987,11 @@
       <Name>Battle's Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
+      <MapLocation>
+        <X>-7939.68</X>
+        <Y>-9885.6</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>GreenBorderlands</Map>
       <Points>0</Points>

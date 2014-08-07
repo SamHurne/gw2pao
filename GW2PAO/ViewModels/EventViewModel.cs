@@ -108,17 +108,6 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Visiblity of the notification for this event
-        /// This is configured by the user by showing/hiding specific event notifications
-        /// TODO: Implement UI for user to configure/set this
-        /// </summary>
-        public bool IsNotificationVisible
-        {
-            get { return this.isNotificationVisible; }
-            set { SetField(ref this.isNotificationVisible, value); }
-        }
-
-        /// <summary>
         /// True if the notification for this event has already been shown, else false
         /// </summary>
         public bool IsNotificationShown
@@ -164,7 +153,6 @@ namespace GW2PAO.ViewModels
             this.userSettings = userSettings;
             this.displayedNotifications = displayedNotificationsCollection;
             this.IsVisible = true;
-            this.IsNotificationVisible = true;
             this.IsNotificationShown = false;
             this.IsRemovingNotification = false;
 

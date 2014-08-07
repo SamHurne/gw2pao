@@ -39,9 +39,14 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
+
+#if DEBUG
+            LogManager.EnableLogging();
+#else
             // Set up logging configuration
             if (!GW2PAO.Properties.Settings.Default.IsLoggingEnabled)
                 LogManager.DisableLogging();
+#endif
 
             // Log application information
             var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();

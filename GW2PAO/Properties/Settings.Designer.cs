@@ -202,5 +202,77 @@ namespace GW2PAO.Properties {
                 this["DungeonTrackerY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWNotificationX {
+            get {
+                return ((double)(this["WvWNotificationX"]));
+            }
+            set {
+                this["WvWNotificationX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWNotificationY {
+            get {
+                return ((double)(this["WvWNotificationY"]));
+            }
+            set {
+                this["WvWNotificationY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWTrackerHeight {
+            get {
+                return ((double)(this["WvWTrackerHeight"]));
+            }
+            set {
+                this["WvWTrackerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWTrackerWidth {
+            get {
+                return ((double)(this["WvWTrackerWidth"]));
+            }
+            set {
+                this["WvWTrackerWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWTrackerX {
+            get {
+                return ((double)(this["WvWTrackerX"]));
+            }
+            set {
+                this["WvWTrackerX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double WvWTrackerY {
+            get {
+                return ((double)(this["WvWTrackerY"]));
+            }
+            set {
+                this["WvWTrackerY"] = value;
+            }
+        }
     }
 }
