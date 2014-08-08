@@ -47,7 +47,7 @@
       <ID>4</ID>
       <Name>Green Mill</Name>
       <FullName>Golanta Clearing</FullName>
-      <Location />
+      <Location>SSW</Location>
       <MapLocation>
         <X>-7497.6</X>
         <Y>-25468.8</Y>
@@ -61,7 +61,7 @@
       <ID>5</ID>
       <Name>Red Mine</Name>
       <FullName>Pangloss Rise</FullName>
-      <Location />
+      <Location>NNE</Location>
       <MapLocation>
         <X>18393.6</X>
         <Y>13939.2</Y>
@@ -75,7 +75,7 @@
       <ID>6</ID>
       <Name>Red Mill</Name>
       <FullName>Speldan Clearcut</FullName>
-      <Location />
+      <Location>NNW</Location>
       <MapLocation>
         <X>-16848.72</X>
         <Y>19048.8</Y>
@@ -89,7 +89,7 @@
       <ID>7</ID>
       <Name>Blue Mine</Name>
       <FullName>Danelon Passage</FullName>
-      <Location />
+      <Location>SSE</Location>
       <MapLocation>
         <X>13310.4</X>
         <Y>-28867.2</Y>
@@ -103,7 +103,7 @@
       <ID>8</ID>
       <Name>Blue Mill</Name>
       <FullName>Umberglade Woods</FullName>
-      <Location />
+      <Location>E</Location>
       <MapLocation>
         <X>25802.4</X>
         <Y>-2716.8</Y>
@@ -131,7 +131,7 @@
       <ID>10</ID>
       <Name>Green Mine</Name>
       <FullName>Rogue's Quarry</FullName>
-      <Location />
+      <Location>W</Location>
       <MapLocation>
         <X>-22010.16</X>
         <Y>-2349.6</Y>
@@ -860,6 +860,11 @@
       <Name>Temple of Lost Prayers</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
+      <MapLocation>
+        <X>-279.59</X>
+        <Y>-16015.255</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>RedBorderlands</Map>
       <Points>0</Points>
@@ -883,6 +888,11 @@
       <Name>Bauer's Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
+      <MapLocation>
+        <X>-5251.525</X>
+        <Y>-783.006</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BauersEstate</Type>
       <Map>RedBorderlands</Map>
       <Points>0</Points>
@@ -892,6 +902,11 @@
       <Name>Orchard Overlook</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
+      <MapLocation>
+        <X>5983.413</X>
+        <Y>-2110.027</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>RedBorderlands</Map>
       <Points>0</Points>
@@ -901,6 +916,11 @@
       <Name>Carver's Ascent</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
+      <MapLocation>
+        <X>6802.815</X>
+        <Y>-10643.904</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>CarversAscent</Type>
       <Map>RedBorderlands</Map>
       <Points>0</Points>
@@ -910,6 +930,11 @@
       <Name>Carver's Ascent</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
+      <MapLocation>
+        <X>6802.815</X>
+        <Y>-10643.904</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>CarversAscent</Type>
       <Map>BlueBorderlands</Map>
       <Points>0</Points>
@@ -919,6 +944,11 @@
       <Name>Orchard Overlook</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
+      <MapLocation>
+        <X>5983.413</X>
+        <Y>-2110.027</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>BlueBorderlands</Map>
       <Points>0</Points>
@@ -928,6 +958,11 @@
       <Name>Bauer's Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
+      <MapLocation>
+        <X>-5251.525</X>
+        <Y>-783.006</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BauersEstate</Type>
       <Map>BlueBorderlands</Map>
       <Points>0</Points>
@@ -951,6 +986,11 @@
       <Name>Temple of Lost Prayers</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
+      <MapLocation>
+        <X>-279.59</X>
+        <Y>-16015.255</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>BlueBorderlands</Map>
       <Points>0</Points>
@@ -960,6 +1000,11 @@
       <Name>Carver's Ascent</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
+      <MapLocation>
+        <X>6802.815</X>
+        <Y>-10643.904</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>CarversAscent</Type>
       <Map>GreenBorderlands</Map>
       <Points>0</Points>
@@ -969,6 +1014,11 @@
       <Name>Orchard Overlook</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
+      <MapLocation>
+        <X>5983.413</X>
+        <Y>-2110.027</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>GreenBorderlands</Map>
       <Points>0</Points>
@@ -978,6 +1028,11 @@
       <Name>Bauer's Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
+      <MapLocation>
+        <X>-5251.525</X>
+        <Y>-783.006</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>BauersEstate</Type>
       <Map>GreenBorderlands</Map>
       <Points>0</Points>
@@ -1001,6 +1056,11 @@
       <Name>Temple of Lost Prayers</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
+      <MapLocation>
+        <X>-279.59</X>
+        <Y>-16015.255</Y>
+        <Z>0</Z>
+      </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>GreenBorderlands</Map>
       <Points>0</Points>

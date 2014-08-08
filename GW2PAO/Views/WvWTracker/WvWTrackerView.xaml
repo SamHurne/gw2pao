@@ -6,8 +6,6 @@
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        MinHeight="58" MaxHeight="750" Height="250"
-        MinWidth="190" MaxWidth="190" Width="190"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResize"
         Topmost="True"
@@ -31,6 +29,29 @@
 
         </ResourceDictionary>
     </src:OverlayWindow.Resources>
+    
+    <src:OverlayWindow.Style>
+        <Style TargetType="src:OverlayWindow">
+            <Setter Property="MinHeight" Value="58" />
+            <Setter Property="MaxHeight" Value="750" />
+            <Setter Property="Height" Value="250" />
+            <Setter Property="MinWidth" Value="190" />
+            <Setter Property="MaxWidth" Value="190" />
+            <Setter Property="Width" Value="190" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                    <DataTrigger.Setters>
+                        <Setter Property="MinHeight" Value="120" />
+                        <Setter Property="MaxHeight" Value="120" />
+                        <Setter Property="Height" Value="120" />
+                        <Setter Property="MinWidth" Value="190" />
+                        <Setter Property="MaxWidth" Value="1390" />
+                        <Setter Property="Width" Value="350" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </src:OverlayWindow.Style>
 
     <Grid>
         <Grid.Background>
@@ -67,6 +88,11 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
+                            <MenuItem Header="Orientation">
+                                <MenuItem Header="Vertical" IsCheckable="True" IsChecked="{Binding IsVerticalOrientation}" />
+                                <MenuItem Header="Horizontal" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
+                            </MenuItem>
+                            <Separator />
                             <MenuItem Header="Reset Hidden Objectives" Command="{Binding ResetHiddenObjectivesCommand}" />
                             <MenuItem Header="Show">
                                 <MenuItem Header="Red Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" />
@@ -152,20 +178,72 @@
 
         <Grid Name="ObjectivesContainer" Grid.Row="1">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Auto">
-                <StackPanel Width="{Binding ElementName=ObjectivesContainer, Path=ActualWidth}">
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto"
+                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <StackPanel>
                     <ItemsControl Name="ObjectivesControl"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
                                   Margin="0,0,0,5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <!--TODO: Use a trigger to change Horizontal vs Vertical control based on selection in menu-->
-                                <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border>
+                                                <StackPanel IsItemsHost="True">
+                                                    <StackPanel.Style>
+                                                        <Style TargetType="StackPanel">
+                                                            <Setter Property="Orientation" Value="Vertical" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                                                    <DataTrigger.Setters>
+                                                                        <Setter Property="Orientation" Value="Horizontal" />
+                                                                    </DataTrigger.Setters>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </StackPanel.Style>
+                                                </StackPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="ItemTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="ItemTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <view:VerticalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
                     </ItemsControl>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Vertical" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Orientation" Value="Horizontal" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -189,6 +267,56 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
         </Grid>
+
+        <Grid Name="ResizeWidth" Grid.Row="0" Grid.RowSpan="3"
+              Cursor="SizeWE"
+              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+
+            <Rectangle VerticalAlignment="Stretch"
+                       HorizontalAlignment="Right"
+                       Width="3"
+                       Fill="#01FFA500">
+            </Rectangle>
+
+            <Rectangle VerticalAlignment="Stretch"
+                       HorizontalAlignment="Right"
+                       Width="1">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#00FFA500" Offset="0"/>
+                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                        <GradientStop Color="#00FFA500" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+
     </Grid>
 </src:OverlayWindow>

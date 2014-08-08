@@ -177,6 +177,9 @@
     <Compile Include="Views\WvWNotification\WvWNotificationWindow.xaml.cs">
       <DependentUpon>WvWNotificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WvWTracker\VerticalWvWObjectiveView.xaml.cs">
+      <DependentUpon>VerticalWvWObjectiveView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WvWTracker\HorizontalWvWObjectiveView.xaml.cs">
       <DependentUpon>HorizontalWvWObjectiveView.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\WvWNotification\WvWNotificationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WvWTracker\VerticalWvWObjectiveView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

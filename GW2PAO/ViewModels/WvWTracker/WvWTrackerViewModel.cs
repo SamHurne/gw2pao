@@ -41,6 +41,40 @@ namespace GW2PAO.ViewModels.WvWTracker
         public DelegateCommand ResetHiddenObjectivesCommand { get { return new DelegateCommand(this.ResetHiddenObjectives); } }
 
         /// <summary>
+        /// True if the view should use a vertical orientation, else false
+        /// Note: I would prefer to have this in the view, but we save it the user settings
+        /// </summary>
+        public bool IsVerticalOrientation
+        {
+            get { return !this.UserSettings.IsTrackerHorizontal; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.IsTrackerHorizontal = false;
+                    this.NotifyOrientationSelectionChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the view should use a horizontal orientation, else false
+        /// Note: I would prefer to have this in the view, but we save it the user settings
+        /// </summary>
+        public bool IsHorizontalOrientation
+        {
+            get { return this.UserSettings.IsTrackerHorizontal; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.IsTrackerHorizontal = true;
+                    this.NotifyOrientationSelectionChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// True if the controller's current map is not overriden, else false
         /// </summary>
         public bool IsUsingPlayerMap
@@ -155,6 +189,15 @@ namespace GW2PAO.ViewModels.WvWTracker
             this.RaisePropertyChanged("IsUsingBlueBorderlands");
             this.RaisePropertyChanged("IsUsingGreenBorderlands");
             this.RaisePropertyChanged("IsUsingEternalBattlegrounds");
+        }
+
+        /// <summary>
+        /// Raises property changed events for all of the orientation selection properties
+        /// </summary>
+        private void NotifyOrientationSelectionChanged()
+        {
+            this.RaisePropertyChanged("IsVerticalOrientation");
+            this.RaisePropertyChanged("IsHorizontalOrientation");
         }
     }
 }

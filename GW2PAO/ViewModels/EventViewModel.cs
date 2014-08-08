@@ -25,7 +25,6 @@ namespace GW2PAO.ViewModels
         private EventState state;
         private TimeSpan timerValue;
         private bool isVisible;
-        private bool isNotificationVisible;
         private bool isNotificationShown;
         private bool isRemovingNotification;
         private ICollection<EventViewModel> displayedNotifications;

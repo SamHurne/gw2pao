@@ -31,8 +31,7 @@ namespace GW2PAO.Controllers
         private const int GreenBorderlandsMapID = 95;
         private const int BlueBorderlandsMapID = 96;
         private const int EdgeOfMistsMapID = 968;
-
-        private const double DistanceToTimeFactor = 9.4;
+        private const double DistanceToTimeFactor = 300;
 
         /// <summary>
         /// Service responsible for WvW information
@@ -340,48 +339,64 @@ namespace GW2PAO.Controllers
 
                     // Refresh state of all objectives
                     var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                    foreach (var objective in this.AllObjectives)
+                    if (latestObjectivesData.Count() > 0)
                     {
-                        var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-
-                        if (objective.WorldOwner != latestData.WorldOwner)
+                        foreach (var objective in this.AllObjectives)
                         {
-                            // New owner
-                            Threading.InvokeOnUI(() =>
-                                {
-                                    objective.PrevWorldOwner = objective.WorldOwner;
-                                    objective.WorldOwner = latestData.WorldOwner;
-                                    objective.FlipTime = DateTime.UtcNow;
-                                    objective.IsRIActive = true;
-                                });
-                            if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+
+                            if (objective.WorldOwner != latestData.WorldOwner)
                             {
-                                // Owner just changed, raise a notification!
-                                this.DisplayNotification(objective);
-                            }
-                        }
+                                // New owner
+                                Threading.InvokeOnUI(() =>
+                                    {
+                                        objective.PrevWorldOwner = objective.WorldOwner;
+                                        objective.WorldOwner = latestData.WorldOwner;
 
-                        var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
-                        if (timeSinceFlip <= TimeSpan.FromMinutes(5))
-                        {
-                            var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
-                            Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
-                        }
-                        else
-                        {
-                            Threading.InvokeOnUI(() => objective.IsRIActive = false);
+                                        // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
+                                        if (objective.Type != ObjectiveType.TempleofLostPrayers
+                                            && objective.Type != ObjectiveType.BattlesHollow
+                                            && objective.Type != ObjectiveType.BauersEstate
+                                            && objective.Type != ObjectiveType.OrchardOverlook
+                                            && objective.Type != ObjectiveType.CarversAscent)
+                                        {
+                                            objective.FlipTime = DateTime.UtcNow;
+                                            objective.IsRIActive = true;
+                                        }
+                                    });
+                                if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                                {
+                                    // Owner just changed, raise a notification!
+                                    this.DisplayNotification(objective);
+                                }
+                            }
+
+                            var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
+                            if (timeSinceFlip <= TimeSpan.FromMinutes(5))
+                            {
+                                var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
+                                Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
+                            }
+                            else
+                            {
+                                Threading.InvokeOnUI(() => objective.IsRIActive = false);
+                            }
                         }
                     }
 
                     // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
+                    // Note: these are approximations at best
                     var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
                     foreach (var objective in this.CurrentObjectives)
                     {
                         if (this.PlayerMap == objective.Map)
                         {
-                            var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
-                            var timeDistance = this.CalculateTimeDistance(newDistance);
-                            objective.DistanceTime = timeDistance;
+                            if (playerPosition != null && objective.ModelData.MapLocation != null)
+                            {
+                                var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
+                                var timeDistance = this.CalculateTimeDistance(newDistance);
+                                objective.DistanceTime = timeDistance;
+                            }
                         }
                         else
                         {

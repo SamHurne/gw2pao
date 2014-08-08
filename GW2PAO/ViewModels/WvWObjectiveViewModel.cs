@@ -26,7 +26,6 @@ namespace GW2PAO.ViewModels
         private TimeSpan distanceTime;
         private bool isVisible;
         private bool isRIActive;
-        private bool isNotificationVisible;
         private bool isNotificationShown;
         private bool isRemovingNotification;
         private WvWSettings userSettings;

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GW2PAO.Views.WvWTracker
 {
     /// <summary>
-    /// Interaction logic for HorizontalWvWObjectiveView.xaml
+    /// Interaction logic for VerticalWvWObjectiveView.xaml
     /// </summary>
-    public partial class HorizontalWvWObjectiveView : UserControl
+    public partial class VerticalWvWObjectiveView : UserControl
     {
-        public HorizontalWvWObjectiveView()
+        public VerticalWvWObjectiveView()
         {
             InitializeComponent();
         }

@@ -1,0 +1,193 @@
+﻿<UserControl x:Class="GW2PAO.Views.WvWTracker.VerticalWvWObjectiveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             mc:Ignorable="d" d:DesignHeight="80" d:DesignWidth="58"
+             TextOptions.TextFormattingMode="Display">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
+            <converters:WvWMapConverter x:Key="MapConverter" />
+            <converters:WorldColorConverter x:Key="WorldColorConverter" />
+            <converters:EventStateConverter x:Key="StateConverter" />
+            <converters:TimespanConverter x:Key="TimeConverter" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Hide" Command="{Binding HideCommand}" />
+            <!--TODO-->
+            <!--<Separator />
+            <MenuItem Header="Copy Text Information" Command="{Binding CopyWaypointCommand}" />
+            -->
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    
+    <UserControl.ToolTip>
+        <StackPanel Orientation="Vertical">
+            <core:OutlinedTextBlock Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                    FontSize="12" FontFamily="Gisha"
+                                    Text="{Binding Name}"/>
+            <StackPanel Orientation="Horizontal">
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="Owned By:"
+                                        Margin="0,0,5,0"/>
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Margin="0,0,2,0"
+                                        Text="{Binding WorldOwnerName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="Points:"
+                                        Margin="0,0,5,0"/>
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Margin="0,0,2,0"
+                                        Text="{Binding Points}"/>
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip>
+
+    <!--Note: DataContext is set by the DungeonTrackerView-->
+    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,0,0" Padding="5,2,5,0" BorderThickness="1,0,0,0">
+
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" Opacity="0" BlurRadius="30"
+                              Color="{Binding WorldOwner, Converter={StaticResource WorldColorConverter}}" />
+        </Border.Effect>
+
+        <Border.Triggers>
+            <EventTrigger SourceName="OwnerTextblock" RoutedEvent="Binding.TargetUpdated">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation To="1"          Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"/>
+                        <DoubleAnimation To="0.25"       Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"
+                                                         BeginTime="00:00:0.5"/>
+                        <DoubleAnimation To="1"          Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"
+                                                         BeginTime="00:00:01"/>
+                        <DoubleAnimation To="0.25"       Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"
+                                                         BeginTime="00:00:01.5"/>
+                        <DoubleAnimation To="1"          Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"
+                                                         BeginTime="00:00:02"/>
+                        <DoubleAnimation To="0"          Storyboard.TargetName="MainBorder"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.5"
+                                                         BeginTime="00:00:02.5"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+        
+        <Border.BorderBrush>
+            <LinearGradientBrush Opacity="0.65" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00FFA500" Offset="0"/>
+                <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                <GradientStop Color="#00FFA500" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Border.Background>
+            <SolidColorBrush Color="#01FFFFFF" />
+        </Border.Background>
+
+        <Grid Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--Objective Image-->
+            <Image Grid.Row="0"
+                   Height="25" Width="25"
+                   VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image.Source>
+                    <MultiBinding Converter="{StaticResource ObjTypeConverter}">
+                        <Binding Path="Type"/>
+                        <Binding Path="WorldOwner"/>
+                    </MultiBinding>
+                </Image.Source>
+            </Image>
+
+            <!--Objective Location (e.g. N, NW, SW, etc)-->
+            <core:OutlinedTextBlock Grid.Row="1"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                    FontFamily="Gisha" FontSize="11"
+                                    Text="{Binding Location}" />
+            
+            <!--Distance-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Margin="0,5,0,0">
+                <core:OutlinedTextBlock Margin="0,0,3,0"
+                                        Fill="White"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="Dist:" />
+                <core:OutlinedTextBlock Fill="White"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
+            </StackPanel>
+
+            <!--RI Timer Value (if any), will hide/show based with trigger-->
+            <StackPanel Orientation="Horizontal" Grid.Row="3"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Margin="0,5,0,0">
+                <core:OutlinedTextBlock Margin="0,0,3,0"
+                                        Fill="White"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="RI:" />
+                <core:OutlinedTextBlock Name="TimerValueTextBlock"
+                                        Fill="White"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        FontSize="11" FontFamily="Gisha"
+                                        Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <!--Hide the RI text if RI is not active-->
+                            <DataTrigger Binding="{Binding IsRIActive}" Value="false">
+                                <DataTrigger.Setters>
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+
+            <!--Dummy textblock for flashing the item when the owner changes -->
+            <TextBlock Name="OwnerTextblock" Opacity="0" Visibility="Collapsed" Text="{Binding WorldOwner, NotifyOnTargetUpdated=True}" />
+        </Grid>
+    </Border>
+</UserControl>

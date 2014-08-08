@@ -161,5 +161,32 @@ namespace GW2PAO.Views.WvWTracker
                 e.Handled = true;
             }
         }
+
+        /// <summary>
+        /// Handles the PreviewMouseWheel on the scrollviewer to enable scrolling the horizontal scrollbar via the mousewheel
+        /// </summary>
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer sv = sender as ScrollViewer;
+            if (sv != null)
+            {
+                if (sv.ComputedHorizontalScrollBarVisibility == System.Windows.Visibility.Visible)
+                {
+                    // 3 times so that it scrolls faster...
+                    if (e.Delta > 0)
+                    {
+                        sv.LineLeft();
+                        sv.LineLeft();
+                        sv.LineLeft();
+                    }
+                    else
+                    {
+                        sv.LineRight();
+                        sv.LineRight();
+                        sv.LineRight();
+                    }
+                }
+            }
+        }
     }
 }

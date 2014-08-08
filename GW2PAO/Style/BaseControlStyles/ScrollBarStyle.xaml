@@ -3,7 +3,7 @@
                     xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
                     xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
 
-    <Color x:Key="ScrollbarTrackColor">Transparent</Color>
+    <Color x:Key="ScrollbarTrackColor">Orange</Color>
     <Color x:Key="ScrollbarThumbFillColor">Orange</Color>
 
     <Style x:Key="LeftScrollViewer" TargetType="{x:Type ScrollViewer}">
@@ -17,18 +17,19 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
-                        <ScrollContentPresenter Grid.Column="1" />
+                        <ScrollContentPresenter Grid.Column="1" Grid.Row="1" />
                         <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Grid.Column="0" Grid.Row="1"
                                    Value="{TemplateBinding VerticalOffset}"
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Orientation="Horizontal"
-                                   Grid.Row="1"
+                                   Grid.Row="0"
                                    Grid.Column="1"
                                    Value="{TemplateBinding HorizontalOffset}"
                                    Maximum="{TemplateBinding ScrollableWidth}"
@@ -66,9 +67,21 @@
                             <ColumnDefinition Width="1" />
                             <ColumnDefinition Width="1" />
                         </Grid.ColumnDefinitions>
-                        <Ellipse Grid.Column="0" Grid.ColumnSpan="2" Fill="#FFF4F4F5" />
-                        <Rectangle Grid.Column="1" Grid.ColumnSpan="3" Fill="#FFF4F4F5" />
-                        <Ellipse Grid.Column="3" Grid.ColumnSpan="2" Fill="#FFF4F4F5" />
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="2">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="1" Grid.ColumnSpan="3">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="3" Grid.ColumnSpan="2">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -87,21 +100,21 @@
                             <RowDefinition Height="1" />
                             <RowDefinition Height="1" />
                         </Grid.RowDefinitions>
-                        <Ellipse Grid.Row="0" Grid.RowSpan="2">
-                            <Ellipse.Fill>
+                        <Rectangle Grid.Row="0" Grid.RowSpan="2">
+                            <Rectangle.Fill>
                                 <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <Rectangle Grid.Row="1" Grid.RowSpan="3">
                             <Rectangle.Fill>
                                 <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <Ellipse Grid.Row="3" Grid.RowSpan="2">
-                            <Ellipse.Fill>
+                        <Rectangle Grid.Row="3" Grid.RowSpan="2">
+                            <Rectangle.Fill>
                                 <SolidColorBrush Color="{StaticResource ScrollbarThumbFillColor}"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -119,7 +132,7 @@
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
                     <Border x:Name="Bg" CornerRadius="0" SnapsToDevicePixels="true">
                         <Border.Background>
-                            <SolidColorBrush Color="{StaticResource ScrollbarTrackColor}" Opacity="0.25" />
+                            <SolidColorBrush Color="{StaticResource ScrollbarTrackColor}" Opacity="0.15" />
                         </Border.Background>
                         <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
                             <Track.DecreaseRepeatButton>
@@ -140,12 +153,15 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="MinWidth" Value="0"/>
-                <Setter Property="Height" Value="3"/>
-                <Setter Property="MinHeight" Value="3"/>
+                <Setter Property="Height" Value="2"/>
+                <Setter Property="MinHeight" Value="2"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="Bg" SnapsToDevicePixels="true" Background="#7FA7A7A7">
+                            <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{StaticResource ScrollbarTrackColor}" Opacity="0.15" />
+                                </Grid.Background>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.00001*"/>
                                 </Grid.ColumnDefinitions>

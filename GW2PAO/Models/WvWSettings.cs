@@ -31,6 +31,7 @@ namespace GW2PAO.Models
         public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".WvWSettings.xml"; } }
 
         private World worldSelection;
+        private bool isTrackerHorizontal;
         private bool areBlueBorderlandsNotificationsEnabled;
         private bool areGreenBorderlandsNotificationsEnabled;
         private bool areRedBorderlandsNotificationsEnabled;
@@ -53,6 +54,15 @@ namespace GW2PAO.Models
         {
             get { return this.worldSelection; }
             set { this.SetField(ref this.worldSelection, value); }
+        }
+
+        /// <summary>
+        /// True if the WvW tracker window is horizontal, else false if vertical
+        /// </summary>
+        public bool IsTrackerHorizontal
+        {
+            get { return this.isTrackerHorizontal; }
+            set { SetField(ref this.isTrackerHorizontal, value); }
         }
 
         /// <summary>
@@ -183,6 +193,7 @@ namespace GW2PAO.Models
         public WvWSettings()
         {
             this.WorldSelection = new World() { ID = 1019, Name = "Blackgate" };
+            this.IsTrackerHorizontal = false;
             this.AreBlueBorderlandsNotificationsEnabled = true;
             this.AreGreenBorderlandsNotificationsEnabled = true;
             this.AreRedBorderlandsNotificationsEnabled = true;
