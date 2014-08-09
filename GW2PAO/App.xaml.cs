@@ -125,6 +125,14 @@ namespace GW2PAO
             {
                 WebCore.Shutdown();
             }
+
+            // Really hate to have to do this, but I can't have logs filling up people's disk space
+            //  There's no way to disable logging (tried but it didn't work)
+            logger.Debug("Cleaning up GwApiNETLog");
+            foreach (System.IO.FileInfo f in new System.IO.DirectoryInfo(".").GetFiles("GwApiNETLog_*.txt"))
+            {
+                f.Delete();
+            }
         }
 
         /// <summary>

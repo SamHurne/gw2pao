@@ -25,15 +25,6 @@ namespace GW2PAO.API.Services
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Static initializer that disables logging by the GwApiNET assembly
-        /// TODO: I'd prefer to have this in a more generic location
-        /// </summary>
-        static EventsService()
-        {
-            GwApiNET.Logging.GwLogManager.SetLogLevel(false);
-        }
-
-        /// <summary>
         /// Internal dictionary cache of event details
         /// 
         /// Note: At this point, the event details cache is really only used for determining the zone
