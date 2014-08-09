@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
+using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Models;
 using GW2PAO.PresentationCore;
 using NLog;
@@ -23,6 +25,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private IPlayerService playerService;
         private double distanceFromPlayer;
         private double directionFromPlayer;
         private bool isVisible;
@@ -80,20 +83,50 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         public bool IsUnlocked
         {
-            get { return this.userSettings.UnlockedZoneItems.Contains(this.ItemModel); }
+            get
+            {
+                var characterItems = this.userSettings.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
+                if (characterItems != null)
+                {
+                    return characterItems.ZoneItems.Contains(this.ItemModel);
+                }
+                else
+                {
+                    return false;
+                }
+            }
             set
             {
-                if (value && !this.userSettings.UnlockedZoneItems.Contains(this.ItemModel))
+                var characterItems = this.userSettings.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
+                if (value) // Add to UnlockedZoneItems
                 {
-                    logger.Debug("Adding \"{0}\" to UnlockedZoneItems", this.ItemId);
-                    this.userSettings.UnlockedZoneItems.Add(this.ItemModel);
-                    this.RaisePropertyChanged();
+                    if (characterItems != null)
+                    {
+                        // Already saved stuff for this character, add to collection for character
+                        if (!characterItems.ZoneItems.Contains(this.ItemModel))
+                        {
+                            characterItems.ZoneItems.Add(this.ItemModel);
+                            this.RaisePropertyChanged();
+                        }
+                    }
+                    else
+                    {
+                        // Nothing saved yet for this character, add character then add zone item
+                        characterItems = new CharacterZoneItems() { Character = this.playerService.CharacterName };
+                        characterItems.ZoneItems.Add(this.ItemModel);
+                        this.userSettings.UnlockedZoneItems.Add(characterItems);
+                        this.RaisePropertyChanged();
+                    }
                 }
-                else if (this.userSettings.UnlockedZoneItems.Contains(this.ItemModel))
+                else  // Remove from UnlockedZoneItems
                 {
-                    logger.Debug("Removing \"{0}\" from UnlockedZoneItems", this.ItemId);
-                    this.userSettings.UnlockedZoneItems.Remove(this.ItemModel);
-                    this.RaisePropertyChanged();
+                    if (characterItems != null)
+                    {
+                        if (characterItems.ZoneItems.Remove(this.ItemModel))
+                        {
+                            this.RaisePropertyChanged();
+                        }
+                    }
                 }
             }
         }
@@ -121,10 +154,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         /// <param name="zoneItem">The zone item/point's information</param>
         /// <param name="userSettings">User settings</param>
-        public ZoneItemViewModel(ZoneItem zoneItem, ZoneCompletionSettings userSettings)
+        public ZoneItemViewModel(ZoneItem zoneItem, IPlayerService playerService, ZoneCompletionSettings userSettings)
         {
             this.DistanceFromPlayer = -1;
             this.ItemModel = zoneItem;
+            this.playerService = playerService;
             this.userSettings = userSettings;
             this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
             this.userSettings.HiddenZoneItems.CollectionChanged += (o, e) => this.RefreshVisibility();

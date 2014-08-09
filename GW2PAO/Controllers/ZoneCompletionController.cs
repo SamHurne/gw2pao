@@ -89,6 +89,11 @@ namespace GW2PAO.Controllers
         private readonly object zoneItemsLock = new object();
 
         /// <summary>
+        /// The current character's name
+        /// </summary>
+        public string CharacterName { get; private set; }
+
+        /// <summary>
         /// The zone completion user settings
         /// </summary>
         public ZoneCompletionSettings UserSettings { get; private set; }
@@ -192,11 +197,13 @@ namespace GW2PAO.Controllers
             {
                 if (this.systemService.IsGw2Running && this.playerService.HasValidMapId)
                 {
-                    // Check to see if the MapId has changed, if so, we need to clear our zone items and add the new ones
-                    if (this.CurrentMapID != this.playerService.MapId)
+                    // Check to see if the MapId or Character Name has changed, if so, we need to clear our zone items and add the new ones
+                    if (this.CurrentMapID != this.playerService.MapId
+                        || this.CharacterName != this.playerService.CharacterName)
                     {
-                        logger.Info(string.Format("Map change detected, resetting zone events. New MapID = {0}", this.playerService.MapId));
+                        logger.Info("Map/Character change detected, resetting zone events. New MapID = {0} | Character Name = {1}", this.playerService.MapId, this.CharacterName);
                         this.CurrentMapID = this.playerService.MapId;
+                        this.CharacterName = this.playerService.CharacterName;
 
                         var zoneItems = this.zoneService.GetZoneItems(this.playerService.MapId);
                         Threading.InvokeOnUI(() =>
@@ -206,7 +213,7 @@ namespace GW2PAO.Controllers
                                 this.ZoneItems.Clear();
                                 foreach (var item in zoneItems)
                                 {
-                                    this.ZoneItems.Add(new ZoneItemViewModel(item, this.UserSettings));
+                                    this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserSettings));
                                 }
                             }
                         });
@@ -217,7 +224,7 @@ namespace GW2PAO.Controllers
                         {
                             Threading.InvokeOnUI(() => this.zoneNameObject.ZoneName = newZoneName);
                         }
-                        logger.Info(string.Format("New Zone Name = {0}", newZoneName));
+                        logger.Info("New Zone Name = {0}", newZoneName);
                     }
                 }
 

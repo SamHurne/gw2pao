@@ -39,8 +39,8 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
-
 #if DEBUG
+            // Ignore logging if running in debug
             LogManager.EnableLogging();
 #else
             // Set up logging configuration

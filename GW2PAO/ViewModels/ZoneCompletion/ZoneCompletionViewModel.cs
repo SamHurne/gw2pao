@@ -94,15 +94,21 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         {
             logger.Debug("Resetting unlocked points for zone {0}", this.controller.CurrentMapID);
             List<ZoneItem> toRemove = new List<ZoneItem>();
-            foreach (var zoneItem in this.UserSettings.UnlockedZoneItems)
-            {
-                if (zoneItem.MapId == this.controller.CurrentMapID)
-                    toRemove.Add(zoneItem);
-            }
 
-            foreach (var zoneItem in toRemove)
+            // Only reset unlocked points for this character
+            var characterItems = this.UserSettings.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.controller.CharacterName);
+            if (characterItems != null)
             {
-                this.UserSettings.UnlockedZoneItems.Remove(zoneItem);
+                foreach (var zoneItem in characterItems.ZoneItems)
+                {
+                    if (zoneItem.MapId == this.controller.CurrentMapID)
+                        toRemove.Add(zoneItem);
+                }
+
+                foreach (var zoneItem in toRemove)
+                {
+                    characterItems.ZoneItems.Remove(zoneItem);
+                }
             }
         }
 

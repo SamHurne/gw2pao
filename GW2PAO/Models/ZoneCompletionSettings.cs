@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -39,7 +40,7 @@ namespace GW2PAO.Models
         private bool autoUnlockVistas;
         private bool showUnlockedPoints;
         private ObservableCollection<ZoneItem> hiddenZoneItems = new ObservableCollection<ZoneItem>();
-        private ObservableCollection<ZoneItem> unlockedZoneItems = new ObservableCollection<ZoneItem>();
+        private ObservableCollection<CharacterZoneItems> unlockedZoneItems = new ObservableCollection<CharacterZoneItems>();
 
         /// <summary>
         /// True if Heart Quests are shown in the list, else false
@@ -131,8 +132,10 @@ namespace GW2PAO.Models
         /// <summary>
         /// Collection of unlocked zone items 
         /// Since IDs are not unique across zones, this is a collection of the zone item objects themselves
+        /// Key: Character Name
+        /// Value: Unlocked zone items for that character
         /// </summary>
-        public ObservableCollection<ZoneItem> UnlockedZoneItems { get { return this.unlockedZoneItems; } }
+        public ObservableCollection<CharacterZoneItems> UnlockedZoneItems { get { return this.unlockedZoneItems; } }
 
         /// <summary>
         /// Default constructor
@@ -158,7 +161,17 @@ namespace GW2PAO.Models
             logger.Info("Enabling auto save");
             this.PropertyChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this);
             this.HiddenZoneItems.CollectionChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this);
-            this.UnlockedZoneItems.CollectionChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this);
+            this.UnlockedZoneItems.CollectionChanged += (o, e) =>
+                {
+                    ZoneCompletionSettings.SaveSettings(this);
+                    if (e.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        foreach (CharacterZoneItems itemAdded in e.NewItems)
+                        {
+                            itemAdded.ZoneItems.CollectionChanged += (a, b) => ZoneCompletionSettings.SaveSettings(this);
+                        }
+                    }
+                };
         }
 
         /// <summary>
@@ -211,5 +224,14 @@ namespace GW2PAO.Models
                 serializer.Serialize(writer, settings);
             }
         }
+    }
+
+    public class CharacterZoneItems
+    {
+        private ObservableCollection<ZoneItem> zoneItems = new ObservableCollection<ZoneItem>();
+
+        public string Character { get; set; }
+        public ObservableCollection<ZoneItem> ZoneItems { get { return this.zoneItems; } }
+
     }
 }

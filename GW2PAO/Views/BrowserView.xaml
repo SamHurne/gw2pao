@@ -78,8 +78,6 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!--TODO: Add Opacity and Zoom sliders-->
-            
             <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                     Grid.Row="0">

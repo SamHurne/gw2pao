@@ -23,6 +23,11 @@ namespace GW2PAO.Controllers.Interfaces
         ObservableCollection<ZoneItemViewModel> ZoneItems { get; }
 
         /// <summary>
+        /// The current character's name
+        /// </summary>
+        string CharacterName { get; }
+
+        /// <summary>
         /// The zone completion user settings
         /// </summary>
         ZoneCompletionSettings UserSettings { get; }
