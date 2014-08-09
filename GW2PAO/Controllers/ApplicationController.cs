@@ -279,9 +279,8 @@ namespace GW2PAO.Controllers
             wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled));
             this.menuItems.Add(wvwNotificationsMenu);
 
-
-            //this.menuItems.Add(null) // Null for a seperator
-            //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser)); Left out for now... will add after WvW features are completed
+            //this.menuItems.Add(null); // Null for a seperator
+            //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));// Left out for now... will add after WvW features are completed
 
             logger.Info("Application controller initialized");
         }
