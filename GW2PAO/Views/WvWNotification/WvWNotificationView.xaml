@@ -96,10 +96,7 @@
                             </MultiBinding>
                         </Image.Source>
                     </Image>
-                    <core:OutlinedTextBlock HorizontalAlignment="Center"
-                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                            FontFamily="Gisha" FontSize="11"
-                                            Text="{Binding Location}" />
+                    <core:OutlinedTextBlock HorizontalAlignment="Center" Text="{Binding Location}" />
                 </StackPanel>
 
                 <Grid Grid.Row="0" Grid.Column="1"
@@ -126,28 +123,20 @@
 
                     <!-- Objective Name -->
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                            VerticalAlignment="Bottom"
-                                            Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                            FontFamily="Gisha" FontSize="12"
+                                            VerticalAlignment="Bottom" FontSize="12"
                                             Text="{Binding Name}" />
                     
                     
                     <!-- Map -->
                     <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                            FontFamily="Gisha" FontSize="12"
                                             Text="{Binding Map, Converter={StaticResource MapConverter}}" />
 
                     <!-- Owner information -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
-                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                                FontFamily="Gisha" FontSize="12"
-                                                Text="By:" />
+                        <core:OutlinedTextBlock FontSize="12" Text="By:" />
                         <core:OutlinedTextBlock Margin="3,0,0,0"
-                                                Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                                FontFamily="Gisha" FontSize="12"
-                                                Text="{Binding WorldOwnerName}" />
+                                                FontSize="12" Text="{Binding WorldOwnerName}" />
                     </StackPanel>
                 </Grid>
             </Grid>

@@ -111,8 +111,7 @@
                                     Grid.Row="0" Grid.Column="0"
                                     VerticalAlignment="Center" HorizontalAlignment="Left"
                                     Fill="{Binding State, Converter={StaticResource StateConverter}}"
-                                    Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                    FontSize="13" FontFamily="Gisha"
+                                    FontSize="13"
                                     Text="{Binding EventName}" />
 
             <CheckBox Name="ChestIcon" Grid.Column="1"
@@ -167,8 +166,7 @@
                                     Grid.Row="0" Grid.Column="2"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Fill="{Binding State, Converter={StaticResource StateConverter}}"
-                                    Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                    FontSize="13" FontFamily="Gisha"
+                                    FontSize="13"
                                     Text="{Binding TimerValue, Converter={StaticResource TimeConverter}}" />
 
             <TextBlock Name="StateTextblock" Opacity="0" Foreground="Transparent" Text="{Binding State}" />

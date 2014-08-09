@@ -56,9 +56,7 @@
             <core:OutlinedTextBlock Name="DungeonName"
                                     Grid.Row="0" Grid.Column="0"
                                     VerticalAlignment="Center" HorizontalAlignment="Left"
-                                    Fill="White"
-                                    Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                    FontSize="13" FontFamily="Gisha"
+                                    FontSize="13"
                                     Text="{Binding DungeonName}" />
             
             <ItemsControl Grid.Row="0" Grid.Column="1"
@@ -83,7 +81,7 @@
                                             <ControlTemplate TargetType="{x:Type CheckBox}">
                                                 <Grid Margin="10,0,0,0">
                                                     <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                             FontSize="13" FontFamily="Gisha"
                                                                             Text="{Binding DisplayName}">
                                                         <core:OutlinedTextBlock.Style>
@@ -91,9 +89,9 @@
                                                                 <Setter Property="Effect">
                                                                     <Setter.Value>
                                                                         <DropShadowEffect ShadowDepth="0"
-                                                                                      Color="Goldenrod"
-                                                                                      Opacity="0"
-                                                                                      BlurRadius="15"/>
+                                                                                          Color="Goldenrod"
+                                                                                          Opacity="0"
+                                                                                          BlurRadius="15"/>
                                                                     </Setter.Value>
                                                                 </Setter>
                                                                 <Style.Triggers>
@@ -149,24 +147,24 @@
                             </CheckBox.Style>
                             <CheckBox.ToolTip>
                                 <StackPanel Orientation="Vertical">
-                                    <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                    <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                             FontSize="12" FontFamily="Gisha"
                                                             Text="{Binding NickName}"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                 FontSize="12" FontFamily="Gisha"
                                                                 Text="Reward:"
                                                                 Margin="0,0,5,0"/>
-                                        
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+
+                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                 FontSize="12" FontFamily="Gisha"
                                                                 Margin="0,0,2,0"
                                                                 Text="{Binding RewardGold}"/>
                                         <Image Source="../../Resources/gold_coin.png"
                                                Height="12" Width="12"
                                                Margin="0,0,5,0"/>
-                                        
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+
+                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                 FontSize="12" FontFamily="Gisha"
                                                                 Margin="0,0,2,0"
                                                                 Text="{Binding RewardSilver}"/>

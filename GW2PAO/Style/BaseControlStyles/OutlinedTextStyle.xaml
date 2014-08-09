@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore">
+
+    <Style TargetType="core:OutlinedTextBlock">
+        <Setter Property="Fill" Value="White" />
+        <Setter Property="Stroke" Value="Black" />
+        <Setter Property="StrokeThickness" Value="4" />
+        <Setter Property="StrokeOpacity" Value="0.75" />
+        <Setter Property="FontFamily" Value="Gisha" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+
+</ResourceDictionary>

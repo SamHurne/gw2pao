@@ -105,8 +105,7 @@
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                             Margin="0,5,0,0"
                                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                            FontFamily="Gisha" FontSize="12"
+                                            FontSize="12"
                                             Text="{Binding EventName}" />
                     
                     <!-- Close button -->
@@ -123,13 +122,8 @@
                     <!-- Time until active -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
-                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                                FontFamily="Gisha" FontSize="12"
-                                                Text="active in" />
-
-                        <core:OutlinedTextBlock Margin="3,0,0,0"
-                                                Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                                FontFamily="Gisha" FontSize="12"
+                        <core:OutlinedTextBlock FontSize="12" Text="active in" />
+                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="12"
                                                 Text="{Binding TimerValue, Converter={StaticResource TimeConverter}}" />
                     </StackPanel>
 

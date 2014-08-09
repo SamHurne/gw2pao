@@ -114,8 +114,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontFamily="Candara" FontSize="17"
+                                        Fill="Orange" FontFamily="Candara" FontSize="17"
                                         Text="World Events" />
 
                 <Button Name="MinimizeWindowButton"

@@ -36,28 +36,14 @@
     
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
-            <core:OutlinedTextBlock Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                    FontSize="12" FontFamily="Gisha"
-                                    Text="{Binding Name}"/>
+            <core:OutlinedTextBlock Fill="Orange" FontSize="12" Text="{Binding Name}"/>
             <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="Owned By:"
-                                        Margin="0,0,5,0"/>
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Margin="0,0,2,0"
-                                        Text="{Binding WorldOwnerName}"/>
+                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Owned By:" />
+                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding WorldOwnerName}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="Points:"
-                                        Margin="0,0,5,0"/>
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Margin="0,0,2,0"
-                                        Text="{Binding Points}"/>
+                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Points:" />
+                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding Points}"/>
             </StackPanel>
         </StackPanel>
     </UserControl.ToolTip>
@@ -151,8 +137,6 @@
             <!--Objective Location (e.g. N, NW, SW, etc)-->
             <core:OutlinedTextBlock Grid.Column="1"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                    FontFamily="Gisha" FontSize="11"
                                     Text="{Binding Location}" />
 
             
@@ -162,29 +146,18 @@
 
                 <!--Distance-->
                 <core:OutlinedTextBlock Margin="0,0,3,0"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                        FontSize="11" FontFamily="Gisha"
                                         Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                                         Text="Dist:" />
                 <core:OutlinedTextBlock Fill="White"
                                         Margin="0,0,10,0"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                        FontSize="11" FontFamily="Gisha"
                                         Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
 
                 <!--RI Timer Value (if any)-->
                 <core:OutlinedTextBlock Margin="0,0,3,0"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                        FontSize="11" FontFamily="Gisha"
                                         Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="RI:" />
                 <core:OutlinedTextBlock Name="TimerValueTextBlock"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                        FontSize="11" FontFamily="Gisha"
                                         Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
             </StackPanel>

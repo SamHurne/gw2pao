@@ -5,6 +5,7 @@
         <ResourceDictionary Source="BaseControlStyles/CheckboxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ContextMenuStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/DataGridStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/OutlinedTextStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ScrollBarStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/SliderStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/TabControlStyle.xaml" />

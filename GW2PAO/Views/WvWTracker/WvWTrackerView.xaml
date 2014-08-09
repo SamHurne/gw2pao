@@ -157,8 +157,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                        Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontFamily="Candara" FontSize="12"
+                                        Fill="Orange" FontFamily="Candara" FontSize="12"
                                         Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}" />
 
                 <Button Name="MinimizeWindowButton"
