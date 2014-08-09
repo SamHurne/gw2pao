@@ -205,10 +205,10 @@ namespace GW2PAO.Models
             this.WorldSelection = new World() { ID = 1019, Name = "Blackgate" };
             this.IsTrackerHorizontal = false;
             this.AreTimeDistancesShown = true;
-            this.AreBlueBorderlandsNotificationsEnabled = true;
-            this.AreGreenBorderlandsNotificationsEnabled = true;
-            this.AreRedBorderlandsNotificationsEnabled = true;
-            this.AreEternalBattlegroundsNotificationsEnabled = true;
+            this.AreBlueBorderlandsNotificationsEnabled = false;
+            this.AreGreenBorderlandsNotificationsEnabled = false;
+            this.AreRedBorderlandsNotificationsEnabled = false;
+            this.AreEternalBattlegroundsNotificationsEnabled = false;
             this.AreCastlesShown = true;
             this.AreKeepsShown = true;
             this.AreTowersShown = true;
