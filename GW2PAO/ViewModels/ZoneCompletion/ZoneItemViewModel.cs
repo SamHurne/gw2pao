@@ -161,7 +161,16 @@ namespace GW2PAO.ViewModels.ZoneCompletion
             this.playerService = playerService;
             this.userSettings = userSettings;
             this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userSettings.HiddenZoneItems.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userSettings.UnlockedZoneItems.CollectionChanged += (o, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (CharacterZoneItems itemAdded in e.NewItems)
+                    {
+                        itemAdded.ZoneItems.CollectionChanged += (a, b) => this.RefreshVisibility();
+                    }
+                }
+            };
             this.userSettings.UnlockedZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
             this.RefreshVisibility();
         }

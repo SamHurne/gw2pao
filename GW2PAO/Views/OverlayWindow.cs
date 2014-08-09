@@ -34,7 +34,7 @@ namespace GW2PAO.Views
             while (this.IsVisible)
             {
                 Threading.BeginInvokeOnUI(() => User32.SetTopMost(this));
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(1000);
             }
         }
 
