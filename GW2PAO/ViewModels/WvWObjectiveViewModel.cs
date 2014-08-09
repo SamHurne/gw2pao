@@ -177,6 +177,11 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// The WvW user settings
+        /// </summary>
+        public WvWSettings UserSettings { get { return this.userSettings; } }
+
+        /// <summary>
         /// Visibility of the objective
         /// Visibility is based on multiple properties, including:
         ///     - Type and the user configuration for what objective types are shown

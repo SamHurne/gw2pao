@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200"
+             mc:Ignorable="d"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
             <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
             <converters:WvWMapConverter x:Key="MapConverter" />
             <converters:WorldColorConverter x:Key="WorldColorConverter" />
@@ -60,6 +61,19 @@
             </StackPanel>
         </StackPanel>
     </UserControl.ToolTip>
+    
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Width" Value="188" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                    <DataTrigger.Setters>
+                        <Setter Property="Width" Value="140" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
 
     <!--Note: DataContext is set by the DungeonTrackerView-->
     <Border Name="MainBorder" CornerRadius="0" Margin="0,0,1,0" Padding="10,0,0,0" BorderThickness="0,1,0,0">
@@ -119,7 +133,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25" />
                 <ColumnDefinition Width="27" />
-                <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -138,51 +151,42 @@
             <!--Objective Location (e.g. N, NW, SW, etc)-->
             <core:OutlinedTextBlock Grid.Column="1"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                     FontFamily="Gisha" FontSize="11"
                                     Text="{Binding Location}" />
+
             
-            <!--Distance-->
             <StackPanel Orientation="Horizontal" Grid.Column="2"
                         VerticalAlignment="Center" HorizontalAlignment="Left"
-                        Margin="15,0,0,0">
+                        Margin="10,0,0,0">
+
+                <!--Distance-->
                 <core:OutlinedTextBlock Margin="0,0,3,0"
                                         Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
+                                        Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                                         Text="Dist:" />
                 <core:OutlinedTextBlock Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        Margin="0,0,10,0"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
+                                        Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
-            </StackPanel>
 
-            <!--RI Timer Value (if any), will hide/show based with trigger-->
-            <StackPanel Orientation="Horizontal" Grid.Column="3"
-                        VerticalAlignment="Center" HorizontalAlignment="Left"
-                        Margin="10,0,0,0">
+                <!--RI Timer Value (if any)-->
                 <core:OutlinedTextBlock Margin="0,0,3,0"
                                         Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
+                                        Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="RI:" />
                 <core:OutlinedTextBlock Name="TimerValueTextBlock"
                                         Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
+                                        Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Style.Triggers>
-                            <!--Hide the RI text if RI is not active-->
-                            <DataTrigger Binding="{Binding IsRIActive}" Value="false">
-                                <DataTrigger.Setters>
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
             </StackPanel>
 
             <!--Dummy textblock for flashing the item when the owner changes -->

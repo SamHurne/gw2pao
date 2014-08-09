@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
             <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
             <converters:WvWMapConverter x:Key="MapConverter" />
             <converters:WorldColorConverter x:Key="WorldColorConverter" />
@@ -22,6 +23,19 @@
 
         </ResourceDictionary>
     </UserControl.Resources>
+
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Height" Value="82" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                    <DataTrigger.Setters>
+                        <Setter Property="Height" Value="60" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
 
     <UserControl.ContextMenu>
         <ContextMenu>
@@ -35,25 +49,25 @@
     
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
-            <core:OutlinedTextBlock Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+            <core:OutlinedTextBlock Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                     FontSize="12" FontFamily="Gisha"
                                     Text="{Binding Name}"/>
             <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
                                         Text="Owned By:"
                                         Margin="0,0,5,0"/>
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
                                         Margin="0,0,2,0"
                                         Text="{Binding WorldOwnerName}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
                                         Text="Points:"
                                         Margin="0,0,5,0"/>
-                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="11" FontFamily="Gisha"
                                         Margin="0,0,2,0"
                                         Text="{Binding Points}"/>
@@ -118,10 +132,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="15" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="53" />
             </Grid.ColumnDefinitions>
 
             <!--Objective Image-->
@@ -139,51 +152,45 @@
             <!--Objective Location (e.g. N, NW, SW, etc)-->
             <core:OutlinedTextBlock Grid.Row="1"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                    Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                     FontFamily="Gisha" FontSize="11"
                                     Text="{Binding Location}" />
             
-            <!--Distance-->
-            <StackPanel Orientation="Horizontal" Grid.Row="2"
+            <StackPanel Orientation="Vertical" Grid.Row="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Margin="0,5,0,0">
-                <core:OutlinedTextBlock Margin="0,0,3,0"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="Dist:" />
-                <core:OutlinedTextBlock Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
-            </StackPanel>
+                
+                <!--Distance-->
+                <StackPanel Orientation="Horizontal" Grid.Row="2"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
+                            Margin="0,0,0,5">
+                    <core:OutlinedTextBlock Margin="0,0,3,0"
+                                            Fill="White"
+                                            Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                            FontSize="11" FontFamily="Gisha"
+                                            Text="Dist:" />
+                    <core:OutlinedTextBlock Fill="White"
+                                            Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                            FontSize="11" FontFamily="Gisha"
+                                            Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
+                </StackPanel>
 
-            <!--RI Timer Value (if any), will hide/show based with trigger-->
-            <StackPanel Orientation="Horizontal" Grid.Row="3"
-                        VerticalAlignment="Center" HorizontalAlignment="Center"
-                        Margin="0,5,0,0">
-                <core:OutlinedTextBlock Margin="0,0,3,0"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="RI:" />
-                <core:OutlinedTextBlock Name="TimerValueTextBlock"
-                                        Fill="White"
-                                        Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
-                                        FontSize="11" FontFamily="Gisha"
-                                        Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Style.Triggers>
-                            <!--Hide the RI text if RI is not active-->
-                            <DataTrigger Binding="{Binding IsRIActive}" Value="false">
-                                <DataTrigger.Setters>
-                                    <Setter Property="Visibility" Value="Hidden" />
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
+                <!--RI Timer Value (if any), will hide/show based with trigger-->
+                <StackPanel Orientation="Horizontal" Grid.Row="3"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}">
+                    <core:OutlinedTextBlock Margin="0,0,3,0"
+                                            Fill="White"
+                                            Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                            FontSize="11" FontFamily="Gisha"
+                                            Text="RI:" />
+                    <core:OutlinedTextBlock Name="TimerValueTextBlock"
+                                            Fill="White"
+                                            Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                            FontSize="11" FontFamily="Gisha"
+                                            Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
+                </StackPanel>
             </StackPanel>
 
             <!--Dummy textblock for flashing the item when the owner changes -->

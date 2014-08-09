@@ -57,7 +57,7 @@
         <Grid.Background>
             <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
                 <GradientStop Color="#FF5B4411" Offset="0"/>
-                <GradientStop Color="#015B4411" Offset="1"/>
+                <GradientStop Color="#005B4411" Offset="1"/>
             </RadialGradientBrush>
         </Grid.Background>
 
@@ -106,6 +106,7 @@
                                 <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" />
                                 <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" />
                             </MenuItem>
+                            <MenuItem Header="Show Est. Time-Distances" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
                             <Separator />
                             <MenuItem Header="Use Player's Map" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
                             <MenuItem Header="Override Displayed Map">
@@ -184,7 +185,7 @@
                 <StackPanel>
                     <ItemsControl Name="ObjectivesControl"
                                   ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
-                                  Margin="0,0,0,5">
+                                  Margin="0,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <ItemsControl.Style>
                             <Style TargetType="ItemsControl">
                                 <Setter Property="Template">
@@ -250,7 +251,8 @@
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form"
+              HorizontalAlignment="Left">
 
             <Rectangle HorizontalAlignment="Stretch"
                        Height="3"
@@ -270,11 +272,17 @@
 
             <Grid.Style>
                 <Style TargetType="Grid">
+                    <Setter Property="Width" Value="188" />
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                            <DataTrigger.Setters>
+                                <Setter Property="Width" Value="140" />
                             </DataTrigger.Setters>
                         </DataTrigger>
                     </Style.Triggers>
@@ -284,6 +292,7 @@
 
         <Grid Name="ResizeWidth" Grid.Row="0" Grid.RowSpan="3"
               Cursor="SizeWE"
+              VerticalAlignment="Top"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
 
             <Rectangle VerticalAlignment="Stretch"
@@ -306,11 +315,17 @@
 
             <Grid.Style>
                 <Style TargetType="Grid">
+                    <Setter Property="Height" Value="115" />
                     <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                            <DataTrigger.Setters>
+                                <Setter Property="Height" Value="90" />
                             </DataTrigger.Setters>
                         </DataTrigger>
                     </Style.Triggers>

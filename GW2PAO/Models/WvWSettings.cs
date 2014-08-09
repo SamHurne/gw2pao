@@ -32,6 +32,7 @@ namespace GW2PAO.Models
 
         private World worldSelection;
         private bool isTrackerHorizontal;
+        private bool areTimeDistancesShown;
         private bool areBlueBorderlandsNotificationsEnabled;
         private bool areGreenBorderlandsNotificationsEnabled;
         private bool areRedBorderlandsNotificationsEnabled;
@@ -63,6 +64,15 @@ namespace GW2PAO.Models
         {
             get { return this.isTrackerHorizontal; }
             set { SetField(ref this.isTrackerHorizontal, value); }
+        }
+
+        /// <summary>
+        /// True if the WvW tracker should show time-distances, else false
+        /// </summary>
+        public bool AreTimeDistancesShown
+        {
+            get { return this.areTimeDistancesShown; }
+            set { SetField(ref this.areTimeDistancesShown, value); }
         }
 
         /// <summary>
@@ -194,6 +204,7 @@ namespace GW2PAO.Models
         {
             this.WorldSelection = new World() { ID = 1019, Name = "Blackgate" };
             this.IsTrackerHorizontal = false;
+            this.AreTimeDistancesShown = true;
             this.AreBlueBorderlandsNotificationsEnabled = true;
             this.AreGreenBorderlandsNotificationsEnabled = true;
             this.AreRedBorderlandsNotificationsEnabled = true;
