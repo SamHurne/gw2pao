@@ -105,7 +105,7 @@
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                             Margin="0,5,0,0"
                                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                                            FontSize="12"
+                                            Fill="Orange" FontSize="13"
                                             Text="{Binding EventName}" />
                     
                     <!-- Close button -->

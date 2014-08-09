@@ -123,20 +123,20 @@
 
                     <!-- Objective Name -->
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                            VerticalAlignment="Bottom" FontSize="12"
+                                            VerticalAlignment="Bottom"
+                                            Fill="Orange" FontSize="13"
                                             Text="{Binding Name}" />
                     
                     
                     <!-- Map -->
                     <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                            Text="{Binding Map, Converter={StaticResource MapConverter}}" />
+                                            FontSize="12" Text="{Binding Map, Converter={StaticResource MapConverter}}" />
 
                     <!-- Owner information -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
                         <core:OutlinedTextBlock FontSize="12" Text="By:" />
-                        <core:OutlinedTextBlock Margin="3,0,0,0"
-                                                FontSize="12" Text="{Binding WorldOwnerName}" />
+                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="12" Text="{Binding WorldOwnerName}" />
                     </StackPanel>
                 </Grid>
             </Grid>
