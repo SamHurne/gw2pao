@@ -142,7 +142,7 @@
 
                 <Viewbox StretchDirection="DownOnly" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Left">
                     <core:OutlinedTextBlock VerticalAlignment="Center" 
-                                            Fill="Orange" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.5"
+                                            Fill="Orange"
                                             FontFamily="Candara" FontSize="17"
                                             Text="{Binding ZoneNameVM.ZoneName}" />
                 </Viewbox>

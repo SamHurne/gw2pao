@@ -161,6 +161,10 @@ namespace GW2PAO.ViewModels.ZoneCompletion
             this.playerService = playerService;
             this.userSettings = userSettings;
             this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
+            foreach (CharacterZoneItems charItems in this.userSettings.UnlockedZoneItems)
+            {
+                charItems.ZoneItems.CollectionChanged += (a, b) => this.RefreshVisibility();
+            }
             this.userSettings.UnlockedZoneItems.CollectionChanged += (o, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
