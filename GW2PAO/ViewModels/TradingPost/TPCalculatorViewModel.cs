@@ -175,13 +175,26 @@ namespace GW2PAO.ViewModels.TradingPost
         private int gold;
         private int silver;
         private int copper;
+        private bool isNegative;
+
+        public bool IsNegative
+        {
+            get { return this.isNegative; }
+            set { SetField(ref this.isNegative, value); }
+        }
 
         /// <summary>
         /// Gold-component for the price
         /// </summary>
         public int Gold
         {
-            get { return this.gold; }
+            get
+            {
+                if (this.silver >= 0)
+                    return this.gold;
+                else
+                    return this.gold * -1; // Never display number as negative
+            }
             set
             {
                 SetField(ref this.gold, value);
@@ -198,7 +211,7 @@ namespace GW2PAO.ViewModels.TradingPost
                 if (this.silver >= 0)
                     return this.silver;
                 else
-                    return this.silver * -1; // Never display silver as negative
+                    return this.silver * -1; // Never display number as negative
             }
             set
             {
@@ -219,7 +232,7 @@ namespace GW2PAO.ViewModels.TradingPost
                 if (this.copper >= 0)
                     return this.copper;
                 else
-                    return this.copper * -1; // Never display silver as negative
+                    return this.copper * -1; // Never display number as negative
             }
             set
             {
@@ -237,13 +250,15 @@ namespace GW2PAO.ViewModels.TradingPost
         {
             get
             {
+                // Use backing fields instead of properties, as these contain negatives-info
                 return (this.gold * 100.0) + this.silver + (this.copper / 100.0);
             }
             set
             {
                 this.Gold = (int)(value / 100.0);
                 this.Silver = (int)(value - (this.Gold * 100.0));
-                this.Copper = (int)((value - ((int)value)) * 100.0);
+                this.Copper = (int)Math.Round(((value - ((int)value)) * 100.0), 0);
+                this.IsNegative = value < 0;
             }
         }
     }

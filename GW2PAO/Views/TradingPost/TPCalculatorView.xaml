@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
             <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
             
         </ResourceDictionary>
@@ -237,6 +238,7 @@
 
                 <core:OutlinedTextBlock Text="Profit:" FontSize="15"/>
                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
+                    <core:OutlinedTextBlock Text="-" FontSize="14" Visibility="{Binding Profit.IsNegative, Converter={StaticResource BoolToVisibility}}" />
                     <core:OutlinedTextBlock Text="{Binding Profit.Gold}" FontSize="14" />
                     <Image Source="../../Resources/gold_coin.png"
                            Height="14" Width="14"
