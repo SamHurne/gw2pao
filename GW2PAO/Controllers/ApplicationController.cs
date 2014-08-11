@@ -279,10 +279,25 @@ namespace GW2PAO.Controllers
 
             // Notifications Menu
             var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
+                {
+                    this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = true;
+                    this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = true;
+                    this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = true;
+                    this.WvWSettings.AreRedBorderlandsNotificationsEnabled = true;
+                }));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
+                {
+                    this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = false;
+                    this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = false;
+                    this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = false;
+                    this.WvWSettings.AreRedBorderlandsNotificationsEnabled = false;
+                }));
+            wvwNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled, this.WvWSettings, "AreEternalBattlegroundsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
             this.menuItems.Add(wvwNotificationsMenu);
 
             // Add the TP Calculator
