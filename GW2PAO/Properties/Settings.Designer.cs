@@ -274,5 +274,29 @@ namespace GW2PAO.Properties {
                 this["WvWTrackerY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TPCalculatorX {
+            get {
+                return ((double)(this["TPCalculatorX"]));
+            }
+            set {
+                this["TPCalculatorX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TPCalculatorY {
+            get {
+                return ((double)(this["TPCalculatorY"]));
+            }
+            set {
+                this["TPCalculatorY"] = value;
+            }
+        }
     }
 }

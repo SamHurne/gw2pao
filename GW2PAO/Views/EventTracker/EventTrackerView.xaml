@@ -8,7 +8,6 @@
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        MinHeight="84" MaxHeight="380" Height="125"
         MinWidth="250" MaxWidth="250" Width="250"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResize"
@@ -117,12 +116,23 @@
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
                                         Text="World Events" />
 
-                <Button Name="MinimizeWindowButton"
+                <Button Name="CollapseExpandButton"
                     Grid.Column="2"
                     Margin="5"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Content="{StaticResource MinimizeGraphic}"
-                    Click="MinimizeWindowButton_Click" />
+                    Click="CollapseExpandButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=EventsContainer}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
                 <Button Name="CloseWindowButton"
                     Grid.Column="3"

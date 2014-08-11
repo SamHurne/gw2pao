@@ -27,6 +27,15 @@ namespace GW2PAO.Views.DungeonTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private const double minHeight = 84;
+        private const double maxHeight = 275;
+        private const double initialHeight = 125;
+
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
         /// <summary>
         /// True if the user is resizing the window, else false
         /// </summary>
@@ -55,6 +64,10 @@ namespace GW2PAO.Views.DungeonTracker
             InitializeComponent();
 
             // Set the window size and location
+            this.MinHeight = minHeight;
+            this.MaxHeight = maxHeight;
+            this.Height = initialHeight;
+
             this.Closing += DungeonTrackerView_Closing;
             if (Properties.Settings.Default.DungeonTrackerHeight > 0)
                 this.Height = Properties.Settings.Default.DungeonTrackerHeight;
@@ -62,6 +75,8 @@ namespace GW2PAO.Views.DungeonTracker
                 this.Width = Properties.Settings.Default.DungeonTrackerWidth;
             this.Left = Properties.Settings.Default.DungeonTrackerX;
             this.Top = Properties.Settings.Default.DungeonTrackerY;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         private void DungeonTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -92,9 +107,23 @@ namespace GW2PAO.Views.DungeonTracker
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.DungeonsContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.MaxHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
+                this.DungeonsContainer.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.MinHeight = minHeight;
+                this.MaxHeight = maxHeight;
+                this.Height = this.beforeCollapseHeight;
+                this.DungeonsContainer.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void Resize_Init(object sender, MouseButtonEventArgs e)

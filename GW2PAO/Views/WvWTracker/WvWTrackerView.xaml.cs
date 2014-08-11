@@ -30,6 +30,25 @@ namespace GW2PAO.Views.WvWTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private const double minVerticalHeight = 58;
+        private const double maxVerticalHeight = 750;
+        private const double verticalHeight = 250;
+        private const double minHorizontalHeight = 120;
+        private const double maxHorizontalHeight = 120;
+        private const double horizontalHeight = 120;
+
+        private const double minVerticalWidth = 190;
+        private const double maxVerticalWidth = 190;
+        private const double verticalWidth = 190;
+        private const double minHorizontalWidth = 190;
+        private const double maxHorizontalWidth = 1390;
+        private const double horizontalWidth = 350;
+
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
         /// <summary>
         /// True if the user is resizing the window, else false
         /// </summary>
@@ -58,6 +77,8 @@ namespace GW2PAO.Views.WvWTracker
             InitializeComponent();
 
             // Set the window size and location
+            this.RefreshWindowSizeForOrientation();
+
             this.Closing += WvWTrackerView_Closing;
             if (Properties.Settings.Default.WvWTrackerHeight > 0)
                 this.Height = Properties.Settings.Default.WvWTrackerHeight;
@@ -65,6 +86,66 @@ namespace GW2PAO.Views.WvWTracker
                 this.Width = Properties.Settings.Default.WvWTrackerWidth;
             this.Left = Properties.Settings.Default.WvWTrackerX;
             this.Top = Properties.Settings.Default.WvWTrackerY;
+
+            this.beforeCollapseHeight = this.Height;
+            this.viewModel.PropertyChanged += viewModel_PropertyChanged;
+        }
+
+        /// <summary>
+        /// Event handler for the view model's property changed event. Current only used for setting orientation
+        /// </summary>
+        private void viewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsHorizontalOrientation")
+            {
+                this.RefreshWindowSizeForOrientation();
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the height/width of the control based on the Vertical/Horizontal orientation
+        /// </summary>
+        private void RefreshWindowSizeForOrientation()
+        {
+            if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                if (this.viewModel.IsHorizontalOrientation)
+                {
+                    this.MinHeight = minHorizontalHeight;
+                    this.MaxHeight = maxHorizontalHeight;
+                    this.Height = horizontalHeight;
+                    this.MinWidth = minHorizontalWidth;
+                    this.MaxWidth = maxHorizontalWidth;
+                    this.Width = horizontalWidth;
+                }
+                else
+                {
+                    this.MinHeight = minVerticalHeight;
+                    this.MaxHeight = maxVerticalHeight;
+                    this.Height = verticalHeight;
+                    this.MinWidth = minVerticalWidth;
+                    this.MaxWidth = maxVerticalWidth;
+                    this.Width = verticalWidth;
+                }
+            }
+            else
+            {
+                // Collapsed, just set the widths and beforeCollapseHeight
+                if (this.viewModel.IsHorizontalOrientation)
+                {
+                    this.beforeCollapseHeight = horizontalHeight;
+                    this.MinWidth = minHorizontalWidth;
+                    this.MaxWidth = maxHorizontalWidth;
+                    this.Width = horizontalWidth;
+                }
+                else
+                {
+                    this.beforeCollapseHeight = verticalHeight;
+                    this.MinWidth = minVerticalWidth;
+                    this.MaxWidth = maxVerticalWidth;
+                    this.Width = verticalWidth;
+                }
+            }
         }
 
         private void WvWTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -94,9 +175,31 @@ namespace GW2PAO.Views.WvWTracker
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.MaxHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
+                this.ObjectivesContainer.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                if (this.viewModel.IsHorizontalOrientation)
+                {
+                    this.MinHeight = minHorizontalHeight;
+                    this.MaxHeight = maxHorizontalHeight;
+                }
+                else
+                {
+                    this.MinHeight = minVerticalHeight;
+                    this.MaxHeight = maxVerticalHeight;
+                }
+                this.Height = this.beforeCollapseHeight;
+                this.ObjectivesContainer.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void Resize_Init(object sender, MouseButtonEventArgs e)

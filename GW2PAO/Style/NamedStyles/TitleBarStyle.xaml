@@ -10,9 +10,29 @@
     <Color x:Key="ButtonPressedForegroundColor">Black</Color>
 
     <DockPanel x:Key="MinimizeGraphic" Height="8">
-        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Bottom"
+        <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center"
                            Height="3" Width="10"
                            Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
+    </DockPanel>
+
+    <DockPanel x:Key="CollapseGraphic" Height="8">
+        <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Stretch="Uniform"
+                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                      StrokeStartLineCap="Square" StrokeEndLineCap="Square"
+                      StrokeThickness="2"
+                      Data="M 0,10 L 10,0 L 20,10">
+        </Path>
+    </DockPanel>
+
+    <DockPanel x:Key="ExpandGraphic" Height="8">
+        <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Stretch="Uniform"
+                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                      StrokeThickness="2"
+                      Data="M 0,0 L 10,10 L 20,0">
+        </Path>
     </DockPanel>
 
     <DockPanel x:Key="CloseGraphic" Height="8">
@@ -142,7 +162,7 @@
     <Style x:Key="TitleBarStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="{StaticResource TitleBarBorderBrush}" />
         <Setter Property="Background" Value="{StaticResource TitleBarBackgroundBrush}" />
-        <Setter Property="BorderThickness" Value="0,1,0,0" />
+        <Setter Property="BorderThickness" Value="0,1,0,1" />
     </Style>
 
 </ResourceDictionary>

@@ -29,6 +29,14 @@ namespace GW2PAO.Views.ZoneCompletion
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private const double minHeight = 78;
+        private const double initialHeight = 250;
+
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
         /// <summary>
         /// True if the user is resizing the window, else false
         /// </summary>
@@ -52,6 +60,9 @@ namespace GW2PAO.Views.ZoneCompletion
             InitializeComponent();
 
             // Set the window size and location
+            this.MinHeight = minHeight;
+            this.Height = initialHeight;
+
             this.Closing += ZoneCompletionView_Closing;
             if (Properties.Settings.Default.ZoneAssistantHeight > 0)
                 this.Height = Properties.Settings.Default.ZoneAssistantHeight;
@@ -59,6 +70,8 @@ namespace GW2PAO.Views.ZoneCompletion
                 this.Width = Properties.Settings.Default.ZoneAssistantWidth;
             this.Left = Properties.Settings.Default.ZoneAssistantX;
             this.Top = Properties.Settings.Default.ZoneAssistantY;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         private void ZoneCompletionView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -89,9 +102,21 @@ namespace GW2PAO.Views.ZoneCompletion
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.ItemsContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
+                this.ItemsContainer.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.MinHeight = minHeight;
+                this.Height = this.beforeCollapseHeight;
+                this.ItemsContainer.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void Resize_Init(object sender, MouseButtonEventArgs e)

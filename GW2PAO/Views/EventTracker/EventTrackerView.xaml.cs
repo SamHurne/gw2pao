@@ -29,6 +29,15 @@ namespace GW2PAO.Views.EventTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private const double minHeight = 84;
+        private const double maxHeight = 380;
+        private const double initialHeight = 125;
+
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
         /// <summary>
         /// True if the user is resizing the window, else false
         /// </summary>
@@ -57,6 +66,10 @@ namespace GW2PAO.Views.EventTracker
             InitializeComponent();
 
             // Set the window size and location
+            this.MinHeight = minHeight;
+            this.MaxHeight = maxHeight;
+            this.Height = initialHeight;
+
             this.Closing += EventTrackerView_Closing;
             if (Properties.Settings.Default.EventTrackerHeight > 0)
                 this.Height = Properties.Settings.Default.EventTrackerHeight;
@@ -64,6 +77,8 @@ namespace GW2PAO.Views.EventTracker
                 this.Width = Properties.Settings.Default.EventTrackerWidth;
             this.Left = Properties.Settings.Default.EventTrackerX;
             this.Top = Properties.Settings.Default.EventTrackerY;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         private void EventTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -94,9 +109,23 @@ namespace GW2PAO.Views.EventTracker
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.EventsContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.MaxHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
+                this.EventsContainer.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.MinHeight = minHeight;
+                this.MaxHeight = maxHeight;
+                this.Height = this.beforeCollapseHeight;
+                this.EventsContainer.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void Resize_Init(object sender, MouseButtonEventArgs e)

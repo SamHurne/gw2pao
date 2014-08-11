@@ -5,7 +5,7 @@
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.TradingPost"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        SizeToContent="WidthAndHeight"
+        Width="215" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResize"
         Topmost="True"
@@ -37,7 +37,6 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -106,12 +105,23 @@
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
                                         Text="TP Calculator" />
 
-                <Button Name="MinimizeWindowButton"
+                <Button Name="CollapseExpandButton"
                     Grid.Column="2"
                     Margin="5"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Content="{StaticResource MinimizeGraphic}"
-                    Click="MinimizeWindowButton_Click" />
+                    Click="CollapseExpandButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=Calculator}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
                 <Button Name="CloseWindowButton"
                     Grid.Column="3"

@@ -62,7 +62,7 @@
     </UserControl.Style>
 
     <!--Note: DataContext is set by the DungeonTrackerView-->
-    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,1,0" Padding="10,0,0,0" BorderThickness="0,1,0,0">
+    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,1,0" Padding="10,0,0,0" BorderThickness="0,0,0,1">
 
         <Border.Effect>
             <DropShadowEffect ShadowDepth="0" Opacity="0" BlurRadius="30"

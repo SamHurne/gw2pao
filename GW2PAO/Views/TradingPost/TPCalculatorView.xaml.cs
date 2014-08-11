@@ -37,26 +37,18 @@ namespace GW2PAO.Views.TradingPost
             InitializeComponent();
 
             // Set the window size and location
-            // TODO
-            //this.Closing += DungeonTrackerView_Closing;
-            //if (Properties.Settings.Default.DungeonTrackerHeight > 0)
-            //    this.Height = Properties.Settings.Default.DungeonTrackerHeight;
-            //if (Properties.Settings.Default.DungeonTrackerWidth > 0)
-            //    this.Width = Properties.Settings.Default.DungeonTrackerWidth;
-            //this.Left = Properties.Settings.Default.DungeonTrackerX;
-            //this.Top = Properties.Settings.Default.DungeonTrackerY;
+            this.Closing += TPCalculatorView_Closing;
+            this.Left = Properties.Settings.Default.TPCalculatorX;
+            this.Top = Properties.Settings.Default.TPCalculatorY;
         }
 
-        private void DungeonTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TPCalculatorView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                // TODO
-                //Properties.Settings.Default.DungeonTrackerHeight = this.Height;
-                //Properties.Settings.Default.DungeonTrackerWidth = this.Width;
-                //Properties.Settings.Default.DungeonTrackerX = this.Left;
-                //Properties.Settings.Default.DungeonTrackerY = this.Top;
-                //Properties.Settings.Default.Save();
+                Properties.Settings.Default.TPCalculatorX = this.Left;
+                Properties.Settings.Default.TPCalculatorY = this.Top;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -75,9 +67,16 @@ namespace GW2PAO.Views.TradingPost
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.Calculator.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.Calculator.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.Calculator.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void TitleImage_MouseDown(object sender, MouseButtonEventArgs e)
