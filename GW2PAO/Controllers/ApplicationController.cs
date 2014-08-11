@@ -16,6 +16,7 @@ using GW2PAO.Views;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
+using GW2PAO.Views.TradingPost;
 using GW2PAO.Views.WvWNotification;
 using GW2PAO.Views.WvWTracker;
 using GW2PAO.Views.ZoneCompletion;
@@ -151,6 +152,11 @@ namespace GW2PAO.Controllers
         private WvWNotificationWindow wvwNotificationsView;
 
         /// <summary>
+        /// The TP Calculator utility window
+        /// </summary>
+        private TPCalculatorView tpCalculatorView;
+
+        /// <summary>
         /// The web browser view
         /// </summary>
         private BrowserView webBrowserView;
@@ -279,7 +285,10 @@ namespace GW2PAO.Controllers
             wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled));
             this.menuItems.Add(wvwNotificationsMenu);
 
-            //this.menuItems.Add(null); // Null for a seperator
+            // Add the TP Calculator
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+
             //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));// Left out for now... will add after WvW features are completed
 
             logger.Info("Application controller initialized");
@@ -418,6 +427,32 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <returns></returns>
         private bool CanDisplayWvWTracker()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the TP Calcualtor window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayTPCalculator()
+        {
+            if (this.tpCalculatorView == null || !this.tpCalculatorView.IsVisible)
+            {
+                this.tpCalculatorView = new TPCalculatorView();
+                this.tpCalculatorView.Show();
+            }
+            else
+            {
+                this.tpCalculatorView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the TP Calculator can be displayed
+        /// </summary>
+        /// <returns></returns>
+        private bool CanDisplayTPCalculator()
         {
             return true;
         }
