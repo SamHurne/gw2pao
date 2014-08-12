@@ -57,6 +57,11 @@ namespace GW2PAO.Views
             private set { this.SetValue(BrowserView.IsRegularWindowPropertyKey, value); }
         }
 
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
         public BrowserView()
         {
             InitializeComponent();
@@ -65,6 +70,8 @@ namespace GW2PAO.Views
             this.Closed += BrowserView_Closed;
 
             this.Source = WebCore.Configuration.HomeURL;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         public BrowserView(IntPtr nativeView)
@@ -83,6 +90,8 @@ namespace GW2PAO.Views
             // This window will host a WebControl that is the result of 
             // JavaScript 'window.open'. Hide the address and status bar.
             this.IsRegularWindow = false;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         public BrowserView(Uri url)
@@ -98,6 +107,8 @@ namespace GW2PAO.Views
             webControl.WindowClose += webControl_WindowClose;
             // Tell the WebControl to load a specified target URL.
             this.Source = url;
+
+            this.beforeCollapseHeight = this.Height;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -248,9 +259,19 @@ namespace GW2PAO.Views
             this.Close();
         }
 
-        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            if (this.webControl.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.Height = this.TitleBar.ActualHeight;
+                this.webControl.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.Height = this.beforeCollapseHeight;
+                this.webControl.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void Resize_Init(object sender, MouseButtonEventArgs e)
@@ -301,6 +322,18 @@ namespace GW2PAO.Views
                         }
                     }
                 }
+            }
+        }
+
+        private void TitleImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+            {
+                Image image = sender as Image;
+                ContextMenu contextMenu = image.ContextMenu;
+                contextMenu.PlacementTarget = image;
+                contextMenu.IsOpen = true;
+                e.Handled = true;
             }
         }
     }

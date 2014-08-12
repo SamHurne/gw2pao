@@ -244,7 +244,9 @@ namespace GW2PAO.Controllers
             logger.Debug("Initializing application menu items");
             this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
             this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
+            this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
+            this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
             this.menuItems.Add(null); // Null for a seperator
 
@@ -304,7 +306,8 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
 
-            //this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));// Left out for now... will add after WvW features are completed
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
 
             logger.Info("Application controller initialized");
         }

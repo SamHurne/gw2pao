@@ -99,7 +99,17 @@
                            VerticalAlignment="Center"
                            Height="30" Width="30"
                            Margin="0,0,0,0"
-                           Source="/Resources/community.png">
+                           Source="/Resources/community.png"
+                           MouseDown="TitleImage_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="GW2 Wiki" Command="{x:Static awe:WebControlCommands.LoadURL}" CommandTarget="{Binding ElementName=webControl}" CommandParameter="http://wiki.guildwars2.com/"  />
+                                <MenuItem Header="Dulfy" Command="{x:Static awe:WebControlCommands.LoadURL}" CommandTarget="{Binding ElementName=webControl}" CommandParameter="http://dulfy.net/" />
+                                <MenuItem Header="GW2 Spidy" Command="{x:Static awe:WebControlCommands.LoadURL}" CommandTarget="{Binding ElementName=webControl}" CommandParameter="http://www.gw2spidy.com/" />
+                                <Separator />
+                                <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            </ContextMenu>
+                        </Image.ContextMenu>
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Effect">
@@ -137,7 +147,7 @@
                     </Image>
 
                     <!--Navigation Buttons-->
-                    <Button Grid.Column="1"
+                    <Button Grid.Column="1" Grid.Row="0"
                             Margin="5,5,1,5" Width="30"
                             HorizontalAlignment="Right"
                             Style="{StaticResource TitleBarButtonStyle}"
@@ -145,7 +155,7 @@
                             Command="{x:Static NavigationCommands.BrowseBack}" 
                             CommandTarget="{Binding ElementName=webControl}"/>
 
-                    <Button Grid.Column="2"
+                    <Button Grid.Column="2" Grid.Row="0"
                             Margin="1,5,1,5" Width="30"
                             HorizontalAlignment="Left"
                             Style="{StaticResource TitleBarButtonStyle}"
@@ -153,7 +163,7 @@
                             Command="{x:Static NavigationCommands.BrowseForward}" 
                             CommandTarget="{Binding ElementName=webControl}"/>
 
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="3" Grid.Row="0"
                             Margin="1,5,5,5" Width="30" 
                             HorizontalAlignment="Left"
                             Style="{StaticResource TitleBarButtonStyle}"
@@ -163,34 +173,53 @@
                             CommandTarget="{Binding ElementName=webControl}"/>
 
                     <!-- URL Text Box-->
-                    <TextBox Grid.Column="4"
+                    <TextBox Grid.Column="4" Grid.Row="0"
                              Margin="5" Padding="3,0"
                              VerticalContentAlignment="Center"
                              TextWrapping="NoWrap"
                              FontFamily="Candara" FontSize="14"
-                             Text="{data:SourceBinding webControl}" />
+                             Text="{data:SourceBinding webControl}">
+                        <TextBox.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#70000000" Offset="0"/>
+                                <GradientStop Color="#00000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.Background>
+                    </TextBox>
                     
                     <!-- Opacity Slider -->
-                    <Slider Grid.Column="5" MinWidth="75"
+                    <Slider Grid.Column="5" Grid.Row="0" MinWidth="75"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Maximum="1" Minimum="0"
                             Value="{Binding ElementName=webControl, Path=Opacity}" />
 
                     <!-- Minimize and Close Buttons -->
-                    <Button Name="MinimizeWindowButton"
-                            Grid.Column="6"
+                    <Button Name="CollapseExpandButton"
+                            Grid.Column="6" Grid.Row="0"
                             Margin="5"
-                            Style="{StaticResource TitleBarButtonStyle}"
-                            Content="{StaticResource MinimizeGraphic}"
-                            Click="MinimizeWindowButton_Click" />
+                            Click="CollapseExpandButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=webControl}" Value="Collapsed">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
                     <Button Name="CloseWindowButton"
-                            Grid.Column="7"
+                            Grid.Column="7" Grid.Row="0"
                             Margin="5"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
                             Click="CloseWindowButton_Click" />
+
                 </Grid>
             </Border>
 
