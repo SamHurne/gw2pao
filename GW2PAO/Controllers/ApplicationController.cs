@@ -17,6 +17,7 @@ using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
 using GW2PAO.Views.TradingPost;
+using GW2PAO.Views.WebBrowser;
 using GW2PAO.Views.WvWNotification;
 using GW2PAO.Views.WvWTracker;
 using GW2PAO.Views.ZoneCompletion;

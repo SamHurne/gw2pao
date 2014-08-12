@@ -151,7 +151,7 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BrowserView.xaml.cs">
+    <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DungeonTracker\DungeonTrackerView.xaml.cs">
@@ -257,7 +257,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\BrowserView.xaml">
+    <Page Include="Views\WebBrowser\BrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -393,6 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Style\Brushes\" />
+    <Folder Include="ViewModels\WebBrowser\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\boss.png" />
