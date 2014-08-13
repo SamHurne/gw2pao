@@ -25,6 +25,11 @@ namespace GW2PAO
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
+        /// The actual taskbar icon object
+        /// </summary>
+        private static TaskbarIcon TaskbarIcon;
+
+        /// <summary>
         /// View model for the primary application tray icon
         /// </summary>
         private static TrayIconViewModel TrayIconVm;
@@ -33,6 +38,11 @@ namespace GW2PAO
         /// The primary application tray icon
         /// </summary>
         public static IApplicationTrayIcon TrayIcon { get; private set; }
+
+        /// <summary>
+        /// The main application controller
+        /// </summary>
+        private static ApplicationController AppController;
 
         /// <summary>
         /// Application startup
@@ -53,9 +63,6 @@ namespace GW2PAO
             System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
             logger.Info("Application starting - " + executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version + " - " + fvi.FileVersion + " - " + fvi.ProductVersion);
 
-            // Register the Exit event handler
-            this.Exit += App_Exit;
-
             // Initialize the last chance exception handlers
             logger.Debug("Registering last chance exception handlers");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -70,40 +77,6 @@ namespace GW2PAO
                 });
             }
 
-            // Create the tray icon
-            logger.Debug("Creating tray icon");
-            TaskbarIcon trayIcon = (TaskbarIcon)this.FindResource("TrayIcon");
-            TrayIconVm = new TrayIconViewModel();
-            trayIcon.DataContext = TrayIconVm;
-            trayIcon.ContextMenu.DataContext = TrayIconVm;
-            trayIcon.ContextMenu.ItemsSource = TrayIconVm.MenuItems;
-            App.TrayIcon = new ApplicationTrayIcon(trayIcon);
-            logger.Debug("Tray icon created");
-
-            // Initialize the application controller
-            ApplicationController appController = new ApplicationController();
-
-            // Set up the menu items
-            logger.Debug("Initializing menu items");
-            if (TrayIconVm != null)
-            {
-                foreach (var item in appController.GetMenuItems())
-                    TrayIconVm.MenuItems.Add(item);
-
-                TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
-
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", () => 
-                    {
-                        // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
-                        Task.Factory.StartNew(() =>
-                            {
-                                appController.Shutdown();
-                                Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
-                            });
-                    }));
-            }
-
             // Create dummy window so that the only way to exit the app is by using the tray icon
             Window dummyWindow = new Window()
             {
@@ -115,6 +88,32 @@ namespace GW2PAO
             dummyWindow.Show();
             dummyWindow.Hide();
 
+            // Create the tray icon
+            logger.Debug("Creating tray icon");
+            TaskbarIcon = (TaskbarIcon)this.FindResource("TrayIcon");
+            TrayIconVm = new TrayIconViewModel();
+            TaskbarIcon.DataContext = TrayIconVm;
+            TaskbarIcon.ContextMenu.DataContext = TrayIconVm;
+            TaskbarIcon.ContextMenu.ItemsSource = TrayIconVm.MenuItems;
+            App.TrayIcon = new ApplicationTrayIcon(TaskbarIcon);
+            logger.Debug("Tray icon created");
+
+            // Initialize the application controller
+            AppController = new ApplicationController();
+
+            // Set up the menu items
+            logger.Debug("Initializing menu items");
+            if (TrayIconVm != null)
+            {
+                foreach (var item in AppController.GetMenuItems())
+                    TrayIconVm.MenuItems.Add(item);
+
+                TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
+
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", this.ExitAndCleanup));
+            }
+
             // Show a notification that the program is now running
             TrayIcon.DisplayNotification("GW2 Personal Assistant Overlay is now running", "Click here for options", TrayInfoMessageType.None);
 
@@ -122,9 +121,9 @@ namespace GW2PAO
         }
 
         /// <summary>
-        /// Handler for the application exit event
+        /// Exits and cleans up the application
         /// </summary>
-        private void App_Exit(object sender, ExitEventArgs e)
+        private void ExitAndCleanup()
         {
             logger.Info("Program shutting down");
 
@@ -141,6 +140,14 @@ namespace GW2PAO
             {
                 f.Delete();
             }
+
+            // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
+            Task.Factory.StartNew(() =>
+            {
+                AppController.Shutdown();
+                Application.Current.Dispatcher.Invoke(TaskbarIcon.Dispose);
+                Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+            });
         }
 
         /// <summary>
