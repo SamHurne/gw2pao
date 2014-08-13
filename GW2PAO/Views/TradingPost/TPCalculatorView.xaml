@@ -29,6 +29,11 @@
     </src:OverlayWindow.DataContext>
 
     <Grid>
+
+        <Grid.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
+        </Grid.Effect>
+
         <Grid.Background>
             <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
                 <GradientStop Color="#FF5B4411" Offset="0"/>
