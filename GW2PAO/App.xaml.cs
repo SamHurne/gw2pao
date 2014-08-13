@@ -95,8 +95,12 @@ namespace GW2PAO
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", () => 
                     {
-                        appController.Shutdown();
-                        Application.Current.Shutdown();
+                        // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
+                        Task.Factory.StartNew(() =>
+                            {
+                                appController.Shutdown();
+                                Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                            });
                     }));
             }
 

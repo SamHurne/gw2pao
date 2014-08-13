@@ -334,19 +334,19 @@ namespace GW2PAO.Controllers
 
             logger.Debug("Closing views");
             if (this.eventTrackerView != null)
-                this.eventTrackerView.Close();
+                Threading.InvokeOnUI(() => this.eventTrackerView.Close());
             if (this.zoneCompletionView != null)
-                this.zoneCompletionView.Close();
+                Threading.InvokeOnUI(() => this.zoneCompletionView.Close());
             if (this.eventNotificationsView != null)
-                this.eventNotificationsView.Close();
+                Threading.InvokeOnUI(() => this.eventNotificationsView.Close());
             if (this.dungeonTrackerView != null)
-                this.dungeonTrackerView.Close();
+                Threading.InvokeOnUI(() => this.dungeonTrackerView.Close());
             if (this.wvwTrackerView != null)
-                this.wvwTrackerView.Close();
+                Threading.InvokeOnUI(() => this.wvwTrackerView.Close());
             if (this.wvwNotificationsView != null)
-                this.wvwNotificationsView.Close();
+                Threading.InvokeOnUI(() => this.wvwNotificationsView.Close());
             if (this.tpCalculatorView != null)
-                this.tpCalculatorView.Close();
+                Threading.InvokeOnUI(() => this.tpCalculatorView.Close());
 
             logger.Debug("Stopping controllers");
             this.BrowserController.CloseBrowser();
