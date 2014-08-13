@@ -93,7 +93,11 @@ namespace GW2PAO
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", Application.Current.Shutdown));
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", () => 
+                    {
+                        appController.Shutdown();
+                        Application.Current.Shutdown();
+                    }));
             }
 
             // Create dummy window so that the only way to exit the app is by using the tray icon

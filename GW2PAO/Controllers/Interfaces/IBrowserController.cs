@@ -14,6 +14,11 @@ namespace GW2PAO.Controllers.Interfaces
         void OpenBrowser();
 
         /// <summary>
+        /// Closes the browser window
+        /// </summary>
+        void CloseBrowser();
+
+        /// <summary>
         /// Goes to a specific url.
         /// If the browser is open, sets the browser's url.
         /// If the browser is not open, opens a new browser window with the given url.

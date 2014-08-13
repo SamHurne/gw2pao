@@ -32,6 +32,17 @@ namespace GW2PAO.Controllers
         }
 
         /// <summary>
+        /// Closes the browser window
+        /// </summary>
+        public void CloseBrowser()
+        {
+            if (this.browser != null && this.browser.IsVisible)
+            {
+                this.browser.Close();
+            }
+        }
+
+        /// <summary>
         /// Goes to a specific url.
         /// If the browser is open, sets the browser's url.
         /// If the browser is not open, opens a new browser window with the given url.

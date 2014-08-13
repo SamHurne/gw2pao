@@ -163,11 +163,6 @@ namespace GW2PAO.Controllers
         private TPCalculatorView tpCalculatorView;
 
         /// <summary>
-        /// The web browser view
-        /// </summary>
-        private BrowserView webBrowserView;
-
-        /// <summary>
         /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
         /// running as administrator - prevents spamming the error message
         /// </summary>
@@ -328,6 +323,37 @@ namespace GW2PAO.Controllers
         public IEnumerable<MenuItemViewModel> GetMenuItems()
         {
             return this.menuItems;
+        }
+
+        /// <summary>
+        /// Shuts down all controllers, views, and viewmodels
+        /// </summary>
+        public void Shutdown()
+        {
+            logger.Info("Shutting down application controller");
+
+            logger.Debug("Closing views");
+            if (this.eventTrackerView != null)
+                this.eventTrackerView.Close();
+            if (this.zoneCompletionView != null)
+                this.zoneCompletionView.Close();
+            if (this.eventNotificationsView != null)
+                this.eventNotificationsView.Close();
+            if (this.dungeonTrackerView != null)
+                this.dungeonTrackerView.Close();
+            if (this.wvwTrackerView != null)
+                this.wvwTrackerView.Close();
+            if (this.wvwNotificationsView != null)
+                this.wvwNotificationsView.Close();
+            if (this.tpCalculatorView != null)
+                this.tpCalculatorView.Close();
+
+            logger.Debug("Stopping controllers");
+            this.BrowserController.CloseBrowser();
+            this.EventsController.Stop();
+            this.ZoneCompletionController.Stop();
+            this.DungeonsController.Stop();
+            this.WvWController.Stop();
         }
 
         /// <summary>
