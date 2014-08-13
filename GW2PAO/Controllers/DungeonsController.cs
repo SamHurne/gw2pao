@@ -27,6 +27,11 @@ namespace GW2PAO.Controllers
         private IDungeonsService dungeonsService;
 
         /// <summary>
+        /// Browser controller. Currently just passed through to DungeonViewModels
+        /// </summary>
+        private IBrowserController browserController;
+
+        /// <summary>
         /// Keeps track of how many times Start() has been called in order
         /// to support reuse of a single object
         /// </summary>
@@ -72,10 +77,11 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
         /// <param name="userSettings">The dungeons user settings object</param>
-        public DungeonsController(IDungeonsService dungeonsService, DungeonSettings userSettings)
+        public DungeonsController(IDungeonsService dungeonsService, IBrowserController browserController, DungeonSettings userSettings)
         {
             logger.Debug("Initializing Dungeons Controller");
             this.dungeonsService = dungeonsService;
+            this.browserController = browserController;
             this.userSettings = userSettings;
 
             // Initialize the refresh timer
@@ -144,7 +150,7 @@ namespace GW2PAO.Controllers
                     foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
                     {
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
-                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.userSettings));
+                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userSettings));
                     }
                 });
         }

@@ -79,6 +79,8 @@ namespace GW2PAO.Views.WebBrowser
         {
             InitializeComponent();
 
+            this.Loaded += (o, e) => this.MinHeight = this.TitleBar.ActualHeight;
+
             webControl.ShowCreatedWebView += webControl_ShowCreatedWebView;
             this.Closed += BrowserView_Closed;
 
@@ -108,6 +110,8 @@ namespace GW2PAO.Views.WebBrowser
             // JavaScript 'window.open'. Hide the address and status bar.
             this.IsRegularWindow = false;
 
+            this.Loaded += (o, e) => this.MinHeight = this.TitleBar.ActualHeight;
+
             this.beforeCollapseHeight = this.Height;
         }
 
@@ -128,6 +132,8 @@ namespace GW2PAO.Views.WebBrowser
             webControl.WindowClose += webControl_WindowClose;
             // Tell the WebControl to load a specified target URL.
             this.Source = url;
+
+            this.Loaded += (o, e) => this.MinHeight = this.TitleBar.ActualHeight;
 
             this.beforeCollapseHeight = this.Height;
         }
@@ -362,15 +368,15 @@ namespace GW2PAO.Views.WebBrowser
         {
             if (sender == this.WikiLink)
             {
-                this.Source = new Uri("http://wiki.guildwars2.com/");
+                this.webControl.Source = new Uri("http://wiki.guildwars2.com/");
             }
             else if (sender == this.DulfyLink)
             {
-                this.Source = new Uri("http://dulfy.net/");
+                this.webControl.Source = new Uri("http://dulfy.net/");
             }
             else if (sender == this.SpidyLink)
             {
-                this.Source = new Uri("http://www.gw2spidy.com/");
+                this.webControl.Source = new Uri("http://www.gw2spidy.com/");
             }
         }
     }

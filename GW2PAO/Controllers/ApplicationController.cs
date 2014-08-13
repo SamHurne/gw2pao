@@ -97,6 +97,11 @@ namespace GW2PAO.Controllers
         public IHasWvWMap WvWMap { get; private set; }
 
         /// <summary>
+        /// Controller for the browser. Responsible for showing the browser, or going to a specific URL
+        /// </summary>
+        public IBrowserController BrowserController { get; private set; }
+
+        /// <summary>
         /// Event settings
         /// </summary>
         public EventSettings EventSettings { get; private set; }
@@ -217,6 +222,9 @@ namespace GW2PAO.Controllers
             this.WvWSettings.EnableAutoSave();
 
             // Create the controllers
+            logger.Debug("Creating browser controller");
+            this.BrowserController = new BrowserController();
+
             logger.Debug("Creating events controller");
             this.EventsController = new EventsController(this.EventsService, this.EventSettings);
             this.EventsController.Start(); // Get it started for event notifications
@@ -225,7 +233,7 @@ namespace GW2PAO.Controllers
             this.ZoneCompletionController = new ZoneCompletionController(this.ZoneService, this.PlayerService, this.SystemService, this.ZoneName, this.ZoneCompletionSettings);
 
             logger.Debug("Creating dungeons controller");
-            this.DungeonsController = new DungeonsController(this.DungeonsService, this.DungeonSettings);
+            this.DungeonsController = new DungeonsController(this.DungeonsService, this.BrowserController, this.DungeonSettings);
 
             logger.Debug("Creating wvw controller");
             this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWMap, this.WvWSettings);
@@ -482,15 +490,7 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void DisplayWebBrowser()
         {
-            if (this.webBrowserView == null || !this.webBrowserView.IsVisible)
-            {
-                this.webBrowserView = new BrowserView();
-                this.webBrowserView.Show();
-            }
-            else
-            {
-                this.webBrowserView.Focus();
-            }
+            this.BrowserController.OpenBrowser();
         }
 
         /// <summary>

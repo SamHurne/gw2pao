@@ -5,7 +5,7 @@
     <Color x:Key="ButtonForegroundColor">#FFFFA500</Color>
     <Color x:Key="ButtonBackgroundMouseOverColor">#50FFA500</Color>
     <Color x:Key="DisabledButtonBackgroundColor">#00FFA500</Color>
-    <Color x:Key="DisabledButtonForegroundColor">#FFFFA500</Color>
+    <Color x:Key="DisabledButtonForegroundColor">#70FFA500</Color>
     <Color x:Key="ButtonPressedBackgroundColor">#FFFFA500</Color>
     <Color x:Key="ButtonPressedForegroundColor">Black</Color>
 
@@ -133,6 +133,22 @@
                                 <BeginStoryboard>
                                     <Storyboard TargetProperty="(Button.Foreground).(SolidColorBrush.Color)">
                                         <ColorAnimation To="{StaticResource ButtonPressedForegroundColor}" BeginTime="0" Duration="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="(Button.Foreground).(SolidColorBrush.Color)">
+                                        <ColorAnimation To="{StaticResource ButtonForegroundColor}" BeginTime="0" Duration="0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="(Button.Foreground).(SolidColorBrush.Color)">
+                                        <ColorAnimation To="{StaticResource DisabledButtonForegroundColor}" BeginTime="0" Duration="0" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>

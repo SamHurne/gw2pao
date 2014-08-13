@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Services;
+using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
 using GW2PAO.PresentationCore;
+using GW2PAO.Views.WebBrowser;
 using NLog;
 
 namespace GW2PAO.ViewModels.DungeonTracker
@@ -22,6 +24,11 @@ namespace GW2PAO.ViewModels.DungeonTracker
 
         private DungeonSettings userSettings;
         private bool isVisible;
+
+        /// <summary>
+        /// The browser controller used for displaying the dungeon's wiki page
+        /// </summary>
+        private IBrowserController browserController;
 
         /// <summary>
         /// The primary model object containing the dungeon information
@@ -84,10 +91,12 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// Default constructor
         /// </summary>
         /// <param name="dungeon">The dungeon information</param>
+        /// <param name="browser">The browser object for displaying wiki information</param>
         /// <param name="userSettings">The dungeon user settings</param>
-        public DungeonViewModel(Dungeon dungeon, DungeonSettings userSettings)
+        public DungeonViewModel(Dungeon dungeon, IBrowserController browserController, DungeonSettings userSettings)
         {
             this.DungeonModel = dungeon;
+            this.browserController = browserController;
             this.userSettings = userSettings;
 
             // Initialize the path view models
@@ -125,7 +134,8 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// </summary>
         private void OpenWikiPage()
         {
-            Process.Start(this.DungeonModel.WikiUrl);
+            //Process.Start(this.DungeonModel.WikiUrl);
+            this.browserController.GoToUrl(this.DungeonModel.WikiUrl);
         }
 
         /// <summary>

@@ -96,8 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\BrowserController.cs" />
     <Compile Include="Controllers\DungeonsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\Interfaces\IBrowserController.cs" />
     <Compile Include="Controllers\Interfaces\IDungeonsController.cs" />
     <Compile Include="Controllers\Interfaces\IEventsController.cs" />
     <Compile Include="Controllers\Interfaces\IWvWController.cs" />
