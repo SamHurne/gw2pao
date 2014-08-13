@@ -33,9 +33,9 @@ namespace GW2PAO.Views.WvWTracker
         private const double minVerticalHeight = 58;
         private const double maxVerticalHeight = 750;
         private const double verticalHeight = 250;
-        private const double minHorizontalHeight = 120;
-        private const double maxHorizontalHeight = 120;
-        private const double horizontalHeight = 120;
+        private const double minHorizontalHeight = 125;
+        private const double maxHorizontalHeight = 125;
+        private const double horizontalHeight = 125;
 
         private const double minVerticalWidth = 190;
         private const double maxVerticalWidth = 190;
