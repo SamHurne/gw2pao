@@ -141,10 +141,67 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
+            <!--Buy Price-->
             <StackPanel Grid.Row="0"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="Buy Price" FontSize="14"/>
+                <core:OutlinedTextBlock Text="Buy Price" FontSize="14" ToolTipService.ShowDuration="30000">
+                    <core:OutlinedTextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
+                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Gold}" />
+                                    <Image Source="../../Resources/gold_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Silver}"/>
+                                    <Image Source="../../Resources/silver_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Copper}"/>
+                                    <Image Source="../../Resources/copper_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ToolTip>
+                    </core:OutlinedTextBlock.ToolTip>
+                    <core:OutlinedTextBlock.Style>
+                        <Style TargetType="{x:Type core:OutlinedTextBlock}" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                  Color="Gold"
+                                                  Opacity="0"
+                                                  BlurRadius="15"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.25"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </core:OutlinedTextBlock.Style>
+                </core:OutlinedTextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
                              FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
@@ -176,10 +233,67 @@
                 </StackPanel>
             </StackPanel>
 
+            <!--Sell Price-->
             <StackPanel Grid.Row="1"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="Sell Price" FontSize="14"/>
+                <core:OutlinedTextBlock Text="Sell Price" FontSize="14" ToolTipService.ShowDuration="30000">
+                    <core:OutlinedTextBlock.ToolTip>
+                        <ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
+                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Gold}" />
+                                    <Image Source="../../Resources/gold_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Silver}"/>
+                                    <Image Source="../../Resources/silver_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                    <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Copper}"/>
+                                    <Image Source="../../Resources/copper_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ToolTip>
+                    </core:OutlinedTextBlock.ToolTip>
+                    <core:OutlinedTextBlock.Style>
+                        <Style TargetType="{x:Type core:OutlinedTextBlock}" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                  Color="Gold"
+                                                  Opacity="0"
+                                                  BlurRadius="15"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.25"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </core:OutlinedTextBlock.Style>
+                </core:OutlinedTextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
                              FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
@@ -211,7 +325,7 @@
                 </StackPanel>
             </StackPanel>
 
-
+            <!--Quantity-->
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
                         Margin="5">
@@ -230,7 +344,7 @@
                 </Button>
             </StackPanel>
 
-
+            <!--Profit-->
             <StackPanel Grid.Row="3"
                         Orientation="Horizontal"
                         Margin="5"
@@ -325,7 +439,6 @@
                         </StackPanel>
                     </ToolTip>
                 </StackPanel.ToolTip>
-
                 <StackPanel.Style>
                     <Style TargetType="{x:Type StackPanel}">
                         <Setter Property="Effect">
@@ -360,8 +473,6 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-
-
             </StackPanel>
 
         </Grid>

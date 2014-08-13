@@ -395,7 +395,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Style\Brushes\" />
-    <Folder Include="ViewModels\WebBrowser\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\boss.png" />

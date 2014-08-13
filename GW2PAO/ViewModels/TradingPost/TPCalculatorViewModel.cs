@@ -50,6 +50,16 @@ namespace GW2PAO.ViewModels.TradingPost
         }
 
         /// <summary>
+        /// Break-even buy price
+        /// </summary>
+        public Price BreakEvenBuyPrice { get; private set; }
+
+        /// <summary>
+        /// Break-even sell price
+        /// </summary>
+        public Price BreakEvenSellPrice { get; private set; }
+
+        /// <summary>
         /// Total calculated revenue
         /// </summary>
         public Price Revenue { get; private set; }
@@ -86,6 +96,8 @@ namespace GW2PAO.ViewModels.TradingPost
         {
             this.BuyPrice = new Price();
             this.SellPrice = new Price();
+            this.BreakEvenBuyPrice = new Price();
+            this.BreakEvenSellPrice = new Price();
             this.Revenue = new Price();
             this.Cost = new Price();
             this.ListingFee = new Price();
@@ -113,12 +125,22 @@ namespace GW2PAO.ViewModels.TradingPost
         /// </summary>
         private void CalculateAll()
         {
-            logger.Debug("Calculating all values");
+            logger.Debug("Recalculating all values");
+            this.CalculateBreakEvenValues();
             this.CalculateRevenue();
             this.CalculateCost();
             this.CalculateListingFee();
             this.CalculateSaleFee();
             this.CalculateProfit();
+        }
+
+        /// <summary>
+        /// Calculates the break-even buy and sell prices
+        /// </summary>
+        private void CalculateBreakEvenValues()
+        {
+            this.BreakEvenBuyPrice.Value = this.SellPrice.Value * 0.85;
+            this.BreakEvenSellPrice.Value = this.BuyPrice.Value / 0.85;
         }
 
         /// <summary>
