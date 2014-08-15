@@ -490,4 +490,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <!--<Target
+    AfterTargets="AfterBuild;NonWinFodyTarget"
+    Name="CleanReferenceCopyLocalPaths" >
+    <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>-->
 </Project>

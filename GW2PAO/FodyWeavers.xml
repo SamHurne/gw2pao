@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Weavers>
-	<Costura/>
-  
+  <Costura>
+    <ExcludeAssemblies>
+      Awesomium.Core
+      Awesomium.Windows.Controls
+      awesomium
+      avcodec-53
+      avformat-53
+      icudt
+      inspector
+      libEGL
+      libGLESv2
+      xinput9_1_0
+    </ExcludeAssemblies>
+  </Costura>
 </Weavers>

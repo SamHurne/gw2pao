@@ -50,12 +50,12 @@ namespace GW2PAO
         public void AppStartup(object sender, StartupEventArgs e)
         {
 #if DEBUG
-            // Ignore logging if running in debug
-            LogManager.EnableLogging();
+            // Enable logging if running in debug
+            LogManager.GlobalThreshold = NLog.LogLevel.Trace;
 #else
             // Set up logging configuration
             if (!GW2PAO.Properties.Settings.Default.IsLoggingEnabled)
-                LogManager.DisableLogging();
+                LogManager.GlobalThreshold = NLog.LogLevel.Fatal;
 #endif
 
             // Log application information

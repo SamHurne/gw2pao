@@ -32,9 +32,9 @@ namespace GW2PAO.ViewModels
                 Properties.Settings.Default.IsLoggingEnabled = value;
 
                 if (!Properties.Settings.Default.IsLoggingEnabled)
-                    LogManager.DisableLogging();
+                    LogManager.GlobalThreshold = NLog.LogLevel.Fatal;
                 else
-                    LogManager.EnableLogging();
+                    LogManager.GlobalThreshold = NLog.LogLevel.Trace;
 
                 Properties.Settings.Default.Save();
             }
