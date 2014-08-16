@@ -34,10 +34,30 @@ namespace GW2PAO.API.Services
         public void LoadTable()
         {
             logger.Info("Loading Worlds Table");
-            this.Worlds = WorldsTable.LoadTable();
+            try
+            {
+                this.Worlds = WorldsTable.LoadTable();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                logger.Info("Error loading Worlds Table, re-creating table");
+                WorldsTable.CreateTable();
+                this.Worlds = WorldsTable.LoadTable();
+            }
 
             logger.Info("Loading Objectives Table");
-            this.ObjectivesTable = WvWObjectivesTable.LoadTable();
+            try
+            {
+                this.ObjectivesTable = WvWObjectivesTable.LoadTable();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                logger.Info("Error loading Objectives Table, re-creating table");
+                WvWObjectivesTable.CreateTable();
+                this.ObjectivesTable = WvWObjectivesTable.LoadTable();
+            }
         }
 
         /// <summary>
@@ -47,14 +67,23 @@ namespace GW2PAO.API.Services
         /// <returns>The match ID for the given world ID</returns>
         public string GetMatchId(int worldId)
         {
-            var matches = GwApi.GetMatches();
-            var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
-                                                               || match.RedWorldId == worldId
-                                                               || match.GreenWorldId == worldId);
-            if (wvwMatch == null)
+            try
+            {
+                var matches = GwApi.GetMatches();
+                var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
+                                                                   || match.RedWorldId == worldId
+                                                                   || match.GreenWorldId == worldId);
+                if (wvwMatch == null)
+                    return null;
+                else
+                    return wvwMatch.Id;
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong (like if WvW is resetting)
+                logger.Error(ex);
                 return null;
-            else
-                return wvwMatch.Id;
+            }
         }
 
         /// <summary>
@@ -64,19 +93,34 @@ namespace GW2PAO.API.Services
         /// <returns>The team color for the given world</returns>
         public WorldColor GetTeamColor(int worldId)
         {
-            var matches = GwApi.GetMatches();
-            var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
-                                                               || match.RedWorldId == worldId
-                                                               || match.GreenWorldId == worldId);
-
-            if (wvwMatch.BlueWorldId == worldId)
-                return WorldColor.Blue;
-            else if (wvwMatch.RedWorldId == worldId)
-                return WorldColor.Red;
-            else if (wvwMatch.GreenWorldId == worldId)
-                return WorldColor.Green;
-            else
+            try
+            {
+                var matches = GwApi.GetMatches();
+                var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
+                                                                   || match.RedWorldId == worldId
+                                                                   || match.GreenWorldId == worldId);
+                if (wvwMatch != null)
+                {
+                    if (wvwMatch.BlueWorldId == worldId)
+                        return WorldColor.Blue;
+                    else if (wvwMatch.RedWorldId == worldId)
+                        return WorldColor.Red;
+                    else if (wvwMatch.GreenWorldId == worldId)
+                        return WorldColor.Green;
+                    else
+                        return WorldColor.None;
+                }
+                else
+                {
+                    return WorldColor.None;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong (like if WvW is resetting)
+                logger.Error(ex);
                 return WorldColor.None;
+            }
         }
 
         /// <summary>
@@ -97,17 +141,33 @@ namespace GW2PAO.API.Services
         /// <returns>The current WvW for the given world</returns>
         public int GetWorldScore(string matchId, int worldId)
         {
-            var details = GwApiNET.GwApi.GetMatchDetails(matchId, true);
-            switch (this.GetTeamColor(worldId))
+            try
             {
-                case WorldColor.Red:
-                    return details.RedScore;
-                case WorldColor.Blue:
-                    return details.BlueScore;
-                case WorldColor.Green:
-                    return details.GreenScore;
-                default:
+                var details = GwApiNET.GwApi.GetMatchDetails(matchId, true);
+                if (details != null)
+                {
+                    switch (this.GetTeamColor(worldId))
+                    {
+                        case WorldColor.Red:
+                            return details.RedScore;
+                        case WorldColor.Blue:
+                            return details.BlueScore;
+                        case WorldColor.Green:
+                            return details.GreenScore;
+                        default:
+                            return -1;
+                    }
+                }
+                else
+                {
                     return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong (like if WvW is resetting)
+                logger.Error(ex);
+                return -1;
             }
         }
 
@@ -119,72 +179,79 @@ namespace GW2PAO.API.Services
         public IEnumerable<WvWObjective> GetMapObjectives(string matchId, WvWMap map)
         {
             List<WvWObjective> objectives = new List<WvWObjective>();
-
-            var details = GwApi.GetMatchDetails(matchId, true);
-            if (details != null)
+            try
             {
-                MatchMapType mapType;
-                switch (map)
+                var details = GwApi.GetMatchDetails(matchId, true);
+                if (details != null)
                 {
-                    case WvWMap.BlueBorderlands:
-                        mapType = MatchMapType.BlueHome;
-                        break;
-                    case WvWMap.GreenBorderlands:
-                        mapType = MatchMapType.GreenHome;
-                        break;
-                    case WvWMap.RedBorderlands:
-                        mapType = MatchMapType.RedHome;
-                        break;
-                    case WvWMap.EternalBattlegrounds:
-                        mapType = MatchMapType.Center;
-                        break;
-                    default:
-                        mapType = MatchMapType.Center;
-                        break;
-                }
-
-                var mapDetails = details.Maps.FirstOrDefault(m => m.Type == mapType);
-                if (mapDetails != null)
-                {
-                    foreach (var objective in mapDetails.Objectives)
+                    MatchMapType mapType;
+                    switch (map)
                     {
-                        var objData = new WvWObjective();
+                        case WvWMap.BlueBorderlands:
+                            mapType = MatchMapType.BlueHome;
+                            break;
+                        case WvWMap.GreenBorderlands:
+                            mapType = MatchMapType.GreenHome;
+                            break;
+                        case WvWMap.RedBorderlands:
+                            mapType = MatchMapType.RedHome;
+                            break;
+                        case WvWMap.EternalBattlegrounds:
+                            mapType = MatchMapType.Center;
+                            break;
+                        default:
+                            mapType = MatchMapType.Center;
+                            break;
+                    }
 
-                        objData.ID = objective.Id;
-                        objData.MatchId = matchId;
-                        objData.Map = map;
-                        objData.GuildOwner = objective.OwnerGuildId;
-
-                        var objDetails = this.ObjectivesTable.Objectives.FirstOrDefault(obj => obj.ID == objData.ID);
-                        if (objDetails != null)
+                    var mapDetails = details.Maps.FirstOrDefault(m => m.Type == mapType);
+                    if (mapDetails != null)
+                    {
+                        foreach (var objective in mapDetails.Objectives)
                         {
-                            objData.Type = objDetails.Type;
-                            objData.Name = objDetails.Name;
-                            objData.FullName = objDetails.FullName;
-                            objData.Location = objDetails.Location;
-                            objData.MapLocation = objDetails.MapLocation;
-                            objData.Points = objDetails.Points;
-                        }
+                            var objData = new WvWObjective();
 
-                        switch (objective.Owner)
-                        {
-                            case OwnerColor.Blue:
-                                objData.WorldOwner = WorldColor.Blue;
-                                break;
-                            case OwnerColor.Green:
-                                objData.WorldOwner = WorldColor.Green;
-                                break;
-                            case OwnerColor.Red:
-                                objData.WorldOwner = WorldColor.Red;
-                                break;
-                            default:
-                                objData.WorldOwner = WorldColor.None;
-                                break;
-                        }
+                            objData.ID = objective.Id;
+                            objData.MatchId = matchId;
+                            objData.Map = map;
+                            objData.GuildOwner = objective.OwnerGuildId;
 
-                        objectives.Add(objData);
+                            var objDetails = this.ObjectivesTable.Objectives.FirstOrDefault(obj => obj.ID == objData.ID);
+                            if (objDetails != null)
+                            {
+                                objData.Type = objDetails.Type;
+                                objData.Name = objDetails.Name;
+                                objData.FullName = objDetails.FullName;
+                                objData.Location = objDetails.Location;
+                                objData.MapLocation = objDetails.MapLocation;
+                                objData.Points = objDetails.Points;
+                            }
+
+                            switch (objective.Owner)
+                            {
+                                case OwnerColor.Blue:
+                                    objData.WorldOwner = WorldColor.Blue;
+                                    break;
+                                case OwnerColor.Green:
+                                    objData.WorldOwner = WorldColor.Green;
+                                    break;
+                                case OwnerColor.Red:
+                                    objData.WorldOwner = WorldColor.Red;
+                                    break;
+                                default:
+                                    objData.WorldOwner = WorldColor.None;
+                                    break;
+                            }
+
+                            objectives.Add(objData);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong (like if WvW is resetting)
+                logger.Error(ex);
             }
 
             return objectives;
@@ -197,69 +264,76 @@ namespace GW2PAO.API.Services
         public IEnumerable<WvWObjective> GetAllObjectives(string matchId)
         {
             List<WvWObjective> objectives = new List<WvWObjective>();
-
-            var details = GwApi.GetMatchDetails(matchId, true);
-            if (details != null)
+            try
             {
-                foreach (var mapDetails in details.Maps)
+                var details = GwApi.GetMatchDetails(matchId, true);
+                if (details != null)
                 {
-                    foreach (var objective in mapDetails.Objectives)
+                    foreach (var mapDetails in details.Maps)
                     {
-                        var objData = new WvWObjective();
-
-                        objData.ID = objective.Id;
-                        objData.MatchId = matchId;
-                        objData.GuildOwner = objective.OwnerGuildId;
-
-                        var objDetails = this.ObjectivesTable.Objectives.FirstOrDefault(obj => obj.ID == objData.ID);
-                        if (objDetails != null)
+                        foreach (var objective in mapDetails.Objectives)
                         {
-                            objData.Type = objDetails.Type;
-                            objData.Name = objDetails.Name;
-                            objData.FullName = objDetails.FullName;
-                            objData.Location = objDetails.Location;
-                            objData.MapLocation = objDetails.MapLocation;
-                            objData.Points = objDetails.Points;
-                        }
+                            var objData = new WvWObjective();
 
-                        switch (mapDetails.Type)
-                        {
-                            case MatchMapType.BlueHome:
-                                objData.Map = WvWMap.BlueBorderlands;
-                                break;
-                            case MatchMapType.GreenHome:
-                                objData.Map = WvWMap.GreenBorderlands;
-                                break;
-                            case MatchMapType.RedHome:
-                                objData.Map = WvWMap.RedBorderlands;
-                                break;
-                            case MatchMapType.Center:
-                                objData.Map = WvWMap.EternalBattlegrounds;
-                                break;
-                            default:
-                                objData.Map = WvWMap.Unknown;
-                                break;
-                        }
+                            objData.ID = objective.Id;
+                            objData.MatchId = matchId;
+                            objData.GuildOwner = objective.OwnerGuildId;
 
-                        switch (objective.Owner)
-                        {
-                            case OwnerColor.Blue:
-                                objData.WorldOwner = WorldColor.Blue;
-                                break;
-                            case OwnerColor.Green:
-                                objData.WorldOwner = WorldColor.Green;
-                                break;
-                            case OwnerColor.Red:
-                                objData.WorldOwner = WorldColor.Red;
-                                break;
-                            default:
-                                objData.WorldOwner = WorldColor.None;
-                                break;
-                        }
+                            var objDetails = this.ObjectivesTable.Objectives.FirstOrDefault(obj => obj.ID == objData.ID);
+                            if (objDetails != null)
+                            {
+                                objData.Type = objDetails.Type;
+                                objData.Name = objDetails.Name;
+                                objData.FullName = objDetails.FullName;
+                                objData.Location = objDetails.Location;
+                                objData.MapLocation = objDetails.MapLocation;
+                                objData.Points = objDetails.Points;
+                            }
 
-                        objectives.Add(objData);
+                            switch (mapDetails.Type)
+                            {
+                                case MatchMapType.BlueHome:
+                                    objData.Map = WvWMap.BlueBorderlands;
+                                    break;
+                                case MatchMapType.GreenHome:
+                                    objData.Map = WvWMap.GreenBorderlands;
+                                    break;
+                                case MatchMapType.RedHome:
+                                    objData.Map = WvWMap.RedBorderlands;
+                                    break;
+                                case MatchMapType.Center:
+                                    objData.Map = WvWMap.EternalBattlegrounds;
+                                    break;
+                                default:
+                                    objData.Map = WvWMap.Unknown;
+                                    break;
+                            }
+
+                            switch (objective.Owner)
+                            {
+                                case OwnerColor.Blue:
+                                    objData.WorldOwner = WorldColor.Blue;
+                                    break;
+                                case OwnerColor.Green:
+                                    objData.WorldOwner = WorldColor.Green;
+                                    break;
+                                case OwnerColor.Red:
+                                    objData.WorldOwner = WorldColor.Red;
+                                    break;
+                                default:
+                                    objData.WorldOwner = WorldColor.None;
+                                    break;
+                            }
+
+                            objectives.Add(objData);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong (like if WvW is resetting)
+                logger.Error(ex);
             }
 
             return objectives;

@@ -43,18 +43,36 @@ namespace GW2PAO.API.Services
         public void LoadTable()
         {
             logger.Info("Loading Event Time Table");
-            this.EventTimeTable = MegaserverEventTimeTable.LoadTable();
-
-            logger.Info("Initializing event details cache");
-            this.EventDetails = GwApi.GetEventDetails(Guid.Empty);
-
-            logger.Info("Loading world event locations");
-            foreach (var worldEvent in this.EventTimeTable.WorldEvents)
+            try
             {
-                if (this.EventDetails.ContainsKey(worldEvent.ID))
+                this.EventTimeTable = MegaserverEventTimeTable.LoadTable();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                logger.Info("Error loading Event Time Table, re-creating table");
+                MegaserverEventTimeTable.CreateTable();
+                this.EventTimeTable = MegaserverEventTimeTable.LoadTable();
+            }
+
+            try
+            {
+                logger.Info("Initializing event details cache");
+                this.EventDetails = GwApi.GetEventDetails(Guid.Empty);
+
+                logger.Info("Loading world event locations");
+                foreach (var worldEvent in this.EventTimeTable.WorldEvents)
                 {
-                    worldEvent.Location = GwApi.GetMap(this.EventDetails[worldEvent.ID].MapId).Values.First().MapName;
+                    if (this.EventDetails.ContainsKey(worldEvent.ID))
+                    {
+                        worldEvent.Location = GwApi.GetMap(this.EventDetails[worldEvent.ID].MapId).Values.First().MapName;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                // If something goes wrong with the API, don't crash, but log the error
+                logger.Error(ex);
             }
         }
 

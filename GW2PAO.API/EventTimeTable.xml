@@ -31,7 +31,7 @@
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:13:00</Time>
+        <Time>00:12:00</Time>
       </Duration>
       <WarmupDuration>
         <Time>00:02:00</Time>
@@ -74,22 +74,22 @@
       <ID>F479B4CF-2E11-457A-B279-90822511B53B</ID>
       <ActiveTimes>
         <EventTimespan>
-          <Time>02:00:00</Time>
+          <Time>02:03:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>06:00:00</Time>
+          <Time>06:03:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>10:30:00</Time>
+          <Time>10:33:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>15:00:00</Time>
+          <Time>15:03:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>18:00:00</Time>
+          <Time>18:03:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>23:00:00</Time>
+          <Time>23:03:00</Time>
         </EventTimespan>
       </ActiveTimes>
       <Duration>
@@ -269,7 +269,7 @@
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:08:30</Time>
+        <Time>00:06:00</Time>
       </Duration>
       <WarmupDuration>
         <Time>00:02:00</Time>
@@ -281,35 +281,35 @@
       <ID>242BD241-E360-48F1-A8D9-57180E146789</ID>
       <ActiveTimes>
         <EventTimespan>
-          <Time>00:00:00</Time>
+          <Time>00:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>03:00:00</Time>
+          <Time>03:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>06:00:00</Time>
+          <Time>06:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>09:00:00</Time>
+          <Time>09:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>12:00:00</Time>
+          <Time>12:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>15:00:00</Time>
+          <Time>15:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>18:00:00</Time>
+          <Time>18:15:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>21:00:00</Time>
+          <Time>21:15:00</Time>
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:15:00</Time>
+        <Time>00:04:00</Time>
       </Duration>
       <WarmupDuration>
-        <Time>00:05:00</Time>
+        <Time>00:15:00</Time>
       </WarmupDuration>
       <WaypointCode><![CDATA[[&BKgBAAA=]]]></WaypointCode>
     </WorldEvent>
@@ -355,7 +355,7 @@
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:10:00</Time>
+        <Time>00:05:00</Time>
       </Duration>
       <WarmupDuration>
         <Time>00:02:00</Time>
@@ -404,7 +404,7 @@
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:04:30</Time>
+        <Time>00:09:00</Time>
       </Duration>
       <WarmupDuration>
         <Time>00:01:00</Time>
@@ -465,47 +465,47 @@
       <ID>33F76E9E-0BB6-46D0-A3A9-BE4CDFC4A3A4</ID>
       <ActiveTimes>
         <EventTimespan>
-          <Time>00:45:00</Time>
+          <Time>00:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>02:45:00</Time>
+          <Time>02:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>04:45:00</Time>
+          <Time>04:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>06:45:00</Time>
+          <Time>06:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>08:45:00</Time>
+          <Time>08:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>10:45:00</Time>
+          <Time>10:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>12:45:00</Time>
+          <Time>12:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>14:45:00</Time>
+          <Time>14:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>16:45:00</Time>
+          <Time>16:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>18:45:00</Time>
+          <Time>18:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>20:45:00</Time>
+          <Time>20:54:00</Time>
         </EventTimespan>
         <EventTimespan>
-          <Time>22:45:00</Time>
+          <Time>22:54:00</Time>
         </EventTimespan>
       </ActiveTimes>
       <Duration>
-        <Time>00:05:00</Time>
+        <Time>00:03:00</Time>
       </Duration>
       <WarmupDuration>
-        <Time>00:02:00</Time>
+        <Time>00:09:00</Time>
       </WarmupDuration>
       <WaypointCode><![CDATA[[&BEYAAAA=]]]></WaypointCode>
     </WorldEvent>

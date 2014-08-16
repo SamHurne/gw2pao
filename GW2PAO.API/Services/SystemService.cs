@@ -22,7 +22,7 @@ namespace GW2PAO.API.Services
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Rhe GW2 Process
+        /// The GW2 Process
         /// </summary>
         private Process gw2Process;
 

@@ -28,35 +28,71 @@ namespace GW2PAO.API.Services
         public IEnumerable<ZoneItem> GetZoneItems(int mapId)
         {
             List<ZoneItem> zoneItems = new List<ZoneItem>();
-
-            // Get the continents (used later in determining the location of items)
-            var continents = GwApi.GetContinents();
-
-            // Get the current map info
-            var map = GwApi.GetMap(mapId).Values.FirstOrDefault();
-            if (map != null)
+            try
             {
-                // Find the map's continent
-                var continent = continents[map.ContinentId];
+                // Get the continents (used later in determining the location of items)
+                var continents = GwApi.GetContinents();
 
-                // Retrieve details of items on every floor of the map
-                foreach (var floorId in map.Floors)
+                // Get the current map info
+                var map = GwApi.GetMap(mapId).Values.FirstOrDefault();
+                if (map != null)
                 {
-                    var floor = GwApi.GetMapFloor(map.ContinentId, floorId);
-                    if (floor != null && floor.Regions != null)
-                    {
-                        // Find the region that this map is located in
-                        var region = floor.Regions.Values.FirstOrDefault(r => r.Maps.ContainsKey(mapId));
-                        if (region != null)
-                        {
-                            if (region.Maps.ContainsKey(mapId))
-                            {
-                                var regionMap = region.Maps[mapId];
+                    // Find the map's continent
+                    var continent = continents[map.ContinentId];
 
-                                // Iterate over every PointsOfInterest in the map (note: PointsOfInterest includes POIs, Vistas, and Waypoints)
-                                foreach (var item in regionMap.PointsOfInterest)
+                    // Retrieve details of items on every floor of the map
+                    foreach (var floorId in map.Floors)
+                    {
+                        var floor = GwApi.GetMapFloor(map.ContinentId, floorId);
+                        if (floor != null && floor.Regions != null)
+                        {
+                            // Find the region that this map is located in
+                            var region = floor.Regions.Values.FirstOrDefault(r => r.Maps.ContainsKey(mapId));
+                            if (region != null)
+                            {
+                                if (region.Maps.ContainsKey(mapId))
                                 {
-                                    if (item.Type != PointOfInterestType.Unlock)
+                                    var regionMap = region.Maps[mapId];
+
+                                    // Iterate over every PointsOfInterest in the map (note: PointsOfInterest includes POIs, Vistas, and Waypoints)
+                                    foreach (var item in regionMap.PointsOfInterest)
+                                    {
+                                        if (item.Type != PointOfInterestType.Unlock)
+                                        {
+                                            // If we havn't already added the item, get it's info and add it
+                                            if (!zoneItems.Any(zi => zi.ID == item.Id))
+                                            {
+                                                // Determine the location
+                                                var location = GwMapsHelper.PixelToWorldPos(map, new Gw2Point(item.Coordinates[0], item.Coordinates[1]), continent.MaxZoom);
+
+                                                ZoneItem zoneItem = new ZoneItem();
+                                                zoneItem.ID = item.Id;
+                                                zoneItem.Name = item.Name;
+                                                zoneItem.Location = new Point(location.X, location.Y);
+                                                zoneItem.MapId = mapId;
+                                                zoneItem.MapName = map.MapName;
+
+                                                // Translate the item's type
+                                                switch (item.Type)
+                                                {
+                                                    case PointOfInterestType.Landmark:
+                                                        zoneItem.Type = Data.Enums.ZoneItemType.PointOfInterest;
+                                                        break;
+                                                    case PointOfInterestType.Vista:
+                                                        zoneItem.Type = Data.Enums.ZoneItemType.Vista;
+                                                        break;
+                                                    case PointOfInterestType.Waypoint:
+                                                        zoneItem.Type = Data.Enums.ZoneItemType.Waypoint;
+                                                        break;
+                                                }
+
+                                                zoneItems.Add(zoneItem);
+                                            }
+                                        }
+                                    }
+
+                                    // Iterate over every Task in the map (Tasks are the same as HeartQuests
+                                    foreach (var item in regionMap.Tasks)
                                     {
                                         // If we havn't already added the item, get it's info and add it
                                         if (!zoneItems.Any(zi => zi.ID == item.Id))
@@ -66,76 +102,47 @@ namespace GW2PAO.API.Services
 
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = item.Id;
-                                            zoneItem.Name = item.Name;
+                                            zoneItem.Name = item.Objective;
+                                            zoneItem.Level = item.Level;
                                             zoneItem.Location = new Point(location.X, location.Y);
                                             zoneItem.MapId = mapId;
                                             zoneItem.MapName = map.MapName;
-
-                                            // Translate the item's type
-                                            switch (item.Type)
-                                            {
-                                                case PointOfInterestType.Landmark:
-                                                    zoneItem.Type = Data.Enums.ZoneItemType.PointOfInterest;
-                                                    break;
-                                                case PointOfInterestType.Vista:
-                                                    zoneItem.Type = Data.Enums.ZoneItemType.Vista;
-                                                    break;
-                                                case PointOfInterestType.Waypoint:
-                                                    zoneItem.Type = Data.Enums.ZoneItemType.Waypoint;
-                                                    break;
-                                            }
+                                            zoneItem.Type = Data.Enums.ZoneItemType.HeartQuest;
 
                                             zoneItems.Add(zoneItem);
                                         }
                                     }
-                                }
 
-                                // Iterate over every Task in the map (Tasks are the same as HeartQuests
-                                foreach (var item in regionMap.Tasks)
-                                {
-                                    // If we havn't already added the item, get it's info and add it
-                                    if (!zoneItems.Any(zi => zi.ID == item.Id))
+                                    // Iterate over every skill challenge in the map
+                                    foreach (var item in regionMap.SkillChallenges)
                                     {
-                                        // Determine the location
-                                        var location = GwMapsHelper.PixelToWorldPos(map, new Gw2Point(item.Coordinates[0], item.Coordinates[1]), continent.MaxZoom);
+                                        // Determine the location, this serves an internally-used ID for skill challenges
+                                        var location = GwMapsHelper.PixelToWorldPos(map, new Gw2Point(item.Coordinents[0], item.Coordinents[1]), continent.MaxZoom);
+                                        int id = (int)(mapId + location.X + location.Y);
 
-                                        ZoneItem zoneItem = new ZoneItem();
-                                        zoneItem.ID = item.Id;
-                                        zoneItem.Name = item.Objective;
-                                        zoneItem.Level = item.Level;
-                                        zoneItem.Location = new Point(location.X, location.Y);
-                                        zoneItem.MapId = mapId;
-                                        zoneItem.MapName = map.MapName;
-                                        zoneItem.Type = Data.Enums.ZoneItemType.HeartQuest;
+                                        // If we havn't already added the item, get it's info and add it
+                                        if (!zoneItems.Any(zi => zi.ID == id))
+                                        {
+                                            ZoneItem zoneItem = new ZoneItem();
+                                            zoneItem.ID = id;
+                                            zoneItem.Location = new Point(location.X, location.Y);
+                                            zoneItem.MapId = mapId;
+                                            zoneItem.MapName = map.MapName;
+                                            zoneItem.Type = Data.Enums.ZoneItemType.SkillChallenge;
 
-                                        zoneItems.Add(zoneItem);
-                                    }
-                                }
-
-                                // Iterate over every skill challenge in the map
-                                foreach (var item in regionMap.SkillChallenges)
-                                {
-                                    // Determine the location, this serves an internally-used ID for skill challenges
-                                    var location = GwMapsHelper.PixelToWorldPos(map, new Gw2Point(item.Coordinents[0], item.Coordinents[1]), continent.MaxZoom);
-                                    int id = (int)(mapId + location.X + location.Y);
-
-                                    // If we havn't already added the item, get it's info and add it
-                                    if (!zoneItems.Any(zi => zi.ID == id))
-                                    {
-                                        ZoneItem zoneItem = new ZoneItem();
-                                        zoneItem.ID = id;
-                                        zoneItem.Location = new Point(location.X, location.Y);
-                                        zoneItem.MapId = mapId;
-                                        zoneItem.MapName = map.MapName;
-                                        zoneItem.Type = Data.Enums.ZoneItemType.SkillChallenge;
-
-                                        zoneItems.Add(zoneItem);
+                                            zoneItems.Add(zoneItem);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
             }
             return zoneItems;
         }
@@ -147,11 +154,20 @@ namespace GW2PAO.API.Services
         /// <returns>the name of the zone</returns>
         public string GetZoneName(int mapId)
         {
-            var map = GwApi.GetMap(mapId).Values.FirstOrDefault();
-            if (map != null)
-                return map.MapName;
-            else
+            try
+            {
+                var map = GwApi.GetMap(mapId).Values.FirstOrDefault();
+                if (map != null)
+                    return map.MapName;
+                else
+                    return "Unknown";
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
                 return "Unknown";
+            }
         }
     }
 }
