@@ -41,9 +41,9 @@
     <!--See code-behind for ViewModel details-->
     <Grid>
 
-        <Grid.Effect>
+        <!--<Grid.Effect>
             <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
-        </Grid.Effect>
+        </Grid.Effect>-->
 
         <Grid.Background>
             <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
@@ -187,8 +187,7 @@
 
                     <ItemsControl Name="WorldEventsControl"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  ItemsSource="{Binding Source={StaticResource zoneItemsView}}"
-                                  Margin="0,0,0,0">
+                                  ItemsSource="{Binding Source={StaticResource zoneItemsView}}">
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

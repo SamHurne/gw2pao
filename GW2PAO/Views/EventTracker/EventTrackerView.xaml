@@ -155,8 +155,7 @@
                 <StackPanel Width="{Binding ElementName=EventsContainer, Path=ActualWidth}">
                     <ItemsControl Name="WorldEventsControl"
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}"
-                                      Margin="0,0,0,5">
+                                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <View:WorldEventView DataContext="{Binding}"

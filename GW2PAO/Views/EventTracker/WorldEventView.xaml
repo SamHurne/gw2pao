@@ -131,7 +131,7 @@
                         <Setter Property="Effect">
                             <Setter.Value>
                                 <DropShadowEffect ShadowDepth="0"
-                                              Color="Goldenrod"
+                                              Color="Gold"
                                               Opacity="0"
                                               BlurRadius="10"/>
                             </Setter.Value>
