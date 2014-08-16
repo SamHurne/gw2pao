@@ -58,6 +58,9 @@ namespace GW2PAO
                 LogManager.GlobalThreshold = NLog.LogLevel.Fatal;
 #endif
 
+            // Disable the debug assert windows that pop-up from NLog
+            System.Diagnostics.Trace.Listeners.OfType<System.Diagnostics.DefaultTraceListener>().First().AssertUiEnabled = false;
+
             // Log application information
             var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
