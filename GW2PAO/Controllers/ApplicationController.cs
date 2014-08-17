@@ -349,7 +349,7 @@ namespace GW2PAO.Controllers
                 Threading.InvokeOnUI(() => this.tpCalculatorView.Close());
 
             logger.Debug("Stopping controllers");
-            this.BrowserController.CloseBrowser();
+            Threading.InvokeOnUI(() => this.BrowserController.CloseBrowser());
             this.EventsController.Stop();
             this.ZoneCompletionController.Stop();
             this.DungeonsController.Stop();
