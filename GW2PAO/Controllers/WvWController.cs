@@ -407,23 +407,26 @@ namespace GW2PAO.Controllers
                         }
                     }
 
-                    // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
-                    // Note: these are approximations at best
-                    var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
-                    foreach (var objective in this.CurrentObjectives)
+                    if (this.UserSettings.AreTimeDistancesShown) // Don't bother if we aren't showing these
                     {
-                        if (this.PlayerMap == objective.Map)
+                        // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
+                        // Note: these are approximations at best
+                        var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
+                        foreach (var objective in this.CurrentObjectives)
                         {
-                            if (playerPosition != null && objective.ModelData.MapLocation != null)
+                            if (this.PlayerMap == objective.Map)
                             {
-                                var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
-                                var timeDistance = this.CalculateTimeDistance(newDistance);
-                                objective.DistanceTime = timeDistance;
+                                if (playerPosition != null && objective.ModelData.MapLocation != null)
+                                {
+                                    var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
+                                    var timeDistance = this.CalculateTimeDistance(newDistance);
+                                    objective.DistanceTime = timeDistance;
+                                }
                             }
-                        }
-                        else
-                        {
-                            objective.DistanceTime = TimeSpan.Zero;
+                            else
+                            {
+                                objective.DistanceTime = TimeSpan.Zero;
+                            }
                         }
                     }
                 }
