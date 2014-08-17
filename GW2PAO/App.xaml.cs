@@ -160,11 +160,13 @@ namespace GW2PAO
         {
             logger.Info("Program shutting down");
 
+#if !NO_BROWSER
             logger.Debug("Cleaning up Awesomium WebCore");
             if (WebCore.IsInitialized)
             {
                 WebCore.Shutdown();
             }
+#endif
 
             // Really hate to have to do this, but I can't have logs filling up people's disk space
             //  There's no way to disable logging (tried but it didn't work)
