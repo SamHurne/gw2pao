@@ -46,6 +46,7 @@ namespace GW2PAO.API.Services
         public static void CreateTable()
         {
             MegaserverEventTimeTable tt = new MegaserverEventTimeTable();
+            tt.WorldEvents = new List<WorldEvent>();
             tt.WorldEvents.Add(new WorldEvent()
                 {
                     Name = "Megadestroyer",
