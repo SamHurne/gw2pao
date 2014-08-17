@@ -94,7 +94,7 @@ namespace GW2PAO.API.Services
             });
             tt.WorldEvents.Add(new WorldEvent()
             {
-                Name = "Jormag",
+                Name = "Claw of Jormag",
                 ID = new Guid("0464CB9E-1848-4AAA-BA31-4779A959DD71"),
                 ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 33, 0), new EventTimespan(5, 33, 0), new EventTimespan(8, 33, 0), new EventTimespan(11, 33, 0), new EventTimespan(14, 33, 0), new EventTimespan(17, 33, 0), new EventTimespan(20, 33, 0), new EventTimespan(23, 33, 0) },
                 Duration = new EventTimespan(0, 17, 0),
