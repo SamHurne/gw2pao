@@ -96,10 +96,11 @@ namespace GW2PAO
                 WindowStyle = System.Windows.WindowStyle.None,
                 AllowsTransparency = true,
                 Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent),
-                ShowInTaskbar = false
+                ShowInTaskbar = false,
+                Title = "GW2 Personal Assistant Overlay"
             };
             dummyWindow.Show();
-            dummyWindow.Hide();
+            GW2PAO.Views.OverlayWindow.OwnerWindow = dummyWindow;
 
             // Create the tray icon
             logger.Debug("Creating tray icon");

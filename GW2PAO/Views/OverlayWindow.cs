@@ -14,6 +14,11 @@ namespace GW2PAO.Views
     public class OverlayWindow : Window
     {
         /// <summary>
+        /// Static owner window that all overlay windows live under. This reduces the amount of entries in the taskbar and in the alt-tab menu of windows
+        /// </summary>
+        public static Window OwnerWindow { get; set; }
+
+        /// <summary>
         /// StickyWindow helper object
         /// </summary>
         private StickyWindow stickyWindow;
@@ -23,6 +28,7 @@ namespace GW2PAO.Views
         /// </summary>
         public OverlayWindow()
         {
+            this.Owner = OwnerWindow;
             this.Loaded += OverlayWindowBase_Loaded;
         }
 
