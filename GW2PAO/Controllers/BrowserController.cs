@@ -11,16 +11,19 @@ namespace GW2PAO.Controllers
 {
     public class BrowserController : IBrowserController
     {
+#if !NO_BROWSER
         /// <summary>
         /// The browser object
         /// </summary>
         private BrowserView browser;
+#endif
 
         /// <summary>
         /// Opens the browser window
         /// </summary>
         public void OpenBrowser()
         {
+#if !NO_BROWSER
             if (this.browser == null || !this.browser.IsVisible)
             {
                 this.browser = new BrowserView();
@@ -30,6 +33,7 @@ namespace GW2PAO.Controllers
             {
                 this.browser.Focus();
             }
+#endif
         }
 
         /// <summary>
@@ -37,10 +41,12 @@ namespace GW2PAO.Controllers
         /// </summary>
         public void CloseBrowser()
         {
+#if !NO_BROWSER
             if (this.browser != null && this.browser.IsVisible)
             {
                 this.browser.Close();
             }
+#endif
         }
 
         /// <summary>
