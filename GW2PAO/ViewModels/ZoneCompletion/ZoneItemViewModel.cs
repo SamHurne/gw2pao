@@ -161,9 +161,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
             this.playerService = playerService;
             this.userSettings = userSettings;
             this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
+
+            // Set up handling for collection changed events on the unlocked zone items collections
             foreach (CharacterZoneItems charItems in this.userSettings.UnlockedZoneItems)
             {
-                charItems.ZoneItems.CollectionChanged += (a, b) => this.RefreshVisibility();
+                charItems.ZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
             }
             this.userSettings.UnlockedZoneItems.CollectionChanged += (o, e) =>
             {
@@ -171,11 +173,12 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 {
                     foreach (CharacterZoneItems itemAdded in e.NewItems)
                     {
-                        itemAdded.ZoneItems.CollectionChanged += (a, b) => this.RefreshVisibility();
+                        itemAdded.ZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
                     }
                 }
             };
             this.userSettings.UnlockedZoneItems.CollectionChanged += UnlockedZoneItems_CollectionChanged;
+
             this.RefreshVisibility();
         }
 
