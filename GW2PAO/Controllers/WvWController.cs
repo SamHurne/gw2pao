@@ -65,6 +65,12 @@ namespace GW2PAO.Controllers
         private readonly object objectivesRefreshTimerLock = new object();
 
         /// <summary>
+        /// Timer counter used for reducing the amount of requests performed
+        /// See RefreshObjectives() for more details
+        /// </summary>
+        private int timerCount;
+
+        /// <summary>
         /// User settings for dungeons
         /// </summary>
         private WvWSettings userSettings;
@@ -175,6 +181,7 @@ namespace GW2PAO.Controllers
             this.playerService = playerService;
             this.mapObj = mapObj;
             this.userSettings = userSettings;
+            this.timerCount = 0;
 
             // Initialize the refresh timer
             this.objectivesRefreshTimer = new Timer(this.RefreshObjectives);
@@ -341,49 +348,62 @@ namespace GW2PAO.Controllers
                     }
 
                     // Refresh state of all objectives
-                    var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                    if (latestObjectivesData.Count() > 0)
+                    // Since we don't perform any caching with this request, let's not spam Anet's servers by doing it 2-times a second
+                    // Instead, we'll do it once every 2 seconds
+                    this.timerCount++;
+                    if (this.timerCount >= 4) // 500ms * 4 = 2seconds
                     {
-                        foreach (var objective in this.AllObjectives)
+                        logger.Debug("Refreshing all objectives");
+                        this.timerCount = 0;
+                        var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                        if (latestObjectivesData.Count() > 0)
                         {
-                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-
-                            if (objective.WorldOwner != latestData.WorldOwner)
+                            foreach (var objective in this.AllObjectives)
                             {
-                                // New owner
-                                Threading.InvokeOnUI(() =>
-                                    {
-                                        objective.PrevWorldOwner = objective.WorldOwner;
-                                        objective.WorldOwner = latestData.WorldOwner;
+                                var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
 
-                                        // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
-                                        if (objective.Type != ObjectiveType.TempleofLostPrayers
-                                            && objective.Type != ObjectiveType.BattlesHollow
-                                            && objective.Type != ObjectiveType.BauersEstate
-                                            && objective.Type != ObjectiveType.OrchardOverlook
-                                            && objective.Type != ObjectiveType.CarversAscent)
-                                        {
-                                            objective.FlipTime = DateTime.UtcNow;
-                                            objective.IsRIActive = true;
-                                        }
-                                    });
-                                if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                                if (objective.WorldOwner != latestData.WorldOwner)
                                 {
-                                    // Owner just changed, raise a notification!
-                                    this.DisplayNotification(objective);
+                                    // New owner
+                                    Threading.InvokeOnUI(() =>
+                                        {
+                                            objective.PrevWorldOwner = objective.WorldOwner;
+                                            objective.WorldOwner = latestData.WorldOwner;
+
+                                            // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
+                                            if (objective.Type != ObjectiveType.TempleofLostPrayers
+                                                && objective.Type != ObjectiveType.BattlesHollow
+                                                && objective.Type != ObjectiveType.BauersEstate
+                                                && objective.Type != ObjectiveType.OrchardOverlook
+                                                && objective.Type != ObjectiveType.CarversAscent)
+                                            {
+                                                objective.FlipTime = DateTime.UtcNow;
+                                                objective.IsRIActive = true;
+                                            }
+                                        });
+
+                                    if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                                    {
+                                        // Owner just changed, raise a notification!
+                                        this.DisplayNotification(objective);
+                                    }
                                 }
                             }
+                        }
+                    }
 
-                            var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
-                            if (timeSinceFlip <= TimeSpan.FromMinutes(5))
-                            {
-                                var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
-                                Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
-                            }
-                            else
-                            {
-                                Threading.InvokeOnUI(() => objective.IsRIActive = false);
-                            }
+                    // Refresh timers
+                    foreach (var objective in this.AllObjectives)
+                    {
+                        var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
+                        if (timeSinceFlip <= TimeSpan.FromMinutes(5))
+                        {
+                            var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
+                            Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
+                        }
+                        else
+                        {
+                            Threading.InvokeOnUI(() => objective.IsRIActive = false);
                         }
                     }
 
