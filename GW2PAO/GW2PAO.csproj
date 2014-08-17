@@ -494,7 +494,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="Fody.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(TargetDir)
+    <PostBuildEvent Condition="'$(Configuration)' == 'Release_WithoutBrowser'">cd $(TargetDir)
 del avcodec-53.dll
 del avformat-53.dll
 del avutil-51.dll
