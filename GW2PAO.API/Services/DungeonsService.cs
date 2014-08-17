@@ -29,7 +29,18 @@ namespace GW2PAO.API.Services
         public void LoadTable()
         {
             logger.Info("Loading Dungeons Table");
-            this.DungeonsTable = DungeonsTable.LoadTable();
+            try
+            {
+                this.DungeonsTable = DungeonsTable.LoadTable();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                logger.Info("Error loading Dungeons Table, re-creating table");
+                DungeonsTable.CreateTable();
+                this.DungeonsTable = DungeonsTable.LoadTable();
+            }
+            
         }
     }
 }
