@@ -466,28 +466,7 @@ namespace GW2PAO.Controllers
         /// <returns></returns>
         private bool CanDisplayZoneAssistant()
         {
-            bool canDisplayZoneAssistant = false;
-
-            try
-            {
-                canDisplayZoneAssistant = (this.SystemService.IsGw2Running && this.PlayerService.HasValidMapId);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                // An exception can happen if GW2 is running as admin
-                // If that occurs, display a notification
-                if (ex.NativeErrorCode == 5 && !this.runningAsAdminErrorShown)
-                {
-                    App.TrayIcon.DisplayNotification("Warning", "Some features cannot be started because GW2 is running as administrator.", TrayIcon.TrayInfoMessageType.Warning);
-                    logger.Warn(ex);
-                    this.runningAsAdminErrorShown = true;
-                }
-            }
-
-            if (canDisplayZoneAssistant)
-                this.runningAsAdminErrorShown = false;
-
-            return canDisplayZoneAssistant;
+            return true;
         }
 
         /// <summary>
