@@ -49,6 +49,14 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
+            // Update settings if neccessary
+            if (GW2PAO.Properties.Settings.Default.UpgradeRequired)
+            {
+                GW2PAO.Properties.Settings.Default.Upgrade();
+                GW2PAO.Properties.Settings.Default.UpgradeRequired = false;
+                GW2PAO.Properties.Settings.Default.Save();
+            }
+
 #if DEBUG
             // Enable logging if running in debug
             LogManager.GlobalThreshold = NLog.LogLevel.Trace;
@@ -123,6 +131,8 @@ namespace GW2PAO
             TrayIcon.DisplayNotification("GW2 Personal Assistant Overlay is now running", "Click here for options", TrayInfoMessageType.None);
 
             logger.Info("Program startup complete");
+
+            AppController.ReopenWindowsFromSettings();
         }
 
         /// <summary>

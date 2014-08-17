@@ -46,6 +46,7 @@ namespace GW2PAO.Models
         private bool areGreenObjectivesShown;
         private bool areBlueObjectivesShown;
         private bool areNeutralObjectivesShown;
+        private WvWMap mapOverride;
         private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
 
         /// <summary>
@@ -190,6 +191,15 @@ namespace GW2PAO.Models
         {
             get { return this.areNeutralObjectivesShown; }
             set { SetField(ref this.areNeutralObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// User-configured map override
+        /// </summary>
+        public WvWMap MapOverride
+        {
+            get { return this.mapOverride; }
+            set { this.SetField(ref this.mapOverride, value); }
         }
 
         /// <summary>

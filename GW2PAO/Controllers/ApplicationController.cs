@@ -320,6 +320,34 @@ namespace GW2PAO.Controllers
         }
 
         /// <summary>
+        /// Forces the application controller to open windows based on the user settings
+        /// </summary>
+        public void ReopenWindowsFromSettings()
+        {
+            logger.Info("Reopening windows based on settings.");
+            Task.Factory.StartNew(() =>
+                {
+                    Threading.BeginInvokeOnUI(() =>
+                        {
+                            if (Properties.Settings.Default.IsEventTrackerOpen && this.CanDisplayEventTracker())
+                                this.DisplayEventTracker();
+
+                            if (Properties.Settings.Default.IsZoneAssistantOpen && this.CanDisplayZoneAssistant())
+                                this.DisplayZoneAssistant();
+
+                            if (Properties.Settings.Default.IsDungeonTrackerOpen && this.CanDisplayDungeonTracker())
+                                this.DisplayDungeonTracker();
+
+                            if (Properties.Settings.Default.IsWvWTrackerOpen && this.CanDisplayWvWTracker())
+                                this.DisplayWvWTracker();
+
+                            if (Properties.Settings.Default.IsTPCalculatorOpen && this.CanDisplayTPCalculator())
+                                this.DisplayTPCalculator();
+                        });
+                });
+        }
+
+        /// <summary>
         /// Returns the main application menu items
         /// </summary>
         /// <returns>The main application menu items</returns>
@@ -337,22 +365,50 @@ namespace GW2PAO.Controllers
 
             logger.Debug("Closing views");
             if (this.eventTrackerView != null)
+            {
+                Properties.Settings.Default.IsEventTrackerOpen = this.eventTrackerView.IsVisible;
                 Threading.InvokeOnUI(() => this.eventTrackerView.Close());
+            }
+
             if (this.zoneCompletionView != null)
+            {
+                Properties.Settings.Default.IsZoneAssistantOpen = this.zoneCompletionView.IsVisible;
                 Threading.InvokeOnUI(() => this.zoneCompletionView.Close());
+            }
+
             if (this.eventNotificationsView != null)
+            {
                 Threading.InvokeOnUI(() => this.eventNotificationsView.Close());
+            }
+
             if (this.dungeonTrackerView != null)
+            {
+                Properties.Settings.Default.IsDungeonTrackerOpen = this.dungeonTrackerView.IsVisible;
                 Threading.InvokeOnUI(() => this.dungeonTrackerView.Close());
+            }
+
             if (this.wvwTrackerView != null)
+            {
+                Properties.Settings.Default.IsWvWTrackerOpen = this.wvwTrackerView.IsVisible;
                 Threading.InvokeOnUI(() => this.wvwTrackerView.Close());
+            }
+
             if (this.wvwNotificationsView != null)
+            {
                 Threading.InvokeOnUI(() => this.wvwNotificationsView.Close());
+            }
+
             if (this.tpCalculatorView != null)
+            {
+                Properties.Settings.Default.IsTPCalculatorOpen = this.tpCalculatorView.IsVisible;
                 Threading.InvokeOnUI(() => this.tpCalculatorView.Close());
+            }
+
+            Threading.InvokeOnUI(() => this.BrowserController.CloseBrowser());
+
+            Properties.Settings.Default.Save();
 
             logger.Debug("Stopping controllers");
-            Threading.InvokeOnUI(() => this.BrowserController.CloseBrowser());
             this.EventsController.Stop();
             this.ZoneCompletionController.Stop();
             this.DungeonsController.Stop();

@@ -298,5 +298,77 @@ namespace GW2PAO.Properties {
                 this["TPCalculatorY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpgradeRequired {
+            get {
+                return ((bool)(this["UpgradeRequired"]));
+            }
+            set {
+                this["UpgradeRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsZoneAssistantOpen {
+            get {
+                return ((bool)(this["IsZoneAssistantOpen"]));
+            }
+            set {
+                this["IsZoneAssistantOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsEventTrackerOpen {
+            get {
+                return ((bool)(this["IsEventTrackerOpen"]));
+            }
+            set {
+                this["IsEventTrackerOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDungeonTrackerOpen {
+            get {
+                return ((bool)(this["IsDungeonTrackerOpen"]));
+            }
+            set {
+                this["IsDungeonTrackerOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsWvWTrackerOpen {
+            get {
+                return ((bool)(this["IsWvWTrackerOpen"]));
+            }
+            set {
+                this["IsWvWTrackerOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsTPCalculatorOpen {
+            get {
+                return ((bool)(this["IsTPCalculatorOpen"]));
+            }
+            set {
+                this["IsTPCalculatorOpen"] = value;
+            }
+        }
     }
 }

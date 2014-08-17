@@ -107,7 +107,11 @@ namespace GW2PAO.Controllers
         /// Map with which to override the player map.
         /// To disable the override, set this to Unknown
         /// </summary>
-        public WvWMap MapOverride { get; set; }
+        public WvWMap MapOverride
+        {
+            get { return this.UserSettings.MapOverride; }
+            set { this.UserSettings.MapOverride = value; }
+        }
 
         /// <summary>
         /// The interval by which to refresh the objectives state
@@ -171,7 +175,6 @@ namespace GW2PAO.Controllers
             this.playerService = playerService;
             this.mapObj = mapObj;
             this.userSettings = userSettings;
-            this.MapOverride = WvWMap.Unknown;
 
             // Initialize the refresh timer
             this.objectivesRefreshTimer = new Timer(this.RefreshObjectives);
