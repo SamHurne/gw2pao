@@ -132,6 +132,23 @@ namespace GW2PAO
 
             logger.Info("Program startup complete");
 
+            // Check admin privileges - some parts of the application won't work if the application doesn't have permissions to access the Mumble interface
+            try
+            {
+                bool isRunning = AppController.SystemService.IsGw2Running;
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                // An exception can happen if GW2 is running as admin
+                // If that occurs, display a notification
+                if (ex.NativeErrorCode == 5)
+                {
+                    App.TrayIcon.DisplayNotification("Warning", "Some features cannot be started because GW2 is running as administrator.", TrayInfoMessageType.Warning);
+                    logger.Warn(ex);
+                }
+            }
+
+            // Reopen windows based on user settings
             AppController.ReopenWindowsFromSettings();
         }
 
