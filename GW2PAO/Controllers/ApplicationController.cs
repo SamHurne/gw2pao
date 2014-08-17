@@ -310,8 +310,11 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
 
+#if !NO_BROWSER
+            // Add the Web Browser
             this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
+#endif
 
             logger.Info("Application controller initialized");
         }

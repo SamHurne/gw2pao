@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,7 @@ namespace GW2PAO.Controllers
         /// <param name="url">The url to go to</param>
         public void GoToUrl(string url)
         {
+#if !NO_BROWSER
             if (this.browser == null || !this.browser.IsVisible)
             {
                 this.browser = new BrowserView(new Uri(url));
@@ -59,6 +61,10 @@ namespace GW2PAO.Controllers
             {
                 this.browser.webControl.Source = new Uri(url);
             }
+#else
+            // No browser, just start a process with the URL and let windows handle it
+            Process.Start(url);
+#endif
         }
     }
 }

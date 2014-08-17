@@ -70,6 +70,7 @@ namespace GW2PAO
             logger.Debug("Registering last chance exception handlers");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+#if !NO_BROWSER
             // Initialize the WebCore for the web browser
             logger.Debug("Initializing Awesomium WebCore");
             if (!WebCore.IsInitialized)
@@ -79,6 +80,7 @@ namespace GW2PAO
                     HomeURL = "http://wiki.guildwars2.com/".ToUri(),
                 });
             }
+#endif
 
             // Create dummy window so that the only way to exit the app is by using the tray icon
             Window dummyWindow = new Window()

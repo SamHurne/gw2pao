@@ -21,6 +21,7 @@
             
             <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
                 <awecore:WebPreferences  ShrinkStandaloneImagesToFit="False" SmoothScrolling="True"
+                                         AllowInsecureContent="False"
                                          CustomCSS="
                                             ::-webkit-scrollbar              { background-color: #000000; }
                                             ::-webkit-scrollbar-button       { background-color: #000000; }
