@@ -58,8 +58,9 @@ namespace GW2PAO.ViewModels
                     this.ModelData.WorldOwner = value;
                     this.RaisePropertyChanged();
 
-                    // Also refresh the world owner's name
+                    // Also refresh the world owner's name, and visiblity
                     this.RaisePropertyChanged("WorldOwnerName");
+                    this.RefreshVisibility();
                 }
             }
         }
