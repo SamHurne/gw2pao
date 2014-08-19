@@ -10,7 +10,7 @@
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         MinWidth="250" MaxWidth="250" Width="250"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">

@@ -5,6 +5,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="OverlayMenuIconView" SizeToContent="WidthAndHeight"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="NoResize"
         Topmost="True"
         Closing="OverlayMenuIconView_Closing">
     <src:OverlayWindow.Resources>

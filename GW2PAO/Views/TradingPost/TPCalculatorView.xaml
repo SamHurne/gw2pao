@@ -7,7 +7,7 @@
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         Width="215" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">

@@ -16,7 +16,7 @@
         MinHeight="78" Height="250"
         MinWidth="225" MaxWidth="225" Width="225"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">

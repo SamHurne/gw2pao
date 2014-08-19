@@ -8,6 +8,7 @@
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:view="clr-namespace:GW2PAO.Views.WvWNotification"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="NoResize"
         Topmost="True" ShowInTaskbar="False"
         TextOptions.TextFormattingMode="Display"
         MinHeight="216" Height="Auto" SizeToContent="Height" Width="215"

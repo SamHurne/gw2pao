@@ -9,6 +9,7 @@
         xmlns:View="clr-namespace:GW2PAO.Views.EventNotification"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         Topmost="True" ShowInTaskbar="False"
+        ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
         MinHeight="120" Height="Auto" SizeToContent="Height" Width="215" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
