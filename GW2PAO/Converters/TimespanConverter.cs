@@ -22,20 +22,20 @@ namespace GW2PAO.Style.Converters
 
             if (targetType == typeof(string))
             {
-                TimeSpan timespan = (TimeSpan)value;
-                if (timespan < TimeSpan.Zero)
+                if (value is TimeSpan)
                 {
-                    if (excludeHours)
-                        return timespan.ToString("mm\\:ss");
-                    else
-                        return timespan.ToString("hh\\:mm\\:ss");
+                    TimeSpan timespan = (TimeSpan)value;
+                    return this.GetTimeSpanString(timespan, excludeHours);
+                }
+                else if (value is double || value is int)
+                {
+                    // Treat it as if it's in seconds
+                    TimeSpan timespan = TimeSpan.FromSeconds((double)value);
+                    return this.GetTimeSpanString(timespan, excludeHours);
                 }
                 else
                 {
-                    if (excludeHours)
-                        return timespan.ToString("mm\\:ss");
-                    else
-                        return timespan.ToString("hh\\:mm\\:ss");
+                    return "??";
                 }
             }
             else
@@ -47,6 +47,24 @@ namespace GW2PAO.Style.Converters
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private string GetTimeSpanString(TimeSpan timespan, bool excludeHours)
+        {
+            if (timespan < TimeSpan.Zero)
+            {
+                if (excludeHours)
+                    return timespan.ToString("mm\\:ss");
+                else
+                    return timespan.ToString("hh\\:mm\\:ss");
+            }
+            else
+            {
+                if (excludeHours)
+                    return timespan.ToString("mm\\:ss");
+                else
+                    return timespan.ToString("hh\\:mm\\:ss");
+            }
         }
     }
 }

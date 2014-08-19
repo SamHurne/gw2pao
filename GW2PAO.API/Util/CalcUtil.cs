@@ -12,6 +12,7 @@ namespace GW2PAO.API.Util
     public static class CalcUtil
     {
         public static double MapConversionFactor = 39.3701;
+        public static double DistanceToTimeFactor = 300.0;
 
         /// <summary>
         /// Converts a given mumble-link Point to a map position.
@@ -37,6 +38,16 @@ namespace GW2PAO.API.Util
             // Note: Removing inclusion of the Z component, since it seems like the resulting distance isn't accurate in the game (might be a problem with the Z axis reported by the game)
             //return Math.Sqrt(Math.Pow(Math.Abs((ptB.X - ptA.X)), 2) + Math.Pow(Math.Abs((ptB.Y - ptA.Y)), 2) + Math.Pow(Math.Abs((ptB.Z - ptA.Z)), 2));
             return Math.Sqrt(Math.Pow(Math.Abs((ptB.X - ptA.X)), 2) + Math.Pow(Math.Abs((ptB.Y - ptA.Y)), 2));
+        }
+
+        /// <summary>
+        /// Calculates a time-distance from a given distance in game units
+        /// </summary>
+        /// <param name="distance">The distance in game units</param>
+        /// <returns>The resulting time-distance in seconds</returns>
+        public static double CalculateTimeDistance(double distance)
+        {
+            return distance / DistanceToTimeFactor;
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace GW2PAO.Models
         private bool autoUnlockPois;
         private bool autoUnlockVistas;
         private bool showUnlockedPoints;
+        private Units distanceUnits;
         private ObservableCollection<ZoneItem> hiddenZoneItems = new ObservableCollection<ZoneItem>();
         private ObservableCollection<CharacterZoneItems> unlockedZoneItems = new ObservableCollection<CharacterZoneItems>();
 
@@ -124,6 +125,15 @@ namespace GW2PAO.Models
         }
 
         /// <summary>
+        /// The units used for calculated distances
+        /// </summary>
+        public Units DistanceUnits
+        {
+            get { return this.distanceUnits; }
+            set { SetField(ref this.distanceUnits, value); }
+        }
+
+        /// <summary>
         /// Collection of hidden zone items 
         /// Since IDs are not unique across zones, this is a collection of the zone item objects themselves
         /// </summary>
@@ -151,6 +161,7 @@ namespace GW2PAO.Models
             this.AutoUnlockPois = true;
             this.AutoUnlockVistas = true;
             this.ShowUnlockedPoints = true;
+            this.DistanceUnits = Units.Feet;
         }
 
         /// <summary>

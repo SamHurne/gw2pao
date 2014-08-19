@@ -88,6 +88,12 @@
                                 <MenuItem Header="Global" Command="{Binding ResetAllHiddenCommand}" />
                             </MenuItem>
                             <Separator />
+                            <MenuItem Header="Distance Units">
+                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
+                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
+                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
+                            </MenuItem>
+                            <Separator />
                             <MenuItem Header="Automatic Unlock">
                                 <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" />
                                 <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" />

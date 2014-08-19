@@ -42,6 +42,69 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         public IHasZoneName ZoneNameVM { get; private set; }
 
         /// <summary>
+        /// True if the selected distance units are Feet, else false
+        /// </summary>
+        public bool IsFeetSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.Feet; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.Feet;
+                    this.RaisePropertyChanged();
+
+                    // Also raise property changed for the other options
+                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
+                    this.RaisePropertyChanged("IsMetersSelected");
+                    this.RaisePropertyChanged("IsTimeDistanceSelected");
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the selected distance units are Meters, else false
+        /// </summary>
+        public bool IsMetersSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.Meters; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.Meters;
+                    this.RaisePropertyChanged();
+
+                    // Also raise property changed for the other options
+                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
+                    this.RaisePropertyChanged("IsFeetSelected");
+                    this.RaisePropertyChanged("IsTimeDistanceSelected");
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the selected distance units are Time-Distances, else false
+        /// </summary>
+        public bool IsTimeDistanceSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.TimeDistance; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.TimeDistance;
+                    this.RaisePropertyChanged();
+
+                    // Also raise property changed for the other options
+                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
+                    this.RaisePropertyChanged("IsFeetSelected");
+                    this.RaisePropertyChanged("IsMetersSelected");
+                }
+            }
+        }
+
+        /// <summary>
         /// The user settings
         /// </summary>
         public ZoneCompletionSettings UserSettings { get { return this.controller.UserSettings; } }

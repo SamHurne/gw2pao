@@ -145,6 +145,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         }
 
         /// <summary>
+        /// The zone completion assistant settings
+        /// </summary>
+        public ZoneCompletionSettings UserSettings { get { return this.userSettings; } }
+
+        /// <summary>
         /// Command to hide this item/point
         /// </summary>
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenItems); } }

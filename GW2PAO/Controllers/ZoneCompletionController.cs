@@ -247,7 +247,21 @@ namespace GW2PAO.Controllers
                 {
                     foreach (var item in this.ZoneItems)
                     {
-                        var newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location) / 12.0);
+                        double newDistance = 0;
+                        switch (this.UserSettings.DistanceUnits)
+                        {
+                            case Units.Feet:
+                                newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location) / 12.0);
+                                break;
+                            case Units.Meters:
+                                newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location) / 39.3701);
+                                break;
+                            case Units.TimeDistance:
+                                newDistance = Math.Round(CalcUtil.CalculateTimeDistance(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location)));
+                                break;
+                            default:
+                                break;
+                        }
                         var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerPosition, item.ItemModel.Location),
                                                                CalcUtil.Vector.CreateVector(new API.Data.Point(0, 0), cameraDirectionPosition));
 

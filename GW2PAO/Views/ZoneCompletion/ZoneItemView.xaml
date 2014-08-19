@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="../../Style/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
+            <converters:TimespanConverter x:Key="TimeConverter" />
 
         </ResourceDictionary>
 
@@ -103,11 +104,34 @@
                                     VerticalAlignment="Center"
                                     Text="Distance:  " />
 
-                <core:OutlinedTextBlock VerticalAlignment="Center"
-                                        Text="{Binding DistanceFromPlayer}" />
+                <core:OutlinedTextBlock VerticalAlignment="Center">
+                    <core:OutlinedTextBlock.Style>
+                        <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                            <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                    <Setter Property="Text" Value="{Binding DistanceFromPlayer, Converter={StaticResource TimeConverter}, ConverterParameter=true}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </core:OutlinedTextBlock.Style>
+                </core:OutlinedTextBlock>
 
-                <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
-                                        Text=" ft"/>
+                <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <core:OutlinedTextBlock.Style>
+                        <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                            <Setter Property="Text" Value=" ft"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="Meters">
+                                    <Setter Property="Text" Value=" m"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                    <Setter Property="Text" Value=""/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </core:OutlinedTextBlock.Style>
+                </core:OutlinedTextBlock>
             </StackPanel>
 
             <CheckBox Name="UnlockedIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2"

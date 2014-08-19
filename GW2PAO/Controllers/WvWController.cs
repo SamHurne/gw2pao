@@ -31,7 +31,6 @@ namespace GW2PAO.Controllers
         private const int GreenBorderlandsMapID = 95;
         private const int BlueBorderlandsMapID = 96;
         private const int EdgeOfMistsMapID = 968;
-        private const double DistanceToTimeFactor = 300;
 
         /// <summary>
         /// Service responsible for WvW information
@@ -419,7 +418,7 @@ namespace GW2PAO.Controllers
                                 if (playerPosition != null && objective.ModelData.MapLocation != null)
                                 {
                                     var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
-                                    var timeDistance = this.CalculateTimeDistance(newDistance);
+                                    var timeDistance = TimeSpan.FromSeconds(CalcUtil.CalculateTimeDistance(newDistance));
                                     objective.DistanceTime = timeDistance;
                                 }
                             }
@@ -493,16 +492,6 @@ namespace GW2PAO.Controllers
                 default:
                     return false;
             }
-        }
-
-        /// <summary>
-        /// Calculates a time-distance from a given distance in game units
-        /// </summary>
-        /// <param name="distance">The distance in game units</param>
-        /// <returns>The resulting time-distance</returns>
-        private TimeSpan CalculateTimeDistance(double distance)
-        {
-            return TimeSpan.FromSeconds(distance / DistanceToTimeFactor);
         }
     }
 }
