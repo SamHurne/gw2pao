@@ -61,7 +61,8 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         }
 
         /// <summary>
-        /// Distance of the item/point from the player, in ft
+        /// Distance of the item/point from the player
+        /// Units depend on user selection
         /// </summary>
         public double DistanceFromPlayer
         {

@@ -155,6 +155,54 @@ namespace GW2PAO.ViewModels.WvWTracker
         }
 
         /// <summary>
+        /// True if the selected distance units are Feet, else false
+        /// </summary>
+        public bool IsFeetSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.Feet; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.Feet;
+                    this.NotifyUnitsSelectionChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the selected distance units are Meters, else false
+        /// </summary>
+        public bool IsMetersSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.Meters; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.Meters;
+                    this.NotifyUnitsSelectionChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the selected distance units are Time-Distances, else false
+        /// </summary>
+        public bool IsTimeDistanceSelected
+        {
+            get { return this.UserSettings.DistanceUnits == Units.TimeDistance; }
+            set
+            {
+                if (value)
+                {
+                    this.UserSettings.DistanceUnits = Units.TimeDistance;
+                    this.NotifyUnitsSelectionChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// WvW user settings
         /// </summary>
         public WvWSettings UserSettings { get { return this.controller.UserSettings; } }
@@ -198,6 +246,16 @@ namespace GW2PAO.ViewModels.WvWTracker
         {
             this.RaisePropertyChanged("IsVerticalOrientation");
             this.RaisePropertyChanged("IsHorizontalOrientation");
+        }
+
+        /// <summary>
+        /// Raises property changed events for all of the unit selection properties
+        /// </summary>
+        private void NotifyUnitsSelectionChanged()
+        {
+            this.RaisePropertyChanged("IsFeetSelected");
+            this.RaisePropertyChanged("IsMetersSelected");
+            this.RaisePropertyChanged("IsTimeDistanceSelected");
         }
     }
 }

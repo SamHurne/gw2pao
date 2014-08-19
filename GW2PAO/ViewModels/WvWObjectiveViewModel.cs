@@ -23,7 +23,7 @@ namespace GW2PAO.ViewModels
         private WorldColor prevWorldOwner;
         private DateTime flipTime;
         private TimeSpan timerValue;
-        private TimeSpan distanceTime;
+        private double distanceFromPlayer;
         private bool isVisible;
         private bool isRIActive;
         private bool isNotificationShown;
@@ -160,12 +160,13 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Player's distance from the objective, in an estimated time
+        /// Distance of the objective from the player
+        /// Units depend on user selection
         /// </summary>
-        public TimeSpan DistanceTime
+        public double DistanceFromPlayer
         {
-            get { return this.distanceTime; }
-            set { SetField(ref this.distanceTime, value); }
+            get { return this.distanceFromPlayer; }
+            set { SetField(ref this.distanceFromPlayer, value); }
         }
 
         /// <summary>
@@ -248,7 +249,7 @@ namespace GW2PAO.ViewModels
             this.PrevWorldOwner = WorldColor.None;
             this.FlipTime = DateTime.UtcNow;
             this.TimerValue = TimeSpan.Zero;
-            this.DistanceTime = TimeSpan.Zero;
+            this.DistanceFromPlayer = 0.0;
             this.IsRIActive = false;
             this.IsNotificationShown = false;
             this.IsRemovingNotification = false;

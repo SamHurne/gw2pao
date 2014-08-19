@@ -52,12 +52,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 if (value)
                 {
                     this.UserSettings.DistanceUnits = Units.Feet;
-                    this.RaisePropertyChanged();
-
-                    // Also raise property changed for the other options
-                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
-                    this.RaisePropertyChanged("IsMetersSelected");
-                    this.RaisePropertyChanged("IsTimeDistanceSelected");
+                    this.NotifyUnitsSelectionChanged();
                 }
             }
         }
@@ -73,12 +68,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 if (value)
                 {
                     this.UserSettings.DistanceUnits = Units.Meters;
-                    this.RaisePropertyChanged();
-
-                    // Also raise property changed for the other options
-                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
-                    this.RaisePropertyChanged("IsFeetSelected");
-                    this.RaisePropertyChanged("IsTimeDistanceSelected");
+                    this.NotifyUnitsSelectionChanged();
                 }
             }
         }
@@ -94,12 +84,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 if (value)
                 {
                     this.UserSettings.DistanceUnits = Units.TimeDistance;
-                    this.RaisePropertyChanged();
-
-                    // Also raise property changed for the other options
-                    // Should also probably refresh the value on all zone items, but we'll let the controller just handle it
-                    this.RaisePropertyChanged("IsFeetSelected");
-                    this.RaisePropertyChanged("IsMetersSelected");
+                    this.NotifyUnitsSelectionChanged();
                 }
             }
         }
@@ -236,6 +221,16 @@ namespace GW2PAO.ViewModels.ZoneCompletion
             this.UserSettings.AreHeartsVisible = false;
             this.UserSettings.AreVistasVisible = false;
             this.UserSettings.AreSkillChallengesVisible = false;
+        }
+
+        /// <summary>
+        /// Raises property changed events for all of the unit selection properties
+        /// </summary>
+        private void NotifyUnitsSelectionChanged()
+        {
+            this.RaisePropertyChanged("IsFeetSelected");
+            this.RaisePropertyChanged("IsMetersSelected");
+            this.RaisePropertyChanged("IsTimeDistanceSelected");
         }
     }
 }

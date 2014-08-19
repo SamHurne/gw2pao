@@ -417,14 +417,12 @@ namespace GW2PAO.Controllers
                             {
                                 if (playerPosition != null && objective.ModelData.MapLocation != null)
                                 {
-                                    var newDistance = CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation);
-                                    var timeDistance = TimeSpan.FromSeconds(CalcUtil.CalculateTimeDistance(newDistance));
-                                    objective.DistanceTime = timeDistance;
+                                    objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
                                 }
                             }
                             else
                             {
-                                objective.DistanceTime = TimeSpan.Zero;
+                                objective.DistanceFromPlayer = 0;
                             }
                         }
                     }

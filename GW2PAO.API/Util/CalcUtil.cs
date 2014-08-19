@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.API.Data.Enums;
 
 namespace GW2PAO.API.Util
 {
@@ -38,6 +39,28 @@ namespace GW2PAO.API.Util
             // Note: Removing inclusion of the Z component, since it seems like the resulting distance isn't accurate in the game (might be a problem with the Z axis reported by the game)
             //return Math.Sqrt(Math.Pow(Math.Abs((ptB.X - ptA.X)), 2) + Math.Pow(Math.Abs((ptB.Y - ptA.Y)), 2) + Math.Pow(Math.Abs((ptB.Z - ptA.Z)), 2));
             return Math.Sqrt(Math.Pow(Math.Abs((ptB.X - ptA.X)), 2) + Math.Pow(Math.Abs((ptB.Y - ptA.Y)), 2));
+        }
+
+        /// <summary>
+        /// Calculates the distance between 2 points, using x, y, and z coordinates
+        /// </summary>
+        /// <param name="ptA">The first point</param>
+        /// <param name="ptB">The second point</param>
+        /// <param name="units">Units of the value to return</param>
+        /// <returns>The distance between ptA and ptB, using x, y, and z coordinates, using the specified units</returns>
+        public static double CalculateDistance(API.Data.Point ptA, API.Data.Point ptB, Units units)
+        {
+            switch (units)
+            {
+                case Units.Feet:
+                    return CalcUtil.CalculateDistance(ptA, ptB) / 12.0;
+                case Units.Meters:
+                    return CalcUtil.CalculateDistance(ptA, ptB) / 39.3701;
+                case Units.TimeDistance:
+                    return CalcUtil.CalculateTimeDistance(CalcUtil.CalculateDistance(ptA, ptB));
+                default:
+                    return 0;
+            }
         }
 
         /// <summary>

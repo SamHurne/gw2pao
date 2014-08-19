@@ -47,6 +47,7 @@ namespace GW2PAO.Models
         private bool areBlueObjectivesShown;
         private bool areNeutralObjectivesShown;
         private WvWMap mapOverride;
+        private Units distanceUnits;
         private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
 
         /// <summary>
@@ -200,6 +201,15 @@ namespace GW2PAO.Models
         {
             get { return this.mapOverride; }
             set { this.SetField(ref this.mapOverride, value); }
+        }
+
+        /// <summary>
+        /// Units in which to display distances
+        /// </summary>
+        public Units DistanceUnits
+        {
+            get { return this.distanceUnits; }
+            set { SetField(ref this.distanceUnits, value); }
         }
 
         /// <summary>

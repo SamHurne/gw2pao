@@ -149,10 +149,48 @@
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                             Margin="0,0,0,5">
-                    <core:OutlinedTextBlock Margin="0,0,3,0"
-                                            Text="Dist:" />
-                    <core:OutlinedTextBlock Fill="White"
-                                            Text="{Binding DistanceTime, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
+
+                    <core:OutlinedTextBlock Margin="0,0,3,0">
+                        <core:OutlinedTextBlock.Style>
+                            <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                                <Setter Property="Text" Value=""/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                        <Setter Property="Text" Value="Dist:"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </core:OutlinedTextBlock.Style>
+                    </core:OutlinedTextBlock>
+
+                    <core:OutlinedTextBlock Fill="White">
+                        <core:OutlinedTextBlock.Style>
+                            <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                                <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                        <Setter Property="Text" Value="{Binding DistanceFromPlayer, Converter={StaticResource TimeConverter}, ConverterParameter=true}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </core:OutlinedTextBlock.Style>
+                    </core:OutlinedTextBlock>
+
+                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <core:OutlinedTextBlock.Style>
+                            <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                                <Setter Property="Text" Value=" ft"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="Meters">
+                                        <Setter Property="Text" Value=" m"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                        <Setter Property="Text" Value=""/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </core:OutlinedTextBlock.Style>
+                    </core:OutlinedTextBlock>
                 </StackPanel>
 
                 <!--RI Timer Value (if any), will hide/show based with trigger-->

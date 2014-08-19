@@ -75,6 +75,13 @@
                                 <MenuItem Header="Horizontal" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
                             </MenuItem>
                             <Separator />
+                            <MenuItem Header="Show Est. Time-Distances" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
+                            <MenuItem Header="Distance Units">
+                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
+                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
+                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
+                            </MenuItem>
+                            <Separator />
                             <MenuItem Header="Reset Hidden Objectives" Command="{Binding ResetHiddenObjectivesCommand}" />
                             <MenuItem Header="Show">
                                 <MenuItem Header="Red Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" />
@@ -88,7 +95,6 @@
                                 <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" />
                                 <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" />
                             </MenuItem>
-                            <MenuItem Header="Show Est. Time-Distances" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
                             <Separator />
                             <MenuItem Header="Use Player's Map" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
                             <MenuItem Header="Override Displayed Map">

@@ -138,7 +138,6 @@
     <Compile Include="TrayIcon\IApplicationTrayIcon.cs" />
     <Compile Include="TrayIcon\TrayInfoMessageType.cs" />
     <Compile Include="Utility\Threading.cs" />
-    <Compile Include="Models\Units.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\DungeonTracker\DungeonTrackerViewModel.cs" />

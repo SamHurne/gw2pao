@@ -66,6 +66,7 @@
     <Compile Include="Data\Enums\EventState.cs" />
     <Compile Include="Data\Enums\ObjectiveType.cs" />
     <Compile Include="Data\Enums\Profession.cs" />
+    <Compile Include="Data\Enums\Units.cs" />
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
