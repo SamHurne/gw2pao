@@ -45,6 +45,11 @@ namespace GW2PAO
         private static ApplicationController AppController;
 
         /// <summary>
+        /// The overlay menu icon (little icon that shows up on the screen, rather than in the tray)
+        /// </summary>
+        private static OverlayMenuIcon ApplicationOverlayMenuIcon;
+
+        /// <summary>
         /// Application startup
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
@@ -115,6 +120,9 @@ namespace GW2PAO
             // Initialize the application controller
             AppController = new ApplicationController();
 
+            // Initialize the OverlayMenuIcon
+            ApplicationOverlayMenuIcon = new OverlayMenuIcon(TrayIconVm);
+
             // Set up the menu items
             logger.Debug("Initializing menu items");
             if (TrayIconVm != null)
@@ -124,6 +132,10 @@ namespace GW2PAO
 
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true,
+                    () => { return ApplicationOverlayMenuIcon.IsVisible; },
+                    (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
+                    ApplicationOverlayMenuIcon, "IsVisible"));
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", this.ExitAndCleanup));
             }

@@ -89,5 +89,14 @@
     <Setting Name="IsTPCalculatorOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="IsOverlayIconVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OverlayIconX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="OverlayIconY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">29</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

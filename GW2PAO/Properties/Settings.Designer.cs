@@ -370,5 +370,41 @@ namespace GW2PAO.Properties {
                 this["IsTPCalculatorOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsOverlayIconVisible {
+            get {
+                return ((bool)(this["IsOverlayIconVisible"]));
+            }
+            set {
+                this["IsOverlayIconVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double OverlayIconX {
+            get {
+                return ((double)(this["OverlayIconX"]));
+            }
+            set {
+                this["OverlayIconX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("29")]
+        public double OverlayIconY {
+            get {
+                return ((double)(this["OverlayIconY"]));
+            }
+            set {
+                this["OverlayIconY"] = value;
+            }
+        }
     }
 }

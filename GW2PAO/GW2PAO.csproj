@@ -149,6 +149,7 @@
     <Compile Include="ViewModels\Interfaces\IHasWvWMap.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
+    <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
@@ -162,6 +163,9 @@
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverlayMenuIconView.xaml.cs">
+      <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
@@ -269,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\OverlayMenuIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WebBrowser\BrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -339,6 +347,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\OverlayMenuIcon.png" />
     <Resource Include="Resources\copper_coin.png" />
     <Resource Include="Resources\merchant.png" />
     <Resource Include="Resources\WorldvsWorld.png" />
