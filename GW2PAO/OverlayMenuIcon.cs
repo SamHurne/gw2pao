@@ -27,6 +27,9 @@ namespace GW2PAO
             {
                 if (SetField(ref this.isVisible, value))
                 {
+                    Settings.Default.IsOverlayIconVisible = value;
+                    Settings.Default.Save();
+
                     if (value && menuIconView == null || !menuIconView.IsVisible)
                     {
                         // Showing
@@ -48,10 +51,26 @@ namespace GW2PAO
             }
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="vm">The tray icon view model containing the main menu</param>
         public OverlayMenuIcon(TrayIconViewModel vm)
         {
             this.trayIconViewModel = vm;
             this.IsVisible = Settings.Default.IsOverlayIconVisible;
+        }
+
+        public void Shutdown()
+        {
+            if (menuIconView != null && menuIconView.IsVisible)
+            {
+                // Closing
+                GW2PAO.Utility.Threading.InvokeOnUI(() =>
+                    {
+                        menuIconView.Close();
+                    });
+            }
         }
     }
 }

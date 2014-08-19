@@ -191,6 +191,7 @@ namespace GW2PAO
             // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
             Task.Factory.StartNew(() =>
             {
+                ApplicationOverlayMenuIcon.Shutdown();
                 AppController.Shutdown();
                 Application.Current.Dispatcher.Invoke(TaskbarIcon.Dispose);
                 Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);

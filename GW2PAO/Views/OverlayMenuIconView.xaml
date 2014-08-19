@@ -20,15 +20,15 @@
                         <Border Name="Border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
                                 BorderThickness="2" CornerRadius="3">
                             <Border.Background>
-                                <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                                    <GradientStop Color="#FF293847" Offset="0.25"/>
-                                    <GradientStop Color="#01293847" Offset="1.5"/>
-                                </RadialGradientBrush>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#FF24313D" Offset="0"/>
+                                    <GradientStop Color="#8024313D" Offset="1"/>
+                                </LinearGradientBrush>
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Black" Opacity="1" />
                             </Border.BorderBrush>
-                            <ContentPresenter Margin="3,4,3,4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <ContentPresenter Margin="4,5,4,5" HorizontalAlignment="Left" VerticalAlignment="Top" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="HasDropShadow" Value="true">
@@ -55,7 +55,7 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image Name="IconImage"
                Source="../Resources/OverlayMenuIcon.png"
-               Margin="4,3,4,3"
+               Margin="4,4,4,4"
                Height="24" Width="24"
                ToolTipService.InitialShowDelay="0"
                MouseDown="Image_MouseDown">
