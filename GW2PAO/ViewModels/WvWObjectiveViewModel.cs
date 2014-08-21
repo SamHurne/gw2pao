@@ -306,7 +306,7 @@ namespace GW2PAO.ViewModels
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreCastlesShown && this.Type == ObjectiveType.Camp)
+            else if (!this.userSettings.AreCampsShown && this.Type == ObjectiveType.Camp)
             {
                 this.IsVisible = false;
             }
