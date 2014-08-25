@@ -20,6 +20,8 @@ namespace GW2PAO.Views
     /// </summary>
     public partial class OverlayMenuIconView : OverlayWindow
     {
+        protected override bool NeverClickThrough { get { return true; } }
+
         public OverlayMenuIconView(TrayIconViewModel trayIconVm)
         {
             this.DataContext = trayIconVm;

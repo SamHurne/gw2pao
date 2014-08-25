@@ -98,5 +98,8 @@
     <Setting Name="OverlayIconY" Type="System.Double" Scope="User">
       <Value Profile="(Default)">29</Value>
     </Setting>
+    <Setting Name="IsClickthroughEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

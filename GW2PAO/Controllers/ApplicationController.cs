@@ -163,12 +163,6 @@ namespace GW2PAO.Controllers
         private TPCalculatorView tpCalculatorView;
 
         /// <summary>
-        /// Boolean for keeping track of the "Running As Admin" error shown when GW2 is
-        /// running as administrator - prevents spamming the error message
-        /// </summary>
-        private bool runningAsAdminErrorShown = false;
-
-        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()

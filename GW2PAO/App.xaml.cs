@@ -132,6 +132,14 @@ namespace GW2PAO
 
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Clickthrough Windows", null, true,
+                    () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
+                    (enabled) => {
+                                    GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
+                                    GW2PAO.Properties.Settings.Default.Save();
+                                 },
+                    GW2PAO.Properties.Settings.Default, "IsClickthroughEnabled"));
+
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true,
                     () => { return ApplicationOverlayMenuIcon.IsVisible; },
                     (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },

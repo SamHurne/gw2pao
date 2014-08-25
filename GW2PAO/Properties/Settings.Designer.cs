@@ -406,5 +406,17 @@ namespace GW2PAO.Properties {
                 this["OverlayIconY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsClickthroughEnabled {
+            get {
+                return ((bool)(this["IsClickthroughEnabled"]));
+            }
+            set {
+                this["IsClickthroughEnabled"] = value;
+            }
+        }
     }
 }
