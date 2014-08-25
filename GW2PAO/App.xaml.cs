@@ -132,7 +132,7 @@ namespace GW2PAO
 
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Clickthrough Windows", null, true,
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Click-Through Windows", null, true,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
                                     GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
