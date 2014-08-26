@@ -203,6 +203,32 @@ namespace GW2PAO.ViewModels.WvWTracker
         }
 
         /// <summary>
+        /// True if cardinal directions should be shown, else false
+        /// </summary>
+        public bool IsCardinalDirectionsSelected
+        {
+            get { return !this.UserSettings.AreShortNamesShown; }
+            set
+            {
+                this.UserSettings.AreShortNamesShown = !value;
+                this.NotifyDisplayedNamesSelectionChanged();
+            }
+        }
+
+        /// <summary>
+        /// True if short names should be shown, else false
+        /// </summary>
+        public bool IsShortNamesSelected
+        {
+            get { return this.UserSettings.AreShortNamesShown; }
+            set
+            {
+                this.UserSettings.AreShortNamesShown = value;
+                this.NotifyDisplayedNamesSelectionChanged();
+            }
+        }
+
+        /// <summary>
         /// WvW user settings
         /// </summary>
         public WvWSettings UserSettings { get { return this.controller.UserSettings; } }
@@ -256,6 +282,15 @@ namespace GW2PAO.ViewModels.WvWTracker
             this.RaisePropertyChanged("IsFeetSelected");
             this.RaisePropertyChanged("IsMetersSelected");
             this.RaisePropertyChanged("IsTimeDistanceSelected");
+        }
+
+        /// <summary>
+        /// Raises property changed events for all of the name selection properties
+        /// </summary>
+        private void NotifyDisplayedNamesSelectionChanged()
+        {
+            this.RaisePropertyChanged("IsCardinalDirectionsSelected");
+            this.RaisePropertyChanged("IsShortNamesSelected");
         }
     }
 }

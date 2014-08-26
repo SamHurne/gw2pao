@@ -135,11 +135,21 @@
                 </Image.Source>
             </Image>
 
-            <!--Objective Location (e.g. N, NW, SW, etc)-->
+            <!--Objective Name/Location (e.g. N, NW, SW, etc or the objective's short name) -->
             <core:OutlinedTextBlock Grid.Row="1"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Text="{Binding Location}" />
-            
+                                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                <core:OutlinedTextBlock.Style>
+                    <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                        <Setter Property="Text" Value="{Binding Location}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UserSettings.AreShortNamesShown}" Value="True">
+                                <Setter Property="Text" Value="{Binding ShortName}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </core:OutlinedTextBlock.Style>
+            </core:OutlinedTextBlock>
+
             <StackPanel Orientation="Vertical" Grid.Row="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Margin="0,5,0,0">

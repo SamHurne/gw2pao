@@ -95,6 +95,10 @@
                                 <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" />
                                 <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" />
                             </MenuItem>
+                            <MenuItem Header="Names">
+                                <MenuItem Header="Cardinal Directions" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
+                                <MenuItem Header="Short Names" IsCheckable="True" IsChecked="{Binding IsShortNamesSelected}" />
+                            </MenuItem>
                             <Separator />
                             <MenuItem Header="Use Player's Map" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
                             <MenuItem Header="Override Displayed Map">

@@ -46,6 +46,7 @@ namespace GW2PAO.Models
         private bool areGreenObjectivesShown;
         private bool areBlueObjectivesShown;
         private bool areNeutralObjectivesShown;
+        private bool areShortNamesShown;
         private WvWMap mapOverride;
         private Units distanceUnits;
         private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
@@ -192,6 +193,15 @@ namespace GW2PAO.Models
         {
             get { return this.areNeutralObjectivesShown; }
             set { SetField(ref this.areNeutralObjectivesShown, value); }
+        }
+
+        /// <summary>
+        /// True if short names are shown, else false (cardinal directions are shown)
+        /// </summary>
+        public bool AreShortNamesShown
+        {
+            get { return this.areShortNamesShown; }
+            set { this.SetField(ref this.areShortNamesShown, value); }
         }
 
         /// <summary>

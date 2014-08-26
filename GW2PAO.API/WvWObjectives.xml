@@ -3,7 +3,7 @@
   <Objectives>
     <Objective>
       <ID>1</ID>
-      <Name>Keep</Name>
+      <Name>Overlook</Name>
       <FullName>Overlook</FullName>
       <Location>N</Location>
       <MapLocation>
@@ -17,7 +17,7 @@
     </Objective>
     <Objective>
       <ID>2</ID>
-      <Name>Keep</Name>
+      <Name>Valley</Name>
       <FullName>Valley</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -31,7 +31,7 @@
     </Objective>
     <Objective>
       <ID>3</ID>
-      <Name>Keep</Name>
+      <Name>Lowlands</Name>
       <FullName>Lowlands</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -45,7 +45,7 @@
     </Objective>
     <Objective>
       <ID>4</ID>
-      <Name>Green Mill</Name>
+      <Name>Golanta</Name>
       <FullName>Golanta Clearing</FullName>
       <Location>SSW</Location>
       <MapLocation>
@@ -59,7 +59,7 @@
     </Objective>
     <Objective>
       <ID>5</ID>
-      <Name>Red Mine</Name>
+      <Name>Pangloss</Name>
       <FullName>Pangloss Rise</FullName>
       <Location>NNE</Location>
       <MapLocation>
@@ -73,7 +73,7 @@
     </Objective>
     <Objective>
       <ID>6</ID>
-      <Name>Red Mill</Name>
+      <Name>Speldan</Name>
       <FullName>Speldan Clearcut</FullName>
       <Location>NNW</Location>
       <MapLocation>
@@ -87,7 +87,7 @@
     </Objective>
     <Objective>
       <ID>7</ID>
-      <Name>Blue Mine</Name>
+      <Name>Danelon</Name>
       <FullName>Danelon Passage</FullName>
       <Location>SSE</Location>
       <MapLocation>
@@ -101,7 +101,7 @@
     </Objective>
     <Objective>
       <ID>8</ID>
-      <Name>Blue Mill</Name>
+      <Name>Umberglade</Name>
       <FullName>Umberglade Woods</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -115,7 +115,7 @@
     </Objective>
     <Objective>
       <ID>9</ID>
-      <Name>Castle</Name>
+      <Name>Stonemist</Name>
       <FullName>Stonemist Castle</FullName>
       <Location>C</Location>
       <MapLocation>
@@ -129,7 +129,7 @@
     </Objective>
     <Objective>
       <ID>10</ID>
-      <Name>Green Mine</Name>
+      <Name>Rogue's</Name>
       <FullName>Rogue's Quarry</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -143,7 +143,7 @@
     </Objective>
     <Objective>
       <ID>11</ID>
-      <Name>Tower</Name>
+      <Name>Aldon's</Name>
       <FullName>Aldon's Ledge</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -157,7 +157,7 @@
     </Objective>
     <Objective>
       <ID>12</ID>
-      <Name>Tower</Name>
+      <Name>Wildcreek</Name>
       <FullName>Wildcreek Run</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -171,7 +171,7 @@
     </Objective>
     <Objective>
       <ID>13</ID>
-      <Name>Tower</Name>
+      <Name>Jerrifer's</Name>
       <FullName>Jerrifer's Slough</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -185,7 +185,7 @@
     </Objective>
     <Objective>
       <ID>14</ID>
-      <Name>Tower</Name>
+      <Name>Klovan</Name>
       <FullName>Klovan Gully</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -199,7 +199,7 @@
     </Objective>
     <Objective>
       <ID>15</ID>
-      <Name>Tower</Name>
+      <Name>Langor</Name>
       <FullName>Langor Gulch</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -213,7 +213,7 @@
     </Objective>
     <Objective>
       <ID>16</ID>
-      <Name>Tower</Name>
+      <Name>Quentin</Name>
       <FullName>Quentin Lake</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -227,7 +227,7 @@
     </Objective>
     <Objective>
       <ID>17</ID>
-      <Name>Tower</Name>
+      <Name>Mendon's</Name>
       <FullName>Mendon's Gap</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -241,7 +241,7 @@
     </Objective>
     <Objective>
       <ID>18</ID>
-      <Name>Tower</Name>
+      <Name>Anzalias</Name>
       <FullName>Anzalias Pass</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -255,7 +255,7 @@
     </Objective>
     <Objective>
       <ID>19</ID>
-      <Name>Tower</Name>
+      <Name>Ogrewatch</Name>
       <FullName>Ogrewatch Cut</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -269,7 +269,7 @@
     </Objective>
     <Objective>
       <ID>20</ID>
-      <Name>Tower</Name>
+      <Name>Veloka</Name>
       <FullName>Veloka Slope</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -283,7 +283,7 @@
     </Objective>
     <Objective>
       <ID>21</ID>
-      <Name>Tower</Name>
+      <Name>Durios</Name>
       <FullName>Durios Gulch</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -297,7 +297,7 @@
     </Objective>
     <Objective>
       <ID>22</ID>
-      <Name>Tower</Name>
+      <Name>Bravost</Name>
       <FullName>Bravost Escarpment</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -311,7 +311,7 @@
     </Objective>
     <Objective>
       <ID>23</ID>
-      <Name>Keep</Name>
+      <Name>Garrison</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
       <MapLocation>
@@ -339,7 +339,7 @@
     </Objective>
     <Objective>
       <ID>25</ID>
-      <Name>Tower</Name>
+      <Name>Redbriar</Name>
       <FullName>Redbriar</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -353,7 +353,7 @@
     </Objective>
     <Objective>
       <ID>26</ID>
-      <Name>Tower</Name>
+      <Name>Greenlake</Name>
       <FullName>Greenlake</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -367,7 +367,7 @@
     </Objective>
     <Objective>
       <ID>27</ID>
-      <Name>Keep</Name>
+      <Name>Bay</Name>
       <FullName>Ascension Bay</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -381,7 +381,7 @@
     </Objective>
     <Objective>
       <ID>28</ID>
-      <Name>Tower</Name>
+      <Name>Dawn's</Name>
       <FullName>Dawn's Eyrie</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -395,7 +395,7 @@
     </Objective>
     <Objective>
       <ID>29</ID>
-      <Name>Crossroads</Name>
+      <Name>Spiritholme</Name>
       <FullName>The Spiritholme</FullName>
       <Location>N</Location>
       <MapLocation>
@@ -409,7 +409,7 @@
     </Objective>
     <Objective>
       <ID>30</ID>
-      <Name>Tower</Name>
+      <Name>Woodhaven</Name>
       <FullName>Woodhaven</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -423,7 +423,7 @@
     </Objective>
     <Objective>
       <ID>31</ID>
-      <Name>Keep</Name>
+      <Name>Hills</Name>
       <FullName>Askalion Hills</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -437,7 +437,7 @@
     </Objective>
     <Objective>
       <ID>32</ID>
-      <Name>Keep</Name>
+      <Name>Hills</Name>
       <FullName>Etheron Hills</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -451,7 +451,7 @@
     </Objective>
     <Objective>
       <ID>33</ID>
-      <Name>Keep</Name>
+      <Name>Bay</Name>
       <FullName>Dreaming Bay</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -479,7 +479,7 @@
     </Objective>
     <Objective>
       <ID>35</ID>
-      <Name>Tower</Name>
+      <Name>Greenbriar</Name>
       <FullName>Greenbriar</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -493,7 +493,7 @@
     </Objective>
     <Objective>
       <ID>36</ID>
-      <Name>Tower</Name>
+      <Name>Bluelake</Name>
       <FullName>Bluelake</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -507,7 +507,7 @@
     </Objective>
     <Objective>
       <ID>37</ID>
-      <Name>Keep</Name>
+      <Name>Garrison</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
       <MapLocation>
@@ -521,7 +521,7 @@
     </Objective>
     <Objective>
       <ID>38</ID>
-      <Name>Tower</Name>
+      <Name>Longview</Name>
       <FullName>Longview</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -535,7 +535,7 @@
     </Objective>
     <Objective>
       <ID>39</ID>
-      <Name>Crossroads</Name>
+      <Name>Godsword</Name>
       <FullName>The Godsword</FullName>
       <Location>N</Location>
       <MapLocation>
@@ -549,7 +549,7 @@
     </Objective>
     <Objective>
       <ID>40</ID>
-      <Name>Tower</Name>
+      <Name>Cliffside</Name>
       <FullName>Cliffside</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -563,7 +563,7 @@
     </Objective>
     <Objective>
       <ID>41</ID>
-      <Name>Keep</Name>
+      <Name>Hills</Name>
       <FullName>Shadaran Hills</FullName>
       <Location>E</Location>
       <MapLocation>
@@ -577,7 +577,7 @@
     </Objective>
     <Objective>
       <ID>42</ID>
-      <Name>Tower</Name>
+      <Name>Redlake</Name>
       <FullName>Redlake</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -605,7 +605,7 @@
     </Objective>
     <Objective>
       <ID>44</ID>
-      <Name>Keep</Name>
+      <Name>Bay</Name>
       <FullName>Dreadfall Bay</FullName>
       <Location>W</Location>
       <MapLocation>
@@ -619,7 +619,7 @@
     </Objective>
     <Objective>
       <ID>45</ID>
-      <Name>Tower</Name>
+      <Name>Bluebriar</Name>
       <FullName>Bluebriar</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -633,7 +633,7 @@
     </Objective>
     <Objective>
       <ID>46</ID>
-      <Name>Keep</Name>
+      <Name>Garrison</Name>
       <FullName>Garrison</FullName>
       <Location>C</Location>
       <MapLocation>
@@ -647,7 +647,7 @@
     </Objective>
     <Objective>
       <ID>47</ID>
-      <Name>Tower</Name>
+      <Name>Sunnyhill</Name>
       <FullName>Sunnyhill</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -661,7 +661,7 @@
     </Objective>
     <Objective>
       <ID>48</ID>
-      <Name>Quarry</Name>
+      <Name>Faithleap</Name>
       <FullName>Faithleap</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -675,7 +675,7 @@
     </Objective>
     <Objective>
       <ID>49</ID>
-      <Name>Workshop</Name>
+      <Name>Bluevale</Name>
       <FullName>Bluevale Refuge</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -689,7 +689,7 @@
     </Objective>
     <Objective>
       <ID>50</ID>
-      <Name>Fishing Village</Name>
+      <Name>Bluewater</Name>
       <FullName>Bluewater Lowlands</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -703,7 +703,7 @@
     </Objective>
     <Objective>
       <ID>51</ID>
-      <Name>Lumber Mill</Name>
+      <Name>Astralholme</Name>
       <FullName>Astralholme</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -717,7 +717,7 @@
     </Objective>
     <Objective>
       <ID>52</ID>
-      <Name>Quarry</Name>
+      <Name>Arah's</Name>
       <FullName>Arah's Hope</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -731,7 +731,7 @@
     </Objective>
     <Objective>
       <ID>53</ID>
-      <Name>Workshop</Name>
+      <Name>Greenvale</Name>
       <FullName>Greenvale Refuge</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -745,7 +745,7 @@
     </Objective>
     <Objective>
       <ID>54</ID>
-      <Name>Lumber Mill</Name>
+      <Name>Foghaven</Name>
       <FullName>Foghaven</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -759,7 +759,7 @@
     </Objective>
     <Objective>
       <ID>55</ID>
-      <Name>Fishing Village</Name>
+      <Name>Redwater</Name>
       <FullName>Redwater Lowlands</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -773,7 +773,7 @@
     </Objective>
     <Objective>
       <ID>56</ID>
-      <Name>Crossroads</Name>
+      <Name>Titanpaw</Name>
       <FullName>The Titanpaw</FullName>
       <Location>N</Location>
       <MapLocation>
@@ -787,7 +787,7 @@
     </Objective>
     <Objective>
       <ID>57</ID>
-      <Name>Tower</Name>
+      <Name>Cragtop</Name>
       <FullName>Cragtop</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -801,7 +801,7 @@
     </Objective>
     <Objective>
       <ID>58</ID>
-      <Name>Quarry</Name>
+      <Name>Godslore</Name>
       <FullName>Godslore</FullName>
       <Location>NW</Location>
       <MapLocation>
@@ -815,7 +815,7 @@
     </Objective>
     <Objective>
       <ID>59</ID>
-      <Name>Workshop</Name>
+      <Name>Redvale</Name>
       <FullName>Redvale Refuge</FullName>
       <Location>SW</Location>
       <MapLocation>
@@ -829,7 +829,7 @@
     </Objective>
     <Objective>
       <ID>60</ID>
-      <Name>Lumber Mill</Name>
+      <Name>Stargrove</Name>
       <FullName>Stargrove</FullName>
       <Location>NE</Location>
       <MapLocation>
@@ -843,7 +843,7 @@
     </Objective>
     <Objective>
       <ID>61</ID>
-      <Name>Fishing Village</Name>
+      <Name>Greenwater</Name>
       <FullName>Greenwater Lowlands</FullName>
       <Location>SE</Location>
       <MapLocation>
@@ -857,7 +857,7 @@
     </Objective>
     <Objective>
       <ID>62</ID>
-      <Name>Temple of Lost Prayers</Name>
+      <Name>Temple</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
       <MapLocation>
@@ -871,7 +871,7 @@
     </Objective>
     <Objective>
       <ID>63</ID>
-      <Name>Battle's Hollow</Name>
+      <Name>Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
       <MapLocation>
@@ -885,7 +885,7 @@
     </Objective>
     <Objective>
       <ID>64</ID>
-      <Name>Bauer's Estate</Name>
+      <Name>Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
       <MapLocation>
@@ -899,7 +899,7 @@
     </Objective>
     <Objective>
       <ID>65</ID>
-      <Name>Orchard Overlook</Name>
+      <Name>Orchard</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
       <MapLocation>
@@ -913,7 +913,7 @@
     </Objective>
     <Objective>
       <ID>66</ID>
-      <Name>Carver's Ascent</Name>
+      <Name>Carver's</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
       <MapLocation>
@@ -927,7 +927,7 @@
     </Objective>
     <Objective>
       <ID>67</ID>
-      <Name>Carver's Ascent</Name>
+      <Name>Carver's</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
       <MapLocation>
@@ -941,7 +941,7 @@
     </Objective>
     <Objective>
       <ID>68</ID>
-      <Name>Orchard Overlook</Name>
+      <Name>Orchard</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
       <MapLocation>
@@ -955,7 +955,7 @@
     </Objective>
     <Objective>
       <ID>69</ID>
-      <Name>Bauer's Estate</Name>
+      <Name>Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
       <MapLocation>
@@ -969,7 +969,7 @@
     </Objective>
     <Objective>
       <ID>70</ID>
-      <Name>Battle's Hollow</Name>
+      <Name>Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
       <MapLocation>
@@ -983,7 +983,7 @@
     </Objective>
     <Objective>
       <ID>71</ID>
-      <Name>Temple of Lost Prayers</Name>
+      <Name>Temple</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
       <MapLocation>
@@ -997,7 +997,7 @@
     </Objective>
     <Objective>
       <ID>72</ID>
-      <Name>Carver's Ascent</Name>
+      <Name>Carver's</Name>
       <FullName>Carver's Ascent</FullName>
       <Location />
       <MapLocation>
@@ -1011,7 +1011,7 @@
     </Objective>
     <Objective>
       <ID>73</ID>
-      <Name>Orchard Overlook</Name>
+      <Name>Orchard</Name>
       <FullName>Orchard Overlook</FullName>
       <Location />
       <MapLocation>
@@ -1025,7 +1025,7 @@
     </Objective>
     <Objective>
       <ID>74</ID>
-      <Name>Bauer's Estate</Name>
+      <Name>Estate</Name>
       <FullName>Bauer's Estate</FullName>
       <Location />
       <MapLocation>
@@ -1039,7 +1039,7 @@
     </Objective>
     <Objective>
       <ID>75</ID>
-      <Name>Battle's Hollow</Name>
+      <Name>Hollow</Name>
       <FullName>Battle's Hollow</FullName>
       <Location />
       <MapLocation>
@@ -1053,7 +1053,7 @@
     </Objective>
     <Objective>
       <ID>76</ID>
-      <Name>Temple of Lost Prayers</Name>
+      <Name>Temple</Name>
       <FullName>Temple of Lost Prayers</FullName>
       <Location />
       <MapLocation>
