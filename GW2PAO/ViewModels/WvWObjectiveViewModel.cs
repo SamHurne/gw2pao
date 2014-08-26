@@ -235,6 +235,26 @@ namespace GW2PAO.ViewModels
         public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
 
         /// <summary>
+        /// Command to copy the "'x' is under attack!" text to the clipboard
+        /// </summary>
+        public DelegateCommand CopyUnderAttackTextCommand { get { return new DelegateCommand(this.CopyUnderAttackText); } }
+
+        /// <summary>
+        /// Command to copy the "Enemy headed to 'x'" text to the clipboard
+        /// </summary>
+        public DelegateCommand CopyEnemyHeadedToTextCommand { get { return new DelegateCommand(this.CopyEnemyHeadedToText); } }
+
+        /// <summary>
+        /// Command to copy the "I'm headed to 'x'" text to the clipboard
+        /// </summary>
+        public DelegateCommand CopyPlayerHeadedToTextCommand { get { return new DelegateCommand(this.CopyPlayerHeadedToText); } }
+
+        /// <summary>
+        /// Command to copy the "x: RI 'xx:xx:xx'" or "x: RI Not Active" text to the clipboard
+        /// </summary>
+        public DelegateCommand CopyRITextCommand { get { return new DelegateCommand(this.CopyRIText); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="objective">The objective details</param>
@@ -332,6 +352,92 @@ namespace GW2PAO.ViewModels
         private void CloseNotification()
         {
             this.displayedNotificationsCollection.Remove(this);
+        }
+
+        /// <summary>
+        /// Copies "'x' is under attack!" text to the clipboard for pasting into the in-game chat
+        /// </summary>
+        private void CopyUnderAttackText()
+        {
+            logger.Debug("Copying under attack text of \"{0}\"", this.Name);
+            System.Windows.Clipboard.SetText(string.Format("{0} is under attack!! ({1} {2})", this.Name, this.Location, this.Type));
+        }
+
+        /// <summary>
+        /// Copies "Enemy headed to 'x'" text to the clipboard for pasting into the in-game chat
+        /// </summary>
+        private void CopyEnemyHeadedToText()
+        {
+            logger.Debug("Copying enemy-headed-to text of \"{0}\"", this.Name);
+            if (this.Type != ObjectiveType.BattlesHollow
+                && this.Type != ObjectiveType.BauersEstate
+                && this.Type != ObjectiveType.CarversAscent
+                && this.Type != ObjectiveType.OrchardOverlook
+                && this.Type != ObjectiveType.TempleofLostPrayers)
+            {
+                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0} ({1} {2})", this.Name, this.Location, this.Type));
+            }
+            else
+            {
+                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0}", this.Name));
+            }
+        }
+
+        /// <summary>
+        /// Copies "I'm headed to 'x'" text to the clipboard for pasting into the in-game chat
+        /// </summary>
+        private void CopyPlayerHeadedToText()
+        {
+            string distance = string.Empty;
+            string distanceUnits = string.Empty;
+            switch (this.UserSettings.DistanceUnits)
+            {
+                case Units.Feet:
+                    distance = this.DistanceFromPlayer.ToString();
+                    distanceUnits = "ft";
+                    break;
+                case Units.Meters:
+                    distance = this.DistanceFromPlayer.ToString();
+                    distanceUnits = "m";
+                    break;
+                case Units.TimeDistance:
+                    distance = TimeSpan.FromSeconds(this.DistanceFromPlayer).ToString("mm\\:ss");
+                    distanceUnits = string.Empty;
+                    break;
+                default:
+                    break;
+            }
+
+            logger.Debug("Copying player-headed-to text of \"{0}\"", this.Name);
+
+            if (this.Type != ObjectiveType.BattlesHollow
+                && this.Type != ObjectiveType.BauersEstate
+                && this.Type != ObjectiveType.CarversAscent
+                && this.Type != ObjectiveType.OrchardOverlook
+                && this.Type != ObjectiveType.TempleofLostPrayers)
+            {
+                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} ({1} {2}) - Estimated Distance: {3}{4}", this.Name, this.Location, this.Type, distance, distanceUnits));
+            }
+            else
+            {
+                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} - Estimated Distance: {1}{2}", this.Name, distance, distanceUnits));
+            }
+        }
+
+        /// <summary>
+        /// Copies "x: RI 'xx:xx:xx'" or "x: RI Not Active" text to the clipboard for pasting into the in-game chat
+        /// </summary>
+        private void CopyRIText()
+        {
+            logger.Debug("Copying RI text of \"{0}\"", this.Name);
+            if (this.IsRIActive)
+            {
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI: {3}", this.Name, this.Location, this.Type, this.TimerValue.ToString("mm\\:ss")));
+            }
+            else
+            {
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI is NOT active", this.Name, this.Location, this.Type));
+            }
         }
     }
 }

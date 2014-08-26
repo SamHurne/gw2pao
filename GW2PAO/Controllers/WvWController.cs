@@ -352,7 +352,6 @@ namespace GW2PAO.Controllers
                     this.timerCount++;
                     if (this.timerCount >= 4) // 500ms * 4 = 2seconds
                     {
-                        logger.Debug("Refreshing all objectives");
                         this.timerCount = 0;
                         var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
                         if (latestObjectivesData.Count() > 0)

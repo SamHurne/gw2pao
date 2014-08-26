@@ -27,10 +27,11 @@
     <UserControl.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Hide" Command="{Binding HideCommand}" />
-            <!--TODO: Add macro text or something-->
-            <!--<Separator />
-            <MenuItem Header="Copy Text Information" Command="{Binding CopyWaypointCommand}" />
-            -->
+            <Separator />
+            <MenuItem Header="Copy Under Attack Text" Command="{Binding CopyUnderAttackTextCommand}" />
+            <MenuItem Header="Copy Enemy Headed Towards Text" Command="{Binding CopyEnemyHeadedToTextCommand}" />
+            <MenuItem Header="Copy Player Headed Towards Text" Command="{Binding CopyPlayerHeadedToTextCommand}" />
+            <MenuItem Header="Copy RI Timer Text" Command="{Binding CopyRITextCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
     
