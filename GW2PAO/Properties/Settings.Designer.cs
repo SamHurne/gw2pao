@@ -478,5 +478,17 @@ namespace GW2PAO.Properties {
                 this["IsTeamspeakOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AreWindowsSticky {
+            get {
+                return ((bool)(this["AreWindowsSticky"]));
+            }
+            set {
+                this["AreWindowsSticky"] = value;
+            }
+        }
     }
 }

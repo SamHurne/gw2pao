@@ -41,6 +41,16 @@ namespace GW2PAO.Views
             new FrameworkPropertyMetadata(false, new PropertyChangedCallback(IsClickthroughPropertyChanged)));
 
         /// <summary>
+        /// Dependency property for IsSticky
+        /// True if this window has click-through enabled, else false
+        /// </summary>
+        public static readonly DependencyProperty IsStickyProperty =
+            DependencyProperty.Register("IsSticky",
+            typeof(bool),
+            typeof(OverlayWindow),
+            new FrameworkPropertyMetadata(false, new PropertyChangedCallback(IsStickyPropertyChanged)));
+
+        /// <summary>
         /// True if this window has click-through enabled, else false
         /// </summary>
         public bool IsClickthrough
@@ -50,9 +60,18 @@ namespace GW2PAO.Views
         }
 
         /// <summary>
+        /// True if the window should be sticky (stick to edges, other windows, etc), else false
+        /// </summary>
+        public bool IsSticky
+        {
+            get { return (bool)GetValue(IsStickyProperty); }
+            set { SetValue(IsStickyProperty, value); }
+        }
+
+        /// <summary>
         /// StickyWindow helper object
         /// </summary>
-        private StickyWindow stickyWindow;
+        public StickyWindow StickyHelper { get; private set; }
 
         /// <summary>
         /// Default constructor
@@ -73,15 +92,6 @@ namespace GW2PAO.Views
         /// </summary>
         private void OverlayWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
-            // For sticky window support
-            this.stickyWindow = new StickyWindow(this);
-            this.stickyWindow.StickGap = 10;
-            this.stickyWindow.StickToScreen = true;
-            this.stickyWindow.StickToOther = true;
-            this.stickyWindow.StickOnResize = true;
-            this.stickyWindow.StickOnMove = true;
-            this.LocationChanged += OverlayWindowBase_LocationChanged;
-
             // Set up the click through binding
             if (!this.NeverClickThrough)
             {
@@ -94,6 +104,25 @@ namespace GW2PAO.Views
                     };
                 BindingOperations.SetBinding(this, OverlayWindow.IsClickthroughProperty, clickthroughBinding);
             }
+
+            // Set up the IsSticky binding
+            this.IsSticky = GW2PAO.Properties.Settings.Default.AreWindowsSticky;
+            Binding isStickyBinding = new Binding("AreWindowsSticky")
+            {
+                Source = GW2PAO.Properties.Settings.Default,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            BindingOperations.SetBinding(this, OverlayWindow.IsStickyProperty, isStickyBinding);
+
+            // For sticky window support:
+            this.StickyHelper = new StickyWindow(this);
+            this.StickyHelper.StickGap = 10;
+            this.StickyHelper.StickToScreen = this.IsSticky;
+            this.StickyHelper.StickToOther = this.IsSticky;
+            this.StickyHelper.StickOnResize = this.IsSticky;
+            this.StickyHelper.StickOnMove = this.IsSticky;
+            this.LocationChanged += OverlayWindowBase_LocationChanged;
         }
 
         /// <summary>
@@ -106,8 +135,8 @@ namespace GW2PAO.Views
                 System.Windows.Point MousePoint = Mouse.GetPosition(this);
                 System.Windows.Point ScreenPoint = this.PointToScreen(MousePoint);
 
-                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
-                Win32.SendMessage(this.stickyWindow.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
+                Win32.SendMessage(this.StickyHelper.Handle, Win32.WM.WM_NCLBUTTONDOWN, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(ScreenPoint.X), Convert.ToInt32(ScreenPoint.Y)));
+                Win32.SendMessage(this.StickyHelper.Handle, Win32.WM.WM_MOUSEMOVE, Win32.HT.HTCAPTION, Win32.MakeLParam(Convert.ToInt32(MousePoint.X), Convert.ToInt32(MousePoint.Y)));
             }
         }
 
@@ -127,6 +156,19 @@ namespace GW2PAO.Views
             {
                 User32.SetWindowExTransparent(window, false);
             }
+        }
+
+        /// <summary>
+        /// Property Changed event handler for the IsSticky property
+        /// </summary>
+        private static void IsStickyPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            bool isSticky = (bool)e.NewValue;
+            OverlayWindow window = (OverlayWindow)source;
+            window.StickyHelper.StickToScreen = isSticky;
+            window.StickyHelper.StickToOther = isSticky;
+            window.StickyHelper.StickOnResize = isSticky;
+            window.StickyHelper.StickOnMove = isSticky;
         }
     }
 }
