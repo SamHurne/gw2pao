@@ -172,6 +172,15 @@ namespace GW2PAO.API.Services
                     WarmupDuration = new EventTimespan(0, 9, 0),
                     WaypointCode = "[&BEYAAAA=]"
                 });
+                tt.WorldEvents.Add(new WorldEvent()
+                {
+                    Name = "Frozen Maw",
+                    ID = new Guid("F7D9D427-5E54-4F12-977A-9809B23FBA99"),
+                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 17, 0), new EventTimespan(2, 17, 0), new EventTimespan(4, 17, 0), new EventTimespan(6, 17, 0), new EventTimespan(8, 17, 0), new EventTimespan(10, 17, 0), new EventTimespan(12, 17, 0), new EventTimespan(14, 17, 0), new EventTimespan(16, 17, 0), new EventTimespan(18, 17, 0), new EventTimespan(20, 17, 0), new EventTimespan(22, 17, 0) },
+                    Duration = new EventTimespan(0, 3, 30),
+                    WarmupDuration = new EventTimespan(0, 2, 0),
+                    WaypointCode = "[&BH4BAAA=]"
+                });
                 #endregion
 
                 filename = AdjustedFilename;
@@ -286,6 +295,15 @@ namespace GW2PAO.API.Services
                     Duration = new EventTimespan(0, 8, 0),
                     WarmupDuration = new EventTimespan(0, 0, 0),
                     WaypointCode = "[&BEYAAAA=]"
+                });
+                tt.WorldEvents.Add(new WorldEvent()
+                {
+                    Name = "Frozen Maw",
+                    ID = new Guid("F7D9D427-5E54-4F12-977A-9809B23FBA99"),
+                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(2, 15, 0), new EventTimespan(4, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(8, 15, 0), new EventTimespan(10, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(14, 15, 0), new EventTimespan(16, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(20, 15, 0), new EventTimespan(22, 15, 0) },
+                    Duration = new EventTimespan(0, 5, 0),
+                    WarmupDuration = new EventTimespan(0, 0, 0),
+                    WaypointCode = "[&BH4BAAA=]"
                 });
                 #endregion
 

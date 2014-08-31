@@ -460,5 +460,54 @@
       </WarmupDuration>
       <WaypointCode>[&amp;BEYAAAA=]</WaypointCode>
     </WorldEvent>
+    <WorldEvent>
+      <Name>Frozen Maw</Name>
+      <ID>f7d9d427-5e54-4f12-977a-9809b23fba99</ID>
+      <ActiveTimes>
+        <EventTimespan>
+          <Time>00:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>02:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>04:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>06:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>08:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>10:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>12:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>14:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>16:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>18:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>20:15:00</Time>
+        </EventTimespan>
+        <EventTimespan>
+          <Time>22:15:00</Time>
+        </EventTimespan>
+      </ActiveTimes>
+      <Duration>
+        <Time>00:05:00</Time>
+      </Duration>
+      <WarmupDuration>
+        <Time>00:00:00</Time>
+      </WarmupDuration>
+      <WaypointCode>[&amp;BH4BAAA=]</WaypointCode>
+    </WorldEvent>
   </WorldEvents>
 </MegaserverEventTimeTable>
