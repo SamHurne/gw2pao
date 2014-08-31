@@ -372,7 +372,7 @@ namespace GW2PAO.Controllers
         private void BuildMenuItems()
         {
             // Event Menu Items
-            var eventTimeTableMenus = new MenuItemViewModel("Time Table", null);
+            var eventTimeTableMenus = new MenuItemViewModel("Event Time Table", null);
             var standardEvents = new MenuItemViewModel("Standard", null, true,
                 () => { return !this.EventSettings.UseAdjustedTimeTable; },
                 (selected) => this.EventSettings.UseAdjustedTimeTable = !selected,
