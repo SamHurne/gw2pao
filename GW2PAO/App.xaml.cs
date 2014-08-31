@@ -149,7 +149,8 @@ namespace GW2PAO
             }
 
             // Show a notification that the program is now running
-            TrayIcon.DisplayNotification("GW2 Personal Assistant Overlay is now running", "Click here for options", TrayInfoMessageType.None);
+            // UPDATE: Removed for now...
+            //TrayIcon.DisplayNotification("GW2 Personal Assistant Overlay is now running", "Click here for options", TrayInfoMessageType.None);
 
             logger.Info("Program startup complete");
 

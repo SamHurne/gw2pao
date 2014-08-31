@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO", "GW2PAO\GW2PAO.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.StickyWindows", "GW2PAO.StickyWindows\GW2PAO.StickyWindows.csproj", "{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.TS3", "GW2PAO.TS3\GW2PAO.TS3.csproj", "{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Release_WithoutBrowser|Any CPU.Build.0 = Release_WithoutBrowser|Any CPU
 		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F2D6EEB-63E9-48CD-A62D-5043A1A446F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Release_WithoutBrowser|Any CPU.ActiveCfg = Release|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Release_WithoutBrowser|Any CPU.Build.0 = Release|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C6CBDD-7E9D-4737-96EF-C58A4C92C271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -418,5 +418,65 @@ namespace GW2PAO.Properties {
                 this["IsClickthroughEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TeamspeakX {
+            get {
+                return ((double)(this["TeamspeakX"]));
+            }
+            set {
+                this["TeamspeakX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TeamspeakY {
+            get {
+                return ((double)(this["TeamspeakY"]));
+            }
+            set {
+                this["TeamspeakY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TeamspeakHeight {
+            get {
+                return ((double)(this["TeamspeakHeight"]));
+            }
+            set {
+                this["TeamspeakHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TeamspeakWidth {
+            get {
+                return ((double)(this["TeamspeakWidth"]));
+            }
+            set {
+                this["TeamspeakWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsTeamspeakOpen {
+            get {
+                return ((bool)(this["IsTeamspeakOpen"]));
+            }
+            set {
+                this["IsTeamspeakOpen"] = value;
+            }
+        }
     }
 }

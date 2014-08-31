@@ -118,6 +118,7 @@
     <Compile Include="Controllers\ZoneCompletionController.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventStateConverter.cs" />
+    <Compile Include="Converters\TSNotificationTypeImageSrcConverter.cs" />
     <Compile Include="Converters\WvWMapConverter.cs" />
     <Compile Include="Converters\ObjectiveTypeImageSrcConverter.cs" />
     <Compile Include="Converters\TimespanConverter.cs" />
@@ -150,6 +151,8 @@
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
+    <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
+    <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
     <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
@@ -166,6 +169,12 @@
     </Compile>
     <Compile Include="Views\OverlayMenuIconView.xaml.cs">
       <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Teamspeak\TSNotificationView.xaml.cs">
+      <DependentUpon>TSNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Teamspeak\TeamspeakView.xaml.cs">
+      <DependentUpon>TeamspeakView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
@@ -277,6 +286,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Teamspeak\TSNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Teamspeak\TeamspeakView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\WebBrowser\BrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +364,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\warning.png" />
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\enter.png" />
+    <Resource Include="Resources\chat_bubble.png" />
+    <Resource Include="Resources\speaker_mute.png" />
+    <Resource Include="Resources\speaker.png" />
     <Resource Include="Resources\OverlayMenuIcon.png" />
     <Resource Include="Resources\copper_coin.png" />
     <Resource Include="Resources\merchant.png" />
@@ -451,6 +474,10 @@
     <ProjectReference Include="..\GW2PAO.StickyWindows\GW2PAO.StickyWindows.csproj">
       <Project>{4f2d6eeb-63e9-48cd-a62d-5043a1a446f6}</Project>
       <Name>GW2PAO.StickyWindows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GW2PAO.TS3\GW2PAO.TS3.csproj">
+      <Project>{47c6cbdd-7e9d-4737-96ef-c58a4c92c271}</Project>
+      <Name>GW2PAO.TS3</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

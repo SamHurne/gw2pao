@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using GW2PAO.API.Services;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
+using GW2PAO.TS3.Services;
+using GW2PAO.TS3.Services.Interfaces;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels.EventNotification;
 using GW2PAO.ViewModels.Interfaces;
+using GW2PAO.ViewModels.Teamspeak;
 using GW2PAO.ViewModels.TrayIcon;
 using GW2PAO.ViewModels.WvWTracker;
 using GW2PAO.ViewModels.ZoneCompletion;
@@ -16,6 +19,7 @@ using GW2PAO.Views;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
+using GW2PAO.Views.Teamspeak;
 using GW2PAO.Views.TradingPost;
 using GW2PAO.Views.WebBrowser;
 using GW2PAO.Views.WvWNotification;
@@ -60,6 +64,12 @@ namespace GW2PAO.Controllers
         /// Service responsible for Dungeon information
         /// </summary>
         public DungeonsService DungeonsService { get; private set; }
+
+        /// <summary>
+        /// The Teampseak Service that provides events and methods for
+        /// interacting with teamspeak
+        /// </summary>
+        public ITeamspeakService TeamspeakService { get; private set; }
 
         /// <summary>
         /// Service responsible for WvW information
@@ -163,6 +173,11 @@ namespace GW2PAO.Controllers
         private TPCalculatorView tpCalculatorView;
 
         /// <summary>
+        /// The Teamspeak View
+        /// </summary>
+        private TeamspeakView teamspeakView;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()
@@ -175,6 +190,7 @@ namespace GW2PAO.Controllers
             this.ZoneService = new ZoneService();
             this.DungeonsService = new DungeonsService();
             this.WvWService = new WvWService();
+            this.TeamspeakService = new TeamspeakService();
 
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
@@ -304,6 +320,10 @@ namespace GW2PAO.Controllers
             this.menuItems.Add(null); // Null for a seperator
             this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
 
+            // Add the Teamspeak Overlay
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
+
 #if !NO_BROWSER
             // Add the Web Browser
             this.menuItems.Add(null); // Null for a seperator
@@ -337,6 +357,9 @@ namespace GW2PAO.Controllers
 
                             if (Properties.Settings.Default.IsTPCalculatorOpen && this.CanDisplayTPCalculator())
                                 this.DisplayTPCalculator();
+
+                            if (Properties.Settings.Default.IsTeamspeakOpen && this.CanDisplayTeamspeakOverlay())
+                                this.DisplayTeamspeakOverlay();
                         });
                 });
         }
@@ -396,6 +419,12 @@ namespace GW2PAO.Controllers
             {
                 Properties.Settings.Default.IsTPCalculatorOpen = this.tpCalculatorView.IsVisible;
                 Threading.InvokeOnUI(() => this.tpCalculatorView.Close());
+            }
+
+            if (this.teamspeakView != null)
+            {
+                Properties.Settings.Default.IsTeamspeakOpen = this.teamspeakView.IsVisible;
+                Threading.InvokeOnUI(() => this.teamspeakView.Close());
             }
 
             Threading.InvokeOnUI(() => this.BrowserController.CloseBrowser());
@@ -556,6 +585,32 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <returns></returns>
         private bool CanDisplayWebBrowser()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Teamspeak overlay window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayTeamspeakOverlay()
+        {
+            if (this.teamspeakView == null || !this.teamspeakView.IsVisible)
+            {
+                this.teamspeakView = new TeamspeakView(new TeamspeakViewModel(this.TeamspeakService));
+                this.teamspeakView.Show();
+            }
+            else
+            {
+                this.teamspeakView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the Teamspeak overlay window can be displayed
+        /// </summary>
+        /// <returns></returns>
+        private bool CanDisplayTeamspeakOverlay()
         {
             return true;
         }

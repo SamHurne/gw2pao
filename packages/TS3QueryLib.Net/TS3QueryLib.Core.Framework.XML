@@ -1,0 +1,1801 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TS3QueryLib.Core.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:TS3QueryLib.Core.AsyncTcpDispatcher">
+            <summary>
+             Class for sending and receiving data from a teamspeak query port using tcp. This class also supports notifications and is using asynchronous behavior.
+            </summary>
+        </member>
+        <member name="T:TS3QueryLib.Core.TcpDispatcherBase">
+            <summary>
+            Base class for tcp dispatchers
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.TcpDispatcherBase.#ctor">
+            <summary>
+            Creates an instance of the current class  using localhost on port 10011
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.TcpDispatcherBase.#ctor(System.String,System.Nullable{System.UInt16})">
+            <summary>
+            Creates an instance of the current class
+            </summary>
+            <param name="host">The host to connect to</param>
+            <param name="port">The port to connect to</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.TcpDispatcherBase.DetachAllEventListeners">
+            <summary>
+            Detaches all event listeners.
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.TcpDispatcherBase.NotificationReceived">
+            <summary>
+            Raised when a notification was received
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.TcpDispatcherBase.BanDetected">
+            <summary>
+            Raised when a ban was detected
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.AsyncTcpDispatcher.#ctor(System.String,System.Nullable{System.UInt16})">
+            <summary>
+            Creates an instance of the current class
+            </summary>
+            <param name="host">The host to connect to</param>
+            <param name="port">The port to connect to</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.AsyncTcpDispatcher.Connect">
+            <summary>
+            Connects to the remote socket.
+            </summary>
+            <returns>Returns SocketError.Success when connection was successful or the socket was already connected or returns another SocketError when something went wrong.</returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.AsyncTcpDispatcher.Disconnect">
+            <summary>
+            Disconnects from the connected socket
+            </summary>
+            <returns>Returns true if the disconnect was done or false when the socket was already disconnected</returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.AsyncTcpDispatcher.DetachAllEventListeners">
+            <summary>
+            Detaches all event listeners.
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.AsyncTcpDispatcher.ServerClosedConnection">
+            <summary>
+            Raised when the connection was reset by the server
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.AsyncTcpDispatcher.SocketError">
+            <summary>
+            Raised when an error was caused by the socket
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.AsyncTcpDispatcher.ReadyForSendingCommands">
+            <summary>
+            Raised when the socket connected successfully and the greeting (TS3) was received.
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.IsAway">
+            <summary>
+             Set us away or back available
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.AwayMessage">
+            <summary>
+            What away message to display when away
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.IsInputMuted">
+            <summary>
+            Mutes or unmutes microphone
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.IsOutputMuted">
+            <summary>
+            Mutes or unmutes speakers/headphones
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.IsInputDeactivated">
+            <summary>
+            Same as IsInputMuted, but invisible to other clients
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.IsChannelCommander">
+            <summary>
+            Sets or removes channel commander
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.PhoneticNickname">
+            <summary>
+            Set your phonetic nickname
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.Avatar">
+            <summary>
+            Set your avatar
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.Metadata">
+            <summary>
+            Any string that is passed to all clients that have vision of you.
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.Entities.ClientModification.DefaultToken">
+            <summary>
+            Privilege key to be used for the next server connect
+            </summary>
+        </member>
+        <member name="T:TS3QueryLib.Core.Client.Notification.Notifications">
+            <summary>
+            This class handles the notifications sent by the teamspeak-client and raises type safe events for each notification
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Common.QueryRunnerBase.#ctor(TS3QueryLib.Core.Common.IQueryDispatcher)">
+            <summary>
+            Creates an instance of QueryRunner using the provided dispatcher
+            </summary>
+            <param name="queryDispatcher">The dispatcher used to send commands</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Common.QueryRunnerBase.Quit">
+            <summary>
+            Closes the ServerQuery connection to the TeamSpeak 3 Server instance. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Common.QueryRunnerBase.SendCommand(TS3QueryLib.Core.CommandHandling.Command)">
+            <summary>
+            Send the command to the undlerying socket
+            </summary>
+            <param name="command">The command to send</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Common.QueryRunnerBase.SendRaw(System.String)">
+            <summary>
+            Send the message in plain to the socket
+            </summary>
+            <param name="rawCommand">The raw messag</param>
+        </member>
+        <member name="P:TS3QueryLib.Core.Common.QueryRunnerBase.Dispatcher">
+            <summary>
+            The dispatcher used to send commands 
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Common.QueryRunnerBase.IsDisposed">
+            <summary>
+            Returns true if this instance was disposed
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Common.QueryRunnerBase.UnknownNotificationReceived">
+            <summary>
+            A notification was received that is not handled in a typesafe manner
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.#ctor(TS3QueryLib.Core.Common.IQueryDispatcher)">
+            <summary>
+            Creates an instance of QueryRunner using the provided dispatcher
+            </summary>
+            <param name="queryDispatcher">The dispatcher used to send commands</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.RegisterForNotifications(TS3QueryLib.Core.Client.Entities.ClientNotifyRegisterEvent,System.Nullable{System.UInt32})">
+            <summary>
+            This command allows you to listen to events that the client encounters. Events 
+            are things like people starting or stopping to talk, people joining or leaving, 
+            new channels being created and many more. It registers for client notifications 
+            for the specified serverConnectionHandlerId. If the serverConnectionHandlerID 
+            is set to null it applies to all server connection handlers. 
+            </summary>
+            <param name="event">The event to register for. Choose ClientNotifyRegisterEvent.Any to register for all events.</param>
+            <param name="serverConnectionHandlerId">The id of the server connection handler.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.UpdateClient(TS3QueryLib.Core.Client.Entities.ClientModification)">
+            <summary>
+            Sets one or more values concerning your own client, and makes them available to other clients through the server where applicable 
+            </summary>
+            <param name="modificationInstance">The modifications as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.GetChannelList(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Displays a list of channels created on a virtual server including their ID, order, name, etc. The output can be modified using several command options. 
+            </summary>
+            <param name="includeAll">if set to true all options are set to true.</param>
+            <param name="includeTopics">if set to true topic is included</param>
+            <param name="includeFlags">if set to true flag parameters are included</param>
+            <param name="includeVoiceInfo">if set to true voice parameters are included</param>
+            <param name="includeLimits">if set to true limit parameters are included</param>
+            <param name="includeIcon">if set to true icon parameter is included</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.SelectServerConnectionHandler">
+            <summary>
+            Selects the current server connection handler.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.SelectServerConnectionHandler(System.Nullable{System.UInt32})">
+            <summary>
+            Selects the server connection handler.
+            </summary>
+            <param name="serverConnectionHandlerId">The id of the server connection handler to select. If set to null, the currently active connection handler is selected.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.GetChannelConnectionInfo">
+            <summary>
+            Gets channel connection information for the current channel from the currently selected server connection handler.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.GetChannelConnectionInfo(System.Nullable{System.UInt32})">
+            <summary>
+            Gets channel connection information for the provided channel id from the currently selected server connection handler. If the provided id is null, the current channel id is used.
+            </summary>
+            <param name="channelId">The channel id to get the info for. Null for the current channel</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.GetServerConnectionHandlerIdList">
+            <summary>
+            Returns a list of currently active server connection handler ids
+            </summary>
+            <returns>A list of ids</returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Client.QueryRunner.SendWhoAmI">
+            <summary>
+            Displays information about your current ServerQuery connection including the ID of the selected virtual server, your loginname, etc. 
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Client.QueryRunner.Notifications">
+            <summary>
+            Provides access to events raised by notifications
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.CommandHandling.GroupDatabaseType.Template">
+            <summary>
+            Used for new virtual servers
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.CommandHandling.GroupDatabaseType.Regular">
+            <summary>
+            Used for regular clients
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.CommandHandling.GroupDatabaseType.Query">
+            <summary>
+            Used for ServerQuery clients
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.CommandHandling.KickReason.Channel">
+            <summary>
+            Kick Client from Channel
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.CommandHandling.KickReason.Server">
+            <summary>
+            Kick Client from Server
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Communication.AsyncSocketMethodHelper.InvokeAsyncMethod(System.Net.Sockets.Socket,TS3QueryLib.Core.Communication.SocketAsyncMethod,System.EventHandler{System.Net.Sockets.SocketAsyncEventArgs},System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            Represents one of the new Socket xxxAsync methods in .NET 3.5.
+            </summary>
+            <param name="socket">The socket.</param>
+            <param name="method">The method.</param>
+            <param name="callback">The callback.</param>
+            <param name="args">The SocketAsyncEventArgs for use with the method.</param>
+        </member>
+        <member name="F:TS3QueryLib.Core.Server.Entities.Codec.SpeexNarrowband">
+            <summary>
+            speex narrowband mono, 16bit, 8kHz) 
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.Server.Entities.Codec.SpeexWideband">
+            <summary>
+            speex wideband (mono, 16bit, 16kHz) 
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.Server.Entities.Codec.SpeexUltrawideband">
+            <summary>
+            speex ultra-wideband (mono, 16bit, 32kHz) 
+            </summary>
+        </member>
+        <member name="F:TS3QueryLib.Core.Server.Entities.Codec.CeltMono">
+            <summary>
+            celt mono (mono, 16bit, 48kHz) 
+            </summary>
+        </member>
+        <member name="T:TS3QueryLib.Core.Server.Notification.Notifications">
+            <summary>
+            This class handles the notifications sent by the teamspeak-server and raises type safe events for each notification
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientBan">
+            <summary>
+            Raised, when a client was banned from the server
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientKick">
+            <summary>
+            Raised, when a client was kicked from the server
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientDisconnect">
+            <summary>
+            Raised, when a client disconnected from the server 
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientConnectionLost">
+            <summary>
+            Raised, when a client lost the connection to the server (for example when the client teamspeak app crashed)
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientMessageReceived">
+            <summary>
+            Raised, when a private message was sent to the current query client.
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ChannelMessageReceived">
+            <summary>
+            Raised, when a message was sent to the channel the current query client has joined.
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ServerMessageReceived">
+            <summary>
+            Raised, when a message was sent to the server the current query client is connected to.
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientMovedByTemporaryChannelCreate">
+            <summary>
+            Raised, when a client moved himself to another channel
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientMoved">
+            <summary>
+            Raised, when a client moved himself to another channel
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientMoveForced">
+            <summary>
+            Raised, when a client was moved to another channel by another client
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.ClientJoined">
+            <summary>
+            Raised, when a client joined the server
+            </summary>
+        </member>
+        <member name="E:TS3QueryLib.Core.Server.Notification.Notifications.TokenUsed">
+            <summary>
+            Raised, when a client has used a token
+            </summary>
+        </member>
+        <member name="T:TS3QueryLib.Core.Server.QueryRunner">
+            <summary>
+            Class for running queries against teamspeak 3 server
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.#ctor(TS3QueryLib.Core.Common.IQueryDispatcher)">
+            <summary>
+            Creates an instance of QueryRunner using the provided dispatcher
+            </summary>
+            <param name="queryDispatcher">The dispatcher used to send commands</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.Login(System.String,System.String)">
+            <summary>
+            Authenticates with the TeamSpeak 3 Server instance using given ServerQuery login credentials. 
+            </summary>
+            <param name="username">The username</param>
+            <param name="password">The password</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.Logout">
+            <summary>
+            Deselects the active virtual server and logs out from the server instance. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetVersion">
+            <summary>
+            Displays the servers version information including platform and build number. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetHostInfo">
+            <summary>
+            Displays detailed connection information about the server instance including uptime, number of virtual servers online, traffic information, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetInstanceInfo">
+            <summary>
+            Displays the server instance configuration including database revision number, the file transfer port, default group IDs, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.EditServerInstance(TS3QueryLib.Core.Server.Entities.ServerInstanceModification)">
+            <summary>
+            Changes the server instance configuration using given properties. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetBindingList">
+            <summary>
+            Displays a list of IP addresses used by the server instance on multi-homed machines. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SelectVirtualServerById(System.UInt32)">
+            <summary>
+            Selects the virtual server specified with virtualServerId to allow further interaction. The ServerQuery client will 
+            appear on the virtual server and acts like a real TeamSpeak 3 Client, except it's unable to send or receive voice 
+            data. 
+            </summary>
+            <param name="virtualServerId">The id of the virtual server</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SelectVirtualServerByPort(System.UInt32)">
+            <summary>
+            Selects the virtual server specified with virtualServerPort to allow further interaction. The ServerQuery client will 
+            appear on the virtual server and acts like a real TeamSpeak 3 Client, except it's unable to send or receive voice 
+            data. 
+            </summary>
+            <param name="virtualServerPort">The port of the virtual server</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerListShort">
+            <summary>
+            Gets a list of virtual servers with 3 properties for each virtual server: ID, Port and Status.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerList(System.Boolean,System.Boolean)">
+            <summary>
+            Displays a list of virtual servers including their ID, status, number of clients online, etc. If you're using the -all 
+            option, the server will list all virtual servers stored in the database. This can be useful when multiple server 
+            instances with different machine IDs are using the same database. The machine ID is used to identify the 
+            server instance a virtual server is associated with. 
+            The status of a virtual server can be either online, none and virtual. While online and none are self-
+            explanatory, virtual is a bit more complicated. Whenever you select a virtual server which is currently 
+            stopped, it will be started in virtual mode which means you are able to change its configuration, create 
+            channels or change permissions, but no regular TeamSpeak 3 Client can connect. As soon as the last 
+            ServerQuery client deselects the virtual server, its status will be changed back to none. 
+            </summary>
+            <param name="includeRemoteServers">whether to get only local servers</param>
+            <param name="includeUniqueId">whether to include the virtual servers unique id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerIdByPort(System.UInt16)">
+            <summary>
+            Returns the id of the virtual server using the specified voice port
+            </summary>
+            <param name="virtualServerPort">the port</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServer(System.UInt32)">
+            <summary>
+            Deletes the virtual server specified with virtualServerId. Please note that only virtual servers in stopped state can be deleted. 
+            </summary>
+            <param name="virtualServerId">the virtual server id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CreateServer(TS3QueryLib.Core.Server.Entities.VirtualServerModification)">
+            <summary>
+            Creates a new virtual server using the given properties and displays its ID and initial administrator token. If 
+            virtualserver_port is not specified, the server will test for the first unused UDP port. 
+            The first virtual server will be running on UDP port 9987 by default. Subsequently started virtual servers will 
+            be running on increasing UDP port numbers. 
+            </summary>
+            <param name="serverModification">the properties as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.StartVirtualServer(System.UInt32)">
+            <summary>
+            Starts the virtual server specified with sid. Depending on your permissions, you're able to start either your 
+            own virtual server only or all virtual servers in the server instance. 
+            </summary>
+            <param name="virtualServerId">the virtual server id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.StopVirtualServer(System.UInt32)">
+            <summary>
+            Stops the virtual server specified with sid. Depending on your permissions, you're able to stop either your own 
+            virtual server only or all virtual servers in the server instance. 
+            </summary>
+            <param name="virtualServerId">the virtual server id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.StopServerProcess">
+            <summary>
+            Stops the entire TeamSpeak 3 Server instance by shutting down the process.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerInfo">
+            <summary>
+            Displays detailed configuration information about the selected virtual server including unique ID, number of
+            clients online, configuration, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerConnectionInfo">
+            <summary>
+            Displays detailed connection information about the selected virtual server including uptime, traffic information, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.EditServer(TS3QueryLib.Core.Server.Entities.VirtualServerModification)">
+            <summary>
+            Changes the selected virtual servers configuration using given properties.  
+            </summary>
+            <param name="serverModification">the properties as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerGroupList">
+            <summary>
+            Displays a list of server groups available. Depending on your permissions, the output may also contain global ServerQuery groups and template groups. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroup(System.String)">
+            <summary>
+            Creates a new server group using the name specified with name and displays its ID. 
+            </summary>
+            <param name="serverGroupName">Name of the new group to create</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroup(System.String,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Creates a new server group using the name specified with name and displays its ID. 
+            </summary>
+            <param name="serverGroupName">Name of the new group to create</param>
+            <param name="groupType">Type of the new group to create</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroup(System.UInt32,System.Boolean)">
+            <summary>
+            Deletes the server group specified with sgid. If force is set to 1, the server group will be deleted even if there are clients within
+            </summary>
+            <param name="serverGroupId">Id of the group to delete</param>
+            <param name="forceDeleteWhenClientsExist">force deletion even when clients are assigned this group</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.RenameServerGroup(System.UInt32,System.String)">
+            <summary>
+            Changes the name of the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">The id of the group to rename</param>
+            <param name="newName">the new name of the group</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerGroupPermissionList(System.UInt32)">
+            <summary>
+            Displays a list of permissions assigned to the server group specified with sgid. 
+            </summary>
+            <param name="serverGroupId">The id of the group to get permissions for</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerGroupPermissionList(System.UInt32,System.Boolean)">
+            <summary>
+            Displays a list of permissions assigned to the server group specified with sgid. 
+            </summary>
+            <param name="serverGroupId">The id of the group to get permissions for</param>
+            <param name="returnNameInsteadOfId">If set to true, the returned permissions have the Id property set to 0 and the name property will be filled with the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.Permission)">
+            <summary>
+            Adds the specified permission to the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.Permission,System.Boolean)">
+            <summary>
+            Adds the specified permission to the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permission">the permission to add</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.Permission})">
+            <summary>
+            Adds a set of specified permissions to the server group specified with sgid. Multiple permissions can be added by providing the four parameters of each permission. 
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.Permission},System.Boolean)">
+            <summary>
+            Adds a set of specified permissions to the server group specified with sgid. Multiple permissions can be added by providing the four parameters of each permission.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permissions">the permissions to add</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.NamedPermission)">
+            <summary>
+            Adds the specified permission to the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.NamedPermission,System.Boolean)">
+            <summary>
+            Adds the specified permission to the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedPermission})">
+            <summary>
+            Adds a set of specified permissions to the server group specified with sgid. Multiple permissions can be added by providing the four parameters of each permission.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddServerGroupPermission(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedPermission},System.Boolean)">
+            <summary>
+            Adds a set of specified permissions to the server group specified with sgid. Multiple permissions can be added by providing the four parameters of each permission.
+            </summary>
+            <param name="serverGroupId">the id of the server group</param>
+            <param name="permissions">the permissions to add</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermission(System.UInt32,System.UInt32)">
+            <summary>
+            Removes the specified permissions from the server group specified with sgid. 
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permission from</param>
+            <param name="permissionId">The id of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermission(System.UInt32,System.UInt32,System.Boolean)">
+            <summary>
+            Removes the specified permissions from the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permission from</param>
+            <param name="permissionId">The id of the permission to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>
+            Removes a set of specified permissions from the server group specified with sgid. Multiple permissions can be removed at once.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permissions from</param>
+            <param name="permissionIdList">The ids of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32},System.Boolean)">
+            <summary>
+            Removes a set of specified permissions from the server group specified with sgid. Multiple permissions can be removed at once.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permissions from</param>
+            <param name="permissionIdList">The ids of the permissions to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermission(System.UInt32,System.String)">
+            <summary>
+            Removes the specified permissions from the server group specified with sgid. 
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permission from</param>
+            <param name="permissionName">The name of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermission(System.UInt32,System.String,System.Boolean)">
+            <summary>
+            Removes the specified permissions from the server group specified with sgid.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permission from</param>
+            <param name="permissionName">The name of the permission to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a set of specified permissions from the server group specified with sgid. Multiple permissions can be removed at once.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permissions from</param>
+            <param name="permissionNameList">The names of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteServerGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Removes a set of specified permissions from the server group specified with sgid. Multiple permissions can be removed at once.
+            </summary>
+            <param name="serverGroupId">The id of the group to delete the permissions from</param>
+            <param name="permissionNameList">The names of the permissions to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddClientToServerGroup(System.UInt32,System.UInt32)">
+            <summary>
+            Adds a client to the server group specified with sgid. Please note that a client cannot be added to default groups or template groups.
+            </summary>
+            <param name="serverGroupId">The id of the server group</param>
+            <param name="clientDatabaseId">The database id of the client</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientFromServerGroup(System.UInt32,System.UInt32)">
+            <summary>
+            Removes a client from the server group specified with sgid. 
+            </summary>
+            <param name="serverGroupId">The id of the server group</param>
+            <param name="clientDatabaseId">The database id of the client</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerGroupClientList(System.UInt32,System.Boolean)">
+            <summary>
+            Displays the IDs of all clients currently residing in the server group specified with sgid. If you're using the 
+            -names option, the output will also contain the last known nickname and the unique identifier of the clients. 
+            </summary>
+            <param name="serverGroupId">The id of the server group</param>
+            <param name="includeNicknamesAndUid">whether to include nickname and unique id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerGroupsByClientId(System.UInt32)">
+            <summary>
+            Displays all server groups the client specified with cldbid is currently residing in.
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetServerSnapshot">
+            <summary>
+            Displays a snapshot of the selected virtual server containing all settings, groups and known client identities. 
+            The data from a server snapshot can be used to restore a virtual servers configuration, channels and 
+            permissions using the serversnapshotdeploy command. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeployServerSnapshot(System.String)">
+            <summary>
+            Restores the selected virtual servers configuration using the data from a previously created server snapshot. 
+            Please note that the TeamSpeak 3 Server does NOT check for necessary permissions while deploying a 
+            snapshot so the command could be abused to gain additional privileges. 
+            </summary>
+            <param name="snapshotData">The data that was got by calling GetServerSnapshot()</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.RegisterForNotifications(TS3QueryLib.Core.Server.Entities.ServerNotifyRegisterEvent,System.Nullable{System.UInt32})">
+            <summary>
+            Registers for a specified category of events on a virtual server to receive notification messages. Depending on 
+            the notifications you've registered for, the server will send you a message on every event in the view of your 
+            ServerQuery client (e.g. clients joining your channel, incoming text messages, server configuration changes, 
+            etc). The event source is declared by the event parameter while id can be used to limit the notifications to a specific channel. 
+            </summary>
+            <param name="eventSource">the event to register for</param>
+            <param name="channelId">the optional channel id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.UnregisterNotifications">
+            <summary>
+            Unregisters all events previously registered with servernotifyregister so you will no longer receive notification messages. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SendGlobalMessage(System.String)">
+            <summary>
+            Sends a text message to all clients on all virtual servers in the TeamSpeak 3 Server instance.
+            </summary>
+            <param name="message">the message to send</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SendTextMessage(TS3QueryLib.Core.CommandHandling.MessageTarget,System.UInt32,System.String)">
+            <summary>
+            Sends a text message a specified target. The type of the target is determined by targetmode while target 
+            specifies the ID of the recipient, whether it be a virtual server, a channel or a client.
+            </summary>
+            <param name="target">The target of the message</param>
+            <param name="targetId">The id of the target</param>
+            <param name="message">The message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetLogEntries(System.UInt16,System.UInt16)">
+            <summary>
+            Displays a specified number of entries from the servers log. Use a combination of lines and beginPos
+            to get all available LogEntries. 
+            </summary>
+            <param name="lines">The max amount of entries to retrieve (max. 100)</param>
+            <param name="beginPos">Where to start looking for Logs</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetLogEntries(System.UInt16,System.UInt16,System.Boolean,System.Boolean)">
+            <summary>
+            Displays a specified number of entries from the servers log. Depending on your permissions, you'll receive 
+            entries from the server instance log and/or your virtual server log. Using a combination of the comparator and 
+            timestamp parameters allows you to filter for log entries based on a specific date/time. 
+            </summary>
+            <param name="lines">The max amount of entries to retrieve (30)</param>
+            <param name="beginPos">Where to start looking for Logs</param>
+            <param name="reverse">Reverse start? (Not documented by TS)</param>
+            <param name="instance">If true, it will return logs from the master server, else from the selected one</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddLogEntry(TS3QueryLib.Core.Server.Entities.LogEntryLight)">
+            <summary>
+            Writes a custom entry into the servers log. Depending on your permissions, you'll be able to add entries into 
+            the server instance log and/or your virtual servers log. The loglevel parameter specifies the type of the entry. 
+            </summary>
+            <param name="logEntry">The logentry to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddLogEntry(System.String)">
+            <summary>
+            Writes a custom entry into the servers log. Depending on your permissions, you'll be able to add entries into 
+            the server instance log and/or your virtual servers log. The loglevel parameter specifies the type of the entry. 
+            </summary>
+            <param name="logLevel">the loglevel</param>
+            <param name="message">the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelList(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Displays a list of channels created on a virtual server including their ID, order, name, etc. The output can be modified using several command options. 
+            </summary>
+            <param name="includeTopics">if set to true topic is included</param>
+            <param name="includeFlags">if set to true flag parameters are included</param>
+            <param name="includeVoiceInfo">if set to true voice parameters are included</param>
+            <param name="includeLimits">if set to true limit parameters are included</param>
+            <param name="includeIcon">if set to true icon parameter is included</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelInfo(System.UInt32)">
+            <summary>
+            Displays detailed configuration information about a channel including ID, topic, description, etc. 
+            </summary>
+            <param name="channelId">the id of the channel</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.FindChannels(System.String)">
+            <summary>
+            Displays a list of channels matching a given name pattern. 
+            </summary>
+            <param name="pattern">The pattern used for searchinf</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.MoveChannel(System.UInt32,System.UInt32,System.Nullable{System.UInt16})">
+            <summary>
+            Moves a channel to a new parent channel with the ID cpid. If order is specified, the channel will be sorted right 
+            under the channel with the specified ID. If order is set to 0, the channel will be sorted right below the new parent.
+            </summary>
+            <param name="channelId">The id of the channel to move</param>
+            <param name="channelParentId">The target parent channel id</param>
+            <param name="order">the order used under the new target parent channel id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CreateChannel(TS3QueryLib.Core.Server.Entities.ChannelModification)">
+            <summary>
+            Creates a new channel using the given properties and displays its ID. 
+            </summary>
+            <param name="channelModification">the parameters of the channel as properties</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.EditChannel(System.UInt32,TS3QueryLib.Core.Server.Entities.ChannelModification)">
+            <summary>
+            Changes a channels configuration using given properties. 
+            </summary>
+            <param name="channelId">the id of the channel to edit</param>
+            <param name="channelModification">the parameters of the channel as properties</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannel(System.UInt32,System.Boolean)">
+            <summary>
+            Deletes an existing channel by ID. If force is set to 1, the channel will be deleted even if there are clients within. 
+            </summary>
+            <param name="channelId">The id of the channel to delete</param>
+            <param name="forceDeleteWhenClientsExist">delete even if clients are within the channel</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelPermissionList(System.UInt32)">
+            <summary>
+            Displays a list of permissions defined for a channel. 
+            </summary>
+            <param name="channelId">The id of the channel to retrieve permissions for</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelPermissionList(System.UInt32,System.Boolean)">
+            <summary>
+            Displays a list of permissions defined for a channel. 
+            </summary>
+            <param name="channelId">The id of the channel to retrieve permissions for</param>
+            <param name="returnNameInsteadOfId">If set to true, the returned permissions have the Id property set to 0 and the name property will be filled with the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.PermissionLight)">
+            <summary>
+            Adds the specified permission to the channel.
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.PermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a channel. Multiple permissions can be added by providing the two parameters of each permission. 
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.NamedPermissionLight)">
+            <summary>
+            Adds the specified permission to the channel.
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedPermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a channel. Multiple permissions can be added by providing the two parameters of each permission. 
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelPermission(System.UInt32,System.UInt32)">
+            <summary>
+            Removes the specified permissions from a channel.
+            </summary>
+            <param name="channelId">The id of the channel to delete the permission from</param>
+            <param name="permissionId">The id of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>
+            Removes a set of specified permissions from a channel. Multiple permissions can be removed at once.
+            </summary>
+            <param name="channelId">The id of the channel to delete the permissions from</param>
+            <param name="permissionIdList">The ids of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelPermission(System.UInt32,System.String)">
+            <summary>
+            Removes the specified permissions from a channel.
+            </summary>
+            <param name="channelId">The id of the channel to delete the permission from</param>
+            <param name="permissionName">The name of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a set of specified permissions from a channel. Multiple permissions can be removed at once.
+            </summary>
+            <param name="channelId">The id of the channel to delete the permissions from</param>
+            <param name="permissionNameList">The names of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelGroupList">
+            <summary>
+            Displays a list of channel groups available on the selected virtual server. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroup(System.String)">
+            <summary>
+            Creates a new channel group using a given name and displays its ID. 
+            </summary>
+            <param name="channelGroupName">the name of the group</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroup(System.String,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Creates a new channel group using a given name and displays its ID. 
+            </summary>
+            <param name="channelGroupName">the name of the group</param>
+            <param name="groupType">the type of the group</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroup(System.UInt32,System.Boolean)">
+            <summary>
+            Deletes a channel group by ID. If force is set to 1, the channel group will be deleted even if there are clients within. 
+            </summary>
+            <param name="channelGroupId">the id of the channel group to delete</param>
+            <param name="forceDeleteWhenClientsExist">delete even if there are members within the group</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.RenameChannelGroup(System.UInt32,System.String)">
+            <summary>
+            Changes the name of a specified channel group.
+            </summary>
+            <param name="channelGroupId">the id of the channel group to rename</param>
+            <param name="newName">the new channel group name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.PermissionLight)">
+            <summary>
+             Adds the specified permission to a channel group.
+            </summary>
+            <param name="channelGroupId">the id of the channel group</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.PermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a channel group. Multiple permissions can be added by providing the two parameters of each permission. 
+            </summary>
+            <param name="channelGroupId">the id of the channel group</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.PermissionLight},System.Boolean)">
+            <summary>
+            Adds a set of specified permissions to a channel group. Multiple permissions can be added by providing the two parameters of each permission.
+            </summary>
+            <param name="channelGroupId">the id of the channel group</param>
+            <param name="permissions">the permissions to add</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroupPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.NamedPermissionLight)">
+            <summary>
+             Adds the specified permission to a channel group.
+            </summary>
+            <param name="channelGroupId">the id of the channel group</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedPermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a channel group. Multiple permissions can be added by providing the two parameters of each permission. 
+            </summary>
+            <param name="channelGroupId">the id of the channel group</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermission(System.UInt32,System.UInt32)">
+            <summary>
+            Removes the specified permissions from the channel group.
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permission from</param>
+            <param name="permissionId">The id of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermission(System.UInt32,System.UInt32,System.Boolean)">
+            <summary>
+            Removes the specified permissions from the channel group.
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permission from</param>
+            <param name="permissionId">The id of the permission to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permissions from</param>
+            <param name="permissionIdList">The ids of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermission(System.UInt32,System.String)">
+            <summary>
+            Removes the specified permissions from the channel group.
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permission from</param>
+            <param name="permissionName">The name of the permission to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermission(System.UInt32,System.String,System.Boolean)">
+            <summary>
+            Removes the specified permissions from the channel group.
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permission from</param>
+            <param name="permissionName">The name of the permission to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permissions from</param>
+            <param name="permissionNameList">The names of the permissions to remove</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelGroupPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once.
+            </summary>
+            <param name="channelGroupId">The id of the channel group to delete the permissions from</param>
+            <param name="permissionNameList">The names of the permissions to remove</param>
+            <param name="continueOnError">if set to <c>true</c> continue on error.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelGroupPermissionList(System.UInt32)">
+            <summary>
+            Displays a list of permissions assigned to the channel group specified with cgid.
+            </summary>
+            <param name="channelGroupId">The channel group id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelGroupPermissionList(System.UInt32,System.Boolean)">
+            <summary>
+            Displays a list of permissions assigned to the channel group specified with cgid.
+            </summary>
+            <param name="channelGroupId">The channel group id</param>
+            <param name="returnNameInsteadOfId">If set to true, the returned permissions have the Id property set to 0 and the name property will be filled with the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelGroupClientList(System.Nullable{System.UInt32},System.Nullable{System.UInt32},System.Nullable{System.UInt32})">
+            <summary>
+            Displays all the client and/or channel IDs currently assigned to channel groups. All three parameters are 
+            optional so you're free to choose the most suitable combination for your requirements. 
+            </summary>
+            <param name="channelId">The channel id</param>
+            <param name="clientDatabaseId">The client database id</param>
+            <param name="channelGroupId">The channel group id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SetClientChannelGroup(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Sets the channel group of a client to the ID specified with cgid. 
+            </summary>
+            <param name="channelId">The channel id</param>
+            <param name="clientDatabaseId">The client database id</param>
+            <param name="channelGroupId">The channel group id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientList(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Displays a list of clients online on a virtual server including their ID, nickname, status flags, etc. The output can 
+            be modified using several command options. Please note that the output will only contain clients which are 
+            currently in channels you're able to subscribe to. 
+            </summary>
+            <param name="includeUniqueId">if set to true, the unique id is included</param>
+            <param name="includeAwayState">if set to true, the away info is included</param>
+            <param name="includeVoiceInfo">if set tot true, the voice info is included</param>
+            <param name="includeGroupInfo">if set to true, the group info is included</param>
+            <param name="includeClientInfo">if set to true, the client info is included</param>
+            <param name="includeTimes">if set to true, time information is included</param>
+            <param name="includeIcon">if set to true, icon information is included</param>
+            <param name="includeCountry">if set to true, country information is included</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientInfo(System.UInt32)">
+            <summary>
+            Displays detailed configuration information about a client including unique ID, nickname, client version, etc. 
+            </summary>
+            <param name="clientId">the client id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.FindClients(System.String)">
+            <summary>
+            Displays a list of clients matching a given name pattern. 
+            </summary>
+            <param name="pattern">the pattern used for searching</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.EditClient(System.UInt32,TS3QueryLib.Core.Server.Entities.ClientModification)">
+            <summary>
+            Changes a clients settings using given properties. 
+            </summary>
+            <param name="clientId">the id of the client to edit</param>
+            <param name="modificationInstance">the modifications as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientDatabaseInfo(System.Int32)">
+            <summary>
+            Gets the client database info.
+            </summary>
+            <param name="clientDatabaseId">The client database id.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientDatabaseList(System.Nullable{System.UInt32},System.Nullable{System.UInt32},System.Boolean)">
+            <summary>
+            Displays a list of client identities known by the server including their database ID, last nickname, etc. 
+            </summary>
+            <param name="startIndex">the index of the first record to return (starting  at 0). Default is 0.</param>
+            <param name="numberOfRecords">The amount of records to return. Default is 25</param>
+            <param name="includeTotalCount">If set to true, the property TotalClientsInDatabase of the response is filled with the whole amount of records in database.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.FindClientDatabaseIds(System.String,System.Boolean)">
+            <summary>
+            Displays a list of client database IDs matching a given pattern. You can either search for a clients last known 
+            nickname or his unique identity by using the -uid option. 
+            </summary>
+            <param name="pattern">The search pattern</param>
+            <param name="useUniqueIdInsteadOfNicknameForSearch">if set to true, </param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.EditDatbaseClient(System.Int32,TS3QueryLib.Core.Server.Entities.ClientModification)">
+            <summary>
+            Changes a clients settings using given properties.
+            </summary>
+            <param name="clientDatabaseId">the id of the database client to edit</param>
+            <param name="modificationInstance">the modifications as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientFromDatabase(System.UInt32)">
+            <summary>
+            Deletes a clients properties from the database. 
+            </summary>
+            <param name="clientDatabaseId">Client database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientIdsByUniqueId(System.String)">
+            <summary>
+            Displays all client IDs matching the unique identifier specified by cluid.
+            </summary>
+            <param name="clientUniqueId">the client unique id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientDatabaseIdsByUniqueId(System.String)">
+            <summary>
+            Displays the database ID matching the unique identifier specified by cluid. 
+            </summary>
+            <param name="clientUniqueId">The client unique id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientNameAndDatabaseIdByUniqueId(System.String)">
+            <summary>
+            Displays the database ID and nickname matching the unique identifier specified by cluid. 
+            </summary>
+            <param name="clientUniqueId">The client unique id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientNameAndUniqueIdByClientDatabaseId(System.UInt32)">
+            <summary>
+            Displays the unique identifier and nickname matching the database ID specified by cldbid. 
+            </summary>
+            <param name="clientDatabaseId">client database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.UpdateServerQueryLogin(System.String)">
+            <summary>
+            Updates your own ServerQuery login credentials using a specified username. The password will be auto-generated. 
+            </summary>
+            <param name="username">username to generate new a new password for</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.UpdateCurrentQueryClient(TS3QueryLib.Core.Server.Entities.ClientModification)">
+            <summary>
+            Change your ServerQuery clients settings using given properties. 
+            </summary>
+            <param name="modificationInstance">the modifications as class</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.MoveClient(System.UInt32,System.UInt32,System.String)">
+            <summary>
+            Moves one or more clients specified with clid to the channel with ID cid. If the target channel has a password, 
+            it needs to be specified with cpw. If the channel has no password, the parameter can be omitted. 
+            </summary>
+            <param name="clientId">the id of the client to move</param>
+            <param name="channelId">the id of the target channel</param>
+            <param name="channelPassword">the password of the target channel</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.KickClient(System.UInt32,TS3QueryLib.Core.CommandHandling.KickReason,System.String)">
+            <summary>
+            Kicks one client specified with clid from his currently joined channel or from the server, 
+            depending on reasonid. The reasonmsg parameter specifies a text message sent to the kicked client. This 
+            parameter is optional and may only have a maximum of 40 characters. 
+            </summary>
+            <param name="clientId">the id of the client to kick</param>
+            <param name="kickReason">the reason for kicking</param>
+            <param name="reasonMessage">the reason for kicking as text</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.KickClients(System.Collections.Generic.IEnumerable{System.UInt32},TS3QueryLib.Core.CommandHandling.KickReason,System.String)">
+            <summary>
+            Kicks one or more clients specified with clid from their currently joined channel or from the server, 
+            depending on reasonid. The reasonmsg parameter specifies a text message sent to the kicked clients. This 
+            parameter is optional and may only have a maximum of 40 characters. 
+            </summary>
+            <param name="clientIds">the ids of the clients to kick</param>
+            <param name="kickreason">the reason for kicking</param>
+            <param name="reasonMessage">the reason for kicking as text</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.PokeClient(System.UInt32,System.String)">
+            <summary>
+            Sends a poke message to the client specified with clid. 
+            </summary>
+            <param name="clientId">The id of the client to poke</param>
+            <param name="message">the message to sent</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientPermissionList(System.UInt32)">
+            <summary>
+            Displays a list of permissions defined for a client. 
+            </summary>
+            <param name="clientDatabaseId">the client database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetClientPermissionList(System.UInt32,System.Boolean)">
+            <summary>
+            Displays a list of permissions defined for a client. 
+            </summary>
+            <param name="clientDatabaseId">the client database id</param>
+            <param name="returnNameInsteadOfId">If set to true, the returned permissions have the Id property set to 0 and the name property will be filled with the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddClientPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.ClientPermission)">
+            <summary>
+            Adds the specified permission to a client.
+            </summary>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddClientPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.ClientPermission})">
+            <summary>
+            Adds a set of specified permissions to a client. Multiple permissions can be added by providing the three parameters of each permission. 
+            </summary>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddClientPermission(System.UInt32,TS3QueryLib.Core.Server.Entities.NamedClientPermission)">
+            <summary>
+            Adds the specified permission to a client.
+            </summary>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddClientPermissions(System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedClientPermission})">
+            <summary>
+            Adds a set of specified permissions to a client. Multiple permissions can be added by providing the three parameters of each permission. 
+            </summary>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientPermission(System.UInt32,System.UInt32)">
+            <summary>
+            Removes a set of specified permissions from a client. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionId">the permission id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionIdList">the permission ids</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientPermission(System.UInt32,System.String)">
+            <summary>
+            Removes a set of specified permissions from a client. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionName">the permission id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteClientPermissions(System.UInt32,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionNameList">the permission names</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelClientPermissionList(System.UInt32,System.UInt32)">
+            <summary>
+            Displays a list of permissions defined for a client in a specific channel. 
+            </summary>
+            <param name="channelId">the id of the channel></param>
+            <param name="clientDatabaseId">the clients database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetChannelClientPermissionList(System.UInt32,System.UInt32,System.Boolean)">
+            <summary>
+            Displays a list of permissions defined for a client in a specific channel. 
+            </summary>
+            <param name="channelId">the id of the channel></param>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="returnNameInsteadOfId">If set to true, the returned permissions have the Id property set to 0 and the name property will be filled with the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelClientPermission(System.UInt32,System.UInt32,TS3QueryLib.Core.Server.Entities.PermissionLight)">
+            <summary>
+             Adds the specified permission to a client in a specific channel.
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelClientPermissions(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.PermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a client in a specific channel. Multiple permissions can be added by providing the three parameters of each permission. 
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelClientPermission(System.UInt32,System.UInt32,TS3QueryLib.Core.Server.Entities.NamedPermissionLight)">
+            <summary>
+             Adds the specified permission to a client in a specific channel.
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permission">the permission to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddChannelClientPermissions(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.NamedPermissionLight})">
+            <summary>
+            Adds a set of specified permissions to a client in a specific channel. Multiple permissions can be added by providing the three parameters of each permission. 
+            </summary>
+            <param name="channelId">the id of the channel</param>
+            <param name="clientDatabaseId">the database id of the client</param>
+            <param name="permissions">the permissions to add</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelClientPermission(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Removes the specified permission from the channel group.
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionId">the permission id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelClientPermissions(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionIdList">the permission ids</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelClientPermission(System.UInt32,System.UInt32,System.String)">
+            <summary>
+            Removes the specified permission from the channel group.
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionName">the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteChannelClientPermissions(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes a set of specified permissions from the channel group. Multiple permissions can be removed at once. 
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="clientDatabaseId">the clients database id</param>
+            <param name="permissionIdList">the permission names</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetOwnPermissionDetails(System.UInt32)">
+            <summary>
+            Displays the current value of the permission specified with permid or permsid 
+            for your own connection. This can be useful when you need to check your own 
+            privileges.
+            </summary>
+            <param name="permid">the permission id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetOwnPermissionDetails(System.String)">
+            <summary>
+            Displays the current value of the permission specified with permid or permsid 
+            for your own connection. This can be useful when you need to check your own 
+            privileges.
+            </summary>
+            <param name="permsid">the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPermissionList">
+            <summary>
+            Displays a list of permissions available on the server instance including ID, name and description. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPermissionInfoByName(System.String)">
+            <summary>
+            Returns a list of PermissionInfo objects matching the provided permission name
+            </summary>
+            <param name="permissionName">the permission name used for searching</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPermissionInfoByNames(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Returns a list of PermissionInfo objects matching the provided permission names
+            </summary>
+            <param name="permissionNames">the name of the permissions used for searching</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPermissionOverview(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Displays all permissions assigned to a client for the channel specified with cid. If permid is set to 0, all permissions will be displayed. 
+            </summary>
+            <param name="channelId">The channel id</param>
+            <param name="clientDatabaseId">The client database id</param>
+            <param name="permissionId">the permission id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPermissionOverview(System.UInt32,System.UInt32,System.String)">
+            <summary>
+            Displays all permissions assigned to a client for the channel specified with cid. If permid is set to 0, all permissions will be displayed. 
+            </summary>
+            <param name="channelId">The channel id</param>
+            <param name="clientDatabaseId">The client database id</param>
+            <param name="permissionName">the permission name</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.FindPermissions(System.UInt32)">
+            <summary>
+            Displays the IDs of all clients, channels or groups using the permission specified with permid.
+            </summary>
+            <param name="permissionId">the id of the permission</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.FindPermissions(System.String)">
+            <summary>
+            Displays the IDs of all clients, channels or groups using the permission specified with permsid.
+            </summary>
+            <param name="permissionName">the name of the permission</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.ResetPermissions">
+            <summary>
+            Restores the default permission settings on the selected virtual server and creates a new initial administrator 
+            token. Please note that in case of an error during the permreset call - e.g. when the database has been modified 
+            or corrupted - the virtual server will be deleted from the database. The new admin token is returned by this method.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetPrivilegeKeyList">
+            <summary>
+            Displays a list of privilege keys available including their type and group IDs. Privilege keys can be used to gain access to specified server or channel groups. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddPrivilegeKey(System.Boolean,System.UInt32,System.UInt32)">
+            <summary>
+            Create a new PrivilegeKey. If tokentype is set to 0, the ID specified with tokenid1 will be a server group ID. Otherwise, 
+            tokenid1 is used as a channel group ID and you need to provide a valid channel ID using tokenid2. 
+            </summary>
+            <param name="isChannelGroupIdInsteadOfServerGroupId">if set to true, its a server group id</param>
+            <param name="groupId">the id of the group</param>
+            <param name="channelId">the id of the channel</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddPrivilegeKey(System.Boolean,System.UInt32,System.UInt32,System.String)">
+            <summary>
+            Create a new PrivilegeKey. If tokentype is set to 0, the ID specified with tokenid1 will be a server group ID. Otherwise, 
+            tokenid1 is used as a channel group ID and you need to provide a valid channel ID using tokenid2. 
+            </summary>
+            <param name="isChannelGroupIdInsteadOfServerGroupId">if set to true, its a server group id</param>
+            <param name="groupId">the id of the group</param>
+            <param name="channelId">the id of the channel</param>
+            <param name="tokenDescription">the description for the token</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddPrivilegeKey(System.Boolean,System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Create a new PrivilegeKey. If tokentype is set to 0, the ID specified with tokenid1 will be a server group ID. Otherwise, 
+            tokenid1 is used as a channel group ID and you need to provide a valid channel ID using tokenid2. 
+            </summary>
+            <param name="isChannelGroupIdInsteadOfServerGroupId">if set to true, its a server group id</param>
+            <param name="groupId">the id of the group</param>
+            <param name="channelId">the id of the channel</param>
+            <param name="identValuePairs">The  parameter allows you to specify a set of custom client properties. This feature can be used when generating tokens to combine a website account database with a TeamSpeak user.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddPrivilegeKey(System.Boolean,System.UInt32,System.UInt32,System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Create a new PrivilegeKey. If tokentype is set to 0, the ID specified with tokenid1 will be a server group ID. Otherwise, 
+            tokenid1 is used as a channel group ID and you need to provide a valid channel ID using tokenid2. 
+            </summary>
+            <param name="isChannelGroupIdInsteadOfServerGroupId">if set to true, its a server group id</param>
+            <param name="groupId">the id of the group</param>
+            <param name="channelId">the id of the channel</param>
+            <param name="tokenDescription">the description for the token</param>
+            <param name="identValuePairs">The  parameter allows you to specify a set of custom client properties. This feature can be used when generating tokens to combine a website account database with a TeamSpeak user.</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddPrivilegeKey(System.Boolean,System.UInt32,System.UInt32,System.String,System.String)">
+            <summary>
+            Create a new token. If tokentype is set to 0, the ID specified with tokenid1 will be a server group ID. Otherwise, 
+            tokenid1 is used as a channel group ID and you need to provide a valid channel ID using tokenid2. 
+            </summary>
+            <param name="isChannelGroupIdInsteadOfServerGroupId">if set to true, its a server group id</param>
+            <param name="groupId">the id of the group</param>
+            <param name="channelId">the id of the channel</param>
+            <param name="tokenDescription">the description for the token</param>
+            <param name="tokenCustomSettings">the custome settings you want to save with the token</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeletePrivilegeKey(System.String)">
+            <summary>
+            Deletes an existing PrivilegeKey matching the PrivilegeKey specified with token. 
+            </summary>
+            <param name="privilegeKey">The token to delete</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.UsePrivilegeKey(System.String)">
+            <summary>
+            Use a PrivilegeKey to gain access to a server or channel group. Please note that the server will automatically delete the PrivilegeKey after it has been used. 
+            </summary>
+            <param name="privilegeKey">The token to use</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetMessageList">
+            <summary>
+            Displays a list of offline messages you've received. The output contains the senders unique identifier, the messages subject, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddMessage(System.UInt32,System.String,System.String)">
+            <summary>
+            Sends an offline message to the client specified by cluid
+            </summary>
+            <param name="clientUniqueId">the unique id of the receiver</param>
+            <param name="subject">the subject</param>
+            <param name="message">the message</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetMessage(System.UInt32)">
+            <summary>
+            Displays an existing offline message with ID msgid from your inbox. Please note that this does not 
+            automatically set the flag_read property of the message.
+            </summary>
+            <param name="messageId">the message id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.UpdateMessageFlag(System.UInt32,System.Boolean)">
+            <summary>
+            Updates the flag_read property of the offline message specified with msgid. If flag is set to 1, the message will be marked as read. 
+            </summary>
+            <param name="messageId">the message id</param>
+            <param name="setRead">set it read or not</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteMessage(System.UInt32)">
+            <summary>
+            Deletes an existing offline message with ID msgid from your inbox.
+            </summary>
+            <param name="messageId">the message id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetComplainList">
+            <summary>
+            Displays a list of complaints on the selected virtual server. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetComplainList(System.Nullable{System.UInt32})">
+            <summary>
+            Displays a list of complaints on the selected virtual server. If targetClientDatabaseId is specified, only complaints about the targeted client will be shown.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddComplaint(System.UInt32,System.String)">
+            <summary>
+            Submits a complaint about the client with database ID tcldbid to the server. 
+            </summary>
+            <param name="targetClientDatabaseId">target client database id</param>
+            <param name="message">the complain message</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteComplaint(System.UInt32,System.UInt32)">
+            <summary>
+            Deletes the complaint about the client with ID tcldbid submitted by the client with ID fcldbid from the server.
+            </summary>
+            <param name="targetClientDatabaseId">target client database id</param>
+            <param name="sourceClientDatabaseId">source client database id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteAllComplaints(System.UInt32)">
+            <summary>
+            Deletes all complaints about the client with database ID tcldbid from the server. 
+            </summary>
+            <param name="targetClientDatabaseId">target client database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.BanClient(System.UInt32,System.Nullable{System.TimeSpan},System.String)">
+            <summary>
+            Bans the client specified with ID clid from the server. Please note that this will create two separate ban rules 
+            for the targeted clients IP address and his unique identifier. 
+            </summary>
+            <param name="clientId">the client id to ban</param>
+            <param name="duration">the ban duration</param>
+            <param name="reason">the reason for ban</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetBanList">
+            <summary>
+            Displays a list of active bans on the selected virtual server.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.AddBanRule(System.String,System.String,System.String,System.Nullable{System.TimeSpan},System.String)">
+            <summary>
+            Adds a new ban rule on the selected virtual server. All parameters are optional but at least one of the following must be set: ip, name, or uid. 
+            </summary>
+            <param name="ipPattern">the ip pattern</param>
+            <param name="namePattern">the name pattern</param>
+            <param name="clientUniqueId">the clients unique id</param>
+            <param name="duration">the duration</param>
+            <param name="banReason">te reason for the ban</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteBan(System.UInt32)">
+            <summary>
+            Deletes the ban rule with ID banid from the server. 
+            </summary>
+            <param name="banId">the ban id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteAllBans">
+            <summary>
+            Deletes all active ban rules from the server. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.InitializeFileUpload(System.UInt32,System.String,System.UInt32,System.UInt64,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initializes a file transfer upload. clientftfid is an arbitrary ID to identify the file transfer on client-side. 
+            On success, the server generates a new ftkey which is required to start uploading the file through TeamSpeak 3's file transfer interface. 
+            </summary>
+            <param name="clientFileTransferId">the id of the file transfer</param>
+            <param name="name">the name of the file to upload</param>
+            <param name="channelId">the id of the channel to upload the file to</param>
+            <param name="size">the size of the file in bytes</param>
+            <param name="overwrite">whether to overwrite an existing file</param>
+            <param name="resume">whether to resume on an existing file</param>
+            <param name="channelPassword">the optional channel password</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.InitializeFileDownload(System.UInt32,System.String,System.UInt32,System.UInt64,System.String)">
+            <summary>
+            Initializes a file transfer download. clientftfid is an arbitrary ID to identify the file transfer on client-side. 
+            On success, the server generates a new ftkey which is required to start downloading the file through 
+            TeamSpeak 3's file transfer interface. 
+            </summary>
+            <param name="clientFileTransferId">the id of the file transfer</param>
+            <param name="name">the name of the file to upload</param>
+            <param name="channelId">the id of the channel to upload the file to</param>
+            <param name="seekPosition">the position of the file where to start downloading</param>
+            <param name="channelPassword">the optional channel password</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetFileTransferList">
+            <summary>
+            Displays a list of running file transfers on the selected virtual server. The output contains the path to which a 
+            file is uploaded to, the current transfer rate in bytes per second, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetFileList(System.UInt32,System.String,System.String)">
+            <summary>
+            Displays a list of files and directories stored in the specified channels file repository.
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="channelPassword">the password</param>
+            <param name="filePath">the filepath</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetFileInfo(System.UInt32,System.String,System.String)">
+            <summary>
+            Displays detailed information about the specified file stored in a channels file repository. 
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="name">the name of the file</param>
+            <param name="channelPassword">the channel password</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetFileInfo(System.UInt32,System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Displays detailed information about one or more specified files stored in a channels file repository. 
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="names">the names of the files</param>
+            <param name="channelPassword">the channel password</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.StopFileTransfer(System.UInt32,System.Boolean)">
+            <summary>
+            Stops the running file transfer with server-side ID serverftfid. 
+            </summary>
+            <param name="serverFileTransferId">transfer id</param>
+            <param name="deleteFile">set to true, to delete the file</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.DeleteFile(System.UInt32,System.String,System.String)">
+            <summary>
+            Deletes one or more files stored in a channels file repository
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="channelPassword">the channel password</param>
+            <param name="filePath">The filepath</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CreateDirectory(System.UInt32,System.String,System.String)">
+            <summary>
+            Creates new directory in a channels file repository
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="channelPassword">the channel password</param>
+            <param name="directoryPath">The path for the new directory</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.RenameFile(System.UInt32,System.String,System.String,System.Nullable{System.UInt32},System.String,System.String)">
+            <summary>
+            Renames a file in a channels file repository. If the two parameters tcid and tcpw are specified, the file will be moved into another channels file repository
+            </summary>
+            <param name="channelId"></param>
+            <param name="channelPassword"></param>
+            <param name="oldName"></param>
+            <param name="newName"></param>
+            <param name="targetChannelId"></param>
+            <param name="targetChannelPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CustomSearch(System.String,System.String)">
+            <summary>
+            Searches for custom client properties specified by ident and value. The value parameter can include regular characters and SQL wildcard characters (e.g. %). 
+            </summary>
+            <param name="ident">the ident</param>
+            <param name="pattern">the pattern used for searching</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.GetCustomInfo(System.Int32)">
+            <summary>
+            Displays a list of custom properties for the client specified with cldbid. 
+            </summary>
+            <param name="clientDatabaseId">the clients database id</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.SendWhoAmI">
+            <summary>
+            Displays information about your current ServerQuery connection including the ID of the selected virtual server, your loginname, etc. 
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CopyServerGroup(System.UInt32,System.String,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Creates a copy of the server group specified with sourceGroupId. 
+            </summary>
+            <param name="sourceGroupId">The id of the source group</param>
+            <param name="targetGroupName">The name of the new group</param>
+            <param name="groupType">The type of the group to create</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.OverwriteServerGroup(System.UInt32,System.Int32,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Overwrites the settings of a server group with the settings of another group
+            </summary>
+            <param name="sourceGroupId">The id of the source group from which to copy settings</param>
+            <param name="targetGroupId">The id of the group to overwrite</param>
+            <param name="groupType">The type of the group to create</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.CopyChannelGroup(System.UInt32,System.String,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Creates a copy of the channel group specified with sourceGroupId. 
+            </summary>
+            <param name="sourceGroupId">The id of the source group</param>
+            <param name="targetGroupName">The name of the new group</param>
+            <param name="groupType">The type of the group to create</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryRunner.OverwriteChannelGroup(System.UInt32,System.Int32,TS3QueryLib.Core.CommandHandling.GroupDatabaseType)">
+            <summary>
+            Overwrites the settings of a channel group with the settings of another group
+            </summary>
+            <param name="sourceGroupId">The id of the source group from which to copy settings</param>
+            <param name="targetGroupId">The id of the group to overwrite</param>
+            <param name="groupType">The type of the group to create</param>
+        </member>
+        <member name="P:TS3QueryLib.Core.Server.QueryRunner.Notifications">
+            <summary>
+            Provides access to events raised by notifications
+            </summary>
+        </member>
+        <member name="P:TS3QueryLib.Core.Server.QueryRunner.Utils">
+            <summary>
+            Provides utility methods that are using the queryrunner methods under the hood to ease some often used functions.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetChannelTree">
+            <summary>
+            Returns a tree of channels and contained clients by calling GetChannelList() and GetClientList() on QueryRunner.
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetChannelTree(System.Boolean)">
+            <summary>
+            Returns a tree of channels and contained clients by calling GetChannelList() and GetClientList() on QueryRunner when useCachedData is set to false. Otherwise the data retrieved by previous calls is used.
+            </summary>
+            <param name="useCachedData">whether to use cached data from previous calls or to query the data again to get fresh data</param>
+            <returns></returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetChannelTree(System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.ChannelListEntry},System.Collections.Generic.IEnumerable{TS3QueryLib.Core.Server.Entities.ClientListEntry})">
+            <summary>
+            Returns a list of channels in a tree like fashion. if a clientlist is provided, the clients of the appropriate channel will eb added to the channeltreeitem.
+            You cna use this method to display the structure of a virtual server with channels and users
+            </summary>
+            <param name="channelListEntries">The list of channels from GetChannelList-Method</param>
+            <param name="clientListEntries">The optional list of clients from GetClientList-Method</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetAvatarFilename(System.UInt32)">
+            <summary>
+             Get the filename of the avatar of the client with the provided clientId
+            </summary>
+            <param name="clientId">the id of the client</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetAvatarFilename(TS3QueryLib.Core.Server.Responses.ClientInfoResponse)">
+            <summary>
+            Get the filename of the avatar using the provided ClientInfoResponse
+            </summary>
+            <param name="clientInfoResponse">The ClientInfoResponse which you can get by calling QueryRunner.GetClientInfo(..)</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.Server.QueryUtils.GetAvatarFilename(System.String)">
+            <summary>
+            Get the filename of the avatar using the clients hashed unique id
+            </summary>
+            <param name="hashedUniqueClientId">The hashed unique id of the client which you can get by calling QueryRunner.GetClientInfo(..).HashedUniqueId</param>
+        </member>
+        <member name="F:TS3QueryLib.Core.Server.Responses.HostBannerMode.No_Adjust">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TS3QueryLib.Core.SyncTcpDispatcher">
+            <summary>
+            Class for sending and receiving data from a teamspeak query port using tcp
+            </summary>
+        </member>
+        <member name="M:TS3QueryLib.Core.SyncTcpDispatcher.#ctor(System.String,System.Nullable{System.UInt16})">
+            <summary>
+            Creates an instance of SyncTcpDispatcher
+            </summary>
+            <param name="host">The host to connect to</param>
+            <param name="port">The port to connect to</param>
+        </member>
+        <member name="M:TS3QueryLib.Core.SyncTcpDispatcher.Connect">
+            <summary>
+            Connects to the remote socket.
+            </summary>
+            <returns>Returns SocketError.Success when connection was successful or the socket was already connected or returns another SocketError when something went wrong.</returns>
+        </member>
+        <member name="M:TS3QueryLib.Core.SyncTcpDispatcher.Disconnect">
+            <summary>
+            Disconnects from the connected socket
+            </summary>
+            <returns>Returns true if the disconnect was done or false when the socket was already disconnected</returns>
+        </member>
+    </members>
+</doc>
