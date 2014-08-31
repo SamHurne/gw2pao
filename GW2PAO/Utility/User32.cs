@@ -21,6 +21,7 @@ namespace GW2PAO.Utility
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
 
+        private static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
         private const UInt32 SWP_NOACTIVATE = 0x0010;
         private const UInt32 SWP_NOSIZE = 0x0001;
@@ -30,13 +31,17 @@ namespace GW2PAO.Utility
         private const int GWL_EXSTYLE = (-20);
 
         /// <summary>
-        /// Sets the given WPF window as topmost using a user32 pinvoke call
+        /// Sets the given WPF window as topmost or not topmost using a user32 pinvoke call
         /// </summary>
         /// <param name="window">The window to set as topmost</param>
-        public static void SetTopMost(System.Windows.Window window)
+        /// <param name="topMost">True to set window as topmost, false to remove topmost property</param>
+        public static void SetTopMost(System.Windows.Window window, bool topMost)
         {
             var handle = new System.Windows.Interop.WindowInteropHelper(window).Handle;
-            User32.SetWindowPos(handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
+            if (topMost)
+                User32.SetWindowPos(handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
+            else
+                User32.SetWindowPos(handle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE);
         }
 
         /// <summary>

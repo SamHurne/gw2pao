@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Blue.Private.Win32Imports;
 using Blue.Windows;
 using GW2PAO.Utility;
+using GW2PAO.Utility.Interfaces;
 
 namespace GW2PAO.Views
 {
@@ -18,6 +19,11 @@ namespace GW2PAO.Views
         /// Static owner window that all overlay windows live under. This reduces the amount of entries in the taskbar and in the alt-tab menu of windows
         /// </summary>
         public static Window OwnerWindow { get; set; }
+
+        /// <summary>
+        /// Process Monitor object that monitors the focus/lost focus state of the GW2 process
+        /// </summary>
+        public static IProcessMonitor ProcessMonitor { get; set; }
 
         /// <summary>
         /// Set to true to never allow click-through, else false
@@ -55,17 +61,10 @@ namespace GW2PAO.Views
         {
             this.Owner = OwnerWindow;
             this.Loaded += OverlayWindowBase_Loaded;
-        }
 
-        /// <summary>
-        /// Method that handles making sure the overlay window is always shown
-        /// </summary>
-        private void TopMostThread()
-        {
-            while (this.IsVisible)
+            if (ProcessMonitor != null)
             {
-                Threading.BeginInvokeOnUI(() => User32.SetTopMost(this));
-                System.Threading.Thread.Sleep(10000);
+                ProcessMonitor.GW2Focused += (o, e) => Threading.BeginInvokeOnUI(() => User32.SetTopMost(this, true));
             }
         }
 
@@ -95,10 +94,6 @@ namespace GW2PAO.Views
                     };
                 BindingOperations.SetBinding(this, OverlayWindow.IsClickthroughProperty, clickthroughBinding);
             }
-
-            // To make a window truely top-most, we have to periodically set the window as top-most using a User32 call
-            // So, to do this, we'll create a thread to do it periodically, as long as the window isn't closed
-            Task.Factory.StartNew(this.TopMostThread, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>

@@ -8,6 +8,8 @@ using System.Windows;
 using Awesomium.Core;
 using GW2PAO.Controllers;
 using GW2PAO.TrayIcon;
+using GW2PAO.Utility;
+using GW2PAO.Utility.Interfaces;
 using GW2PAO.ViewModels.TrayIcon;
 using Hardcodet.Wpf.TaskbarNotification;
 using NLog;
@@ -48,6 +50,11 @@ namespace GW2PAO
         /// The overlay menu icon (little icon that shows up on the screen, rather than in the tray)
         /// </summary>
         private static OverlayMenuIcon ApplicationOverlayMenuIcon;
+
+        /// <summary>
+        /// The Process Monitor object that monitors the GW2 Process
+        /// </summary>
+        private static IProcessMonitor ProcessMonitor;
 
         /// <summary>
         /// Application startup
@@ -120,6 +127,10 @@ namespace GW2PAO
             // Initialize the application controller
             AppController = new ApplicationController();
 
+            // Initialize the process monitor
+            ProcessMonitor = new ProcessMonitor(AppController.SystemService);
+            GW2PAO.Views.OverlayWindow.ProcessMonitor = ProcessMonitor;
+
             // Initialize the OverlayMenuIcon
             ApplicationOverlayMenuIcon = new OverlayMenuIcon(TrayIconVm);
 
@@ -154,22 +165,6 @@ namespace GW2PAO
 
             logger.Info("Program startup complete");
 
-            // Check admin privileges - some parts of the application won't work if the application doesn't have permissions to access the Mumble interface
-            try
-            {
-                bool isRunning = AppController.SystemService.IsGw2Running;
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                // An exception can happen if GW2 is running as admin
-                // If that occurs, display a notification
-                if (ex.NativeErrorCode == 5)
-                {
-                    App.TrayIcon.DisplayNotification("Warning", "Some features cannot be started because GW2 is running as administrator.", TrayInfoMessageType.Warning);
-                    logger.Warn(ex);
-                }
-            }
-
             // Reopen windows based on user settings
             AppController.ReopenWindowsFromSettings();
         }
@@ -202,6 +197,7 @@ namespace GW2PAO
             {
                 ApplicationOverlayMenuIcon.Shutdown();
                 AppController.Shutdown();
+                ProcessMonitor.Dispose();
                 Application.Current.Dispatcher.Invoke(TaskbarIcon.Dispose);
                 Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
             });
