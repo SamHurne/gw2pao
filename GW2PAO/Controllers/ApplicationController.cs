@@ -256,79 +256,7 @@ namespace GW2PAO.Controllers
 
             // Initialize the menu items
             logger.Debug("Initializing application menu items");
-            this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
-            this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
-            this.menuItems.Add(null); // Null for a seperator
-
-            // Build the WvW menus (these are a bit more complicated)
-
-            // World Selection Menu
-            var wvwWorldSelectionMenu = new MenuItemViewModel("World Selection", null);
-            var naWorlds = new MenuItemViewModel("NA", null);
-            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID < 2000))
-            {
-                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
-                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
-                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
-                    this.WvWSettings, "WorldSelection");
-                naWorlds.SubMenuItems.Add(worldMenuItem);
-            }
-            wvwWorldSelectionMenu.SubMenuItems.Add(naWorlds);
-            var euWorlds = new MenuItemViewModel("EU", null);
-            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID > 2000))
-            {
-                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
-                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
-                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
-                    this.WvWSettings, "WorldSelection");
-                euWorlds.SubMenuItems.Add(worldMenuItem);
-            }
-            wvwWorldSelectionMenu.SubMenuItems.Add(euWorlds);
-            this.menuItems.Add(wvwWorldSelectionMenu);
-
-            // Tracker view
-            this.menuItems.Add(new MenuItemViewModel("Open WvW Tracker", this.DisplayWvWTracker, this.CanDisplayWvWTracker));
-
-            // Notifications Menu
-            var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
-                {
-                    this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = true;
-                    this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = true;
-                    this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = true;
-                    this.WvWSettings.AreRedBorderlandsNotificationsEnabled = true;
-                }));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
-                {
-                    this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = false;
-                    this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = false;
-                    this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = false;
-                    this.WvWSettings.AreRedBorderlandsNotificationsEnabled = false;
-                }));
-            wvwNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled, this.WvWSettings, "AreEternalBattlegroundsNotificationsEnabled"));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
-            this.menuItems.Add(wvwNotificationsMenu);
-
-            // Add the TP Calculator
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
-
-            // Add the Teamspeak Overlay
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
-
-#if !NO_BROWSER
-            // Add the Web Browser
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
-#endif
+            this.BuildMenuItems();
 
             logger.Info("Application controller initialized");
         }
@@ -436,6 +364,104 @@ namespace GW2PAO.Controllers
             this.ZoneCompletionController.Stop();
             this.DungeonsController.Stop();
             this.WvWController.Stop();
+        }
+
+        /// <summary>
+        /// Initializes the menuItems list
+        /// </summary>
+        private void BuildMenuItems()
+        {
+            // Event Menu Items
+            var eventTimeTableMenus = new MenuItemViewModel("Time Table", null);
+            var standardEvents = new MenuItemViewModel("Standard", null, true,
+                () => { return !this.EventSettings.UseAdjustedTimeTable; },
+                (selected) => this.EventSettings.UseAdjustedTimeTable = !selected,
+                this.EventSettings, "UseAdjustedTimeTable");
+            eventTimeTableMenus.SubMenuItems.Add(standardEvents);
+            var adjustedEvents = new MenuItemViewModel("Adjusted", null, true,
+                () => { return this.EventSettings.UseAdjustedTimeTable; },
+                (selected) => this.EventSettings.UseAdjustedTimeTable = selected,
+                this.EventSettings, "UseAdjustedTimeTable");
+            eventTimeTableMenus.SubMenuItems.Add(adjustedEvents);
+
+            this.menuItems.Add(eventTimeTableMenus);
+            this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
+            this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
+
+            // Zone Completion Assistant
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
+
+            // Dungeons Tracker
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
+
+            // WvW menus (these are a bit more complicated)
+            this.menuItems.Add(null); // Null for a seperator
+
+            // World Selection Menu
+            var wvwWorldSelectionMenu = new MenuItemViewModel("World Selection", null);
+            var naWorlds = new MenuItemViewModel("NA", null);
+            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID < 2000))
+            {
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
+                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
+                    this.WvWSettings, "WorldSelection");
+                naWorlds.SubMenuItems.Add(worldMenuItem);
+            }
+            wvwWorldSelectionMenu.SubMenuItems.Add(naWorlds);
+            var euWorlds = new MenuItemViewModel("EU", null);
+            foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID > 2000))
+            {
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                    () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
+                    (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
+                    this.WvWSettings, "WorldSelection");
+                euWorlds.SubMenuItems.Add(worldMenuItem);
+            }
+            wvwWorldSelectionMenu.SubMenuItems.Add(euWorlds);
+            this.menuItems.Add(wvwWorldSelectionMenu);
+
+            // WvW Tracker view
+            this.menuItems.Add(new MenuItemViewModel("Open WvW Tracker", this.DisplayWvWTracker, this.CanDisplayWvWTracker));
+
+            // WvW Notifications Menu
+            var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
+            {
+                this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = true;
+                this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = true;
+                this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = true;
+                this.WvWSettings.AreRedBorderlandsNotificationsEnabled = true;
+            }));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
+            {
+                this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = false;
+                this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = false;
+                this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = false;
+                this.WvWSettings.AreRedBorderlandsNotificationsEnabled = false;
+            }));
+            wvwNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled, this.WvWSettings, "AreEternalBattlegroundsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
+            this.menuItems.Add(wvwNotificationsMenu);
+
+            // TP Calculator
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+
+            // Teamspeak Overlay
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
+
+#if !NO_BROWSER
+            // Web Browser
+            this.menuItems.Add(null); // Null for a seperator
+            this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
+#endif
         }
 
         /// <summary>

@@ -96,10 +96,13 @@
     <Compile Include="Util\CalcUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdjustedEventTimeTable.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dungeons.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="EventTimeTable.xml">
+    <Content Include="StandardEventTimeTable.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Worlds.xml">

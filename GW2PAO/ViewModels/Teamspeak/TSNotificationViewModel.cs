@@ -94,6 +94,20 @@ namespace GW2PAO.ViewModels.Teamspeak
                 return false;
             }
         }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 23 + this.ClientID.GetHashCode();
+                hash = hash * 23 + this.User.GetHashCode();
+                hash = hash * 23 + this.NotificationType.GetHashCode();
+                hash = hash * 23 + this.Message.GetHashCode();
+                return hash;
+            }
+        }
     }
 
     public enum TSNotificationType

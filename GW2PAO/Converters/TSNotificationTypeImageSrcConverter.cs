@@ -21,7 +21,6 @@ namespace GW2PAO.Style.Converters
             {
                 case TSNotificationType.CannotConnect:
                     return @"/Resources/warning.png";
-                    break;
                 case TSNotificationType.Text:
                     return @"/Resources/chat_bubble.png";
                 case TSNotificationType.Speech:

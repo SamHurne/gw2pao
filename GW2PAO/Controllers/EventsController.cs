@@ -110,6 +110,9 @@ namespace GW2PAO.Controllers
             // Initialize the WorldEvents collection
             this.InitializeWorldEvents();
 
+            // Set up handling of the event settings UseAdjustedTable property changed so that we can load the correct table when it changes
+            this.UserSettings.PropertyChanged += UserSettings_PropertyChanged;
+
             logger.Info("Event Tracker Controller initialized");
         }
 
@@ -159,7 +162,7 @@ namespace GW2PAO.Controllers
         private void InitializeWorldEvents()
         {
             logger.Debug("Initializing world events");
-            this.eventsService.LoadTable();
+            this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
 
             Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
@@ -170,8 +173,6 @@ namespace GW2PAO.Controllers
                     }
                 }));
         }
-
-        //private static int test = 0;
 
         /// <summary>
         /// Refreshes all events within the events collection
@@ -208,15 +209,6 @@ namespace GW2PAO.Controllers
                         }
                         else
                         {
-                            //////////// FOR DEBUG //////////////
-                            //test++;
-                            //if (test == 141)
-                            //{
-                            //    test = 0;
-                            //    this.DisplayEventNotification(worldEvent);
-                            //}
-                            /////////////////////////////////////
-
                             // Reset the IsNotificationShown state
                             worldEvent.IsNotificationShown = false;
                         }
@@ -276,6 +268,27 @@ namespace GW2PAO.Controllers
                                 eventData.IsRemovingNotification = false;
                             });
                     }, TaskCreationOptions.LongRunning);
+            }
+        }
+
+        /// <summary>
+        /// Handles the PropertyChanged event for the EventSettings
+        /// </summary>
+        private void UserSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "UseAdjustedTimeTable")
+            {
+                // Load a different table
+                lock (refreshTimerLock)
+                {
+                    this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+
+                    foreach (var worldEvent in this.WorldEvents)
+                    {
+                        var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
+                        worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
+                    }
+                }
             }
         }
     }

@@ -31,6 +31,7 @@ namespace GW2PAO.Models
 
         private bool areInactiveEventsVisible;
         private bool areEventNotificationsEnabled;
+        private bool useAdjustedTimeTable;
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
@@ -51,6 +52,15 @@ namespace GW2PAO.Models
         {
             get { return this.areEventNotificationsEnabled; }
             set { SetField(ref this.areEventNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if the adjusted time table should be used, else false
+        /// </summary>
+        public bool UseAdjustedTimeTable
+        {
+            get { return this.useAdjustedTimeTable; }
+            set { SetField(ref this.useAdjustedTimeTable, value); }
         }
 
         /// <summary>
@@ -79,6 +89,7 @@ namespace GW2PAO.Models
         {
             this.AreInactiveEventsVisible = true;
             this.AreEventNotificationsEnabled = true;
+            this.UseAdjustedTimeTable = true;
             this.LastResetDateTime = DateTime.UtcNow;
         }
 

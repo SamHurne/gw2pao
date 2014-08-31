@@ -40,19 +40,19 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// Loads the events time table and initializes all cached event information
         /// </summary>
-        public void LoadTable()
+        public void LoadTable(bool isAdjustedTable)
         {
             logger.Info("Loading Event Time Table");
             try
             {
-                this.EventTimeTable = MegaserverEventTimeTable.LoadTable();
+                this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
             }
             catch (Exception ex)
             {
                 logger.Error(ex);
                 logger.Info("Error loading Event Time Table, re-creating table");
-                MegaserverEventTimeTable.CreateTable();
-                this.EventTimeTable = MegaserverEventTimeTable.LoadTable();
+                MegaserverEventTimeTable.CreateTable(isAdjustedTable);
+                this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
             }
 
             try

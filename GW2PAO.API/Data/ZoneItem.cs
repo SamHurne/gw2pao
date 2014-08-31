@@ -39,5 +39,23 @@ namespace GW2PAO.API.Data
                 return false;
             }
         }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 23 + this.ID.GetHashCode();
+                hash = hash * 23 + this.Name.GetHashCode();
+                hash = hash * 23 + this.Type.GetHashCode();
+                hash = hash * 23 + this.MapId.GetHashCode();
+                hash = hash * 23 + this.MapName.GetHashCode();
+                hash = hash * 23 + this.Location.X.GetHashCode();
+                hash = hash * 23 + this.Location.Y.GetHashCode();
+                hash = hash * 23 + this.Location.Z.GetHashCode();
+                return hash;
+            }
+        }
     }
 }
