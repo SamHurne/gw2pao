@@ -287,6 +287,8 @@ namespace GW2PAO.Controllers
                     {
                         var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
                         worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
+                        worldEvent.EventModel.Duration = newData.Duration;
+                        worldEvent.EventModel.WarmupDuration = newData.WarmupDuration;
                     }
                 }
             }
