@@ -105,6 +105,11 @@ namespace GW2PAO.Views
                 BindingOperations.SetBinding(this, OverlayWindow.IsClickthroughProperty, clickthroughBinding);
             }
 
+            // For sticky window support:
+            this.StickyHelper = new StickyWindow(this);
+            this.StickyHelper.StickGap = 10;
+            this.LocationChanged += OverlayWindowBase_LocationChanged;
+
             // Set up the IsSticky binding
             this.IsSticky = GW2PAO.Properties.Settings.Default.AreWindowsSticky;
             Binding isStickyBinding = new Binding("AreWindowsSticky")
@@ -114,15 +119,6 @@ namespace GW2PAO.Views
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
             BindingOperations.SetBinding(this, OverlayWindow.IsStickyProperty, isStickyBinding);
-
-            // For sticky window support:
-            this.StickyHelper = new StickyWindow(this);
-            this.StickyHelper.StickGap = 10;
-            this.StickyHelper.StickToScreen = this.IsSticky;
-            this.StickyHelper.StickToOther = this.IsSticky;
-            this.StickyHelper.StickOnResize = this.IsSticky;
-            this.StickyHelper.StickOnMove = this.IsSticky;
-            this.LocationChanged += OverlayWindowBase_LocationChanged;
         }
 
         /// <summary>
