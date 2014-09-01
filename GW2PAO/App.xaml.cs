@@ -61,11 +61,16 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
+            // We save this so that if we perform an upgrade of settings,
+            //  we still treat this startup as a first-time run of the application
+            bool firstTimeUse = GW2PAO.Properties.Settings.Default.FirstTimeRun;
+
             // Update settings if neccessary
             if (GW2PAO.Properties.Settings.Default.UpgradeRequired)
             {
                 GW2PAO.Properties.Settings.Default.Upgrade();
                 GW2PAO.Properties.Settings.Default.UpgradeRequired = false;
+                GW2PAO.Properties.Settings.Default.FirstTimeRun = firstTimeUse;
                 GW2PAO.Properties.Settings.Default.Save();
             }
 
@@ -176,6 +181,9 @@ namespace GW2PAO
 
             // Reopen windows based on user settings
             AppController.ReopenWindowsFromSettings();
+
+            GW2PAO.Properties.Settings.Default.FirstTimeRun = false;
+            GW2PAO.Properties.Settings.Default.Save();
         }
 
         /// <summary>

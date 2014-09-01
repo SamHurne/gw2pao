@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         Title="OverlayMenuIconView" SizeToContent="WidthAndHeight"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
@@ -49,16 +50,55 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
     </src:OverlayWindow.Resources>
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Popup Name="NowRunningPopup"
+               HorizontalAlignment="Left" VerticalAlignment="Top"
+               PlacementTarget="{Binding ElementName=IconImage}"
+               AllowsTransparency="True" PopupAnimation="Fade"
+               HorizontalOffset="24">
+            <Grid>
+                <Path Stretch="Fill" Stroke="Black" StrokeThickness="2" StrokeLineJoin="Round"
+                      Margin="0" Data="M0,0 L50,30 275,30 275,100 25,100 25,50 z">
+                    <!--Data="M130,154 L427.5,154  427.5,240.5  299.5,240.5  287.5,245.5  275.5,240.5  130,240.5 z">-->
+                    <Path.Effect>
+                        <DropShadowEffect BlurRadius="12" Color="Black" Direction="315" Opacity="0.8"/>
+                    </Path.Effect>
+
+                    <Path.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF24313D" Offset="0"/>
+                            <GradientStop Color="#8024313D" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+
+                <Grid>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="30,30,0,0">
+                    
+                        <core:OutlinedTextBlock Fill="White" FontWeight="Bold" FontSize="15"
+                                                Text="GW2 Personal Assistant Overlay" />
+                        <core:OutlinedTextBlock Fill="White" FontSize="12"
+                                                Text="is now running" />
+                        <core:OutlinedTextBlock Margin="0,10,0,0"
+                                                Fill="White" FontSize="12" FontWeight="Bold"
+                                                Text="Click Here to Get Started" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Popup>
+
         <Image Name="IconImage"
                Source="../Resources/OverlayMenuIcon.png"
                Margin="4,4,4,4"
                Height="24" Width="24"
                ToolTipService.InitialShowDelay="0"
-               MouseDown="Image_MouseDown">
+               MouseDown="Image_MouseDown"
+               MouseEnter="Image_MouseEnter">
             <Image.ToolTip>
                 <ToolTip Style="{StaticResource OverlayIconToolTipStyle}">
                     <TextBlock FontFamily="Gisha" Text="GW2 Personal Assistant Overlay" />

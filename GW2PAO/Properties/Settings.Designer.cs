@@ -490,5 +490,17 @@ namespace GW2PAO.Properties {
                 this["AreWindowsSticky"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FirstTimeRun {
+            get {
+                return ((bool)(this["FirstTimeRun"]));
+            }
+            set {
+                this["FirstTimeRun"] = value;
+            }
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace GW2PAO.Utility
 
         private bool disposed;
         private ISystemService systemService;
-        private bool isShuttingDown;
         private bool isAdminRightsErrorShown;
 
         /// <summary>

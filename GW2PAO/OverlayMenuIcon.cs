@@ -35,7 +35,7 @@ namespace GW2PAO
                         // Showing
                         GW2PAO.Utility.Threading.InvokeOnUI(() =>
                         {
-                            menuIconView = new Views.OverlayMenuIconView(trayIconViewModel);
+                            menuIconView = new Views.OverlayMenuIconView(trayIconViewModel, Properties.Settings.Default.FirstTimeRun);
                             menuIconView.Show();
                         });
                     }
