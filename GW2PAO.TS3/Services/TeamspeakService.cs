@@ -272,7 +272,7 @@ namespace GW2PAO.TS3.Services
                         // Someone joined the channel
                         this.RaiseClientEnteredChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
                     }
-                    else if (this.clients[clientId].ChannelID == this.currentClientID && newChannelId != this.currentChannelID)
+                    else if (this.clients[clientId].ChannelID == this.currentChannelID && newChannelId != this.currentChannelID)
                     {
                         // Someone left the channel
                         this.RaiseClientExitedChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
