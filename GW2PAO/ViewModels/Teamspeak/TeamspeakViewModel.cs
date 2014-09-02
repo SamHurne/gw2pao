@@ -64,7 +64,12 @@ namespace GW2PAO.ViewModels.Teamspeak
             this.TeamspeakService.TextMessageReceived += TeamspeakService_TextMessageReceived;
             this.TeamspeakService.ClientEnteredChannel += TeamspeakService_ClientEnteredChannel;
             this.TeamspeakService.ClientExitedChannel += TeamspeakService_ClientExitedChannel;
-            this.TeamspeakService.Connect();
+
+            Task.Factory.StartNew(() =>
+                {
+                    // Start this on another thread so that we don't hold up anything creating us
+                    Threading.BeginInvokeOnUI(() => this.TeamspeakService.Connect());
+                });
         }
 
         /// <summary>
