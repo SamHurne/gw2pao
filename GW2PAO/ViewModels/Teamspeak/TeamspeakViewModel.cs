@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2PAO.Models;
 using GW2PAO.PresentationCore;
 using GW2PAO.TS3.Services.Interfaces;
 using GW2PAO.Utility;
@@ -41,6 +42,11 @@ namespace GW2PAO.ViewModels.Teamspeak
         }
 
         /// <summary>
+        /// User settings for the Teamspeak Overlay
+        /// </summary>
+        public TeamspeakSettings UserSettings { get; private set; }
+
+        /// <summary>
         /// Collection of client notifications (speaking users, messages, users entering, etc)
         /// </summary>
         public ObservableCollection<TSNotificationViewModel> Notifications { get; private set; }
@@ -53,9 +59,10 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TeamspeakViewModel(ITeamspeakService teamspeakService)
+        public TeamspeakViewModel(ITeamspeakService teamspeakService, TeamspeakSettings userSettings)
         {
             this.isShuttingDown = false;
+            this.UserSettings = userSettings;
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
 
             this.TeamspeakService = teamspeakService;

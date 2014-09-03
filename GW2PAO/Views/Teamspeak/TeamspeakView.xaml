@@ -66,9 +66,8 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <!--<MenuItem Header="Reset Hidden Dungeons" Command="{Binding ResetHiddenDungeonsCommand}" />
-                            <MenuItem Header="Reset Completed Paths" Command="{Binding ResetCompletedPathsCommand}" />
-                            <Separator />-->
+                            <MenuItem Header="Show Chat Entry Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
+                            <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
@@ -160,7 +159,8 @@
         </Grid>
 
         <Grid Name="TextEntryBox" Grid.Row="2"
-              Margin="3">
+              Margin="3"
+              Visibility="{Binding UserSettings.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>

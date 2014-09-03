@@ -132,6 +132,11 @@ namespace GW2PAO.Controllers
         public WvWSettings WvWSettings { get; private set; }
 
         /// <summary>
+        /// User settings for teamspeak
+        /// </summary>
+        public TeamspeakSettings TeamspeakSettings { get; private set; }
+
+        /// <summary>
         /// Main functionality menu items, including those for the Event Tracker 
         /// and the Zone Completion Assistant
         /// </summary>
@@ -219,12 +224,18 @@ namespace GW2PAO.Controllers
             if (this.WvWSettings == null)
                 this.WvWSettings = new WvWSettings();
 
+            logger.Debug("Loading teamspeak settings");
+            this.TeamspeakSettings = TeamspeakSettings.LoadSettings();
+            if (this.TeamspeakSettings == null)
+                this.TeamspeakSettings = new TeamspeakSettings();
+
             // Enable autosave on the user settings
             logger.Debug("Enabling autosave of user settings");
             this.EventSettings.EnableAutoSave();
             this.ZoneCompletionSettings.EnableAutoSave();
             this.DungeonSettings.EnableAutoSave();
             this.WvWSettings.EnableAutoSave();
+            this.TeamspeakSettings.EnableAutoSave();
 
             // Create the controllers
             logger.Debug("Creating browser controller");
@@ -623,7 +634,7 @@ namespace GW2PAO.Controllers
         {
             if (this.teamspeakView == null || !this.teamspeakView.IsVisible)
             {
-                this.teamspeakView = new TeamspeakView(new TeamspeakViewModel(this.TeamspeakService));
+                this.teamspeakView = new TeamspeakView(new TeamspeakViewModel(this.TeamspeakService, this.TeamspeakSettings));
                 this.teamspeakView.Show();
             }
             else
