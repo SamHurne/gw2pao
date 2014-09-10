@@ -156,6 +156,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenItems); } }
 
         /// <summary>
+        /// Command to copy the zone item's chat code to the clipboard
+        /// </summary>
+        public DelegateCommand CopyChatCodeCommand { get { return new DelegateCommand(this.CopyChatCode, this.CanCopyChatCode); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="zoneItem">The zone item/point's information</param>
@@ -267,6 +272,23 @@ namespace GW2PAO.ViewModels.ZoneCompletion
                 }
             }
             logger.Trace("IsVisible = {0}", this.IsVisible);
+        }
+
+        /// <summary>
+        /// Returns true if this zone item has a chat code, else false
+        /// </summary>
+        private bool CanCopyChatCode()
+        {
+            return !string.IsNullOrWhiteSpace(this.ItemModel.ChatCode);
+        }
+
+        /// <summary>
+        /// Copies the item's chat code, if it has one
+        /// </summary>
+        private void CopyChatCode()
+        {
+            logger.Debug("Copying chat code of \"{0}\" as \"{1}\"", this.ItemName, this.ItemModel.ChatCode);
+            System.Windows.Clipboard.SetText(this.ItemModel.ChatCode);
         }
     }
 }

@@ -24,6 +24,8 @@
     <UserControl.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Hide" Command="{Binding HideCommand}" />
+            <Separator />
+            <MenuItem Header="Copy Chat Code" Command="{Binding CopyChatCodeCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
 
