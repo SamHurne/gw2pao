@@ -291,6 +291,7 @@ namespace GW2PAO.API.Services
                                 objData.FullName = objDetails.FullName;
                                 objData.Location = objDetails.Location;
                                 objData.MapLocation = objDetails.MapLocation;
+                                objData.ChatCode = objDetails.ChatCode;
                                 objData.Points = objDetails.Points;
                             }
 

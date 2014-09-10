@@ -16,6 +16,7 @@ namespace GW2PAO.API.Data
         public string Name { get; set; }
         public string FullName { get; set; }
         public string Location { get; set; }
+        public string ChatCode { get; set; }
         public Point MapLocation { get; set; }
         public WorldColor WorldOwner { get; set; }
         public Guid? GuildOwner { get; set; }

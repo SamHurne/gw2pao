@@ -28,6 +28,8 @@
         <ContextMenu>
             <MenuItem Header="Hide" Command="{Binding HideCommand}" />
             <Separator />
+            <MenuItem Header="Copy Chat Code" Command="{Binding CopyChatCodeCommand}" />
+            <Separator />
             <MenuItem Header="Copy Under Attack Text" Command="{Binding CopyUnderAttackTextCommand}" />
             <MenuItem Header="Copy Enemy Headed Towards Text" Command="{Binding CopyEnemyHeadedToTextCommand}" />
             <MenuItem Header="Copy Player Headed Towards Text" Command="{Binding CopyPlayerHeadedToTextCommand}" />

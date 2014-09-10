@@ -235,6 +235,11 @@ namespace GW2PAO.ViewModels
         public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
 
         /// <summary>
+        /// Command to copy the chat code for this objective to the clipboard
+        /// </summary>
+        public DelegateCommand CopyChatCodeCommand { get { return new DelegateCommand(this.CopyChatCode, this.CanCopyChatCode); } }
+
+        /// <summary>
         /// Command to copy the "'x' is under attack!" text to the clipboard
         /// </summary>
         public DelegateCommand CopyUnderAttackTextCommand { get { return new DelegateCommand(this.CopyUnderAttackText); } }
@@ -355,12 +360,30 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Returns true if a chat code is available for this objective, else false
+        /// </summary>
+        private bool CanCopyChatCode()
+        {
+            return !string.IsNullOrWhiteSpace(this.ModelData.ChatCode);
+        }
+
+        /// <summary>
+        /// Copies the objectives's chat code, if it has one
+        /// </summary>
+        private void CopyChatCode()
+        {
+            logger.Debug("Copying chat code of \"{0}\" as \"{1}\"", this.Name, this.ModelData.ChatCode);
+            System.Windows.Clipboard.SetText(this.ModelData.ChatCode);
+        }
+
+        /// <summary>
         /// Copies "'x' is under attack!" text to the clipboard for pasting into the in-game chat
         /// </summary>
         private void CopyUnderAttackText()
         {
             logger.Debug("Copying under attack text of \"{0}\"", this.Name);
-            System.Windows.Clipboard.SetText(string.Format("{0} is under attack!! ({1} {2})", this.Name, this.Location, this.Type));
+            string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
+            System.Windows.Clipboard.SetText(string.Format("{0} is under attack!! ({1} {2})", name, this.Location, this.Type));
         }
 
         /// <summary>
@@ -369,17 +392,18 @@ namespace GW2PAO.ViewModels
         private void CopyEnemyHeadedToText()
         {
             logger.Debug("Copying enemy-headed-to text of \"{0}\"", this.Name);
+            string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
             if (this.Type != ObjectiveType.BattlesHollow
                 && this.Type != ObjectiveType.BauersEstate
                 && this.Type != ObjectiveType.CarversAscent
                 && this.Type != ObjectiveType.OrchardOverlook
                 && this.Type != ObjectiveType.TempleofLostPrayers)
             {
-                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0} ({1} {2})", this.Name, this.Location, this.Type));
+                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0} ({1} {2})", name, this.Location, this.Type));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0}", this.Name));
+                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0}", name));
             }
         }
 
@@ -410,17 +434,19 @@ namespace GW2PAO.ViewModels
 
             logger.Debug("Copying player-headed-to text of \"{0}\"", this.Name);
 
+            string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
+
             if (this.Type != ObjectiveType.BattlesHollow
                 && this.Type != ObjectiveType.BauersEstate
                 && this.Type != ObjectiveType.CarversAscent
                 && this.Type != ObjectiveType.OrchardOverlook
                 && this.Type != ObjectiveType.TempleofLostPrayers)
             {
-                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} ({1} {2}) - Estimated Distance: {3}{4}", this.Name, this.Location, this.Type, distance, distanceUnits));
+                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} ({1} {2}) - Estimated Distance: {3}{4}", name, this.Location, this.Type, distance, distanceUnits));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} - Estimated Distance: {1}{2}", this.Name, distance, distanceUnits));
+                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} - Estimated Distance: {1}{2}", name, distance, distanceUnits));
             }
         }
 
@@ -430,13 +456,16 @@ namespace GW2PAO.ViewModels
         private void CopyRIText()
         {
             logger.Debug("Copying RI text of \"{0}\"", this.Name);
+
+            string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
+
             if (this.IsRIActive)
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI: {3}", this.Name, this.Location, this.Type, this.TimerValue.ToString("mm\\:ss")));
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI: {3}", name, this.Location, this.Type, this.TimerValue.ToString("mm\\:ss")));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI is NOT active", this.Name, this.Location, this.Type));
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI is NOT active", name, this.Location, this.Type));
             }
         }
     }
