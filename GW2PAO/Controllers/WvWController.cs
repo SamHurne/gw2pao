@@ -300,128 +300,148 @@ namespace GW2PAO.Controllers
             lock (this.objectivesRefreshTimerLock)
             {
                 var matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
-
-                if (this.matchID != matchID)
+                if (matchID == null)
                 {
-                    logger.Info("Match change detected: new matchID = {0}", matchID);
-                    this.matchID = matchID;
-
-                    // Refresh state of all objectives
-                    var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                    foreach (var objective in this.AllObjectives)
-                    {
-                        var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                        Threading.InvokeOnUI(() =>
+                    // Unable to retrieve the current match ID, which means a reset is probably occuring
+                    // When this happens, clear out the state of everything
+                    Threading.InvokeOnUI(() =>
                         {
-                            objective.ModelData.MatchId = this.matchID;
-                            objective.WorldOwner = latestData.WorldOwner;
-                            objective.PrevWorldOwner = latestData.WorldOwner;
-                            objective.FlipTime = DateTime.UtcNow;
-                            objective.TimerValue = TimeSpan.Zero;
-                            objective.IsRIActive = false;
+                            foreach (var objective in this.AllObjectives)
+                            {
+                                objective.PrevWorldOwner = WorldColor.None;
+                                objective.WorldOwner = WorldColor.None;
+                                objective.FlipTime = DateTime.UtcNow;
+                                objective.DistanceFromPlayer = 0;
+                                objective.TimerValue = TimeSpan.Zero;
+                                objective.IsRIActive = false;
+                            }
                         });
-                    }
                 }
                 else
                 {
-                    // Check for new WvW Map
-                    if (this.MapOverride != WvWMap.Unknown)
+
+                    if (this.matchID != matchID)
                     {
-                        if (this.MapOverride != this.prevMap)
+                        logger.Info("Match change detected: new matchID = {0}", matchID);
+                        this.matchID = matchID;
+
+                        // Refresh state of all objectives
+                        var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                        foreach (var objective in this.AllObjectives)
                         {
-                            // Map changed, rebuild the objectives
-                            this.prevMap = this.MapOverride;
-                            this.mapObj.Map = this.MapOverride;
-                            this.RebuildCurrentObjectivesCollection(this.MapOverride);
+                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+                            Threading.InvokeOnUI(() =>
+                            {
+                                objective.ModelData.MatchId = this.matchID;
+                                objective.PrevWorldOwner = latestData.WorldOwner;
+                                objective.WorldOwner = latestData.WorldOwner;
+                                objective.FlipTime = DateTime.UtcNow;
+                                objective.DistanceFromPlayer = 0;
+                                objective.TimerValue = TimeSpan.Zero;
+                                objective.IsRIActive = false;
+                            });
                         }
                     }
                     else
                     {
-                        if (this.PlayerMap != this.prevMap)
+                        // Check for new WvW Map
+                        if (this.MapOverride != WvWMap.Unknown)
                         {
-                            // Map changed, rebuild the objectives
-                            this.prevMap = this.PlayerMap;
-                            this.mapObj.Map = this.PlayerMap;
-                            this.RebuildCurrentObjectivesCollection(this.PlayerMap);
-                        }
-                    }
-
-                    // Refresh state of all objectives
-                    // Since we don't perform any caching with this request, let's not spam Anet's servers by doing it 2-times a second
-                    // Instead, we'll do it once every 2 seconds
-                    this.timerCount++;
-                    if (this.timerCount >= 4) // 500ms * 4 = 2seconds
-                    {
-                        this.timerCount = 0;
-                        var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                        if (latestObjectivesData.Count() > 0)
-                        {
-                            foreach (var objective in this.AllObjectives)
+                            if (this.MapOverride != this.prevMap)
                             {
-                                var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+                                // Map changed, rebuild the objectives
+                                this.prevMap = this.MapOverride;
+                                this.mapObj.Map = this.MapOverride;
+                                this.RebuildCurrentObjectivesCollection(this.MapOverride);
+                            }
+                        }
+                        else
+                        {
+                            if (this.PlayerMap != this.prevMap)
+                            {
+                                // Map changed, rebuild the objectives
+                                this.prevMap = this.PlayerMap;
+                                this.mapObj.Map = this.PlayerMap;
+                                this.RebuildCurrentObjectivesCollection(this.PlayerMap);
+                            }
+                        }
 
-                                if (objective.WorldOwner != latestData.WorldOwner)
+                        // Refresh state of all objectives
+                        // Do this only once every 2 seconds
+                        this.timerCount++;
+                        if (this.timerCount >= 4) // 500ms * 4 = 2seconds
+                        {
+                            this.timerCount = 0;
+                            var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                            if (latestObjectivesData.Count() > 0)
+                            {
+                                foreach (var objective in this.AllObjectives)
                                 {
-                                    // New owner
-                                    Threading.InvokeOnUI(() =>
-                                        {
-                                            objective.PrevWorldOwner = objective.WorldOwner;
-                                            objective.WorldOwner = latestData.WorldOwner;
+                                    var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
 
-                                            // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
-                                            if (objective.Type != ObjectiveType.TempleofLostPrayers
-                                                && objective.Type != ObjectiveType.BattlesHollow
-                                                && objective.Type != ObjectiveType.BauersEstate
-                                                && objective.Type != ObjectiveType.OrchardOverlook
-                                                && objective.Type != ObjectiveType.CarversAscent)
-                                            {
-                                                objective.FlipTime = DateTime.UtcNow;
-                                                objective.IsRIActive = true;
-                                            }
-                                        });
-
-                                    if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                                    if (objective.WorldOwner != latestData.WorldOwner)
                                     {
-                                        // Owner just changed, raise a notification!
-                                        this.DisplayNotification(objective);
+                                        // New owner
+                                        Threading.InvokeOnUI(() =>
+                                            {
+                                                objective.PrevWorldOwner = objective.WorldOwner;
+                                                objective.WorldOwner = latestData.WorldOwner;
+
+                                                // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
+                                                if (objective.Type != ObjectiveType.TempleofLostPrayers
+                                                    && objective.Type != ObjectiveType.BattlesHollow
+                                                    && objective.Type != ObjectiveType.BauersEstate
+                                                    && objective.Type != ObjectiveType.OrchardOverlook
+                                                    && objective.Type != ObjectiveType.CarversAscent)
+                                                {
+                                                    objective.FlipTime = DateTime.UtcNow;
+                                                    objective.IsRIActive = true;
+                                                }
+                                            });
+
+                                        if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                                        {
+                                            // Owner just changed, raise a notification!
+                                            this.DisplayNotification(objective);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    // Refresh timers
-                    foreach (var objective in this.AllObjectives)
-                    {
-                        var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
-                        if (timeSinceFlip <= TimeSpan.FromMinutes(5))
+                        // Refresh timers
+                        foreach (var objective in this.AllObjectives)
                         {
-                            var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
-                            Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
-                        }
-                        else
-                        {
-                            Threading.InvokeOnUI(() => objective.IsRIActive = false);
-                        }
-                    }
-
-                    if (this.UserSettings.AreTimeDistancesShown) // Don't bother if we aren't showing these
-                    {
-                        // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
-                        // Note: these are approximations at best
-                        var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
-                        foreach (var objective in this.CurrentObjectives)
-                        {
-                            if (this.PlayerMap == objective.Map)
+                            var timeSinceFlip = DateTime.UtcNow - objective.FlipTime;
+                            if (timeSinceFlip <= TimeSpan.FromMinutes(5))
                             {
-                                if (playerPosition != null && objective.ModelData.MapLocation != null)
-                                {
-                                    objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
-                                }
+                                var countdownTime = TimeSpan.FromMinutes(5) - timeSinceFlip;
+                                Threading.InvokeOnUI(() => objective.TimerValue = countdownTime);
                             }
                             else
                             {
-                                objective.DistanceFromPlayer = 0;
+                                Threading.InvokeOnUI(() => objective.IsRIActive = false);
+                            }
+                        }
+
+                        if (this.UserSettings.AreTimeDistancesShown) // Don't bother if we aren't showing these
+                        {
+                            // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
+                            // Note: these are approximations at best
+                            var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
+                            foreach (var objective in this.CurrentObjectives)
+                            {
+                                if (this.PlayerMap == objective.Map)
+                                {
+                                    if (playerPosition != null && objective.ModelData.MapLocation != null)
+                                    {
+                                        objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
+                                    }
+                                }
+                                else
+                                {
+                                    objective.DistanceFromPlayer = 0;
+                                }
                             }
                         }
                     }

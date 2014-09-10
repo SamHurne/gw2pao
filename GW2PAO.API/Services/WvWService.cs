@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
-using GwApiNET;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
+using GW2DotNET;
+using GW2DotNET.V1.WorldVersusWorld;
+using GW2DotNET.Entities.WorldVersusWorld;
 
 namespace GW2PAO.API.Services
 {
@@ -17,6 +19,16 @@ namespace GW2PAO.API.Services
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// The GW2.NET API service objective
+        /// </summary>
+        private ServiceManager service = new ServiceManager();
+
+        /// <summary>
+        /// Internal cache of the current WvW matchup
+        /// </summary>
+        private Matchup currentMatchup;
 
         /// <summary>
         /// The Worlds table
@@ -69,14 +81,11 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var matches = GwApi.GetMatches();
-                var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
-                                                                   || match.RedWorldId == worldId
-                                                                   || match.GreenWorldId == worldId);
+                var wvwMatch = this.GetCurrentMatchup(worldId);
                 if (wvwMatch == null)
                     return null;
                 else
-                    return wvwMatch.Id;
+                    return wvwMatch.MatchId;
             }
             catch (Exception ex)
             {
@@ -95,17 +104,14 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var matches = GwApi.GetMatches();
-                var wvwMatch = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
-                                                                   || match.RedWorldId == worldId
-                                                                   || match.GreenWorldId == worldId);
+                var wvwMatch = this.GetCurrentMatchup(worldId);
                 if (wvwMatch != null)
                 {
                     if (wvwMatch.BlueWorldId == worldId)
                         return WorldColor.Blue;
-                    else if (wvwMatch.RedWorldId == worldId)
-                        return WorldColor.Red;
                     else if (wvwMatch.GreenWorldId == worldId)
+                        return WorldColor.Red;
+                    else if (wvwMatch.RedWorldId == worldId)
                         return WorldColor.Green;
                     else
                         return WorldColor.None;
@@ -143,17 +149,17 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var details = GwApiNET.GwApi.GetMatchDetails(matchId, true);
+                var details = this.service.GetMatchDetails(matchId);
                 if (details != null)
                 {
                     switch (this.GetTeamColor(worldId))
                     {
                         case WorldColor.Red:
-                            return details.RedScore;
+                            return details.Scores.Red;
                         case WorldColor.Blue:
-                            return details.BlueScore;
+                            return details.Scores.Blue;
                         case WorldColor.Green:
-                            return details.GreenScore;
+                            return details.Scores.Green;
                         default:
                             return -1;
                     }
@@ -181,37 +187,35 @@ namespace GW2PAO.API.Services
             List<WvWObjective> objectives = new List<WvWObjective>();
             try
             {
-                var details = GwApi.GetMatchDetails(matchId, true);
-                if (details != null)
+                var matchDetails = this.service.GetMatchDetails(matchId);
+                if (matchDetails != null)
                 {
-                    MatchMapType mapType;
+                    CompetitiveMap mapDetails = null;
                     switch (map)
                     {
                         case WvWMap.BlueBorderlands:
-                            mapType = MatchMapType.BlueHome;
+                            mapDetails = matchDetails.Maps.FirstOrDefault(m => m is BlueBorderlands);
                             break;
                         case WvWMap.GreenBorderlands:
-                            mapType = MatchMapType.GreenHome;
+                            mapDetails = matchDetails.Maps.FirstOrDefault(m => m is GreenBorderlands);
                             break;
                         case WvWMap.RedBorderlands:
-                            mapType = MatchMapType.RedHome;
+                            mapDetails = matchDetails.Maps.FirstOrDefault(m => m is RedBorderlands);
                             break;
                         case WvWMap.EternalBattlegrounds:
-                            mapType = MatchMapType.Center;
+                            mapDetails = matchDetails.Maps.FirstOrDefault(m => m is EternalBattlegrounds);
                             break;
                         default:
-                            mapType = MatchMapType.Center;
                             break;
                     }
 
-                    var mapDetails = details.Maps.FirstOrDefault(m => m.Type == mapType);
                     if (mapDetails != null)
                     {
                         foreach (var objective in mapDetails.Objectives)
                         {
                             var objData = new WvWObjective();
 
-                            objData.ID = objective.Id;
+                            objData.ID = objective.ObjectiveId;
                             objData.MatchId = matchId;
                             objData.Map = map;
                             objData.GuildOwner = objective.OwnerGuildId;
@@ -229,13 +233,13 @@ namespace GW2PAO.API.Services
 
                             switch (objective.Owner)
                             {
-                                case OwnerColor.Blue:
+                                case TeamColor.Blue:
                                     objData.WorldOwner = WorldColor.Blue;
                                     break;
-                                case OwnerColor.Green:
+                                case TeamColor.Green:
                                     objData.WorldOwner = WorldColor.Green;
                                     break;
-                                case OwnerColor.Red:
+                                case TeamColor.Red:
                                     objData.WorldOwner = WorldColor.Red;
                                     break;
                                 default:
@@ -266,16 +270,16 @@ namespace GW2PAO.API.Services
             List<WvWObjective> objectives = new List<WvWObjective>();
             try
             {
-                var details = GwApi.GetMatchDetails(matchId, true);
-                if (details != null)
+                var matchDetails = this.service.GetMatchDetails(matchId);
+                if (matchDetails != null)
                 {
-                    foreach (var mapDetails in details.Maps)
+                    foreach (var mapDetails in matchDetails.Maps)
                     {
                         foreach (var objective in mapDetails.Objectives)
                         {
                             var objData = new WvWObjective();
 
-                            objData.ID = objective.Id;
+                            objData.ID = objective.ObjectiveId;
                             objData.MatchId = matchId;
                             objData.GuildOwner = objective.OwnerGuildId;
 
@@ -290,34 +294,26 @@ namespace GW2PAO.API.Services
                                 objData.Points = objDetails.Points;
                             }
 
-                            switch (mapDetails.Type)
-                            {
-                                case MatchMapType.BlueHome:
-                                    objData.Map = WvWMap.BlueBorderlands;
-                                    break;
-                                case MatchMapType.GreenHome:
-                                    objData.Map = WvWMap.GreenBorderlands;
-                                    break;
-                                case MatchMapType.RedHome:
-                                    objData.Map = WvWMap.RedBorderlands;
-                                    break;
-                                case MatchMapType.Center:
-                                    objData.Map = WvWMap.EternalBattlegrounds;
-                                    break;
-                                default:
-                                    objData.Map = WvWMap.Unknown;
-                                    break;
-                            }
+                            if (mapDetails is BlueBorderlands)
+                                objData.Map = WvWMap.BlueBorderlands;
+                            else if (mapDetails is GreenBorderlands)
+                                objData.Map = WvWMap.GreenBorderlands;
+                            else if (mapDetails is RedBorderlands)
+                                objData.Map = WvWMap.RedBorderlands;
+                            else if (mapDetails is EternalBattlegrounds)
+                                objData.Map = WvWMap.EternalBattlegrounds;
+                            else
+                                objData.Map = WvWMap.Unknown;
 
                             switch (objective.Owner)
                             {
-                                case OwnerColor.Blue:
+                                case TeamColor.Blue:
                                     objData.WorldOwner = WorldColor.Blue;
                                     break;
-                                case OwnerColor.Green:
+                                case TeamColor.Green:
                                     objData.WorldOwner = WorldColor.Green;
                                     break;
-                                case OwnerColor.Red:
+                                case TeamColor.Red:
                                     objData.WorldOwner = WorldColor.Red;
                                     break;
                                 default:
@@ -337,6 +333,25 @@ namespace GW2PAO.API.Services
             }
 
             return objectives;
+        }
+
+        /// <summary>
+        /// Retrieves either the cached matchup details, or requests new matchup details
+        /// </summary>
+        /// <returns>The current WvW matchup</returns>
+        private Matchup GetCurrentMatchup(int worldId)
+        {
+            if (this.currentMatchup == null
+                || (this.currentMatchup.EndTime.CompareTo(DateTimeOffset.UtcNow) < 0))
+            {
+                // We've never requested the current matchup, or we've passed the end time for the current matchup
+                var matches = this.service.GetMatches();
+                this.currentMatchup = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
+                                                                            || match.GreenWorldId == worldId
+                                                                            || match.RedWorldId == worldId);
+            }
+
+            return this.currentMatchup;
         }
     }
 }

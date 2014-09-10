@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
-using GwApiNET.Gw2PositionReader;
+using GW2PAO.API.Util;
+using GW2PAO.Mumble;
 using NLog;
 
 namespace GW2PAO.API.Services
@@ -67,21 +68,21 @@ namespace GW2PAO.API.Services
             {
                 switch (this.player.Profession)
                 {
-                    case GwApiNET.Profession.Elementalist:
+                    case GW2PAO.Mumble.Data.Profession.Elementalist:
                         return Profession.Elementalist;
-                    case GwApiNET.Profession.Engineer:
+                    case GW2PAO.Mumble.Data.Profession.Engineer:
                         return Profession.Engineer;
-                    case GwApiNET.Profession.Guardian:
+                    case GW2PAO.Mumble.Data.Profession.Guardian:
                         return Profession.Guardian;
-                    case GwApiNET.Profession.Mesmer:
+                    case GW2PAO.Mumble.Data.Profession.Mesmer:
                         return Profession.Mesmer;
-                    case GwApiNET.Profession.Necromancer:
+                    case GW2PAO.Mumble.Data.Profession.Necromancer:
                         return Profession.Necromancer;
-                    case GwApiNET.Profession.Ranger:
+                    case GW2PAO.Mumble.Data.Profession.Ranger:
                         return Profession.Ranger;
-                    case GwApiNET.Profession.Thief:
+                    case GW2PAO.Mumble.Data.Profession.Thief:
                         return Profession.Thief;
-                    case GwApiNET.Profession.Warrior:
+                    case GW2PAO.Mumble.Data.Profession.Warrior:
                         return Profession.Warrior;
                     default:
                         return Profession.Unknown;

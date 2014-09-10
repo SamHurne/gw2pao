@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
-using GwApiNET;
 using NLog;
 
 namespace GW2PAO.API.Services.Interfaces

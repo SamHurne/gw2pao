@@ -18,7 +18,7 @@ namespace GW2PAO.API.Data
         public string Location { get; set; }
         public Point MapLocation { get; set; }
         public WorldColor WorldOwner { get; set; }
-        public Guid GuildOwner { get; set; }
+        public Guid? GuildOwner { get; set; }
         public int Points { get; set; }
     }
 }

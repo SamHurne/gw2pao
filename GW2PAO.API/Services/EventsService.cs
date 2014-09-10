@@ -5,11 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2DotNET;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
-using GwApiNET;
-using GwApiNET.ResponseObjects;
 using NLog;
 
 namespace GW2PAO.API.Services
@@ -25,12 +24,9 @@ namespace GW2PAO.API.Services
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Internal dictionary cache of event details
-        /// 
-        /// Note: At this point, the event details cache is really only used for determining the zone
-        /// of world events. Previously, before the megaserver update, this was used for zone-by-zone event information
+        /// The GW2.NET API service objective
         /// </summary>
-        private EntryDictionary<Guid, EventDetailsEntry> EventDetails;
+        private ServiceManager service = new ServiceManager();
 
         /// <summary>
         /// The World Events time table
@@ -57,15 +53,15 @@ namespace GW2PAO.API.Services
 
             try
             {
-                logger.Info("Initializing event details cache");
-                this.EventDetails = GwApi.GetEventDetails(Guid.Empty);
+                var events = this.service.GetDynamicEventDetails();
 
                 logger.Info("Loading world event locations");
                 foreach (var worldEvent in this.EventTimeTable.WorldEvents)
                 {
-                    if (this.EventDetails.ContainsKey(worldEvent.ID))
+                    if (events.ContainsKey(worldEvent.ID))
                     {
-                        worldEvent.Location = GwApi.GetMap(this.EventDetails[worldEvent.ID].MapId).Values.First().MapName;
+                        if (events[worldEvent.ID].Map != null)
+                            worldEvent.Location = events[worldEvent.ID].Map.MapName;
                     }
                 }
             }

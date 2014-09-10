@@ -16,6 +16,7 @@ namespace GW2PAO.API.Data
         public string MapName { get; set; }
         public int Level { get; set; }
         public Point Location { get; set; }
+        public string ChatCode { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -47,13 +48,22 @@ namespace GW2PAO.API.Data
                 int hash = 17;
                 // Suitable nullity checks etc, of course :)
                 hash = hash * 23 + this.ID.GetHashCode();
-                hash = hash * 23 + this.Name.GetHashCode();
+                if (this.Name != null)
+                {
+                    hash = hash * 23 + this.Name.GetHashCode();
+                }
                 hash = hash * 23 + this.Type.GetHashCode();
                 hash = hash * 23 + this.MapId.GetHashCode();
-                hash = hash * 23 + this.MapName.GetHashCode();
-                hash = hash * 23 + this.Location.X.GetHashCode();
-                hash = hash * 23 + this.Location.Y.GetHashCode();
-                hash = hash * 23 + this.Location.Z.GetHashCode();
+                if (this.MapName != null)
+                {
+                    hash = hash * 23 + this.MapName.GetHashCode();
+                }
+                if (this.Location != null)
+                {
+                    hash = hash * 23 + this.Location.X.GetHashCode();
+                    hash = hash * 23 + this.Location.Y.GetHashCode();
+                    hash = hash * 23 + this.Location.Z.GetHashCode();
+                }
                 return hash;
             }
         }
