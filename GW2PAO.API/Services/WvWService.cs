@@ -31,6 +31,11 @@ namespace GW2PAO.API.Services
         private Matchup currentMatchup;
 
         /// <summary>
+        /// Internally cached match ID. If this changes, then the GetMatches() request is sent. See GetCurrentMatchup().
+        /// </summary>
+        private int cachedWorldID;
+
+        /// <summary>
         /// The Worlds table
         /// </summary>
         public WorldsTable Worlds { get; private set; }
@@ -343,6 +348,7 @@ namespace GW2PAO.API.Services
         private Matchup GetCurrentMatchup(int worldId)
         {
             if (this.currentMatchup == null
+                || (this.cachedWorldID != worldId)
                 || (this.currentMatchup.EndTime.CompareTo(DateTimeOffset.UtcNow) < 0))
             {
                 // We've never requested the current matchup, or we've passed the end time for the current matchup
@@ -350,6 +356,7 @@ namespace GW2PAO.API.Services
                 this.currentMatchup = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
                                                                             || match.GreenWorldId == worldId
                                                                             || match.RedWorldId == worldId);
+                this.cachedWorldID = worldId;
             }
 
             return this.currentMatchup;
