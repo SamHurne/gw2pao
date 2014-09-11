@@ -27,11 +27,23 @@ namespace GW2PAO.API.Services.Interfaces
         void LoadTable();
 
         /// <summary>
+        /// Retrieves a full list of all match IDs for all servers
+        /// </summary>
+        /// <returns>a full list of all match IDs for all servers</returns>
+        Dictionary<int, string> GetMatchIDs();
+
+        /// <summary>
         /// Find and returns the Match ID for the given world
         /// </summary>
         /// <param name="worldId">The ID for the world</param>
         /// <returns>The match ID for the given world ID</returns>
         string GetMatchId(int worldId);
+
+        /// <summary>
+        /// Retrieves a full list of all team colors for all servers
+        /// </summary>
+        /// <returns>a full list of all team colors for all servers</returns>
+        Dictionary<int, WorldColor> GetTeamColors();
 
         /// <summary>
         /// Retrieves the TeamColor of the given World

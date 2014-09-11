@@ -78,6 +78,25 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// Retrieves a full list of all match IDs for all servers
+        /// </summary>
+        /// <returns>a full list of all match IDs for all servers</returns>
+        public Dictionary<int, string> GetMatchIDs()
+        {
+            Dictionary<int, string> worldMatchIDs = new Dictionary<int, string>();
+
+            var matches = this.service.GetMatches();
+            foreach (var match in matches)
+            {
+                worldMatchIDs.Add(match.Value.BlueWorldId, match.Key);
+                worldMatchIDs.Add(match.Value.GreenWorldId, match.Key);
+                worldMatchIDs.Add(match.Value.RedWorldId, match.Key);
+            }
+
+            return worldMatchIDs;
+        }
+
+        /// <summary>
         /// Find and returns the Match ID for the given world
         /// </summary>
         /// <param name="worldId">The ID for the world</param>
@@ -98,6 +117,25 @@ namespace GW2PAO.API.Services
                 logger.Error(ex);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Retrieves a full list of all team colors for all servers
+        /// </summary>
+        /// <returns>a full list of all team colors for all servers</returns>
+        public Dictionary<int, WorldColor> GetTeamColors()
+        {
+            Dictionary<int, WorldColor> teamColors = new Dictionary<int, WorldColor>();
+
+            var matches = this.service.GetMatches();
+            foreach (var match in matches)
+            {
+                teamColors.Add(match.Value.BlueWorldId, WorldColor.Blue);
+                teamColors.Add(match.Value.GreenWorldId, WorldColor.Green);
+                teamColors.Add(match.Value.RedWorldId, WorldColor.Red);
+            }
+
+            return teamColors;
         }
 
         /// <summary>

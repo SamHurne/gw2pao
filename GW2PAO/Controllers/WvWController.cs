@@ -242,11 +242,14 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void InitializeTeams()
         {
+            var matchIDs = this.wvwService.GetMatchIDs();
+            var teamColors = this.wvwService.GetTeamColors();
+
             foreach (var world in this.wvwService.Worlds.Worlds)
             {
                 var team = new WvWTeamViewModel(world);
-                team.MatchId = this.wvwService.GetMatchId(team.WorldId);
-                team.Color = this.wvwService.GetTeamColor(team.WorldId);
+                team.MatchId = matchIDs[team.WorldId];
+                team.Color = teamColors[team.WorldId];
                 //team.Score = this.wvwService.GetWorldScore(team.WorldId); // This really slows things down... disabled for now
                 Threading.InvokeOnUI(() => this.Teams.Add(team));
             }
