@@ -18,11 +18,17 @@ using GW2PAO.TS3.Services.Interfaces;
 using GW2PAO.TS3.Constants;
 using System.Timers;
 using GW2PAO.TS3.Data;
+using NLog;
 
 namespace GW2PAO.TS3.Services
 {
     public class TeamspeakService : ITeamspeakService
     {
+        /// <summary>
+        /// Default logger
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public AsyncTcpDispatcher QueryDispatcher { get; private set; }
         public QueryRunner QueryRunner { get; private set; }
 
@@ -62,6 +68,16 @@ namespace GW2PAO.TS3.Services
         public event EventHandler ConnectionRefused;
 
         /// <summary>
+        /// Raised when connected to a server in TS
+        /// </summary>
+        public event EventHandler<GW2PAO.TS3.Data.NewServerInfoEventArgs> NewServerInfo;
+
+        /// <summary>
+        /// Raised when the TS user changes channel
+        /// </summary>
+        public event EventHandler<GW2PAO.TS3.Data.NewChannelInfoEventArgs> NewChannelInfo;
+
+        /// <summary>
         /// Raised when someone starts or stops talking in TS
         /// </summary>
         public event EventHandler<GW2PAO.TS3.Data.TalkStatusEventArgs> TalkStatusChanged;
@@ -89,6 +105,7 @@ namespace GW2PAO.TS3.Services
             this.pollTimer = new Timer(5000);
             this.pollTimer.AutoReset = true;
             this.pollTimer.Elapsed += (o, e) => this.Poll();
+            logger.Trace("New Teamspeak Service constructed");
         }
 
         /// <summary>
@@ -109,6 +126,7 @@ namespace GW2PAO.TS3.Services
             this.QueryDispatcher.SocketError += QueryDispatcher_SocketError;
             this.QueryDispatcher.NotificationReceived += QueryDispatcher_NotificationReceived;
 
+            logger.Info("Connecting");
             this.QueryDispatcher.Connect();
         }
 
@@ -119,6 +137,8 @@ namespace GW2PAO.TS3.Services
         {
             lock (this.pollLock)
             {
+                logger.Info("Disconnecting and cleaning up");
+
                 // Stop the poll timer
                 this.pollTimer.Stop();
                 this.clients.Clear();
@@ -141,6 +161,7 @@ namespace GW2PAO.TS3.Services
         {
             if (this.QueryRunner != null)
             {
+                logger.Info("Sending text message: {0}", msg);
                 var command = new Command("sendtextmessage targetmode=2 msg=" + this.EncodeString(msg));
                 this.QueryRunner.SendCommand(command);
             }
@@ -151,7 +172,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void QueryDispatcher_BanDetected(object sender, EventArgs<SimpleResponse> e)
         {
-            System.Diagnostics.Debug.WriteLine("BanDetected");
+            logger.Warn("Ban detected!");
             // Force disconnect
             this.Disconnect();
         }
@@ -161,7 +182,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void QueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("ReadyForSendingCommands");
+            logger.Info("Ready For Sending Commands");
             this.ConnectionState = ConnectionState.Connected;
             // you can only run commands on the queryrunner when this event has been raised first!
             this.QueryRunner = new QueryRunner(QueryDispatcher);
@@ -171,17 +192,24 @@ namespace GW2PAO.TS3.Services
             var whoami = this.QueryRunner.SendWhoAmI();
             this.currentClientID = whoami.ClientId;
             this.currentChannelID = whoami.ChannelId;
-            System.Diagnostics.Debug.WriteLine("Current Client ID: " + currentClientID);
-            System.Diagnostics.Debug.WriteLine("Current Channel ID: " + currentChannelID);
+            logger.Info("Current Client ID: {0}", this.currentClientID);
+            logger.Info("Current Channel ID: {0}", this.currentChannelID);
+
+            // Determine the current server and channel information
+            this.UpdateServerInfo();
+            this.UpdateChannelInfo();
 
             // Send a request for the full list of clients
+            logger.Info("Sending request for client list");
             string result = this.QueryRunner.SendCommand(new Command("clientlist"));
             this.AddClients(result);
 
             // Start handling notifications
+            logger.Info("Registering for notifications");
             this.QueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
 
             // Start a timer to send a message every so often, keeping the connection open
+            logger.Info("Starting poll timer");
             this.pollTimer.Start();
         }
 
@@ -190,7 +218,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void QueryDispatcher_ServerClosedConnection(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("ServerClosedConnection");
+            logger.Info("Server closed connection");
 
             // Reconnect
             this.Disconnect();
@@ -202,7 +230,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void QueryDispatcher_SocketError(object sender, SocketErrorEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("SocketError: " + e.SocketError);
+            logger.Warn("SocketError: {0}", e.SocketError);
 
             // Do not handle connection lost errors because they are already handled by QueryDispatcher_ServerClosedConnection
             if (e.SocketError == SocketError.ConnectionReset)
@@ -213,6 +241,7 @@ namespace GW2PAO.TS3.Services
                     || e.SocketError == SocketError.AddressAlreadyInUse
                     || e.SocketError == SocketError.ConnectionRefused)
             {
+                logger.Warn("Connection refused");
                 this.RaiseConnectionRefused();
             }
 
@@ -225,7 +254,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void QueryDispatcher_NotificationReceived(object sender, EventArgs<string> e)
         {
-            System.Diagnostics.Debug.WriteLine("Notification: " + e.Value.Trim());
+            logger.Trace("Notification: {0}", e.Value.Trim());
 
             if (e.Value.StartsWith(Notifications.TextMessage))
             {
@@ -244,29 +273,34 @@ namespace GW2PAO.TS3.Services
                         this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
                     this.clients.Clear();
 
-                    // Also figure out our new client and channel
+                    // Also figure out our new server, client, and channel
+                    System.Threading.Thread.Sleep(250);
                     var whoami = this.QueryRunner.SendWhoAmI();
                     this.currentClientID = whoami.ClientId;
                     this.currentChannelID = whoami.ChannelId;
-                    System.Diagnostics.Debug.WriteLine("New Client ID: " + currentClientID);
-                    System.Diagnostics.Debug.WriteLine("New Channel ID: " + currentChannelID);
+                    logger.Trace("New Client ID: {0}", this.currentClientID);
+                    logger.Trace("New Channel ID: {0}", this.currentChannelID);
+
+                    this.UpdateServerInfo();
+                    this.UpdateChannelInfo();
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientMoved))
             {
                 // Client moved channel
-                if (this.currentClientID == this.ParseClientID(e.Value))
+                if (this.currentClientID == this.ParseUintProperty(e.Value, Properties.ClientID))
                 {
                     // The current user moved channel, so update our current channel
-                    uint channelId = this.ParseChannelID(e.Value);
+                    uint channelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
                     this.currentChannelID = channelId;
-                    System.Diagnostics.Debug.WriteLine("New Channel ID: " + currentChannelID);
+                    logger.Trace("New Channel ID: {0}", this.currentChannelID);
+                    this.UpdateChannelInfo();
                 }
                 else
                 {
                     // Someone else moved - raise the client entered/exited based on what channel they moved to
-                    uint clientId = this.ParseClientID(e.Value);
-                    uint newChannelId = this.ParseChannelID(e.Value);
+                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
+                    uint newChannelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
                     if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
                     {
                         // Someone joined the channel
@@ -286,18 +320,18 @@ namespace GW2PAO.TS3.Services
                 this.AddClients(e.Value);
 
                 // If they joined the current channel, raise the client entered channel event
-                uint channelId = this.ParseChannelID(e.Value);
+                uint channelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
                 if (channelId == this.currentChannelID)
                 {
                     // Someone joined the channel
-                    uint clientId = this.ParseClientID(e.Value);
+                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                     this.RaiseClientEnteredChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientLeftView))
             {
                 // Someone left the server
-                var clientId = this.ParseClientID(e.Value);
+                var clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                 Client client;
                 if (this.clients.TryRemove(clientId, out client))
                 {
@@ -313,10 +347,10 @@ namespace GW2PAO.TS3.Services
                 // Someone changed their nickname
                 if (e.Value.Contains(Properties.ClientNickname))
                 {
-                    uint clientId = this.ParseClientID(e.Value);
+                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                     if (this.clients.ContainsKey(clientId))
                     {
-                        string clientNickname = this.ParseNickname(e.Value);
+                        string clientNickname = this.ParseStringProperty(e.Value, true, Properties.ClientNickname);
                         this.clients[clientId].Name = clientNickname;
                     }
                 }
@@ -333,7 +367,7 @@ namespace GW2PAO.TS3.Services
             if (this.clients.ContainsKey(e.ClientId))
                 name = this.clients[e.ClientId].Name;
 
-            System.Diagnostics.Debug.WriteLine("TalkStatusChanged: " + name + " " + e.TalkStatus);
+            logger.Trace("TalkStatusChanged: {0} {1}", name, e.TalkStatus);
 
             TalkStatus internalStatus = TalkStatus.Unknown;
             switch (e.TalkStatus)
@@ -362,13 +396,13 @@ namespace GW2PAO.TS3.Services
             {
                 if (clientString.Contains(Properties.ClientID) && clientString.Contains(Properties.ClientNickname))
                 {
-                    uint clientId = this.ParseClientID(clientString);
+                    uint clientId = this.ParseUintProperty(clientString, Properties.ClientID);
 
-                    string clientNickname = this.ParseNickname(clientString);
+                    string clientNickname = this.ParseStringProperty(clientString, true, Properties.ClientNickname);
 
                     uint channelId = 0;
                     if (clientString.Contains(Properties.ChannelID) || clientString.Contains(Properties.TargetChannelID))
-                        channelId = this.ParseChannelID(clientString);
+                        channelId = this.ParseUintProperty(clientString, Properties.ChannelID, Properties.TargetChannelID);
 
                     var client = new Client(clientId, clientNickname, channelId);
                     this.clients.AddOrUpdate(clientId, client, (key, oldValue) => client);
@@ -388,7 +422,38 @@ namespace GW2PAO.TS3.Services
             string message = notificationProperties.First(id => id.StartsWith(Properties.Message)).Substring(Properties.Message.Length + 1);
 
             // Raise the text message received event
-            this.RaiseTextMessageReceived(new Data.TextMessageEventArgs(clientId, clientNickname, this.ParseString(message)));
+            logger.Trace("Text message received From {0} ({1}): {2}", clientId, clientNickname, message);
+            this.RaiseTextMessageReceived(new Data.TextMessageEventArgs(clientId, clientNickname, this.DecodeString(message)));
+        }
+
+        /// <summary>
+        /// Sends a request for the current server information and raises the server connected event
+        /// </summary>
+        private void UpdateServerInfo()
+        {
+            // Determine the current server information
+            string result = this.QueryRunner.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
+            string serverName = this.ParseStringProperty(result, true, Properties.ServerName);
+            string serverAddress = this.ParseStringProperty(result, false, Properties.ServerIP);
+
+            logger.Info("New Server Information: name={0} address={1}", serverName, serverAddress);
+            this.RaiseNewServerInfo(new NewServerInfoEventArgs(serverName, serverAddress));
+        }
+
+        /// <summary>
+        /// Sends a request for the current channel and raises the channel switched event
+        /// </summary>
+        private void UpdateChannelInfo()
+        {
+            var command = new Command(string.Format("channelvariable {0}={1} {2} {3}", Properties.ChannelID, this.currentChannelID, Properties.ChannelName, Properties.ChannelDescription));
+            string result = this.QueryRunner.SendCommand(command);
+
+            // Parse the channel info
+            string channelName = this.ParseStringProperty(result, true, Properties.ChannelName);
+            string channelDescription = this.ParseStringProperty(result, true, Properties.ChannelDescription);
+
+            logger.Info("New Channel Information: name={0} description={1}", channelName, channelDescription);
+            this.RaiseNewChannelInfo(new NewChannelInfoEventArgs(new Channel(channelName, channelDescription)));
         }
 
         /// <summary>
@@ -398,6 +463,24 @@ namespace GW2PAO.TS3.Services
         {
             if (this.ConnectionRefused != null)
                 this.ConnectionRefused(this, new EventArgs());
+        }
+
+        /// <summary>
+        /// Raises the NewServerInfo event
+        /// </summary>
+        private void RaiseNewServerInfo(GW2PAO.TS3.Data.NewServerInfoEventArgs args)
+        {
+            if (this.NewServerInfo != null)
+                this.NewServerInfo(this, args);
+        }
+
+        /// <summary>
+        /// Raises the NewChannelInfo event
+        /// </summary>
+        private void RaiseNewChannelInfo(GW2PAO.TS3.Data.NewChannelInfoEventArgs args)
+        {
+            if (this.NewChannelInfo != null)
+                this.NewChannelInfo(this, args);
         }
 
         /// <summary>
@@ -453,49 +536,59 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
-        /// Parses out the value of clid from an input string
+        /// Parses a uint property out of the given input string
         /// </summary>
-        /// <param name="input">The input string to parse</param>
-        /// <returns>The parsed client id</returns>
-        private uint ParseClientID(string input)
+        /// <param name="input">the input string to parse</param>
+        /// <param name="propertyName">the full list of possible property names to parse the value of. the first one that works is used.</param>
+        /// <returns>The parsed value of the property.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
+        private uint ParseUintProperty(string input, params string[] propertyNames)
         {
-            var clientProperties = input.Split(' ', '\n', '\r');
-            return uint.Parse(clientProperties.First(id => id.StartsWith(Properties.ClientID)).Substring(Properties.ClientID.Length + 1));
+            var properties = input.Split(' ', '\n', '\r');
+
+            foreach (var propertyName in propertyNames)
+            {
+                string value = properties.FirstOrDefault(id => id.StartsWith(propertyName));
+                if (value != null)
+                {
+                    value = value.Substring(propertyName.Length + 1);
+                    return uint.Parse(value);
+                }
+            }
+
+            throw new InvalidOperationException("Invalid propertyNames for given input string");
         }
 
         /// <summary>
-        /// Parses out the value of client nickname from an input string
+        /// Parses a uint property out of the given input string
         /// </summary>
-        /// <param name="input">The input string to parse</param>
-        /// <returns>the parsed nickname</returns>
-        private string ParseNickname(string input)
+        /// <param name="input">the input string to parse</param>
+        /// <param name="decodeValue">True to decode the string, else false to return it as-is</param>
+        /// <param name="propertyName">the full list of possible property names to parse the value of. the first one that works is used.</param>
+        /// <returns>The parsed value of the property.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
+        private string ParseStringProperty(string input, bool decodeValue, params string[] propertyNames)
         {
-            var clientProperties = input.Split(' ', '\n', '\r');
-            string clientNickname = clientProperties.First(id => id.StartsWith(Properties.ClientNickname)).Substring(Properties.ClientNickname.Length + 1);
-            return this.ParseString(clientNickname);
-        }
+            var properties = input.Split(' ', '\n', '\r');
 
-        /// <summary>
-        /// Parses out the value of channel ID from an input string
-        /// </summary>
-        /// <param name="input">The input string to parse</param>
-        /// <returns>the parsed channel ID</returns>
-        private uint ParseChannelID(string input)
-        {
-            var clientProperties = input.Split(' ', '\n', '\r');
+            foreach (var propertyName in propertyNames)
+            {
+                string value = properties.FirstOrDefault(id => id.StartsWith(propertyName));
+                if (value != null)
+                {
+                    if (value.Length > propertyName.Length)
+                        value = value.Substring(propertyName.Length + 1);
+                    else
+                        value = string.Empty;
 
-            // There are two possible properties that contain the channel ID
-            string clientNickname = clientProperties.FirstOrDefault(id => id.StartsWith(Properties.ChannelID));
-            if (clientNickname != null)
-            {
-                clientNickname = clientNickname.Substring(Properties.ChannelID.Length + 1);
-            }
-            else
-            {
-                clientNickname = clientProperties.First(id => id.StartsWith(Properties.TargetChannelID)).Substring(Properties.TargetChannelID.Length + 1);
+                    if (decodeValue)
+                        return this.DecodeString(value);
+                    else
+                        return value;
+                }
             }
 
-            return uint.Parse(clientNickname);
+            throw new InvalidOperationException("Invalid propertyNames for given input string");
         }
 
         /// <summary>
@@ -503,7 +596,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         /// <param name="input">String to clean up</param>
         /// <returns>The normal string representation of the input</returns>
-        private string ParseString(string input)
+        private string DecodeString(string input)
         {
             string output = input.Replace(@"\s", " "); // spaces come through as \s
             output = output.Replace(@"\", string.Empty); // additional '\' characters come through as well

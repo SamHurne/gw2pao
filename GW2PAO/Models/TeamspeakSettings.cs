@@ -54,6 +54,7 @@ namespace GW2PAO.Models
         public TeamspeakSettings()
         {
             this.ShowChatEntryBox = true;
+            this.ShowChannelName = true;
         }
 
         /// <summary>
