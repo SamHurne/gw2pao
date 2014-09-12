@@ -40,6 +40,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -66,6 +67,7 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
+                            <MenuItem Header="Show Channel Name" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
                             <MenuItem Header="Show Chat Entry Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
@@ -139,7 +141,15 @@
             </Grid>
         </Border>
 
-        <Grid Name="NotificationsContainer" Grid.Row="1">
+        <Border Name="ChannelName"
+                Grid.Row="1" Margin="3"
+                BorderBrush="{StaticResource TitleBarBorderBrush}" BorderThickness="0,0,0,0"
+                Visibility="{Binding UserSettings.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
+            <!-- TODO: Customize this so that it can be clicked into a drop-down, allowing selecting of a different channel -->
+            <TextBox Text="{Binding ChannelName}" IsEnabled="False"/>
+        </Border>
+
+        <Grid Name="NotificationsContainer" Grid.Row="2">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Auto">
@@ -158,7 +168,7 @@
             </ScrollViewer>
         </Grid>
 
-        <Grid Name="TextEntryBox" Grid.Row="2"
+        <Grid Name="TextEntryBox" Grid.Row="3"
               Margin="3"
               Visibility="{Binding UserSettings.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
             <Grid.ColumnDefinitions>
@@ -176,7 +186,7 @@
             </Button>
         </Grid>
 
-        <Grid Name="ResizeHeight" Grid.Row="3"
+        <Grid Name="ResizeHeight" Grid.Row="4"
               Cursor="SizeNS"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
 

@@ -16,6 +16,10 @@ namespace GW2PAO.ViewModels.Teamspeak
     public class TeamspeakViewModel : NotifyPropertyChangedBase
     {
         private string messageText;
+        private string serverName;
+        private string serverAddress;
+        private string channelName;
+        private string channelDescription;
 
         /// <summary>
         /// Default logger
@@ -39,6 +43,42 @@ namespace GW2PAO.ViewModels.Teamspeak
         {
             get { return this.messageText; }
             set { this.SetField(ref this.messageText, value); }
+        }
+
+        /// <summary>
+        /// The currently connected server's name
+        /// </summary>
+        public string ServerName
+        {
+            get { return this.serverName; }
+            set { this.SetField(ref this.serverName, value); }
+        }
+
+        /// <summary>
+        /// The address of the currently connected server
+        /// </summary>
+        public string ServerAddress
+        {
+            get { return this.serverAddress; }
+            set { this.SetField(ref this.serverAddress, value); }
+        }
+
+        /// <summary>
+        /// The currently connected channel's name
+        /// </summary>
+        public string ChannelName
+        {
+            get { return this.channelName; }
+            set { this.SetField(ref this.channelName, value); }
+        }
+
+        /// <summary>
+        /// The description of the currently connected channel
+        /// </summary>
+        public string ChannelDescription
+        {
+            get { return this.channelDescription; }
+            set { this.SetField(ref this.channelDescription, value); }
         }
 
         /// <summary>
@@ -66,6 +106,8 @@ namespace GW2PAO.ViewModels.Teamspeak
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
 
             this.TeamspeakService = teamspeakService;
+            this.TeamspeakService.NewServerInfo += TeamspeakService_NewServerInfo;
+            this.TeamspeakService.NewChannelInfo += TeamspeakService_NewChannelInfo;
             this.TeamspeakService.ConnectionRefused += TeamspeakService_ConnectionRefused;
             this.TeamspeakService.TalkStatusChanged += TeamspeakService_TalkStatusChanged;
             this.TeamspeakService.TextMessageReceived += TeamspeakService_TextMessageReceived;
@@ -99,6 +141,24 @@ namespace GW2PAO.ViewModels.Teamspeak
                 this.TeamspeakService.SendChannelMessage(this.MessageText);
                 this.MessageText = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Handles the New Server Info event of the Teamspeak Service
+        /// </summary>
+        private void TeamspeakService_NewServerInfo(object sender, TS3.Data.NewServerInfoEventArgs e)
+        {
+            this.ServerName = e.ServerName;
+            this.ServerAddress = e.ServerAddress;
+        }
+
+        /// <summary>
+        /// Handles the New Channel Info event of the Teamspeak Service
+        /// </summary>
+        private void TeamspeakService_NewChannelInfo(object sender, TS3.Data.NewChannelInfoEventArgs e)
+        {
+            this.ChannelName = e.NewChannel.Name;
+            this.ChannelDescription = e.NewChannel.Description;
         }
 
         /// <summary>

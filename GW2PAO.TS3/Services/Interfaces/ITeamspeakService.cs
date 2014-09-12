@@ -20,6 +20,16 @@ namespace GW2PAO.TS3.Services.Interfaces
         event EventHandler ConnectionRefused;
 
         /// <summary>
+        /// Raised when new server information is available (such as when connecting to a new server)
+        /// </summary>
+        event EventHandler<GW2PAO.TS3.Data.NewServerInfoEventArgs> NewServerInfo;
+
+        /// <summary>
+        /// Raised when the TS user changes channel
+        /// </summary>
+        event EventHandler<GW2PAO.TS3.Data.NewChannelInfoEventArgs> NewChannelInfo;
+
+        /// <summary>
         /// Raised when someone starts or stops talking in TS
         /// </summary>
         event EventHandler<GW2PAO.TS3.Data.TalkStatusEventArgs> TalkStatusChanged;

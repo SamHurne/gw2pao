@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,10 +47,13 @@
   <ItemGroup>
     <Compile Include="Constants\Notifications.cs" />
     <Compile Include="Constants\Properties.cs" />
+    <Compile Include="Data\Channel.cs" />
     <Compile Include="Data\ChannelEventArgs.cs" />
+    <Compile Include="Data\NewChannelInfoEventArgs.cs" />
     <Compile Include="Data\Client.cs" />
     <Compile Include="Data\Enums\ConnectionState.cs" />
     <Compile Include="Data\Enums\TalkStatus.cs" />
+    <Compile Include="Data\NewServerInfoEventArgs.cs" />
     <Compile Include="Data\TalkStatusEventArgs.cs" />
     <Compile Include="Data\TextMessageEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

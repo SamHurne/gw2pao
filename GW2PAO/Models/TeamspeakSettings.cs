@@ -28,6 +28,7 @@ namespace GW2PAO.Models
         public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".TeamspeakSettings.xml"; } }
 
         private bool showChatEntryBox;
+        private bool showChannelName;
 
         /// <summary>
         /// True to show the chat entry box, else false
@@ -36,6 +37,15 @@ namespace GW2PAO.Models
         {
             get { return this.showChatEntryBox; }
             set { this.SetField(ref this.showChatEntryBox, value); }
+        }
+
+        /// <summary>
+        /// True to show the channel name box, else false
+        /// </summary>
+        public bool ShowChannelName
+        {
+            get { return this.showChannelName; }
+            set { this.SetField(ref this.showChannelName, value); }
         }
 
         /// <summary>

@@ -3,7 +3,7 @@
 
     <Color x:Key="TextBoxBackgroundColor">#70000000</Color>
     <Color x:Key="TextBoxBorderColor">#FFFFA500</Color>
-    <Color x:Key="TextBoxDisabledBackgroundColor">#00FFA500</Color>
+    <Color x:Key="TextBoxDisabledBackgroundColor">#70000000</Color>
     <Color x:Key="TextBoxDisabledBorderColor">#50FFA500</Color>
     <Color x:Key="TextBoxTextColor">#FFFFA500</Color>
     <Color x:Key="TextBoxCaretColor">#FFFFA500</Color>
