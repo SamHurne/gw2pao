@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Samuel Hurne">
+
+    <title>GW2 PAO</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/application_icon.ico"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+        $(function(){
+            refreshDownloadCounts();
+            setInterval(refreshDownloadCounts, 5000);
+        });
+        
+        function refreshDownloadCounts() {
+            
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/237238?callback=?', function( response ) {
+                var data = response.data;
+                $("#allFeaturesDownloadCount").text(data.download_count);
+            });
+            
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/237237?callback=?', function( response ) {
+                var data = response.data;
+                $("#noBrowserDownloadCount").text(data.download_count);
+            });
+        }
+        
+        function JSONP( url, callback ) {
+            var id = ( 'jsonp' + Math.random() * new Date() ).replace('.', '');
+            var script = document.createElement('script');
+            script.src = url.replace( 'callback=?', 'callback=' + id );
+            document.body.appendChild( script );
+            window[ id ] = function( data ) {
+                if (callback) {
+                    callback( data );
+                }
+            };
+        }
+    </script>
+    
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    GW2 Personal Assistant Overlay
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Download</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#screenshots">Screenshots</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#faq">FAQ</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="https://github.com/SamHurne/gw2pao/wiki">Wiki</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <img src="img\main_icon.png" />
+                        <br><br>
+                        <h1 class="brand-heading">GW2 Personal Assistant Overlay</h1>
+                        <p class="intro-text">A stand-alone Guild Wars 2 informational overlay.</p>
+                        <a href="#about" class="btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container about-section text-center">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h2>About</h2>
+                <p>The GW2 Personal Assistant Overlay is an 'overlay' utility that sits on top of Guild Wars 2 as you play, providing various information such as time until world events, zone completion information, and WvW objectives status.</p>
+                <div class="feature">
+                    <h3>World Events Tracker</h3>
+                    <p>The Events Tracker overlay tracks active and inactive world events, and allows a user to keep track of which events have already been completed for the day.</p>
+                </div>
+                <div class="feature">
+                    <h3>World Event Notifications</h3>
+                    <p>Event Notifications are notification pop-ups that appear when a world event is about to start.</p>
+                </div>
+                <div class="feature">
+                    <h3>Zone Completion Assistant</h3>
+                    <p>The Zone Completion Assistant displays real-time distance and direction information for zone completion points/locations and provides several options for keeping track of unlocked locations.</p>
+                </div>
+                <div class="feature">
+                    <h3>Dungeon Tracker</h3>
+                    <p>The Dungeon Tracker is a simple overlay tool that allows a user to keep track of what dungeon paths have been completed for the day, and provides some basic information about each dungeon and dungeon path.</p>
+                </div>
+                <div class="feature">
+                    <h3>WvW Tracker</h3>
+                    <p>The WvW Tracker overlay displays all objectives in the current player's WvW map, and includes information such as current owner, estimated time-distance to the objective, and the current RI timer value.</p>
+                </div>
+                <div class="feature">
+                    <h3>WvW Notifications</h3>
+                    <p>WvW Notifications are notification pop-ups that appear when an objective (keep/tower/camp, etc) has been captured in one of the WvW maps.</p>
+                </div>
+                <div class="feature">
+                    <h3>Trading Post Calculator</h3>
+                    <p>The Trading Post Calculator is a simple tool that allows a user to calculate profit, taxes, and break-even prices for buying/selling items on the in-game Trading Post.</p>
+                </div>
+                <div class="feature">
+                    <h3>Web Browser</h3>
+                    <p>For all needs not provided by the other overlay windows, the Web Browser allows a user to look up guides, videos, or anything else.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Download</h2>
+                    <p>GW2 PAO comes packaged within a zip file. Two version are available, one with all features included and another excluding the browser.</p>
+                    <p>A browserless version is provided for those who may be concerned about the security of the Awesomium browser. The browserless version is also much smaller in size.</p>
+                    <p>To install, simply download, extract to any location, then run GW2PAO.exe.</p>
+                    <h4>Latest Version: <b>1.1</b></h4>
+                    <br>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/f1df383ed5a7/GW2PAO_1.1.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature Download</span></a>
+                    <br>
+                    <span class="smalltext"><span id="allFeaturesDownloadCount">??</span> Downloads</span>
+                    <br>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/f1df383ed5a7/GW2PAO_1.1_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser Download</span></a>
+                    <br>
+                    <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
+                    <br><br><br>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/f1df383ed5a7.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <br><br>
+                    <h4>Requirements:</h4>
+                    <p>
+                    <i class="fa fa-windows fa-fw"></i> Windows 7 or Higher
+                    <br>
+                    <a href="http://www.microsoft.com/en-us/download/details.aspx?id=30653">.Net 4.5 or Higher</a>
+                    </p>
+                    <p>For a full list of releases with release notes, go to the <a href="https://github.com/SamHurne/gw2pao/releases">Releases page on GitHub</a>.</p>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section text-center">
+        <h2>Screenshots</h2>
+        <!--  Carousel - consult the Twitter Bootstrap docs at 
+              http://twitter.github.com/bootstrap/javascript.html#carousel -->
+        <div id="this-carousel-id" class="carousel slide col-lg-8 col-lg-offset-2"><!-- class of slide for animation -->
+          <div class="carousel-inner">
+            <div class="item active"><!-- class of active since it's the first item -->
+              <img src="img\screenshots\screen1.png" alt="" />
+            </div>
+            <div class="item">
+              <img src="img\screenshots\screen2.png" alt="" />
+            </div>
+            <div class="item">
+              <img src="img\screenshots\screen3.png" alt="" />
+            </div>
+            <div class="item">
+              <img src="img\screenshots\screen4.png" alt="" />
+            </div>
+            <div class="item">
+              <img src="img\screenshots\screen5.png" alt="" />
+            </div>
+          </div><!-- /.carousel-inner -->
+          <!--  Next and Previous controls below
+                href values must reference the id for this carousel -->
+            <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+        </div><!-- /.carousel -->
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="container faq-section text-center">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h2>FAQ</h2>
+                <div class="feature">
+                    <h3>Is this safe to use?</h3>
+                    <p>This software does not include any hacks or cheats, and makes use of official APIs built into the game and built by ArenaNet. Using this software is in no way different than using other GW2 informational websites, event trackers, and overlays.</p>
+                    <p>Some additional links:
+                    <br>
+                    <a href="http://www.reddit.com/r/Guildwars2/comments/2drawa/introducing_the_gw2_personal_assistant_overlay/cjshktp">Chris Cleary's (ArenaNet employee) post regarding version 1.0 of this overlay</a>
+                    <br>
+                    <a href="https://forum-en.guildwars2.com/forum/community/api/Is-this-API-allowed/first#post2118969">ArenaNet's forum post regarding another GW2 overlay utility</a>
+                    <br>
+                    <a href="https://forum-en.guildwars2.com/forum/support/account/Policy-3rd-Party-Programs-Multi-Boxing-Macros/first">ArenaNet's official policy on 3rd-Party Programs</a>
+                </div>
+                <div class="feature">
+                    <h3>Does this work while playing the game in Fullscreen?</h3>
+                    <p>No. Due to some technical reasons for how Fullscreen games take over the monitor, the overlay does not work when the game is running in fullscreen (at this time). The game must be running in Windowed or Windowed Fullscreen for it to properly overlay on top of the game. It's possible that this may be added in the future.</p>
+                </div>
+                <div class="feature">
+                    <h3>Can I run this on my Mac?</h3>
+                    <p>No. Mac OS is not supported at this time.</p>
+                </div>
+                <div class="feature">
+                    <h3>I'm having an issue with the overlay. How can I report it?</h3>
+                    <p>Issues can be reported at the <a href="https://github.com/SamHurne/gw2pao/issues">Github Issues Page</a>.</p>
+                </div>
+                <div class="feature">
+                    <h3>How do I ___?</h3>
+                    <p>For all questions on how to use the tool, check out the <a href="https://github.com/SamHurne/gw2pao/wiki">Wiki</a>.</p>
+                </div>
+                <div class="feature">
+                    <h3>Can you add ___?</h3>
+                    <p>Maybe! For all feature requests and suggestions, head over to the <a href="https://github.com/SamHurne/gw2pao/issues">Github Issues/Features Page</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <ul class="list-inline banner-social-buttons">
+                <!--
+                <li>
+                    <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                </li>
+                -->
+                <li>
+                    <a href="https://github.com/SamHurne/gw2pao" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i><span class="network-name">GitHub</span></a>
+                </li>
+                <!--
+                <li>
+                    <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                </li>
+                -->
+            </ul>
+            <br>
+            <span>© 2012 ArenaNet, Inc. All rights reserved. NCsoft, the interlocking NC logo, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Eye of the North, Guild Wars 2, and all associated logos and designs are trademarks or registered trademarks of NCsoft Corporation. All other trademarks are the property of their respective owners.</span>
+        </div>
+    </footer>
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>
