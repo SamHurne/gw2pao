@@ -13,8 +13,6 @@ using NLog;
 
 namespace GW2PAO.API.Services
 {
-    using GW2DotNET.Entities.DynamicEvents;
-
     /// <summary>
     /// Service class for event information
     /// </summary>
