@@ -13,6 +13,8 @@ using NLog;
 
 namespace GW2PAO.API.Services
 {
+    using GW2DotNET.Entities.DynamicEvents;
+
     /// <summary>
     /// Service class for event information
     /// </summary>
@@ -53,16 +55,32 @@ namespace GW2PAO.API.Services
 
             try
             {
-                var events = this.service.GetDynamicEventDetails();
-
                 logger.Info("Loading world event locations");
                 foreach (var worldEvent in this.EventTimeTable.WorldEvents)
                 {
-                    if (events.ContainsKey(worldEvent.ID))
+                    // Get event details for the current event
+                    var dynamicEvent = this.service.GetDynamicEventDetails(worldEvent.ID);
+
+                    // Ensure that the service returned event data for the current event
+                    if (dynamicEvent == null)
                     {
-                        if (events[worldEvent.ID].Map != null)
-                            worldEvent.Location = events[worldEvent.ID].Map.MapName;
+                        logger.Warn("Failed to load event data for event with ID '{0}'", worldEvent.ID);
+                        continue;
                     }
+
+                    // Get map details for the current event
+                    // TODO: consider specifying a language (default: English)
+                    dynamicEvent.Map = this.service.GetMap(dynamicEvent.MapId);
+
+                    // Ensure that the service returned map data for the current event
+                    if (dynamicEvent.Map == null)
+                    {
+                        logger.Warn("Failed to load map data for event with ID '{0}'", worldEvent.ID);
+                        continue;
+                    }
+
+                    // Set the event location name
+                    worldEvent.Location = dynamicEvent.Map.MapName;
                 }
             }
             catch (Exception ex)
