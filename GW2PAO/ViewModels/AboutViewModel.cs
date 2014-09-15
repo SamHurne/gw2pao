@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -41,6 +42,16 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// License information
+        /// </summary>
+        public string OpenSourceLicense { get; private set; }
+
+        /// <summary>
+        /// ArenaNet copyright information (for use of images and the API)
+        /// </summary>
+        public string ArenaNetCopyright { get; private set; }
+
+        /// <summary>
         /// Command to open help
         /// </summary>
         public DelegateCommand HelpCommand { get { return new DelegateCommand(this.OpenHelpPage); } }
@@ -53,6 +64,8 @@ namespace GW2PAO.ViewModels
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             this.Version = fvi.ProductVersion;
+            this.OpenSourceLicense = File.ReadAllText("LICENSE.txt", Encoding.Default);
+            this.ArenaNetCopyright = File.ReadAllText("AnetCopyright.txt", Encoding.Default);
         }
 
         /// <summary>

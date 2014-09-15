@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels"
-        Title="About" Height="Auto" Width="260"
-        SizeToContent="WidthAndHeight"
+        Title="About" Height="Auto" Width="500"
+        SizeToContent="Height"
+        WindowStyle="ToolWindow"
         ResizeMode="NoResize"
         Closed="Window_Closed">
     
@@ -18,11 +19,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="0"
-                    Margin="10,10,0,5">
+                    Margin="20,10,0,5">
             <TextBlock FontSize="13" FontWeight="Bold" Foreground="White"
                        Text="GW2 Personal Assistant Overlay"  >
             </TextBlock>
@@ -53,11 +54,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="105" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0"
@@ -68,6 +71,12 @@
                            FontSize="11" Foreground="White"
                            Text="Aerodin.2795" />
 
+                    <CheckBox Grid.Row="0" Grid.Column="2"
+                              HorizontalAlignment="Right"
+                              IsChecked="{Binding IsLoggingEnabled}">
+                        <TextBlock FontSize="11" Foreground="White" Text="Enable Logging" />
+                    </CheckBox>
+
                     <TextBlock Grid.Row="1" Grid.Column="0"
                            FontSize="11" Foreground="White"
                            Text="Design/art input by: " />
@@ -76,19 +85,30 @@
                            FontSize="11" Foreground="White"
                            Text="Raal.1634" />
 
-
-                    <CheckBox Grid.Row="2" Grid.Column="0"
-                              Margin="0,10,0,0"
-                              IsChecked="{Binding IsLoggingEnabled}">
-                        <TextBlock FontSize="11" Foreground="White" Text="Enable Logging" />
-                    </CheckBox>
-
-                    <TextBlock Grid.Row="2" Grid.Column="1"
+                    <TextBlock Grid.Row="1" Grid.Column="2"
                                HorizontalAlignment="Right"
-                               Margin="0,10,0,0"
+                               Margin="0,00,0,0"
                                FontSize="11">
                         <Hyperlink Foreground="White" Command="{Binding HelpCommand}">Help</Hyperlink>
                     </TextBlock>
+
+                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                            Margin="0,10,0,5"
+                            BorderBrush="Gray" BorderThickness="0,1,0,0">
+                        <TextBlock 
+                                   FontSize="11" Foreground="White"
+                                   TextWrapping="Wrap"
+                                   Text="{Binding OpenSourceLicense}" />
+                    </Border>
+
+                    <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            Margin="0,5,0,5"
+                            BorderBrush="Gray" BorderThickness="0,1,0,0">
+                        <TextBlock 
+                                   FontSize="11" Foreground="White"
+                                   TextWrapping="Wrap"
+                                   Text="{Binding ArenaNetCopyright}" />
+                    </Border>
                 </Grid>
             </Grid>
         </Border>
