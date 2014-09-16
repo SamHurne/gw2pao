@@ -1,13 +1,11 @@
-gw2pao
+Guild Wars 2 Personal Assistant Overlay
 ======
 
-Guild Wars 2 Personal Assistant Overlay
+# Description
 
+A stand-alone .NET/WPF informational overlay utility for Guild Wars 2, providing events tracking, dungeon tracking, and directional/positional tracking for zone completion and WvW.
 
-#Description
-
-An informational overlay utility for Guild Wars 2, providing events tracking, dungeon tracking, and directional/positional tracking for zone completion and WvW.
-Features
+# Features
 
 Currently, the GW2 Personal Assistant Overlay includes 8 overlay utilities:
 
@@ -42,3 +40,7 @@ The Trading Post Calculator is a simple tool that allows a user to calculate pro
 ## Web Browser (Optional)
 
 For all needs not provided by the other overlay windows, the Web Browser allows a user to look up guides, videos, or anything else.
+
+
+
+For more information, visit the [GitHub Pages Site](http://samhurne.github.io/gw2pao/)
