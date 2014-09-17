@@ -19,7 +19,7 @@ namespace GW2PAO.Utility
         public static bool IsNewVersionAvailable()
         {
             var http = new HttpClient();
-            var request = http.GetStringAsync(new Uri("https://raw.githubusercontent.com/SamHurne/gw2pao/master/.gitignore"));
+            var request = http.GetStringAsync(new Uri("https://raw.githubusercontent.com/SamHurne/gw2pao/master/latest_version.txt"));
             request.Wait(); // Should be pretty quick
 
             string versionString = request.Result;
