@@ -87,6 +87,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -142,6 +143,7 @@
     <Compile Include="Utility\Interfaces\IProcessMonitor.cs" />
     <Compile Include="Utility\ProcessMonitor.cs" />
     <Compile Include="Utility\Threading.cs" />
+    <Compile Include="Utility\UpdateChecker.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\DungeonTracker\DungeonTrackerViewModel.cs" />
