@@ -7,7 +7,15 @@
         WindowStyle="ToolWindow"
         ResizeMode="NoResize"
         Closed="Window_Closed">
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Style/ResourceLibrary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Window.DataContext>
         <vm:AboutViewModel x:Name="ViewModel" />
     </Window.DataContext>

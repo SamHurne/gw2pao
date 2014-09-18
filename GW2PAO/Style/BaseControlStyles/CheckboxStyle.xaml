@@ -3,7 +3,6 @@
 
     <Color x:Key="HighlightedBackgroundColor">#45FFFFFF</Color>
     <Color x:Key="PressedBackgroundColor">#A0FFFFFF</Color>
-    <Color x:Key="ControlBorderColor">#FFFFFFFF</Color>
     <Color x:Key="GlyphColor">#FFFFFFFF</Color>
 
     <Style TargetType="CheckBox">
@@ -15,37 +14,33 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <BulletDecorator Background="Transparent">
-                        
                         <BulletDecorator.Bullet>
                             <Border x:Name="Border"
+                                    CornerRadius="2" BorderThickness="1" BorderBrush="#80000000"
                                     Width="14" Height="14"
-                                    CornerRadius="1" BorderThickness="1">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="{StaticResource ControlBorderColor}" />
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <SolidColorBrush Color="Transparent" />
-                                </Border.Background>
-                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Path x:Name="CheckMark"
-                                          Visibility="Collapsed" Width="8" Height="8"
-                                          SnapsToDevicePixels="False"
-                                          StrokeThickness="2"
-                                          Data="M 0 4 L 3 8 M 3 8 L 8 0">
-                                        <Path.Stroke>
-                                            <SolidColorBrush Color="{DynamicResource GlyphColor}" />
-                                        </Path.Stroke>
-                                    </Path>
-                                    <Path x:Name="InderminateMark"
-                                          Visibility="Collapsed" Width="8" Height="8"
-                                          SnapsToDevicePixels="False"
-                                          StrokeThickness="2"
-                                          Data="M 0 8 L 8 0">
-                                        <Path.Stroke>
-                                            <SolidColorBrush Color="{DynamicResource GlyphColor}" />
-                                        </Path.Stroke>
-                                    </Path>
-                                </Grid>
+                                    Background="Transparent">
+                                <Border CornerRadius="1" BorderThickness="1" BorderBrush="#80FFFFFF">
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="CheckMark"
+                                                Visibility="Collapsed" Width="10" Height="10"
+                                                SnapsToDevicePixels="False"
+                                                StrokeThickness="2"
+                                                Data="M 1 4 L 4 8 L 9 1">
+                                            <Path.Stroke>
+                                                <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                                            </Path.Stroke>
+                                        </Path>
+                                        <Path x:Name="InderminateMark"
+                                                Visibility="Collapsed" Width="10" Height="10"
+                                                SnapsToDevicePixels="False"
+                                                StrokeThickness="2"
+                                                Data="M 0 10 L 10 0">
+                                            <Path.Stroke>
+                                                <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                                            </Path.Stroke>
+                                        </Path>
+                                    </Grid>
+                                </Border>
                             </Border>
                         </BulletDecorator.Bullet>
 

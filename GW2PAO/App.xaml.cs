@@ -169,6 +169,16 @@ namespace GW2PAO
                     () => { return ApplicationOverlayMenuIcon.IsVisible; },
                     (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
                     ApplicationOverlayMenuIcon, "IsVisible"));
+
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true,
+                    () => { return GW2PAO.Properties.Settings.Default.CheckForUpdates; },
+                    (enabled) =>
+                    {
+                        GW2PAO.Properties.Settings.Default.CheckForUpdates = enabled;
+                        GW2PAO.Properties.Settings.Default.Save();
+                    },
+                    GW2PAO.Properties.Settings.Default, "CheckForUpdates"));
+
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", this.ExitAndCleanup));
             }
@@ -184,6 +194,10 @@ namespace GW2PAO
 
             GW2PAO.Properties.Settings.Default.FirstTimeRun = false;
             GW2PAO.Properties.Settings.Default.Save();
+
+            // Perform a check for new updates
+            if (GW2PAO.Properties.Settings.Default.CheckForUpdates)
+                UpdateChecker.CheckForUpdateAndNotify();
         }
 
         /// <summary>
