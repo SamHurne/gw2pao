@@ -383,6 +383,8 @@ namespace GW2PAO.Controllers
         private void BuildMenuItems()
         {
             // Event Menu Items
+            var eventMenu = new MenuItemViewModel("Events", null);
+
             var eventTimeTableMenus = new MenuItemViewModel("Event Time Table", null);
             var standardEvents = new MenuItemViewModel("Standard", null, true,
                 () => { return !this.EventSettings.UseAdjustedTimeTable; },
@@ -394,21 +396,19 @@ namespace GW2PAO.Controllers
                 (selected) => this.EventSettings.UseAdjustedTimeTable = selected,
                 this.EventSettings, "UseAdjustedTimeTable");
             eventTimeTableMenus.SubMenuItems.Add(adjustedEvents);
-
-            this.menuItems.Add(eventTimeTableMenus);
-            this.menuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
-            this.menuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
+            eventMenu.SubMenuItems.Add(eventTimeTableMenus);
+            eventMenu.SubMenuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
+            eventMenu.SubMenuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
+            this.menuItems.Add(eventMenu);
 
             // Zone Completion Assistant
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
+            this.menuItems.Add(new MenuItemViewModel("Zone Completion Assistant", this.DisplayZoneAssistant, this.CanDisplayZoneAssistant));
 
             // Dungeons Tracker
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
+            this.menuItems.Add(new MenuItemViewModel("Dungeons Tracker", this.DisplayDungeonTracker, this.CanDisplayDungeonTracker));
 
             // WvW menus (these are a bit more complicated)
-            this.menuItems.Add(null); // Null for a seperator
+            var wvwMenu = new MenuItemViewModel("World vs World", null);
 
             // World Selection Menu
             var wvwWorldSelectionMenu = new MenuItemViewModel("World Selection", null);
@@ -432,10 +432,11 @@ namespace GW2PAO.Controllers
                 euWorlds.SubMenuItems.Add(worldMenuItem);
             }
             wvwWorldSelectionMenu.SubMenuItems.Add(euWorlds);
-            this.menuItems.Add(wvwWorldSelectionMenu);
+
+            wvwMenu.SubMenuItems.Add(wvwWorldSelectionMenu);
 
             // WvW Tracker view
-            this.menuItems.Add(new MenuItemViewModel("Open WvW Tracker", this.DisplayWvWTracker, this.CanDisplayWvWTracker));
+            wvwMenu.SubMenuItems.Add(new MenuItemViewModel("Open WvW Tracker", this.DisplayWvWTracker, this.CanDisplayWvWTracker));
 
             // WvW Notifications Menu
             var wvwNotificationsMenu = new MenuItemViewModel("WvW Notifications", null);
@@ -458,20 +459,19 @@ namespace GW2PAO.Controllers
             wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
             wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
             wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
-            this.menuItems.Add(wvwNotificationsMenu);
+            wvwMenu.SubMenuItems.Add(wvwNotificationsMenu);
+
+            this.menuItems.Add(wvwMenu);
 
             // TP Calculator
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+            this.menuItems.Add(new MenuItemViewModel("TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
 
             // Teamspeak Overlay
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
+            this.menuItems.Add(new MenuItemViewModel("Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
 
 #if !NO_BROWSER
             // Web Browser
-            this.menuItems.Add(null); // Null for a seperator
-            this.menuItems.Add(new MenuItemViewModel("Open Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
+            this.menuItems.Add(new MenuItemViewModel("Web Browser", this.DisplayWebBrowser, this.CanDisplayWebBrowser));
 #endif
         }
 

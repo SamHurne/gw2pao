@@ -148,7 +148,9 @@ namespace GW2PAO
 
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Click-Through Windows", null, true,
+                var settingsMenu = new MenuItemViewModel("Settings", null);
+
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Click-Through Windows", null, true,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
                                     GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
@@ -156,7 +158,7 @@ namespace GW2PAO
                                  },
                     GW2PAO.Properties.Settings.Default, "IsClickthroughEnabled"));
 
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Sticky Windows", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Sticky Windows", null, true,
                     () => { return GW2PAO.Properties.Settings.Default.AreWindowsSticky; },
                     (enabled) =>
                     {
@@ -165,12 +167,12 @@ namespace GW2PAO
                     },
                     GW2PAO.Properties.Settings.Default, "AreWindowsSticky"));
 
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true,
                     () => { return ApplicationOverlayMenuIcon.IsVisible; },
                     (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
                     ApplicationOverlayMenuIcon, "IsVisible"));
 
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true,
                     () => { return GW2PAO.Properties.Settings.Default.CheckForUpdates; },
                     (enabled) =>
                     {
@@ -179,6 +181,7 @@ namespace GW2PAO
                     },
                     GW2PAO.Properties.Settings.Default, "CheckForUpdates"));
 
+                TrayIconVm.MenuItems.Add(settingsMenu);
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
                 TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", this.ExitAndCleanup));
             }
