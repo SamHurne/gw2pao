@@ -282,6 +282,7 @@ namespace GW2PAO.PresentationCore
                 return;
             }
 
+            this.formattedText.Trimming = this.TextTrimming;
             this.formattedText.TextAlignment = this.TextAlignment;
             if (this.TextWrapping != System.Windows.TextWrapping.NoWrap)
                 this.formattedText.Trimming = System.Windows.TextTrimming.None;

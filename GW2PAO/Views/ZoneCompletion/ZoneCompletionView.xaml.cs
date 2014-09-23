@@ -30,7 +30,6 @@ namespace GW2PAO.Views.ZoneCompletion
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private const double minHeight = 78;
-        private const double initialHeight = 250;
 
         /// <summary>
         /// Height before collapsing the control
@@ -59,18 +58,11 @@ namespace GW2PAO.Views.ZoneCompletion
             this.DataContext = new ZoneCompletionViewModel(this.controller, zoneName);
             InitializeComponent();
 
-            // Set the window size and location
+            // Save the height values for use when collapsing the window
             this.MinHeight = minHeight;
-            this.Height = initialHeight;
+            this.Height = Properties.Settings.Default.ZoneAssistantHeight;
 
             this.Closing += ZoneCompletionView_Closing;
-            if (Properties.Settings.Default.ZoneAssistantHeight > 0)
-                this.Height = Properties.Settings.Default.ZoneAssistantHeight;
-            if (Properties.Settings.Default.ZoneAssistantWidth > 0)
-                this.Width = Properties.Settings.Default.ZoneAssistantWidth;
-            this.Left = Properties.Settings.Default.ZoneAssistantX;
-            this.Top = Properties.Settings.Default.ZoneAssistantY;
-
             this.beforeCollapseHeight = this.Height;
         }
 

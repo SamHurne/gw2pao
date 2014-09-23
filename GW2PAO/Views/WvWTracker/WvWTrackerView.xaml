@@ -4,10 +4,14 @@
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:view="clr-namespace:GW2PAO.Views.WvWTracker"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        x:Name="TrackerWindow"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerX}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">
@@ -42,12 +46,15 @@
                 <GradientStop Color="#005B4411" Offset="1"/>
             </RadialGradientBrush>
         </Grid.Background>
-
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
@@ -180,10 +187,7 @@
         </Border>
 
         <Grid Name="ObjectivesContainer" Grid.Row="1">
-            <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto"
-                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                 <StackPanel>
                     <ItemsControl Name="ObjectivesControl"
                                   ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
@@ -215,7 +219,7 @@
                                 <Setter Property="ItemTemplate">
                                     <Setter.Value>
                                         <DataTemplate>
-                                            <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                            <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"/>
                                         </DataTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -248,11 +252,26 @@
                         </Style>
                     </StackPanel.Style>
                 </StackPanel>
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
+                        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                <DataTrigger.Setters>
+                                    <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+                                    <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
             </ScrollViewer>
         </Grid>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"
+              Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form"
               HorizontalAlignment="Left">
 
@@ -261,8 +280,7 @@
                        Fill="#01FFA500">
             </Rectangle>
 
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
+            <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
                        Height="1">
                 <Rectangle.Fill>
                     <LinearGradientBrush>
@@ -274,17 +292,11 @@
 
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Width" Value="188" />
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger.Setters>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
-                            <DataTrigger.Setters>
-                                <Setter Property="Width" Value="140" />
                             </DataTrigger.Setters>
                         </DataTrigger>
                     </Style.Triggers>

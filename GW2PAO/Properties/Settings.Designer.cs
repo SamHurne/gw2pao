@@ -25,7 +25,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
         public double ZoneAssistantHeight {
             get {
                 return ((double)(this["ZoneAssistantHeight"]));
@@ -37,7 +37,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("225")]
         public double ZoneAssistantWidth {
             get {
                 return ((double)(this["ZoneAssistantWidth"]));
@@ -49,7 +49,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public double ZoneAssistantX {
             get {
                 return ((double)(this["ZoneAssistantX"]));
@@ -61,7 +61,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public double ZoneAssistantY {
             get {
                 return ((double)(this["ZoneAssistantY"]));
@@ -73,7 +73,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
         public double EventTrackerHeight {
             get {
                 return ((double)(this["EventTrackerHeight"]));
@@ -85,7 +85,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
         public double EventTrackerWidth {
             get {
                 return ((double)(this["EventTrackerWidth"]));
@@ -157,7 +157,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
         public double DungeonTrackerHeight {
             get {
                 return ((double)(this["DungeonTrackerHeight"]));
@@ -169,7 +169,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("280")]
         public double DungeonTrackerWidth {
             get {
                 return ((double)(this["DungeonTrackerWidth"]));
@@ -445,7 +445,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
         public double TeamspeakHeight {
             get {
                 return ((double)(this["TeamspeakHeight"]));
@@ -457,7 +457,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("225")]
         public double TeamspeakWidth {
             get {
                 return ((double)(this["TeamspeakWidth"]));

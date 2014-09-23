@@ -7,7 +7,8 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200"
+             mc:Ignorable="d" d:DesignWidth="200"
+             Height="26"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
@@ -48,11 +49,11 @@
 
         <Grid Margin="0,5,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="135" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <core:OutlinedTextBlock Name="DungeonName"

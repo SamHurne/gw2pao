@@ -29,7 +29,6 @@ namespace GW2PAO.Views.DungeonTracker
 
         private const double minHeight = 84;
         private const double maxHeight = 275;
-        private const double initialHeight = 125;
 
         /// <summary>
         /// Height before collapsing the control
@@ -63,19 +62,12 @@ namespace GW2PAO.Views.DungeonTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Set the window size and location
+            // Save the height values for use when collapsing the window
             this.MinHeight = minHeight;
             this.MaxHeight = maxHeight;
-            this.Height = initialHeight;
+            this.Height = Properties.Settings.Default.DungeonTrackerHeight;
 
             this.Closing += DungeonTrackerView_Closing;
-            if (Properties.Settings.Default.DungeonTrackerHeight > 0)
-                this.Height = Properties.Settings.Default.DungeonTrackerHeight;
-            if (Properties.Settings.Default.DungeonTrackerWidth > 0)
-                this.Width = Properties.Settings.Default.DungeonTrackerWidth;
-            this.Left = Properties.Settings.Default.DungeonTrackerX;
-            this.Top = Properties.Settings.Default.DungeonTrackerY;
-
             this.beforeCollapseHeight = this.Height;
         }
 

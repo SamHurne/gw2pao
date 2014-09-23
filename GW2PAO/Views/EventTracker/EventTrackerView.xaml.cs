@@ -31,7 +31,6 @@ namespace GW2PAO.Views.EventTracker
 
         private const double minHeight = 84;
         private const double maxHeight = 380;
-        private const double initialHeight = 125;
 
         /// <summary>
         /// Height before collapsing the control
@@ -65,19 +64,12 @@ namespace GW2PAO.Views.EventTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Set the window size and location
+            // Save the hight values for use when collapsing the window
             this.MinHeight = minHeight;
             this.MaxHeight = maxHeight;
-            this.Height = initialHeight;
+            this.Height = GW2PAO.Properties.Settings.Default.EventTrackerHeight;
 
             this.Closing += EventTrackerView_Closing;
-            if (Properties.Settings.Default.EventTrackerHeight > 0)
-                this.Height = Properties.Settings.Default.EventTrackerHeight;
-            if (Properties.Settings.Default.EventTrackerWidth > 0)
-                this.Width = Properties.Settings.Default.EventTrackerWidth;
-            this.Left = Properties.Settings.Default.EventTrackerX;
-            this.Top = Properties.Settings.Default.EventTrackerY;
-
             this.beforeCollapseHeight = this.Height;
         }
 

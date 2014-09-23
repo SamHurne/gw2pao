@@ -3,22 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="ZoneAssistantHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">250</Value>
     </Setting>
     <Setting Name="ZoneAssistantWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">225</Value>
     </Setting>
     <Setting Name="ZoneAssistantX" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">200</Value>
+      <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="ZoneAssistantY" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">200</Value>
+      <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="EventTrackerHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">125</Value>
     </Setting>
     <Setting Name="EventTrackerWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">250</Value>
     </Setting>
     <Setting Name="EventTrackerX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">200</Value>
@@ -36,10 +36,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="DungeonTrackerHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">125</Value>
     </Setting>
     <Setting Name="DungeonTrackerWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">280</Value>
     </Setting>
     <Setting Name="DungeonTrackerX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
@@ -108,10 +108,10 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="TeamspeakHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">150</Value>
     </Setting>
     <Setting Name="TeamspeakWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">225</Value>
     </Setting>
     <Setting Name="IsTeamspeakOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

@@ -6,11 +6,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:View="clr-namespace:GW2PAO.Views.EventTracker"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        MinWidth="250" MaxWidth="250" Width="250"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=EventTrackerY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=EventTrackerX}"
+        MinWidth="150" MaxWidth="350" Width="{Binding Source={x:Static properties:Settings.Default}, Path=EventTrackerWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">
@@ -30,12 +33,10 @@
                     <scm:SortDescription PropertyName="TimerValue" />
                 </CollectionViewSource.SortDescriptions>
             </core:AutoRefreshCollectionViewSource>
-
         </ResourceDictionary>
     </src:OverlayWindow.Resources>
 
     <Grid>
-
         <Grid.Effect>
             <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
         </Grid.Effect>
@@ -56,7 +57,8 @@
         <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                 Grid.Row="0">
-            <Grid Margin="5,0,0,0">
+            <Grid Margin="5,0,0,0"
+                  Height="32">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />

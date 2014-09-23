@@ -9,6 +9,7 @@
         <Setter Property="StrokeOpacity" Value="0.75" />
         <Setter Property="FontFamily" Value="Gisha" />
         <Setter Property="FontSize" Value="11" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 
 </ResourceDictionary>

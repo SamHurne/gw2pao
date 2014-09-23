@@ -29,7 +29,6 @@ namespace GW2PAO.Views.Teamspeak
 
         private const double minHeight = 84;
         private const double maxHeight = 500;
-        private const double initialHeight = 125;
 
         /// <summary>
         /// Height before collapsing the control
@@ -57,19 +56,12 @@ namespace GW2PAO.Views.Teamspeak
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Set the window size and location
+            // Save the height values for use when collapsing the window
             this.MinHeight = minHeight;
             this.MaxHeight = maxHeight;
-            this.Height = initialHeight;
+            this.Height = Properties.Settings.Default.TeamspeakHeight;
 
             this.Closing += TeamspeakView_Closing;
-            if (Properties.Settings.Default.TeamspeakHeight > 0)
-                this.Height = Properties.Settings.Default.TeamspeakHeight;
-            if (Properties.Settings.Default.TeamspeakWidth > 0)
-                this.Width = Properties.Settings.Default.TeamspeakWidth;
-            this.Left = Properties.Settings.Default.TeamspeakX;
-            this.Top = Properties.Settings.Default.TeamspeakY;
-
             this.beforeCollapseHeight = this.Height;
         }
 

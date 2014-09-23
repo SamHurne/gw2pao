@@ -33,12 +33,12 @@ namespace GW2PAO.Views.WvWTracker
         private const double minVerticalHeight = 58;
         private const double maxVerticalHeight = 750;
         private const double verticalHeight = 250;
-        private const double minHorizontalHeight = 125;
+        private const double minHorizontalHeight = 76;
         private const double maxHorizontalHeight = 125;
         private const double horizontalHeight = 125;
 
-        private const double minVerticalWidth = 215;
-        private const double maxVerticalWidth = 215;
+        private const double minVerticalWidth = 125;
+        private const double maxVerticalWidth = 350;
         private const double verticalWidth = 215;
         private const double minHorizontalWidth = 190;
         private const double maxHorizontalWidth = 1421;
@@ -84,8 +84,6 @@ namespace GW2PAO.Views.WvWTracker
                 this.Height = Properties.Settings.Default.WvWTrackerHeight;
             if (Properties.Settings.Default.WvWTrackerWidth > 0)
                 this.Width = Properties.Settings.Default.WvWTrackerWidth;
-            this.Left = Properties.Settings.Default.WvWTrackerX;
-            this.Top = Properties.Settings.Default.WvWTrackerY;
 
             this.beforeCollapseHeight = this.Height;
             this.viewModel.PropertyChanged += viewModel_PropertyChanged;
@@ -288,6 +286,7 @@ namespace GW2PAO.Views.WvWTracker
                         sv.LineRight();
                         sv.LineRight();
                     }
+                    e.Handled = true;
                 }
             }
         }

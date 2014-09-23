@@ -10,13 +10,15 @@
         xmlns:View="clr-namespace:GW2PAO.Views.ZoneCompletion"
         xmlns:huddled="http://schemas.huddledmasses.org/wpf"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
-        MinHeight="78" Height="250"
-        MinWidth="225" MaxWidth="225" Width="225"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=ZoneAssistantY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=ZoneAssistantX}"
+        MinWidth="150" MaxWidth="350" Width="{Binding Source={x:Static properties:Settings.Default}, Path=ZoneAssistantWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">
@@ -61,7 +63,8 @@
         <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                 Grid.Row="0">
-            <Grid Margin="5,0,0,0">
+            <Grid Margin="5,0,0,0"
+                  Height="32">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
@@ -151,12 +154,11 @@
                     </Image.Style>
                 </Image>
 
-                <Viewbox StretchDirection="DownOnly" Grid.Column="1" Margin="5,0,0,0" HorizontalAlignment="Left">
-                    <core:OutlinedTextBlock VerticalAlignment="Center" 
-                                            Fill="Orange"
-                                            FontFamily="Candara" FontSize="17"
-                                            Text="{Binding ZoneNameVM.ZoneName}" />
-                </Viewbox>
+                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                        HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                        Fill="Orange"
+                                        FontFamily="Candara" FontSize="17"
+                                        Text="{Binding ZoneNameVM.ZoneName}" />
 
                 <Button Name="CollapseExpandButton"
                     Grid.Column="2"
