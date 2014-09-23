@@ -43,16 +43,14 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2.NET, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET v0.9.8.0\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2.NET.dll</HintPath>
+    <Reference Include="GW2.NET">
+      <HintPath>..\packages\GW2.NET.0.9.9.1\lib\net40\GW2.NET.dll</HintPath>
     </Reference>
     <Reference Include="GW2.NET.Core">
-      <HintPath>..\packages\GW2.NET v0.9.8.0\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2.NET.Core.dll</HintPath>
+      <HintPath>..\packages\GW2.NET.0.9.9.1\lib\net40\GW2.NET.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
@@ -122,6 +120,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
