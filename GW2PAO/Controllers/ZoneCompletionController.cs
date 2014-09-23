@@ -213,7 +213,11 @@ namespace GW2PAO.Controllers
                                 this.ZoneItems.Clear();
                                 foreach (var item in zoneItems)
                                 {
-                                    this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserSettings));
+                                    // Ignore dungeons for now
+                                    if (item.Type != API.Data.Enums.ZoneItemType.Dungeon)
+                                    {
+                                        this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserSettings));
+                                    }
                                 }
                             }
                         });
