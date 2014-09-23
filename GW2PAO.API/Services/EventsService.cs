@@ -29,6 +29,12 @@ namespace GW2PAO.API.Services
         private ServiceManager service = new ServiceManager();
 
         /// <summary>
+        /// List of DynamicEvent objects containing information for the world events
+        /// This is cached to reduce the amount of API requests sent when LoadTable is called
+        /// </summary>
+        private Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent> eventInformationCache = new Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent>();
+
+        /// <summary>
         /// The World Events time table
         /// </summary>
         public MegaserverEventTimeTable EventTimeTable { get; private set; }
@@ -56,29 +62,34 @@ namespace GW2PAO.API.Services
                 logger.Info("Loading world event locations");
                 foreach (var worldEvent in this.EventTimeTable.WorldEvents)
                 {
-                    // Get event details for the current event
-                    var dynamicEvent = this.service.GetDynamicEventDetails(worldEvent.ID);
-
-                    // Ensure that the service returned event data for the current event
-                    if (dynamicEvent == null)
+                    if (!this.eventInformationCache.ContainsKey(worldEvent.ID))
                     {
-                        logger.Warn("Failed to load event data for event with ID '{0}'", worldEvent.ID);
-                        continue;
-                    }
+                        // Get event details for the current event
+                        var dynamicEvent = this.service.GetDynamicEventDetails(worldEvent.ID);
 
-                    // Get map details for the current event
-                    // TODO: consider specifying a language (default: English)
-                    dynamicEvent.Map = this.service.GetMap(dynamicEvent.MapId);
+                        // Ensure that the service returned event data for the current event
+                        if (dynamicEvent == null)
+                        {
+                            logger.Warn("Failed to load event data for event with ID '{0}'", worldEvent.ID);
+                            continue;
+                        }
 
-                    // Ensure that the service returned map data for the current event
-                    if (dynamicEvent.Map == null)
-                    {
-                        logger.Warn("Failed to load map data for event with ID '{0}'", worldEvent.ID);
-                        continue;
+                        // Get map details for the current event
+                        // TODO: consider specifying a language (default: English)
+                        dynamicEvent.Map = this.service.GetMap(dynamicEvent.MapId);
+
+                        // Ensure that the service returned map data for the current event
+                        if (dynamicEvent.Map == null)
+                        {
+                            logger.Warn("Failed to load map data for event with ID '{0}'", worldEvent.ID);
+                            continue;
+                        }
+
+                        this.eventInformationCache.Add(worldEvent.ID, dynamicEvent);
                     }
 
                     // Set the event location name
-                    worldEvent.Location = dynamicEvent.Map.MapName;
+                    worldEvent.Location = this.eventInformationCache[worldEvent.ID].Map.MapName;
                 }
             }
             catch (Exception ex)

@@ -161,17 +161,25 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void InitializeWorldEvents()
         {
-            logger.Debug("Initializing world events");
-            this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
-
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            // This can take a little while to perform, since the LoadTable involves calling the events API for event details
+            // Due to this, we'll do the Load on a seperate thread
+            Task.Factory.StartNew(() =>
                 {
-                    foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+                    lock (refreshTimerLock)
                     {
-                        logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                        this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
+                        logger.Debug("Initializing world events");
+                        this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+
+                        Threading.InvokeOnUI(() =>
+                            {
+                                foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+                                {
+                                    logger.Debug("Initializing view model for {0}", worldEvent.ID);
+                                    this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
+                                }
+                            });
                     }
-                }));
+                });
         }
 
         /// <summary>
@@ -278,19 +286,24 @@ namespace GW2PAO.Controllers
         {
             if (e.PropertyName == "UseAdjustedTimeTable")
             {
-                // Load a different table
-                lock (refreshTimerLock)
-                {
-                    this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
-
-                    foreach (var worldEvent in this.WorldEvents)
+                Task.Factory.StartNew(() =>
                     {
-                        var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
-                        worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
-                        worldEvent.EventModel.Duration = newData.Duration;
-                        worldEvent.EventModel.WarmupDuration = newData.WarmupDuration;
-                    }
-                }
+                        // Load a different table
+                        lock (refreshTimerLock)
+                        {
+                            this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+                            Threading.InvokeOnUI(() =>
+                                {
+                                    foreach (var worldEvent in this.WorldEvents)
+                                    {
+                                        var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
+                                        worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
+                                        worldEvent.EventModel.Duration = newData.Duration;
+                                        worldEvent.EventModel.WarmupDuration = newData.WarmupDuration;
+                                    }
+                                });
+                        }
+                    });
             }
         }
     }
