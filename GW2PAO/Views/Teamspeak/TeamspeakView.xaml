@@ -51,6 +51,7 @@
 
         <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                MouseRightButtonDown="TitleBar_MouseRightButtonDown"
                 Grid.Row="0">
             <Grid Margin="5,0,0,0">
 

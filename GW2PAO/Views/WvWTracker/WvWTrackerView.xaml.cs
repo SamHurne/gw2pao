@@ -165,7 +165,24 @@ namespace GW2PAO.Views.WvWTracker
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // This prevents Aero snapping
+            if (this.ResizeMode != System.Windows.ResizeMode.NoResize)
+            {
+                this.ResizeMode = System.Windows.ResizeMode.NoResize;
+                this.UpdateLayout();
+            }
+
             this.DragMove();
+        }
+
+        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.ResizeMode == System.Windows.ResizeMode.NoResize)
+            {
+                // Restore resize grips (removed on mouse-down to prevent Aero snapping)
+                this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
+                this.UpdateLayout();
+            }
         }
 
         private void CloseWindowButton_Click(object sender, RoutedEventArgs e)
