@@ -28,7 +28,7 @@ namespace GW2PAO.Views.DungeonTracker
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private const double minHeight = 84;
-        private const double maxHeight = 275;
+        private const double maxHeight = 268;
 
         /// <summary>
         /// Height before collapsing the control

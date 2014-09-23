@@ -30,7 +30,7 @@ namespace GW2PAO.Views.EventTracker
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private const double minHeight = 84;
-        private const double maxHeight = 380;
+        private const double maxHeight = 373;
 
         /// <summary>
         /// Height before collapsing the control

@@ -145,31 +145,21 @@
         <Grid Name="DungeonsContainer" Grid.Row="1">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Auto">
-                <StackPanel Width="{Binding ElementName=DungeonsContainer, Path=ActualWidth}">
-                    <ItemsControl Name="DungeonsControl"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  ItemsSource="{Binding Source={StaticResource DungeonsCollection}}"
-                                  Margin="0,0,0,5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                          VerticalScrollBarVisibility="Visible">
+                <ItemsControl Name="DungeonsControl"
+                              ItemsSource="{Binding Source={StaticResource DungeonsCollection}}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
-
-            <Rectangle HorizontalAlignment="Stretch"
-                       Height="3"
-                       Fill="#01FFA500">
-            </Rectangle>
-
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">

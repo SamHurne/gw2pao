@@ -157,7 +157,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
                                         Fill="Orange"
-                                        FontFamily="Candara" FontSize="17"
+                                        FontFamily="Candara" FontSize="14"
                                         Text="{Binding ZoneNameVM.ZoneName}" />
 
                 <Button Name="CollapseExpandButton"
@@ -190,22 +190,16 @@
         <Grid Name="ItemsContainer" Grid.Row="1">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Auto">
+                          VerticalScrollBarVisibility="Visible">
                 <StackPanel Width="{Binding ElementName=ItemsContainer, Path=ActualWidth}">
-
                     <ItemsControl Name="WorldEventsControl"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ItemsSource="{Binding Source={StaticResource zoneItemsView}}">
-
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <View:ZoneItemView DataContext="{Binding}"
-                                                   Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-
                     </ItemsControl>
-
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -213,12 +207,6 @@
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
-
-            <Rectangle HorizontalAlignment="Stretch"
-                       Height="3"
-                       Fill="#01FFA500">
-            </Rectangle>
-
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">

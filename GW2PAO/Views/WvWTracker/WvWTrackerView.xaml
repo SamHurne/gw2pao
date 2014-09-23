@@ -191,7 +191,7 @@
                 <StackPanel>
                     <ItemsControl Name="ObjectivesControl"
                                   ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
-                                  Margin="0,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                  HorizontalAlignment="Left" VerticalAlignment="Top">
                         <ItemsControl.Style>
                             <Style TargetType="ItemsControl">
                                 <Setter Property="Template">
@@ -254,13 +254,13 @@
                 </StackPanel>
                 <ScrollViewer.Style>
                     <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
-                        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
                         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
                                 <DataTrigger.Setters>
                                     <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
-                                    <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+                                    <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
                                 </DataTrigger.Setters>
                             </DataTrigger>
                         </Style.Triggers>
@@ -274,11 +274,6 @@
               Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form"
               HorizontalAlignment="Left">
-
-            <Rectangle HorizontalAlignment="Stretch"
-                       Height="3"
-                       Fill="#01FFA500">
-            </Rectangle>
 
             <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
                        Height="1">
@@ -308,12 +303,6 @@
               Cursor="SizeWE"
               VerticalAlignment="Top"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
-
-            <Rectangle VerticalAlignment="Stretch"
-                       HorizontalAlignment="Right"
-                       Width="3"
-                       Fill="#01FFA500">
-            </Rectangle>
 
             <Rectangle VerticalAlignment="Stretch"
                        HorizontalAlignment="Right"

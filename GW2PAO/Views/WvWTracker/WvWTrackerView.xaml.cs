@@ -31,7 +31,7 @@ namespace GW2PAO.Views.WvWTracker
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private const double minVerticalHeight = 58;
-        private const double maxVerticalHeight = 750;
+        private const double maxVerticalHeight = 627;
         private const double verticalHeight = 250;
         private const double minHorizontalHeight = 76;
         private const double maxHorizontalHeight = 125;
@@ -41,7 +41,7 @@ namespace GW2PAO.Views.WvWTracker
         private const double maxVerticalWidth = 350;
         private const double verticalWidth = 215;
         private const double minHorizontalWidth = 190;
-        private const double maxHorizontalWidth = 1421;
+        private const double maxHorizontalWidth = 1408;
         private const double horizontalWidth = 350;
 
         /// <summary>
