@@ -30,7 +30,7 @@
     
     <UserControl.Style>
         <Style TargetType="UserControl">
-            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Opacity" Value="1" />
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard Storyboard="{StaticResource AddAnimation}" Name="AddStoryboard" />
@@ -49,23 +49,21 @@
     <Grid Background="Transparent">
         
         <Border Name="Border"
-                BorderThickness="0,1,0,1"
+                BorderThickness="2"
                 CornerRadius="0"
                 Margin="5"
                 Padding="5">
+            
 
             <Border.Background>
                 <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                    <GradientStop Color="#015B4411" Offset="0"/>
-                    <GradientStop Color="#FF5B4411" Offset="1.5"/>
+                    <GradientStop Color="#5024313D" Offset="0"/>
+                    <GradientStop Color="#FF24313D" Offset="1.5"/>
                 </RadialGradientBrush>
             </Border.Background>
 
             <Border.BorderBrush>
-                <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                    <GradientStop Color="#00FFA500" Offset="0"/>
-                    <GradientStop Color="#FFFFA500" Offset="1.5"/>
-                </RadialGradientBrush>
+                <SolidColorBrush Color="Black" Opacity="0.75" />
             </Border.BorderBrush>
 
             <Border.Effect>
@@ -103,9 +101,9 @@
 
                     <!-- Event Name -->
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                            Margin="0,5,0,0"
+                                            Margin="0,3,0,0"
                                             HorizontalAlignment="Left" VerticalAlignment="Center"
-                                            Fill="Orange" FontSize="13"
+                                            Fill="Orange" FontSize="14"
                                             Text="{Binding EventName}" />
                     
                     <!-- Close button -->
