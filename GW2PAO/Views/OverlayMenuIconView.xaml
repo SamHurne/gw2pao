@@ -11,45 +11,11 @@
         Closing="OverlayMenuIconView_Closing">
     <src:OverlayWindow.Resources>
 
-        <Style TargetType="ToolTip" x:Key="OverlayIconToolTipStyle">
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="HasDropShadow" Value="True"/>
-            <Setter Property="TextBlock.Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToolTip">
-                        <Border Name="Border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                BorderThickness="2" CornerRadius="3">
-                            <Border.Background>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#FF24313D" Offset="0"/>
-                                    <GradientStop Color="#8024313D" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="Black" Opacity="1" />
-                            </Border.BorderBrush>
-                            <ContentPresenter Margin="4,5,4,5" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="HasDropShadow" Value="true">
-                                <Setter TargetName="Border" Property="CornerRadius" Value="2"/>
-                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-            <Style.Triggers>
-                <Trigger Property="Content" Value="{x:Static sys:String.Empty}">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Trigger>
-                <Trigger Property="Content" Value="{x:Null}">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Style/ResourceLibrary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 
     </src:OverlayWindow.Resources>
 
@@ -100,7 +66,7 @@
                MouseDown="Image_MouseDown"
                MouseEnter="Image_MouseEnter">
             <Image.ToolTip>
-                <ToolTip Style="{StaticResource OverlayIconToolTipStyle}">
+                <ToolTip>
                     <TextBlock FontFamily="Gisha" Text="GW2 Personal Assistant Overlay" />
                 </ToolTip>
             </Image.ToolTip>
