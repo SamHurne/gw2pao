@@ -269,29 +269,31 @@ namespace GW2PAO.Controllers
                         {
                             // If the zone item isn't already unlocked, check to see if it should be automatically unlocked
                             //  based on the item's distance from the player
+
+                            var ftDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, API.Data.Enums.Units.Feet));
                             // TODO: Refine these differences, and/or make it configurable
                             switch (item.ItemType)
                             {
                                 case API.Data.Enums.ZoneItemType.Waypoint:
                                     if (this.UserSettings.AutoUnlockWaypoints
-                                        && item.DistanceFromPlayer >= 0
-                                        && item.DistanceFromPlayer < 55)
+                                        && ftDistance >= 0
+                                        && ftDistance < 55)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.PointOfInterest:
                                     if (this.UserSettings.AutoUnlockPois
-                                        && item.DistanceFromPlayer >= 0
-                                        && item.DistanceFromPlayer < 25)
+                                        && ftDistance >= 0
+                                        && ftDistance < 25)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.Vista:
                                     if (this.UserSettings.AutoUnlockVistas
-                                        && item.DistanceFromPlayer >= 0
-                                        && item.DistanceFromPlayer < 5)
+                                        && ftDistance >= 0
+                                        && ftDistance < 5)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
