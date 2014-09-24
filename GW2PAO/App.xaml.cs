@@ -150,7 +150,7 @@ namespace GW2PAO
 
                 var settingsMenu = new MenuItemViewModel("Settings", null);
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Click-Through Windows", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Non-Interactive Windows", null, true,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
                                     GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
