@@ -4,6 +4,7 @@
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         Title="OverlayMenuIconView" SizeToContent="WidthAndHeight"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
@@ -59,7 +60,6 @@
         </Popup>
 
         <Image Name="IconImage"
-               Source="../Resources/OverlayMenuIcon.png"
                Margin="4,4,4,4"
                Height="24" Width="24"
                ToolTipService.InitialShowDelay="0"
@@ -88,6 +88,18 @@
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
             </Image.ContextMenu>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Source" Value="../Resources/OverlayMenuIcon.png" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=IsClickthroughEnabled}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Source" Value="../Resources/OverlayMenuIcon_Color.png" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
         </Image>
         <Grid.Style>
             <Style TargetType="{x:Type Grid}">

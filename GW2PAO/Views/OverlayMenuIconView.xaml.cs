@@ -23,9 +23,11 @@ namespace GW2PAO.Views
         protected override bool NeverClickThrough { get { return true; } }
 
         private bool showPopup;
+        private TrayIconViewModel vm;
 
         public OverlayMenuIconView(TrayIconViewModel trayIconVm, bool showPopup)
         {
+            this.vm = trayIconVm;
             this.DataContext = trayIconVm;
             this.showPopup = showPopup;
             InitializeComponent();
@@ -64,9 +66,24 @@ namespace GW2PAO.Views
                     Image image = sender as Image;
                     ContextMenu contextMenu = image.ContextMenu;
                     contextMenu.PlacementTarget = image;
+                    contextMenu.Visibility = System.Windows.Visibility.Visible;
                     contextMenu.IsOpen = true;
                     e.Handled = true;
                 }
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                Image image = sender as Image;
+                ContextMenu contextMenu = image.ContextMenu;
+                contextMenu.Visibility = System.Windows.Visibility.Collapsed;
+                contextMenu.IsOpen = false;
+
+                // Toggle global click-through
+                // TODO: This probably belongs in a view model rather than here in the view...
+                GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = !GW2PAO.Properties.Settings.Default.IsClickthroughEnabled;
+                GW2PAO.Properties.Settings.Default.Save();
+
+                e.Handled = true;
             }
         }
 

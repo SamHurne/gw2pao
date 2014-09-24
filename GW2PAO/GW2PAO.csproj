@@ -381,6 +381,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\OverlayMenuIcon_Color.png" />
     <Resource Include="Resources\warning.png" />
     <Resource Include="Resources\exit.png" />
     <Resource Include="Resources\enter.png" />

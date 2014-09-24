@@ -483,6 +483,16 @@ namespace GW2PAO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OverlayMenuIcon_Color {
+            get {
+                object obj = ResourceManager.GetObject("OverlayMenuIcon_Color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap poi {
             get {
                 object obj = ResourceManager.GetObject("poi", resourceCulture);
