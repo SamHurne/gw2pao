@@ -37,6 +37,11 @@ namespace GW2PAO.Models
         private bool areGreenBorderlandsNotificationsEnabled;
         private bool areRedBorderlandsNotificationsEnabled;
         private bool areEternalBattlegroundsNotificationsEnabled;
+
+        private bool notifyWhenHomeTakesObjective;
+        private bool notifyWhenHomeLosesObjective;
+        private bool notifyWhenOtherTakesOtherObjective;
+
         private bool areCastlesShown;
         private bool areKeepsShown;
         private bool areTowersShown;
@@ -112,6 +117,33 @@ namespace GW2PAO.Models
         {
             get { return this.areEternalBattlegroundsNotificationsEnabled; }
             set { SetField(ref this.areEternalBattlegroundsNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True to enable notifications shown when the player's home world takes an objective
+        /// </summary>
+        public bool NotifyWhenHomeTakesObjective
+        {
+            get { return this.notifyWhenHomeTakesObjective; }
+            set { this.SetField(ref this.notifyWhenHomeTakesObjective, value); }
+        }
+
+        /// <summary>
+        /// True to enable notifications shown when the player's home world loses an objective
+        /// </summary>
+        public bool NotifyWhenHomeLosesObjective
+        {
+            get { return this.notifyWhenHomeLosesObjective; }
+            set { this.SetField(ref this.notifyWhenHomeLosesObjective, value); }
+        }
+
+        /// <summary>
+        /// True to enable notifications shown when another world takes another world's objective
+        /// </summary>
+        public bool NotifyWhenOtherTakesOtherObjective
+        {
+            get { return this.notifyWhenOtherTakesOtherObjective; }
+            set { this.SetField(ref this.notifyWhenOtherTakesOtherObjective, value); }
         }
 
         /// <summary>
