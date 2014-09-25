@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
-             Height="72" Width="215">
+             Height="84" Width="215">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -102,6 +102,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     
@@ -123,18 +124,29 @@
                                             VerticalAlignment="Bottom"
                                             Fill="Orange" FontSize="13"
                                             Text="{Binding Name}" />
+                    <!--  -->
                     
                     
                     <!-- Map -->
                     <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                             FontSize="12" Text="{Binding Map, Converter={StaticResource MapConverter}}" />
-
-                    <!-- Owner information -->
+                    <!--  -->
+                    
+                    <!-- Previous Owner Information -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
-                        <core:OutlinedTextBlock FontSize="12" Text="By:" />
-                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="12" Text="{Binding WorldOwnerName}" />
+                        <core:OutlinedTextBlock FontSize="11" Text="From:" />
+                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="11" Text="{Binding PrevWorldOwnerName}" />
                     </StackPanel>
+                    <!---->
+
+                    <!-- Owner information -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                Orientation="Horizontal">
+                        <core:OutlinedTextBlock FontSize="11" Text="By:" />
+                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="11" Text="{Binding WorldOwnerName}" />
+                    </StackPanel>
+                    <!---->
                 </Grid>
             </Grid>
         </Border>

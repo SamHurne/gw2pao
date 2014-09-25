@@ -11,7 +11,7 @@
         Topmost="True" ShowInTaskbar="False"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        MinHeight="120" Height="Auto" SizeToContent="Height" Width="215" 
+        MinHeight="120" Height="Auto" SizeToContent="Height" Width="230" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>

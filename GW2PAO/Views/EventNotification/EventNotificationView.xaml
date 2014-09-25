@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
-             Height="60" Width="215">
+             Height="60" Width="230">
 
     <UserControl.Resources>
         <ResourceDictionary>
