@@ -18,8 +18,11 @@ namespace GW2PAO.TS3.Constants
         public const string InvokerName = "invokername";
         public const string Message = "msg";
 
+        public const string ParentChannelID = "pid";
         public const string ChannelName = "channel_name";
         public const string ChannelDescription = "channel_description";
+        public const string ChannelOrder = "channel_order";
+        public const string ChannelClientsCount = "total_clients";
 
         public const string ServerName = "virtualserver_name";
         public const string ServerIP = "virtualserver_ip";

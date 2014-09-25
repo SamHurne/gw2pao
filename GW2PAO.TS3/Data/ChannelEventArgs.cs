@@ -8,13 +8,11 @@ namespace GW2PAO.TS3.Data
 {
     public class ChannelEventArgs : EventArgs
     {
-        public uint ClientID { get; private set; }
-        public string ClientName { get; private set; }
+        public Channel Channel { get; private set; }
 
-        public ChannelEventArgs(uint clientId, string clientName)
+        public ChannelEventArgs(Channel channel)
         {
-            this.ClientID = clientId;
-            this.ClientName = clientName;
+            this.Channel = channel;
         }
     }
 }

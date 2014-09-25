@@ -202,5 +202,31 @@ namespace GW2PAO.Views.Teamspeak
             // User pressed enter - execute the send command
             this.viewModel.SendMessageCommand.Execute(null);
         }
+
+        private void ChannelTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                TextBox textbox = sender as TextBox;
+                ContextMenu contextMenu = textbox.ContextMenu;
+                contextMenu.PlacementTarget = textbox;
+                contextMenu.Visibility = System.Windows.Visibility.Visible;
+                contextMenu.IsOpen = true;
+                e.Handled = true;
+            }
+        }
+
+        private void ChannelContextMenuItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // This is kind of a hacky way to do this, but in order to allow users to select channels that have subchannels,
+            // we have to manually execute the command. MenuItems with children do not execute their commands, so we have to
+            // to it manually.
+            var dataContext = (sender as TextBlock).DataContext;
+            var vm = dataContext as ChannelViewModel;
+            if (vm != null)
+            {
+                vm.SelectChannelCommand.Execute(null);
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@
     <Compile Include="Constants\Properties.cs" />
     <Compile Include="Data\Channel.cs" />
     <Compile Include="Data\ChannelEventArgs.cs" />
-    <Compile Include="Data\NewChannelInfoEventArgs.cs" />
+    <Compile Include="Data\ClientEventArgs.cs" />
     <Compile Include="Data\Client.cs" />
     <Compile Include="Data\Enums\ConnectionState.cs" />
     <Compile Include="Data\Enums\TalkStatus.cs" />

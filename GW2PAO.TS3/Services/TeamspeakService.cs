@@ -48,9 +48,14 @@ namespace GW2PAO.TS3.Services
         private uint currentChannelID;
 
         /// <summary>
-        /// Collection of client nicknames
+        /// Collection of clients on the current server
         /// </summary>
         private ConcurrentDictionary<uint, Client> clients = new ConcurrentDictionary<uint, Client>();
+
+        /// <summary>
+        /// Collection of channels on the current server
+        /// </summary>
+        private ConcurrentDictionary<uint, Channel> channels = new ConcurrentDictionary<uint, Channel>();
 
         /// <summary>
         /// Timer used for polling the server, keeping the connection open
@@ -75,7 +80,22 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Raised when the TS user changes channel
         /// </summary>
-        public event EventHandler<GW2PAO.TS3.Data.NewChannelInfoEventArgs> NewChannelInfo;
+        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientChannelChanged;
+
+        /// <summary>
+        /// Raised when a channel is added to the TS channel list
+        /// </summary>
+        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelAdded;
+
+        /// <summary>
+        /// Raised when a channel is removed from the TS channel list
+        /// </summary>
+        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelRemoved;
+
+        /// <summary>
+        /// Raised when a channel in the TS channel list is updated
+        /// </summary>
+        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelUpdated;
 
         /// <summary>
         /// Raised when someone starts or stops talking in TS
@@ -90,12 +110,12 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Raised when someone enters the current channel in TS
         /// </summary>
-        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientEnteredChannel;
+        public event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientEnteredChannel;
 
         /// <summary>
         /// Raised when someone leaves the current channel in TS
         /// </summary>
-        public event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientExitedChannel;
+        public event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientExitedChannel;
 
         /// <summary>
         /// Default constructor
@@ -168,6 +188,20 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
+        /// Sends a command to change the current channel
+        /// </summary>
+        /// <param name="channelID"></param>
+        public void ChangeChannel(uint channelID)
+        {
+            if (this.QueryRunner != null)
+            {
+                logger.Info("Moving client to channel {0}", channelID);
+                var command = new Command(string.Format("clientmove cid={0} clid={1}", channelID, this.currentClientID));
+                string restul = this.QueryRunner.SendCommand(command);
+            }
+        }
+
+        /// <summary>
         /// Handler for the BanDetected event
         /// </summary>
         private void QueryDispatcher_BanDetected(object sender, EventArgs<SimpleResponse> e)
@@ -195,14 +229,17 @@ namespace GW2PAO.TS3.Services
             logger.Info("Current Client ID: {0}", this.currentClientID);
             logger.Info("Current Channel ID: {0}", this.currentChannelID);
 
-            // Determine the current server and channel information
-            this.UpdateServerInfo();
-            this.UpdateChannelInfo();
+            if (this.currentClientID != 0 || this.currentChannelID != 0)
+            {
+                // Determine the current server and channel information
+                this.UpdateServerInfo();
+                this.UpdateChannelInfo();
 
-            // Send a request for the full list of clients
-            logger.Info("Sending request for client list");
-            string result = this.QueryRunner.SendCommand(new Command("clientlist"));
-            this.AddClients(result);
+                // Send a request for the full list of clients
+                logger.Info("Sending request for client list");
+                string result = this.QueryRunner.SendCommand(new Command("clientlist"));
+                this.AddClients(result);
+            }
 
             // Start handling notifications
             logger.Info("Registering for notifications");
@@ -211,6 +248,12 @@ namespace GW2PAO.TS3.Services
             // Start a timer to send a message every so often, keeping the connection open
             logger.Info("Starting poll timer");
             this.pollTimer.Start();
+
+            // Request the channel list last - this can take a little while...
+            if (this.currentClientID != 0 || this.currentChannelID != 0)
+            {
+                this.InitializeChannelList();
+            }
         }
 
         /// <summary>
@@ -283,6 +326,14 @@ namespace GW2PAO.TS3.Services
 
                     this.UpdateServerInfo();
                     this.UpdateChannelInfo();
+
+                    // Reset our channel list
+                    foreach (var channel in this.channels.Values)
+                    {
+                        this.RaiseChannelRemoved(new ChannelEventArgs(channel));
+                    }
+                    this.channels.Clear();
+                    this.InitializeChannelList();
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientMoved))
@@ -304,12 +355,12 @@ namespace GW2PAO.TS3.Services
                     if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
                     {
                         // Someone joined the channel
-                        this.RaiseClientEnteredChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
+                        this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                     }
                     else if (this.clients[clientId].ChannelID == this.currentChannelID && newChannelId != this.currentChannelID)
                     {
                         // Someone left the channel
-                        this.RaiseClientExitedChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
+                        this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                     }
                     this.clients[clientId].ChannelID = newChannelId;
                 }
@@ -325,7 +376,7 @@ namespace GW2PAO.TS3.Services
                 {
                     // Someone joined the channel
                     uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
-                    this.RaiseClientEnteredChannel(new Data.ChannelEventArgs(clientId, this.clients[clientId].Name));
+                    this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientLeftView))
@@ -338,7 +389,7 @@ namespace GW2PAO.TS3.Services
                     if (client.ChannelID == this.currentChannelID)
                     {
                         // They were in our channel, so raise the client left channel event
-                        this.RaiseClientExitedChannel(new Data.ChannelEventArgs(clientId, client.Name));
+                        this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, client.Name));
                     }
                 }
             }
@@ -353,6 +404,75 @@ namespace GW2PAO.TS3.Services
                         string clientNickname = this.ParseStringProperty(e.Value, true, Properties.ClientNickname);
                         this.clients[clientId].Name = clientNickname;
                     }
+                }
+            }
+            else if (e.Value.StartsWith(Notifications.ChannelList))
+            {
+                // ???
+            }
+            else if (e.Value.StartsWith(Notifications.ChannelCreated))
+            {
+                // Add the channel to our list of channels, raise channel list updated event
+                var channelInfo = this.ProcessChannelInformation(e.Value);
+
+                if (!this.channels.ContainsKey(channelInfo.ID))
+                {
+                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                    {
+                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                    }
+                }
+                else
+                {
+                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                }
+            }
+            else if (e.Value.StartsWith(Notifications.ChannelDeleted))
+            {
+                // Remove the channel from our list of channels, raise channel list updated event
+                var channelInfo = this.ProcessChannelInformation(e.Value);
+
+                Channel removed;
+                if (this.channels.TryRemove(channelInfo.ID, out removed))
+                {
+                    this.RaiseChannelRemoved(new ChannelEventArgs(removed));
+                }
+            }
+            else if (e.Value.StartsWith(Notifications.ChannelEdited))
+            {
+                // Update the channel in our list of channels, raise channel list updated event
+                var channelInfo = this.ProcessChannelInformation(e.Value);
+
+                if (!this.channels.ContainsKey(channelInfo.ID))
+                {
+                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                    {
+                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                    }
+                }
+                else
+                {
+                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                }
+            }
+            else if (e.Value.StartsWith(Notifications.ChannelMoved))
+            {
+                // Update the channel in our list of channels, raise channel list updated event
+                var channelInfo = this.ProcessChannelInformation(e.Value);
+
+                if (!this.channels.ContainsKey(channelInfo.ID))
+                {
+                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                    {
+                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                    }
+                }
+                else
+                {
+                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
                 }
             }
         }
@@ -453,7 +573,73 @@ namespace GW2PAO.TS3.Services
             string channelDescription = this.ParseStringProperty(result, true, Properties.ChannelDescription);
 
             logger.Info("New Channel Information: name={0} description={1}", channelName, channelDescription);
-            this.RaiseNewChannelInfo(new NewChannelInfoEventArgs(new Channel(channelName, channelDescription)));
+            this.RaiseClientChannelChanged(new ChannelEventArgs(new Channel(this.currentChannelID, channelName) { Description = channelDescription }));
+        }
+
+        /// <summary>
+        /// Updates the full channel list and raises the ChannelListUpdated event when done
+        /// </summary>
+        private void InitializeChannelList()
+        {
+            Task.Factory.StartNew(() =>
+                {
+                    var command = new Command("channellist");
+                    string result = this.QueryRunner.SendCommand(command);
+
+                    var channelStrings = result.Split('|');
+                    foreach (var channelString in channelStrings)
+                    {
+                        var channelInfo = this.ProcessChannelInformation(channelString);
+
+                        if (!this.channels.ContainsKey(channelInfo.ID))
+                        {
+                            if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                            {
+                                this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                            }
+                        }
+                        else
+                        {
+                            this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                            this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                        }
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Parses a string for channel information and returns the resulting channel object
+        /// </summary>
+        /// <param name="channelString">The string to parse</param>
+        /// <returns>The resulting channel object</returns>
+        private Channel ProcessChannelInformation(string channelString)
+        {
+            uint id = this.ParseUintProperty(channelString, Properties.ChannelID);
+
+            uint parentId = 0;
+            if (channelString.Contains(Properties.ParentChannelID))
+                parentId = this.ParseUintProperty(channelString, Properties.ParentChannelID);
+
+            uint order = 0;
+            if (channelString.Contains(Properties.ChannelOrder))
+                order = this.ParseUintProperty(channelString, Properties.ChannelOrder);
+
+            string name = string.Empty;
+            if (channelString.Contains(Properties.ParentChannelID))
+                name = this.ParseStringProperty(channelString, true, Properties.ChannelName);
+
+            uint clientsCount = 0;
+            if (channelString.Contains(Properties.ChannelClientsCount))
+                clientsCount = this.ParseUintProperty(channelString, Properties.ChannelClientsCount);
+
+            Channel channelInfo = new Channel(id, name)
+            {
+                ParentID = parentId,
+                Order = order,
+                ClientsCount = clientsCount
+            };
+
+            return channelInfo;
         }
 
         /// <summary>
@@ -475,12 +661,39 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
-        /// Raises the NewChannelInfo event
+        /// Raises the ClientChannelChanged event
         /// </summary>
-        private void RaiseNewChannelInfo(GW2PAO.TS3.Data.NewChannelInfoEventArgs args)
+        private void RaiseClientChannelChanged(GW2PAO.TS3.Data.ChannelEventArgs args)
         {
-            if (this.NewChannelInfo != null)
-                this.NewChannelInfo(this, args);
+            if (this.ClientChannelChanged != null)
+                this.ClientChannelChanged(this, args);
+        }
+
+        /// <summary>
+        /// Raises the ChannelAdded event
+        /// </summary>
+        private void RaiseChannelAdded(GW2PAO.TS3.Data.ChannelEventArgs args)
+        {
+            if (this.ChannelAdded != null)
+                this.ChannelAdded(this, args);
+        }
+
+        /// <summary>
+        /// Raises the ChannelRemoved event
+        /// </summary>
+        private void RaiseChannelRemoved(GW2PAO.TS3.Data.ChannelEventArgs args)
+        {
+            if (this.ChannelRemoved != null)
+                this.ChannelRemoved(this, args);
+        }
+
+        /// <summary>
+        /// Raises the ChannelAdded event
+        /// </summary>
+        private void RaiseChannelUpdated(GW2PAO.TS3.Data.ChannelEventArgs args)
+        {
+            if (this.ChannelUpdated != null)
+                this.ChannelUpdated(this, args);
         }
 
         /// <summary>
@@ -504,7 +717,7 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Raises the ClientEnteredChannel event
         /// </summary>
-        private void RaiseClientEnteredChannel(GW2PAO.TS3.Data.ChannelEventArgs args)
+        private void RaiseClientEnteredChannel(GW2PAO.TS3.Data.ClientEventArgs args)
         {
             if (this.ClientEnteredChannel != null)
                 this.ClientEnteredChannel(this, args);
@@ -513,7 +726,7 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Raises the ClientExitedChannel event
         /// </summary>
-        private void RaiseClientExitedChannel(GW2PAO.TS3.Data.ChannelEventArgs args)
+        private void RaiseClientExitedChannel(GW2PAO.TS3.Data.ClientEventArgs args)
         {
             if (this.ClientExitedChannel != null)
                 this.ClientExitedChannel(this, args);

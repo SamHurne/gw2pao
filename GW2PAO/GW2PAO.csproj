@@ -117,6 +117,7 @@
     <Compile Include="Controllers\Interfaces\IZoneCompletionController.cs" />
     <Compile Include="Controllers\WvWController.cs" />
     <Compile Include="Controllers\ZoneCompletionController.cs" />
+    <Compile Include="Converters\SortedCollectionConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventStateConverter.cs" />
     <Compile Include="Converters\TSNotificationTypeImageSrcConverter.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Teamspeak\ChannelViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
     <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />

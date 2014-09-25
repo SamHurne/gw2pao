@@ -8,13 +8,17 @@ namespace GW2PAO.TS3.Data
 {
     public class Channel
     {
+        public uint ID { get; set; }
+        public uint ParentID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public uint Order { get; set; }
+        public uint ClientsCount { get; set; }
 
-        public Channel(string name, string description)
+        public Channel(uint id, string name)
         {
+            this.ID = id;
             this.Name = name;
-            this.Description = description;
         }
     }
 }

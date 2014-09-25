@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.Models;
@@ -15,11 +16,18 @@ namespace GW2PAO.ViewModels.Teamspeak
 {
     public class TeamspeakViewModel : NotifyPropertyChangedBase
     {
+        private static Regex spacerRegex = new Regex(@"^\[..spacer.\]");
+
         private string messageText;
         private string serverName;
         private string serverAddress;
-        private string channelName;
-        private string channelDescription;
+        private string clientChannelName;
+        private string clientChannelDescription;
+
+        /// <summary>
+        /// List of 'orphan' channels - channels that have been added but who's parent has not been added 'yet'
+        /// </summary>
+        private List<ChannelViewModel> orphanChannels = new List<ChannelViewModel>();
 
         /// <summary>
         /// Default logger
@@ -66,19 +74,19 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// The currently connected channel's name
         /// </summary>
-        public string ChannelName
+        public string ClientChannelName
         {
-            get { return this.channelName; }
-            set { this.SetField(ref this.channelName, value); }
+            get { return this.clientChannelName; }
+            set { this.SetField(ref this.clientChannelName, value); }
         }
 
         /// <summary>
         /// The description of the currently connected channel
         /// </summary>
-        public string ChannelDescription
+        public string ClientChannelDescription
         {
-            get { return this.channelDescription; }
-            set { this.SetField(ref this.channelDescription, value); }
+            get { return this.clientChannelDescription; }
+            set { this.SetField(ref this.clientChannelDescription, value); }
         }
 
         /// <summary>
@@ -90,6 +98,11 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// Collection of client notifications (speaking users, messages, users entering, etc)
         /// </summary>
         public ObservableCollection<TSNotificationViewModel> Notifications { get; private set; }
+
+        /// <summary>
+        /// Collection of sub channels for this channel
+        /// </summary>
+        public ObservableCollection<ChannelViewModel> Channels { get; private set; }
 
         /// <summary>
         /// Command to reset all hidden objectives
@@ -104,21 +117,25 @@ namespace GW2PAO.ViewModels.Teamspeak
             this.isShuttingDown = false;
             this.UserSettings = userSettings;
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
+            this.Channels = new ObservableCollection<ChannelViewModel>();
 
             this.TeamspeakService = teamspeakService;
             this.TeamspeakService.NewServerInfo += TeamspeakService_NewServerInfo;
-            this.TeamspeakService.NewChannelInfo += TeamspeakService_NewChannelInfo;
+            this.TeamspeakService.ClientChannelChanged += TeamspeakService_ClientChannelChanged;
             this.TeamspeakService.ConnectionRefused += TeamspeakService_ConnectionRefused;
             this.TeamspeakService.TalkStatusChanged += TeamspeakService_TalkStatusChanged;
             this.TeamspeakService.TextMessageReceived += TeamspeakService_TextMessageReceived;
             this.TeamspeakService.ClientEnteredChannel += TeamspeakService_ClientEnteredChannel;
             this.TeamspeakService.ClientExitedChannel += TeamspeakService_ClientExitedChannel;
+            this.TeamspeakService.ChannelAdded += TeamspeakService_ChannelAdded;
+            this.TeamspeakService.ChannelRemoved += TeamspeakService_ChannelRemoved;
+            this.TeamspeakService.ChannelUpdated += TeamspeakService_ChannelUpdated;
 
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew((state) =>
                 {
                     // Start this on another thread so that we don't hold up anything creating us
-                    Threading.BeginInvokeOnUI(() => this.TeamspeakService.Connect());
-                });
+                    this.TeamspeakService.Connect();
+                }, null, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext() );
         }
 
         /// <summary>
@@ -136,6 +153,7 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// </summary>
         private void SendMessage()
         {
+            logger.Info("Attempting to send message: {0}", MessageText);
             if (!string.IsNullOrWhiteSpace(MessageText))
             {
                 this.TeamspeakService.SendChannelMessage(this.MessageText);
@@ -155,10 +173,10 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// Handles the New Channel Info event of the Teamspeak Service
         /// </summary>
-        private void TeamspeakService_NewChannelInfo(object sender, TS3.Data.NewChannelInfoEventArgs e)
+        private void TeamspeakService_ClientChannelChanged(object sender, TS3.Data.ChannelEventArgs e)
         {
-            this.ChannelName = e.NewChannel.Name;
-            this.ChannelDescription = e.NewChannel.Description;
+            this.ClientChannelName = e.Channel.Name;
+            this.ClientChannelDescription = e.Channel.Description;
         }
 
         /// <summary>
@@ -228,7 +246,7 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// Handler for the Client Entered Channel event
         /// </summary>
-        private void TeamspeakService_ClientEnteredChannel(object sender, TS3.Data.ChannelEventArgs e)
+        private void TeamspeakService_ClientEnteredChannel(object sender, TS3.Data.ClientEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -242,7 +260,7 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// Handler for the Client Exited Channel event
         /// </summary>
-        private void TeamspeakService_ClientExitedChannel(object sender, TS3.Data.ChannelEventArgs e)
+        private void TeamspeakService_ClientExitedChannel(object sender, TS3.Data.ClientEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -251,6 +269,181 @@ namespace GW2PAO.ViewModels.Teamspeak
                 Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
                 Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
             });
+        }
+
+        /// <summary>
+        /// Handler for the Channel Added event
+        /// </summary>
+        private void TeamspeakService_ChannelAdded(object sender, TS3.Data.ChannelEventArgs e)
+        {
+            Threading.BeginInvokeOnUI(() =>
+                {
+                    var newChannel = new ChannelViewModel(e.Channel, this.TeamspeakService);
+
+                    if (spacerRegex.IsMatch(newChannel.Name))
+                    {
+                        // Totally ignore spacers
+                        return;
+                    }
+
+                    // Check if we have any orphans who is a subchannel of this new channel
+                    var matchingOrphans = this.orphanChannels.Where(c => c.ParentID == newChannel.ID);
+                    foreach (var orphan in matchingOrphans)
+                    {
+                        newChannel.Subchannels.Add(orphan);
+                    }
+                    this.orphanChannels.RemoveAll(c => c.ParentID == newChannel.ID);
+
+                    if (newChannel.ParentID != 0)
+                    {
+                        // This has a parent channel - find it
+                        var parentChannel = this.FindParentChannel(this.Channels, newChannel);
+
+                        if (parentChannel != null)
+                        {
+                            parentChannel.Subchannels.Add(newChannel);
+                        }
+                        else
+                        {
+                            // This is an orphan channel... add it to our orphan list for now
+                            this.orphanChannels.Add(newChannel);
+                        }
+                    }
+                    else
+                    {
+                        // No parent
+                        this.Channels.Add(newChannel);
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Handler for the Channel Removed event
+        /// </summary>
+        private void TeamspeakService_ChannelRemoved(object sender, TS3.Data.ChannelEventArgs e)
+        {
+            Threading.BeginInvokeOnUI(() =>
+                {
+                    var removedChannel = new ChannelViewModel(e.Channel, this.TeamspeakService);
+
+                    if (removedChannel.ParentID != 0)
+                    {
+                        // This has a parent channel - find it
+                        var parentChannel = this.FindParentChannel(this.Channels, removedChannel);
+
+                        if (parentChannel != null)
+                        {
+                            var toRemove = parentChannel.Subchannels.FirstOrDefault(channel => channel.ID == removedChannel.ID);
+                            parentChannel.Subchannels.Remove(toRemove);
+                        }
+                    }
+                    else
+                    {
+                        // No parent
+                        var toRemove = this.Channels.FirstOrDefault(channel => channel.ID == removedChannel.ID);
+                        this.Channels.Remove(toRemove);
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Handler for the Channel Updated event
+        /// </summary>
+        private void TeamspeakService_ChannelUpdated(object sender, TS3.Data.ChannelEventArgs e)
+        {
+            Threading.BeginInvokeOnUI(() =>
+                {
+                    // Find the matching existing channel
+                    ChannelViewModel existingChannel = this.FindChannel(this.Channels, e.Channel.ID);
+
+                    existingChannel.Name = e.Channel.Name;
+                    existingChannel.OrderIndex = e.Channel.Order;
+
+                    // Check to see if the parent ID has changed. If so, update it and move the channel
+                    if (existingChannel.ParentID != e.Channel.ParentID)
+                    {
+                        // Find the existing parent
+                        ChannelViewModel existingParent = this.FindParentChannel(this.Channels, existingChannel);
+
+                        // Remove it from the parent
+                        existingParent.Subchannels.Remove(existingChannel);
+
+                        // Update the parent ID
+                        existingChannel.ParentID = e.Channel.ParentID;
+
+                        // Find the new parent
+                        ChannelViewModel newParent = this.FindParentChannel(this.Channels, existingChannel);
+
+                        if (newParent != null)
+                        {
+                            // Add it to the parent
+                            newParent.Subchannels.Add(existingChannel);
+                        }
+                        else
+                        {
+                            // Orphan...
+                            this.orphanChannels.Add(existingChannel);
+                        }
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Recursively searches through a collection of channels to find a subChannel's parent ChannelViewModel object
+        /// </summary>
+        /// <param name="channelCollection">The collection to search</param>
+        /// <param name="subChannel">The subChannel of which to the find the parent of</param>
+        /// <returns>The parent of the subchannel, or null if not found</returns>
+        private ChannelViewModel FindParentChannel(ICollection<ChannelViewModel> channelCollection, ChannelViewModel subChannel)
+        {
+            foreach (var channel in channelCollection)
+            {
+                if (channel.ID == subChannel.ParentID)
+                {
+                    return channel;
+                }
+                else
+                {
+                    // Recurse within the subchannels of this channel
+                    var parent = this.FindParentChannel(channel.Subchannels, subChannel);
+                    if (parent != null)
+                    {
+                        return parent;
+                    }
+                }
+            }
+
+            // Didn't find parent
+            return null;
+        }
+
+        /// <summary>
+        /// Recursively searches through a collection of channels to find a specific ChannelViewModel object
+        /// </summary>
+        /// <param name="channelCollection">The collection to search</param>
+        /// <param name="subChannel">The subChannel of which to the find the parent of</param>
+        /// <returns>The parent of the subchannel, or null if not found</returns>
+        private ChannelViewModel FindChannel(ICollection<ChannelViewModel> channelCollection, uint channelId)
+        {
+            foreach (var channel in channelCollection)
+            {
+                if (channel.ID == channelId)
+                {
+                    return channel;
+                }
+                else
+                {
+                    // Recurse within the subchannels of this channel
+                    var foundChannel = this.FindChannel(channel.Subchannels, channelId);
+                    if (foundChannel != null)
+                    {
+                        return foundChannel;
+                    }
+                }
+            }
+
+            // Didn't find channel
+            return null;
         }
     }
 }

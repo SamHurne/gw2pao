@@ -8,6 +8,41 @@
     <SolidColorBrush x:Key="MenuItemEnabledColor" Color="White"/>
     <SolidColorBrush x:Key="MenuItemDisabledColor" Color="White" Opacity="0.5"/>
 
+    <Style x:Key="ContextMenuScrollViewer" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <ScrollContentPresenter Grid.Column="1" Grid.Row="1" />
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Grid.Column="0" Grid.Row="1"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Orientation="Horizontal"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="ContextMenu">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -22,14 +57,18 @@
                             Padding="1,1,1,1">
 
                         <Border.Background>
-                            <SolidColorBrush Color="Black" Opacity="0.90" />
+                            <SolidColorBrush Color="Black" Opacity="0.80" />
                         </Border.Background>
                         
                         <Border.BorderBrush>
                             <SolidColorBrush Color="Orange" Opacity="0.5" />
                         </Border.BorderBrush>
-                        
-                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+
+                        <ScrollViewer Style="{StaticResource ContextMenuScrollViewer}"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Auto">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                        </ScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -84,11 +123,21 @@
                             </Grid>
 
                             <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
-                            <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
-                                <Border x:Name="SubMenuBorder" BorderBrush="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" BorderThickness="1" Padding="2,2,2,2">
+                            <Popup x:Name="SubMenuPopup" Placement="Right" Focusable="false"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                                   IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   AllowsTransparency="True">
+                                <Border x:Name="SubMenuBorder" BorderThickness="1,0,1,0" Padding="1">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Black" Opacity="0.80" />
+                                    </Border.Background>
                                     <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True">
                                         <!-- StackPanel holds children of the menu. This is set by IsItemsHost=True -->
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                        <ScrollViewer Style="{StaticResource ContextMenuScrollViewer}"
+                                                      HorizontalScrollBarVisibility="Hidden"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                        </ScrollViewer>
                                     </Grid>
                                 </Border>
                             </Popup>

@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:view="clr-namespace:GW2PAO.Views.Teamspeak"
+        xmlns:vm="clr-namespace:GW2PAO.ViewModels.Teamspeak"
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Top="{Binding Source={x:Static properties:Settings.Default}, Path=TeamspeakY}"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=TeamspeakX}"
         MinWidth="150" MaxWidth="450" Width="{Binding Source={x:Static properties:Settings.Default}, Path=TeamspeakWidth}"
@@ -22,6 +24,13 @@
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+            <converters:SortedCollectionConverter x:Key="CollectionSorter" />
+
+            <core:AutoRefreshCollectionViewSource Source="{Binding Channels}" x:Key="ChannelsCollection">
+                <CollectionViewSource.SortDescriptions>
+                    <scm:SortDescription PropertyName="OrderIndex" />
+                </CollectionViewSource.SortDescriptions>
+            </core:AutoRefreshCollectionViewSource>
 
             <core:AutoRefreshCollectionViewSource Source="{Binding Notifications}" x:Key="NotificationsCollection" />
 
@@ -71,7 +80,7 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Show Channel Name" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
+                            <MenuItem Header="Show Channel Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
                             <MenuItem Header="Show Chat Entry Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
@@ -149,26 +158,37 @@
                 Grid.Row="1" Margin="3"
                 BorderBrush="{StaticResource TitleBarBorderBrush}" BorderThickness="0,0,0,0"
                 Visibility="{Binding UserSettings.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
-            <!-- TODO: Customize this so that it can be clicked into a drop-down, allowing selecting of a different channel -->
-            <TextBox Text="{Binding ChannelName}" IsEnabled="False"/>
+            <TextBox Grid.Row="0"
+                         Name="ChannelTextBox"
+                         Text="{Binding ClientChannelName}"
+                         IsReadOnly="True"
+                         PreviewMouseDown="ChannelTextBox_PreviewMouseDown">
+                <TextBox.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding Source={StaticResource ChannelsCollection}}">
+                        <ContextMenu.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Subchannels, Converter={StaticResource CollectionSorter}, ConverterParameter=OrderIndex}">
+                                <TextBlock Name="ChannelContextMenuItem" Text="{Binding Name}"
+                                           MouseLeftButtonDown="ChannelContextMenuItem_MouseLeftButtonDown" />
+                            </HierarchicalDataTemplate>
+                        </ContextMenu.ItemTemplate>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
         </Border>
 
         <Grid Name="NotificationsContainer" Grid.Row="2">
             <ScrollViewer Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Auto">
-                <StackPanel Width="{Binding ElementName=NotificationsContainer, Path=ActualWidth}">
-                    <ItemsControl Name="NotificationsControl"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                  ItemsSource="{Binding Source={StaticResource NotificationsCollection}}"
-                                  Margin="0,0,0,5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                <ItemsControl Name="NotificationsControl"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
 
@@ -193,12 +213,6 @@
         <Grid Name="ResizeHeight" Grid.Row="4"
               Cursor="SizeNS"
               MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
-
-            <Rectangle HorizontalAlignment="Stretch"
-                       Height="3"
-                       Fill="#01FFA500">
-            </Rectangle>
-
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">

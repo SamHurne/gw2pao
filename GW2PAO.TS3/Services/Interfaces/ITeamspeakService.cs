@@ -27,7 +27,22 @@ namespace GW2PAO.TS3.Services.Interfaces
         /// <summary>
         /// Raised when the TS user changes channel
         /// </summary>
-        event EventHandler<GW2PAO.TS3.Data.NewChannelInfoEventArgs> NewChannelInfo;
+        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientChannelChanged;
+
+        /// <summary>
+        /// Raised when a channel is added to the TS channel list
+        /// </summary>
+        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelAdded;
+
+        /// <summary>
+        /// Raised when a channel is removed from the TS channel list
+        /// </summary>
+        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelRemoved;
+
+        /// <summary>
+        /// Raised when a channel in the TS channel list is updated
+        /// </summary>
+        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ChannelUpdated;
 
         /// <summary>
         /// Raised when someone starts or stops talking in TS
@@ -42,12 +57,12 @@ namespace GW2PAO.TS3.Services.Interfaces
         /// <summary>
         /// Raised when someone enters the current channel in TS
         /// </summary>
-        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientEnteredChannel;
+        event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientEnteredChannel;
 
         /// <summary>
         /// Raised when someone leaves the current channel in TS
         /// </summary>
-        event EventHandler<GW2PAO.TS3.Data.ChannelEventArgs> ClientExitedChannel;
+        event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientExitedChannel;
 
         /// <summary>
         /// Connects to the Teamspeak Client Query interface
@@ -64,5 +79,11 @@ namespace GW2PAO.TS3.Services.Interfaces
         /// </summary>
         /// <param name="msg">The message to send</param>
         void SendChannelMessage(string msg);
+
+        /// <summary>
+        /// Sends a command to change the current channel
+        /// </summary>
+        /// <param name="channelID"></param>
+        void ChangeChannel(uint channelID);
     }
 }
