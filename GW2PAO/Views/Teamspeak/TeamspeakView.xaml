@@ -125,7 +125,26 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="Teamspeak" />
+                                        Text="Teamspeak">
+                    <core:OutlinedTextBlock.ToolTip>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
+                                                        Text="Server: "/>
+                                <core:OutlinedTextBlock FontSize="13"
+                                                        Margin="3,0,0,0"
+                                                        Text="{Binding ServerName}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
+                                                        Text="IP: "/>
+                                <core:OutlinedTextBlock FontSize="13"
+                                                        Margin="3,0,0,0"
+                                                        Text="{Binding ServerAddress}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </core:OutlinedTextBlock.ToolTip>
+                </core:OutlinedTextBlock>
 
                 <Button Name="CollapseExpandButton"
                     Grid.Column="2"
