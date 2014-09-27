@@ -19,6 +19,7 @@ using GW2PAO.Views;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
+using GW2PAO.Views.PriceNotification;
 using GW2PAO.Views.Teamspeak;
 using GW2PAO.Views.TradingPost;
 using GW2PAO.Views.WebBrowser;
@@ -69,12 +70,17 @@ namespace GW2PAO.Controllers
         /// The Teampseak Service that provides events and methods for
         /// interacting with teamspeak
         /// </summary>
-        public ITeamspeakService TeamspeakService { get; private set; }
+        public TeamspeakService TeamspeakService { get; private set; }
 
         /// <summary>
         /// Service responsible for WvW information
         /// </summary>
         public WvWService WvWService { get; private set; }
+
+        /// <summary>
+        /// Service responsible for commerce/trade/item information
+        /// </summary>
+        public CommerceService CommerceService { get; private set; }
 
         /// <summary>
         /// Events controller
@@ -112,6 +118,11 @@ namespace GW2PAO.Controllers
         public IBrowserController BrowserController { get; private set; }
 
         /// <summary>
+        /// Commerce Controller
+        /// </summary>
+        public ICommerceController CommerceController { get; private set; }
+
+        /// <summary>
         /// Event settings
         /// </summary>
         public EventSettings EventSettings { get; private set; }
@@ -135,6 +146,11 @@ namespace GW2PAO.Controllers
         /// User settings for teamspeak
         /// </summary>
         public TeamspeakSettings TeamspeakSettings { get; private set; }
+
+        /// <summary>
+        /// User settings for commerce-focused overlays (like price notifications)
+        /// </summary>
+        public CommerceSettings CommerceSettings { get; private set; }
 
         /// <summary>
         /// Main functionality menu items, including those for the Event Tracker 
@@ -183,6 +199,16 @@ namespace GW2PAO.Controllers
         private TeamspeakView teamspeakView;
 
         /// <summary>
+        /// Window containing price notifications
+        /// </summary>
+        private PriceNotificationWindow priceNotificationsView;
+
+        /// <summary>
+        /// Window used for configuring price notifications
+        /// </summary>
+        private PriceNotificationConfigView priceNotificationsConfigView;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()
@@ -196,6 +222,7 @@ namespace GW2PAO.Controllers
             this.DungeonsService = new DungeonsService();
             this.WvWService = new WvWService();
             this.TeamspeakService = new TeamspeakService();
+            this.CommerceService = new CommerceService();
 
             // Create ZoneName view model for the Zone Completion Assistant
             this.ZoneName = new ZoneNameViewModel();
@@ -229,6 +256,11 @@ namespace GW2PAO.Controllers
             if (this.TeamspeakSettings == null)
                 this.TeamspeakSettings = new TeamspeakSettings();
 
+            logger.Debug("Loading commerce settings");
+            this.CommerceSettings = CommerceSettings.LoadSettings();
+            if (this.CommerceSettings == null)
+                this.CommerceSettings = new CommerceSettings();
+
             // Enable autosave on the user settings
             logger.Debug("Enabling autosave of user settings");
             this.EventSettings.EnableAutoSave();
@@ -236,6 +268,7 @@ namespace GW2PAO.Controllers
             this.DungeonSettings.EnableAutoSave();
             this.WvWSettings.EnableAutoSave();
             this.TeamspeakSettings.EnableAutoSave();
+            this.CommerceSettings.EnableAutoSave();
 
             // Create the controllers
             logger.Debug("Creating browser controller");
@@ -255,15 +288,23 @@ namespace GW2PAO.Controllers
             this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWMap, this.WvWSettings);
             this.WvWController.Start(); // Get it started for wvw notifications
 
+            logger.Debug("Creating commerce controller");
+            this.CommerceController = new CommerceController(this.CommerceService, this.CommerceSettings);
+            this.CommerceController.Start(); // Get it started for price-watch notifications
+
             // Create the event notifications view
             logger.Debug("Initializing event notifications");
             this.eventNotificationsView = new EventNotificationWindow(this.EventsController);
             this.eventNotificationsView.Show(); // Transparent window, just go ahead and show it
 
             // Create the wvw notifications view
-            logger.Debug("Initializing WvV notifications");
+            logger.Debug("Initializing WvW notifications");
             this.wvwNotificationsView = new WvWNotificationWindow(this.WvWController);
             this.wvwNotificationsView.Show(); // Transparent window, just go ahead and show it
+
+            logger.Debug("Initializing price notifications");
+            this.priceNotificationsView = new PriceNotificationWindow(this.CommerceController);
+            this.priceNotificationsView.Show(); // Transparent window, just go ahead and show it
 
             // Initialize the menu items
             logger.Debug("Initializing application menu items");
@@ -472,8 +513,32 @@ namespace GW2PAO.Controllers
 
             this.menuItems.Add(wvwMenu);
 
+            // Commerce/Trade menus
+            var commerceMenu = new MenuItemViewModel("Commerce", null);
+
             // TP Calculator
-            this.menuItems.Add(new MenuItemViewModel("TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+            commerceMenu.SubMenuItems.Add(new MenuItemViewModel("TP Calculator", this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+
+            // Price Notifications
+            var priceNotificationsMenu = new MenuItemViewModel("Price Notifications", null);
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Configure", this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
+            priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
+            {
+                this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = true;
+                this.CommerceSettings.AreSellListingPriceNotificationsEnabled = true;
+            }));
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
+            {
+                this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = false;
+                this.CommerceSettings.AreSellListingPriceNotificationsEnabled = false;
+            }));
+            priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Buy Order Price Notifications", null, true, () => { return this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreBuyOrderPriceNotificationsEnabled"));
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Sell Listing Price Notifications", null, true, () => { return this.CommerceSettings.AreSellListingPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreSellListingPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreSellListingPriceNotificationsEnabled"));
+            commerceMenu.SubMenuItems.Add(priceNotificationsMenu);
+
+            this.menuItems.Add(commerceMenu);
 
             // Teamspeak Overlay
             this.menuItems.Add(new MenuItemViewModel("Teamspeak Overlay", this.DisplayTeamspeakOverlay, this.CanDisplayTeamspeakOverlay));
@@ -657,6 +722,31 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <returns></returns>
         private bool CanDisplayTeamspeakOverlay()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Price Notifications Configuration window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayPriceNotificationsConfig()
+        {
+            if (this.priceNotificationsConfigView == null || !this.priceNotificationsConfigView.IsVisible)
+            {
+                this.priceNotificationsConfigView = new PriceNotificationConfigView(this.CommerceService, this.CommerceController);
+                this.priceNotificationsConfigView.Show();
+            }
+            else
+            {
+                this.priceNotificationsConfigView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the Price Notifications Configuration window can be displayed
+        /// </summary>
+        private bool CanDisplayPriceNotificationsConfig()
         {
             return true;
         }

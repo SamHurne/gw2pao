@@ -108,15 +108,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\BrowserController.cs" />
+    <Compile Include="Controllers\CommerceController.cs" />
     <Compile Include="Controllers\DungeonsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\Interfaces\IBrowserController.cs" />
+    <Compile Include="Controllers\Interfaces\ICommerceController.cs" />
     <Compile Include="Controllers\Interfaces\IDungeonsController.cs" />
     <Compile Include="Controllers\Interfaces\IEventsController.cs" />
     <Compile Include="Controllers\Interfaces\IWvWController.cs" />
     <Compile Include="Controllers\Interfaces\IZoneCompletionController.cs" />
     <Compile Include="Controllers\WvWController.cs" />
     <Compile Include="Controllers\ZoneCompletionController.cs" />
+    <Compile Include="Converters\BoolToVisibleHiddenConverter.cs" />
+    <Compile Include="Converters\PriceNotificationTypeConverter.cs" />
     <Compile Include="Converters\SortedCollectionConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventStateConverter.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="Converters\TreasureCheckboxConverter.cs" />
     <Compile Include="Converters\WorldColorConverter.cs" />
     <Compile Include="Converters\ZoneItemTypeImageSrcConverter.cs" />
+    <Compile Include="Models\CommerceSettings.cs" />
     <Compile Include="Models\DungeonSettings.cs" />
     <Compile Include="Models\EventSettings.cs" />
     <Compile Include="Models\TeamspeakSettings.cs" />
@@ -158,9 +163,15 @@
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\PriceNotificationConfigViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\PriceWatchViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\ChannelViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\PriceNotificationsViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\PriceNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Price.cs" />
+    <Compile Include="ViewModels\PriceNotification\PriceWatch.cs" />
     <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
@@ -181,11 +192,23 @@
     <Compile Include="Views\OverlayMenuIconView.xaml.cs">
       <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PriceNotification\PriceWatchView.xaml.cs">
+      <DependentUpon>PriceWatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PriceNotification\PriceNotificationView.xaml.cs">
+      <DependentUpon>PriceNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PriceNotification\PriceNotificationWindow.xaml.cs">
+      <DependentUpon>PriceNotificationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Teamspeak\TSNotificationView.xaml.cs">
       <DependentUpon>TSNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Teamspeak\TeamspeakView.xaml.cs">
       <DependentUpon>TeamspeakView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PriceNotification\PriceNotificationConfigView.xaml.cs">
+      <DependentUpon>PriceNotificationConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
@@ -281,6 +304,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Style\NamedStyles\AlternateCheckboxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Style\NamedStyles\TitleBarStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -305,11 +332,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PriceNotification\PriceWatchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PriceNotification\PriceNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PriceNotification\PriceNotificationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Teamspeak\TSNotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Teamspeak\TeamspeakView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PriceNotification\PriceNotificationConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

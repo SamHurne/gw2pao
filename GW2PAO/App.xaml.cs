@@ -119,6 +119,12 @@ namespace GW2PAO
             dummyWindow.Show();
             GW2PAO.Views.OverlayWindow.OwnerWindow = dummyWindow;
 
+            GW2PAO.API.Services.CommerceService test = new GW2PAO.API.Services.CommerceService();
+            //test.BuildItemDatabase();
+            //var testt = test.GetItemID("test");
+            var testId = test.GetItemID("Superior Rune of the Sunless");
+            var itemPrices = test.GetItemPrices(testId);
+
             // Create the tray icon
             logger.Debug("Creating tray icon");
             TaskbarIcon = (TaskbarIcon)this.FindResource("TrayIcon");

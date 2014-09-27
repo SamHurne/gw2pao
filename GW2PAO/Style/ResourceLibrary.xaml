@@ -12,6 +12,7 @@
         <ResourceDictionary Source="BaseControlStyles/TabControlStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/TextBoxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ToolTipStyle.xaml" />
+        <ResourceDictionary Source="NamedStyles/AlternateCheckboxStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

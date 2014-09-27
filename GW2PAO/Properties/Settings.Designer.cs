@@ -514,5 +514,29 @@ namespace GW2PAO.Properties {
                 this["CheckForUpdates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double PriceNotificationX {
+            get {
+                return ((double)(this["PriceNotificationX"]));
+            }
+            set {
+                this["PriceNotificationX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double PriceNotificationY {
+            get {
+                return ((double)(this["PriceNotificationY"]));
+            }
+            set {
+                this["PriceNotificationY"] = value;
+            }
+        }
     }
 }

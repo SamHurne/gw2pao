@@ -46,7 +46,7 @@
                             <SolidColorBrush Color="{StaticResource ButtonBorderColor}" />
                         </Border.BorderBrush>
                         <Border.Background>
-                            <SolidColorBrush  Color="{StaticResource ButtonBackgroundColor}" />
+                            <SolidColorBrush Color="{StaticResource ButtonBackgroundColor}" />
                         </Border.Background>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
