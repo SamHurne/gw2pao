@@ -106,10 +106,12 @@ namespace GW2PAO.Views
             }
 
             // For sticky window support:
-            this.IsSticky = GW2PAO.Properties.Settings.Default.AreWindowsSticky;
             this.StickyHelper = new StickyWindow(this);
             this.StickyHelper.StickGap = 10;
             this.LocationChanged += OverlayWindowBase_LocationChanged;
+
+            this.IsSticky = GW2PAO.Properties.Settings.Default.AreWindowsSticky;
+            
             this.StickyHelper.StickToScreen = this.IsSticky;
             this.StickyHelper.StickToOther = this.IsSticky;
             this.StickyHelper.StickOnResize = this.IsSticky;
