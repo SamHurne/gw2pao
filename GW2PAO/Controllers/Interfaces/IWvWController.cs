@@ -31,7 +31,7 @@ namespace GW2PAO.Controllers.Interfaces
         /// <summary>
         /// The collection of WvW Teams
         /// </summary>
-        ObservableCollection<WvWTeamViewModel> Teams { get; }
+        ObservableCollection<WvWTeamViewModel> Worlds { get; }
 
         /// <summary>
         /// The collection of all WvW Objectives

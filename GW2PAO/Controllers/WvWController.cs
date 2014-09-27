@@ -131,12 +131,12 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Backing store of the teams collection
         /// </summary>
-        private ObservableCollection<WvWTeamViewModel> teams = new ObservableCollection<WvWTeamViewModel>();
+        private ObservableCollection<WvWTeamViewModel> worlds = new ObservableCollection<WvWTeamViewModel>();
 
         /// <summary>
         /// The collection of WvW Teams
         /// </summary>
-        public ObservableCollection<WvWTeamViewModel> Teams { get { return this.teams; } }
+        public ObservableCollection<WvWTeamViewModel> Worlds { get { return this.worlds; } }
 
         /// <summary>
         /// Backing store of the All WvW Objectives collection
@@ -189,14 +189,10 @@ namespace GW2PAO.Controllers
             // Initialize the start call count to 0
             this.startCallCount = 0;
 
-            // Initialize the collections, but do it on a seperate thread since it can take a little time
-            Task.Factory.StartNew(() =>
-                {
-                    this.wvwService.LoadTable();
-                    this.InitializeTeams();
-                    this.InitializeAllObjectivesCollection();
-                });
+            // Have the WvW service load the worlds table
+            this.wvwService.LoadTable();
 
+            // Initialize the collections, but do it on a seperate thread since it can take a little time
             logger.Info("WvW Controller initialized");
         }
 
@@ -211,6 +207,11 @@ namespace GW2PAO.Controllers
                 // Start the timer if this is the first time that Start() has been called
                 if (this.startCallCount == 0)
                 {
+                    // Initialize Teams and Objectives
+                    this.InitializeWorlds();
+                    this.InitializeAllObjectivesCollection();
+
+                    // Then start the timer
                     logger.Debug("Starting refresh timers");
                     this.Refresh();
                 }
@@ -243,18 +244,26 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Initializes the WvW teams collection
         /// </summary>
-        private void InitializeTeams()
+        private void InitializeWorlds()
         {
-            var matchIDs = this.wvwService.GetMatchIDs();
-            var teamColors = this.wvwService.GetTeamColors();
-
-            foreach (var world in this.wvwService.Worlds.Worlds)
+            lock (objectivesRefreshTimerLock)
             {
-                var team = new WvWTeamViewModel(world);
-                team.MatchId = matchIDs[team.WorldId];
-                team.Color = teamColors[team.WorldId];
-                //team.Score = this.wvwService.GetWorldScore(team.WorldId); // This really slows things down... disabled for now
-                Threading.InvokeOnUI(() => this.Teams.Add(team));
+                logger.Debug("Initializing worlds");
+
+                Threading.InvokeOnUI(() => this.Worlds.Clear());
+
+                var matchIDs = this.wvwService.GetMatchIDs();
+                var teamColors = this.wvwService.GetTeamColors();
+
+                foreach (var world in this.wvwService.Worlds.Worlds)
+                {
+                    var team = new WvWTeamViewModel(world);
+                    if (matchIDs.ContainsKey(team.WorldId))
+                        team.MatchId = matchIDs[team.WorldId];
+                    if (teamColors.ContainsKey(team.WorldId))
+                        team.Color = teamColors[team.WorldId];
+                    Threading.InvokeOnUI(() => this.Worlds.Add(team));
+                }
             }
         }
 
@@ -263,21 +272,34 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void InitializeAllObjectivesCollection()
         {
-            logger.Debug("Initializing objectives");
-
-            // Determine the current match. If this changes, we don't need to re-initialize since the actual objectives don't change - just the owners change
-            var matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
-            var objectives = this.wvwService.GetAllObjectives(matchID);
-
-            Threading.InvokeOnUI(() =>
+            lock (objectivesRefreshTimerLock)
             {
-                foreach (var obj in objectives)
+                logger.Debug("Initializing objectives");
+
+                Threading.InvokeOnUI(() => this.AllObjectives.Clear());
+
+                // Determine the current match. If this changes, we don't need to re-initialize since the actual objectives don't change - just the owners change
+                var matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
+                var objectives = this.wvwService.GetAllObjectives(matchID);
+
+                while (objectives.Count() == 0 && this.startCallCount > 0)
                 {
-                    logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                    var vm = new WvWObjectiveViewModel(obj, this.UserSettings, this.Teams, this.WvWNotifications);
-                    this.AllObjectives.Add(vm);
+                    // If we started up while in the middle of a reset, the objectives count will return 0, so loop until we get it
+                    Thread.Sleep(1000);
+                    matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
+                    objectives = this.wvwService.GetAllObjectives(matchID);
                 }
-            });
+
+                Threading.InvokeOnUI(() =>
+                {
+                    foreach (var obj in objectives)
+                    {
+                        logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
+                        var vm = new WvWObjectiveViewModel(obj, this.UserSettings, this.Worlds, this.WvWNotifications);
+                        this.AllObjectives.Add(vm);
+                    }
+                });
+            }
         }
 
         /// <summary>
@@ -350,34 +372,37 @@ namespace GW2PAO.Controllers
                 // Unable to retrieve the current match ID, which means a reset is probably occuring
                 // When this happens, clear out the state of everything
                 Threading.InvokeOnUI(() =>
+                {
+                    foreach (var objective in this.AllObjectives)
                     {
-                        foreach (var objective in this.AllObjectives)
-                        {
-                            objective.PrevWorldOwner = WorldColor.None;
-                            objective.WorldOwner = WorldColor.None;
-                            objective.FlipTime = DateTime.UtcNow;
-                            objective.DistanceFromPlayer = 0;
-                            objective.TimerValue = TimeSpan.Zero;
-                            objective.IsRIActive = false;
-                        }
-                    });
+                        objective.PrevWorldOwner = WorldColor.None;
+                        objective.WorldOwner = WorldColor.None;
+                        objective.FlipTime = DateTime.UtcNow;
+                        objective.DistanceFromPlayer = 0;
+                        objective.TimerValue = TimeSpan.Zero;
+                        objective.IsRIActive = false;
+                    }
+                });
             }
             else
             {
                 // Refresh all team colors
                 var teamColors = this.wvwService.GetTeamColors();
-                foreach (var team in this.Teams)
+                Threading.InvokeOnUI(() =>
                 {
-                    Threading.InvokeOnUI(() => team.Color = teamColors[team.WorldId]);
-                }
+                    foreach (var team in this.Worlds)
+                    {
+                        team.Color = teamColors[team.WorldId];
+                    }
+                });
 
                 // Refresh state of all objectives
                 var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                foreach (var objective in this.AllObjectives)
+                Threading.InvokeOnUI(() =>
                 {
-                    var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                    Threading.InvokeOnUI(() =>
+                    foreach (var objective in this.AllObjectives)
                     {
+                        var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
                         objective.ModelData.MatchId = this.matchID;
                         objective.PrevWorldOwner = latestData.WorldOwner;
                         objective.WorldOwner = latestData.WorldOwner;
@@ -385,8 +410,8 @@ namespace GW2PAO.Controllers
                         objective.DistanceFromPlayer = 0;
                         objective.TimerValue = TimeSpan.Zero;
                         objective.IsRIActive = false;
-                    });
-                }
+                    }
+                });
             }
         }
 
@@ -489,20 +514,23 @@ namespace GW2PAO.Controllers
             // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
             // Note: these are approximations at best
             var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
-            foreach (var objective in this.CurrentObjectives)
+            Threading.InvokeOnUI(() =>
             {
-                if (this.PlayerMap == objective.Map)
+                foreach (var objective in this.CurrentObjectives)
                 {
-                    if (playerPosition != null && objective.ModelData.MapLocation != null)
+                    if (this.PlayerMap == objective.Map)
                     {
-                        objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
+                        if (playerPosition != null && objective.ModelData.MapLocation != null)
+                        {
+                            objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
+                        }
+                    }
+                    else
+                    {
+                        objective.DistanceFromPlayer = 0;
                     }
                 }
-                else
-                {
-                    objective.DistanceFromPlayer = 0;
-                }
-            }
+            });
         }
 
         /// <summary>
@@ -552,7 +580,7 @@ namespace GW2PAO.Controllers
         {
             bool canShow = false;
 
-            var homeTeam = this.Teams.First(t => t.WorldId == this.UserSettings.WorldSelection.ID);
+            var homeTeam = this.Worlds.First(t => t.WorldId == this.UserSettings.WorldSelection.ID);
 
             if (this.UserSettings.NotifyWhenHomeTakesObjective
                 && objectiveData.WorldOwner == homeTeam.Color)
