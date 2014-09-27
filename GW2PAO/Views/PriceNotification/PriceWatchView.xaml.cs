@@ -36,15 +36,5 @@ namespace GW2PAO.Views.PriceNotification
         {
             InitializeComponent();
         }
-
-        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            ((TextBox)sender).SelectAll();
-        }
-
-        private void TextBox_GotMouseCapture(object sender, MouseEventArgs e)
-        {
-            ((TextBox)sender).SelectAll();
-        }
     }
 }
