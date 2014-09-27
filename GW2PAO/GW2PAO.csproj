@@ -433,6 +433,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\copy.png" />
     <Resource Include="Resources\unknown_icon.png" />
     <Resource Include="Resources\OverlayMenuIcon_Color.png" />
     <Resource Include="Resources\warning.png" />

@@ -131,8 +131,55 @@
                                            Margin="1,0,0,0"/>
                         </StackPanel>
                     </StackPanel>
-                    
-                    <!--TODO: Add button to copy item name to clipboard-->
+
+                    <Image Name="CopyIcon"
+                           Grid.Row="1" Grid.Column="1"
+                           Height="12" Width="12"
+                           Margin="1"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           Source="../../Resources/copy.png"
+                           MouseDown="CopyIcon_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Copy Name" Command="{Binding PriceWatch.CopyNameCommand}" />
+                                <MenuItem Header="Copy Chat Code" Command="{Binding PriceWatch.CopyChatcodeCommand}" />
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                                         Color="White"
+                                                         Opacity="0"
+                                                         BlurRadius="10"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1"
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:00.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0"
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:0.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </Grid>
             </Grid>
         </Border>

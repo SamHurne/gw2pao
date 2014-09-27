@@ -36,5 +36,17 @@ namespace GW2PAO.Views.PriceNotification
         {
             InitializeComponent();
         }
+
+        private void CopyIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                Image image = sender as Image;
+                ContextMenu contextMenu = image.ContextMenu;
+                contextMenu.PlacementTarget = image;
+                contextMenu.IsOpen = true;
+                e.Handled = true;
+            }
+        }
     }
 }

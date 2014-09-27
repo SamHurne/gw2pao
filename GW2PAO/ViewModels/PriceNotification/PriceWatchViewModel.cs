@@ -121,6 +121,16 @@ namespace GW2PAO.ViewModels.PriceNotification
         public DelegateCommand RemoveCommand { get { return new DelegateCommand(this.Remove); } }
 
         /// <summary>
+        /// Copies the Item's name to the clipboard
+        /// </summary>
+        public DelegateCommand CopyNameCommand { get { return new DelegateCommand(this.CopyNameToClipboard); } }
+
+        /// <summary>
+        /// Copies the Item's Chatcode to the clipboard
+        /// </summary>
+        public DelegateCommand CopyChatcodeCommand { get { return new DelegateCommand(this.CopyChatcodeToClipboard); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="modelData">The price watch model data</param>
@@ -188,5 +198,22 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.controller.PriceWatches.Remove(this);
         }
 
+        /// <summary>
+        /// Copies the name of the item to the clipboard
+        /// </summary>
+        private void CopyNameToClipboard()
+        {
+            logger.Debug("Copying name of \"{0}\" ", this.ItemName);
+            System.Windows.Clipboard.SetText(this.ItemName);
+        }
+
+        /// <summary>
+        /// Copies the chatcode of the item to the clipboard
+        /// </summary>
+        private void CopyChatcodeToClipboard()
+        {
+            logger.Debug("Copying chatcode of \"{0}\" as \"{1}\" ", this.ItemName, this.ItemData.ChatCode);
+            System.Windows.Clipboard.SetText(this.ItemData.ChatCode);
+        }
     }
 }
