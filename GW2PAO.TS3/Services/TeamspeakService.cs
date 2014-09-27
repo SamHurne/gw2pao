@@ -352,17 +352,20 @@ namespace GW2PAO.TS3.Services
                     // Someone else moved - raise the client entered/exited based on what channel they moved to
                     uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                     uint newChannelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
-                    if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
+                    if (this.clients.ContainsKey(clientId))
                     {
-                        // Someone joined the channel
-                        this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                        if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
+                        {
+                            // Someone joined the channel
+                            this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                        }
+                        else if (this.clients[clientId].ChannelID == this.currentChannelID && newChannelId != this.currentChannelID)
+                        {
+                            // Someone left the channel
+                            this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                        }
+                        this.clients[clientId].ChannelID = newChannelId;
                     }
-                    else if (this.clients[clientId].ChannelID == this.currentChannelID && newChannelId != this.currentChannelID)
-                    {
-                        // Someone left the channel
-                        this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-                    }
-                    this.clients[clientId].ChannelID = newChannelId;
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientEnterView))
