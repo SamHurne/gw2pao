@@ -41,7 +41,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-
     <!--See code-behind for DataContext/ViewModel details-->
     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
           Margin="5,0,5,0"
@@ -66,8 +65,8 @@
         <!-- Item's Icon -->
         <Image Grid.Column="1"
                Margin="5,5,5,5"
-               Width="30" Height="30"
-               Source="https://render.guildwars2.com/file/C6110F52DF5AFE0F00A56F9E143E9732176DDDE9/65015.png" />
+               Width="40" Height="40"
+               Source="{Binding IconUrl}"/>
 
         <!-- Item's Name -->
         <TextBox Grid.Column="2" Margin="5"

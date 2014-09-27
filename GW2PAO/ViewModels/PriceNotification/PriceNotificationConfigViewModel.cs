@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.PresentationCore;
@@ -54,7 +55,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         private void AddPriceWatch()
         {
             var priceWatch = new PriceWatch();
-            var priceWatchVm = new PriceWatchViewModel(priceWatch, this.controller, this.commerceService);
+            var priceWatchVm = new PriceWatchViewModel(priceWatch, null, this.controller, this.commerceService);
             this.controller.UserSettings.PriceWatches.Add(priceWatch);
             this.PriceWatches.Add(priceWatchVm);
         }

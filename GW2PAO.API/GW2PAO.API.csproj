@@ -43,11 +43,13 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2.NET">
-      <HintPath>..\packages\GW2.NET.0.9.9.1\lib\net40\GW2.NET.dll</HintPath>
+    <Reference Include="GW2.NET, Version=0.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GW2.NET.0.9.10.0\lib\net40\GW2.NET.dll</HintPath>
     </Reference>
-    <Reference Include="GW2.NET.Core">
-      <HintPath>..\packages\GW2.NET.0.9.9.1\lib\net40\GW2.NET.Core.dll</HintPath>
+    <Reference Include="GW2.NET.Core, Version=0.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GW2.NET.0.9.10.0\lib\net40\GW2.NET.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -70,6 +72,11 @@
     <Compile Include="Data\DynamicEvent.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
+    <Compile Include="Data\Enums\ItemFlags.cs" />
+    <Compile Include="Data\Enums\ItemGameType.cs" />
+    <Compile Include="Data\Enums\ItemRarity.cs" />
+    <Compile Include="Data\Enums\ItemRestriction.cs" />
+    <Compile Include="Data\Enums\ItemType.cs" />
     <Compile Include="Data\Enums\ObjectiveType.cs" />
     <Compile Include="Data\Enums\Profession.cs" />
     <Compile Include="Data\Enums\Units.cs" />

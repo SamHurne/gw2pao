@@ -80,11 +80,7 @@ namespace GW2PAO.Controllers
             this.PriceWatches = new ObservableCollection<PriceWatchViewModel>();
             this.PriceNotifications = new ObservableCollection<PriceNotificationViewModel>();
 
-            // Initialize view models
-            foreach (var priceWatch in this.UserSettings.PriceWatches)
-            {
-                this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, this, this.commerceService));
-            }
+            this.InitializePriceWatches();
 
             // Initialize the refresh timer
             this.refreshTimer = new Timer(this.Refresh);
@@ -102,64 +98,6 @@ namespace GW2PAO.Controllers
         public void Start()
         {
             logger.Debug("Start called");
-
-            //////////////////////////////////////////////////////////
-            //"26836":"Berserker's Iron Shield of Battle"
-            //var testPriceWatch = new PriceWatch(26836, "Berserker's Iron Shield of Battle");
-            //var existing = this.PriceWatches.FirstOrDefault(pw => pw.Data.ItemID == testPriceWatch.ItemID);
-            //if (existing == null)
-            //{
-            //    testPriceWatch.IsBuyOrderNotificationEnabled = true;
-            //    testPriceWatch.BuyOrderLimit.Value = 3133;
-            //    testPriceWatch.IsSellListingNotificationEnabled = true;
-            //    testPriceWatch.SellListingLimit.Value = 4498;
-            //    this.PriceWatches.Add(new PriceWatchViewModel(testPriceWatch, this, this.commerceService));
-            //}
-            //else
-            //{
-            //    existing.Data.IsBuyOrderNotificationEnabled = true;
-            //    existing.Data.BuyOrderLimit.Value = 3133;
-            //    existing.Data.IsSellListingNotificationEnabled = true;
-            //    existing.Data.SellListingLimit.Value = 4498;
-            //}
-            ////"891","Honed Cabalist Boots of Lyssa"
-            //var testPriceWatch2 = new PriceWatch(891, "Honed Cabalist Boots of Lyssa");
-            //var existing2 = this.PriceWatches.FirstOrDefault(pw => pw.Data.ItemID == testPriceWatch2.ItemID);
-            //if (existing2 == null)
-            //{
-            //    testPriceWatch2.IsBuyOrderNotificationEnabled = true;
-            //    testPriceWatch2.BuyOrderLimit.Value = 100;
-            //    testPriceWatch2.IsSellListingNotificationEnabled = true;
-            //    testPriceWatch2.SellListingLimit.Value = 900;
-            //    this.PriceWatches.Add(new PriceWatchViewModel(testPriceWatch2, this, this.commerceService));
-            //}
-            //else
-            //{
-            //    existing2.Data.IsBuyOrderNotificationEnabled = true;
-            //    existing2.Data.BuyOrderLimit.Value = 100;
-            //    existing2.Data.IsSellListingNotificationEnabled = true;
-            //    existing2.Data.SellListingLimit.Value = 900;
-            //}
-            ////"32818","Carrion Steam Gizmo of Agony"
-            //var testPriceWatch3 = new PriceWatch(32818, "Carrion Steam Gizmo of Agony");
-            //var existing3 = this.PriceWatches.FirstOrDefault(pw => pw.Data.ItemID == testPriceWatch3.ItemID);
-            //if (existing3 == null)
-            //{
-            //    testPriceWatch3.IsBuyOrderNotificationEnabled = true;
-            //    testPriceWatch3.BuyOrderLimit.Value = 100;
-            //    testPriceWatch3.IsSellListingNotificationEnabled = true;
-            //    testPriceWatch3.SellListingLimit.Value = 300;
-            //    this.PriceWatches.Add(new PriceWatchViewModel(testPriceWatch3, this, this.commerceService));
-            //}
-            //else
-            //{
-            //    existing3.Data.IsBuyOrderNotificationEnabled = true;
-            //    existing3.Data.BuyOrderLimit.Value = 100;
-            //    existing3.Data.IsSellListingNotificationEnabled = true;
-            //    existing3.Data.SellListingLimit.Value = 300;
-            //}
-            //////////////////////////////////////////////////////////
-
             Task.Factory.StartNew(() =>
             {
                 // Start the timer if this is the first time that Start() has been called
@@ -190,6 +128,32 @@ namespace GW2PAO.Controllers
                 lock (this.refreshTimerLock)
                 {
                     this.refreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initializes the collection of price watches
+        /// </summary>
+        private void InitializePriceWatches()
+        {
+            // If for some reason there are items with an ID of 0, just remove them now
+            var itemsToRemove = new List<PriceWatch>(this.UserSettings.PriceWatches.Where(pw => pw.ItemID == 0));
+            foreach (var emptyItem in itemsToRemove)
+                this.UserSettings.PriceWatches.Remove(emptyItem);
+
+            if (this.UserSettings.PriceWatches.Count > 0)
+            {
+                var itemIds = this.UserSettings.PriceWatches.Select(pw => pw.ItemID);
+                var itemData = this.commerceService.GetItems(itemIds.ToArray());
+
+                // Initialize view models
+                foreach (var priceWatch in this.UserSettings.PriceWatches)
+                {
+                    if (priceWatch.ItemID > 0)
+                        this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
+                    else
+                        this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, null, this, this.commerceService));
                 }
             }
         }

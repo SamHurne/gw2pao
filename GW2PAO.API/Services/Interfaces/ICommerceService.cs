@@ -10,6 +10,11 @@ namespace GW2PAO.API.Services.Interfaces
     public interface ICommerceService
     {
         /// <summary>
+        /// Cache of item names loaded from the ItemNames.json file
+        /// </summary>
+        IDictionary<int, string> ItemNames { get; }
+
+        /// <summary>
         /// Returns true if the given item exists, else false
         /// </summary>
         /// <param name="itemName">Name of the item</param>
@@ -24,11 +29,32 @@ namespace GW2PAO.API.Services.Interfaces
         int GetItemID(string itemName);
 
         /// <summary>
-        /// Returns the item information for the item with the given name
+        /// Returns the item information for the item with the given names
         /// </summary>
         /// <param name="itemName">Name of the item</param>
         /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
         GW2PAO.API.Data.Item GetItem(string itemName);
+
+        /// <summary>
+        /// Returns the item information for the items with the given ID
+        /// </summary>
+        /// <param name="itemID">ID of the item</param>
+        /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
+        GW2PAO.API.Data.Item GetItem(int itemID);
+
+        /// <summary>
+        /// Returns the item information for the items with the given Names
+        /// </summary>
+        /// <param name="itemNames">Names of the items to retrieve</param>
+        /// <returns>Collection of Item objects containing all item information</returns>
+        IDictionary<string, Item> GetItems(ICollection<string> itemNames);
+
+        /// <summary>
+        /// Returns the item information for the items with the given IDs
+        /// </summary>
+        /// <param name="itemIDs">IDs of the items to retrieve</param>
+        /// <returns>Dictionary of Item objects containing all item information</returns>
+        IDictionary<int, Item> GetItems(ICollection<int> itemIDs);
 
         /// <summary>
         /// Returns the ItemPrices of the item with the given item ID

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
@@ -37,6 +38,11 @@ namespace GW2PAO.ViewModels.PriceNotification
         public PriceWatch Data { get; private set; }
 
         /// <summary>
+        /// Item data
+        /// </summary>
+        public Item ItemData { get; private set; }
+
+        /// <summary>
         /// Name of the item
         /// </summary>
         public string ItemName
@@ -49,17 +55,44 @@ namespace GW2PAO.ViewModels.PriceNotification
                     // Do a search to see if the item exists
                     if (this.commerceService.DoesItemExist(value))
                     {
-                        this.Data.ItemName = value;
+                        // It exists, so update our model data
+                        this.ItemData = this.commerceService.GetItem(value);
+                        this.Data.ItemID = this.ItemData.ID;
+                        this.Data.ItemName = this.ItemData.Name;
+                        this.Data.BuyOrderLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
+                        this.Data.SellListingLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
+
                         this.RaisePropertyChanged();
 
-                        // It exists, so update our model data
-                        // For now, this is just the item ID
-                        var id = this.commerceService.GetItemID(this.Data.ItemName);
-                        var prices = this.commerceService.GetItemPrices(id);
-                        this.Data.ItemID = id;
-                        this.Data.BuyOrderLimit.Value = prices.HighestBuyOrder;
-                        this.Data.SellListingLimit.Value = prices.LowestSellListing;
+                        // Also raise property changed for the icon
+                        this.RaisePropertyChanged("IconUrl");
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// The full collection of item names
+        /// </summary>
+        public ICollection<string> ItemNames
+        {
+            get { return this.commerceService.ItemNames.Values; }
+        }
+
+        /// <summary>
+        /// Path to the icon url
+        /// </summary>
+        public string IconUrl
+        {
+            get
+            {
+                if (this.ItemData == null || this.ItemData.Icon == null)
+                {
+                    return "/Resources/unknown_icon.png";
+                }
+                else
+                {
+                    return this.ItemData.Icon.ToString();
                 }
             }
         }
@@ -92,9 +125,10 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// </summary>
         /// <param name="modelData">The price watch model data</param>
         /// <param name="controller">Commerce controller</param>
-        public PriceWatchViewModel(PriceWatch modelData, ICommerceController controller, ICommerceService service)
+        public PriceWatchViewModel(PriceWatch priceData, Item itemData, ICommerceController controller, ICommerceService service)
         {
-            this.Data = modelData;
+            this.Data = priceData;
+            this.ItemData = itemData;
             this.controller = controller;
             this.commerceService = service;
 

@@ -82,12 +82,8 @@
                 <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
                        VerticalAlignment="Center" HorizontalAlignment="Center"
                        Height="40" Width="40"
-                       Source="/Resources/merchant.png">
-                </Image>
-                <!--TODO: Use URI-->
-                <!--ex: https://render.guildwars2.com/file/C6110F52DF5AFE0F00A56F9E143E9732176DDDE9/65015.png-->
+                       Source="{Binding PriceWatch.IconUrl}" />
 
-                <!-- We also need to add an 'x' button and a 'don't show again' button -->
                 <Grid Grid.Row="0" Grid.Column="1"
                       Margin="5,0,0,0">
 
