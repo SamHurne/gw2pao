@@ -234,26 +234,31 @@ namespace GW2PAO.TS3.Services
                 // Determine the current server and channel information
                 this.UpdateServerInfo();
                 this.UpdateChannelInfo();
+            }
 
+            // Do all of this on a seperate thread so we don't hold up the UI
+            Task.Factory.StartNew(() =>
+            {
                 // Send a request for the full list of clients
                 logger.Info("Sending request for client list");
                 string result = this.QueryRunner.SendCommand(new Command("clientlist"));
                 this.AddClients(result);
-            }
 
-            // Start handling notifications
-            logger.Info("Registering for notifications");
-            this.QueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
+                // Request the client and channel lists last - these can take a little while...
+                // TODO: This is kind of horrible, look into a better way to make this work better
+                if (this.currentClientID != 0 || this.currentChannelID != 0)
+                {
+                    this.InitializeChannelList();
+                }
 
-            // Start a timer to send a message every so often, keeping the connection open
-            logger.Info("Starting poll timer");
-            this.pollTimer.Start();
+                // Start handling notifications
+                logger.Info("Registering for notifications");
+                this.QueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
 
-            // Request the channel list last - this can take a little while...
-            if (this.currentClientID != 0 || this.currentChannelID != 0)
-            {
-                this.InitializeChannelList();
-            }
+                // Start a timer to send a message every so often, keeping the connection open
+                logger.Info("Starting poll timer");
+                this.pollTimer.Start();
+            });
         }
 
         /// <summary>
@@ -333,7 +338,12 @@ namespace GW2PAO.TS3.Services
                         this.RaiseChannelRemoved(new ChannelEventArgs(channel));
                     }
                     this.channels.Clear();
-                    this.InitializeChannelList();
+
+                    // Do this on another thread... could take awhile
+                    Task.Factory.StartNew(() =>
+                    {
+                        this.InitializeChannelList();
+                    });
                 }
             }
             else if (e.Value.StartsWith(Notifications.ClientMoved))
@@ -408,10 +418,6 @@ namespace GW2PAO.TS3.Services
                         this.clients[clientId].Name = clientNickname;
                     }
                 }
-            }
-            else if (e.Value.StartsWith(Notifications.ChannelList))
-            {
-                // ???
             }
             else if (e.Value.StartsWith(Notifications.ChannelCreated))
             {
@@ -584,30 +590,27 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void InitializeChannelList()
         {
-            Task.Factory.StartNew(() =>
+            var command = new Command("channellist");
+            string result = this.QueryRunner.SendCommand(command);
+
+            var channelStrings = result.Split('|');
+            foreach (var channelString in channelStrings)
+            {
+                var channelInfo = this.ProcessChannelInformation(channelString);
+
+                if (!this.channels.ContainsKey(channelInfo.ID))
                 {
-                    var command = new Command("channellist");
-                    string result = this.QueryRunner.SendCommand(command);
-
-                    var channelStrings = result.Split('|');
-                    foreach (var channelString in channelStrings)
+                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
                     {
-                        var channelInfo = this.ProcessChannelInformation(channelString);
-
-                        if (!this.channels.ContainsKey(channelInfo.ID))
-                        {
-                            if (this.channels.TryAdd(channelInfo.ID, channelInfo))
-                            {
-                                this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
-                            }
-                        }
-                        else
-                        {
-                            this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                            this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
-                        }
+                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
                     }
-                });
+                }
+                else
+                {
+                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                }
+            }
         }
 
         /// <summary>
