@@ -167,9 +167,6 @@ namespace GW2PAO.TS3.Services
                 if (this.QueryRunner != null)
                     this.QueryRunner.Dispose();
 
-                if (!this.QueryDispatcher.IsDisposed)
-                    this.QueryDispatcher.Dispose();
-
                 this.QueryDispatcher = null;
                 this.QueryRunner = null;
                 this.ConnectionState = ConnectionState.Disconnected;
@@ -270,10 +267,6 @@ namespace GW2PAO.TS3.Services
         private void QueryDispatcher_ServerClosedConnection(object sender, EventArgs e)
         {
             logger.Info("Server closed connection");
-
-            // Reconnect
-            this.Disconnect();
-            this.Connect();
         }
 
         /// <summary>
