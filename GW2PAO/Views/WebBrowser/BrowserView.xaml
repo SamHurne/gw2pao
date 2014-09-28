@@ -198,7 +198,7 @@
                     <Slider Grid.Column="5" Grid.Row="0" MinWidth="75"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Maximum="1" Minimum="0"
+                            Maximum="1" Minimum="0" SmallChange="0.1" LargeChange="0.25"
                             Value="{Binding ElementName=webControl, Path=Opacity}" />
 
                     <!-- Minimize and Close Buttons -->
@@ -235,7 +235,7 @@
                             NativeView="{Binding NativeView, ElementName=webWindow}"
                             WebSession="{Binding Source={StaticResource webSession}}"
                             Source="{Binding Source, ElementName=webWindow}"
-                            Opacity="0.75"/>
+                            Opacity="0.90"/>
         </Grid>
     </awe:WebDialogsLayer>
 </src:OverlayWindow>
