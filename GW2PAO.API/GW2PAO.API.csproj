@@ -104,6 +104,7 @@
     <Compile Include="Services\Interfaces\ISystemService.cs" />
     <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
+    <Compile Include="Services\ItemNamesDatabaseBuilder.cs" />
     <Compile Include="Services\MegaserverEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />

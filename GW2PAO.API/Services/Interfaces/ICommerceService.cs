@@ -15,6 +15,16 @@ namespace GW2PAO.API.Services.Interfaces
         IDictionary<int, string> ItemNames { get; }
 
         /// <summary>
+        /// Helper object for building/rebuilding the names database
+        /// </summary>
+        ItemNamesDatabaseBuilder NamesDatabaseBuilder { get;}
+
+        /// <summary>
+        /// Forces a re-load of the item names database
+        /// </summary>
+        void ReloadNames();
+
+        /// <summary>
         /// Returns true if the given item exists, else false
         /// </summary>
         /// <param name="itemName">Name of the item</param>

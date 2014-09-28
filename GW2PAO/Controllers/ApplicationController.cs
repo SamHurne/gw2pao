@@ -209,6 +209,11 @@ namespace GW2PAO.Controllers
         private PriceNotificationConfigView priceNotificationsConfigView;
 
         /// <summary>
+        /// View used when rebuilding the item names database
+        /// </summary>
+        private RebuildNamesDatabaseView rebuildItemNamesView;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()
@@ -522,6 +527,7 @@ namespace GW2PAO.Controllers
             // Price Notifications
             var priceNotificationsMenu = new MenuItemViewModel("Price Notifications", null);
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Configure", this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Rebuild Item Names Database", this.DisplayRebuildItemNamesView, this.CanDisplayRebuildItemNamesView));
             priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
             {
@@ -747,6 +753,31 @@ namespace GW2PAO.Controllers
         /// Determines if the Price Notifications Configuration window can be displayed
         /// </summary>
         private bool CanDisplayPriceNotificationsConfig()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Price Rebuild Item Names Database window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        private void DisplayRebuildItemNamesView()
+        {
+            if (this.rebuildItemNamesView == null || !this.rebuildItemNamesView.IsVisible)
+            {
+                this.rebuildItemNamesView = new RebuildNamesDatabaseView(this.CommerceService);
+                this.rebuildItemNamesView.Show();
+            }
+            else
+            {
+                this.priceNotificationsConfigView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the Rebuild Item Names Database window can be displayed
+        /// </summary>
+        private bool CanDisplayRebuildItemNamesView()
         {
             return true;
         }

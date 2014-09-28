@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceNotificationConfigViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceWatchViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\RebuildNamesDatabaseViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\ChannelViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
@@ -191,6 +192,9 @@
     </Compile>
     <Compile Include="Views\OverlayMenuIconView.xaml.cs">
       <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml.cs">
+      <DependentUpon>RebuildNamesDatabaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PriceNotification\PriceView.xaml.cs">
       <DependentUpon>PriceView.xaml</DependentUpon>
@@ -263,6 +267,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Style\BaseControlStyles\ProgressBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Style\BaseControlStyles\ResizeGripStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -334,6 +342,10 @@
     <Page Include="Views\OverlayMenuIconView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PriceNotification\PriceView.xaml">
       <Generator>MSBuild:Compile</Generator>

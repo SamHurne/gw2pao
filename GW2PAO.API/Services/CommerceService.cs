@@ -11,21 +11,35 @@ using GW2DotNET.V2.Commerce;
 using GW2DotNET.V2.Items;
 using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
-using Newtonsoft.Json;
+using NLog;
 
 namespace GW2PAO.API.Services
 {
     public class CommerceService : ICommerceService
     {
-        private const string NAMES_DATABASE_FILENAME = "ItemNames.json";
+        /// <summary>
+        /// Default logger
+        /// </summary>
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private ServiceManager serviceManager;
         private PriceService priceService;
         private ItemService itemService;
 
         /// <summary>
+        /// Locking object for the ItemNames collection
+        /// </summary>
+        private readonly object itemNamesLock = new object();
+
+        /// <summary>
         /// Cache of item names loaded from the ItemNames.json file
         /// </summary>
         public IDictionary<int, string> ItemNames { get; private set; }
+
+        /// <summary>
+        /// Helper object for building/rebuilding the names database
+        /// </summary>
+        public ItemNamesDatabaseBuilder NamesDatabaseBuilder { get; private set; }
 
         /// <summary>
         /// Default constructor
@@ -36,19 +50,23 @@ namespace GW2PAO.API.Services
             this.priceService = (PriceService)sf.GetPriceService();
             this.itemService = (ItemService)sf.GetItemService();
             this.serviceManager = new ServiceManager();
+            this.NamesDatabaseBuilder = new ItemNamesDatabaseBuilder();
 
-            // Load the names database
-            var db = File.ReadAllText(NAMES_DATABASE_FILENAME);
-            ItemNames = JsonConvert.DeserializeObject<Dictionary<int, string>>(db); // Consider just keeping this in memory
+            lock (this.itemNamesLock)
+            {
+                this.ItemNames = this.NamesDatabaseBuilder.LoadFromFile();
+            }
         }
 
         /// <summary>
-        /// Performs a rebuild of the names item database
-        /// Note: This takes a long time...
+        /// Forces a re-load of the item names database
         /// </summary>
-        public void BuildItemDatabase()
+        public void ReloadNames()
         {
-            // TODO
+            lock (this.itemNamesLock)
+            {
+                this.ItemNames = this.NamesDatabaseBuilder.LoadFromFile();
+            }
         }
 
         /// <summary>
@@ -58,7 +76,10 @@ namespace GW2PAO.API.Services
         /// <returns>true if the given item exists, else false</returns>
         public bool DoesItemExist(string itemName)
         {
-            return this.ItemNames.Values.Any(name => name == itemName);
+            lock (this.itemNamesLock)
+            {
+                return this.ItemNames.Values.Any(name => name == itemName);
+            }
         }
 
         /// <summary>
@@ -68,15 +89,18 @@ namespace GW2PAO.API.Services
         /// <returns>item ID of the item with the given name, or -1 if not found</returns>
         public int GetItemID(string itemName)
         {
-            var item = ItemNames.FirstOrDefault(i => i.Value == itemName);
+            lock (this.itemNamesLock)
+            {
+                var item = ItemNames.FirstOrDefault(i => i.Value == itemName);
 
-            if (item.Key != 0 || item.Value != null)
-            {
-                return item.Key;
-            }
-            else
-            {
-                return -1;
+                if (item.Key != 0 || item.Value != null)
+                {
+                    return item.Key;
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 
@@ -89,7 +113,12 @@ namespace GW2PAO.API.Services
         {
             GW2PAO.API.Data.Item item = null;
 
-            var itemId = ItemNames.FirstOrDefault(i => i.Value == itemName);
+            KeyValuePair<int, string> itemId;
+            lock (this.itemNamesLock)
+            {
+                itemId = this.ItemNames.FirstOrDefault(i => i.Value == itemName);
+            }
+
             if (itemId.Key != 0 || itemId.Value != null)
             {
                 item = this.GetItem(itemId.Key);
