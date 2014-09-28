@@ -135,6 +135,7 @@
     <Compile Include="Models\DungeonSettings.cs" />
     <Compile Include="Models\EventSettings.cs" />
     <Compile Include="Models\TeamspeakSettings.cs" />
+    <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Models\WvWSettings.cs" />
     <Compile Include="Models\ZoneCompletionSettings.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />

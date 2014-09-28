@@ -19,7 +19,7 @@ namespace GW2PAO.Models
     /// User settings for Commerce overlays, like the price notifications
     /// </summary>
     [Serializable]
-    public class CommerceSettings : NotifyPropertyChangedBase
+    public class CommerceSettings : UserSettings<CommerceSettings>
     {
         /// <summary>
         /// Default logger
@@ -29,7 +29,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".CommerceSettings.xml"; } }
+        public const string Filename = "CommerceSettings.xml";
 
         private bool areBuyOrderPriceNotificationsEnabled;
         private bool areSellListingPriceNotificationsEnabled;
@@ -71,15 +71,17 @@ namespace GW2PAO.Models
         /// <summary>
         /// Enables auto-save of settings. If called, whenever a setting is changed, this settings object will be saved to disk
         /// </summary>
-        public void EnableAutoSave()
+        public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => CommerceSettings.SaveSettings(this);
+            this.PropertyChanged += (o, e) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
             this.PriceWatches.CollectionChanged += PriceWatches_CollectionChanged;
 
             foreach (var pw in this.PriceWatches)
             {
-                pw.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this);
+                pw.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.BuyOrderLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.SellListingLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
             }
         }
 
@@ -93,62 +95,11 @@ namespace GW2PAO.Models
             {
                 foreach (PriceWatch newItem in e.NewItems)
                 {
-                    newItem.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this);
+                    newItem.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
                 }
             }
 
-            CommerceSettings.SaveSettings(this);
-        }
-
-        /// <summary>
-        /// Loads the user settings
-        /// </summary>
-        /// <returns>The loaded DungeonSettings, or null if the load fails</returns>
-        public static CommerceSettings LoadSettings()
-        {
-            logger.Debug("Loading user settings");
-
-            XmlSerializer deserializer = new XmlSerializer(typeof(CommerceSettings));
-            object loadedSettings = null;
-
-            if (File.Exists(Filename))
-            {
-                try
-                {
-                    using (TextReader reader = new StreamReader(Filename))
-                    {
-                        loadedSettings = deserializer.Deserialize(reader);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Unable to load user settings! Exception: ", ex);
-                }
-            }
-
-            if (loadedSettings != null)
-            {
-                logger.Info("Settings successfully loaded");
-                return loadedSettings as CommerceSettings;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Saves the user settings
-        /// </summary>
-        /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(CommerceSettings settings)
-        {
-            logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(CommerceSettings));
-            using (TextWriter writer = new StreamWriter(Filename))
-            {
-                serializer.Serialize(writer, settings);
-            }
+            CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
         }
     }
 }

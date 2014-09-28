@@ -237,32 +237,32 @@ namespace GW2PAO.Controllers
 
             // Load user settings
             logger.Debug("Loading event user settings");
-            this.EventSettings = EventSettings.LoadSettings();
+            this.EventSettings = EventSettings.LoadSettings(EventSettings.Filename);
             if (this.EventSettings == null)
                 this.EventSettings = new EventSettings();
 
             logger.Debug("Loading zone completion assistant user settings");
-            this.ZoneCompletionSettings = ZoneCompletionSettings.LoadSettings();
+            this.ZoneCompletionSettings = ZoneCompletionSettings.LoadSettings(ZoneCompletionSettings.Filename);
             if (this.ZoneCompletionSettings == null)
                 this.ZoneCompletionSettings = new ZoneCompletionSettings();
 
             logger.Debug("Loading dungeon user settings");
-            this.DungeonSettings = DungeonSettings.LoadSettings();
+            this.DungeonSettings = DungeonSettings.LoadSettings(DungeonSettings.Filename);
             if (this.DungeonSettings == null)
                 this.DungeonSettings = new DungeonSettings();
 
             logger.Debug("Loading wvw user settings");
-            this.WvWSettings = WvWSettings.LoadSettings();
+            this.WvWSettings = WvWSettings.LoadSettings(WvWSettings.Filename);
             if (this.WvWSettings == null)
                 this.WvWSettings = new WvWSettings();
 
             logger.Debug("Loading teamspeak settings");
-            this.TeamspeakSettings = TeamspeakSettings.LoadSettings();
+            this.TeamspeakSettings = TeamspeakSettings.LoadSettings(TeamspeakSettings.Filename);
             if (this.TeamspeakSettings == null)
                 this.TeamspeakSettings = new TeamspeakSettings();
 
             logger.Debug("Loading commerce settings");
-            this.CommerceSettings = CommerceSettings.LoadSettings();
+            this.CommerceSettings = CommerceSettings.LoadSettings(CommerceSettings.Filename);
             if (this.CommerceSettings == null)
                 this.CommerceSettings = new CommerceSettings();
 

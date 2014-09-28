@@ -16,7 +16,7 @@ namespace GW2PAO.Models
     /// User settings for the Dungeons Tracker
     /// </summary>
     [Serializable]
-    public class DungeonSettings : NotifyPropertyChangedBase
+    public class DungeonSettings : UserSettings<DungeonSettings>
     {
         /// <summary>
         /// Default logger
@@ -26,7 +26,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".DungeonSettings.xml"; } }
+        public const string Filename = "DungeonSettings.xml";
 
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenDungeons = new ObservableCollection<Guid>();
@@ -62,63 +62,12 @@ namespace GW2PAO.Models
         /// <summary>
         /// Enables auto-save of settings. If called, whenever a setting is changed, this settings object will be saved to disk
         /// </summary>
-        public void EnableAutoSave()
+        public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => DungeonSettings.SaveSettings(this);
-            this.HiddenDungeons.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this);
-            this.CompletedPaths.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this);
-        }
-
-        /// <summary>
-        /// Loads the user settings
-        /// </summary>
-        /// <returns>The loaded DungeonSettings, or null if the load fails</returns>
-        public static DungeonSettings LoadSettings()
-        {
-            logger.Debug("Loading user settings");
-
-            XmlSerializer deserializer = new XmlSerializer(typeof(DungeonSettings));
-            object loadedSettings = null;
-
-            if (File.Exists(Filename))
-            {
-                try
-                {
-                    using (TextReader reader = new StreamReader(Filename))
-                    {
-                        loadedSettings = deserializer.Deserialize(reader);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Unable to load user settings! Exception: ", ex);
-                }
-            }
-
-            if (loadedSettings != null)
-            {
-                logger.Info("Settings successfully loaded");
-                return loadedSettings as DungeonSettings;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Saves the user settings
-        /// </summary>
-        /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(DungeonSettings settings)
-        {
-            logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(DungeonSettings));
-            using (TextWriter writer = new StreamWriter(Filename))
-            {
-                serializer.Serialize(writer, settings);
-            }
+            this.PropertyChanged += (o, e) => DungeonSettings.SaveSettings(this, DungeonSettings.Filename);
+            this.HiddenDungeons.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this, DungeonSettings.Filename);
+            this.CompletedPaths.CollectionChanged += (o, e) => DungeonSettings.SaveSettings(this, DungeonSettings.Filename);
         }
     }
 }

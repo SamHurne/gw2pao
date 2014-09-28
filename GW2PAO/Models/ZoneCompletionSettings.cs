@@ -19,7 +19,7 @@ namespace GW2PAO.Models
     /// User settings for the Zone Completion Assistant
     /// </summary>
     [Serializable]
-    public class ZoneCompletionSettings : NotifyPropertyChangedBase
+    public class ZoneCompletionSettings : UserSettings<ZoneCompletionSettings>
     {
         /// <summary>
         /// Default logger
@@ -29,7 +29,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".ZoneCompletionSettings.xml"; } }
+        public const string Filename = "ZoneCompletionSettings.xml";
 
         private bool areHeartsVisible;
         private bool arePoisVisible;
@@ -168,73 +168,22 @@ namespace GW2PAO.Models
         /// <summary>
         /// Enables auto-save of settings. If called, whenever a setting is changed, this settings object will be saved to disk
         /// </summary>
-        public void EnableAutoSave()
+        public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this);
-            this.HiddenZoneItems.CollectionChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this);
+            this.PropertyChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this, ZoneCompletionSettings.Filename);
+            this.HiddenZoneItems.CollectionChanged += (o, e) => ZoneCompletionSettings.SaveSettings(this, ZoneCompletionSettings.Filename);
             this.UnlockedZoneItems.CollectionChanged += (o, e) =>
                 {
-                    ZoneCompletionSettings.SaveSettings(this);
+                    ZoneCompletionSettings.SaveSettings(this, ZoneCompletionSettings.Filename);
                     if (e.Action == NotifyCollectionChangedAction.Add)
                     {
                         foreach (CharacterZoneItems itemAdded in e.NewItems)
                         {
-                            itemAdded.ZoneItems.CollectionChanged += (a, b) => ZoneCompletionSettings.SaveSettings(this);
+                            itemAdded.ZoneItems.CollectionChanged += (a, b) => ZoneCompletionSettings.SaveSettings(this, ZoneCompletionSettings.Filename);
                         }
                     }
                 };
-        }
-
-        /// <summary>
-        /// Loads the user settings
-        /// </summary>
-        /// <returns>The loaded ZoneCompletionSettings, or null if the load fails</returns>
-        public static ZoneCompletionSettings LoadSettings()
-        {
-            logger.Debug("Loading user settings");
-
-            XmlSerializer deserializer = new XmlSerializer(typeof(ZoneCompletionSettings));
-            object loadedSettings = null;
-
-            if (File.Exists(Filename))
-            {
-                try
-                {
-                    using (TextReader reader = new StreamReader(Filename))
-                    {
-                        loadedSettings = deserializer.Deserialize(reader);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Unable to load user settings!", ex);
-                }
-            }
-
-            if (loadedSettings != null)
-            {
-                logger.Info("Settings successfully loaded");
-                return loadedSettings as ZoneCompletionSettings;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Saves the user settings
-        /// </summary>
-        /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(ZoneCompletionSettings settings)
-        {
-            logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(ZoneCompletionSettings));
-            using (TextWriter writer = new StreamWriter(Filename))
-            {
-                serializer.Serialize(writer, settings);
-            }
         }
     }
 

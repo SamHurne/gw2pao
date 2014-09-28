@@ -18,7 +18,7 @@ namespace GW2PAO.Models
     /// User settings for WvW
     /// </summary>
     [Serializable]
-    public class WvWSettings : NotifyPropertyChangedBase
+    public class WvWSettings : UserSettings<WvWSettings>
     {
         /// <summary>
         /// Default logger
@@ -28,7 +28,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public static string Filename { get { return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location) + ".WvWSettings.xml"; } }
+        public const string Filename = "WvWSettings.xml";
 
         private World worldSelection;
         private bool isTrackerHorizontal;
@@ -285,61 +285,10 @@ namespace GW2PAO.Models
         /// <summary>
         /// Enables auto-save of settings. If called, whenever a setting is changed, this settings object will be saved to disk
         /// </summary>
-        public void EnableAutoSave()
+        public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => WvWSettings.SaveSettings(this);
-        }
-
-        /// <summary>
-        /// Loads the user settings
-        /// </summary>
-        /// <returns>The loaded DungeonSettings, or null if the load fails</returns>
-        public static WvWSettings LoadSettings()
-        {
-            logger.Debug("Loading user settings");
-
-            XmlSerializer deserializer = new XmlSerializer(typeof(WvWSettings));
-            object loadedSettings = null;
-
-            if (File.Exists(Filename))
-            {
-                try
-                {
-                    using (TextReader reader = new StreamReader(Filename))
-                    {
-                        loadedSettings = deserializer.Deserialize(reader);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Unable to load user settings! Exception: ", ex);
-                }
-            }
-
-            if (loadedSettings != null)
-            {
-                logger.Info("Settings successfully loaded");
-                return loadedSettings as WvWSettings;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Saves the user settings
-        /// </summary>
-        /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(WvWSettings settings)
-        {
-            logger.Debug("Saving user settings");
-            XmlSerializer serializer = new XmlSerializer(typeof(WvWSettings));
-            using (TextWriter writer = new StreamWriter(Filename))
-            {
-                serializer.Serialize(writer, settings);
-            }
+            this.PropertyChanged += (o, e) => WvWSettings.SaveSettings(this, WvWSettings.Filename);
         }
     }
 }
