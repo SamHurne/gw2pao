@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
-#define MyAppVersion "2.0"
+#define MyAppVersion "1.5"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
