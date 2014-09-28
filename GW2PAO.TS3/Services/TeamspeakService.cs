@@ -157,7 +157,7 @@ namespace GW2PAO.TS3.Services
         {
             lock (this.pollLock)
             {
-                logger.Info("Disconnecting and cleaning up");
+                logger.Debug("Disconnecting and cleaning up");
 
                 // Stop the poll timer
                 this.pollTimer.Stop();
@@ -166,6 +166,9 @@ namespace GW2PAO.TS3.Services
                 // QueryRunner disposes the Dispatcher too
                 if (this.QueryRunner != null)
                     this.QueryRunner.Dispose();
+
+                if (!this.QueryDispatcher.IsDisposed)
+                    this.QueryDispatcher.Dispose();
 
                 this.QueryDispatcher = null;
                 this.QueryRunner = null;
@@ -592,23 +595,25 @@ namespace GW2PAO.TS3.Services
         {
             var command = new Command("channellist");
             string result = this.QueryRunner.SendCommand(command);
-
-            var channelStrings = result.Split('|');
-            foreach (var channelString in channelStrings)
+            if (result != null)
             {
-                var channelInfo = this.ProcessChannelInformation(channelString);
+                var channelStrings = result.Split('|');
+                foreach (var channelString in channelStrings)
+                {
+                    var channelInfo = this.ProcessChannelInformation(channelString);
 
-                if (!this.channels.ContainsKey(channelInfo.ID))
-                {
-                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                    if (!this.channels.ContainsKey(channelInfo.ID))
                     {
-                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                        if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                        {
+                            this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                        }
                     }
-                }
-                else
-                {
-                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                    else
+                    {
+                        this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                        this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                    }
                 }
             }
         }
@@ -620,22 +625,24 @@ namespace GW2PAO.TS3.Services
         /// <returns>The resulting channel object</returns>
         private Channel ProcessChannelInformation(string channelString)
         {
+            var parts = channelString.Split(' ', '\n', '\r');
+
             uint id = this.ParseUintProperty(channelString, Properties.ChannelID);
 
             uint parentId = 0;
-            if (channelString.Contains(Properties.ParentChannelID))
+            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ParentChannelID)) != null)
                 parentId = this.ParseUintProperty(channelString, Properties.ParentChannelID);
 
             uint order = 0;
-            if (channelString.Contains(Properties.ChannelOrder))
+            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelOrder)) != null)
                 order = this.ParseUintProperty(channelString, Properties.ChannelOrder);
 
             string name = string.Empty;
-            if (channelString.Contains(Properties.ParentChannelID))
+            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelName)) != null)
                 name = this.ParseStringProperty(channelString, true, Properties.ChannelName);
 
             uint clientsCount = 0;
-            if (channelString.Contains(Properties.ChannelClientsCount))
+            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelClientsCount)) != null)
                 clientsCount = this.ParseUintProperty(channelString, Properties.ChannelClientsCount);
 
             Channel channelInfo = new Channel(id, name)

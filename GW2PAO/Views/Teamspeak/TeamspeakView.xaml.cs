@@ -96,7 +96,7 @@ namespace GW2PAO.Views.Teamspeak
             this.DragMove();
         }
 
-        private void TitleBar_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (this.ResizeMode == System.Windows.ResizeMode.NoResize)
             {

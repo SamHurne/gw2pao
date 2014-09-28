@@ -16,7 +16,7 @@ namespace GW2PAO.ViewModels.Teamspeak
 {
     public class TeamspeakViewModel : NotifyPropertyChangedBase
     {
-        private static Regex spacerRegex = new Regex(@"^\[..spacer.\]");
+        private static Regex spacerRegex = new Regex(@"^\[[*]*[rcl]*spacer\d*\]");
 
         private string messageText;
         private string serverName;
@@ -356,6 +356,13 @@ namespace GW2PAO.ViewModels.Teamspeak
                     // Find the matching existing channel
                     ChannelViewModel existingChannel = this.FindChannel(this.Channels, e.Channel.ID);
 
+                    if (existingChannel == null)
+                    {
+                        // This shouldn't happen, but if it does, don't crash, just treat it as a "channel added"
+                        this.TeamspeakService_ChannelAdded(sender, e);
+                        return;
+                    }
+
                     existingChannel.Name = e.Channel.Name;
                     existingChannel.OrderIndex = e.Channel.Order;
 
@@ -365,8 +372,11 @@ namespace GW2PAO.ViewModels.Teamspeak
                         // Find the existing parent
                         ChannelViewModel existingParent = this.FindParentChannel(this.Channels, existingChannel);
 
-                        // Remove it from the parent
-                        existingParent.Subchannels.Remove(existingChannel);
+                        if (existingParent != null)
+                        {
+                            // Remove it from the parent
+                            existingParent.Subchannels.Remove(existingChannel);
+                        }
 
                         // Update the parent ID
                         existingChannel.ParentID = e.Channel.ParentID;

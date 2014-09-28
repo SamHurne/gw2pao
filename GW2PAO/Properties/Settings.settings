@@ -108,7 +108,7 @@
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="TeamspeakHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">150</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="TeamspeakWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">225</Value>

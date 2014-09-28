@@ -445,7 +445,7 @@ namespace GW2PAO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public double TeamspeakHeight {
             get {
                 return ((double)(this["TeamspeakHeight"]));
