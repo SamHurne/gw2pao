@@ -2,6 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
+#define MyAppNameShort "GW2 Personal Assistant Overlay"
 #define MyAppVersion "1.5"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
@@ -76,10 +77,10 @@ Source: "..\GW2PAO\bin\Release\xinput9_1_0.dll"; DestDir: "{app}"; Flags: ignore
 
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
+Name: "{group}\{#MyAppNameShort}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppNameShort}}"; Filename: "{#MyAppURL}"
+Name: "{commondesktop}\{#MyAppNameShort}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppNameShort}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
@@ -90,4 +91,4 @@ Name: "Browser"; Description: "Include Browser Feature"; Types: full
 [Dirs]
 Name: "{app}\Settings"; Permissions: users-full
 Name: "{app}\Logs"; Permissions: users-full
-Name: "{app}\Cache"; Components: Browser; Permissions: users-full
+Name: "{app}\Cache"; Flags: uninsalwaysuninstall; Components: Browser; Permissions: users-full
