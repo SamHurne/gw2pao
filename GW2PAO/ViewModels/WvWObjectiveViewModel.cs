@@ -126,6 +126,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// The Guild that has claimed this objective
+        /// </summary>
+        public GuildViewModel GuildClaimer
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Name of the objective
         /// </summary>
         public string Name { get { return this.ModelData.FullName; } }
@@ -278,6 +287,7 @@ namespace GW2PAO.ViewModels
             this.IsRIActive = false;
             this.IsNotificationShown = false;
             this.IsRemovingNotification = false;
+            this.GuildClaimer = new GuildViewModel();
 
             this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
             this.userSettings.HiddenObjectives.CollectionChanged += (o, e) => this.RefreshVisibility();

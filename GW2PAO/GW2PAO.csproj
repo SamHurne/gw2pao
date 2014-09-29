@@ -159,6 +159,7 @@
     <Compile Include="ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
     <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\GuildViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHasWvWMap.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />

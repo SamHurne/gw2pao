@@ -36,13 +36,30 @@
             <MenuItem Header="Copy RI Timer Text" Command="{Binding CopyRITextCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
-    
+
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
             <core:OutlinedTextBlock Fill="Orange" FontSize="12" Text="{Binding Name}"/>
             <StackPanel Orientation="Horizontal">
                 <core:OutlinedTextBlock Margin="0,0,5,0" Text="Owned By:" />
                 <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding WorldOwnerName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Claimed By:" />
+                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Name}"/>
+                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Tag}"/>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding GuildClaimer.ID}" Value="{x:Null}">
+                                <DataTrigger.Setters>
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <core:OutlinedTextBlock Margin="0,0,5,0" Text="Points:" />

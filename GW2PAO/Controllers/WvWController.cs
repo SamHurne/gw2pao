@@ -43,6 +43,11 @@ namespace GW2PAO.Controllers
         private IPlayerService playerService;
 
         /// <summary>
+        /// Service responsible for retrieving Guild information
+        /// </summary>
+        private IGuildService guildService;
+
+        /// <summary>
         /// Keeps track of how many times Start() has been called in order
         /// to support reuse of a single object
         /// </summary>
@@ -173,11 +178,12 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
         /// <param name="userSettings">The dungeons user settings object</param>
-        public WvWController(IWvWService wvwService, IPlayerService playerService, IHasWvWMap mapObj, WvWSettings userSettings)
+        public WvWController(IWvWService wvwService, IPlayerService playerService, IGuildService guildService, IHasWvWMap mapObj, WvWSettings userSettings)
         {
             logger.Debug("Initializing WvW Controller");
             this.wvwService = wvwService;
             this.playerService = playerService;
+            this.guildService = guildService;
             this.mapObj = mapObj;
             this.userSettings = userSettings;
             this.timerCount = 0;
@@ -454,6 +460,7 @@ namespace GW2PAO.Controllers
                 {
                     var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
 
+                    // Refresh owner information
                     if (objective.WorldOwner != latestData.WorldOwner)
                     {
                         Threading.InvokeOnUI(() =>
@@ -480,6 +487,26 @@ namespace GW2PAO.Controllers
                             // Owner just changed, raise a notification!
                             this.DisplayNotification(objective);
                         }
+                    }
+
+                    // Refresh guild information
+                    if (latestData.GuildOwner.HasValue)
+                    {
+                        if (!objective.GuildClaimer.ID.HasValue
+                            || objective.GuildClaimer.ID.Value != latestData.GuildOwner.Value)
+                        {
+                            // Guild claimer has changed
+                            var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
+                            objective.GuildClaimer.ID = guildInfo.ID;
+                            objective.GuildClaimer.Name = guildInfo.Name;
+                            objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                        }
+                    }
+                    else
+                    {
+                        objective.GuildClaimer.ID = null;
+                        objective.GuildClaimer.Name = string.Empty;
+                        objective.GuildClaimer.Tag = string.Empty;
                     }
                 }
             }

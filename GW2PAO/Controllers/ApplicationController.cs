@@ -78,6 +78,11 @@ namespace GW2PAO.Controllers
         public WvWService WvWService { get; private set; }
 
         /// <summary>
+        /// Service responsible for retrieving Guild information
+        /// </summary>
+        public GuildService GuildService { get; private set; }
+
+        /// <summary>
         /// Service responsible for commerce/trade/item information
         /// </summary>
         public CommerceService CommerceService { get; private set; }
@@ -226,6 +231,7 @@ namespace GW2PAO.Controllers
             this.ZoneService = new ZoneService();
             this.DungeonsService = new DungeonsService();
             this.WvWService = new WvWService();
+            this.GuildService = new GuildService();
             this.TeamspeakService = new TeamspeakService();
             this.CommerceService = new CommerceService();
 
@@ -290,7 +296,7 @@ namespace GW2PAO.Controllers
             this.DungeonsController = new DungeonsController(this.DungeonsService, this.BrowserController, this.DungeonSettings);
 
             logger.Debug("Creating wvw controller");
-            this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.WvWMap, this.WvWSettings);
+            this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.GuildService, this.WvWMap, this.WvWSettings);
             this.WvWController.Start(); // Get it started for wvw notifications
 
             logger.Debug("Creating commerce controller");

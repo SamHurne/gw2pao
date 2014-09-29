@@ -83,6 +83,7 @@
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
+    <Compile Include="Data\Guild.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\ItemPrices.cs" />
     <Compile Include="Data\Point.cs" />
@@ -97,9 +98,11 @@
     <Compile Include="Services\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
     <Compile Include="Data\WorldEvent.cs" />
+    <Compile Include="Services\GuildService.cs" />
     <Compile Include="Services\Interfaces\ICommerceService.cs" />
     <Compile Include="Services\Interfaces\IDungeonsService.cs" />
     <Compile Include="Services\Interfaces\IEventsService.cs" />
+    <Compile Include="Services\Interfaces\IGuildService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\Interfaces\ISystemService.cs" />
     <Compile Include="Services\Interfaces\IWvWService.cs" />
