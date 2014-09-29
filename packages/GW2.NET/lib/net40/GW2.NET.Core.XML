@@ -1271,8 +1271,8 @@
     <member name="P:GW2DotNET.Entities.Colors.ColorPalette.ColorId">
       <summary>Gets or sets the color identifier.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Colors.ColorPalette.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Colors.ColorPalette.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Colors.ColorPalette.Leather">
       <summary>Gets or sets the color model for leather armor.</summary>
@@ -1295,7 +1295,7 @@
       <summary>Gets or sets the buy offers.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Commerce.AggregateListing.Item">
-      <summary>Gets or sets the item.</summary>
+      <summary>Gets or sets the item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Commerce.AggregateListing.ItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Commerce.AggregateListing.ItemId">
       <summary>Gets or sets the item identifier.</summary>
@@ -1336,7 +1336,7 @@
       <summary>Gets or sets the buy offers.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Commerce.Listing.Item">
-      <summary>Gets or sets the item.</summary>
+      <summary>Gets or sets the item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Commerce.Listing.ItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Commerce.Listing.ItemId">
       <summary>Gets or sets the item identifier.</summary>
@@ -1418,8 +1418,8 @@
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.Flags">
       <summary>Gets or sets additional flags.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.Level">
       <summary>Gets or sets the event level.</summary>
@@ -1428,7 +1428,7 @@
       <summary>Gets or sets the location of the event.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.Map">
-      <summary>Gets or sets the map.</summary>
+      <summary>Gets or sets the map. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.MapId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEvent.MapId">
       <summary>Gets or sets the map identifier.</summary>
@@ -1483,7 +1483,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventRotation.Event">
-      <summary>Gets or sets the event.</summary>
+      <summary>Gets or sets the event. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.DynamicEvents.DynamicEventRotation.EventId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventRotation.EventId">
       <summary>Gets or sets the event identifier.</summary>
@@ -1524,7 +1524,7 @@
       <summary>Gets or sets the event identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.Map">
-      <summary>Gets or sets the map.</summary>
+      <summary>Gets or sets the map. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.MapId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.MapId">
       <summary>Gets or sets the map identifier.</summary>
@@ -1533,7 +1533,7 @@
       <summary>Gets or sets the current state of the event.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.World">
-      <summary>Gets or sets the world.</summary>
+      <summary>Gets or sets the world.  This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.WorldId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.DynamicEvents.DynamicEventState.WorldId">
       <summary>Gets or sets the world identifier.</summary>
@@ -1653,7 +1653,7 @@
       <summary>Represents a guild's emblem.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.BackgroundColor">
-      <summary>Gets or sets the background color.</summary>
+      <summary>Gets or sets the background color. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Guilds.Emblem.BackgroundColorId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.BackgroundColorId">
       <summary>Gets or sets the background color identifier.</summary>
@@ -1668,13 +1668,13 @@
       <summary>Gets or sets the foreground image identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundPrimaryColor">
-      <summary>Gets or sets the primary foreground color.</summary>
+      <summary>Gets or sets the primary foreground color. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundPrimaryColorId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundPrimaryColorId">
       <summary>Gets or sets the primary foreground color identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundSecondaryColor">
-      <summary>Gets or sets the secondary foreground color.</summary>
+      <summary>Gets or sets the secondary foreground color. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundSecondaryColorId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Guilds.Emblem.ForegroundSecondaryColorId">
       <summary>Gets or sets the secondary foreground color identifier.</summary>
@@ -1786,7 +1786,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Item.BuildId">
-      <summary>Gets or sets the item's build number.</summary>
+      <summary>Gets or sets the item's build number. Default: 0. Assign a build number for change tracking.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Item.Description">
       <summary>Gets or sets the item's description.</summary>
@@ -1809,8 +1809,8 @@
     <member name="P:GW2DotNET.Entities.Items.Item.ItemId">
       <summary>Gets or sets the item's identifier.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Items.Item.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Items.Item.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Item.Level">
       <summary>Gets or sets the item's level.</summary>
@@ -1867,13 +1867,13 @@
       <summary>Gets or sets the item's infusion slots.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.IUpgradable.SecondarySuffixItem">
-      <summary>Gets or sets the item's secondary suffix item.</summary>
+      <summary>Gets or sets the item's secondary suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.IUpgradable.SecondarySuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.IUpgradable.SecondarySuffixItemId">
       <summary>Gets or sets the item's secondary suffix item identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.IUpgradable.SuffixItem">
-      <summary>Gets or sets the item's suffix item.</summary>
+      <summary>Gets or sets the item's suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.IUpgradable.SuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.IUpgradable.SuffixItemId">
       <summary>Gets or sets the item's suffix item identifier.</summary>
@@ -1882,7 +1882,7 @@
       <summary>Provides the interface for items that have a visual appearance in the game.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.ISkinnable.DefaultSkin">
-      <summary>Gets or sets the default skin.</summary>
+      <summary>Gets or sets the default skin. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.ISkinnable.DefaultSkinId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.ISkinnable.DefaultSkinId">
       <summary>Gets or sets the default skin identifier.</summary>
@@ -1900,7 +1900,7 @@
       <summary>Gets or sets the Condition Damage modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.DefaultSkin">
-      <summary>Gets or sets the default skin.</summary>
+      <summary>Gets or sets the default skin. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Armor.DefaultSkinId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.DefaultSkinId">
       <summary>Gets or sets the default skin identifier.</summary>
@@ -1924,13 +1924,13 @@
       <summary>Gets or sets the Precision modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.SecondarySuffixItem">
-      <summary>Gets or sets the item's secondary suffix item.</summary>
+      <summary>Gets or sets the item's secondary suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Armor.SecondarySuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.SecondarySuffixItemId">
       <summary>Gets or sets the item's secondary suffix item identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.SuffixItem">
-      <summary>Gets or sets the item's suffix item.</summary>
+      <summary>Gets or sets the item's suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Armor.SuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Armor.SuffixItemId">
       <summary>Gets or sets the item's suffix item identifier.</summary>
@@ -2002,7 +2002,7 @@
       <summary>Gets or sets the Condition Damage modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.DefaultSkin">
-      <summary>Gets or sets the default skin.</summary>
+      <summary>Gets or sets the default skin. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Backpack.DefaultSkinId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.DefaultSkinId">
       <summary>Gets or sets the default skin identifier.</summary>
@@ -2023,13 +2023,13 @@
       <summary>Gets or sets the Precision modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.SecondarySuffixItem">
-      <summary>Gets or sets the item's secondary suffix item.</summary>
+      <summary>Gets or sets the item's secondary suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Backpack.SecondarySuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.SecondarySuffixItemId">
       <summary>Gets or sets the item's secondary suffix item identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.SuffixItem">
-      <summary>Gets or sets the item's suffix item.</summary>
+      <summary>Gets or sets the item's suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Backpack.SuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Backpack.SuffixItemId">
       <summary>Gets or sets the item's suffix item identifier.</summary>
@@ -2061,7 +2061,7 @@
       <summary>Gets or sets the infusion slot's type(s).</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.InfusionSlot.Item">
-      <summary>Gets or sets the infusion slot's item.</summary>
+      <summary>Gets or sets the infusion slot's item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.InfusionSlot.ItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.InfusionSlot.ItemId">
       <summary>Gets or sets the infusion slot's item identifier.</summary>
@@ -2127,7 +2127,7 @@
       <summary>Represents a crafting recipe.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.CraftingRecipeUnlocker.Recipe">
-      <summary>Gets or sets the recipe.</summary>
+      <summary>Gets or sets the recipe. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.CraftingRecipeUnlocker.RecipeId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.CraftingRecipeUnlocker.RecipeId">
       <summary>Gets or sets the recipe identifier.</summary>
@@ -2136,7 +2136,7 @@
       <summary>Represents a dye.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.DyeUnlocker.Color">
-      <summary>Gets or sets the color.</summary>
+      <summary>Gets or sets the color. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.DyeUnlocker.ColorId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.DyeUnlocker.ColorId">
       <summary>Gets or sets the color identifier.</summary>
@@ -2245,7 +2245,7 @@
       <summary>Provides the base class for gathering tool types.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.GatheringTool.DefaultSkin">
-      <summary>Gets or sets the default skin.</summary>
+      <summary>Gets or sets the default skin. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.GatheringTool.DefaultSkinId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.GatheringTool.DefaultSkinId">
       <summary>Gets or sets the default skin identifier.</summary>
@@ -2424,7 +2424,7 @@
       </setter>
     </member>
     <member name="P:GW2DotNET.Entities.Items.ItemStack.Item">
-      <summary>Gets or sets the item.</summary>
+      <summary>Gets or sets the item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.ItemStack.ItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.ItemStack.ItemId">
       <summary>Gets or sets the item identifier.</summary>
@@ -2481,13 +2481,13 @@
       <summary>Gets or sets the Precision modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Trinket.SecondarySuffixItem">
-      <summary>Gets or sets the item's secondary suffix item.</summary>
+      <summary>Gets or sets the item's secondary suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Trinket.SecondarySuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Trinket.SecondarySuffixItemId">
       <summary>Gets or sets the item's secondary suffix item identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Trinket.SuffixItem">
-      <summary>Gets or sets the item's suffix item.</summary>
+      <summary>Gets or sets the item's suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Trinket.SuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Trinket.SuffixItemId">
       <summary>Gets or sets the item's suffix item identifier.</summary>
@@ -2664,7 +2664,7 @@
       <summary>Gets or sets the weapon's damage type.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.DefaultSkin">
-      <summary>Gets or sets the default skin.</summary>
+      <summary>Gets or sets the default skin. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Weapon.DefaultSkinId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.DefaultSkinId">
       <summary>Gets or sets the default skin identifier.</summary>
@@ -2694,13 +2694,13 @@
       <summary>Gets or sets the Precision modifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.SecondarySuffixItem">
-      <summary>Gets or sets the item's secondary suffix item.</summary>
+      <summary>Gets or sets the item's secondary suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Weapon.SecondarySuffixItem" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.SecondarySuffixItemId">
       <summary>Gets or sets the item's secondary suffix item identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.SuffixItem">
-      <summary>Gets or sets the item's suffix item.</summary>
+      <summary>Gets or sets the item's suffix item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Items.Weapon.SuffixItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Items.Weapon.SuffixItemId">
       <summary>Gets or sets the item's suffix item identifier.</summary>
@@ -2845,7 +2845,7 @@
       <summary>Gets or sets a collection of floor identifiers.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Continent.Floors">
-      <summary>Gets or sets a collection of floors.</summary>
+      <summary>Gets or sets a collection of floors. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Maps.Continent.FloorIds" /> to obtain references.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Continent.MaximumZoom">
       <summary>Gets or sets the maximum zoom level for use with the map tile service.</summary>
@@ -2869,7 +2869,7 @@
       <summary>Gets or sets a rectangle of downloadable textures. Every tile coordinate outside of this rectangle is not available on the tile server.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Floor.Continent">
-      <summary>Gets or sets the continent.</summary>
+      <summary>Gets or sets the continent. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Maps.Floor.ContinentId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Floor.ContinentId">
       <summary>Gets or sets the continent identifier.</summary>
@@ -2877,8 +2877,8 @@
     <member name="P:GW2DotNET.Entities.Maps.Floor.FloorId">
       <summary>Gets or sets the floor identifier.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Maps.Floor.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Maps.Floor.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Floor.Regions">
       <summary>Gets or sets the collection of regions.</summary>
@@ -2922,7 +2922,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Map.Continent">
-      <summary>Gets or sets the continent that this map belongs to.</summary>
+      <summary>Gets or sets the continent that this map belongs to. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Maps.Map.ContinentId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Map.ContinentId">
       <summary>Gets or sets the continent identifier of the continent that this map belongs to.</summary>
@@ -2939,8 +2939,8 @@
     <member name="P:GW2DotNET.Entities.Maps.Map.Floors">
       <summary>Gets or sets a collection of floor identifiers.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Maps.Map.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Maps.Map.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Map.MapId">
       <summary>Gets or sets the map identifier.</summary>
@@ -2958,7 +2958,7 @@
       <summary>Gets or sets the minimum level of this map.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Map.Region">
-      <summary>Gets or sets the region that this map belongs to.</summary>
+      <summary>Gets or sets the region that this map belongs to. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Maps.Map.RegionId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Map.RegionId">
       <summary>Gets or sets the region identifier of the region that this map belongs to.</summary>
@@ -3338,7 +3338,7 @@
       <summary>Gets or sets the default floor of this map.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Subregion.Map">
-      <summary>Gets or sets the map.</summary>
+      <summary>Gets or sets the map. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Maps.Subregion.MapId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Maps.Subregion.MapId">
       <summary>Gets or sets the map identifier.</summary>
@@ -3474,7 +3474,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.BuildId">
-      <summary>Gets or sets the recipe's build number.</summary>
+      <summary>Gets or sets the recipe's build number. Default: 0. Assign a build number for change tracking.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.CraftingDisciplines">
       <summary>Gets or sets the crafting disciplines that can learn the recipe.</summary>
@@ -3485,14 +3485,14 @@
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.Ingredients">
       <summary>Gets or sets a collection of the required ingredients.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Recipes.Recipe.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Recipes.Recipe.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.MinimumRating">
       <summary>Gets or sets the recipe's minimum rating.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.OutputItem">
-      <summary>Gets or sets the output item.</summary>
+      <summary>Gets or sets the output item. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.Recipes.Recipe.OutputItemId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Recipes.Recipe.OutputItemCount">
       <summary>Gets or sets the amount of items produced.</summary>
@@ -3746,8 +3746,8 @@
     <member name="P:GW2DotNET.Entities.Skins.Skin.Flags">
       <summary>Gets or sets the skin's additional flags.</summary>
     </member>
-    <member name="P:GW2DotNET.Entities.Skins.Skin.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Skins.Skin.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Skins.Skin.Name">
       <summary>Gets or sets the name of the skin.</summary>
@@ -3923,8 +3923,8 @@
       <returns>A string that represents the current object.</returns>
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
-    <member name="P:GW2DotNET.Entities.Worlds.World.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.Worlds.World.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.Worlds.World.Name">
       <summary>Gets or sets the name of the world.</summary>
@@ -4046,7 +4046,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.BlueWorld">
-      <summary>Gets or sets the blue world.</summary>
+      <summary>Gets or sets the blue world. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.BlueWorldId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.BlueWorldId">
       <summary>Gets or sets the blue world identifier.</summary>
@@ -4055,7 +4055,7 @@
       <summary>Gets or sets the timestamp (UTC) of when the match ends.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.GreenWorld">
-      <summary>Gets or sets the green world.</summary>
+      <summary>Gets or sets the green world. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.GreenWorldId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.GreenWorldId">
       <summary>Gets or sets the green world identifier.</summary>
@@ -4064,7 +4064,7 @@
       <summary>Gets or sets the match identifier.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.RedWorld">
-      <summary>Gets or sets the red world.</summary>
+      <summary>Gets or sets the red world. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.RedWorldId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Matchup.RedWorldId">
       <summary>Gets or sets the red world identifier.</summary>
@@ -4106,8 +4106,8 @@
       <returns>A string that represents the current object.</returns>
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
-    <member name="P:GW2DotNET.Entities.WorldVersusWorld.ObjectiveName.Language">
-      <summary>Gets or sets the language.</summary>
+    <member name="P:GW2DotNET.Entities.WorldVersusWorld.ObjectiveName.Locale">
+      <summary>Gets or sets the locale.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.ObjectiveName.Name">
       <summary>Gets or sets the name of the objective.</summary>
@@ -4150,7 +4150,7 @@
       <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Objective.Name">
-      <summary>Gets or sets the name of the objective.</summary>
+      <summary>Gets or sets the name of the objective. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.WorldVersusWorld.Objective.ObjectiveId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Objective.ObjectiveId">
       <summary>Gets or sets the objective identifier.</summary>
@@ -4159,7 +4159,7 @@
       <summary>Gets or sets the current owner.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Objective.OwnerGuild">
-      <summary>Gets or sets the guild currently claiming the objective.</summary>
+      <summary>Gets or sets the guild currently claiming the objective. This is a navigation property. Use the value of <see cref="P:GW2DotNET.Entities.WorldVersusWorld.Objective.OwnerGuildId" /> to obtain a reference.</summary>
     </member>
     <member name="P:GW2DotNET.Entities.WorldVersusWorld.Objective.OwnerGuildId">
       <summary>Gets or sets the identifier of the guild currently claiming the objective.</summary>
@@ -10040,7 +10040,7 @@
       <summary>Gets the resource path.</summary>
     </member>
     <member name="T:GW2DotNET.V2.Commerce.ExchangeService">
-      <summary>Provides access to the Trading Post exchange service.</summary>
+      <summary>Provides access to the /v2/commerce/exchange service.</summary>
       <remarks>See: <a href="http://wiki.guildwars2.com/wiki/API:2/commerce/exchange">wiki</a></remarks>
     </member>
     <member name="T:GW2DotNET.V2.Common.IBroker`2">
@@ -10055,15 +10055,20 @@
     <member name="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets the discovered identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Common.IBroker`2.GetQuote(`0)">
       <summary>Gets a quote for the commodity.</summary>
@@ -10111,15 +10116,20 @@
     <member name="M:GW2DotNET.V2.Commerce.ExchangeService.Discover">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ExchangeService.DiscoverAsync">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ExchangeService.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets the discovered identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ExchangeService.GetQuote(System.String)">
       <summary>Gets a quote for the commodity.</summary>
@@ -10162,8 +10172,11 @@
       <returns>The entity.</returns>
     </member>
     <member name="T:GW2DotNET.V2.Commerce.ListingService">
-      <summary>Provides access to the Trading Post listing service.</summary>
-      <remarks>See: <a href="http://wiki.guildwars2.com/wiki/API:2/commerce/listings">wiki</a></remarks>
+      <summary>Provides access to the /v2/commerce/listings service. See the class remarks for important limitations regarding the default implementation.</summary>
+      <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet"><item><term><see cref="P:GW2DotNET.Entities.Commerce.Listing.Item" />:</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Commerce.Listing.ItemId" /> to retrieve the <see cref="T:GW2DotNET.Entities.Items.Item" />.</description></item></list>
+            See: <a href="http://wiki.guildwars2.com/wiki/API:2/commerce/listings">wiki</a></remarks>
     </member>
     <member name="T:GW2DotNET.V2.Common.IRepository`2">
       <summary>Provides the interface for repositories.</summary>
@@ -10302,15 +10315,20 @@
     <member name="M:GW2DotNET.V2.Commerce.ListingService.Discover">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.DiscoverAsync">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets a collection of identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.Find(System.Int32)">
       <summary>Finds the <see cref="T:GW2DotNET.Entities.Commerce.Listing" /> with the specified identifier.</summary>
@@ -10433,26 +10451,36 @@
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.ConvertOfferDataContract(GW2DotNET.V2.Commerce.Json.OfferDataContract)">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.ConvertOfferDataContractCollection(System.Collections.Generic.ICollection{GW2DotNET.V2.Commerce.Json.OfferDataContract})">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.ConvertListingDataContractRange(System.Collections.Generic.ICollection{GW2DotNET.V2.Commerce.Json.ListingDataContract})">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.ListingService.ConvertListingDataContractPage(System.Collections.Generic.ICollection{GW2DotNET.V2.Commerce.Json.ListingDataContract})">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="T:GW2DotNET.V2.Commerce.ListingBulkRequest">
       <summary>Represents a bulk request.</summary>
@@ -10554,8 +10582,11 @@
       <summary>Gets the resource path.</summary>
     </member>
     <member name="T:GW2DotNET.V2.Commerce.PriceService">
-      <summary>Provides access to the Trading Post price service.</summary>
-      <remarks>See: <a href="http://wiki.guildwars2.com/wiki/API:2/commerce/prices">wiki</a></remarks>
+      <summary>Provides access to the Trading Post price service. See the class remarks for important limitations regarding the default implementation.</summary>
+      <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet"><item><term><see cref="P:GW2DotNET.Entities.Commerce.AggregateListing.Item" />:</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Commerce.AggregateListing.ItemId" /> to retrieve the <see cref="T:GW2DotNET.Entities.Items.Item" />.</description></item></list>
+            See: <a href="http://wiki.guildwars2.com/wiki/API:2/commerce/prices">wiki</a></remarks>
     </member>
     <member name="F:GW2DotNET.V2.Commerce.PriceService.serviceClient">
       <summary>Infrastructure. Holds a reference to the service client.</summary>
@@ -10568,15 +10599,20 @@
     <member name="M:GW2DotNET.V2.Commerce.PriceService.Discover">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.DiscoverAsync">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets a collection of identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.Find(System.Int32)">
       <summary>Finds the <see cref="T:GW2DotNET.Entities.Commerce.AggregateListing" /> with the specified identifier.</summary>
@@ -10699,21 +10735,46 @@
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.ConvertAggregateListingDataContractPage(System.Collections.Generic.ICollection{GW2DotNET.V2.Commerce.Json.AggregateListingDataContract})">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.ConvertAggregateListingDataContractRange(System.Collections.Generic.ICollection{GW2DotNET.V2.Commerce.Json.AggregateListingDataContract})">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Commerce.PriceService.ConvertAggregateOfferDataContract(GW2DotNET.V2.Commerce.Json.AggregateOfferDataContract)">
       <summary>Infrastructure. Converts data contracts to entities.</summary>
       <param name="content">The content.</param>
       <returns>The entity.</returns>
+      <requires csharp="content != null" vb="content &lt;&gt; Nothing">content != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:GW2DotNET.V2.Common.DiscoverableCodeContract`1">
+      <summary>The code contract class for <see cref="T:GW2DotNET.V2.Common.IDiscoverable`1" />.</summary>
+      <typeparam name="T">The type of the identifiers.</typeparam>
+    </member>
+    <member name="M:GW2DotNET.V2.Common.DiscoverableCodeContract`1.Discover">
+      <summary>Gets the discovered identifiers.</summary>
+      <returns>A collection of discovered identifiers.</returns>
+    </member>
+    <member name="M:GW2DotNET.V2.Common.DiscoverableCodeContract`1.DiscoverAsync">
+      <summary>Gets the discovered identifiers.</summary>
+      <returns>A collection of discovered identifiers.</returns>
+    </member>
+    <member name="M:GW2DotNET.V2.Common.DiscoverableCodeContract`1.DiscoverAsync(System.Threading.CancellationToken)">
+      <summary>Gets the discovered identifiers.</summary>
+      <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
+      <returns>A collection of discovered identifiers.</returns>
     </member>
     <member name="T:GW2DotNET.V2.Common.IPageContext">
       <summary>Provides contextual information for paginated collections.</summary>
@@ -10847,17 +10908,17 @@
       <typeparam name="TValue">The value type</typeparam>
     </member>
     <member name="M:GW2DotNET.V2.Common.RepositoryContract`2.Discover">
-      <summary>Gets a collection of identifiers.</summary>
-      <returns>A collection of identifiers.</returns>
+      <summary>Gets the discovered identifiers.</summary>
+      <returns>A collection of discovered identifiers.</returns>
     </member>
     <member name="M:GW2DotNET.V2.Common.RepositoryContract`2.DiscoverAsync">
-      <summary>Gets a collection of identifiers.</summary>
-      <returns>A collection of identifiers.</returns>
+      <summary>Gets the discovered identifiers.</summary>
+      <returns>A collection of discovered identifiers.</returns>
     </member>
     <member name="M:GW2DotNET.V2.Common.RepositoryContract`2.DiscoverAsync(System.Threading.CancellationToken)">
-      <summary>Gets a collection of identifiers.</summary>
+      <summary>Gets the discovered identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
-      <returns>A collection of identifiers.</returns>
+      <returns>A collection of discovered identifiers.</returns>
     </member>
     <member name="M:GW2DotNET.V2.Common.RepositoryContract`2.Find(`0)">
       <summary>Finds the <typeparamref name="TValue" /> with the specified identifier.</summary>
@@ -11246,10 +11307,11 @@
       <summary>Gets the resource path.</summary>
     </member>
     <member name="T:GW2DotNET.V2.Items.ItemService">
-      <summary>
-            Provides access to the /v2/items service using the default implementation.
-            This implementation does not retrieve associated entities. For example: item skins can be retrieved from the skins service, but this class does not ever touch the skins service.
-            </summary>
+      <summary>Provides access to the /v2/items service. See the class remarks for important limitations regarding the default implementation.</summary>
+      <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet"><item><term><see cref="P:GW2DotNET.Entities.Items.Item.BuildId" />:</term><description>Always <c>0</c>. Retrieve the build number from the build service.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.ISkinnable.DefaultSkin" /> (applies to <see cref="P:GW2DotNET.Entities.Items.Armor.DefaultSkin" />, <see cref="P:GW2DotNET.Entities.Items.Backpack.DefaultSkin" />, <see cref="P:GW2DotNET.Entities.Items.GatheringTool.DefaultSkin" /> and <see cref="P:GW2DotNET.Entities.Items.Weapon.DefaultSkin" />):</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.ISkinnable.DefaultSkinId" /> to retrieve the skin.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.IUpgradable.SuffixItem" /> (applies to <see cref="P:GW2DotNET.Entities.Items.Armor.SuffixItem" />, <see cref="P:GW2DotNET.Entities.Items.Backpack.SuffixItem" />, <see cref="P:GW2DotNET.Entities.Items.Trinket.SuffixItem" /> and <see cref="P:GW2DotNET.Entities.Items.Weapon.SuffixItem" />):</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.IUpgradable.SuffixItemId" /> to retrieve the suffix item.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.IUpgradable.SecondarySuffixItem" /> (applies to <see cref="P:GW2DotNET.Entities.Items.Armor.SecondarySuffixItem" />, <see cref="P:GW2DotNET.Entities.Items.Backpack.SecondarySuffixItem" />, <see cref="P:GW2DotNET.Entities.Items.Trinket.SecondarySuffixItem" /> and <see cref="P:GW2DotNET.Entities.Items.Weapon.SecondarySuffixItem" />):</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.IUpgradable.SecondarySuffixItemId" /> to retrieve the secondary suffix item.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.InfusionSlot.Item" />:</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.InfusionSlot.ItemId" /> to retrieve the infusion item.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.DyeUnlocker.Color" />:</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.DyeUnlocker.ColorId" /> to retrieve the color.</description></item><item><term><see cref="P:GW2DotNET.Entities.Items.CraftingRecipeUnlocker.Recipe" />:</term><description>Always <c>null</c>. Use the value of <see cref="P:GW2DotNET.Entities.Items.CraftingRecipeUnlocker.RecipeId" /> to retrieve the recipe.</description></item></list>
+            See: <a href="http://wiki.guildwars2.com/wiki/API:2/items">wiki</a></remarks>
     </member>
     <member name="F:GW2DotNET.V2.Items.ItemService.serviceClient">
       <summary>Infrastructure. Holds a reference to the service client.</summary>
@@ -11261,15 +11323,20 @@
     <member name="M:GW2DotNET.V2.Items.ItemService.Discover">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Items.ItemService.DiscoverAsync">
       <summary>Gets the discovered identifiers.</summary>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Items.ItemService.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets the discovered identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of discovered identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Items.ItemService.Find(System.Int32)">
       <summary>Finds the <see cref="T:GW2DotNET.Entities.Items.Item" /> with the specified identifier.</summary>
@@ -11603,15 +11670,20 @@
     <member name="M:GW2DotNET.V2.Quaggans.QuagganService.Discover">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.Discover" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Quaggans.QuagganService.DiscoverAsync">
       <summary>Gets a collection of identifiers.</summary>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Quaggans.QuagganService.DiscoverAsync(System.Threading.CancellationToken)">
       <summary>Gets a collection of identifiers.</summary>
       <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" /> that provides cancellation support.</param>
       <returns>A collection of identifiers.</returns>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:GW2DotNET.V2.Common.IDiscoverable`1.DiscoverAsync(System.Threading.CancellationToken)" inheritedFromTypeName="IDiscoverable" csharp="result.Result != null" vb="result.Result &lt;&gt; Nothing">result.Result != null</ensures>
     </member>
     <member name="M:GW2DotNET.V2.Quaggans.QuagganService.Find(System.String)">
       <summary>Finds the <see cref="T:GW2DotNET.Entities.Quaggans.Quaggan" /> with the specified identifier.</summary>

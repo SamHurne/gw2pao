@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>GW2.NET.Compression</name>
+  </assembly>
+  <members>
+    <member name="T:GW2DotNET.Compression.GzipCompressor">
+      <summary>Represents the GZIP compressor.</summary>
+    </member>
+    <member name="M:GW2DotNET.Compression.GzipCompressor.Convert(System.IO.Stream)">
+      <summary>Compresses the given <see cref="T:System.IO.Stream" />.</summary>
+      <param name="value">The stream.</param>
+      <returns>The compressed <see cref="T:System.IO.Stream" />.</returns>
+    </member>
+    <member name="T:GW2DotNET.Compression.GzipInflator">
+      <summary>Represents the GZIP inflator.</summary>
+    </member>
+    <member name="M:GW2DotNET.Compression.GzipInflator.Convert(System.IO.Stream)">
+      <summary>Inflates the given <see cref="T:System.IO.Stream" />.</summary>
+      <param name="value">The compressed stream.</param>
+      <returns>The <see cref="T:System.IO.Stream" />.</returns>
+    </member>
+  </members>
+</doc>
