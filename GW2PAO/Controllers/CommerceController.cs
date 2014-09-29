@@ -181,8 +181,7 @@ namespace GW2PAO.Controllers
                     priceWatches.RemoveAll(pw => pw.Data.ItemID <= 0);
 
                     // Retrieve price information for all price-watched items
-                    // TODO: There is a bug that prevents this from working, for now, just request one at a time
-                    //var allPrices = this.commerceService.GetItemPrices(priceWatches.Select(pw => pw.Data.ItemID).ToArray());
+                    var allPrices = this.commerceService.GetItemPrices(priceWatches.Select(pw => pw.Data.ItemID).ToArray());
 
                     foreach (var priceWatch in priceWatches)
                     {
@@ -201,8 +200,8 @@ namespace GW2PAO.Controllers
                             this.NotificationsResetDateTimes.Add(priceWatch, DateTime.Now);
                         }
 
-                        //var prices = allPrices[priceWatch.Data.ItemID];
-                        var prices = this.commerceService.GetItemPrices(priceWatch.Data.ItemID);
+                        var prices = allPrices[priceWatch.Data.ItemID];
+                        //var prices = this.commerceService.GetItemPrices(priceWatch.Data.ItemID);
                         Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
                         Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
 
