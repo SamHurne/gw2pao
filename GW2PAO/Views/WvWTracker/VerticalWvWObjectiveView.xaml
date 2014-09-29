@@ -123,7 +123,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="53" />
+                <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
 
             <!--Objective Image-->
@@ -163,19 +163,6 @@
                             Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
                             Margin="0,0,0,5">
 
-                    <core:OutlinedTextBlock Margin="0,0,3,0">
-                        <core:OutlinedTextBlock.Style>
-                            <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
-                                <Setter Property="Text" Value=""/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
-                                        <Setter Property="Text" Value="Dist:"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </core:OutlinedTextBlock.Style>
-                    </core:OutlinedTextBlock>
-
                     <core:OutlinedTextBlock Fill="White">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
@@ -207,14 +194,11 @@
                 </StackPanel>
 
                 <!--RI Timer Value (if any), will hide/show based with trigger-->
-                <StackPanel Orientation="Horizontal" Grid.Row="3"
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}">
-                    <core:OutlinedTextBlock Margin="0,0,3,0"
-                                            Text="RI:" />
-                    <core:OutlinedTextBlock Name="TimerValueTextBlock"
-                                            Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
-                </StackPanel>
+                <core:OutlinedTextBlock Name="TimerValueTextBlock" Grid.Row="3"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Fill="#FF5E5E"
+                                        Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
+                                        Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
             </StackPanel>
 
             <!--Dummy textblock for flashing the item when the owner changes -->

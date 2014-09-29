@@ -166,26 +166,13 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="2"
                         VerticalAlignment="Center" HorizontalAlignment="Left"
-                        Margin="10,0,0,0">
+                        Margin="8,0,0,0">
 
                 <!--Distance-->
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left"
                             Margin="0,0,10,0"
                             Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}">
-
-                    <core:OutlinedTextBlock Margin="0,0,3,0">
-                        <core:OutlinedTextBlock.Style>
-                            <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
-                                <Setter Property="Text" Value=""/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
-                                        <Setter Property="Text" Value="Dist:"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </core:OutlinedTextBlock.Style>
-                    </core:OutlinedTextBlock>
 
                     <core:OutlinedTextBlock VerticalAlignment="Center">
                         <core:OutlinedTextBlock.Style>
@@ -218,10 +205,8 @@
                 </StackPanel>
 
                 <!--RI Timer Value (if any)-->
-                <core:OutlinedTextBlock Margin="0,0,3,0"
-                                        Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
-                                        Text="RI:" />
                 <core:OutlinedTextBlock Name="TimerValueTextBlock"
+                                        Fill="#FF5E5E"
                                         Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />
             </StackPanel>
