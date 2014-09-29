@@ -194,6 +194,9 @@
     <Compile Include="Views\OverlayMenuIconView.xaml.cs">
       <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PriceNotification\ReadonlyPriceView.xaml.cs">
+      <DependentUpon>ReadonlyPriceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml.cs">
       <DependentUpon>RebuildNamesDatabaseView.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
     <Page Include="Views\OverlayMenuIconView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PriceNotification\ReadonlyPriceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml">
       <Generator>MSBuild:Compile</Generator>

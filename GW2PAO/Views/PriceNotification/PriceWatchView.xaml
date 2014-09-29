@@ -46,6 +46,10 @@
     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
           Margin="5,0,5,0"
           Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -57,42 +61,88 @@
         </Grid.ColumnDefinitions>
 
         <!-- Remove Button -->
-        <Button Grid.Column="0"
+        <Button Grid.Column="0" Grid.RowSpan="2"
                 Margin="5"
                 Height="16"
                 Content="{StaticResource CloseGraphic}"
                 Command="{Binding RemoveCommand}"/>
 
         <!-- Item's Icon -->
-        <Image Grid.Column="1"
+        <Image Grid.Column="1" Grid.RowSpan="2"
                Margin="5,5,5,5"
                Width="40" Height="40"
-               Source="{Binding IconUrl}"/>
+               Source="{Binding IconUrl}"
+               ToolTipService.ShowDuration="30000">
+            <Image.ToolTip>
+                <ToolTip>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                            <core:OutlinedTextBlock Text="Current Highest Buy Order:" FontSize="12"/>
+                            <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentBuyOrder}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                            <core:OutlinedTextBlock Text="Current Lowest Sell Listing:" FontSize="12"/>
+                            <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentSellListing}" />
+                        </StackPanel>
+                    </StackPanel>
+                </ToolTip>
+            </Image.ToolTip>
+        </Image>
 
         <!-- Item's Name -->
-        <TextBox Grid.Column="2" Margin="5"
-                 Height="22"
+        <TextBox Grid.Column="2" Grid.RowSpan="2"
+                 Margin="5"
+                 Height="25"
+                 TextBlock.FontSize="15"
                  BorderBrush="{StaticResource TextBoxBorder}"
                  Text="{Binding ItemName, UpdateSourceTrigger=LostFocus}" />
 
-        <!--Buy Order Limit-->
-        <CheckBox Grid.Column="3"
+        <!--Buy Order Upper Limit-->
+        <CheckBox Grid.Column="3" Grid.Row="0"
                   Style="{StaticResource AlternateCheckboxStyle}"
-                  Margin="10,0,0,0" VerticalAlignment="Center"
-                  IsChecked="{Binding Data.IsBuyOrderNotificationEnabled}"/>
-        <Grid Grid.Column="4"
-              Visibility="{Binding Data.IsBuyOrderNotificationEnabled, Converter={StaticResource BoolToVisibility}}">
-            <view:PriceView DataContext="{Binding Data.BuyOrderLimit}"/>
+                  Margin="10,0,5,0" VerticalAlignment="Center"
+                  IsChecked="{Binding Data.IsBuyOrderUpperLimitEnabled}">
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Upper" />
+        </CheckBox>
+        <Grid Grid.Column="4" Grid.Row="0"
+              Visibility="{Binding Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+            <view:PriceView DataContext="{Binding Data.BuyOrderUpperLimit}"/>
         </Grid>
 
-        <!--Sell Listing Limit-->
-        <CheckBox Grid.Column="5"
+        <!--Buy Order Lower Limit-->
+        <CheckBox Grid.Column="3" Grid.Row="1"
                   Style="{StaticResource AlternateCheckboxStyle}"
-                  Margin="15,0,0,0" VerticalAlignment="Center"
-                  IsChecked="{Binding Data.IsSellListingNotificationEnabled}" />
-        <Grid Grid.Column="6"
-              Visibility="{Binding Data.IsSellListingNotificationEnabled, Converter={StaticResource BoolToVisibility}}">
-            <view:PriceView DataContext="{Binding Data.SellListingLimit}"/>
+                  Margin="10,0,5,0" VerticalAlignment="Center"
+                  IsChecked="{Binding Data.IsBuyOrderLowerLimitEnabled}">
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Lower" />
+        </CheckBox>
+        <Grid Grid.Column="4" Grid.Row="1"
+              Visibility="{Binding Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+            <view:PriceView DataContext="{Binding Data.BuyOrderLowerLimit}"/>
+        </Grid>
+
+        <!--Sell Listing Upper Limit-->
+        <CheckBox Grid.Column="5" Grid.Row="0"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="15,0,5,0" VerticalAlignment="Center"
+                  IsChecked="{Binding Data.IsSellListingUpperLimitEnabled}">
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Upper" />
+        </CheckBox>
+        <Grid Grid.Column="6" Grid.Row="0"
+              Visibility="{Binding Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+            <view:PriceView DataContext="{Binding Data.SellListingUpperLimit}"/>
+        </Grid>
+
+        <!--Sell Listing Lower Limit-->
+        <CheckBox Grid.Column="5" Grid.Row="1"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="15,0,5,0" VerticalAlignment="Center"
+                  IsChecked="{Binding Data.IsSellListingLowerLimitEnabled}">
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Lower" />
+        </CheckBox>
+        <Grid Grid.Column="6" Grid.Row="1"
+              Visibility="{Binding Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+            <view:PriceView DataContext="{Binding Data.SellListingLowerLimit}"/>
         </Grid>
 
     </Grid>

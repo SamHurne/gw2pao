@@ -43,6 +43,16 @@ namespace GW2PAO.ViewModels.PriceNotification
         public Item ItemData { get; private set; }
 
         /// <summary>
+        /// The current lowest sell listing
+        /// </summary>
+        public Price CurrentSellListing { get; private set; }
+
+        /// <summary>
+        /// The current highest buy order
+        /// </summary>
+        public Price CurrentBuyOrder { get; private set; }
+
+        /// <summary>
         /// Name of the item
         /// </summary>
         public string ItemName
@@ -59,8 +69,12 @@ namespace GW2PAO.ViewModels.PriceNotification
                         this.ItemData = this.commerceService.GetItem(value);
                         this.Data.ItemID = this.ItemData.ID;
                         this.Data.ItemName = this.ItemData.Name;
-                        this.Data.BuyOrderLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
-                        this.Data.SellListingLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
+                        this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
+                        this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
+                        this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
+                        this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
+                        this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
+                        this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
 
                         this.RaisePropertyChanged();
 
@@ -141,13 +155,17 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.ItemData = itemData;
             this.controller = controller;
             this.commerceService = service;
+            this.CurrentBuyOrder = new Price();
+            this.CurrentSellListing = new Price();
 
             this.IsBuyOrderNotificationShown = false;
             this.IsSellListingNotificationShown = false;
 
             this.Data.PropertyChanged += Data_PropertyChanged;
-            this.Data.BuyOrderLimit.PropertyChanged += BuyOrderLimit_PropertyChanged;
-            this.Data.SellListingLimit.PropertyChanged += SellListingLimit_PropertyChanged;
+            this.Data.BuyOrderUpperLimit.PropertyChanged += BuyOrderLimit_PropertyChanged;
+            this.Data.BuyOrderLowerLimit.PropertyChanged += BuyOrderLimit_PropertyChanged;
+            this.Data.SellListingUpperLimit.PropertyChanged += SellListingLimit_PropertyChanged;
+            this.Data.SellListingLowerLimit.PropertyChanged += SellListingLimit_PropertyChanged;
         }
 
         /// <summary>
@@ -155,11 +173,11 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// </summary>
         private void Data_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsBuyOrderNotificationEnabled")
+            if (e.PropertyName == "IsBuyOrderUpperLimitEnabled" || e.PropertyName == "IsBuyOrderLowerLimitEnabled")
             {
                 this.IsBuyOrderNotificationShown = false;
             }
-            else if (e.PropertyName == "IsSellListingNotificationEnabled")
+            else if (e.PropertyName == "IsSellListingUpperLimitEnabled" || e.PropertyName == "IsSellListingLowerLimitEnabled")
             {
                 this.IsSellListingNotificationShown = false;
             }

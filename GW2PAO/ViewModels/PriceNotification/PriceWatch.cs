@@ -17,10 +17,14 @@ namespace GW2PAO.ViewModels.PriceNotification
     {
         private int itemId;
         private string itemName;
-        private bool isBuyOrderNotificationEnabled;
-        private Price buyOrderLimit;
-        private bool isSellListingNotificationEnabled;
-        private Price sellListingLimit;
+        private bool isBuyOrderUpperLimitEnabled;
+        private bool isBuyOrderLowerLimitEnabled;
+        private Price buyOrderUpperLimit;
+        private Price buyOrderLowerLimit;
+        private bool isSellListingUpperLimitEnabled;
+        private bool isSellListingLowerLimitEnabled;
+        private Price sellListingUpperLimit;
+        private Price sellListingLowerLimit;
 
         /// <summary>
         /// ID of the item
@@ -41,39 +45,75 @@ namespace GW2PAO.ViewModels.PriceNotification
         }
 
         /// <summary>
-        /// True if the buy order notification is enabled for this item, else false
+        /// True if the buy order upper limit is enabled for this item, else false
         /// </summary>
-        public bool IsBuyOrderNotificationEnabled
+        public bool IsBuyOrderUpperLimitEnabled
         {
-            get { return this.isBuyOrderNotificationEnabled; }
-            set { this.SetField(ref this.isBuyOrderNotificationEnabled, value); }
+            get { return this.isBuyOrderUpperLimitEnabled; }
+            set { this.SetField(ref this.isBuyOrderUpperLimitEnabled, value); }
         }
 
         /// <summary>
-        /// The buy order limit
+        /// True if the buy order lower limit is enabled for this item, else false
         /// </summary>
-        public Price BuyOrderLimit
+        public bool IsBuyOrderLowerLimitEnabled
         {
-            get { return this.buyOrderLimit; }
-            set { this.SetField(ref this.buyOrderLimit, value); }
+            get { return this.isBuyOrderLowerLimitEnabled; }
+            set { this.SetField(ref this.isBuyOrderLowerLimitEnabled, value); }
         }
 
         /// <summary>
-        /// True if the sell listing notification is enabled for this item, else false
+        /// The buy order upper limit
         /// </summary>
-        public bool IsSellListingNotificationEnabled
+        public Price BuyOrderUpperLimit
         {
-            get { return this.isSellListingNotificationEnabled; }
-            set { this.SetField(ref this.isSellListingNotificationEnabled, value); }
+            get { return this.buyOrderUpperLimit; }
+            set { this.SetField(ref this.buyOrderUpperLimit, value); }
         }
 
         /// <summary>
-        /// The sell listing limit
+        /// The buy order lower limit
         /// </summary>
-        public Price SellListingLimit
+        public Price BuyOrderLowerLimit
         {
-            get { return this.sellListingLimit; }
-            set { this.SetField(ref this.sellListingLimit, value); }
+            get { return this.buyOrderLowerLimit; }
+            set { this.SetField(ref this.buyOrderLowerLimit, value); }
+        }
+
+        /// <summary>
+        /// True if the sell listing upper limit is enabled for this item, else false
+        /// </summary>
+        public bool IsSellListingUpperLimitEnabled
+        {
+            get { return this.isSellListingUpperLimitEnabled; }
+            set { this.SetField(ref this.isSellListingUpperLimitEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if the sell listing lower limit is enabled for this item, else false
+        /// </summary>
+        public bool IsSellListingLowerLimitEnabled
+        {
+            get { return this.isSellListingLowerLimitEnabled; }
+            set { this.SetField(ref this.isSellListingLowerLimitEnabled, value); }
+        }
+
+        /// <summary>
+        /// The sell listing upper limit
+        /// </summary>
+        public Price SellListingUpperLimit
+        {
+            get { return this.sellListingUpperLimit; }
+            set { this.SetField(ref this.sellListingUpperLimit, value); }
+        }
+
+        /// <summary>
+        /// The sell listing lower limit
+        /// </summary>
+        public Price SellListingLowerLimit
+        {
+            get { return this.sellListingLowerLimit; }
+            set { this.SetField(ref this.sellListingLowerLimit, value); }
         }
 
         /// <summary>
@@ -83,10 +123,14 @@ namespace GW2PAO.ViewModels.PriceNotification
         {
             this.itemId = 0;
             this.itemName = string.Empty;
-            this.isBuyOrderNotificationEnabled = false;
-            this.isSellListingNotificationEnabled = false;
-            this.buyOrderLimit = new Price();
-            this.sellListingLimit = new Price();
+            this.isBuyOrderUpperLimitEnabled = false;
+            this.isBuyOrderLowerLimitEnabled = false;
+            this.isSellListingUpperLimitEnabled = false;
+            this.isSellListingLowerLimitEnabled = false;
+            this.buyOrderUpperLimit = new Price();
+            this.buyOrderLowerLimit = new Price();
+            this.sellListingUpperLimit = new Price();
+            this.sellListingLowerLimit = new Price();
         }
 
         /// <summary>

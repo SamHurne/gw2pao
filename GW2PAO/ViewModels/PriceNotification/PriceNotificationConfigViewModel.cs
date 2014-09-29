@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
+using GW2PAO.Models;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -28,6 +29,22 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// The events controller
         /// </summary>
         private ICommerceController controller;
+
+        /// <summary>
+        /// Interval at which to reset the shown-state of price notifications
+        /// </summary>
+        public int ResetPriceNotificationsInterval
+        {
+            get { return this.controller.UserSettings.ResetPriceNotificationsInterval; }
+            set
+            {
+                if (this.controller.UserSettings.ResetPriceNotificationsInterval != value)
+                {
+                    this.controller.UserSettings.ResetPriceNotificationsInterval = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Collection of active event notifications

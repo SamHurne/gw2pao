@@ -6,12 +6,13 @@
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
-        MaxHeight="450" Width="650" SizeToContent="Height"
+        MaxHeight="450" Width="725" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
-        TextOptions.TextFormattingMode="Display">
+        TextOptions.TextFormattingMode="Display"
+        UseLayoutRounding="True">
     
     <src:OverlayWindow.Resources>
         <ResourceDictionary>
@@ -139,9 +140,9 @@
 
         <Grid Name="MainContent" Grid.Row="1" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="199" />
-                <ColumnDefinition Width="193" />
+                <ColumnDefinition Width="88" />
+                <ColumnDefinition Width="192" />
+                <ColumnDefinition Width="228" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -155,20 +156,21 @@
                                     Text="Item Name" />
             <core:OutlinedTextBlock Grid.Row="0" Grid.Column="2"
                                     FontSize="14"
-                                    Text="Buy Order Limit" />
+                                    Text="Buy Order" />
             <core:OutlinedTextBlock Grid.Row="0" Grid.Column="3"
                                     FontSize="14"
-                                    Text="Sell Listing Limit" />
+                                    Text="Sell Listing" />
 
             <!-- ItemsControl for price watches-->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                           Style="{StaticResource LeftScrollViewer}"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Visible">
-                <ItemsControl ItemsSource="{Binding Source={StaticResource PriceWatchesCollection}}">
+                <ItemsControl ItemsSource="{Binding Source={StaticResource PriceWatchesCollection}}"
+                              Margin="0,5,0,0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <view:PriceWatchView DataContext="{Binding}" />
+                            <view:PriceWatchView DataContext="{Binding}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -181,6 +183,16 @@
                     Width="50" HorizontalAlignment="Left"
                     Content="Add"
                     Command="{Binding AddCommand}"/>
+            
+            <StackPanel Grid.Row="2" Grid.Column="3"
+                        Orientation="Horizontal">
+                <core:OutlinedTextBlock VerticalAlignment="Center"
+                                        Text="Redisplay Notifications Interval (min): "/>
+                <TextBox Margin="3,0,0,0"
+                         VerticalAlignment="Center"
+                         Height="10" Width="25"
+                         Text="{Binding ResetPriceNotificationsInterval, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
         </Grid>
     </Grid>
 </src:OverlayWindow>

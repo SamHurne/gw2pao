@@ -62,25 +62,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         public bool IsRemovingNotification
         {
             get { return this.isRemovingNotification; }
-            set
-            {
-                if (this.SetField(ref this.isRemovingNotification, value))
-                {
-                    // Removing... set flag that this was shown
-                    switch (this.NotificationType)
-                    {
-                        case PriceNotificationType.BuyOrder:
-                            this.PriceWatch.IsBuyOrderNotificationShown = true;
-                            break;
-                        case PriceNotificationType.SellListing:
-                            this.PriceWatch.IsSellListingNotificationShown = true;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                
-            }
+            set { this.SetField(ref this.isRemovingNotification, value); }
         }
 
         /// <summary>

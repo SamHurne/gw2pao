@@ -31,9 +31,19 @@ namespace GW2PAO.Models
         /// </summary>
         public const string Filename = "CommerceSettings.xml";
 
+        private int resetPriceNotificationsInterval;
         private bool areBuyOrderPriceNotificationsEnabled;
         private bool areSellListingPriceNotificationsEnabled;
         private ObservableCollection<PriceWatch> priceWatches = new ObservableCollection<PriceWatch>();
+
+        /// <summary>
+        /// Interval at which to automatically reset the shown-state of price notifications, in minutes
+        /// </summary>
+        public int ResetPriceNotificationsInterval
+        {
+            get { return this.resetPriceNotificationsInterval; }
+            set { this.SetField(ref this.resetPriceNotificationsInterval, value); }
+        }
 
         /// <summary>
         /// True if buy order price notifications are enabled, else false
@@ -64,6 +74,7 @@ namespace GW2PAO.Models
         public CommerceSettings()
         {
             // Defaults:
+            this.ResetPriceNotificationsInterval = 15;
             this.AreBuyOrderPriceNotificationsEnabled = true;
             this.AreSellListingPriceNotificationsEnabled = true;
         }
@@ -80,8 +91,10 @@ namespace GW2PAO.Models
             foreach (var pw in this.PriceWatches)
             {
                 pw.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.BuyOrderLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.SellListingLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.BuyOrderLowerLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.BuyOrderUpperLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.SellListingLowerLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.SellListingUpperLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
             }
         }
 

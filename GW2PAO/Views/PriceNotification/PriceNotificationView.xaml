@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+             xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
+             xmlns:vm="clr-namespace:GW2PAO.ViewModels.PriceNotification"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
-             Height="60" Width="300">
+             Height="60" Width="250">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -16,6 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:PriceNotificationTypeConverter x:Key="NotificationTypeConverter" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
             <Storyboard x:Key="AddAnimation">
                 <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.15"/>
@@ -52,7 +55,6 @@
                 CornerRadius="0"
                 Margin="5"
                 Padding="5">
-            
 
             <Border.Background>
                 <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
@@ -82,7 +84,54 @@
                 <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
                        VerticalAlignment="Center" HorizontalAlignment="Center"
                        Height="40" Width="40"
-                       Source="{Binding PriceWatch.IconUrl}" />
+                       Source="{Binding PriceWatch.IconUrl}">
+                    <Image.ToolTip>
+                        <ToolTip>
+                            <ToolTip.Style>
+                                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
+                                                            Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                    <core:OutlinedTextBlock Text="Buy Order Upper Limit:" FontSize="12"/>
+                                                    <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
+                                                            Visibility="{Binding PriceWatch.Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                    <core:OutlinedTextBlock Text="Buy Order Lower Limit:" FontSize="12"/>
+                                                    <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding NotificationType}" Value="{x:Static vm:PriceNotificationType.SellListing}">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Content">
+                                                    <Setter.Value>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
+                                                                        Visibility="{Binding PriceWatch.Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                                <core:OutlinedTextBlock Text="Sell Listing Upper Limit:" FontSize="12"/>
+                                                                <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingUpperLimit}" />
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
+                                                                        Visibility="{Binding PriceWatch.Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                                <core:OutlinedTextBlock Text="Sell Listing Lower Limit:" FontSize="12"/>
+                                                                <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingLowerLimit}" />
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToolTip.Style>
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
 
                 <Grid Grid.Row="0" Grid.Column="1"
                       Margin="5,0,0,0">
@@ -93,7 +142,7 @@
                     </Grid.RowDefinitions>
                     
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="163" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 

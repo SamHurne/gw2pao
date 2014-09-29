@@ -32,6 +32,11 @@ namespace GW2PAO.Controllers
         private ICommerceService commerceService;
 
         /// <summary>
+        /// Collection used for keeping track of when to reset the shown-state of notifications
+        /// </summary>
+        private Dictionary<PriceWatchViewModel, DateTime> NotificationsResetDateTimes = new Dictionary<PriceWatchViewModel, DateTime>();
+
+        /// <summary>
         /// Keeps track of how many times Start() has been called in order
         /// to support reuse of a single object
         /// </summary>
@@ -181,19 +186,66 @@ namespace GW2PAO.Controllers
 
                     foreach (var priceWatch in priceWatches)
                     {
+                        // Determine if we need to reset the notifications shown-state
+                        if (this.NotificationsResetDateTimes.ContainsKey(priceWatch))
+                        {
+                            var lastResetTime = this.NotificationsResetDateTimes[priceWatch];
+                            if (DateTime.Now.Subtract(lastResetTime).TotalMilliseconds >= UserSettings.ResetPriceNotificationsInterval * 60000)
+                            {
+                                priceWatch.IsBuyOrderNotificationShown = false;
+                                priceWatch.IsSellListingNotificationShown = false;
+                            }
+                        }
+                        else
+                        {
+                            this.NotificationsResetDateTimes.Add(priceWatch, DateTime.Now);
+                        }
+
                         //var prices = allPrices[priceWatch.Data.ItemID];
                         var prices = this.commerceService.GetItemPrices(priceWatch.Data.ItemID);
+                        Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
+                        Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
 
                         // Buy Order
-                        if (prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLimit.Value)
+                        bool displayBuyOrderNotification = false;
+
+                        if (priceWatch.Data.IsBuyOrderUpperLimitEnabled && priceWatch.Data.IsBuyOrderLowerLimitEnabled)
+                            displayBuyOrderNotification = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value
+                                                        && prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
+                        else if (priceWatch.Data.IsBuyOrderUpperLimitEnabled)
+                            displayBuyOrderNotification = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value;
+                        else if (priceWatch.Data.IsBuyOrderLowerLimitEnabled)
+                            displayBuyOrderNotification = prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
+
+                        if (displayBuyOrderNotification)
                         {
-                            this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.BuyOrder, prices.HighestBuyOrder, this.PriceNotifications));
+                            if (this.CanShowNotification(priceWatch, PriceNotificationType.BuyOrder))
+                            {
+                                priceWatch.IsBuyOrderNotificationShown = true;
+                                this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.BuyOrder, prices.HighestBuyOrder, this.PriceNotifications));
+                                this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
+                            }
                         }
 
                         // Sell Listing
-                        if (prices.LowestSellListing <= priceWatch.Data.SellListingLimit.Value)
+                        bool displaySellListingNotification = false;
+
+                        if (priceWatch.Data.IsSellListingUpperLimitEnabled && priceWatch.Data.IsSellListingLowerLimitEnabled)
+                            displaySellListingNotification = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value
+                                                            && prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
+                        else if (priceWatch.Data.IsSellListingUpperLimitEnabled)
+                            displaySellListingNotification = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value;
+                        else if (priceWatch.Data.IsSellListingLowerLimitEnabled)
+                            displaySellListingNotification = prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
+
+                        if (displaySellListingNotification)
                         {
-                            this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.SellListing, prices.LowestSellListing, this.PriceNotifications));
+                            if (this.CanShowNotification(priceWatch, PriceNotificationType.SellListing))
+                            {
+                                priceWatch.IsSellListingNotificationShown = true;
+                                this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.SellListing, prices.LowestSellListing, this.PriceNotifications));
+                                this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
+                            }
                         }
                     }
                 }
@@ -207,62 +259,62 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void DisplayNotification(PriceNotificationViewModel priceNotification)
         {
-            if (this.CanShowNotification(priceNotification))
+            
+            Task.Factory.StartNew(() =>
             {
-                Task.Factory.StartNew(() =>
+                logger.Debug("Adding notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+                Threading.InvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
+
+                // TODO: Consider making these stay open forever, until the user closes it
+                // For 20 seconds, loop and sleep, with checks to see if notifications have been disabled
+                //for (int i = 0; i < 40; i++)
+                //{
+                //    System.Threading.Thread.Sleep(500);
+                //    if (!this.CanShowNotification(priceNotification.PriceWatch, priceNotification.NotificationType))
+                //    {
+                //        logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+                //        Threading.InvokeOnUI(() => 
+                //            {
+                //                priceNotification.IsRemovingNotification = true;
+                //                this.PriceNotifications.Remove(priceNotification);
+                //                priceNotification.IsRemovingNotification = false;
+                //            });
+                //        return;
+                //    }
+                //}
+                System.Threading.Thread.Sleep(20000);
+
+                logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+
+                // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+                // This makes it so that the notifications can fade out before they are removed from the notification window
+                Threading.InvokeOnUI(() => priceNotification.IsRemovingNotification = true);
+                System.Threading.Thread.Sleep(250);
+                Threading.InvokeOnUI(() =>
                 {
-                    logger.Debug("Adding notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-                    Threading.InvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
-
-                    // TODO: Consider making these stay open forever, until the user closes it
-                    // For 20 seconds, loop and sleep, with checks to see if notifications have been disabled
-                    for (int i = 0; i < 40; i++)
-                    {
-                        System.Threading.Thread.Sleep(500);
-                        if (!this.CanShowNotification(priceNotification))
-                        {
-                            logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-                            Threading.InvokeOnUI(() => 
-                                {
-                                    priceNotification.IsRemovingNotification = true;
-                                    this.PriceNotifications.Remove(priceNotification);
-                                    priceNotification.IsRemovingNotification = false;
-                                });
-                            return;
-                        }
-                    }
-
-                    logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-
-                    // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
-                    // This makes it so that the notifications can fade out before they are removed from the notification window
-                    Threading.InvokeOnUI(() => priceNotification.IsRemovingNotification = true);
-                    System.Threading.Thread.Sleep(250);
-                    Threading.InvokeOnUI(() =>
-                    {
-                        this.PriceNotifications.Remove(priceNotification);
-                        priceNotification.IsRemovingNotification = false;
-                    });
-                }, TaskCreationOptions.LongRunning);
-            }
+                    this.PriceNotifications.Remove(priceNotification);
+                    priceNotification.IsRemovingNotification = false;
+                });
+            }, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>
         /// Determines if we can show a notification for the given price notification, based on user settings
         /// </summary>
-        /// <param name="objectiveData">The price notification's data</param>
+        /// <param name="objectiveData">The price watch's data</param>
+        /// <param name="notificationType">The type of notification</param>
         /// <returns>True if the notification can be shown, else false</returns>
-        private bool CanShowNotification(PriceNotificationViewModel priceNotification)
+        private bool CanShowNotification(PriceWatchViewModel priceWatch, PriceNotificationType notificationType)
         {
             bool canShow = false;
 
-            switch (priceNotification.NotificationType)
+            switch (notificationType)
             {
                 case PriceNotificationType.BuyOrder:
-                    canShow = priceNotification.PriceWatch.Data.IsBuyOrderNotificationEnabled && !priceNotification.PriceWatch.IsBuyOrderNotificationShown;
+                    canShow = this.UserSettings.AreBuyOrderPriceNotificationsEnabled && !priceWatch.IsBuyOrderNotificationShown;
                     break;
                 case PriceNotificationType.SellListing:
-                    canShow = priceNotification.PriceWatch.Data.IsSellListingNotificationEnabled && !priceNotification.PriceWatch.IsSellListingNotificationShown;
+                    canShow = this.UserSettings.AreSellListingPriceNotificationsEnabled && !priceWatch.IsSellListingNotificationShown;
                     break;
                 default:
                     break;
