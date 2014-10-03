@@ -38,11 +38,18 @@ namespace GW2PAO.API.Services
         /// <returns>The loaded event time table data</returns>
         public static DungeonsTable LoadTable()
         {
+            DungeonsTable loadedData = null;
             XmlSerializer deserializer = new XmlSerializer(typeof(DungeonsTable));
             TextReader reader = new StreamReader(FileName);
-            object obj = deserializer.Deserialize(reader);
-            DungeonsTable loadedData = (DungeonsTable)obj;
-            reader.Close();
+            try
+            {
+                object obj = deserializer.Deserialize(reader);
+                loadedData = (DungeonsTable)obj;
+            }
+            finally
+            {
+                reader.Close();
+            }
 
             return loadedData;
         }
@@ -469,8 +476,14 @@ namespace GW2PAO.API.Services
 
             XmlSerializer serializer = new XmlSerializer(typeof(DungeonsTable));
             TextWriter textWriter = new StreamWriter(FileName);
-            serializer.Serialize(textWriter, dTable);
-            textWriter.Close();
+            try
+            {
+                serializer.Serialize(textWriter, dTable);
+            }
+            finally
+            {
+                textWriter.Close();
+            }
         }
     }
 }

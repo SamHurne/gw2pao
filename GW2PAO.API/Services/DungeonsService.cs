@@ -40,7 +40,6 @@ namespace GW2PAO.API.Services
                 DungeonsTable.CreateTable();
                 this.DungeonsTable = DungeonsTable.LoadTable();
             }
-            
         }
     }
 }
