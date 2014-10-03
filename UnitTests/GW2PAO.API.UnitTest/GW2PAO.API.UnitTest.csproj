@@ -35,7 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GW2.NET">
+      <HintPath>..\..\packages\GW2.NET\lib\net40\GW2.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="GW2.NET.Core">
+      <HintPath>..\..\packages\GW2.NET\lib\net40\GW2.NET.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,7 +57,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommerceServiceUnitTest.cs" />
+    <Compile Include="ItemsDatabaseBuilderUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\CalcUtilUnitTest.cs" />
+    <Compile Include="Util\MapsHelperUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GW2PAO.API\GW2PAO.API.csproj">
