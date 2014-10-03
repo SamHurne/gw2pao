@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="CommerceServiceUnitTest.cs" />
     <Compile Include="DungeonsServiceUnitTest.cs" />
+    <Compile Include="DungeonsTableUnitTest.cs" />
     <Compile Include="ItemsDatabaseBuilderUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CalcUtilUnitTest.cs" />
