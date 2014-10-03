@@ -70,7 +70,7 @@ namespace GW2PAO.API.Services
                                         if (!zoneItems.Any(zi => zi.ID == item.PointOfInterestId))
                                         {
                                             // Determine the location
-                                            var location = MapsHelper.PixelToWorldPos(map, new Point(item.Coordinates.X, item.Coordinates.Y), continent.MaximumZoom);
+                                            var location = MapsHelper.ConvertToMapPos(map, new Point(item.Coordinates.X, item.Coordinates.Y));
 
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = item.PointOfInterestId;
@@ -103,7 +103,7 @@ namespace GW2PAO.API.Services
                                         if (!zoneItems.Any(zi => zi.ID == task.TaskId))
                                         {
                                             // Determine the location
-                                            var location = MapsHelper.PixelToWorldPos(map, new Point(task.Coordinates.X, task.Coordinates.Y), continent.MaximumZoom);
+                                            var location = MapsHelper.ConvertToMapPos(map, new Point(task.Coordinates.X, task.Coordinates.Y));
 
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = task.TaskId;
@@ -122,7 +122,7 @@ namespace GW2PAO.API.Services
                                     foreach (var skillChallenge in regionMap.SkillChallenges)
                                     {
                                         // Determine the location, this serves an internally-used ID for skill challenges
-                                        var location = MapsHelper.PixelToWorldPos(map, new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y), continent.MaximumZoom);
+                                        var location = MapsHelper.ConvertToMapPos(map, new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y));
 
                                         // Use a custom-generated ID
                                         int id = (int)(mapId + location.X + location.Y);

@@ -7,22 +7,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2DotNET;
 using GW2DotNET.V2.Items;
+using GW2PAO.API.Data.Enums;
 using Newtonsoft.Json;
 using NLog;
 
 namespace GW2PAO.API.Services
 {
-    public class ItemNamesDatabaseBuilder
+    public class ItemsDatabaseBuilder
     {
         /// <summary>
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const string NAMES_DATABASE_FILENAME = "ItemNames.json";
+        /// <summary>
+        /// Filename for the names database file
+        /// </summary>
+        public const string NAMES_DATABASE_FILENAME = "ItemDatabase.json";
+
         private ItemService itemService;
 
-        public ItemNamesDatabaseBuilder()
+        public ItemsDatabaseBuilder()
         {
             this.itemService = (ItemService)ServiceFactory.Default().GetItemService();
         }
@@ -31,12 +36,12 @@ namespace GW2PAO.API.Services
         /// Loads the item names database from file
         /// </summary>
         /// <returns></returns>
-        public IDictionary<int, string> LoadFromFile()
+        public IDictionary<int, ItemDBEntry> LoadFromFile()
         {
             // Load the names database
             var db = File.ReadAllText(NAMES_DATABASE_FILENAME);
-            Dictionary<int, string> itemNames = JsonConvert.DeserializeObject<Dictionary<int, string>>(db);
-            return itemNames;
+            Dictionary<int, ItemDBEntry> itemDb = JsonConvert.DeserializeObject<Dictionary<int, ItemDBEntry>>(db);
+            return itemDb;
         }
 
         /// <summary>
@@ -58,7 +63,7 @@ namespace GW2PAO.API.Services
 
             Task.Factory.StartNew(() =>
             {
-                Dictionary<int, string> namesDb = new Dictionary<int, string>();
+                Dictionary<int, ItemDBEntry> itemsDb = new Dictionary<int, ItemDBEntry>();
 
                 for (int i = 0; i < totalRequests; i++)
                 {
@@ -70,18 +75,35 @@ namespace GW2PAO.API.Services
                     var items = this.itemService.GetPage(i, requestSize);
                     foreach (var item in items)
                     {
-                        namesDb.Add(item.ItemId, item.Name);
+                        var entry = new ItemDBEntry(item.ItemId, item.Name, (ItemRarity)item.Rarity, item.Level);
+                        itemsDb.Add(item.ItemId, entry);
                     }
                     incrementProgressAction.Invoke();
                 }
 
-                var dbString = JsonConvert.SerializeObject(namesDb);
+                var dbString = JsonConvert.SerializeObject(itemsDb);
                 File.WriteAllText(NAMES_DATABASE_FILENAME, dbString);
 
                 rebuildCompleteAction.Invoke();
             }, cancelToken);
 
             return totalRequests;
+        }
+    }
+
+    public class ItemDBEntry
+    {
+        public int ID { get; private set; }
+        public string Name { get; private set; }
+        public ItemRarity Rarity { get; set; }
+        public int Level { get; set; }
+
+        public ItemDBEntry(int id, string name, ItemRarity rarity, int level)
+        {
+            this.ID = id;
+            this.Name = name;
+            this.Rarity = rarity;
+            this.Level = level;
         }
     }
 }

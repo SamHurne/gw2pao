@@ -36,5 +36,10 @@ namespace GW2PAO.Views.PriceNotification
         {
             InitializeComponent();
         }
+
+        private void OnIntelliboxSuggestItem_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.ItemsEntryBox.ChooseCurrentItem();
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
-        MaxHeight="450" Width="725" SizeToContent="Height"
+        MaxHeight="450" SizeToContent="WidthAndHeight"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -153,7 +153,7 @@
 
             <core:OutlinedTextBlock Grid.Row="0" Grid.Column="1"
                                     FontSize="14"
-                                    Text="Item Name" />
+                                    Text="Item" />
             <core:OutlinedTextBlock Grid.Row="0" Grid.Column="2"
                                     FontSize="14"
                                     Text="Buy Order" />

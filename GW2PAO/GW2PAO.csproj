@@ -79,6 +79,9 @@
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
+    <Reference Include="Intellibox">
+      <HintPath>..\packages\Intellibox\Intellibox.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
@@ -165,6 +168,7 @@
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
+    <Compile Include="ViewModels\PriceNotification\ItemResultsProvider.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceNotificationConfigViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceWatchViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\RebuildNamesDatabaseViewModel.cs" />

@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using FeserWard.Controls;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Enums;
+using GW2PAO.API.Services;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Models;
@@ -21,6 +27,7 @@ namespace GW2PAO.ViewModels.PriceNotification
 
         private bool isBuyOrderNotificationShown;
         private bool isSellListingNotificationShown;
+        private ItemDBEntry selectedItem;
 
         /// <summary>
         /// Service object, used for looking up names, etc
@@ -53,48 +60,15 @@ namespace GW2PAO.ViewModels.PriceNotification
         public Price CurrentBuyOrder { get; private set; }
 
         /// <summary>
-        /// Name of the item
+        /// Name of the item, for display purposes
         /// </summary>
         public string ItemName
         {
             get { return this.Data.ItemName; }
-            set
-            {
-                if (this.Data.ItemName != value)
-                {
-                    // Do a search to see if the item exists
-                    if (this.commerceService.DoesItemExist(value))
-                    {
-                        // It exists, so update our model data
-                        this.ItemData = this.commerceService.GetItem(value);
-                        this.Data.ItemID = this.ItemData.ID;
-                        this.Data.ItemName = this.ItemData.Name;
-                        this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
-                        this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
-                        this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
-                        this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
-                        this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
-                        this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
-
-                        this.RaisePropertyChanged();
-
-                        // Also raise property changed for the icon
-                        this.RaisePropertyChanged("IconUrl");
-                    }
-                }
-            }
         }
 
         /// <summary>
-        /// The full collection of item names
-        /// </summary>
-        public ICollection<string> ItemNames
-        {
-            get { return this.commerceService.ItemNames.Values; }
-        }
-
-        /// <summary>
-        /// Path to the icon url
+        /// Path to the icon url, for display purposes
         /// </summary>
         public string IconUrl
         {
@@ -109,6 +83,42 @@ namespace GW2PAO.ViewModels.PriceNotification
                     return this.ItemData.Icon.ToString();
                 }
             }
+        }
+
+        /// <summary>
+        /// The item selected by the user when configuring this price watch
+        /// </summary>
+        public GW2PAO.API.Services.ItemDBEntry SelectedItem
+        {
+            get { return this.selectedItem; }
+            set
+            {
+                if (this.SetField(ref this.selectedItem, value))
+                {
+                    this.ItemData = this.commerceService.GetItem(value.ID);
+                    this.Data.ItemID = this.ItemData.ID;
+                    this.Data.ItemName = this.ItemData.Name;
+                    this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
+                    this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
+                    this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
+                    this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
+                    this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
+                    this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
+
+                    // Raise property-changed events for each of the info display properties
+                    this.RaisePropertyChanged("ItemName");
+                    this.RaisePropertyChanged("IconUrl");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provider object for finding an item for the user to select
+        /// </summary>
+        public IIntelliboxResultsProvider ItemsProvider
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -157,6 +167,10 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.commerceService = service;
             this.CurrentBuyOrder = new Price();
             this.CurrentSellListing = new Price();
+            this.ItemsProvider = new ItemResultsProvider(this.commerceService);
+
+            if (this.ItemData != null)
+                this.SelectedItem = this.commerceService.ItemsDB[this.ItemData.ID];
 
             this.IsBuyOrderNotificationShown = false;
             this.IsSellListingNotificationShown = false;

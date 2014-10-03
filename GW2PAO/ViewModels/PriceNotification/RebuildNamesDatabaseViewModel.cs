@@ -75,7 +75,7 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.Progress = 0;
 
             logger.Debug("Starting rebuild of item database");
-            this.TotalRequests = this.commerceService.NamesDatabaseBuilder.RebuildItemDatabase(this.HandleIncrementProgress, this.HandleComplete, this.cancelToken.Token);
+            this.TotalRequests = this.commerceService.ItemsDatabaseBuilder.RebuildItemDatabase(this.HandleIncrementProgress, this.HandleComplete, this.cancelToken.Token);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace GW2PAO.ViewModels.PriceNotification
                 });
 
             // Have the service reload the new database
-            this.commerceService.ReloadNames();
+            this.commerceService.ReloadDatabase();
         }
 
         /// <summary>

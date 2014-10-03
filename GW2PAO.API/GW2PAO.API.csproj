@@ -93,7 +93,6 @@
     <Compile Include="Data\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommerceService.cs" />
-    <Compile Include="Services\ConcurrentDictionary.cs" />
     <Compile Include="Services\DungeonsService.cs" />
     <Compile Include="Services\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
@@ -107,7 +106,7 @@
     <Compile Include="Services\Interfaces\ISystemService.cs" />
     <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
-    <Compile Include="Services\ItemNamesDatabaseBuilder.cs" />
+    <Compile Include="Services\ItemsDatabaseBuilder.cs" />
     <Compile Include="Services\MegaserverEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
@@ -137,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ItemNames.json">
+    <None Include="ItemDatabase.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
