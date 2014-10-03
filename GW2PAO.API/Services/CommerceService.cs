@@ -232,14 +232,16 @@ namespace GW2PAO.API.Services
             try
             {
                 var prices = priceService.Find(itemId);
-
-                itemPrices = new ItemPrices()
+                if (prices != null && prices.ItemId > 0)
                 {
-                    HighestBuyOrder = prices.BuyOffers.UnitPrice,
-                    BuyOrderQuantity = prices.BuyOffers.Quantity,
-                    LowestSellListing = prices.SellOffers.UnitPrice,
-                    SellOrderQuantity = prices.SellOffers.Quantity
-                };
+                    itemPrices = new ItemPrices()
+                    {
+                        HighestBuyOrder = prices.BuyOffers.UnitPrice,
+                        BuyOrderQuantity = prices.BuyOffers.Quantity,
+                        LowestSellListing = prices.SellOffers.UnitPrice,
+                        SellOrderQuantity = prices.SellOffers.Quantity
+                    };
+                }
             }
             catch (GW2DotNET.Common.ServiceException ex)
             {
@@ -264,14 +266,17 @@ namespace GW2PAO.API.Services
                 var listings = priceService.FindAll(itemIds);
                 foreach (var listing in listings)
                 {
-                    var listingPrices = new ItemPrices()
+                    if (listing.Value.ItemId > 0)
                     {
-                        HighestBuyOrder = listing.Value.BuyOffers.UnitPrice,
-                        BuyOrderQuantity = listing.Value.BuyOffers.Quantity,
-                        LowestSellListing = listing.Value.SellOffers.UnitPrice,
-                        SellOrderQuantity = listing.Value.SellOffers.Quantity
-                    };
-                    prices.Add(listing.Key, listingPrices);
+                        var listingPrices = new ItemPrices()
+                        {
+                            HighestBuyOrder = listing.Value.BuyOffers.UnitPrice,
+                            BuyOrderQuantity = listing.Value.BuyOffers.Quantity,
+                            LowestSellListing = listing.Value.SellOffers.UnitPrice,
+                            SellOrderQuantity = listing.Value.SellOffers.Quantity
+                        };
+                        prices.Add(listing.Key, listingPrices);
+                    }
                 }
             }
             catch (GW2DotNET.Common.ServiceException ex)

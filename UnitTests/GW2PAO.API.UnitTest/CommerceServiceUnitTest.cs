@@ -327,15 +327,76 @@ namespace GW2PAO.API.UnitTest
         }
 
         [TestMethod]
-        public void CommerceService_GetItemPrices_Single()
+        public void CommerceService_GetItemPrices_Single_Valid()
         {
-            // TODO
+            CommerceService cs = new CommerceService();
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var prices = cs.GetItemPrices(VALID_ITEM_NAME_ID);
+            sw.Stop();
+            Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
+
+            Assert.IsNotNull(prices);
+            Assert.IsTrue(prices.BuyOrderQuantity > 0);
+            Assert.IsTrue(prices.HighestBuyOrder > 0);
+            Assert.IsTrue(prices.LowestSellListing > 0);
+            Assert.IsTrue(prices.SellOrderQuantity > 0);
         }
 
         [TestMethod]
-        public void CommerceService_GetItemPrices_Multiple()
+        public void CommerceService_GetItemPrices_Single_Invalid()
         {
-            // TODO
+            CommerceService cs = new CommerceService();
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var prices = cs.GetItemPrices(-1);
+            sw.Stop();
+            Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
+
+            Assert.IsNull(prices);
+        }
+
+        [TestMethod]
+        public void CommerceService_GetItemPrices_Multiple_Valid()
+        {
+            CommerceService cs = new CommerceService();
+
+            // Create the collection of items
+            List<int> ids = new List<int>(cs.ItemsDB.Keys.Take(100));
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var prices = cs.GetItemPrices(ids);
+            sw.Stop();
+            Console.WriteLine("To retrieve prices of {0} items using valid IDs, it took {1}ms", ids.Count, sw.ElapsedMilliseconds);
+
+            Assert.IsNotNull(prices);
+            foreach (var itemPrices in prices)
+            {
+                Assert.IsTrue(ids.Contains(itemPrices.Key));
+            }
+        }
+
+        [TestMethod]
+        public void CommerceService_GetItemPrices_Multiple_Invalid()
+        {
+            CommerceService cs = new CommerceService();
+
+            // Create the collection of items
+            List<int> ids = new List<int>();
+            for (int i = 0; i > -200; i--)
+                ids.Add(i);
+
+            var sw = new Stopwatch();
+            sw.Start();
+            var prices = cs.GetItemPrices(ids);
+            sw.Stop();
+            Console.WriteLine("To retrieve prices of {0} items using invalid IDs, it took {1}ms", ids.Count, sw.ElapsedMilliseconds);
+
+            Assert.IsNotNull(prices);
+            Assert.AreEqual(0, prices.Count);
         }
     }
 }
