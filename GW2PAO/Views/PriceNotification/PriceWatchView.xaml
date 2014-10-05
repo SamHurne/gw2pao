@@ -145,6 +145,11 @@
                             <SolidColorBrush Color="Black" Opacity="0.75" />
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.5" />
+                        </Setter.Value>
+                    </Setter>
                 </Style>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="White" />
