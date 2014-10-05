@@ -775,7 +775,11 @@ namespace GW2PAO.TS3.Services
                 }
             }
 
+#if DEBUG
             throw new InvalidOperationException("Invalid propertyNames for given input string");
+#else
+            return 0;
+#endif
         }
 
         /// <summary>
@@ -807,7 +811,11 @@ namespace GW2PAO.TS3.Services
                 }
             }
 
+#if DEBUG
             throw new InvalidOperationException("Invalid propertyNames for given input string");
+#else
+            return string.Empty;
+#endif
         }
 
         /// <summary>
