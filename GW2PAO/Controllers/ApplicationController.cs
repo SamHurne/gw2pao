@@ -535,17 +535,6 @@ namespace GW2PAO.Controllers
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Configure", this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Rebuild Item Names Database", this.DisplayRebuildItemNamesView, this.CanDisplayRebuildItemNamesView));
             priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
-            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
-            {
-                this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = true;
-                this.CommerceSettings.AreSellListingPriceNotificationsEnabled = true;
-            }));
-            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
-            {
-                this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = false;
-                this.CommerceSettings.AreSellListingPriceNotificationsEnabled = false;
-            }));
-            priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Buy Order Price Notifications", null, true, () => { return this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreBuyOrderPriceNotificationsEnabled"));
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Sell Listing Price Notifications", null, true, () => { return this.CommerceSettings.AreSellListingPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreSellListingPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreSellListingPriceNotificationsEnabled"));
             commerceMenu.SubMenuItems.Add(priceNotificationsMenu);
