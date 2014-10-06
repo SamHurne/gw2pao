@@ -71,8 +71,8 @@ namespace GW2PAO.Views.PriceNotification
             else
             {
                 // Use saved location
-                this.Left = Properties.Settings.Default.EventNotificationX;
-                this.Top = Properties.Settings.Default.EventNotificationY;
+                this.Left = Properties.Settings.Default.PriceNotificationX;
+                this.Top = Properties.Settings.Default.PriceNotificationY;
             }
         }
     }
