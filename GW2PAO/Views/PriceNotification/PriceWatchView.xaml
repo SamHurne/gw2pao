@@ -80,6 +80,7 @@
                         <SolidColorBrush Color="Black" Opacity="0.75" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="ItemContainerStyle" Value="{StaticResource CustomListViewItems}" />
             </Style>
 
