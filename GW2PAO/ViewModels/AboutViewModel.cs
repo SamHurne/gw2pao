@@ -57,6 +57,11 @@ namespace GW2PAO.ViewModels
         public DelegateCommand HelpCommand { get { return new DelegateCommand(this.OpenHelpPage); } }
 
         /// <summary>
+        /// Command to open page for GW2.Net
+        /// </summary>
+        public DelegateCommand GW2NetCommand { get { return new DelegateCommand(this.OpenGW2NetPage); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public AboutViewModel()
@@ -69,11 +74,19 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Opens the Help page (https://gw2pao.codeplex.com/documentation) using the default browser
+        /// Opens the Help page (http://gw2pao.boards.net/) using the default browser
         /// </summary>
         private void OpenHelpPage()
         {
-            Process.Start("https://gw2pao.codeplex.com/documentation");
+            Process.Start("http://gw2pao.boards.net/");
+        }
+
+        /// <summary>
+        /// Opens the GW2.NET page (https://gw2dotnet.codeplex.com/) using the default browser
+        /// </summary>
+        private void OpenGW2NetPage()
+        {
+            Process.Start("https://gw2dotnet.codeplex.com/");
         }
     }
 }
