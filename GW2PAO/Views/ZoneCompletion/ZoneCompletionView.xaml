@@ -102,6 +102,8 @@
                                 <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" />
                                 <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" />
                                 <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" />
+                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockHeartQuests}" />
+                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockSkillChallenges}" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Show Unlocked Zone Points" IsCheckable="True" IsChecked="{Binding UserSettings.ShowUnlockedPoints}" />
@@ -200,6 +202,12 @@
                                 <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
+                        <!--TODO: Return to this, see if we can somehow improve performance here...-->
+                        <!--<ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>-->
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>

@@ -74,6 +74,11 @@ namespace GW2PAO.Controllers
         private int startCallCount;
 
         /// <summary>
+        /// Dictionary of counters for auto-unlock purposes
+        /// </summary>
+        private Dictionary<int, int> distanceCounters = new Dictionary<int, int>();
+
+        /// <summary>
         /// Backing store for the zone items collection
         /// </summary>
         private ObservableCollection<ZoneItemViewModel> zoneItems = new ObservableCollection<ZoneItemViewModel>();
@@ -211,12 +216,14 @@ namespace GW2PAO.Controllers
                             lock (zoneItemsLock)
                             {
                                 this.ZoneItems.Clear();
+                                this.distanceCounters.Clear();
                                 foreach (var item in zoneItems)
                                 {
                                     // Ignore dungeons for now
                                     if (item.Type != API.Data.Enums.ZoneItemType.Dungeon)
                                     {
                                         this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserSettings));
+                                        this.distanceCounters.Add(item.ID, 0);
                                     }
                                 }
                             }
@@ -268,34 +275,79 @@ namespace GW2PAO.Controllers
                         if (!item.IsUnlocked)
                         {
                             // If the zone item isn't already unlocked, check to see if it should be automatically unlocked
-                            //  based on the item's distance from the player
-
+                            //  based on the item's distance from the player and based on how long the player has been near the item
                             var ftDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, API.Data.Enums.Units.Feet));
-                            // TODO: Refine these differences, and/or make it configurable
                             switch (item.ItemType)
                             {
                                 case API.Data.Enums.ZoneItemType.Waypoint:
                                     if (this.UserSettings.AutoUnlockWaypoints
-                                        && ftDistance >= 0
-                                        && ftDistance < 55)
+                                        && ftDistance >= 0 && ftDistance < 75)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.PointOfInterest:
                                     if (this.UserSettings.AutoUnlockPois
-                                        && ftDistance >= 0
-                                        && ftDistance < 25)
+                                        && ftDistance >= 0 && ftDistance < 75)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.Vista:
                                     if (this.UserSettings.AutoUnlockVistas
-                                        && ftDistance >= 0
-                                        && ftDistance < 5)
+                                        && ftDistance >= 0 && ftDistance < 8)
                                     {
-                                        Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        if (this.distanceCounters[item.ItemId] > 4)
+                                        {
+                                            this.distanceCounters[item.ItemId] = 0;
+                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        else
+                                        {
+                                            this.distanceCounters[item.ItemId] += 1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.distanceCounters[item.ItemId] = 0;
+                                    }
+                                    break;
+                                case API.Data.Enums.ZoneItemType.HeartQuest:
+                                    if (this.UserSettings.AutoUnlockHeartQuests
+                                        && ftDistance >= 0 && ftDistance < 400)
+                                    {
+                                        if (this.distanceCounters[item.ItemId] > 90)
+                                        {
+                                            this.distanceCounters[item.ItemId] = 0;
+                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        else
+                                        {
+                                            this.distanceCounters[item.ItemId] += 1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.distanceCounters[item.ItemId] = 0;
+                                    }
+                                    break;
+                                case API.Data.Enums.ZoneItemType.SkillChallenge:
+                                    if (this.UserSettings.AutoUnlockSkillChallenges
+                                        && ftDistance >= 0 && ftDistance < 25)
+                                    {
+                                        if (this.distanceCounters[item.ItemId] > 15)
+                                        {
+                                            this.distanceCounters[item.ItemId] = 0;
+                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        else
+                                        {
+                                            this.distanceCounters[item.ItemId] += 1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.distanceCounters[item.ItemId] = 0;
                                     }
                                     break;
                                 default:

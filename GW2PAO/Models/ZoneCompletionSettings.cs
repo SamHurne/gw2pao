@@ -39,6 +39,8 @@ namespace GW2PAO.Models
         private bool autoUnlockWaypoints;
         private bool autoUnlockPois;
         private bool autoUnlockVistas;
+        private bool autoUnlockHeartQuests;
+        private bool autoUnlockSkillChallenges;
         private bool showUnlockedPoints;
         private Units distanceUnits;
         private ObservableCollection<ZoneItem> hiddenZoneItems = new ObservableCollection<ZoneItem>();
@@ -117,6 +119,24 @@ namespace GW2PAO.Models
         }
 
         /// <summary>
+        /// True if Heart Quests are configured to automatically be marked as unlocked, else false
+        /// </summary>
+        public bool AutoUnlockHeartQuests
+        {
+            get { return this.autoUnlockHeartQuests; }
+            set { SetField(ref this.autoUnlockHeartQuests, value); }
+        }
+
+        /// <summary>
+        /// True if Skill Point Challenges are configured to automatically be marked as unlocked, else false
+        /// </summary>
+        public bool AutoUnlockSkillChallenges
+        {
+            get { return this.autoUnlockSkillChallenges; }
+            set { SetField(ref this.autoUnlockSkillChallenges, value); }
+        }
+
+        /// <summary>
         /// True if unlocked points are shown in the list, else false
         /// </summary>
         public bool ShowUnlockedPoints
@@ -161,6 +181,8 @@ namespace GW2PAO.Models
             this.AutoUnlockWaypoints = true;
             this.AutoUnlockPois = true;
             this.AutoUnlockVistas = true;
+            this.AutoUnlockHeartQuests = true;
+            this.AutoUnlockSkillChallenges = true;
             this.ShowUnlockedPoints = true;
             this.DistanceUnits = Units.Feet;
         }
