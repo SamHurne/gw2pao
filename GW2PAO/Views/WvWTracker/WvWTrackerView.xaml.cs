@@ -290,17 +290,12 @@ namespace GW2PAO.Views.WvWTracker
             {
                 if (sv.ComputedHorizontalScrollBarVisibility == System.Windows.Visibility.Visible)
                 {
-                    // 3 times so that it scrolls faster...
                     if (e.Delta > 0)
                     {
-                        sv.LineLeft();
-                        sv.LineLeft();
                         sv.LineLeft();
                     }
                     else
                     {
-                        sv.LineRight();
-                        sv.LineRight();
                         sv.LineRight();
                     }
                     e.Handled = true;

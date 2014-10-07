@@ -190,28 +190,14 @@
             </Grid>
         </Border>
 
-        <Grid Name="ItemsContainer" Grid.Row="1">
-            <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Visible">
-                <StackPanel Width="{Binding ElementName=ItemsContainer, Path=ActualWidth}">
-                    <ItemsControl Name="WorldEventsControl"
-                                  ItemsSource="{Binding Source={StaticResource zoneItemsView}}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <!--TODO: Return to this, see if we can somehow improve performance here...-->
-                        <!--<ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>-->
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+        <ItemsControl Name="ItemsContainer" Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource zoneItemsView}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>      
+        </ItemsControl>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"

@@ -143,20 +143,15 @@
             </Grid>
         </Border>
 
-        <Grid Name="DungeonsContainer" Grid.Row="1">
-            <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Visible">
-                <ItemsControl Name="DungeonsControl"
-                              ItemsSource="{Binding Source={StaticResource DungeonsCollection}}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
+
+        <ItemsControl Name="DungeonsContainer" Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource DungeonsCollection}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"

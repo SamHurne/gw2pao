@@ -151,20 +151,15 @@
             </Grid>
         </Border>
 
-        <Grid Name="EventsContainer" Grid.Row="1">
-            <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Visible">
-                <ItemsControl Name="WorldEventsControl"
-                              ItemsSource="{Binding Source={StaticResource WorldEventsView}}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <View:WorldEventView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
+
+        <ItemsControl Name="EventsContainer" Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <View:WorldEventView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"

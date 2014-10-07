@@ -187,88 +187,88 @@
             </Grid>
         </Border>
 
-        <Grid Name="ObjectivesContainer" Grid.Row="1">
-            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                <StackPanel>
-                    <ItemsControl Name="ObjectivesControl"
-                                  ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
-                                  HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <ItemsControl.Style>
-                            <Style TargetType="ItemsControl">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <Border>
-                                                <StackPanel IsItemsHost="True">
-                                                    <StackPanel.Style>
-                                                        <Style TargetType="StackPanel">
-                                                            <Setter Property="Orientation" Value="Vertical" />
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
-                                                                    <DataTrigger.Setters>
-                                                                        <Setter Property="Orientation" Value="Horizontal" />
-                                                                    </DataTrigger.Setters>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </StackPanel.Style>
-                                                </StackPanel>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
+
+        <ItemsControl Name="ObjectivesContainer" Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
+                      HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                        Padding="{TemplateBinding Control.Padding}"
+                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                        Background="{TemplateBinding Panel.Background}"
+                                        SnapsToDevicePixels="True">
+                                    <ScrollViewer Padding="{TemplateBinding Control.Padding}"
+                                                  Focusable="False"
+                                                  PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                        <ScrollViewer.Style>
+                                            <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
+                                                <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+                                                <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                                        <DataTrigger.Setters>
+                                                            <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+                                                            <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
+                                                        </DataTrigger.Setters>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ScrollViewer.Style>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="ItemsPanel">
+                        <Setter.Value>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                    <VirtualizingStackPanel.Style>
+                                        <Style TargetType="VirtualizingStackPanel">
+                                            <Setter Property="Orientation" Value="Vertical" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                                    <DataTrigger.Setters>
+                                                        <Setter Property="Orientation" Value="Horizontal" />
+                                                    </DataTrigger.Setters>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </VirtualizingStackPanel.Style>
+                                </VirtualizingStackPanel>
+                            </ItemsPanelTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
                                 <Setter Property="ItemTemplate">
                                     <Setter.Value>
                                         <DataTemplate>
-                                            <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"/>
+                                            <view:VerticalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
                                         </DataTemplate>
                                     </Setter.Value>
                                 </Setter>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
-                                        <DataTrigger.Setters>
-                                            <Setter Property="ItemTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <view:VerticalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger.Setters>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ItemsControl.Style>
-                    </ItemsControl>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Orientation" Value="Vertical" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
-                                    <DataTrigger.Setters>
-                                        <Setter Property="Orientation" Value="Horizontal" />
-                                    </DataTrigger.Setters>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                </StackPanel>
-                <ScrollViewer.Style>
-                    <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
-                        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
-                        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
-                                <DataTrigger.Setters>
-                                    <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
-                                    <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ScrollViewer.Style>
-            </ScrollViewer>
-        </Grid>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+        </ItemsControl>
 
         <Grid Name="ResizeHeight" Grid.Row="2"
               Cursor="SizeNS"
