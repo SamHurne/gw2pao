@@ -27,7 +27,7 @@
             <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical">
                         <i:Interaction.Behaviors>
-                        <ei:FluidMoveBehavior Duration="0:0:0.5" AppliesTo="Children">
+                        <ei:FluidMoveBehavior Duration="0:0:0.25" AppliesTo="Children">
                             <ei:FluidMoveBehavior.EaseY>
                                 <CubicEase EasingMode="EaseInOut"/>
                             </ei:FluidMoveBehavior.EaseY>

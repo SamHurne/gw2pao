@@ -195,21 +195,16 @@
             </TextBox>
         </Border>
 
-        <Grid Name="NotificationsContainer" Grid.Row="2">
-            <ScrollViewer Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Auto">
-                <ItemsControl Name="NotificationsControl"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                              ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
+        <ItemsControl Name="NotificationsContainer" Grid.Row="2"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <Grid Name="TextEntryBox" Grid.Row="3"
               Margin="3"

@@ -162,19 +162,15 @@
                                     Text="Sell Listing" />
 
             <!-- ItemsControl for price watches-->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
-                          Style="{StaticResource LeftScrollViewer}"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Visible">
-                <ItemsControl ItemsSource="{Binding Source={StaticResource PriceWatchesCollection}}"
-                              Margin="0,5,0,0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <view:PriceWatchView DataContext="{Binding}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                          ItemsSource="{Binding Source={StaticResource PriceWatchesCollection}}"
+                          Margin="0,5,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <view:PriceWatchView DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <!--<view:PriceWatchView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" />-->
 
