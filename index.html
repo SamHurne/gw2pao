@@ -47,13 +47,18 @@
         });
         
         function refreshDownloadCounts() {
+
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262011?callback=?', function( response ) {
+                var data = response.data;
+                $("#installerDownloadCount").text(data.download_count);
+            });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/237238?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262013?callback=?', function( response ) {
                 var data = response.data;
                 $("#allFeaturesDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/237237?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262012?callback=?', function( response ) {
                 var data = response.data;
                 $("#noBrowserDownloadCount").text(data.download_count);
             });
@@ -171,6 +176,14 @@
                     <p>The Trading Post Calculator is a simple tool that allows a user to calculate profit, taxes, and break-even prices for buying/selling items on the in-game Trading Post.</p>
                 </div>
                 <div class="feature">
+                    <h3>Trading Post Price Notifications</h3>
+                    <p>Price Notifications are notifications that appear when an item has reached a certain highest Buy Order or lowest Sale Listing in the Trading Post. Want to know when the price of Dawn has dropped below a certain value, or when Copper Ore's Buy Orders reach a specific price? This tool will notify you of the change in price.</p>
+                </div>
+                <div class="feature">
+                    <h3>Teamspeak Overlay</h3>
+                    <p>The Teamspeak Overlay is a basic overlay window that uses the ClientQuery plugin of Teamspeak and allows a user to see when someone talks, sends a chat, or enters/exits the current channel. The tool also allows the user to change channel and send chat messages themselves.</p>
+                </div>
+                <div class="feature">
                     <h3>Web Browser</h3>
                     <p>For all needs not provided by the other overlay windows, the Web Browser allows a user to look up guides, videos, or anything else.</p>
                 </div>
@@ -182,22 +195,29 @@
     <section id="download" class="text-center">
         <div class="download-section">
             <div class="container">
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-10 col-lg-offset-1">
                     <h2>Download</h2>
-                    <p>GW2 PAO comes packaged within a zip file. Two version are available, one with all features included and another excluding the browser.</p>
-                    <p>A browserless version is provided for those who may be concerned about the security of the Awesomium browser. The browserless version is also much smaller in size.</p>
-                    <p>To install, simply download, extract to any location, then run GW2PAO.exe.</p>
-                    <h4>Latest Version: <b>1.1</b></h4>
+                    <p>GW2 PAO comes packaged as an installer or zip archive.</p>
+                    <p>For the zip-file download, two versions are available, one with all features included and another excluding the browser. A browserless version is provided for those who may be concerned about the security of the Awesomium browser.</p>
+                    <p>The installer provides an option to include or exclude installation of the browser from the application.</p>
+                    <p>To install, either download and run the installer, or just download the zip,
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/f1df383ed5a7/GW2PAO_1.1.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature Download</span></a>
+                    extract to any location, and run GW2PAO.exe</p>
+                    <h4>Latest Version: <b>2.0</b></h4>
+                    <br>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/f1df383ed5a7/GW2PAO_1.1.zip" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
+                    <br>
+                    <span class="smalltext"><span id="installerDownloadCount">??</span> Downloads</span>
+                    <br>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/090d160/GW2PAO_2.0.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="allFeaturesDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/f1df383ed5a7/GW2PAO_1.1_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser Download</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/090d160/GW2PAO_2.0_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
                     <br><br><br>
-                    <a href="https://github.com/SamHurne/gw2pao/archive/f1df383ed5a7.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/090d160.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
                     <br><br>
                     <h4>Requirements:</h4>
                     <p>

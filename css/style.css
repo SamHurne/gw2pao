@@ -50,7 +50,7 @@ p {
 
 @media(min-width:767px) {
     p {
-        margin: 0 0 35px;
+        margin: 0 0 20px;
         font-size: 20px;
         line-height: 1.4;
     }
