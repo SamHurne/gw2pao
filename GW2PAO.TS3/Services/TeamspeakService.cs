@@ -543,8 +543,8 @@ namespace GW2PAO.TS3.Services
         {
             var notificationProperties = notificationString.Split(' ');
             uint clientId = uint.Parse(notificationProperties.First(id => id.StartsWith(Properties.InvokerID)).Substring(Properties.InvokerID.Length + 1));
-            string clientNickname = notificationProperties.First(id => id.StartsWith(Properties.InvokerName)).Substring(Properties.InvokerName.Length + 1);
-            string message = notificationProperties.First(id => id.StartsWith(Properties.Message)).Substring(Properties.Message.Length + 1);
+            string clientNickname = this.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.InvokerName)).Substring(Properties.InvokerName.Length + 1));
+            string message = this.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.Message)).Substring(Properties.Message.Length + 1));
 
             // Raise the text message received event
             logger.Trace("Text message received From {0} ({1}): {2}", clientId, clientNickname, message);
