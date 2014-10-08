@@ -6,8 +6,8 @@ Guild Wars 2 Personal Assistant Overlay
 A stand-alone .NET/WPF informational overlay utility for Guild Wars 2, providing events tracking, dungeon tracking, and directional/positional tracking for zone completion and WvW.
 
 # Features
+Currently, the GW2 Personal Assistant Overlay includes 10 overlay utilities:
 
-Currently, the GW2 Personal Assistant Overlay includes 8 overlay utilities:
 
 ## Events Tracker
 The Events Tracker overlay tracks active and inactive world events, and allows a user to keep track of which events have already been completed for the day.
