@@ -111,7 +111,7 @@ namespace GW2PAO.API.Services
                 {
                     Name = "Shatterer",
                     ID = new Guid("03BF176A-D59F-49CA-A311-39FC6F533F2F"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) },
+                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(16, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) },
                     Duration = new EventTimespan(0, 7, 0),
                     WarmupDuration = new EventTimespan(0, 6, 0),
                     WaypointCode = "[&BE4DAAA=]"
@@ -235,7 +235,7 @@ namespace GW2PAO.API.Services
                 {
                     Name = "Shatterer",
                     ID = new Guid("03BF176A-D59F-49CA-A311-39FC6F533F2F"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) },
+                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) },
                     Duration = new EventTimespan(0, 7, 0),
                     WarmupDuration = new EventTimespan(0, 0, 0),
                     WaypointCode = "[&BE4DAAA=]"
