@@ -64,6 +64,7 @@ namespace GW2PAO.API.UnitTest
         }
 
         [TestMethod]
+        [Ignore]
         [TestCategory("Long Running")]
         public void RebuildItemDatabase_RebuildItemDatabase_Success()
         {

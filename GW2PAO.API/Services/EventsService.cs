@@ -9,6 +9,7 @@ using GW2DotNET;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
+using GW2PAO.API.Util;
 using NLog;
 
 namespace GW2PAO.API.Services
@@ -35,6 +36,22 @@ namespace GW2PAO.API.Services
         private Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent> eventInformationCache = new Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent>();
 
         /// <summary>
+        /// Helper class for retrieving the current system time
+        /// </summary>
+        private ITimeProvider timeProvider;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="currentTimeProvider">A time provider for determining the current name. If null, the EventsServer will use the DefaultTimeProvider</param>
+        public EventsService(ITimeProvider currentTimeProvider = null)
+        {
+            this.timeProvider = currentTimeProvider;
+            if (this.timeProvider == null)
+                this.timeProvider = new DefaultTimeProvider();
+        }
+
+        /// <summary>
         /// The World Events time table
         /// </summary>
         public MegaserverEventTimeTable EventTimeTable { get; private set; }
@@ -59,6 +76,7 @@ namespace GW2PAO.API.Services
 
             try
             {
+                // TODO: This takes around 2 seconds to perform, slowing down our startup. Move this to the time tables, or save it to disk so we don't need to request this
                 logger.Info("Loading world event locations");
                 foreach (var worldEvent in this.EventTimeTable.WorldEvents)
                 {
@@ -157,18 +175,18 @@ namespace GW2PAO.API.Services
             TimeSpan timeUntilActive;
 
             // Find the next time
-            var nextTime = evt.ActiveTimes.FirstOrDefault(activeTime => (activeTime.Time - DateTimeOffset.UtcNow.TimeOfDay) >= TimeSpan.FromSeconds(0));
+            var nextTime = evt.ActiveTimes.FirstOrDefault(activeTime => (activeTime.Time - this.timeProvider.CurrentTime.TimeOfDay) >= TimeSpan.FromSeconds(0));
 
             // If there is no next time, then take the first time
             if (nextTime == null)
             {
                 nextTime = evt.ActiveTimes.First();
-                timeUntilActive = (nextTime.Time + TimeSpan.FromHours(24) - DateTimeOffset.UtcNow.TimeOfDay);
+                timeUntilActive = (nextTime.Time + TimeSpan.FromHours(24) - this.timeProvider.CurrentTime.TimeOfDay);
             }
             else
             {
                 // Calculate the number of seconds until the next time
-                timeUntilActive = nextTime.Time - DateTimeOffset.UtcNow.TimeOfDay;
+                timeUntilActive = nextTime.Time - this.timeProvider.CurrentTime.TimeOfDay;
             }
             return timeUntilActive;
         }
@@ -183,18 +201,18 @@ namespace GW2PAO.API.Services
             TimeSpan timeSinceActive;
 
             // Find the next time
-            var lastTime = evt.ActiveTimes.LastOrDefault(activeTime => (DateTimeOffset.UtcNow.TimeOfDay - activeTime.Time) >= TimeSpan.FromSeconds(0));
+            var lastTime = evt.ActiveTimes.LastOrDefault(activeTime => (this.timeProvider.CurrentTime.TimeOfDay - activeTime.Time) >= TimeSpan.FromSeconds(0));
 
             // If there is no next time, then take the first time
             if (lastTime == null)
             {
                 lastTime = evt.ActiveTimes.First();
-                timeSinceActive = (lastTime.Time + TimeSpan.FromHours(24) - DateTimeOffset.UtcNow.TimeOfDay);
+                timeSinceActive = (lastTime.Time + TimeSpan.FromHours(24) - this.timeProvider.CurrentTime.TimeOfDay);
             }
             else
             {
                 // Calculate the number of seconds until the next time
-                timeSinceActive = DateTimeOffset.UtcNow.TimeOfDay - lastTime.Time;
+                timeSinceActive = this.timeProvider.CurrentTime.TimeOfDay - lastTime.Time;
             }
             return timeSinceActive;
         }

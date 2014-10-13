@@ -43,9 +43,16 @@ namespace GW2PAO.API.Services
 
             XmlSerializer deserializer = new XmlSerializer(typeof(MegaserverEventTimeTable));
             TextReader reader = new StreamReader(filename);
-            object obj = deserializer.Deserialize(reader);
-            MegaserverEventTimeTable loadedData = (MegaserverEventTimeTable)obj;
-            reader.Close();
+            MegaserverEventTimeTable loadedData = null;
+            try
+            {
+                object obj = deserializer.Deserialize(reader);
+                loadedData = (MegaserverEventTimeTable)obj;
+            }
+            finally
+            {
+                reader.Close();
+            }
 
             return loadedData;
         }

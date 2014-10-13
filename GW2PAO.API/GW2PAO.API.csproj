@@ -116,6 +116,7 @@
     <Compile Include="Services\ZoneService.cs" />
     <Compile Include="Util\CalcUtil.cs" />
     <Compile Include="Util\MapsHelper.cs" />
+    <Compile Include="Util\TimeProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdjustedEventTimeTable.xml">
