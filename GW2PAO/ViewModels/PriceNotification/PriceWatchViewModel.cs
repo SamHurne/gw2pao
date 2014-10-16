@@ -170,7 +170,7 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.ItemsProvider = new ItemResultsProvider(this.commerceService);
 
             if (this.ItemData != null)
-                this.SelectedItem = this.commerceService.ItemsDB[this.ItemData.ID];
+                this.selectedItem = this.commerceService.ItemsDB[this.ItemData.ID];
 
             this.IsBuyOrderNotificationShown = false;
             this.IsSellListingNotificationShown = false;
