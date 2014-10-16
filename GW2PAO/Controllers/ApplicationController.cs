@@ -438,19 +438,19 @@ namespace GW2PAO.Controllers
             var eventMenu = new MenuItemViewModel("Events", null);
 
             var eventTimeTableMenus = new MenuItemViewModel("Event Time Table", null);
-            var standardEvents = new MenuItemViewModel("Standard", null, true,
+            var standardEvents = new MenuItemViewModel("Standard", null, true, false,
                 () => { return !this.EventSettings.UseAdjustedTimeTable; },
                 (selected) => this.EventSettings.UseAdjustedTimeTable = !selected,
                 this.EventSettings, "UseAdjustedTimeTable");
             eventTimeTableMenus.SubMenuItems.Add(standardEvents);
-            var adjustedEvents = new MenuItemViewModel("Adjusted", null, true,
+            var adjustedEvents = new MenuItemViewModel("Adjusted", null, true, false,
                 () => { return this.EventSettings.UseAdjustedTimeTable; },
                 (selected) => this.EventSettings.UseAdjustedTimeTable = selected,
                 this.EventSettings, "UseAdjustedTimeTable");
             eventTimeTableMenus.SubMenuItems.Add(adjustedEvents);
             eventMenu.SubMenuItems.Add(eventTimeTableMenus);
             eventMenu.SubMenuItems.Add(new MenuItemViewModel("Open Events Tracker", this.DisplayEventTracker, this.CanDisplayEventTracker));
-            eventMenu.SubMenuItems.Add(new MenuItemViewModel("Event Notifications", null, true, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
+            eventMenu.SubMenuItems.Add(new MenuItemViewModel("Event Notifications", null, true, false, () => { return this.EventSettings.AreEventNotificationsEnabled; }, (enabled) => this.EventSettings.AreEventNotificationsEnabled = enabled));
             this.menuItems.Add(eventMenu);
 
             // Zone Completion Assistant
@@ -467,7 +467,7 @@ namespace GW2PAO.Controllers
             var naWorlds = new MenuItemViewModel("NA", null);
             foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID < 2000))
             {
-                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true, false,
                     () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
                     (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
                     this.WvWSettings, "WorldSelection");
@@ -477,7 +477,7 @@ namespace GW2PAO.Controllers
             var euWorlds = new MenuItemViewModel("EU", null);
             foreach (var world in this.WvWService.Worlds.Worlds.Where(wld => wld.ID > 2000))
             {
-                var worldMenuItem = new MenuItemViewModel(world.Name, null, true,
+                var worldMenuItem = new MenuItemViewModel(world.Name, null, true, false,
                     () => { return this.WvWSettings.WorldSelection.ID == world.ID; },
                     (selected) => { if (selected) this.WvWSettings.WorldSelection = world; },
                     this.WvWSettings, "WorldSelection");
@@ -510,14 +510,28 @@ namespace GW2PAO.Controllers
                 this.WvWSettings.AreRedBorderlandsNotificationsEnabled = false;
             }));
             wvwNotificationsMaps.SubMenuItems.Add(null); // Null for a seperator
-            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled, this.WvWSettings, "AreEternalBattlegroundsNotificationsEnabled"));
-            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
-            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
-            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
+            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Eternal Battlegrounds", null, true, true, () => { return this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreEternalBattlegroundsNotificationsEnabled = enabled, this.WvWSettings, "AreEternalBattlegroundsNotificationsEnabled"));
+            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Blue Borderlands", null, true, true, () => { return this.WvWSettings.AreBlueBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreBlueBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreBlueBorderlandsNotificationsEnabled"));
+            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Green Borderlands", null, true, true, () => { return this.WvWSettings.AreGreenBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreGreenBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreGreenBorderlandsNotificationsEnabled"));
+            wvwNotificationsMaps.SubMenuItems.Add(new MenuItemViewModel("Red Borderlands", null, true, true, () => { return this.WvWSettings.AreRedBorderlandsNotificationsEnabled; }, (enabled) => this.WvWSettings.AreRedBorderlandsNotificationsEnabled = enabled, this.WvWSettings, "AreRedBorderlandsNotificationsEnabled"));
 
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Home World Takes Objective", null, true, () => { return this.WvWSettings.NotifyWhenHomeTakesObjective; }, (enabled) => this.WvWSettings.NotifyWhenHomeTakesObjective = enabled, this.WvWSettings, "NotifyWhenHomeTakesObjective"));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Home World Loses Objective", null, true, () => { return this.WvWSettings.NotifyWhenHomeLosesObjective; }, (enabled) => this.WvWSettings.NotifyWhenHomeLosesObjective = enabled, this.WvWSettings, "NotifyWhenHomeLosesObjective"));
-            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Other World Takes Other World's Objective", null, true, () => { return this.WvWSettings.NotifyWhenOtherTakesOtherObjective; }, (enabled) => this.WvWSettings.NotifyWhenOtherTakesOtherObjective = enabled, this.WvWSettings, "NotifyWhenOtherTakesOtherObjective"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Enable All", () =>
+            {
+                this.WvWSettings.NotifyWhenHomeTakesObjective = true;
+                this.WvWSettings.NotifyWhenHomeLosesObjective = true;
+                this.WvWSettings.NotifyWhenOtherTakesOtherObjective = true;
+            }));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Disable All", () =>
+            {
+                this.WvWSettings.NotifyWhenHomeTakesObjective = false;
+                this.WvWSettings.NotifyWhenHomeLosesObjective = false;
+                this.WvWSettings.NotifyWhenOtherTakesOtherObjective = false;
+            }));
+            wvwNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Home World Takes Objective", null, true, true, () => { return this.WvWSettings.NotifyWhenHomeTakesObjective; }, (enabled) => this.WvWSettings.NotifyWhenHomeTakesObjective = enabled, this.WvWSettings, "NotifyWhenHomeTakesObjective"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Home World Loses Objective", null, true, true, () => { return this.WvWSettings.NotifyWhenHomeLosesObjective; }, (enabled) => this.WvWSettings.NotifyWhenHomeLosesObjective = enabled, this.WvWSettings, "NotifyWhenHomeLosesObjective"));
+            wvwNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("When Other World Takes Other World's Objective", null, true, true, () => { return this.WvWSettings.NotifyWhenOtherTakesOtherObjective; }, (enabled) => this.WvWSettings.NotifyWhenOtherTakesOtherObjective = enabled, this.WvWSettings, "NotifyWhenOtherTakesOtherObjective"));
+            wvwNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
             wvwNotificationsMenu.SubMenuItems.Add(wvwNotificationsMaps);
 
             wvwMenu.SubMenuItems.Add(wvwNotificationsMenu);
@@ -535,8 +549,8 @@ namespace GW2PAO.Controllers
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Configure", this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Rebuild Item Names Database", this.DisplayRebuildItemNamesView, this.CanDisplayRebuildItemNamesView));
             priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
-            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Buy Order Price Notifications", null, true, () => { return this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreBuyOrderPriceNotificationsEnabled"));
-            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Sell Listing Price Notifications", null, true, () => { return this.CommerceSettings.AreSellListingPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreSellListingPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreSellListingPriceNotificationsEnabled"));
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Buy Order Price Notifications", null, true, true, () => { return this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreBuyOrderPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreBuyOrderPriceNotificationsEnabled"));
+            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel("Sell Listing Price Notifications", null, true, true, () => { return this.CommerceSettings.AreSellListingPriceNotificationsEnabled; }, (enabled) => this.CommerceSettings.AreSellListingPriceNotificationsEnabled = enabled, this.CommerceSettings, "AreSellListingPriceNotificationsEnabled"));
             commerceMenu.SubMenuItems.Add(priceNotificationsMenu);
 
             this.menuItems.Add(commerceMenu);

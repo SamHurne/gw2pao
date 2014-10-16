@@ -53,6 +53,11 @@ namespace GW2PAO.ViewModels.TrayIcon
         public bool IsCheckable { get; private set; }
 
         /// <summary>
+        /// True if the menu item does not close the menu on click, else false
+        /// </summary>
+        public bool StaysOpen { get; private set; }
+
+        /// <summary>
         /// True if the menu item is checked, else false
         /// </summary>
         public bool IsChecked
@@ -81,7 +86,7 @@ namespace GW2PAO.ViewModels.TrayIcon
         /// <param name="setIsChecked">Setter action used to set the value of the IsChecked property</param>
         /// <param name="isCheckedPropertyChangedObject">Object containing the backing property for the IsChecked property</param>
         /// <param name="isCheckedPropertyName">Name of the property containing the value of the IsChecked property</param>
-        public MenuItemViewModel(string header, Action action, bool isCheckable = false,
+        public MenuItemViewModel(string header, Action action, bool isCheckable = false, bool staysOpen = false,
             Func<bool> getIsChecked = null, Action<bool> setIsChecked = null,
             INotifyPropertyChanged isCheckedPropertyChangedObject = null,
             string isCheckedPropertyName = null)
@@ -89,6 +94,7 @@ namespace GW2PAO.ViewModels.TrayIcon
             this.header = header;
             this.command = new DelegateCommand(action);
             this.IsCheckable = isCheckable;
+            this.StaysOpen = staysOpen;
             this.getIsChecked = getIsChecked;
             this.setIsChecked = setIsChecked;
 
@@ -111,11 +117,13 @@ namespace GW2PAO.ViewModels.TrayIcon
         /// <param name="isCheckable">True if the menu item is checkable, else false</param>
         /// <param name="getIsChecked">Getter function used to get the value of the IsChecked property</param>
         /// <param name="setIsChecked">Setter action used to set the value of the IsChecked property</param>
-        public MenuItemViewModel(string header, Action action, Func<bool> canExcuteAction, bool isCheckable = false, Func<bool> getIsChecked = null, Action<bool> setIsChecked = null)
+        public MenuItemViewModel(string header, Action action, Func<bool> canExcuteAction, bool isCheckable = false, bool staysOpen = false,
+            Func<bool> getIsChecked = null, Action<bool> setIsChecked = null)
         {
             this.header = header;
             this.command = new DelegateCommand(action, canExcuteAction);
             this.IsCheckable = isCheckable;
+            this.StaysOpen = staysOpen;
             this.getIsChecked = getIsChecked;
             this.setIsChecked = setIsChecked;
         }

@@ -35,6 +35,11 @@ namespace GW2PAO.ViewModels.Interfaces
         bool IsChecked { get; set; }
 
         /// <summary>
+        /// True if the menu item does not close the menu on click, else false
+        /// </summary>
+        bool StaysOpen { get; }
+
+        /// <summary>
         /// The on-click command
         /// </summary>
         IRefreshableCommand OnClickCommand { get; }

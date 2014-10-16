@@ -150,7 +150,7 @@ namespace GW2PAO
 
                 var settingsMenu = new MenuItemViewModel("Settings", null);
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Non-Interactive Windows", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Non-Interactive Windows", null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
                                     GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
@@ -158,7 +158,7 @@ namespace GW2PAO
                                  },
                     GW2PAO.Properties.Settings.Default, "IsClickthroughEnabled"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Sticky Windows", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Sticky Windows", null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.AreWindowsSticky; },
                     (enabled) =>
                     {
@@ -167,12 +167,12 @@ namespace GW2PAO
                     },
                     GW2PAO.Properties.Settings.Default, "AreWindowsSticky"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true, false,
                     () => { return ApplicationOverlayMenuIcon.IsVisible; },
                     (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
                     ApplicationOverlayMenuIcon, "IsVisible"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.CheckForUpdates; },
                     (enabled) =>
                     {
