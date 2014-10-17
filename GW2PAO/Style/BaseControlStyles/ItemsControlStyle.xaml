@@ -39,24 +39,17 @@
     </Style>
 
     <Style TargetType="ItemsControl">
-        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                    <Border Name="border"
+                            BorderThickness="{TemplateBinding Border.BorderThickness}"
                             Padding="{TemplateBinding Control.Padding}"
                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                             Background="{TemplateBinding Panel.Background}"
                             SnapsToDevicePixels="True">
-                        <ScrollViewer Padding="{TemplateBinding Control.Padding}"
+                        <ScrollViewer Name="scrollviewer"
+                                      Padding="{TemplateBinding Control.Padding}"
                                       Focusable="False"
                                       Style="{StaticResource LeftScrollViewer}">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />

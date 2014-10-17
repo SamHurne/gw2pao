@@ -93,17 +93,17 @@
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Distance Units">
-                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
-                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
-                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
+                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Automatic Unlock">
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" />
-                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockHeartQuests}" />
-                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockSkillChallenges}" />
+                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" StaysOpenOnClick="True" />
+                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Show Unlocked Zone Points" IsCheckable="True" IsChecked="{Binding UserSettings.ShowUnlockedPoints}" />
@@ -111,11 +111,11 @@
                                 <MenuItem Header="Show All" Command="{Binding ShowAllCommand}" />
                                 <MenuItem Header="Show None" Command="{Binding ShowNoneCommand}" />
                                 <Separator />
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AreWaypointsVisible}" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.ArePoisVisible}" />
-                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AreHeartsVisible}" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AreVistasVisible}" />
-                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AreSkillChallengesVisible}" />
+                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AreWaypointsVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.ArePoisVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AreHeartsVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AreVistasVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="Close" Click="CloseWindowButton_Click" />
@@ -191,7 +191,8 @@
         </Border>
 
         <ItemsControl Name="ItemsContainer" Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource zoneItemsView}}">
+                      ItemsSource="{Binding Source={StaticResource zoneItemsView}}"
+                      Style="{StaticResource VirtualizingItemsControlStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
@@ -199,9 +200,7 @@
             </ItemsControl.ItemTemplate>      
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2"
-              Cursor="SizeNS"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+        <Grid Name="ResizeHeight" Grid.Row="2">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">

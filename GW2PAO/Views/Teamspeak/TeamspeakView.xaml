@@ -224,9 +224,7 @@
             </Button>
         </Grid>
 
-        <Grid Name="ResizeHeight" Grid.Row="4"
-              Cursor="SizeNS"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+        <Grid Name="ResizeHeight" Grid.Row="4">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">
@@ -238,6 +236,5 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Grid>
-
     </Grid>
 </src:OverlayWindow>

@@ -27,18 +27,22 @@ namespace GW2PAO.Views.DungeonTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const double minHeight = 84;
-        private const double maxHeight = 268;
+        /// <summary>
+        /// Actual height of a dungeon in the list
+        /// </summary>
+        private double dungeonHeight;
+
+        /// <summary>
+        /// Count used for keeping track of when we need to adjust our
+        /// maximum height/width if the number of visible dungeons
+        /// changes
+        /// </summary>
+        private int prevVisibleDungeonsCount = 0;
 
         /// <summary>
         /// Height before collapsing the control
         /// </summary>
         private double beforeCollapseHeight;
-
-        /// <summary>
-        /// True if the user is resizing the window, else false
-        /// </summary>
-        private bool resizeInProcess = false;
 
         /// <summary>
         /// Dungeons controller
@@ -62,13 +66,56 @@ namespace GW2PAO.Views.DungeonTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
+            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
+            this.Loaded += DungeonTrackerView_Loaded;
+        }
+
+        private void DungeonTrackerView_Loaded(object sender, RoutedEventArgs e)
+        {
+            var objContainer = this.DungeonsContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+            this.dungeonHeight = objContainer.ActualHeight;
+
+            // Set up resize snapping
+            this.ResizeHelper.SnappingHeightOffset = 6;
+            this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
+            this.ResizeHelper.SnappingIncrementHeight = (int)this.dungeonHeight;
+
             // Save the height values for use when collapsing the window
-            this.MinHeight = minHeight;
-            this.MaxHeight = maxHeight;
+            this.RefreshWindowHeights();
             this.Height = Properties.Settings.Default.DungeonTrackerHeight;
 
+            this.DungeonsContainer.LayoutUpdated += DungeonsContainer_LayoutUpdated;
             this.Closing += DungeonTrackerView_Closing;
             this.beforeCollapseHeight = this.Height;
+        }
+
+        /// <summary>
+        /// Refreshes the MinHeight and MaxHeight of the window
+        /// based on collapsed status and number of visible items
+        /// </summary>
+        private void RefreshWindowHeights()
+        {
+            var visibleObjsCount = this.viewModel.Dungeons.Count(o => o.IsVisible);
+            if (this.DungeonsContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                // Expanded
+                this.MinHeight = dungeonHeight + this.TitleBar.ActualHeight; // minimum of 1 dungeon
+                this.MaxHeight = (visibleObjsCount * dungeonHeight) + this.TitleBar.ActualHeight + 2;
+            }
+            else
+            {
+                // Collapsed, don't touch the height
+            }
+        }
+
+        private void DungeonsContainer_LayoutUpdated(object sender, EventArgs e)
+        {
+            var visibleObjsCount = this.viewModel.Dungeons.Count(o => o.IsVisible);
+            if (prevVisibleDungeonsCount != visibleObjsCount)
+            {
+                prevVisibleDungeonsCount = visibleObjsCount;
+                this.RefreshWindowHeights();
+            }
         }
 
         private void DungeonTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -128,61 +175,9 @@ namespace GW2PAO.Views.DungeonTracker
             }
             else
             {
-                this.MinHeight = minHeight;
-                this.MaxHeight = maxHeight;
-                this.Height = this.beforeCollapseHeight;
                 this.DungeonsContainer.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
-
-        private void Resize_Init(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-
-            if (senderRect != null)
-            {
-                resizeInProcess = true;
-                senderRect.CaptureMouse();
-            }
-        }
-
-        private void Resize_End(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-            if (senderRect != null)
-            {
-                resizeInProcess = false;
-                senderRect.ReleaseMouseCapture();
-            }
-        }
-
-        private void Resizeing_Form(object sender, MouseEventArgs e)
-        {
-            if (resizeInProcess)
-            {
-                Grid senderRect = sender as Grid;
-                if (senderRect != null)
-                {
-                    double width = e.GetPosition(this).X;
-                    double height = e.GetPosition(this).Y;
-                    senderRect.CaptureMouse();
-                    if (senderRect.Name == "ResizeWidth")
-                    {
-                        width += 1;
-                        if (width > 0 && width < this.MaxWidth && width > this.MinWidth)
-                        {
-                            this.Width = width;
-                        }
-                    }
-                    else if (senderRect.Name == "ResizeHeight")
-                    {
-                        height += 1;
-                        if (height > 0 && height < this.MaxHeight && height > this.MinHeight)
-                        {
-                            this.Height = height;
-                        }
-                    }
-                }
+                this.RefreshWindowHeights();
+                this.Height = this.beforeCollapseHeight;
             }
         }
 

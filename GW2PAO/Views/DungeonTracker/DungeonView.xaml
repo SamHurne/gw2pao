@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:view="clr-namespace:GW2PAO.Views.DungeonTracker"
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" d:DesignWidth="200"
-             Height="26"
+             Height="28"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
@@ -34,7 +35,7 @@
     </UserControl.ContextMenu>
 
     <!--Note: DataContext is set by the DungeonTrackerView-->
-    <Border CornerRadius="0" Margin="0,0,5,0" Padding="15,0,5,5" BorderThickness="0,0,0,1">
+    <Border CornerRadius="0" Margin="0,0,0,0" Padding="15,0,0,0" BorderThickness="0,0,0,1">
 
         <Border.BorderBrush>
             <LinearGradientBrush Opacity="0.65">
@@ -47,7 +48,7 @@
             <SolidColorBrush Color="#01FFFFFF" />
         </Border.Background>
 
-        <Grid Margin="0,5,0,0">
+        <Grid Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -60,29 +61,31 @@
                                     Grid.Row="0" Grid.Column="0"
                                     VerticalAlignment="Center" HorizontalAlignment="Left"
                                     FontSize="13"
-                                    Text="{Binding DungeonName}" />
-            
-            <ItemsControl Grid.Row="0" Grid.Column="1"
-                          Margin="0,0,0,0"
-                          ItemsSource="{Binding Source={StaticResource PathsCollection}}">
+                                    Text="{Binding DungeonName}"/>
 
+            <ItemsControl Grid.Row="0" Grid.Column="1"
+                          VerticalAlignment="Center"
+                          Padding="0,0,3,0"
+                          ItemsSource="{Binding Source={StaticResource PathsCollection}}"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <CheckBox Grid.Row="1" Grid.Column="1"
                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                           IsChecked="{Binding IsCompleted}">                            
+                           IsChecked="{Binding IsCompleted}"
+                           Margin="5,5,5,5">
                             <CheckBox.Style>
                                 <Style TargetType="CheckBox">
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                <Grid Margin="10,0,0,0">
+                                                <Grid>
                                                     <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                                                                             Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                             FontSize="13" FontFamily="Gisha"
@@ -179,7 +182,6 @@
                         </CheckBox>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-
             </ItemsControl>
             
         </Grid>

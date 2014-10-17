@@ -35,7 +35,6 @@
     </src:OverlayWindow.Resources>
 
     <Grid>
-
         <Grid.Effect>
             <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
         </Grid.Effect>
@@ -92,16 +91,16 @@
                             <Separator />
                             <MenuItem Header="Reset Hidden Objectives" Command="{Binding ResetHiddenObjectivesCommand}" />
                             <MenuItem Header="Show">
-                                <MenuItem Header="Red Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" />
-                                <MenuItem Header="Green Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreGreenObjectivesShown}" />
-                                <MenuItem Header="Blue Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBlueObjectivesShown}" />
-                                <MenuItem Header="Neutral Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreNeutralObjectivesShown}" />
+                                <MenuItem Header="Red Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Green Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Blue Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Neutral Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
                                 <Separator />
-                                <MenuItem Header="Castles" IsCheckable="True" IsChecked="{Binding UserSettings.AreCastlesShown}" />
-                                <MenuItem Header="Keeps" IsCheckable="True" IsChecked="{Binding UserSettings.AreKeepsShown}" />
-                                <MenuItem Header="Towers" IsCheckable="True" IsChecked="{Binding UserSettings.AreTowersShown}" />
-                                <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" />
-                                <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" />
+                                <MenuItem Header="Castles" IsCheckable="True" IsChecked="{Binding UserSettings.AreCastlesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Keeps" IsCheckable="True" IsChecked="{Binding UserSettings.AreKeepsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Towers" IsCheckable="True" IsChecked="{Binding UserSettings.AreTowersShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <MenuItem Header="Names">
                                 <MenuItem Header="Cardinal Directions" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
@@ -193,7 +192,6 @@
                       HorizontalAlignment="Left" VerticalAlignment="Top">
             <ItemsControl.Style>
                 <Style TargetType="ItemsControl">
-                    <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
                     <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
                     <Setter Property="Template">
                         <Setter.Value>
@@ -236,9 +234,9 @@
                     <Setter Property="ItemsPanel">
                         <Setter.Value>
                             <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
-                                    <VirtualizingStackPanel.Style>
-                                        <Style TargetType="VirtualizingStackPanel">
+                                <StackPanel IsItemsHost="True">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
                                             <Setter Property="Orientation" Value="Vertical" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
@@ -248,8 +246,8 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </VirtualizingStackPanel.Style>
-                                </VirtualizingStackPanel>
+                                    </StackPanel.Style>
+                                </StackPanel>
                             </ItemsPanelTemplate>
                         </Setter.Value>
                     </Setter>
@@ -270,13 +268,9 @@
             </ItemsControl.Style>
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2"
-              Cursor="SizeNS"
-              Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form"
-              HorizontalAlignment="Left">
-
-            <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+        <Grid Name="ResizeHeight" Grid.Row="2">
+            <Rectangle VerticalAlignment="Bottom"
+                       HorizontalAlignment="Stretch"
                        Height="1">
                 <Rectangle.Fill>
                     <LinearGradientBrush>
@@ -285,7 +279,6 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible" />
@@ -301,10 +294,7 @@
         </Grid>
 
         <Grid Name="ResizeWidth" Grid.Row="0" Grid.RowSpan="3"
-              Cursor="SizeWE"
-              VerticalAlignment="Top"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
-
+              VerticalAlignment="Top">
             <Rectangle VerticalAlignment="Stretch"
                        HorizontalAlignment="Right"
                        Width="1">
@@ -316,7 +306,6 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Height" Value="115" />
@@ -336,6 +325,5 @@
                 </Style>
             </Grid.Style>
         </Grid>
-
     </Grid>
 </src:OverlayWindow>

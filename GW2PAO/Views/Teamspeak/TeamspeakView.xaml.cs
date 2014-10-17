@@ -36,11 +36,6 @@ namespace GW2PAO.Views.Teamspeak
         private double beforeCollapseHeight;
 
         /// <summary>
-        /// True if the user is resizing the window, else false
-        /// </summary>
-        private bool resizeInProcess = false;
-
-        /// <summary>
         /// Dungeon tracker view model
         /// </summary>
         private TeamspeakViewModel viewModel;
@@ -55,6 +50,8 @@ namespace GW2PAO.Views.Teamspeak
             this.viewModel = vm;
             this.DataContext = this.viewModel;
             InitializeComponent();
+
+            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
 
             // Save the height values for use when collapsing the window
             this.MinHeight = minHeight;
@@ -127,57 +124,6 @@ namespace GW2PAO.Views.Teamspeak
                 this.MaxHeight = maxHeight;
                 this.Height = this.beforeCollapseHeight;
                 this.NotificationsContainer.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
-
-        private void Resize_Init(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-
-            if (senderRect != null)
-            {
-                resizeInProcess = true;
-                senderRect.CaptureMouse();
-            }
-        }
-
-        private void Resize_End(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-            if (senderRect != null)
-            {
-                resizeInProcess = false;
-                senderRect.ReleaseMouseCapture();
-            }
-        }
-
-        private void Resizeing_Form(object sender, MouseEventArgs e)
-        {
-            if (resizeInProcess)
-            {
-                Grid senderRect = sender as Grid;
-                if (senderRect != null)
-                {
-                    double width = e.GetPosition(this).X;
-                    double height = e.GetPosition(this).Y;
-                    senderRect.CaptureMouse();
-                    if (senderRect.Name == "ResizeWidth")
-                    {
-                        width += 1;
-                        if (width > 0 && width < this.MaxWidth && width > this.MinWidth)
-                        {
-                            this.Width = width;
-                        }
-                    }
-                    else if (senderRect.Name == "ResizeHeight")
-                    {
-                        height += 1;
-                        if (height > 0 && height < this.MaxHeight && height > this.MinHeight)
-                        {
-                            this.Height = height;
-                        }
-                    }
-                }
             }
         }
 

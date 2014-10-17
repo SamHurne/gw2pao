@@ -151,9 +151,9 @@
             </Grid>
         </Border>
 
-
         <ItemsControl Name="EventsContainer" Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}">
+                      ItemsSource="{Binding Source={StaticResource WorldEventsView}}"
+                      Style="{StaticResource VirtualizingItemsControlStyle}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <View:WorldEventView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
@@ -161,9 +161,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2"
-              Cursor="SizeNS"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+        <Grid Name="ResizeHeight" Grid.Row="2">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1">

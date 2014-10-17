@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" d:DesignWidth="200"
-             Height="26"
+             Height="28"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>

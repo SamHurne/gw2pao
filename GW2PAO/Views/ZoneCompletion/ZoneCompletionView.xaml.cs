@@ -29,17 +29,12 @@ namespace GW2PAO.Views.ZoneCompletion
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const double minHeight = 78;
+        private const double MINIMUM_HEIGHT = 78;
 
         /// <summary>
         /// Height before collapsing the control
         /// </summary>
         private double beforeCollapseHeight;
-
-        /// <summary>
-        /// True if the user is resizing the window, else false
-        /// </summary>
-        private bool resizeInProcess = false;
 
         /// <summary>
         /// The zone completion controller
@@ -58,8 +53,10 @@ namespace GW2PAO.Views.ZoneCompletion
             this.DataContext = new ZoneCompletionViewModel(this.controller, zoneName);
             InitializeComponent();
 
+            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
+
             // Save the height values for use when collapsing the window
-            this.MinHeight = minHeight;
+            this.MinHeight = MINIMUM_HEIGHT;
             this.Height = Properties.Settings.Default.ZoneAssistantHeight;
 
             this.Closing += ZoneCompletionView_Closing;
@@ -122,60 +119,9 @@ namespace GW2PAO.Views.ZoneCompletion
             }
             else
             {
-                this.MinHeight = minHeight;
+                this.MinHeight = MINIMUM_HEIGHT;
                 this.Height = this.beforeCollapseHeight;
                 this.ItemsContainer.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
-
-        private void Resize_Init(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-
-            if (senderRect != null)
-            {
-                resizeInProcess = true;
-                senderRect.CaptureMouse();
-            }
-        }
-
-        private void Resize_End(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-            if (senderRect != null)
-            {
-                resizeInProcess = false;
-                senderRect.ReleaseMouseCapture();
-            }
-        }
-
-        private void Resizeing_Form(object sender, MouseEventArgs e)
-        {
-            if (resizeInProcess)
-            {
-                Grid senderRect = sender as Grid;
-                if (senderRect != null)
-                {
-                    double width = e.GetPosition(this).X;
-                    double height = e.GetPosition(this).Y;
-                    senderRect.CaptureMouse();
-                    if (senderRect.Name == "ResizeWidth")
-                    {
-                        width += 1;
-                        if (width > 0 && width < this.MaxWidth && width > this.MinWidth)
-                        {
-                            this.Width = width;
-                        }
-                    }
-                    else if (senderRect.Name == "ResizeHeight")
-                    {
-                        height += 1;
-                        if (height > 0 && height < this.MaxHeight && height > this.MinHeight)
-                        {
-                            this.Height = height;
-                        }
-                    }
-                }
             }
         }
 

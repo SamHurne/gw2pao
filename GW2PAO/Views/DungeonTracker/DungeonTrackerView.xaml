@@ -143,28 +143,22 @@
             </Grid>
         </Border>
 
-
         <ItemsControl Name="DungeonsContainer" Grid.Row="1"
                       ItemsSource="{Binding Source={StaticResource DungeonsCollection}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <view:DungeonView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                    <view:DungeonView DataContext="{Binding}"
+                                      Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"
+                                      Width="{Binding ElementName=DungeonsContainer, Path=ActualWidth}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2"
-              Cursor="SizeNS"
-              MouseLeftButtonDown="Resize_Init" MouseLeftButtonUp="Resize_End" MouseMove="Resizeing_Form">
+        <Grid Name="ResizeHeight" Grid.Row="2">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
-                       Height="1">
-                <Rectangle.Fill>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                        <GradientStop Color="#00FFA500" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
+                       Height="2"
+                       Fill="#01FFA500">
             </Rectangle>
         </Grid>
     </Grid>

@@ -29,18 +29,22 @@ namespace GW2PAO.Views.EventTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const double minHeight = 84;
-        private const double maxHeight = 373;
+        /// <summary>
+        /// Actual height of an event in the list
+        /// </summary>
+        private double eventHeight;
+
+        /// <summary>
+        /// Count used for keeping track of when we need to adjust our
+        /// maximum height/width if the number of visible events
+        /// changes
+        /// </summary>
+        private int prevVisibleEventsCount = 0;
 
         /// <summary>
         /// Height before collapsing the control
         /// </summary>
         private double beforeCollapseHeight;
-
-        /// <summary>
-        /// True if the user is resizing the window, else false
-        /// </summary>
-        private bool resizeInProcess = false;
 
         /// <summary>
         /// Event tracker controller
@@ -64,13 +68,59 @@ namespace GW2PAO.Views.EventTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Save the hight values for use when collapsing the window
-            this.MinHeight = minHeight;
-            this.MaxHeight = maxHeight;
+            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
+            this.Loaded += EventTrackerView_Loaded;
+        }
+
+        private void EventTrackerView_Loaded(object sender, RoutedEventArgs e)
+        {
+            var objContainer = this.EventsContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+            this.eventHeight = objContainer.ActualHeight;
+
+            // Set up resize snapping
+            this.ResizeHelper.SnappingHeightOffset = 7;
+            this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
+            this.ResizeHelper.SnappingIncrementHeight = (int)this.eventHeight;
+
+            // Save the height values for use when collapsing the window
+            this.RefreshWindowHeights();
             this.Height = GW2PAO.Properties.Settings.Default.EventTrackerHeight;
 
+            this.EventsContainer.LayoutUpdated += EventsContainer_LayoutUpdated;
             this.Closing += EventTrackerView_Closing;
             this.beforeCollapseHeight = this.Height;
+        }
+
+        /// <summary>
+        /// Refreshes the MinHeight and MaxHeight of the window
+        /// based on collapsed status and number of visible items
+        /// </summary>
+        private void RefreshWindowHeights()
+        {
+            var visibleObjsCount = this.viewModel.WorldEvents.Count(o => o.IsVisible);
+            if (this.EventsContainer.Visibility == System.Windows.Visibility.Visible)
+            {
+                // Expanded
+                this.MinHeight = eventHeight * 2 + this.TitleBar.ActualHeight; // Minimum of 2 events
+                if (visibleObjsCount < 2)
+                    this.MaxHeight = this.MinHeight;
+                else
+                    this.MaxHeight = (visibleObjsCount * eventHeight) + this.TitleBar.ActualHeight + 2;
+            }
+            else
+            {
+                // Collapsed, don't touch the height
+            }
+        }
+
+        private void EventsContainer_LayoutUpdated(object sender, EventArgs e)
+        {
+            var visibleObjsCount = this.viewModel.WorldEvents.Count(o => o.IsVisible);
+            if (prevVisibleEventsCount != visibleObjsCount)
+            {
+                prevVisibleEventsCount = visibleObjsCount;
+                this.RefreshWindowHeights();
+            }
         }
 
         private void EventTrackerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -130,61 +180,9 @@ namespace GW2PAO.Views.EventTracker
             }
             else
             {
-                this.MinHeight = minHeight;
-                this.MaxHeight = maxHeight;
-                this.Height = this.beforeCollapseHeight;
                 this.EventsContainer.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
-
-        private void Resize_Init(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-
-            if (senderRect != null)
-            {
-                resizeInProcess = true;
-                senderRect.CaptureMouse();
-            }
-        }
-
-        private void Resize_End(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-            if (senderRect != null)
-            {
-                resizeInProcess = false;
-                senderRect.ReleaseMouseCapture();
-            }
-        }
-
-        private void Resizeing_Form(object sender, MouseEventArgs e)
-        {
-            if (resizeInProcess)
-            {
-                Grid senderRect = sender as Grid;
-                if (senderRect != null)
-                {
-                    double width = e.GetPosition(this).X;
-                    double height = e.GetPosition(this).Y;
-                    senderRect.CaptureMouse();
-                    if (senderRect.Name == "ResizeWidth")
-                    {
-                        width += 1;
-                        if (width > 0 && width < this.MaxWidth && width > this.MinWidth)
-                        {
-                            this.Width = width;
-                        }
-                    }
-                    else if (senderRect.Name == "ResizeHeight")
-                    {
-                        height += 1;
-                        if (height > 0 && height < this.MaxHeight && height > this.MinHeight)
-                        {
-                            this.Height = height;
-                        }
-                    }
-                }
+                this.RefreshWindowHeights();
+                this.Height = this.beforeCollapseHeight;
             }
         }
 

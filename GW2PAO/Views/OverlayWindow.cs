@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
 using Blue.Private.Win32Imports;
 using Blue.Windows;
 using GW2PAO.Utility;
@@ -74,12 +77,18 @@ namespace GW2PAO.Views
         public StickyWindow StickyHelper { get; private set; }
 
         /// <summary>
+        /// Helper for snapping any resizing
+        /// </summary>
+        protected ResizeSnapHelper ResizeHelper;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public OverlayWindow()
         {
             this.Owner = OwnerWindow;
             this.Loaded += OverlayWindowBase_Loaded;
+            this.ResizeHelper = new ResizeSnapHelper(this);
 
             if (ProcessMonitor != null)
             {

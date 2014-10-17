@@ -152,6 +152,7 @@
     <Compile Include="TrayIcon\TrayInfoMessageType.cs" />
     <Compile Include="Utility\Interfaces\IProcessMonitor.cs" />
     <Compile Include="Utility\ProcessMonitor.cs" />
+    <Compile Include="Utility\ResizeSnapHelper.cs" />
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\UpdateChecker.cs" />
     <Compile Include="Utility\User32.cs" />
@@ -277,6 +278,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Style\BaseControlStyles\ItemsControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\NamedStyles\VirtualizingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

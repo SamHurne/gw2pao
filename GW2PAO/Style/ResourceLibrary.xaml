@@ -16,5 +16,6 @@
         <ResourceDictionary Source="BaseControlStyles/ToolTipStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/AlternateCheckboxStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />
+        <ResourceDictionary Source="NamedStyles/VirtualizingItemsControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

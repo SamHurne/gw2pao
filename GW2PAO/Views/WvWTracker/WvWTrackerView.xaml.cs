@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Controllers.Interfaces;
+using GW2PAO.PresentationCore;
 using GW2PAO.ViewModels.DungeonTracker;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.WvWTracker;
@@ -30,19 +32,22 @@ namespace GW2PAO.Views.WvWTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const double minVerticalHeight = 58;
-        private const double maxVerticalHeight = 627;
-        private const double verticalHeight = 250;
-        private const double minHorizontalHeight = 76;
-        private const double maxHorizontalHeight = 125;
-        private const double horizontalHeight = 125;
+        // Vertical Orientation Size Constants:
+        private const double VERTICAL_MIN_HEIGHT = 58;
+        private const double VERTICAL_MAX_HEIGHT = 627;
+        private const double VERTICAL_DEF_HEIGHT = 250;
 
-        private const double minVerticalWidth = 125;
-        private const double maxVerticalWidth = 350;
-        private const double verticalWidth = 215;
-        private const double minHorizontalWidth = 190;
-        private const double maxHorizontalWidth = 1124;
-        private const double horizontalWidth = 350;
+        private const double VERTICAL_MIN_WIDTH = 125;
+        private const double VERTICAL_MAX_WIDTH = 350;
+        private const double VERTICAL_DEF_WIDTH = 182;
+
+        // Horizontal Orientation Size Constants:
+        private const double HORIZONTAL_MIN_HEIGHT = 76;
+        private const double HORIZONTAL_MAX_HEIGHT = 125;
+
+        private const double HORIZONTAL_MIN_WIDTH = 190;
+        private const double HORIZONTAL_MAX_WIDTH = 1124;
+        private const double HORIZONTAL_DEF_WIDTH = 350;
 
         /// <summary>
         /// Height before collapsing the control
@@ -50,9 +55,11 @@ namespace GW2PAO.Views.WvWTracker
         private double beforeCollapseHeight;
 
         /// <summary>
-        /// True if the user is resizing the window, else false
+        /// Count used for keeping track of when we need to adjust our
+        /// maximum height/width if the number of visible objectives
+        /// changes
         /// </summary>
-        private bool resizeInProcess = false;
+        private int prevObjsCount = 0;
 
         /// <summary>
         /// WvW controller
@@ -76,8 +83,27 @@ namespace GW2PAO.Views.WvWTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Set the window size and location
-            this.RefreshWindowSizeForOrientation();
+            // Set initial height and widths
+            if (this.viewModel.IsHorizontalOrientation)
+            {
+                // Horizontal Orientation
+                this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
+                this.Height = this.MaxHeight;
+                this.MinWidth = HORIZONTAL_MIN_WIDTH;
+                this.MaxWidth = HORIZONTAL_MAX_WIDTH;
+                this.Width = HORIZONTAL_DEF_WIDTH;
+            }
+            else
+            {
+                // Vertical Orientation
+                this.MinHeight = VERTICAL_MIN_HEIGHT;
+                this.MaxHeight = VERTICAL_MAX_HEIGHT;
+                this.Height = VERTICAL_MAX_HEIGHT / 3;
+                this.MinWidth = VERTICAL_MIN_WIDTH;
+                this.MaxWidth = VERTICAL_MAX_WIDTH;
+                this.Width = VERTICAL_DEF_WIDTH;
+            }
 
             this.Closing += WvWTrackerView_Closing;
             if (Properties.Settings.Default.WvWTrackerHeight > 0)
@@ -86,7 +112,141 @@ namespace GW2PAO.Views.WvWTracker
                 this.Width = Properties.Settings.Default.WvWTrackerWidth;
 
             this.beforeCollapseHeight = this.Height;
-            this.viewModel.PropertyChanged += viewModel_PropertyChanged;
+
+            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, this.ResizeWidth);
+            this.Loaded += (o, e) =>
+                {
+                    this.RefreshWindowHeights(false);
+                    this.RefreshWindowWidths(false);
+                    this.RefreshResizeSnapping();
+
+                    // Set the window size and location
+                    this.viewModel.PropertyChanged += viewModel_PropertyChanged;
+                    this.ObjectivesContainer.LayoutUpdated += ObjectivesContainer_LayoutUpdated;
+                };
+        }
+
+        /// <summary>
+        /// Refreshes the resize snap increments, etc
+        /// </summary>
+        private void RefreshResizeSnapping()
+        {
+            var obj = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+            if (obj != null)
+            {
+                if (this.viewModel.IsHorizontalOrientation)
+                {
+                    this.ResizeHelper.SnappingHeightOffset = 0;
+                    this.ResizeHelper.SnappingIncrementHeight = 1;
+                    this.ResizeHelper.SnappingWidthOffset = 3;
+                    this.ResizeHelper.SnappingIncrementWidth = (int)obj.ActualWidth;
+                }
+                else
+                {
+                    this.ResizeHelper.SnappingHeightOffset = 6;
+                    this.ResizeHelper.SnappingIncrementHeight = (int)obj.ActualHeight;
+                    this.ResizeHelper.SnappingWidthOffset = 0;
+                    this.ResizeHelper.SnappingIncrementWidth = 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the MinHeight, Height, and MaxHeight of the window
+        /// based on orientation, collapsed status, and number of visible items
+        /// </summary>
+        private void RefreshWindowHeights(bool resetHeight)
+        {
+            var objsCount = this.viewModel.Objectives.Count();
+            var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+            if (objContainer != null)
+            {
+                if (objContainer.ActualHeight == 0)
+                    objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(1) as FrameworkElement;
+
+                var objHeight = (int)objContainer.ActualHeight;
+                if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    // Expanded
+                    if (this.viewModel.IsHorizontalOrientation)
+                    {
+                        // Horizontal Orientation
+                        this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                        this.MaxHeight = this.TitleBar.ActualHeight + objHeight;
+
+                        if (resetHeight)
+                            this.Height = this.MaxHeight;
+                    }
+                    else
+                    {
+                        // Vertical Orientation
+                        this.MinHeight = VERTICAL_MIN_HEIGHT;
+                        this.MaxHeight = this.TitleBar.ActualHeight + (objHeight * objsCount) + 5;
+
+                        if (resetHeight)
+                            this.Height = this.TitleBar.ActualHeight + (objHeight * 5);
+                    }
+                }
+                else
+                {
+                    // Collapsed, don't touch the height unless we are resetting it
+                    if (resetHeight)
+                    {
+                        if (this.viewModel.IsHorizontalOrientation)
+                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + objHeight;
+                        else
+                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + (objHeight * 5);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the MinWidth, Width, and MaxWidth of the window
+        /// based on collapsed status, and number of visible items
+        /// </summary>
+        private void RefreshWindowWidths(bool resetWidth)
+        {
+            var objsCount = this.viewModel.Objectives.Count();
+            var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+            if (objContainer != null)
+            {
+                var objWidth = (int)objContainer.ActualWidth;
+                if (this.viewModel.IsHorizontalOrientation)
+                {
+                    // Horizontal Orientation
+                    this.MinWidth = HORIZONTAL_MIN_WIDTH;
+                    this.MaxWidth = objWidth * objsCount;
+
+                    if (resetWidth)
+                        this.Width = objWidth * 5;
+                }
+                else
+                {
+                    // Vertical Orientation
+                    this.MinWidth = VERTICAL_MIN_WIDTH;
+                    this.MaxWidth = VERTICAL_MAX_WIDTH;
+
+                    if (resetWidth)
+                        this.Width = VERTICAL_DEF_WIDTH;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event handler for the objective container's layout updated
+        /// This is used for determining when the amount of visible objectives changes
+        /// so that we can update our maximum height/widths accordingly
+        /// </summary>
+        private void ObjectivesContainer_LayoutUpdated(object sender, EventArgs e)
+        {
+            var objsCount = this.viewModel.Objectives.Count;
+            if (prevObjsCount != objsCount)
+            {
+                prevObjsCount = objsCount;
+                this.RefreshWindowHeights(false);
+                this.RefreshWindowWidths(false);
+            }
         }
 
         /// <summary>
@@ -96,53 +256,22 @@ namespace GW2PAO.Views.WvWTracker
         {
             if (e.PropertyName == "IsHorizontalOrientation")
             {
-                this.RefreshWindowSizeForOrientation();
-            }
-        }
-
-        /// <summary>
-        /// Refreshes the height/width of the control based on the Vertical/Horizontal orientation
-        /// </summary>
-        private void RefreshWindowSizeForOrientation()
-        {
-            if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
-            {
-                if (this.viewModel.IsHorizontalOrientation)
+                Task.Factory.StartNew(() =>
                 {
-                    this.MinHeight = minHorizontalHeight;
-                    this.MaxHeight = maxHorizontalHeight;
-                    this.Height = horizontalHeight;
-                    this.MinWidth = minHorizontalWidth;
-                    this.MaxWidth = maxHorizontalWidth;
-                    this.Width = horizontalWidth;
-                }
-                else
-                {
-                    this.MinHeight = minVerticalHeight;
-                    this.MaxHeight = maxVerticalHeight;
-                    this.Height = verticalHeight;
-                    this.MinWidth = minVerticalWidth;
-                    this.MaxWidth = maxVerticalWidth;
-                    this.Width = verticalWidth;
-                }
-            }
-            else
-            {
-                // Collapsed, just set the widths and beforeCollapseHeight
-                if (this.viewModel.IsHorizontalOrientation)
-                {
-                    this.beforeCollapseHeight = horizontalHeight;
-                    this.MinWidth = minHorizontalWidth;
-                    this.MaxWidth = maxHorizontalWidth;
-                    this.Width = horizontalWidth;
-                }
-                else
-                {
-                    this.beforeCollapseHeight = verticalHeight;
-                    this.MinWidth = minVerticalWidth;
-                    this.MaxWidth = maxVerticalWidth;
-                    this.Width = verticalWidth;
-                }
+                    // Delayed refresh... terrible way to do this, but works for now
+                    // TODO: Do this a better way... find a better event to do this
+                    // The problem is that when this property is set, the actual itemscontrol
+                    // elements haven't been regenerated for the orientation change, so we
+                    // don't know what our max height/widths should be. Having a small
+                    // sleep here means we'll do this after the items have been regenerated
+                    System.Threading.Thread.Sleep(25);
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        this.RefreshWindowHeights(true);
+                        this.RefreshWindowWidths(true);
+                        this.RefreshResizeSnapping();
+                    }));
+                });
             }
         }
 
@@ -202,69 +331,26 @@ namespace GW2PAO.Views.WvWTracker
             }
             else
             {
-                if (this.viewModel.IsHorizontalOrientation)
+                var objsCount = this.viewModel.Objectives.Count();
+                var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+                if (objContainer != null)
                 {
-                    this.MinHeight = minHorizontalHeight;
-                    this.MaxHeight = maxHorizontalHeight;
-                }
-                else
-                {
-                    this.MinHeight = minVerticalHeight;
-                    this.MaxHeight = maxVerticalHeight;
+                    var objHeight = (int)objContainer.ActualHeight;
+                    if (this.viewModel.IsHorizontalOrientation)
+                    {
+                        // Horizontal Orientation
+                        this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                        this.MaxHeight = this.TitleBar.ActualHeight + objHeight;
+                    }
+                    else
+                    {
+                        // Vertical Orientation
+                        this.MinHeight = VERTICAL_MIN_HEIGHT;
+                        this.MaxHeight = this.TitleBar.ActualHeight + (objHeight * objsCount) + 5;
+                    }
                 }
                 this.Height = this.beforeCollapseHeight;
                 this.ObjectivesContainer.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
-
-        private void Resize_Init(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-
-            if (senderRect != null)
-            {
-                resizeInProcess = true;
-                senderRect.CaptureMouse();
-            }
-        }
-
-        private void Resize_End(object sender, MouseButtonEventArgs e)
-        {
-            Grid senderRect = sender as Grid;
-            if (senderRect != null)
-            {
-                resizeInProcess = false;
-                senderRect.ReleaseMouseCapture();
-            }
-        }
-
-        private void Resizeing_Form(object sender, MouseEventArgs e)
-        {
-            if (resizeInProcess)
-            {
-                Grid senderRect = sender as Grid;
-                if (senderRect != null)
-                {
-                    double width = e.GetPosition(this).X;
-                    double height = e.GetPosition(this).Y;
-                    senderRect.CaptureMouse();
-                    if (senderRect.Name == "ResizeWidth")
-                    {
-                        width += 1;
-                        if (width > 0 && width < this.MaxWidth && width > this.MinWidth)
-                        {
-                            this.Width = width;
-                        }
-                    }
-                    else if (senderRect.Name == "ResizeHeight")
-                    {
-                        height += 1;
-                        if (height > 0 && height < this.MaxHeight && height > this.MinHeight)
-                        {
-                            this.Height = height;
-                        }
-                    }
-                }
             }
         }
 
