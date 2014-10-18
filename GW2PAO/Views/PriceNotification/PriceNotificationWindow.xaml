@@ -7,46 +7,68 @@
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:View="clr-namespace:GW2PAO.Views.PriceNotification"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         Topmost="True" ShowInTaskbar="False"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
         MinHeight="600" SizeToContent="Height"
-        Width="250" 
+        Width="252" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
-        <core:AutoRefreshCollectionViewSource Source="{Binding PriceNotifications}" x:Key="PriceNotificationsCollection" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/BaseControlStyles/ToolTipStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <core:AutoRefreshCollectionViewSource Source="{Binding PriceNotifications}" x:Key="PriceNotificationsCollection" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        </ResourceDictionary>
     </src:OverlayWindow.Resources>
 
-    <!--<Border BorderBrush="Black" BorderThickness="1">-->
-    <!--See code behind for DataContext/ViewModel details-->
-    <ItemsControl ItemsSource="{Binding Source={StaticResource PriceNotificationsCollection}}">
+    <Grid>
+        <Border BorderThickness="2,10,0,0" CornerRadius="10" ClipToBounds="True" Margin="2,0,0,0"
+                Visibility="{Binding Source={x:Static properties:Settings.Default}, Path=AreNotificationWindowBordersVisible, Converter={StaticResource BoolToVisibility}}">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0.2,0.22">
+                    <GradientStop Color="#BFFFA500" Offset="0.1" />
+                    <GradientStop Color="#00FFA500" Offset="0.7" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Effect>
+                <DropShadowEffect Direction="270" Color="Gold" ShadowDepth="3" BlurRadius="10" />
+            </Border.Effect>
+            <Border.ToolTip>
+                <TextBlock Text="Price Notifications" />
+            </Border.ToolTip>
+        </Border>
+        <ItemsControl ItemsSource="{Binding Source={StaticResource PriceNotificationsCollection}}"
+                      Margin="0,5,0,0">
 
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <i:Interaction.Behaviors>
-                        <ei:FluidMoveBehavior Duration="0:0:0.25" AppliesTo="Children">
-                            <ei:FluidMoveBehavior.EaseY>
-                                <CubicEase EasingMode="EaseInOut"/>
-                            </ei:FluidMoveBehavior.EaseY>
-                            <ei:FluidMoveBehavior.EaseX>
-                                <CubicEase EasingMode="EaseInOut"/>
-                            </ei:FluidMoveBehavior.EaseX>
-                        </ei:FluidMoveBehavior>
-                    </i:Interaction.Behaviors>
-                </StackPanel>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <i:Interaction.Behaviors>
+                            <ei:FluidMoveBehavior Duration="0:0:0.25" AppliesTo="Children">
+                                <ei:FluidMoveBehavior.EaseY>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </ei:FluidMoveBehavior.EaseY>
+                                <ei:FluidMoveBehavior.EaseX>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </ei:FluidMoveBehavior.EaseX>
+                            </ei:FluidMoveBehavior>
+                        </i:Interaction.Behaviors>
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
 
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <View:PriceNotificationView DataContext="{Binding}" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <View:PriceNotificationView DataContext="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
 
-    </ItemsControl>
-    <!--</Border>-->
+        </ItemsControl>
+    </Grid>
 
 </src:OverlayWindow>

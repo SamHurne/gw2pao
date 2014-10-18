@@ -7,54 +7,76 @@
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:View="clr-namespace:GW2PAO.Views.EventNotification"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         Topmost="True" ShowInTaskbar="False"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        MinHeight="120" Height="Auto" SizeToContent="Height" Width="230" 
+        MinHeight="130" Height="Auto" SizeToContent="Height" Width="230" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
-        <core:AutoRefreshCollectionViewSource Source="{Binding EventNotifications}" x:Key="EventNotificationsCollection" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/BaseControlStyles/ToolTipStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <core:AutoRefreshCollectionViewSource Source="{Binding EventNotifications}" x:Key="EventNotificationsCollection" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        </ResourceDictionary>
     </src:OverlayWindow.Resources>
 
-    <!--<Border BorderBrush="Black" BorderThickness="1">-->
-    <!--See code behind for DataContext/ViewModel details-->
-    <ItemsControl ItemsSource="{Binding Source={StaticResource EventNotificationsCollection}}">
+    <Grid>
+        <Border BorderThickness="0,0,2,10" CornerRadius="10" ClipToBounds="True" Margin="0,0,2,0"
+                Visibility="{Binding Source={x:Static properties:Settings.Default}, Path=AreNotificationWindowBordersVisible, Converter={StaticResource BoolToVisibility}}">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.75,0" StartPoint="1,1">
+                    <GradientStop Color="#BFFFA500" Offset="0.1" />
+                    <GradientStop Color="#00FFA500" Offset="0.7" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Effect>
+                <DropShadowEffect Direction="90" Color="Gold" ShadowDepth="3" BlurRadius="10" />
+            </Border.Effect>
+            <Border.ToolTip>
+                <TextBlock Text="Event Notifications" />
+            </Border.ToolTip>
+        </Border>
+        <ItemsControl ItemsSource="{Binding Source={StaticResource EventNotificationsCollection}}"
+                      Margin="0,0,0,5">
 
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical">
 
-                    <StackPanel.LayoutTransform>
-                        <RotateTransform Angle="180"/>
-                    </StackPanel.LayoutTransform>
+                        <StackPanel.LayoutTransform>
+                            <RotateTransform Angle="180"/>
+                        </StackPanel.LayoutTransform>
 
-                    <i:Interaction.Behaviors>
-                        <ei:FluidMoveBehavior Duration="0:0:0.5" AppliesTo="Children">
-                            <ei:FluidMoveBehavior.EaseY>
-                                <CubicEase EasingMode="EaseInOut"/>
-                            </ei:FluidMoveBehavior.EaseY>
-                            <ei:FluidMoveBehavior.EaseX>
-                                <CubicEase EasingMode="EaseInOut"/>
-                            </ei:FluidMoveBehavior.EaseX>
-                        </ei:FluidMoveBehavior>
-                    </i:Interaction.Behaviors>
-                </StackPanel>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
+                        <i:Interaction.Behaviors>
+                            <ei:FluidMoveBehavior Duration="0:0:0.5" AppliesTo="Children">
+                                <ei:FluidMoveBehavior.EaseY>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </ei:FluidMoveBehavior.EaseY>
+                                <ei:FluidMoveBehavior.EaseX>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </ei:FluidMoveBehavior.EaseX>
+                            </ei:FluidMoveBehavior>
+                        </i:Interaction.Behaviors>
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
 
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <View:EventNotificationView DataContext="{Binding}">
-                    <View:EventNotificationView.LayoutTransform>
-                        <RotateTransform Angle="180"/>
-                    </View:EventNotificationView.LayoutTransform>
-                </View:EventNotificationView>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <View:EventNotificationView DataContext="{Binding}">
+                        <View:EventNotificationView.LayoutTransform>
+                            <RotateTransform Angle="180"/>
+                        </View:EventNotificationView.LayoutTransform>
+                    </View:EventNotificationView>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
 
-    </ItemsControl>
-    <!--</Border>-->
+        </ItemsControl>
+    </Grid>
 
 </src:OverlayWindow>

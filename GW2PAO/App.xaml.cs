@@ -150,6 +150,15 @@ namespace GW2PAO
 
                 var settingsMenu = new MenuItemViewModel("Settings", null);
 
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Show Notification Borders", null, true, false,
+                    () => { return GW2PAO.Properties.Settings.Default.AreNotificationWindowBordersVisible; },
+                    (enabled) =>
+                    {
+                        GW2PAO.Properties.Settings.Default.AreNotificationWindowBordersVisible = enabled;
+                        GW2PAO.Properties.Settings.Default.Save();
+                    },
+                    GW2PAO.Properties.Settings.Default, "AreNotificationWindowBordersVisible"));
+
                 settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Non-Interactive Windows", null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
