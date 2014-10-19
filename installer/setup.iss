@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "2.0"
+#define MyAppVersion "2.1"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -50,9 +50,6 @@ Source: "..\GW2PAO\bin\Release_WithoutBrowser\StandardEventTimeTable.xml"; DestD
 Source: "..\GW2PAO\bin\Release_WithoutBrowser\Worlds.xml"; DestDir: "{app}"; Flags: ignoreversion;
 Source: "..\GW2PAO\bin\Release_WithoutBrowser\WvWObjectives.xml"; DestDir: "{app}"; Flags: ignoreversion;
 ; Full install files:
-Source: "..\GW2PAO\bin\Release\GW2PAO.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\AdjustedEventTimeTable.xml"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\AnetCopyright.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\avcodec-53.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\avformat-53.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\avutil-51.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
@@ -60,19 +57,12 @@ Source: "..\GW2PAO\bin\Release\Awesomium.Core.dll"; DestDir: "{app}"; Flags: ign
 Source: "..\GW2PAO\bin\Release\awesomium.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\Awesomium.Windows.Controls.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\awesomium_process"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\Dungeons.xml"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\GW2PAO.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\GW2PAO.exe.config"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\icudt.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\inspector.pak"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\ItemDatabase.json"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\libGLESv2.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\NLog.config"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\StandardEventTimeTable.xml"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\Worlds.xml"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
-Source: "..\GW2PAO\bin\Release\WvWObjectives.xml"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 Source: "..\GW2PAO\bin\Release\xinput9_1_0.dll"; DestDir: "{app}"; Flags: ignoreversion; Components: Browser
 
 
