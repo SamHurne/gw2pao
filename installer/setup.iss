@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "2.1"
+#define MyAppVersion "2.2"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
