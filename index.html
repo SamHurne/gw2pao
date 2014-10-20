@@ -48,17 +48,17 @@
         
         function refreshDownloadCounts() {
 
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262011?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/274812?callback=?', function( response ) {
                 var data = response.data;
                 $("#installerDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262013?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/274813?callback=?', function( response ) {
                 var data = response.data;
                 $("#allFeaturesDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/262012?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/274814?callback=?', function( response ) {
                 var data = response.data;
                 $("#noBrowserDownloadCount").text(data.download_count);
             });
@@ -203,21 +203,21 @@
                     <p>To install, either download and run the installer, or just download the zip,
                     <br>
                     extract to any location, and run GW2PAO.exe</p>
-                    <h4>Latest Version: <b>2.0</b></h4>
+                    <h4>Latest Version: <b>2.1</b></h4>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/090d160/GW2PAO_Setup_2.0.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/54dbabf/GW2PAO_Setup_2.1.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
                     <br>
                     <span class="smalltext"><span id="installerDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/090d160/GW2PAO_2.0.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/54dbabf/GW2PAO_2.1.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="allFeaturesDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/090d160/GW2PAO_2.0_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/54dbabf/GW2PAO_2.1_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
                     <br><br><br>
-                    <a href="https://github.com/SamHurne/gw2pao/archive/090d160.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/54dbabf.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
                     <br><br>
                     <h4>Requirements:</h4>
                     <p>
@@ -226,8 +226,6 @@
                     <a href="http://www.microsoft.com/en-us/download/details.aspx?id=30653">.Net 4.5 or Higher</a>
                     </p>
                     <p>For a full list of releases with release notes, go to the <a href="https://github.com/SamHurne/gw2pao/releases">Releases page on GitHub</a>.</p>
-                    
-                    
                 </div>
             </div>
         </div>
