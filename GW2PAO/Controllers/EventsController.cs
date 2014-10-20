@@ -161,25 +161,20 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void InitializeWorldEvents()
         {
-            // This can take a little while to perform, since the LoadTable involves calling the events API for event details
-            // Due to this, we'll do the Load on a seperate thread
-            Task.Factory.StartNew(() =>
-                {
-                    lock (refreshTimerLock)
-                    {
-                        logger.Debug("Initializing world events");
-                        this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+            lock (refreshTimerLock)
+            {
+                logger.Debug("Initializing world events");
+                this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
 
-                        Threading.InvokeOnUI(() =>
-                            {
-                                foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
-                                {
-                                    logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                                    this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
-                                }
-                            });
-                    }
-                });
+                Threading.InvokeOnUI(() =>
+                    {
+                        foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+                        {
+                            logger.Debug("Initializing view model for {0}", worldEvent.ID);
+                            this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
+                        }
+                    });
+            }
         }
 
         /// <summary>

@@ -73,48 +73,6 @@ namespace GW2PAO.API.Services
                 MegaserverEventTimeTable.CreateTable(isAdjustedTable);
                 this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
             }
-
-            try
-            {
-                // TODO: This takes around 2 seconds to perform, slowing down our startup. Move this to the time tables, or save it to disk so we don't need to request this
-                logger.Info("Loading world event locations");
-                foreach (var worldEvent in this.EventTimeTable.WorldEvents)
-                {
-                    if (!this.eventInformationCache.ContainsKey(worldEvent.ID))
-                    {
-                        // Get event details for the current event
-                        var dynamicEvent = this.service.GetDynamicEventDetails(worldEvent.ID);
-
-                        // Ensure that the service returned event data for the current event
-                        if (dynamicEvent == null)
-                        {
-                            logger.Warn("Failed to load event data for event with ID '{0}'", worldEvent.ID);
-                            continue;
-                        }
-
-                        // Get map details for the current event
-                        // TODO: consider specifying a language (default: English)
-                        dynamicEvent.Map = this.service.GetMap(dynamicEvent.MapId);
-
-                        // Ensure that the service returned map data for the current event
-                        if (dynamicEvent.Map == null)
-                        {
-                            logger.Warn("Failed to load map data for event with ID '{0}'", worldEvent.ID);
-                            continue;
-                        }
-
-                        this.eventInformationCache.Add(worldEvent.ID, dynamicEvent);
-                    }
-
-                    // Set the event location name
-                    worldEvent.Location = this.eventInformationCache[worldEvent.ID].Map.MapName;
-                }
-            }
-            catch (Exception ex)
-            {
-                // If something goes wrong with the API, don't crash, but log the error
-                logger.Error(ex);
-            }
         }
 
         /// <summary>
