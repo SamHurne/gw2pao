@@ -50,6 +50,16 @@ namespace GW2PAO.Views.WvWTracker
         private const double HORIZONTAL_DEF_WIDTH = 350;
 
         /// <summary>
+        /// Actual height of an objective in the list when in the horizontal orientation
+        /// </summary>
+        private double vertical_objHeight;
+
+        /// <summary>
+        /// Actual width of an objective in the list when in the horizontal orientation
+        /// </summary>
+        private double horizontal_objWidth;
+
+        /// <summary>
         /// Height before collapsing the control
         /// </summary>
         private double beforeCollapseHeight;
@@ -83,27 +93,8 @@ namespace GW2PAO.Views.WvWTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
-            // Set initial height and widths
-            if (this.viewModel.IsHorizontalOrientation)
-            {
-                // Horizontal Orientation
-                this.MinHeight = HORIZONTAL_MIN_HEIGHT;
-                this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
-                this.Height = this.MaxHeight;
-                this.MinWidth = HORIZONTAL_MIN_WIDTH;
-                this.MaxWidth = HORIZONTAL_MAX_WIDTH;
-                this.Width = HORIZONTAL_DEF_WIDTH;
-            }
-            else
-            {
-                // Vertical Orientation
-                this.MinHeight = VERTICAL_MIN_HEIGHT;
-                this.MaxHeight = VERTICAL_MAX_HEIGHT;
-                this.Height = VERTICAL_MAX_HEIGHT / 3;
-                this.MinWidth = VERTICAL_MIN_WIDTH;
-                this.MaxWidth = VERTICAL_MAX_WIDTH;
-                this.Width = VERTICAL_DEF_WIDTH;
-            }
+            this.vertical_objHeight = new HorizontalWvWObjectiveView().Height;
+            this.horizontal_objWidth = new VerticalWvWObjectiveView().Width;
 
             this.Closing += WvWTrackerView_Closing;
             if (Properties.Settings.Default.WvWTrackerHeight > 0)
@@ -131,23 +122,19 @@ namespace GW2PAO.Views.WvWTracker
         /// </summary>
         private void RefreshResizeSnapping()
         {
-            var obj = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-            if (obj != null)
+            if (this.viewModel.IsHorizontalOrientation)
             {
-                if (this.viewModel.IsHorizontalOrientation)
-                {
-                    this.ResizeHelper.SnappingHeightOffset = 0;
-                    this.ResizeHelper.SnappingIncrementHeight = 1;
-                    this.ResizeHelper.SnappingWidthOffset = 3;
-                    this.ResizeHelper.SnappingIncrementWidth = (int)obj.ActualWidth;
-                }
-                else
-                {
-                    this.ResizeHelper.SnappingHeightOffset = 6;
-                    this.ResizeHelper.SnappingIncrementHeight = (int)obj.ActualHeight;
-                    this.ResizeHelper.SnappingWidthOffset = 0;
-                    this.ResizeHelper.SnappingIncrementWidth = 1;
-                }
+                this.ResizeHelper.SnappingHeightOffset = 0;
+                this.ResizeHelper.SnappingIncrementHeight = 1;
+                this.ResizeHelper.SnappingWidthOffset = 3;
+                this.ResizeHelper.SnappingIncrementWidth = (int)this.horizontal_objWidth;
+            }
+            else
+            {
+                this.ResizeHelper.SnappingHeightOffset = 6;
+                this.ResizeHelper.SnappingIncrementHeight = (int)this.vertical_objHeight;
+                this.ResizeHelper.SnappingWidthOffset = 0;
+                this.ResizeHelper.SnappingIncrementWidth = 1;
             }
         }
 
@@ -158,13 +145,8 @@ namespace GW2PAO.Views.WvWTracker
         private void RefreshWindowHeights(bool resetHeight)
         {
             var objsCount = this.viewModel.Objectives.Count();
-            var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-            if (objContainer != null)
+            if (objsCount > 0)
             {
-                if (objContainer.ActualHeight == 0)
-                    objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(1) as FrameworkElement;
-
-                var objHeight = (int)objContainer.ActualHeight;
                 if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
                 {
                     // Expanded
@@ -172,7 +154,7 @@ namespace GW2PAO.Views.WvWTracker
                     {
                         // Horizontal Orientation
                         this.MinHeight = HORIZONTAL_MIN_HEIGHT;
-                        this.MaxHeight = this.TitleBar.ActualHeight + objHeight;
+                        this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
 
                         if (resetHeight)
                             this.Height = this.MaxHeight;
@@ -181,10 +163,10 @@ namespace GW2PAO.Views.WvWTracker
                     {
                         // Vertical Orientation
                         this.MinHeight = VERTICAL_MIN_HEIGHT;
-                        this.MaxHeight = this.TitleBar.ActualHeight + (objHeight * objsCount) + 5;
+                        this.MaxHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * objsCount) + 5;
 
                         if (resetHeight)
-                            this.Height = this.TitleBar.ActualHeight + (objHeight * 5);
+                            this.Height = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
                     }
                 }
                 else
@@ -193,9 +175,9 @@ namespace GW2PAO.Views.WvWTracker
                     if (resetHeight)
                     {
                         if (this.viewModel.IsHorizontalOrientation)
-                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + objHeight;
+                            this.beforeCollapseHeight = HORIZONTAL_MAX_HEIGHT;
                         else
-                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + (objHeight * 5);
+                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
                     }
                 }
             }
@@ -208,18 +190,16 @@ namespace GW2PAO.Views.WvWTracker
         private void RefreshWindowWidths(bool resetWidth)
         {
             var objsCount = this.viewModel.Objectives.Count();
-            var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-            if (objContainer != null)
+            if (objsCount > 0)
             {
-                var objWidth = (int)objContainer.ActualWidth;
                 if (this.viewModel.IsHorizontalOrientation)
                 {
                     // Horizontal Orientation
                     this.MinWidth = HORIZONTAL_MIN_WIDTH;
-                    this.MaxWidth = objWidth * objsCount;
+                    this.MaxWidth = this.horizontal_objWidth * objsCount;
 
                     if (resetWidth)
-                        this.Width = objWidth * 5;
+                        this.Width = this.horizontal_objWidth * 5;
                 }
                 else
                 {
@@ -256,22 +236,9 @@ namespace GW2PAO.Views.WvWTracker
         {
             if (e.PropertyName == "IsHorizontalOrientation")
             {
-                Task.Factory.StartNew(() =>
-                {
-                    // Delayed refresh... terrible way to do this, but works for now
-                    // TODO: Do this a better way... find a better event to do this
-                    // The problem is that when this property is set, the actual itemscontrol
-                    // elements haven't been regenerated for the orientation change, so we
-                    // don't know what our max height/widths should be. Having a small
-                    // sleep here means we'll do this after the items have been regenerated
-                    System.Threading.Thread.Sleep(25);
-                    this.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        this.RefreshWindowHeights(true);
-                        this.RefreshWindowWidths(true);
-                        this.RefreshResizeSnapping();
-                    }));
-                });
+                this.RefreshWindowHeights(true);
+                this.RefreshWindowWidths(true);
+                this.RefreshResizeSnapping();
             }
         }
 
@@ -332,22 +299,17 @@ namespace GW2PAO.Views.WvWTracker
             else
             {
                 var objsCount = this.viewModel.Objectives.Count();
-                var objContainer = this.ObjectivesContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-                if (objContainer != null)
+                if (this.viewModel.IsHorizontalOrientation)
                 {
-                    var objHeight = (int)objContainer.ActualHeight;
-                    if (this.viewModel.IsHorizontalOrientation)
-                    {
-                        // Horizontal Orientation
-                        this.MinHeight = HORIZONTAL_MIN_HEIGHT;
-                        this.MaxHeight = this.TitleBar.ActualHeight + objHeight;
-                    }
-                    else
-                    {
-                        // Vertical Orientation
-                        this.MinHeight = VERTICAL_MIN_HEIGHT;
-                        this.MaxHeight = this.TitleBar.ActualHeight + (objHeight * objsCount) + 5;
-                    }
+                    // Horizontal Orientation
+                    this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                    this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
+                }
+                else
+                {
+                    // Vertical Orientation
+                    this.MinHeight = VERTICAL_MIN_HEIGHT;
+                    this.MaxHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * objsCount) + 5;
                 }
                 this.Height = this.beforeCollapseHeight;
                 this.ObjectivesContainer.Visibility = System.Windows.Visibility.Visible;

@@ -66,15 +66,14 @@ namespace GW2PAO.Views.DungeonTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
+            this.dungeonHeight = new DungeonView().Height;
+
             this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
             this.Loaded += DungeonTrackerView_Loaded;
         }
 
         private void DungeonTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
-            var objContainer = this.DungeonsContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-            this.dungeonHeight = objContainer.ActualHeight;
-
             // Set up resize snapping
             this.ResizeHelper.SnappingHeightOffset = 6;
             this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;

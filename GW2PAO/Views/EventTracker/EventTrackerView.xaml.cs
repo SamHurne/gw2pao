@@ -68,15 +68,14 @@ namespace GW2PAO.Views.EventTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
+            this.eventHeight = new WorldEventView().Height;
+
             this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
             this.Loaded += EventTrackerView_Loaded;
         }
 
         private void EventTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
-            var objContainer = this.EventsContainer.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-            this.eventHeight = objContainer.ActualHeight;
-
             // Set up resize snapping
             this.ResizeHelper.SnappingHeightOffset = 7;
             this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
