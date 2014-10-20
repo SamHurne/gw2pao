@@ -93,10 +93,33 @@ namespace GW2PAO.Views.WvWTracker
             this.DataContext = this.viewModel;
             InitializeComponent();
 
+            this.Closing += WvWTrackerView_Closing;
+
             this.vertical_objHeight = new HorizontalWvWObjectiveView().Height;
             this.horizontal_objWidth = new VerticalWvWObjectiveView().Width;
 
-            this.Closing += WvWTrackerView_Closing;
+            // Set initial height and widths
+            if (this.viewModel.IsHorizontalOrientation)
+            {
+                // Horizontal Orientation
+                this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
+                this.Height = this.MaxHeight;
+                this.MinWidth = HORIZONTAL_MIN_WIDTH;
+                this.MaxWidth = HORIZONTAL_MAX_WIDTH;
+                this.Width = HORIZONTAL_DEF_WIDTH;
+            }
+            else
+            {
+                // Vertical Orientation
+                this.MinHeight = VERTICAL_MIN_HEIGHT;
+                this.MaxHeight = VERTICAL_MAX_HEIGHT;
+                this.Height = VERTICAL_MAX_HEIGHT / 3;
+                this.MinWidth = VERTICAL_MIN_WIDTH;
+                this.MaxWidth = VERTICAL_MAX_WIDTH;
+                this.Width = VERTICAL_DEF_WIDTH;
+            }
+
             if (Properties.Settings.Default.WvWTrackerHeight > 0)
                 this.Height = Properties.Settings.Default.WvWTrackerHeight;
             if (Properties.Settings.Default.WvWTrackerWidth > 0)
