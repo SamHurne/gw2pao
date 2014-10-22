@@ -496,10 +496,13 @@ namespace GW2PAO.Controllers
                             || objective.GuildClaimer.ID.Value != latestData.GuildOwner.Value)
                         {
                             // Guild claimer has changed
+                            objective.GuildClaimer.ID = latestData.GuildOwner.Value;
                             var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
-                            objective.GuildClaimer.ID = guildInfo.ID;
-                            objective.GuildClaimer.Name = guildInfo.Name;
-                            objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                            if (guildInfo != null)
+                            {
+                                objective.GuildClaimer.Name = guildInfo.Name;
+                                objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                            }
                         }
                     }
                     else

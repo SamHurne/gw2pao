@@ -33,14 +33,28 @@ namespace GW2PAO.API.Services
 
             Guild guild = null;
 
-            var details = this.service.GetGuildDetailsById(id);
-            if (details != null)
+            try
             {
-                guild = new Guild(id)
+
+                var details = this.service.GetGuildDetailsById(id);
+                if (details != null)
                 {
-                    Name = details.Name,
-                    Tag = details.Tag
-                };
+                    guild = new Guild(id)
+                    {
+                        Name = details.Name,
+                        Tag = details.Tag
+                    };
+                }
+            }
+            catch (GW2DotNET.Common.ServiceException ex)
+            {
+                // Don't crash on a service exception... just log it
+                logger.Warn(ex);
+            }
+            catch (System.Runtime.Serialization.SerializationException ex)
+            {
+                // Don't crash on a serialization exception... just log it
+                logger.Warn(ex);
             }
 
             return guild;
