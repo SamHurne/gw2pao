@@ -166,7 +166,7 @@
                                                                 FontSize="12" FontFamily="Gisha"
                                                                 Margin="0,0,2,0"
                                                                 Text="{Binding RewardGold}"/>
-                                        <Image Source="../../Resources/gold_coin.png"
+                                        <Image Source="../../Images/Commerce/gold_coin.png"
                                                Height="12" Width="12"
                                                Margin="0,0,5,0"/>
 
@@ -174,7 +174,7 @@
                                                                 FontSize="12" FontFamily="Gisha"
                                                                 Margin="0,0,2,0"
                                                                 Text="{Binding RewardSilver}"/>
-                                        <Image Source="../../Resources/silver_coin.png"
+                                        <Image Source="../../Images/Commerce/silver_coin.png"
                                                Height="12" Width="12"/>
                                     </StackPanel>
                                 </StackPanel>

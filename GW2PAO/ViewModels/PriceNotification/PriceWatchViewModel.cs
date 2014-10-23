@@ -76,7 +76,7 @@ namespace GW2PAO.ViewModels.PriceNotification
             {
                 if (this.ItemData == null || this.ItemData.Icon == null)
                 {
-                    return "/Resources/unknown_icon.png";
+                    return "/Images/Commerce/unknown_icon.png";
                 }
                 else
                 {

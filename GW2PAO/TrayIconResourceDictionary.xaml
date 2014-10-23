@@ -27,7 +27,7 @@
     </ControlTemplate>
 
     <tb:TaskbarIcon x:Key="TrayIcon"
-                    IconSource="Resources/World_Completion2.ico"
+                    IconSource="Images/World_Completion2.ico"
                     MenuActivation="All"
                     ToolTipText="GW2 Personal Assistant Overlay">
         <tb:TaskbarIcon.ContextMenu>

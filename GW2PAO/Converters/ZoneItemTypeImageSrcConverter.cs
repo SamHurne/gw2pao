@@ -23,47 +23,27 @@ namespace GW2PAO.Style.Converters
 
             string imagePath = string.Empty;
 
+            if (isUnlocked)
+                imagePath = @"/Images/Zone/";
+            else
+                imagePath = @"/Images/Zone/Gray/";
+
             switch (zoneItem)
             {
                 case ZoneItemType.HeartQuest:
-                    {
-                        if (isUnlocked)
-                            imagePath = @"/Resources/hearts.png";
-                        else
-                            imagePath = @"/Resources/hearts_gray.png";
-                    }
+                    imagePath += "hearts.png";
                     break;
                 case ZoneItemType.PointOfInterest:
-                    {
-                        if (isUnlocked)
-                            imagePath = @"/Resources/poi.png";
-                        else
-                            imagePath = @"/Resources/poi_gray.png";
-                    }
+                    imagePath += "poi.png";
                     break;
                 case ZoneItemType.SkillChallenge:
-                    {
-                        if (isUnlocked)
-                            imagePath = @"/Resources/skillpoints.png";
-                        else
-                            imagePath = @"/Resources/skillpoints_gray.png";
-                    }
+                    imagePath += "skillpoints.png";
                     break;
                 case ZoneItemType.Vista:
-                    {
-                        if (isUnlocked)
-                            imagePath = @"/Resources/vistas.png";
-                        else
-                            imagePath = @"/Resources/vistas_gray.png";
-                    }
+                    imagePath += "vistas.png";
                     break;
                 case ZoneItemType.Waypoint:
-                    {
-                        if (isUnlocked)
-                            imagePath = @"/Resources/waypoints.png";
-                        else
-                            imagePath = @"/Resources/waypoints_gray.png";
-                    }
+                    imagePath += "waypoints.png";
                     break;
                 default:
                     break;

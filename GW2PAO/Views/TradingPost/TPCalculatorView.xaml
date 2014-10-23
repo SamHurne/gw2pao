@@ -62,7 +62,7 @@
                 <Image Name="TitleImage" Grid.Column="0"
                        VerticalAlignment="Center"
                        Height="30" Width="30"
-                       Source="/Resources/merchant.png"
+                       Source="/Images/Title/merchant.png"
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
@@ -158,15 +158,15 @@
                                 <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,0,0"/>
                                 </StackPanel>
@@ -215,7 +215,7 @@
                             <Binding Path="BuyPrice.Gold" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/gold_coin.png"
+                    <Image Source="../../Images/Commerce/gold_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
@@ -224,7 +224,7 @@
                             <Binding Path="BuyPrice.Silver" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/silver_coin.png"
+                    <Image Source="../../Images/Commerce/silver_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
@@ -233,7 +233,7 @@
                             <Binding Path="BuyPrice.Copper" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/copper_coin.png"
+                    <Image Source="../../Images/Commerce/copper_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,0,0"/>
                 </StackPanel>
@@ -250,15 +250,15 @@
                                 <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,0,0"/>
                                 </StackPanel>
@@ -307,7 +307,7 @@
                             <Binding Path="SellPrice.Gold" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/gold_coin.png"
+                    <Image Source="../../Images/Commerce/gold_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
@@ -316,7 +316,7 @@
                             <Binding Path="SellPrice.Silver" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/silver_coin.png"
+                    <Image Source="../../Images/Commerce/silver_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <TextBox Width="50" BorderBrush="{StaticResource TextBoxBorder}"
@@ -325,7 +325,7 @@
                             <Binding Path="SellPrice.Copper" UpdateSourceTrigger="PropertyChanged" />
                         </TextBox.Text>
                     </TextBox>
-                    <Image Source="../../Resources/copper_coin.png"
+                    <Image Source="../../Images/Commerce/copper_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,0,0"/>
                 </StackPanel>
@@ -360,15 +360,15 @@
                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                     <core:OutlinedTextBlock Text="-" FontSize="14" Visibility="{Binding Profit.IsNegative, Converter={StaticResource BoolToVisibility}}" />
                     <core:OutlinedTextBlock Text="{Binding Profit.Gold}" FontSize="14" />
-                    <Image Source="../../Resources/gold_coin.png"
+                    <Image Source="../../Images/Commerce/gold_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <core:OutlinedTextBlock Text="{Binding Profit.Silver}" FontSize="14"/>
-                    <Image Source="../../Resources/silver_coin.png"
+                    <Image Source="../../Images/Commerce/silver_coin.png"
                            Height="14" Width="14"
                            Margin="1,0,5,0"/>
                     <core:OutlinedTextBlock Text="{Binding Profit.Copper}" FontSize="14"/>
-                    <Image Source="../../Resources/copper_coin.png"
+                    <Image Source="../../Images/Commerce/copper_coin.png"
                            Height="14" Width="14"/>
                 </StackPanel>
                 <StackPanel.ToolTip>
@@ -378,15 +378,15 @@
                                 <core:OutlinedTextBlock Text="Revenue:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding Revenue.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding Revenue.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding Revenue.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,0,0"/>
                                 </StackPanel>
@@ -395,15 +395,15 @@
                                 <core:OutlinedTextBlock Text="Cost:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding Cost.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding Cost.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding Cost.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                            Height="11" Width="11"
                                            Margin="1,0,0,0"/>
                                 </StackPanel>
@@ -412,15 +412,15 @@
                                 <core:OutlinedTextBlock Text="Listing Fee:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding ListingFee.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding ListingFee.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding ListingFee.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,0,0"/>
                                 </StackPanel>
@@ -429,15 +429,15 @@
                                 <core:OutlinedTextBlock Text="Sale Fee:" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding SaleFee.Gold}" />
-                                    <Image Source="../../Resources/gold_coin.png"
+                                    <Image Source="../../Images/Commerce/gold_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding SaleFee.Silver}"/>
-                                    <Image Source="../../Resources/silver_coin.png"
+                                    <Image Source="../../Images/Commerce/silver_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,5,0"/>
                                     <core:OutlinedTextBlock Text="{Binding SaleFee.Copper}"/>
-                                    <Image Source="../../Resources/copper_coin.png"
+                                    <Image Source="../../Images/Commerce/copper_coin.png"
                                         Height="11" Width="11"
                                         Margin="1,0,0,0"/>
                                 </StackPanel>

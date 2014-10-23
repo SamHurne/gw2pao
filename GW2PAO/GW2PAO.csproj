@@ -467,59 +467,59 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Resources\copy.png" />
-    <Resource Include="Resources\unknown_icon.png" />
-    <Resource Include="Resources\OverlayMenuIcon_Color.png" />
-    <Resource Include="Resources\warning.png" />
-    <Resource Include="Resources\exit.png" />
-    <Resource Include="Resources\enter.png" />
-    <Resource Include="Resources\chat_bubble.png" />
-    <Resource Include="Resources\speaker_mute.png" />
-    <Resource Include="Resources\speaker.png" />
-    <Resource Include="Resources\OverlayMenuIcon.png" />
-    <Resource Include="Resources\copper_coin.png" />
-    <Resource Include="Resources\merchant.png" />
-    <Resource Include="Resources\WorldvsWorld.png" />
-    <Resource Include="Resources\Tower_r.png" />
-    <Resource Include="Resources\Tower_g.png" />
-    <Resource Include="Resources\Tower_b.png" />
-    <Resource Include="Resources\TempleofLostPrayers_r.png" />
-    <Resource Include="Resources\TempleofLostPrayers_g.png" />
-    <Resource Include="Resources\TempleofLostPrayers_b.png" />
-    <Resource Include="Resources\OrchardOverlook_r.png" />
-    <Resource Include="Resources\OrchardOverlook_g.png" />
-    <Resource Include="Resources\OrchardOverlook_b.png" />
-    <Resource Include="Resources\Keep_r.png" />
-    <Resource Include="Resources\Keep_g.png" />
-    <Resource Include="Resources\Keep_b.png" />
-    <Resource Include="Resources\Castle_r.png" />
-    <Resource Include="Resources\Castle_g.png" />
-    <Resource Include="Resources\Castle_b.png" />
-    <Resource Include="Resources\CarversAscent_r.png" />
-    <Resource Include="Resources\CarversAscent_g.png" />
-    <Resource Include="Resources\CarversAscent_b.png" />
-    <Resource Include="Resources\Camp_r.png" />
-    <Resource Include="Resources\Camp_g.png" />
-    <Resource Include="Resources\Camp_b.png" />
-    <Resource Include="Resources\BauersEstate_r.png" />
-    <Resource Include="Resources\BauersEstate_g.png" />
-    <Resource Include="Resources\BauersEstate_b.png" />
-    <Resource Include="Resources\BattlesHollow_r.png" />
-    <Resource Include="Resources\BattlesHollow_g.png" />
-    <Resource Include="Resources\BattlesHollow_b.png" />
-    <Resource Include="Resources\TempleofLostPrayers.png" />
-    <Resource Include="Resources\OrchardOverlook.png" />
-    <Resource Include="Resources\Castle.png" />
-    <Resource Include="Resources\Tower.png" />
-    <Resource Include="Resources\Keep.png" />
-    <Resource Include="Resources\Camp.png" />
-    <Resource Include="Resources\CarversAscent.png" />
-    <Resource Include="Resources\BauersEstate.png" />
-    <Resource Include="Resources\BattlesHollow.png" />
-    <Resource Include="Resources\community.png" />
-    <Resource Include="Resources\silver_coin.png" />
-    <Resource Include="Resources\gold_coin.png" />
-    <Resource Include="Resources\dungeons.png" />
+    <Resource Include="Images\Misc\copy.png" />
+    <Resource Include="Images\Commerce\unknown_icon.png" />
+    <Resource Include="Images\OverlayMenuIcon_Color.png" />
+    <Resource Include="Images\Misc\warning.png" />
+    <Resource Include="Images\Teamspeak\exit.png" />
+    <Resource Include="Images\Teamspeak\enter.png" />
+    <Resource Include="Images\Teamspeak\chat_bubble.png" />
+    <Resource Include="Images\Teamspeak\speaker_mute.png" />
+    <Resource Include="Images\Teamspeak\speaker.png" />
+    <Resource Include="Images\OverlayMenuIcon.png" />
+    <Resource Include="Images\Commerce\copper_coin.png" />
+    <Resource Include="Images\Title\merchant.png" />
+    <Resource Include="Images\Title\WorldvsWorld.png" />
+    <Resource Include="Images\WvW\Red\Tower.png" />
+    <Resource Include="Images\WvW\Green\Tower.png" />
+    <Resource Include="Images\WvW\Blue\Tower.png" />
+    <Resource Include="Images\WvW\Red\TempleofLostPrayers.png" />
+    <Resource Include="Images\WvW\Green\TempleofLostPrayers.png" />
+    <Resource Include="Images\WvW\Blue\TempleofLostPrayers.png" />
+    <Resource Include="Images\WvW\Red\OrchardOverlook.png" />
+    <Resource Include="Images\WvW\Green\OrchardOverlook.png" />
+    <Resource Include="Images\WvW\Blue\OrchardOverlook.png" />
+    <Resource Include="Images\WvW\Red\Keep.png" />
+    <Resource Include="Images\WvW\Green\Keep.png" />
+    <Resource Include="Images\WvW\Blue\Keep.png" />
+    <Resource Include="Images\WvW\Red\Castle.png" />
+    <Resource Include="Images\WvW\Green\Castle.png" />
+    <Resource Include="Images\WvW\Blue\Castle.png" />
+    <Resource Include="Images\WvW\Red\CarversAscent.png" />
+    <Resource Include="Images\WvW\Green\CarversAscent.png" />
+    <Resource Include="Images\WvW\Blue\CarversAscent.png" />
+    <Resource Include="Images\WvW\Red\Camp.png" />
+    <Resource Include="Images\WvW\Green\Camp.png" />
+    <Resource Include="Images\WvW\Blue\Camp.png" />
+    <Resource Include="Images\WvW\Red\BauersEstate.png" />
+    <Resource Include="Images\WvW\Green\BauersEstate.png" />
+    <Resource Include="Images\WvW\Blue\BauersEstate.png" />
+    <Resource Include="Images\WvW\Red\BattlesHollow.png" />
+    <Resource Include="Images\WvW\Green\BattlesHollow.png" />
+    <Resource Include="Images\WvW\Blue\BattlesHollow.png" />
+    <Resource Include="Images\WvW\Neutral\TempleofLostPrayers.png" />
+    <Resource Include="Images\WvW\Neutral\OrchardOverlook.png" />
+    <Resource Include="Images\WvW\Neutral\Castle.png" />
+    <Resource Include="Images\WvW\Neutral\Tower.png" />
+    <Resource Include="Images\WvW\Neutral\Keep.png" />
+    <Resource Include="Images\WvW\Neutral\Camp.png" />
+    <Resource Include="Images\WvW\Neutral\CarversAscent.png" />
+    <Resource Include="Images\WvW\Neutral\BauersEstate.png" />
+    <Resource Include="Images\WvW\Neutral\BattlesHollow.png" />
+    <Resource Include="Images\Title\community.png" />
+    <Resource Include="Images\Commerce\silver_coin.png" />
+    <Resource Include="Images\Commerce\gold_coin.png" />
+    <Resource Include="Images\Title\dungeons.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -553,28 +553,22 @@
     <Folder Include="Style\Brushes\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\boss.png" />
+    <Resource Include="Images\Zone\hearts.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Circle.png" />
+    <Resource Include="Images\Zone\poi.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\hearts.png" />
+    <Resource Include="Images\Zone\skillpoints.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\poi.png" />
+    <Resource Include="Images\Zone\vistas.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\skillpoints.png" />
+    <Resource Include="Images\Zone\waypoints.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\vistas.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\waypoints.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\World_Completion2.ico" />
+    <Resource Include="Images\World_Completion2.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GW2PAO.API\GW2PAO.API.csproj">
@@ -595,31 +589,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\bosses.png" />
+    <Resource Include="Images\Title\bosses.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\treasure.png" />
+    <Resource Include="Images\Misc\treasure.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\treasure_gray.png" />
+    <Resource Include="Images\Misc\treasure_gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\zone.png" />
+    <Resource Include="Images\Title\zone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\hearts_gray.png" />
+    <Resource Include="Images\Zone\Gray\hearts.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\poi_gray.png" />
+    <Resource Include="Images\Zone\Gray\poi.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\skillpoints_gray.png" />
+    <Resource Include="Images\Zone\Gray\skillpoints.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\vistas_gray.png" />
+    <Resource Include="Images\Zone\Gray\vistas.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\waypoints_gray.png" />
+    <Resource Include="Images\Zone\Gray\waypoints.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="World_Completion2.ico" />

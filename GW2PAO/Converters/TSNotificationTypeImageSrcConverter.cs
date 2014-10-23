@@ -20,15 +20,15 @@ namespace GW2PAO.Style.Converters
             switch (notificationType)
             {
                 case TSNotificationType.CannotConnect:
-                    return @"/Resources/warning.png";
+                    return @"/Images/Misc/warning.png";
                 case TSNotificationType.Text:
-                    return @"/Resources/chat_bubble.png";
+                    return @"/Images/Teamspeak/chat_bubble.png";
                 case TSNotificationType.Speech:
-                    return @"/Resources/speaker.png";
+                    return @"/Images/Teamspeak/speaker.png";
                 case TSNotificationType.UserEntered:
-                    return @"/Resources/enter.png";
+                    return @"/Images/Teamspeak/enter.png";
                 case TSNotificationType.UserExited:
-                    return @"/Resources/exit.png";
+                    return @"/Images/Teamspeak/exit.png";
                 default:
                     return string.Empty;
             }

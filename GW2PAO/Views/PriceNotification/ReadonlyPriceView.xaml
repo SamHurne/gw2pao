@@ -18,15 +18,15 @@
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
         <core:OutlinedTextBlock Text="{Binding Gold}" />
-        <Image Source="../../Resources/gold_coin.png"
+        <Image Source="../../Images/Commerce/gold_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
         <core:OutlinedTextBlock Text="{Binding Silver}"/>
-        <Image Source="../../Resources/silver_coin.png"
+        <Image Source="../../Images/Commerce/silver_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
         <core:OutlinedTextBlock Text="{Binding Copper}"/>
-        <Image Source="../../Resources/copper_coin.png"
+        <Image Source="../../Images/Commerce/copper_coin.png"
                Height="11" Width="11"
                Margin="1,0,0,0"/>
     </StackPanel>

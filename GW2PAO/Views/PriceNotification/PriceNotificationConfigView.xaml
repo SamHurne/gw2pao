@@ -61,7 +61,7 @@
                 <Image Name="TitleImage" Grid.Column="0"
                        VerticalAlignment="Center"
                        Height="30" Width="30"
-                       Source="/Resources/merchant.png"
+                       Source="/Images/Title/merchant.png"
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>

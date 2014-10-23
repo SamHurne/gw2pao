@@ -25,51 +25,53 @@ namespace GW2PAO.Style.Converters
                 ObjectiveType type = (ObjectiveType)values[0];
                 WorldColor color = (WorldColor)values[1];
 
-                string imagePath = string.Empty;
-                switch (type)
-                {
-                    case ObjectiveType.Camp:
-                        imagePath = @"/Resources/Camp";
-                        break;
-                    case ObjectiveType.Tower:
-                        imagePath = @"/Resources/Tower";
-                        break;
-                    case ObjectiveType.Keep:
-                        imagePath = @"/Resources/Keep";
-                        break;
-                    case ObjectiveType.Castle:
-                        imagePath = @"/Resources/Castle";
-                        break;
-                    case ObjectiveType.TempleofLostPrayers:
-                        imagePath = @"/Resources/templeofLostPrayers";
-                        break;
-                    case ObjectiveType.BattlesHollow:
-                        imagePath = @"/Resources/BattlesHollow";
-                        break;
-                    case ObjectiveType.BauersEstate:
-                        imagePath = @"/Resources/BauersEstate";
-                        break;
-                    case ObjectiveType.OrchardOverlook:
-                        imagePath = @"/Resources/OrchardOverlook";
-                        break;
-                    case ObjectiveType.CarversAscent:
-                        imagePath = @"/Resources/CarversAscent";
-                        break;
-                    default:
-                        break;
-                }
+                string imagePath = @"/Images/WvW/";
 
-                // Append the color
+                // Append the color path
                 switch (color)
                 {
                     case WorldColor.Blue:
-                        imagePath += "_b";
+                        imagePath += "Blue/";
                         break;
                     case WorldColor.Green:
-                        imagePath += "_g";
+                        imagePath += "Green/";
                         break;
                     case WorldColor.Red:
-                        imagePath += "_r";
+                        imagePath += "Red/";
+                        break;
+                    default:
+                        imagePath += "Neutral/";
+                        break;
+                }
+
+                switch (type)
+                {
+                    case ObjectiveType.Camp:
+                        imagePath += "Camp";
+                        break;
+                    case ObjectiveType.Tower:
+                        imagePath += "Tower";
+                        break;
+                    case ObjectiveType.Keep:
+                        imagePath += "Keep";
+                        break;
+                    case ObjectiveType.Castle:
+                        imagePath += "Castle";
+                        break;
+                    case ObjectiveType.TempleofLostPrayers:
+                        imagePath += "TempleofLostPrayers";
+                        break;
+                    case ObjectiveType.BattlesHollow:
+                        imagePath += "BattlesHollow";
+                        break;
+                    case ObjectiveType.BauersEstate:
+                        imagePath += "BauersEstate";
+                        break;
+                    case ObjectiveType.OrchardOverlook:
+                        imagePath += "OrchardOverlook";
+                        break;
+                    case ObjectiveType.CarversAscent:
+                        imagePath += "CarversAscent";
                         break;
                     default:
                         break;

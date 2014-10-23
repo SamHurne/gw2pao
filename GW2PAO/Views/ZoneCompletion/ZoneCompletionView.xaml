@@ -79,7 +79,7 @@
                        VerticalAlignment="Center"
                        Height="30" Width="30"
                        Margin="0,0,0,0"
-                       Source="/Resources/zone.png"
+                       Source="/Images/Title/zone.png"
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>

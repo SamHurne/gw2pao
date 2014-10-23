@@ -91,11 +91,11 @@
             </Image.ContextMenu>
             <Image.Style>
                 <Style TargetType="Image">
-                    <Setter Property="Source" Value="../Resources/OverlayMenuIcon.png" />
+                    <Setter Property="Source" Value="../Images/OverlayMenuIcon.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=IsClickthroughEnabled}" Value="True">
                             <DataTrigger.Setters>
-                                <Setter Property="Source" Value="../Resources/OverlayMenuIcon_Color.png" />
+                                <Setter Property="Source" Value="../Images/OverlayMenuIcon_Color.png" />
                             </DataTrigger.Setters>
                         </DataTrigger>
                     </Style.Triggers>

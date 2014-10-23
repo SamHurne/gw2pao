@@ -26,7 +26,7 @@
                  MouseWheel="TextBox_MouseWheel"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Gold, UpdateSourceTrigger=PropertyChanged}" />
-        <Image Source="../../Resources/gold_coin.png"
+        <Image Source="../../Images/Commerce/gold_coin.png"
                Height="14" Width="14"
                Margin="1,0,5,0"/>
 
@@ -36,7 +36,7 @@
                  MouseWheel="TextBox_MouseWheel"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Silver, UpdateSourceTrigger=PropertyChanged}" />
-        <Image Source="../../Resources/silver_coin.png"
+        <Image Source="../../Images/Commerce/silver_coin.png"
                Height="14" Width="14"
                Margin="1,0,5,0"/>
 
@@ -46,7 +46,7 @@
                  MouseWheel="TextBox_MouseWheel"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Copper, UpdateSourceTrigger=PropertyChanged}" />
-        <Image Source="../../Resources/copper_coin.png"
+        <Image Source="../../Images/Commerce/copper_coin.png"
                Height="14" Width="14"
                Margin="1,0,0,0"/>
 
