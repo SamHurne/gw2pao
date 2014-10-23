@@ -191,14 +191,17 @@ namespace GW2PAO.Controllers
                     var newState = this.eventsService.GetState(worldEvent.EventModel);
                     Threading.BeginInvokeOnUI(() => worldEvent.State = newState);
 
+                    var timeUntilActive = this.eventsService.GetTimeUntilActive(worldEvent.EventModel);
+                    var timeSinceActive = this.eventsService.GetTimeSinceActive(worldEvent.EventModel);
+
+                    Threading.BeginInvokeOnUI(() => worldEvent.TimeSinceActive = timeSinceActive);
+
                     if (newState == API.Data.Enums.EventState.Active)
                     {
-                        var timeSinceActive = this.eventsService.GetTimeSinceActive(worldEvent.EventModel);
                         Threading.BeginInvokeOnUI(() => worldEvent.TimerValue = timeSinceActive.Negate());
                     }
                     else
                     {
-                        var timeUntilActive = this.eventsService.GetTimeUntilActive(worldEvent.EventModel);
                         Threading.BeginInvokeOnUI(() => worldEvent.TimerValue = timeUntilActive);
 
                         // Check to see if we need to display a notification for this event

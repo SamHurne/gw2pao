@@ -23,6 +23,7 @@ namespace GW2PAO.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private EventState state;
+        private TimeSpan timeSinceActive;
         private TimeSpan timerValue;
         private bool isVisible;
         private bool isNotificationShown;
@@ -48,7 +49,7 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// Name of the zone in which the event occurs
         /// </summary>
-        public string ZoneName { get { return "Located in " + this.EventModel.Location; } }
+        public string ZoneName { get { return this.EventModel.Location; } }
 
         /// <summary>
         /// Current state of the event
@@ -67,6 +68,15 @@ namespace GW2PAO.ViewModels
         {
             get { return this.timerValue; }
             set { SetField(ref this.timerValue, value); }
+        }
+
+        /// <summary>
+        /// Time since the event was last active
+        /// </summary>
+        public TimeSpan TimeSinceActive
+        {
+            get { return this.timeSinceActive; }
+            set { SetField(ref this.timeSinceActive, value); }
         }
 
         /// <summary>
