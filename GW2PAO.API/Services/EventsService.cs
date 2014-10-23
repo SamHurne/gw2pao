@@ -101,23 +101,25 @@ namespace GW2PAO.API.Services
         public Data.Enums.EventState GetState(WorldEvent evt)
         {
             var state = Data.Enums.EventState.Unknown;
+            if (evt != null)
+            {
+                var timeUntilActive = this.GetTimeUntilActive(evt);
+                var timeSinceActive = this.GetTimeSinceActive(evt);
 
-            var timeUntilActive = this.GetTimeUntilActive(evt);
-            var timeSinceActive = this.GetTimeSinceActive(evt);
-
-            if (timeSinceActive >= TimeSpan.FromTicks(0)
-                && timeSinceActive < evt.Duration.Time)
-            {
-                state = Data.Enums.EventState.Active;
-            }
-            else if (timeUntilActive >= TimeSpan.FromSeconds(0)
-                        && timeUntilActive < evt.WarmupDuration.Time)
-            {
-                state = Data.Enums.EventState.Warmup;
-            }
-            else
-            {
-                state = Data.Enums.EventState.Inactive;
+                if (timeSinceActive >= TimeSpan.FromTicks(0)
+                    && timeSinceActive < evt.Duration.Time)
+                {
+                    state = Data.Enums.EventState.Active;
+                }
+                else if (timeUntilActive >= TimeSpan.FromSeconds(0)
+                            && timeUntilActive < evt.WarmupDuration.Time)
+                {
+                    state = Data.Enums.EventState.Warmup;
+                }
+                else
+                {
+                    state = Data.Enums.EventState.Inactive;
+                }
             }
 
             return state;
@@ -130,21 +132,24 @@ namespace GW2PAO.API.Services
         /// <returns>Timespan containing the amount of time until the event is next active</returns>
         public TimeSpan GetTimeUntilActive(WorldEvent evt)
         {
-            TimeSpan timeUntilActive;
-
-            // Find the next time
-            var nextTime = evt.ActiveTimes.FirstOrDefault(activeTime => (activeTime.Time - this.timeProvider.CurrentTime.TimeOfDay) >= TimeSpan.FromSeconds(0));
-
-            // If there is no next time, then take the first time
-            if (nextTime == null)
+            TimeSpan timeUntilActive = TimeSpan.MinValue;
+            if (evt != null)
             {
-                nextTime = evt.ActiveTimes.First();
-                timeUntilActive = (nextTime.Time + TimeSpan.FromHours(24) - this.timeProvider.CurrentTime.TimeOfDay);
-            }
-            else
-            {
-                // Calculate the number of seconds until the next time
-                timeUntilActive = nextTime.Time - this.timeProvider.CurrentTime.TimeOfDay;
+                // Find the next time
+                var nextTime = evt.ActiveTimes.FirstOrDefault(activeTime => (activeTime.Time - this.timeProvider.CurrentTime.TimeOfDay) >= TimeSpan.FromSeconds(0));
+
+                // If there is no next time, then take the first time
+                if (nextTime == null)
+                {
+                    nextTime = evt.ActiveTimes.FirstOrDefault();
+                    if (nextTime != null)
+                        timeUntilActive = (nextTime.Time + TimeSpan.FromHours(24) - this.timeProvider.CurrentTime.TimeOfDay);
+                }
+                else
+                {
+                    // Calculate the number of seconds until the next time
+                    timeUntilActive = nextTime.Time - this.timeProvider.CurrentTime.TimeOfDay;
+                }
             }
             return timeUntilActive;
         }
@@ -156,21 +161,24 @@ namespace GW2PAO.API.Services
         /// <returns>Timespan containing the amount of time since the event was last active</returns>
         public TimeSpan GetTimeSinceActive(WorldEvent evt)
         {
-            TimeSpan timeSinceActive;
-
-            // Find the next time
-            var lastTime = evt.ActiveTimes.LastOrDefault(activeTime => (this.timeProvider.CurrentTime.TimeOfDay - activeTime.Time) >= TimeSpan.FromSeconds(0));
-
-            // If there is no next time, then take the first time
-            if (lastTime == null)
+            TimeSpan timeSinceActive = TimeSpan.MinValue;
+            if (evt != null)
             {
-                lastTime = evt.ActiveTimes.First();
-                timeSinceActive = (lastTime.Time + TimeSpan.FromHours(24) - this.timeProvider.CurrentTime.TimeOfDay);
-            }
-            else
-            {
-                // Calculate the number of seconds until the next time
-                timeSinceActive = this.timeProvider.CurrentTime.TimeOfDay - lastTime.Time;
+                // Find the next time
+                var lastTime = evt.ActiveTimes.LastOrDefault(activeTime => (this.timeProvider.CurrentTime.TimeOfDay - activeTime.Time) >= TimeSpan.FromSeconds(0));
+
+                // If there is no next time, then take the first time
+                if (lastTime == null)
+                {
+                    lastTime = evt.ActiveTimes.FirstOrDefault();
+                    if (lastTime != null)
+                        timeSinceActive = (this.timeProvider.CurrentTime.TimeOfDay - lastTime.Time) + TimeSpan.FromHours(24);
+                }
+                else
+                {
+                    // Calculate the number of seconds until the next time
+                    timeSinceActive = this.timeProvider.CurrentTime.TimeOfDay - lastTime.Time;
+                }
             }
             return timeSinceActive;
         }

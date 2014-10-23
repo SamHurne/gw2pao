@@ -16,6 +16,13 @@ namespace GW2PAO.API.Data
         public EventTimespan Duration { get; set; }
         public EventTimespan WarmupDuration { get; set; }
         public string WaypointCode { get; set; }
+
+        public WorldEvent()
+        {
+            this.ActiveTimes = new List<EventTimespan>();
+            this.Duration = new EventTimespan();
+            this.WarmupDuration = new EventTimespan();
+        }
     }
 
     /// <summary>
