@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.TradingPost"
-        xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
         MaxHeight="450" SizeToContent="WidthAndHeight"

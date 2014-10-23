@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a boolean value to a treasure image path

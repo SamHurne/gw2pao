@@ -4,7 +4,7 @@
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:view="clr-namespace:GW2PAO.Views.Teamspeak"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.Teamspeak"
-        xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"

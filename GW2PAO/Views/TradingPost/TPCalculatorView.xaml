@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.TradingPost"
-        xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         Width="215" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"

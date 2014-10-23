@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using GW2PAO.ViewModels.Teamspeak;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a ClientNotificationType to an image source

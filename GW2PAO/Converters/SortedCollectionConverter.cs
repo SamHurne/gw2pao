@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a collection to a sorted collection based on the conversion parameter

@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts an EventState to various different types, including Visibility, Color, Brush, and double (for opacity)

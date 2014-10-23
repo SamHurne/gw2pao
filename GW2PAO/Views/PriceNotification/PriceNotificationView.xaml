@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
              xmlns:vm="clr-namespace:GW2PAO.ViewModels.PriceNotification"
              mc:Ignorable="d" 

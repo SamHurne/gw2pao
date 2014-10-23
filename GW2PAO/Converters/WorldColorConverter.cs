@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a WorlColor to a color or brush

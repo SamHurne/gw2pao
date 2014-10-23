@@ -7,7 +7,7 @@ using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts an ObjectiveType to an image source path

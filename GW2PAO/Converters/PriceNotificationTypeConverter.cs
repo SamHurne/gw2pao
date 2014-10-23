@@ -7,7 +7,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using GW2PAO.ViewModels.PriceNotification;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a PriceNotificationType to a string

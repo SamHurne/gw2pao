@@ -6,7 +6,7 @@
         xmlns:awe="http://schemas.awesomium.com/winfx"
         xmlns:data="http://schemas.awesomium.com/winfx/data"
         xmlns:awecore="clr-namespace:Awesomium.Core;assembly=Awesomium.Core"
-        xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         AllowsTransparency="True" WindowStyle="None"
         Background="Transparent"

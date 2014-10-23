@@ -7,7 +7,7 @@ using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.Style.Converters
+namespace GW2PAO.Converters
 {
     /// <summary>
     /// Converts a ZoneItemtype to an image patch, using a second, boolean-value to determine the exact image to use

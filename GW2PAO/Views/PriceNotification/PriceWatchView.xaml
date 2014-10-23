@@ -6,7 +6,7 @@
              xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
-             xmlns:converters="clr-namespace:GW2PAO.Style.Converters"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display">
 
