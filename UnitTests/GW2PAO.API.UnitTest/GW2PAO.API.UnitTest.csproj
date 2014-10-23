@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="CommerceServiceUnitTest.cs" />
     <Compile Include="DungeonsServiceUnitTest.cs" />
+    <Compile Include="MegaserverEventTimeTableTests.cs" />
     <Compile Include="DungeonsTableUnitTest.cs" />
     <Compile Include="EventsServiceUnitTest.cs" />
     <Compile Include="ItemsDatabaseBuilderUnitTest.cs" />

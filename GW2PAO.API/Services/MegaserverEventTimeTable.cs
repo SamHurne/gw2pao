@@ -30,6 +30,14 @@ namespace GW2PAO.API.Services
         public List<WorldEvent> WorldEvents { get; set; }
 
         /// <summary>
+        /// Default constructor
+        /// </summary>
+        public MegaserverEventTimeTable()
+        {
+            this.WorldEvents = new List<WorldEvent>();
+        }
+
+        /// <summary>
         /// Loads the world events time table file
         /// </summary>
         /// <returns>The loaded event time table data</returns>
