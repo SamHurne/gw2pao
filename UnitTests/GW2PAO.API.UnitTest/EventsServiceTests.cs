@@ -11,7 +11,7 @@ using Moq;
 namespace GW2PAO.API.UnitTest
 {
     [TestClass]
-    public class EventsServiceUnitTest
+    public class EventsServiceTests
     {
         [TestMethod]
         public void EventsService_LoadTable_Standard_Success()

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GW2PAO.API.UnitTest
 {
     [TestClass]
-    public class DungeonsTableUnitTest
+    public class DungeonsTableTests
     {
         [TestMethod]
         public void DungeonsTable_Constructor()

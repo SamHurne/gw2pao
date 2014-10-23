@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GW2PAO.API.UnitTest
 {
     [TestClass]
-    public class CommerceServiceUnitTest
+    public class CommerceServiceTests
     {
         private const string VALID_ITEM_NAME = "Copper Ore";
         private const int VALID_ITEM_NAME_ID = 19697;

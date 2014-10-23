@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GW2PAO.API.UnitTest
 {
     [TestClass]
-    public class ItemsDatabaseBuilderUnitTest
+    public class ItemsDatabaseBuilderTests
     {
         [TestMethod]
         public void RebuildItemDatabase_LoadFromFile_Basic()

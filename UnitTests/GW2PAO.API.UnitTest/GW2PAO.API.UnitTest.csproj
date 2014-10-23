@@ -64,12 +64,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CommerceServiceUnitTest.cs" />
-    <Compile Include="DungeonsServiceUnitTest.cs" />
+    <Compile Include="CommerceServiceTests.cs" />
+    <Compile Include="DungeonsServiceTests.cs" />
     <Compile Include="MegaserverEventTimeTableTests.cs" />
-    <Compile Include="DungeonsTableUnitTest.cs" />
-    <Compile Include="EventsServiceUnitTest.cs" />
-    <Compile Include="ItemsDatabaseBuilderUnitTest.cs" />
+    <Compile Include="DungeonsTableTests.cs" />
+    <Compile Include="EventsServiceTests.cs" />
+    <Compile Include="ItemsDatabaseBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CalcUtilUnitTest.cs" />
     <Compile Include="Util\MapsHelperUnitTest.cs" />
