@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:View="clr-namespace:GW2PAO.Views.ZoneCompletion"
         xmlns:huddled="http://schemas.huddledmasses.org/wpf"
@@ -83,42 +84,42 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Reset Unlocks">
-                                <MenuItem Header="Current Zone" Command="{Binding ResetZoneUnlocksCommand}" />
-                                <MenuItem Header="Global" Command="{Binding ResetAllUnlocksCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetUnlocks}">
+                                <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneUnlocksCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllUnlocksCommand}" />
                             </MenuItem>
-                            <MenuItem Header="Reset Hidden Points">
-                                <MenuItem Header="Current Zone" Command="{Binding ResetZoneHiddenCommand}" />
-                                <MenuItem Header="Global" Command="{Binding ResetAllHiddenCommand}" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="Distance Units">
-                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" StaysOpenOnClick="True" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenPoints}">
+                                <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneHiddenCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllHiddenCommand}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Automatic Unlock">
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" StaysOpenOnClick="True" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
+                            <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
+                                <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.TimeDistances}" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Show Unlocked Zone Points" IsCheckable="True" IsChecked="{Binding UserSettings.ShowUnlockedPoints}" />
-                            <MenuItem Header="Show">
-                                <MenuItem Header="Show All" Command="{Binding ShowAllCommand}" />
-                                <MenuItem Header="Show None" Command="{Binding ShowNoneCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.AutomaticUnlock}">
+                                <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockWaypoints}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockPois}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockVistas}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserSettings.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.ShowUnlockedZonePoints}" IsCheckable="True" IsChecked="{Binding UserSettings.ShowUnlockedPoints}" />
+                            <MenuItem Header="{x:Static resx:Resources.Show}">
+                                <MenuItem Header="{x:Static resx:Resources.ShowAll}" Command="{Binding ShowAllCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.ShowNone}" Command="{Binding ShowNoneCommand}" />
                                 <Separator />
-                                <MenuItem Header="Waypoints" IsCheckable="True" IsChecked="{Binding UserSettings.AreWaypointsVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="POIs" IsCheckable="True" IsChecked="{Binding UserSettings.ArePoisVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Heart Quests" IsCheckable="True" IsChecked="{Binding UserSettings.AreHeartsVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Vistas" IsCheckable="True" IsChecked="{Binding UserSettings.AreVistasVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Skill Challenges" IsCheckable="True" IsChecked="{Binding UserSettings.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserSettings.AreWaypointsVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserSettings.ArePoisVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserSettings.AreHeartsVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserSettings.AreVistasVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserSettings.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>

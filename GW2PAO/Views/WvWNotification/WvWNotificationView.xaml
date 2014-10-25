@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
@@ -124,29 +125,19 @@
                                             VerticalAlignment="Bottom"
                                             Fill="Orange" FontSize="13"
                                             Text="{Binding Name}" />
-                    <!--  -->
-                    
-                    
+
                     <!-- Map -->
                     <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                             FontSize="12" Text="{Binding Map, Converter={StaticResource MapConverter}}" />
-                    <!--  -->
                     
                     <!-- Previous Owner Information -->
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                Orientation="Horizontal">
-                        <core:OutlinedTextBlock FontSize="11" Text="From:" />
-                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="11" Text="{Binding PrevWorldOwnerName}" />
-                    </StackPanel>
-                    <!---->
+                    <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="3,0,0,0" FontSize="11" Text="{Binding PrevWorldOwnerName, StringFormat={x:Static resx:Resources.TakenFrom}}" />
 
                     <!-- Owner information -->
-                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                Orientation="Horizontal">
-                        <core:OutlinedTextBlock FontSize="11" Text="By:" />
-                        <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="11" Text="{Binding WorldOwnerName}" />
-                    </StackPanel>
-                    <!---->
+                    <core:OutlinedTextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="3,0,0,0" FontSize="11" Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.TakenBy}}" />
+
                 </Grid>
             </Grid>
         </Border>

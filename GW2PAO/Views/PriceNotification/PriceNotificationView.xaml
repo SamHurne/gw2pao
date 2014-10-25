@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
@@ -94,12 +95,12 @@
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
                                                             Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                    <core:OutlinedTextBlock Text="Buy Order Upper Limit:" FontSize="12"/>
+                                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderUpperLimit}" FontSize="12"/>
                                                     <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
                                                             Visibility="{Binding PriceWatch.Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                    <core:OutlinedTextBlock Text="Buy Order Lower Limit:" FontSize="12"/>
+                                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderLowerLimit}" FontSize="12"/>
                                                     <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
                                                 </StackPanel>
                                             </StackPanel>
@@ -113,12 +114,12 @@
                                                         <StackPanel Orientation="Vertical">
                                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
                                                                         Visibility="{Binding PriceWatch.Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                                <core:OutlinedTextBlock Text="Sell Listing Upper Limit:" FontSize="12"/>
+                                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingUpperLimit}" FontSize="12"/>
                                                                 <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingUpperLimit}" />
                                                             </StackPanel>
                                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
                                                                         Visibility="{Binding PriceWatch.Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                                <core:OutlinedTextBlock Text="Sell Listing Lower Limit:" FontSize="12"/>
+                                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingLowerLimit}" FontSize="12"/>
                                                                 <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingLowerLimit}" />
                                                             </StackPanel>
                                                         </StackPanel>
@@ -190,8 +191,8 @@
                            MouseDown="CopyIcon_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Copy Name" Command="{Binding PriceWatch.CopyNameCommand}" />
-                                <MenuItem Header="Copy Chat Code" Command="{Binding PriceWatch.CopyChatcodeCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.CopyName}" Command="{Binding PriceWatch.CopyNameCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding PriceWatch.CopyChatcodeCommand}" />
                             </ContextMenu>
                         </Image.ContextMenu>
                         <Image.Style>

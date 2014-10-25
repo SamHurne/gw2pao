@@ -467,6 +467,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.es.resx" />
+    <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
     <Resource Include="Images\Misc\copy.png" />
     <Resource Include="Images\Commerce\unknown_icon.png" />
     <Resource Include="Images\OverlayMenuIcon_Color.png" />
@@ -521,7 +524,7 @@
     <Resource Include="Images\Commerce\gold_coin.png" />
     <Resource Include="Images\Title\dungeons.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

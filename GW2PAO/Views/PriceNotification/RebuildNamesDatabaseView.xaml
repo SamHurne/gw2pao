@@ -1,6 +1,7 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Views.PriceNotification.RebuildNamesDatabaseView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
@@ -39,10 +40,10 @@
 
             <StackPanel Orientation="Horizontal">
                 <core:OutlinedTextBlock Fill="White" FontWeight="Bold" FontSize="15"
-                                        Text="Rebuilding item names database..." />
+                                        Text="{x:Static resx:Resources.RebuildingNamesDatabase}" />
                 <core:OutlinedTextBlock Fill="White" FontWeight="Bold" FontSize="15"
                                         Visibility="{Binding IsComplete, Converter={StaticResource BoolToVisibility}}"
-                                        Text="Done!"/>
+                                        Text="{x:Static resx:Resources.Done}"/>
             </StackPanel>
 
             <ProgressBar Margin="5"
@@ -54,11 +55,11 @@
                     Click="CloseButton_Click">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                        <Setter Property="Content" Value="Cancel" />
+                        <Setter Property="Content" Value="{x:Static resx:Resources.Cancel}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsComplete}" Value="True">
                                 <DataTrigger.Setters>
-                                    <Setter Property="Content" Value="Close" />
+                                    <Setter Property="Content" Value="{x:Static resx:Resources.Close}" />
                                 </DataTrigger.Setters>
                             </DataTrigger>
                         </Style.Triggers>

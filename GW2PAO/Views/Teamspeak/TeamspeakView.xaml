@@ -1,6 +1,7 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Views.Teamspeak.TeamspeakView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:view="clr-namespace:GW2PAO.Views.Teamspeak"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.Teamspeak"
@@ -80,10 +81,10 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Show Channel Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
-                            <MenuItem Header="Show Chat Entry Box" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>
@@ -125,19 +126,19 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="Teamspeak">
+                                        Text="{x:Static resx:Resources.Teamspeak}">
                     <core:OutlinedTextBlock.ToolTip>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
-                                                        Text="Server: "/>
+                                                        Text="{x:Static resx:Resources.Server}"/>
                                 <core:OutlinedTextBlock FontSize="13"
                                                         Margin="3,0,0,0"
                                                         Text="{Binding ServerName}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
-                                                        Text="IP: "/>
+                                                        Text="{x:Static resx:Resources.IP}"/>
                                 <core:OutlinedTextBlock FontSize="13"
                                                         Margin="3,0,0,0"
                                                         Text="{Binding ServerAddress}"/>
@@ -220,7 +221,7 @@
             <Button Name="MessageSendBox" Grid.Column="1"
                     Margin="3,0,3,0"
                     Command="{Binding SendMessageCommand}">
-                <TextBlock Text="Send" />
+                <TextBlock Text="{x:Static resx:Resources.Send}" />
             </Button>
         </Grid>
 

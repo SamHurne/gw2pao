@@ -1,6 +1,7 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Views.WvWTracker.WvWTrackerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:view="clr-namespace:GW2PAO.Views.WvWTracker"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
@@ -77,45 +78,45 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Orientation">
-                                <MenuItem Header="Vertical" IsCheckable="True" IsChecked="{Binding IsVerticalOrientation}" />
-                                <MenuItem Header="Horizontal" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
+                            <MenuItem Header="{x:Static resx:Resources.Orientation}">
+                                <MenuItem Header="{x:Static resx:Resources.Vertical}" IsCheckable="True" IsChecked="{Binding IsVerticalOrientation}" />
+                                <MenuItem Header="{x:Static resx:Resources.Horizontal}" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Show Est. Time-Distances" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
-                            <MenuItem Header="Distance Units">
-                                <MenuItem Header="Feet" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
-                                <MenuItem Header="Meters" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
-                                <MenuItem Header="Time-Distances" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowDistances}" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
+                            <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
+                                <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.TimeDistances}" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Reset Hidden Objectives" Command="{Binding ResetHiddenObjectivesCommand}" />
-                            <MenuItem Header="Show">
-                                <MenuItem Header="Red Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Green Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Blue Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Neutral Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenObjectives}" Command="{Binding ResetHiddenObjectivesCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.Show}">
+                                <MenuItem Header="{x:Static resx:Resources.RedObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.GreenObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BlueObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.NeutralObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
                                 <Separator />
-                                <MenuItem Header="Castles" IsCheckable="True" IsChecked="{Binding UserSettings.AreCastlesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Keeps" IsCheckable="True" IsChecked="{Binding UserSettings.AreKeepsShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Towers" IsCheckable="True" IsChecked="{Binding UserSettings.AreTowersShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Camps" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="Bloodlust Objectives" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Castles}" IsCheckable="True" IsChecked="{Binding UserSettings.AreCastlesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Keeps}" IsCheckable="True" IsChecked="{Binding UserSettings.AreKeepsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Towers}" IsCheckable="True" IsChecked="{Binding UserSettings.AreTowersShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Camps}" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BloodlustObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
                             </MenuItem>
-                            <MenuItem Header="Names">
-                                <MenuItem Header="Cardinal Directions" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
-                                <MenuItem Header="Short Names" IsCheckable="True" IsChecked="{Binding IsShortNamesSelected}" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="Use Player's Map" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
-                            <MenuItem Header="Override Displayed Map">
-                                <MenuItem Header="Red Borderlands" IsCheckable="True" IsChecked="{Binding IsUsingRedBorderlands}" />
-                                <MenuItem Header="Green Borderlands" IsCheckable="True" IsChecked="{Binding IsUsingGreenBorderlands}" />
-                                <MenuItem Header="Blue Borderlands" IsCheckable="True" IsChecked="{Binding IsUsingBlueBorderlands}" />
-                                <MenuItem Header="Eternal Battlegrounds" IsCheckable="True" IsChecked="{Binding IsUsingEternalBattlegrounds}" />
+                            <MenuItem Header="{x:Static resx:Resources.Names}">
+                                <MenuItem Header="{x:Static resx:Resources.CardinalDirections}" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.ShortNames}" IsCheckable="True" IsChecked="{Binding IsShortNamesSelected}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.UsePlayersMap}" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
+                            <MenuItem Header="{x:Static resx:Resources.OverrideDisplayedMap}">
+                                <MenuItem Header="{x:Static resx:Resources.RedBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingRedBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.GreenBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingGreenBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.BlueBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingBlueBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.EternalBattlegrounds}" IsCheckable="True" IsChecked="{Binding IsUsingEternalBattlegrounds}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>

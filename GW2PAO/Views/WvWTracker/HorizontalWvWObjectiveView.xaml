@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d"
@@ -27,26 +28,23 @@
 
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Hide" Command="{Binding HideCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.Hide}" Command="{Binding HideCommand}" />
             <Separator />
-            <MenuItem Header="Copy Chat Code" Command="{Binding CopyChatCodeCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding CopyChatCodeCommand}" />
             <Separator />
-            <MenuItem Header="Copy Under Attack Text" Command="{Binding CopyUnderAttackTextCommand}" />
-            <MenuItem Header="Copy Enemy Headed Towards Text" Command="{Binding CopyEnemyHeadedToTextCommand}" />
-            <MenuItem Header="Copy Player Headed Towards Text" Command="{Binding CopyPlayerHeadedToTextCommand}" />
-            <MenuItem Header="Copy RI Timer Text" Command="{Binding CopyRITextCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyUnderAttack}" Command="{Binding CopyUnderAttackTextCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyEnemyHeadedTowards}" Command="{Binding CopyEnemyHeadedToTextCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyPlayerHeadedTowards}" Command="{Binding CopyPlayerHeadedToTextCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyRITimer}" Command="{Binding CopyRITextCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
 
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
             <core:OutlinedTextBlock Fill="Orange" FontSize="12" Text="{Binding Name}"/>
+            <core:OutlinedTextBlock Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.OwnedBy}}"/>
             <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Owned By:" />
-                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding WorldOwnerName}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Claimed By:" />
+                <core:OutlinedTextBlock Margin="0,0,5,0" Text="{x:Static resx:Resources.ClaimedBy}" />
                 <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Name}"/>
                 <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Tag}"/>
                 <StackPanel.Style>
@@ -62,10 +60,7 @@
                     </Style>
                 </StackPanel.Style>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <core:OutlinedTextBlock Margin="0,0,5,0" Text="Points:" />
-                <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding Points}"/>
-            </StackPanel>
+            <core:OutlinedTextBlock Text="{Binding Points, StringFormat={x:Static resx:Resources.Points}}"/>
         </StackPanel>
     </UserControl.ToolTip>
     

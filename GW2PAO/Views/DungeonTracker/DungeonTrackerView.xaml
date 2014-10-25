@@ -5,6 +5,7 @@
         xmlns:view="clr-namespace:GW2PAO.Views.DungeonTracker"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         Top="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTrackerY}"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTrackerX}"
@@ -69,10 +70,10 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Reset Hidden Dungeons" Command="{Binding ResetHiddenDungeonsCommand}" />
-                            <MenuItem Header="Reset Completed Paths" Command="{Binding ResetCompletedPathsCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenDungeons}" Command="{Binding ResetHiddenDungeonsCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetCompletedPaths}" Command="{Binding ResetCompletedPathsCommand}" />
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>
@@ -114,7 +115,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="Dungeons" />
+                                        Text="{x:Static resx:Resources.Dungeons}" />
 
                 <Button Name="CollapseExpandButton"
                     Grid.Column="2"

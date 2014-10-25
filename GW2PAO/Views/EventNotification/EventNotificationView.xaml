@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
@@ -120,7 +121,7 @@
                     <!-- Time until active -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
-                        <core:OutlinedTextBlock FontSize="12" Text="active in" />
+                        <core:OutlinedTextBlock FontSize="12" Text="{x:Static resx:Resources.ActiveIn}" />
                         <core:OutlinedTextBlock Margin="3,0,0,0" FontSize="12"
                                                 Text="{Binding TimerValue, Converter={StaticResource TimeConverter}}" />
                     </StackPanel>

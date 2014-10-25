@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:view="clr-namespace:GW2PAO.Views.DungeonTracker"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
@@ -25,12 +26,12 @@
 
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Hide" Command="{Binding HideCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.Hide}" Command="{Binding HideCommand}" />
             <Separator />
             <MenuItem Header="{Binding MinimumLevel}" IsEnabled="False" />
             <MenuItem Header="{Binding ZoneName}" IsEnabled="False" />
-            <MenuItem Header="Copy Waypoint Code" Command="{Binding CopyWaypointCommand}" />
-            <MenuItem Header="Open Wiki Page" Command="{Binding OpenWikiPageCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.OpenWikiPage}" Command="{Binding OpenWikiPageCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
 
@@ -159,7 +160,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                                                 FontSize="12" FontFamily="Gisha"
-                                                                Text="Reward:"
+                                                                Text="{x:Static resx:Resources.Reward}"
                                                                 Margin="0,0,5,0"/>
 
                                         <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"

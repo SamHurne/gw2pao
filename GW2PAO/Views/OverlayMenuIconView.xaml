@@ -1,6 +1,7 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Views.OverlayMenuIconView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
@@ -48,12 +49,12 @@
                                 Margin="30,30,0,0">
                     
                         <core:OutlinedTextBlock Fill="White" FontWeight="Bold" FontSize="15"
-                                                Text="GW2 Personal Assistant Overlay" />
+                                                Text="{x:Static resx:Resources.ApplicationName}" />
                         <core:OutlinedTextBlock Fill="White" FontSize="12"
-                                                Text="is now running" />
+                                                Text="{x:Static resx:Resources.NowRunning}" />
                         <core:OutlinedTextBlock Margin="0,10,0,0"
                                                 Fill="White" FontSize="12" FontWeight="Bold"
-                                                Text="Click Here to Get Started" />
+                                                Text="{x:Static resx:Resources.GetStarted}" />
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -67,7 +68,7 @@
                MouseEnter="Image_MouseEnter">
             <Image.ToolTip>
                 <ToolTip>
-                    <TextBlock FontFamily="Gisha" Text="GW2 Personal Assistant Overlay" />
+                    <TextBlock FontFamily="Gisha" Text="{x:Static resx:Resources.ApplicationName}" />
                 </ToolTip>
             </Image.ToolTip>
             <Image.ContextMenu>

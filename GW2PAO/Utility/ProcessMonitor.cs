@@ -95,7 +95,7 @@ namespace GW2PAO.Utility
                 {
                     if (!isAdminRightsErrorShown)
                     {
-                        App.TrayIcon.DisplayNotification("Warning", "Some features cannot be started because GW2 is running as administrator.", GW2PAO.TrayIcon.TrayInfoMessageType.Warning);
+                        App.TrayIcon.DisplayNotification(Properties.Resources.Warning, Properties.Resources.NotRunningAsAdmin, GW2PAO.TrayIcon.TrayInfoMessageType.Warning);
                         logger.Warn(ex);
                         isAdminRightsErrorShown = true;
                     }

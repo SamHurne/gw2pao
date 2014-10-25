@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:vm="clr-namespace:GW2PAO.ViewModels.TradingPost"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
@@ -66,9 +67,9 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Reset" Command="{Binding ResetCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.Reset}" Command="{Binding ResetCommand}" />
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>
@@ -110,7 +111,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="TP Calculator" />
+                                        Text="{x:Static resx:Resources.TPCalculator}" />
 
                 <Button Name="CollapseExpandButton"
                     Grid.Column="2"
@@ -151,11 +152,11 @@
             <StackPanel Grid.Row="0"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="Buy Price" FontSize="14" ToolTipService.ShowDuration="30000">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyPrice}" FontSize="14" ToolTipService.ShowDuration="30000">
                     <core:OutlinedTextBlock.ToolTip>
                         <ToolTip>
                             <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BreakEven}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenBuyPrice.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"
@@ -243,11 +244,11 @@
             <StackPanel Grid.Row="1"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="Sell Price" FontSize="14" ToolTipService.ShowDuration="30000">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellPrice}" FontSize="14" ToolTipService.ShowDuration="30000">
                     <core:OutlinedTextBlock.ToolTip>
                         <ToolTip>
                             <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock Text="Break Even At:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BreakEven}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding BreakEvenSellPrice.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"
@@ -336,7 +337,7 @@
                         Orientation="Horizontal"
                         Margin="5">
                 <StackPanel Orientation="Vertical">
-                    <core:OutlinedTextBlock Text="Quantity" FontSize="14"/>
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Quantity}" FontSize="14"/>
                     <TextBox Margin="0,5,0,0" BorderBrush="{StaticResource TextBoxBorder}" Width="50" HorizontalAlignment="Left" 
                              FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
                         <TextBox.Text>
@@ -346,7 +347,7 @@
                 </StackPanel>
                 <Button Margin="85,0,0,0" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                         Command="{Binding ResetCommand}">
-                    <TextBlock Text="Reset" />
+                    <TextBlock Text="{x:Static resx:Resources.Quantity}" />
                 </Button>
             </StackPanel>
 
@@ -356,7 +357,7 @@
                         Margin="5"
                         ToolTipService.ShowDuration="30000">
 
-                <core:OutlinedTextBlock Text="Profit:" FontSize="15"/>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.Profit}" FontSize="15"/>
                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                     <core:OutlinedTextBlock Text="-" FontSize="14" Visibility="{Binding Profit.IsNegative, Converter={StaticResource BoolToVisibility}}" />
                     <core:OutlinedTextBlock Text="{Binding Profit.Gold}" FontSize="14" />
@@ -375,7 +376,7 @@
                     <ToolTip >
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Text="Revenue:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.Revenue}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding Revenue.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"
@@ -392,7 +393,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Text="Cost:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.Cost}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding Cost.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"
@@ -409,7 +410,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Text="Listing Fee:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.ListingFee}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding ListingFee.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"
@@ -426,7 +427,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock Text="Sale Fee:" FontSize="12"/>
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SaleFee}" FontSize="12"/>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                                     <core:OutlinedTextBlock Text="{Binding SaleFee.Gold}" />
                                     <Image Source="../../Images/Commerce/gold_coin.png"

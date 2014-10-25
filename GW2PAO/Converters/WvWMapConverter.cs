@@ -19,13 +19,13 @@ namespace GW2PAO.Converters
                 switch (map)
                 {
                     case WvWMap.BlueBorderlands:
-                        return "Blue Borderlands";
+                        return Properties.Resources.BlueBorderlands;
                     case WvWMap.GreenBorderlands:
-                        return "Green Borderlands";
+                        return Properties.Resources.GreenBorderlands;
                     case WvWMap.RedBorderlands:
-                        return "Red Borderlands";
+                        return Properties.Resources.RedBorderlands;
                     case WvWMap.EternalBattlegrounds:
-                        return "Eternal Battlegrounds";
+                        return Properties.Resources.EternalBattlegrounds;
                     default:
                         return map.ToString();
                 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" d:DesignWidth="200"
@@ -24,15 +25,15 @@
 
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Hide" Command="{Binding HideCommand}" />
-            <MenuItem Header="Copy Waypoint Code" Command="{Binding CopyWaypointCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.Hide}" Command="{Binding HideCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
     
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding ZoneName, StringFormat=Located in {0}}" />
-            <TextBlock Text="{Binding TimeSinceActive, StringFormat=Last Active {0} ago, Converter={StaticResource TimeConverter}}" />
+            <TextBlock Text="{Binding ZoneName, StringFormat={x:Static resx:Resources.LocatedInX}}" />
+            <TextBlock Text="{Binding TimeSinceActive, StringFormat={x:Static resx:Resources.LastActiveXAgo}, Converter={StaticResource TimeConverter}}" />
         </StackPanel>
     </UserControl.ToolTip>
 

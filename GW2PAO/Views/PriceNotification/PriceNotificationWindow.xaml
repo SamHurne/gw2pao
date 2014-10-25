@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:View="clr-namespace:GW2PAO.Views.PriceNotification"
@@ -39,7 +40,7 @@
                 <DropShadowEffect Direction="270" Color="Gold" ShadowDepth="3" BlurRadius="10" />
             </Border.Effect>
             <Border.ToolTip>
-                <TextBlock Text="Price Notifications" />
+                <TextBlock Text="{x:Static resx:Resources.PriceNotifications}" />
             </Border.ToolTip>
         </Border>
         <ItemsControl ItemsSource="{Binding Source={StaticResource PriceNotificationsCollection}}"

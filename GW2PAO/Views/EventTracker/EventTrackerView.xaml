@@ -4,6 +4,7 @@
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:View="clr-namespace:GW2PAO.Views.EventTracker"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
@@ -77,10 +78,10 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Reset Hidden Events" Command="{Binding ResetHiddenEventsCommand}" />
-                            <MenuItem Header="Show Inactive Events" IsCheckable="True" IsChecked="{Binding UserSettings.AreInactiveEventsVisible}" />
+                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenEvents}" Command="{Binding ResetHiddenEventsCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowInactiveEvents}" IsCheckable="True" IsChecked="{Binding UserSettings.AreInactiveEventsVisible}" />
                             <Separator />
-                            <MenuItem Header="Close" Click="CloseWindowButton_Click" />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
                     <Image.Style>
@@ -122,7 +123,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="World Events" />
+                                        Text="{x:Static resx:Resources.WorldEvents}" />
 
                 <Button Name="CollapseExpandButton"
                     Grid.Column="2"

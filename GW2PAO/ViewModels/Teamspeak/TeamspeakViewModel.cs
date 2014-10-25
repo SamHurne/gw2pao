@@ -188,7 +188,7 @@ namespace GW2PAO.ViewModels.Teamspeak
                 {
                     this.TeamspeakService.ConnectionRefused -= TeamspeakService_ConnectionRefused;
 
-                    var cannotConnectNotification = new TSNotificationViewModel(0, "Please start Teamspeak", TSNotificationType.CannotConnect);
+                    var cannotConnectNotification = new TSNotificationViewModel(0, Properties.Resources.StartTeamspeak, TSNotificationType.CannotConnect);
                     Threading.InvokeOnUI(() => this.Notifications.Add(cannotConnectNotification));
 
                     // Start a loop attempting to connect

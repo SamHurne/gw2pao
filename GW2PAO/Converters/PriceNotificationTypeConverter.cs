@@ -26,9 +26,9 @@ namespace GW2PAO.Converters
                 switch (type)
                 {
                     case PriceNotificationType.BuyOrder:
-                        return "Buy Order:";
+                        return Properties.Resources.BuyOrder + ":";
                     case PriceNotificationType.SellListing:
-                        return "Sell Listing:";
+                        return Properties.Resources.SellListing + ":";
                     default:
                         return "Unknown";
                 }

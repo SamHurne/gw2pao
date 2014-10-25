@@ -61,6 +61,8 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+
             // We save this so that if we perform an upgrade of settings,
             //  we still treat this startup as a first-time run of the application
             bool firstTimeUse = GW2PAO.Properties.Settings.Default.FirstTimeRun;
@@ -114,7 +116,7 @@ namespace GW2PAO
                 AllowsTransparency = true,
                 Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent),
                 ShowInTaskbar = false,
-                Title = "GW2 Personal Assistant Overlay"
+                Title = GW2PAO.Properties.Resources.ApplicationName
             };
             dummyWindow.Show();
             GW2PAO.Views.OverlayWindow.OwnerWindow = dummyWindow;
@@ -148,9 +150,9 @@ namespace GW2PAO
 
                 TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
 
-                var settingsMenu = new MenuItemViewModel("Settings", null);
+                var settingsMenu = new MenuItemViewModel(GW2PAO.Properties.Resources.Settings, null);
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Show Notification Borders", null, true, false,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.ShowNotificationBorders, null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.AreNotificationWindowBordersVisible; },
                     (enabled) =>
                     {
@@ -159,7 +161,7 @@ namespace GW2PAO
                     },
                     GW2PAO.Properties.Settings.Default, "AreNotificationWindowBordersVisible"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Non-Interactive Windows", null, true, false,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.NonInteractiveWindows, null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
                     (enabled) => {
                                     GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
@@ -167,7 +169,7 @@ namespace GW2PAO
                                  },
                     GW2PAO.Properties.Settings.Default, "IsClickthroughEnabled"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Sticky Windows", null, true, false,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.StickyWindows, null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.AreWindowsSticky; },
                     (enabled) =>
                     {
@@ -176,12 +178,12 @@ namespace GW2PAO
                     },
                     GW2PAO.Properties.Settings.Default, "AreWindowsSticky"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Overlay Menu Icon", null, true, false,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.OverlayMenuIcon, null, true, false,
                     () => { return ApplicationOverlayMenuIcon.IsVisible; },
                     (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
                     ApplicationOverlayMenuIcon, "IsVisible"));
 
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel("Check for Updates at Startup", null, true, false,
+                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.CheckForUpdatesAtStartup, null, true, false,
                     () => { return GW2PAO.Properties.Settings.Default.CheckForUpdates; },
                     (enabled) =>
                     {
@@ -191,8 +193,8 @@ namespace GW2PAO
                     GW2PAO.Properties.Settings.Default, "CheckForUpdates"));
 
                 TrayIconVm.MenuItems.Add(settingsMenu);
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("About", () => new GW2PAO.Views.AboutView().Show()));
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel("Exit", this.ExitAndCleanup));
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.About, () => new GW2PAO.Views.AboutView().Show()));
+                TrayIconVm.MenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.Exit, this.ExitAndCleanup));
             }
 
             logger.Info("Program startup complete");

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
@@ -125,11 +126,11 @@
                 <ToolTip>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
-                            <core:OutlinedTextBlock Text="Current Highest Buy Order:" FontSize="12"/>
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CurrentHighestBuyOrder}" FontSize="12"/>
                             <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentBuyOrder}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                            <core:OutlinedTextBlock Text="Current Lowest Sell Listing:" FontSize="12"/>
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CurrentLowestSellListing}" FontSize="12"/>
                             <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentSellListing}" />
                         </StackPanel>
                     </StackPanel>
@@ -159,7 +160,7 @@
             <auto:Intellibox Name="ItemsEntryBox"
                              HideColumnHeaders="True" DisableWhitespaceTrim="True" SelectAllOnFocus="True" 
                              MaxResults="20"
-                             WatermarkText="Item Name"
+                             WatermarkText="{x:Static resx:Resources.ItemName}"
                              WatermarkForeground="Gray"
                              Height="21" Width="150"
                              DataProvider="{Binding ItemsProvider}"
@@ -177,7 +178,7 @@
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="10,0,5,0" VerticalAlignment="Center"
                   IsChecked="{Binding Data.IsBuyOrderUpperLimitEnabled}">
-            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Upper" />
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="{x:Static resx:Resources.Upper}" />
         </CheckBox>
         <Grid Grid.Column="5" Grid.Row="0"
               Visibility="{Binding Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
@@ -189,7 +190,7 @@
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="10,0,5,0" VerticalAlignment="Center"
                   IsChecked="{Binding Data.IsBuyOrderLowerLimitEnabled}">
-            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Lower" />
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="{x:Static resx:Resources.Lower}" />
         </CheckBox>
         <Grid Grid.Column="5" Grid.Row="1"
               Visibility="{Binding Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
@@ -201,7 +202,7 @@
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="15,0,5,0" VerticalAlignment="Center"
                   IsChecked="{Binding Data.IsSellListingUpperLimitEnabled}">
-            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Upper" />
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="{x:Static resx:Resources.Upper}" />
         </CheckBox>
         <Grid Grid.Column="7" Grid.Row="0"
               Visibility="{Binding Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
@@ -213,7 +214,7 @@
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="15,0,5,0" VerticalAlignment="Center"
                   IsChecked="{Binding Data.IsSellListingLowerLimitEnabled}">
-            <core:OutlinedTextBlock Margin="0,1,0,0" Text="Lower" />
+            <core:OutlinedTextBlock Margin="0,1,0,0" Text="{x:Static resx:Resources.Lower}" />
         </CheckBox>
         <Grid Grid.Column="7" Grid.Row="1"
               Visibility="{Binding Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
