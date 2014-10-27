@@ -261,7 +261,7 @@ namespace GW2PAO.Controllers
                     {
                         var newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, this.UserSettings.DistanceUnits));
                         var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerPosition, item.ItemModel.Location),
-                                                               CalcUtil.Vector.CreateVector(new API.Data.Point(0, 0), cameraDirectionPosition));
+                                                               CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionPosition));
 
                         if (item.DistanceFromPlayer != newDistance)
                         {

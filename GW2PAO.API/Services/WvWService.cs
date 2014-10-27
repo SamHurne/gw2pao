@@ -10,6 +10,7 @@ using GW2PAO.API.Services.Interfaces;
 using GW2DotNET;
 using GW2DotNET.V1.WorldVersusWorld;
 using GW2DotNET.Entities.WorldVersusWorld;
+using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.API.Services
 {

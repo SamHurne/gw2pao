@@ -70,8 +70,8 @@
   <ItemGroup>
     <Compile Include="Constants\Paths.cs" />
     <Compile Include="Constants\WorldEventID.cs" />
-    <Compile Include="Data\Dungeon.cs" />
-    <Compile Include="Data\DynamicEvent.cs" />
+    <Compile Include="Data\Entities\Dungeon.cs" />
+    <Compile Include="Data\Entities\DynamicEvent.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
     <Compile Include="Data\Enums\ItemFlags.cs" />
@@ -85,22 +85,22 @@
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
-    <Compile Include="Data\Guild.cs" />
-    <Compile Include="Data\Item.cs" />
-    <Compile Include="Data\ItemPrices.cs" />
-    <Compile Include="Data\Point.cs" />
-    <Compile Include="Data\Resolution.cs" />
-    <Compile Include="Data\World.cs" />
-    <Compile Include="Data\WvWObjective.cs" />
-    <Compile Include="Data\ZoneItem.cs" />
+    <Compile Include="Data\Entities\Guild.cs" />
+    <Compile Include="Data\Entities\Item.cs" />
+    <Compile Include="Data\Entities\ItemPrices.cs" />
+    <Compile Include="Data\Entities\Point.cs" />
+    <Compile Include="Data\Entities\Resolution.cs" />
+    <Compile Include="Data\Entities\World.cs" />
+    <Compile Include="Data\Entities\WvWObjective.cs" />
+    <Compile Include="Data\Entities\ZoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\IStringProvider.cs" />
     <Compile Include="Providers\WorldEventNamesProvider.cs" />
     <Compile Include="Services\CommerceService.cs" />
     <Compile Include="Services\DungeonsService.cs" />
-    <Compile Include="Services\DungeonsTable.cs" />
+    <Compile Include="Data\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
-    <Compile Include="Data\WorldEvent.cs" />
+    <Compile Include="Data\Entities\WorldEvent.cs" />
     <Compile Include="Services\GuildService.cs" />
     <Compile Include="Services\Interfaces\ICommerceService.cs" />
     <Compile Include="Services\Interfaces\IDungeonsService.cs" />
@@ -110,36 +110,18 @@
     <Compile Include="Services\Interfaces\ISystemService.cs" />
     <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
-    <Compile Include="Services\ItemsDatabaseBuilder.cs" />
-    <Compile Include="Services\MegaserverEventTimeTable.cs" />
+    <Compile Include="Data\ItemsDatabaseBuilder.cs" />
+    <Compile Include="Data\MegaserverEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
-    <Compile Include="Services\WorldsTable.cs" />
-    <Compile Include="Services\WvWObjectivesTable.cs" />
+    <Compile Include="Data\WorldsTable.cs" />
+    <Compile Include="Data\WvWObjectivesTable.cs" />
     <Compile Include="Services\WvWService.cs" />
     <Compile Include="Services\ZoneService.cs" />
-    <Compile Include="Util\CalcUtil.cs" />
-    <Compile Include="Util\MapsHelper.cs" />
-    <Compile Include="Util\Serializer.cs" />
-    <Compile Include="Util\TimeProvider.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AdjustedEventTimeTable.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Dungeons.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EventNames.xml" />
-    <Content Include="StandardEventTimeTable.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Worlds.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WvWObjectives.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Compile Include="Utility\CalcUtil.cs" />
+    <Compile Include="Utility\MapsHelper.cs" />
+    <Compile Include="Utility\Serializer.cs" />
+    <Compile Include="Providers\TimeProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

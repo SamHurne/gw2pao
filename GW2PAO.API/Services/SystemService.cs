@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using NLog;
 

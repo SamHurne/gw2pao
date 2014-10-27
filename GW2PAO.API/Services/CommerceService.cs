@@ -10,6 +10,7 @@ using GW2DotNET.Entities.Items;
 using GW2DotNET.V2.Commerce;
 using GW2DotNET.V2.Items;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using NLog;
 
@@ -118,9 +119,9 @@ namespace GW2PAO.API.Services
         /// <param name="rarity">Rarity of the item</param>
         /// <param name="level">Level of the item</param>
         /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
-        public GW2PAO.API.Data.Item GetItem(string itemName, Data.Enums.ItemRarity rarity, int level)
+        public GW2PAO.API.Data.Entities.Item GetItem(string itemName, Data.Enums.ItemRarity rarity, int level)
         {
-            GW2PAO.API.Data.Item item = null;
+            GW2PAO.API.Data.Entities.Item item = null;
 
             KeyValuePair<int, ItemDBEntry> itemEntry;
             itemEntry = this.ItemsDB.FirstOrDefault(itm => itm.Value.Name == itemName
@@ -140,16 +141,16 @@ namespace GW2PAO.API.Services
         /// </summary>
         /// <param name="itemID">ID of the item</param>
         /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
-        public GW2PAO.API.Data.Item GetItem(int itemID)
+        public GW2PAO.API.Data.Entities.Item GetItem(int itemID)
         {
-            GW2PAO.API.Data.Item item = null;
+            GW2PAO.API.Data.Entities.Item item = null;
 
             try
             {
                 var itemDetails = this.itemService.Find(itemID);
                 if (itemDetails != null)
                 {
-                    item = new Data.Item(itemID, itemDetails.Name);
+                    item = new Data.Entities.Item(itemID, itemDetails.Name);
                     item.Icon = itemDetails.IconFileUrl;
                     item.Description = itemDetails.Description;
                     item.Rarity = (Data.Enums.ItemRarity)itemDetails.Rarity;
@@ -178,9 +179,9 @@ namespace GW2PAO.API.Services
         /// </summary>
         /// <param name="itemIDs">IDs of the items to retrieve</param>
         /// <returns>Collection of Item objects containing all item information</returns>
-        public IDictionary<int, GW2PAO.API.Data.Item> GetItems(ICollection<int> itemIDs)
+        public IDictionary<int, GW2PAO.API.Data.Entities.Item> GetItems(ICollection<int> itemIDs)
         {
-            Dictionary<int, GW2PAO.API.Data.Item> items = new Dictionary<int, GW2PAO.API.Data.Item>();
+            Dictionary<int, GW2PAO.API.Data.Entities.Item> items = new Dictionary<int, GW2PAO.API.Data.Entities.Item>();
 
             try
             {
@@ -192,7 +193,7 @@ namespace GW2PAO.API.Services
 
                 foreach (var itemDetail in itemDetails)
                 {
-                    GW2PAO.API.Data.Item item = new Data.Item(itemDetail.Key, itemDetail.Value.Name);
+                    GW2PAO.API.Data.Entities.Item item = new Data.Entities.Item(itemDetail.Key, itemDetail.Value.Name);
                     item.Icon = itemDetail.Value.IconFileUrl;
                     item.Description = itemDetail.Value.Description;
                     item.Rarity = (Data.Enums.ItemRarity)itemDetail.Value.Rarity;

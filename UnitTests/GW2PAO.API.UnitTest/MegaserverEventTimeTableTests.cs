@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using GW2PAO.API.Data;
 using GW2PAO.API.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GW2PAO.API.Data
+namespace GW2PAO.API.Data.Entities
 {
     public class World
     {

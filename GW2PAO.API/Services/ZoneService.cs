@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2DotNET;
 using GW2DotNET.Entities.Maps;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;

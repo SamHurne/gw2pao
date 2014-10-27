@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.PresentationCore;
 using NLog;

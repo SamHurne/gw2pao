@@ -13,6 +13,7 @@ using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.PresentationCore;
 using NLog;
 using GW2PAO.Utility;
+using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.ViewModels.ZoneCompletion
 {

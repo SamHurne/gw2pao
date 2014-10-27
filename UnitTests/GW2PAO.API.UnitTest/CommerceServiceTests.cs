@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using GW2PAO.API.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GW2PAO.API.Data;
 
 namespace GW2PAO.API.UnitTest
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.API.Services.Interfaces
 {
@@ -50,21 +51,21 @@ namespace GW2PAO.API.Services.Interfaces
         /// <param name="rarity">Rarity of the item</param>
         /// <param name="level">Level of the item</param>
         /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
-        GW2PAO.API.Data.Item GetItem(string itemName, Data.Enums.ItemRarity rarity, int level);
+        GW2PAO.API.Data.Entities.Item GetItem(string itemName, Data.Enums.ItemRarity rarity, int level);
 
         /// <summary>
         /// Returns the item information for the items with the given ID
         /// </summary>
         /// <param name="itemID">ID of the item</param>
         /// <returns>Item object containing all item information, or null if the itemName is invalid</returns>
-        GW2PAO.API.Data.Item GetItem(int itemID);
+        GW2PAO.API.Data.Entities.Item GetItem(int itemID);
 
         /// <summary>
         /// Returns the item information for the items with the given IDs
         /// </summary>
         /// <param name="itemIDs">IDs of the items to retrieve</param>
         /// <returns>Collection of Item objects containing all item information</returns>
-        IDictionary<int, GW2PAO.API.Data.Item> GetItems(ICollection<int> itemIDs);
+        IDictionary<int, GW2PAO.API.Data.Entities.Item> GetItems(ICollection<int> itemIDs);
 
         /// <summary>
         /// Returns the ItemPrices of the item with the given item ID

@@ -11,7 +11,7 @@ using GW2PAO.API.Data.Enums;
 using Newtonsoft.Json;
 using NLog;
 
-namespace GW2PAO.API.Services
+namespace GW2PAO.API.Data
 {
     public class ItemsDatabaseBuilder
     {

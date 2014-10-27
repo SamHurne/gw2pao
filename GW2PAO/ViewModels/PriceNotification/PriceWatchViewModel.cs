@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using FeserWard.Controls;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services;
 using GW2PAO.API.Services.Interfaces;
@@ -88,7 +89,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// <summary>
         /// The item selected by the user when configuring this price watch
         /// </summary>
-        public GW2PAO.API.Services.ItemDBEntry SelectedItem
+        public GW2PAO.API.Data.ItemDBEntry SelectedItem
         {
             get { return this.selectedItem; }
             set

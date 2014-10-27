@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
 using NLog;
 
@@ -19,7 +20,7 @@ namespace GW2PAO.API.Services
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// The Dungeons table
+        /// The Dungeons table containing dungeon information
         /// </summary>
         public DungeonsTable DungeonsTable { get; private set; }
 

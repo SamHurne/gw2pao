@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.API.Data
+namespace GW2PAO.API.Data.Entities
 {
     public class Item
     {

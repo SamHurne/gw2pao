@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 
-namespace GW2PAO.API.Services
+namespace GW2PAO.API.Data
 {
     /// <summary>
     /// The WvW Objectives Table containing all information about the various objectives in WvW
