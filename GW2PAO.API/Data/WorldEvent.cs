@@ -11,7 +11,8 @@ namespace GW2PAO.API.Data
     {
         public string Name { get; set; }
         public Guid ID { get; set; }
-        public string Location { get; set; }
+        public int MapID { get; set; }
+        public string MapName { get; set; }
         public List<EventTimespan> ActiveTimes { get; set; }
         public EventTimespan Duration { get; set; }
         public EventTimespan WarmupDuration { get; set; }

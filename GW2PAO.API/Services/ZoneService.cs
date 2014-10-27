@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace GW2PAO.API.Services
                 var continents = this.service.GetContinents();
 
                 // Get the current map info
-                var map = this.service.GetMap(mapId);
+                var map = this.service.GetMap(mapId, CultureInfo.CurrentUICulture);
                 if (map != null)
                 {
                     // Find the map's continent
@@ -52,7 +53,7 @@ namespace GW2PAO.API.Services
                     // Retrieve details of items on every floor of the map
                     foreach (var floorId in map.Floors)
                     {
-                        var floor = this.service.GetMapFloor(map.ContinentId, floorId);
+                        var floor = this.service.GetMapFloor(map.ContinentId, floorId, CultureInfo.CurrentUICulture);
                         if (floor != null && floor.Regions != null)
                         {
                             // Find the region that this map is located in
@@ -163,7 +164,7 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var map = this.service.GetMap(mapId);
+                var map = this.service.GetMap(mapId, CultureInfo.CurrentUICulture);
                 if (map != null)
                     return map.MapName;
                 else

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,8 +62,6 @@ namespace GW2PAO
         /// </summary>
         public void AppStartup(object sender, StartupEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-
             // We save this so that if we perform an upgrade of settings,
             //  we still treat this startup as a first-time run of the application
             bool firstTimeUse = GW2PAO.Properties.Settings.Default.FirstTimeRun;
@@ -96,6 +95,20 @@ namespace GW2PAO
             // Initialize the last chance exception handlers
             logger.Debug("Registering last chance exception handlers");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            // Set up language information
+            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
+            CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("de");
+            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
+            if (string.IsNullOrWhiteSpace(GW2PAO.Properties.Settings.Default.Language))
+            {
+                GW2PAO.Properties.Settings.Default.Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                GW2PAO.Properties.Settings.Default.Save();
+            }
+            else
+            {
+                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(GW2PAO.Properties.Settings.Default.Language);
+            }
 
 #if !NO_BROWSER
             // Initialize the WebCore for the web browser

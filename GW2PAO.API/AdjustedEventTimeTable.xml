@@ -4,7 +4,7 @@
     <WorldEvent>
       <Name>Megadestroyer</Name>
       <ID>c876757a-ef3e-4fbe-a484-07ff790d9b05</ID>
-      <Location>Mount Maelstrom</Location>
+      <MapID>39</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>00:30:00</Time>
@@ -42,7 +42,7 @@
     <WorldEvent>
       <Name>Tequatl</Name>
       <ID>568a30cf-8512-462f-9d67-647d69befaed</ID>
-      <Location>Sparkfly Fen</Location>
+      <MapID>53</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>00:00:00</Time>
@@ -74,7 +74,7 @@
     <WorldEvent>
       <Name>Karka Queen</Name>
       <ID>f479b4cf-2e11-457a-b279-90822511b53b</ID>
-      <Location>Southsun Cove</Location>
+      <MapID>873</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>02:03:00</Time>
@@ -106,7 +106,7 @@
     <WorldEvent>
       <Name>Evolved Jungle Wurm</Name>
       <ID>5a22ead4-8302-4da3-a450-3fc051bd6a3c</ID>
-      <Location>Bloodtide Coast</Location>
+      <MapID>73</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>01:00:00</Time>
@@ -138,7 +138,7 @@
     <WorldEvent>
       <Name>Shatterer</Name>
       <ID>03bf176a-d59f-49ca-a311-39fc6f533f2f</ID>
-      <Location>Blazeridge Steppes</Location>
+      <MapID>20</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>01:08:00</Time>
@@ -173,7 +173,7 @@
     <WorldEvent>
       <Name>Claw of Jormag</Name>
       <ID>0464cb9e-1848-4aaa-ba31-4779a959dd71</ID>
-      <Location>Frostgorge Sound</Location>
+      <MapID>30</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>02:33:00</Time>
@@ -211,7 +211,7 @@
     <WorldEvent>
       <Name>Modniir Ulgoth</Name>
       <ID>e6872a86-e434-4fc1-b803-89921ff0f6d6</ID>
-      <Location>Harathi Hinterlands</Location>
+      <MapID>17</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>01:30:00</Time>
@@ -249,7 +249,7 @@
     <WorldEvent>
       <Name>Inquest Golem Mark II</Name>
       <ID>9aa133dc-f630-4a0e-bb5d-ee34a2b306c2</ID>
-      <Location>Mount Maelstrom</Location>
+      <MapID>17</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>02:04:00</Time>
@@ -287,7 +287,7 @@
     <WorldEvent>
       <Name>Taidha Covington</Name>
       <ID>242bd241-e360-48f1-a8d9-57180e146789</ID>
-      <Location>Bloodtide Coast</Location>
+      <MapID>73</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>00:15:00</Time>
@@ -325,7 +325,7 @@
     <WorldEvent>
       <Name>Jungle Wurm</Name>
       <ID>c5972f64-b894-45b4-bc31-2deea6b7c033</ID>
-      <Location>Caledon Forest</Location>
+      <MapID>34</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>01:15:00</Time>
@@ -375,7 +375,7 @@
     <WorldEvent>
       <Name>Shadow Behemoth</Name>
       <ID>31ceba08-e44d-472f-81b0-7143d73797f5</ID>
-      <Location>Queensdale</Location>
+      <MapID>15</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>01:46:00</Time>
@@ -425,7 +425,7 @@
     <WorldEvent>
       <Name>Fire Elemental</Name>
       <ID>33f76e9e-0bb6-46d0-a3a9-be4cdfc4a3a4</ID>
-      <Location>Metrica Province</Location>
+      <MapID>35</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>00:54:00</Time>
@@ -475,7 +475,7 @@
     <WorldEvent>
       <Name>Frozen Maw</Name>
       <ID>f7d9d427-5e54-4f12-977a-9809b23fba99</ID>
-      <Location>Wayfarer Foothills</Location>
+      <MapID>28</MapID>
       <ActiveTimes>
         <EventTimespan>
           <Time>00:17:00</Time>

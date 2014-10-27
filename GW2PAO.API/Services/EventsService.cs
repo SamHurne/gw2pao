@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using GW2DotNET;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
+using GW2PAO.API.Providers;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using NLog;
@@ -30,10 +32,9 @@ namespace GW2PAO.API.Services
         private ServiceManager service = new ServiceManager();
 
         /// <summary>
-        /// List of DynamicEvent objects containing information for the world events
-        /// This is cached to reduce the amount of API requests sent when LoadTable is called
+        /// String provider for world event names
         /// </summary>
-        private Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent> eventInformationCache = new Dictionary<Guid, GW2DotNET.Entities.DynamicEvents.DynamicEvent>();
+        private IStringProvider<Guid> worldEventStringProvider;
 
         /// <summary>
         /// Helper class for retrieving the current system time
@@ -44,8 +45,12 @@ namespace GW2PAO.API.Services
         /// Default constructor
         /// </summary>
         /// <param name="currentTimeProvider">A time provider for determining the current name. If null, the EventsServer will use the DefaultTimeProvider</param>
-        public EventsService(ITimeProvider currentTimeProvider = null)
+        public EventsService(IStringProvider<Guid> worldEventNamesProvider = null, ITimeProvider currentTimeProvider = null)
         {
+            this.worldEventStringProvider = worldEventNamesProvider;
+            if (this.worldEventStringProvider == null)
+                this.worldEventStringProvider = new WorldEventNamesProvider();
+
             this.timeProvider = currentTimeProvider;
             if (this.timeProvider == null)
                 this.timeProvider = new DefaultTimeProvider();
@@ -70,9 +75,26 @@ namespace GW2PAO.API.Services
             {
                 logger.Error(ex);
                 logger.Info("Error loading Event Time Table, re-creating table");
+                
                 MegaserverEventTimeTable.CreateTable(isAdjustedTable);
                 this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
             }
+        }
+
+        /// <summary>
+        /// Returns the localized name for the given event
+        /// </summary>
+        /// <param name="id">ID of the event to return the name of</param>
+        /// <returns>The localized name</returns>
+        public string GetLocalizedName(Guid id)
+        {
+            string evtName = this.worldEventStringProvider.GetString(id);
+            if (string.IsNullOrEmpty(evtName))
+            {
+                var allNames = this.service.GetDynamicEventNames(CultureInfo.CurrentUICulture);
+                return allNames[id].Name;
+            }
+            return evtName;
         }
 
         /// <summary>

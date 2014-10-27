@@ -286,7 +286,7 @@ namespace GW2PAO.Controllers
             this.BrowserController = new BrowserController();
 
             logger.Debug("Creating events controller");
-            this.EventsController = new EventsController(this.EventsService, this.EventSettings);
+            this.EventsController = new EventsController(this.EventsService, this.ZoneService, this.EventSettings);
             this.EventsController.Start(); // Get it started for event notifications
 
             logger.Debug("Creating zone completion assistant controller");

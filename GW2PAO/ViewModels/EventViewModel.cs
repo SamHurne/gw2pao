@@ -49,7 +49,7 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// Name of the zone in which the event occurs
         /// </summary>
-        public string ZoneName { get { return this.EventModel.Location; } }
+        public string ZoneName { get { return this.EventModel.MapName; } }
 
         /// <summary>
         /// Current state of the event

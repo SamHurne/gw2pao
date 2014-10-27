@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfLocalizedEventNames xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LocalizedEventNames>
+    <ID>c876757a-ef3e-4fbe-a484-07ff790d9b05</ID>
+    <English>Megadestroyer</English>
+    <Spanish>Megadestructor</Spanish>
+    <French>Mégadestructeur</French>
+    <German>Megazerstörer</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>568a30cf-8512-462f-9d67-647d69befaed</ID>
+    <English>Tequatl</English>
+    <Spanish>Tequatl</Spanish>
+    <French>Tequatl</French>
+    <German>Tequatl</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>f479b4cf-2e11-457a-b279-90822511b53b</ID>
+    <English>Karka Queen</English>
+    <Spanish>La Reina Karka</Spanish>
+    <French>La Reine Karka</French>
+    <German>Die Karka-Königin</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>5a22ead4-8302-4da3-a450-3fc051bd6a3c</ID>
+    <English>Evolved Jungle Wurm</English>
+    <Spanish>Tres Cabezas de la Serpiente</Spanish>
+    <French>Trois têtes Guivre</French>
+    <German>Dreiköpfige Wurm</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>03bf176a-d59f-49ca-a311-39fc6f533f2f</ID>
+    <English>Shatterer</English>
+    <Spanish>El Asolador</Spanish>
+    <French>Le Destructeur</French>
+    <German>Zerschmetterer</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>0464cb9e-1848-4aaa-ba31-4779a959dd71</ID>
+    <English>Claw of Jormag</English>
+    <Spanish>La Garra de Jormag</Spanish>
+    <French>La Griffe de Jormag</French>
+    <German>Die Klaue Jormags</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>e6872a86-e434-4fc1-b803-89921ff0f6d6</ID>
+    <English>Modniir Ulgoth</English>
+    <Spanish>Ulgoth el Modniir</Spanish>
+    <French>Ulgoth le Modniir</French>
+    <German>Ulgoth den Modniir</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>9aa133dc-f630-4a0e-bb5d-ee34a2b306c2</ID>
+    <English>Inquest Golem Mark II</English>
+    <Spanish>Gólem Serie II de la Inquisa</Spanish>
+    <French>Golem Marque II de l'Enqueste</French>
+    <German>Inquestur-Golem Typ II</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>242bd241-e360-48f1-a8d9-57180e146789</ID>
+    <English>Taidha Covington</English>
+    <Spanish>Taidha Covington</Spanish>
+    <French>Taidha Covington</French>
+    <German>Taidha Covington</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>c5972f64-b894-45b4-bc31-2deea6b7c033</ID>
+    <English>Jungle Wurm</English>
+    <Spanish>Gran Sierpe de la Selva</Spanish>
+    <French>La Grande Guivre de la Jungle</French>
+    <German>Großen Dschungelwurm</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>31ceba08-e44d-472f-81b0-7143d73797f5</ID>
+    <English>Shadow Behemoth</English>
+    <Spanish>Behemot de las Sombras</Spanish>
+    <French>Béhémoth des Ombres</French>
+    <German>Schatten-Behemoth</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>33f76e9e-0bb6-46d0-a3a9-be4cdfc4a3a4</ID>
+    <English>Fire Elemental</English>
+    <Spanish>Elemental de Fuego</Spanish>
+    <French>L'élémentaire de Feu</French>
+    <German>Feuerelementar</German>
+  </LocalizedEventNames>
+  <LocalizedEventNames>
+    <ID>f7d9d427-5e54-4f12-977a-9809b23fba99</ID>
+    <English>Frozen Maw</English>
+    <Spanish>Jefe Chamán Svanir</Spanish>
+    <French>Chef Chamane de Svanir</French>
+    <German>Schamanenoberhaupt der Svanir</German>
+  </LocalizedEventNames>
+</ArrayOfLocalizedEventNames>

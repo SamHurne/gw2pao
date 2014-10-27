@@ -12,6 +12,7 @@ namespace GW2PAO.API.Services.Interfaces
     {
         MegaserverEventTimeTable EventTimeTable { get; }
         void LoadTable(bool isAdjustedTable);
+        string GetLocalizedName(Guid id);
         Data.Enums.EventState GetState(Guid id);
         Data.Enums.EventState GetState(WorldEvent evt);
         TimeSpan GetTimeUntilActive(WorldEvent evt);

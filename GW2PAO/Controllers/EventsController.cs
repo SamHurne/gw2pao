@@ -38,6 +38,11 @@ namespace GW2PAO.Controllers
         private IEventsService eventsService;
 
         /// <summary>
+        /// Service responsible for Zone information
+        /// </summary>
+        private IZoneService zoneService;
+
+        /// <summary>
         /// The primary event refresh timer object
         /// </summary>
         private Timer eventRefreshTimer;
@@ -93,10 +98,11 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <param name="eventsService">The events service</param>
         /// <param name="userSettings">The user settings</param>
-        public EventsController(IEventsService eventsService, EventSettings userSettings)
+        public EventsController(IEventsService eventsService, IZoneService zoneService, EventSettings userSettings)
         {
             logger.Debug("Initializing Event Tracker Controller");
             this.eventsService = eventsService;
+            this.zoneService = zoneService;
 
             this.userSettings = userSettings;
 
@@ -170,6 +176,12 @@ namespace GW2PAO.Controllers
                     {
                         foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
                         {
+                            logger.Debug("Loading localized name for {0}", worldEvent.ID);
+                            worldEvent.Name = this.eventsService.GetLocalizedName(worldEvent.ID);
+
+                            logger.Debug("Loading localized zone location for {0}", worldEvent.ID);
+                            worldEvent.MapName = this.zoneService.GetZoneName(worldEvent.MapID);
+
                             logger.Debug("Initializing view model for {0}", worldEvent.ID);
                             this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
                         }
