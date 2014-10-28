@@ -10,7 +10,8 @@ namespace GW2PAO.API.Data.Entities
     {
         public string Name { get; set; }
         public Guid ID { get; set; }
-        public string Location { get; set; }
+        public int MapID { get; set; }
+        public string MapName { get; set; }
         public int MinimumLevel { get; set; }
         public string WaypointCode { get; set; }
         public string WikiUrl { get; set; }

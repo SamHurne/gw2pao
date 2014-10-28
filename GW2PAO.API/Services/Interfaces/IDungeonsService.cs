@@ -18,5 +18,12 @@ namespace GW2PAO.API.Services.Interfaces
         /// Loads the dungeons table and initializes all cached information
         /// </summary>
         void LoadTable();
+
+        /// <summary>
+        /// Returns the localized name for the given dungeon or dungeon path
+        /// </summary>
+        /// <param name="id">ID of the dungeon or dungeon path to return the name of</param>
+        /// <returns>The localized name</returns>
+        string GetLocalizedName(Guid id);
     }
 }

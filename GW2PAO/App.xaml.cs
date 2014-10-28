@@ -98,7 +98,7 @@ namespace GW2PAO
 
             // Set up language information
             ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
-            CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("de");
+            //CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("de");
             ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
             if (string.IsNullOrWhiteSpace(GW2PAO.Properties.Settings.Default.Language))
             {

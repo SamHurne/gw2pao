@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using GW2PAO.API.Constants;
 using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.API.Data
@@ -64,8 +65,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
                 {
                     Name = "Ascalonian Catacombs",
-                    ID = Guid.NewGuid(),
-                    Location = "Plains of Ashford",
+                    ID = DungeonID.AscalonianCatacombs,
+                    MapID = 19,
                     MinimumLevel = 30,
                     WaypointCode = "[TBD]",
                     WikiUrl = "http://wiki.guildwars2.com/wiki/Ascalonian_Catacombs",
@@ -74,33 +75,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = AscalonianCatacombsPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = AscalonianCatacombsPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Hodgins",
                                 GoldReward = 1.55
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = AscalonianCatacombsPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Detha",
                                 GoldReward = 1.55
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = AscalonianCatacombsPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Tzark",
                                 GoldReward = 1.55
                             }
                         }
@@ -108,8 +105,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Caudecus's Manor",
-                ID = Guid.NewGuid(),
-                Location = "Queensdale",
+                ID = DungeonID.CaudecusManor,
+                MapID = 15,
                 MinimumLevel = 40,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Caudecus%27s_Manor",
@@ -118,33 +115,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = CaudecusManorPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = CaudecusManorPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Asura",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = CaudecusManorPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Seraph",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = CaudecusManorPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Butler",
                                 GoldReward = 1.05
                             }
                         }
@@ -152,8 +145,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Twilight Arbor",
-                ID = Guid.NewGuid(),
-                Location = "Caledon Forest",
+                ID = DungeonID.TwilightArbor,
+                MapID = 34,
                 MinimumLevel = 50,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Twilight_Arbor",
@@ -162,33 +155,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = TwilightArborPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = TwilightArborPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Leurent (Up)",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = TwilightArborPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Aetherpath",
                                 GoldReward = 2.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = TwilightArborPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Vevina (Forward)",
                                 GoldReward = 1.05
                             }
                         }
@@ -196,8 +185,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Sorrow's Embrace",
-                ID = Guid.NewGuid(),
-                Location = "Dredgehaunt Cliffs",
+                ID = DungeonID.SorrowsEmbrace,
+                MapID = 26,
                 MinimumLevel = 60,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Sorrow%27s_Embrace",
@@ -206,33 +195,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = SorrowsEmbracePathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = SorrowsEmbracePathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Fergg",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = SorrowsEmbracePathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Rasolov",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = SorrowsEmbracePathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Koptev",
                                 GoldReward = 1.05
                             }
                         }
@@ -240,8 +225,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Citadel of Flame",
-                ID = Guid.NewGuid(),
-                Location = "Fireheart Rise",
+                ID = DungeonID.CitadelOfFlame,
+                MapID = 22,
                 MinimumLevel = 70,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Citadel_of_Flame",
@@ -250,33 +235,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = CitadelOfFlamePathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = CitadelOfFlamePathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Ferrah",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = CitadelOfFlamePathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Magg",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = CitadelOfFlamePathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Rhiannon",
                                 GoldReward = 1.05
                             }
                         }
@@ -284,8 +265,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Honor of the Waves",
-                ID = Guid.NewGuid(),
-                Location = "Frostgorge Sound",
+                ID = DungeonID.HonorOfTheWaves,
+                MapID = 30,
                 MinimumLevel = 76,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Honor_of_the_Waves",
@@ -294,33 +275,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = HonorOfTheWavesPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = HonorOfTheWavesPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Butcher",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = HonorOfTheWavesPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Plunderer",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = HonorOfTheWavesPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Zealot",
                                 GoldReward = 1.05
                             }
                         }
@@ -328,8 +305,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Crucible of Eternity",
-                ID = Guid.NewGuid(),
-                Location = "Mount Maelstrom",
+                ID = DungeonID.CrucibleOfEternity,
+                MapID = 39,
                 MinimumLevel = 78,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Crucible_of_Eternity",
@@ -338,33 +315,29 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = CrucibleOfEternityPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = CrucibleOfEternityPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Submarine",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = CrucibleOfEternityPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Teleporter",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = CrucibleOfEternityPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Front door",
                                 GoldReward = 1.05
                             }
                         }
@@ -372,8 +345,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Ruined City of Arah",
-                ID = Guid.NewGuid(),
-                Location = "Cursed Shore",
+                ID = DungeonID.RuinedCityOfArah,
+                MapID = 62,
                 MinimumLevel = 80,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/The_Ruined_City_of_Arah",
@@ -382,41 +355,36 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = RuinedCityOfArahPathID.Story,
                                 PathDisplayText = "S",
-                                Nickname = "Story",
                                 GoldReward = 0.5
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = RuinedCityOfArahPathID.P1,
                                 PathDisplayText = "P1",
-                                Nickname = "Jotun",
                                 GoldReward = 3.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = RuinedCityOfArahPathID.P2,
                                 PathDisplayText = "P2",
-                                Nickname = "Mursaat",
                                 GoldReward = 3.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = RuinedCityOfArahPathID.P3,
                                 PathDisplayText = "P3",
-                                Nickname = "Forgotten",
                                 GoldReward = 1.05
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 4,
-                                ID = Guid.NewGuid(),
+                                ID = RuinedCityOfArahPathID.P4,
                                 PathDisplayText = "P4",
-                                Nickname = "Seer",
                                 GoldReward = 3.05
                             }
                         }
@@ -424,8 +392,8 @@ namespace GW2PAO.API.Data
             dTable.Dungeons.Add(new Dungeon()
             {
                 Name = "Fractals of the Mists",
-                ID = Guid.NewGuid(),
-                Location = "Lion's Arch",
+                ID = DungeonID.FractalsOfTheMists,
+                MapID = 50,
                 MinimumLevel = 1,
                 WaypointCode = "[TBD]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Fractals_of_the_Mists",
@@ -434,41 +402,36 @@ namespace GW2PAO.API.Data
                             new DungeonPath()
                             {
                                 PathNumber = 0,
-                                ID = Guid.NewGuid(),
+                                ID = FractalsOfTheMistsPathID.Tier0,
                                 PathDisplayText = "10",
-                                Nickname = "Tier 0 (1-10)",
                                 GoldReward = 0
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 1,
-                                ID = Guid.NewGuid(),
+                                ID = FractalsOfTheMistsPathID.Tier1,
                                 PathDisplayText = "20",
-                                Nickname = "Tier 1 (11-20)",
                                 GoldReward = 0
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 2,
-                                ID = Guid.NewGuid(),
+                                ID = FractalsOfTheMistsPathID.Tier2,
                                 PathDisplayText = "30",
-                                Nickname = "Tier 2 (21-30)",
                                 GoldReward = 0
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 3,
-                                ID = Guid.NewGuid(),
+                                ID = FractalsOfTheMistsPathID.Tier3,
                                 PathDisplayText = "40",
-                                Nickname = "Tier 3 (31-40)",
                                 GoldReward = 0
                             },
                             new DungeonPath()
                             {
                                 PathNumber = 4,
-                                ID = Guid.NewGuid(),
+                                ID = FractalsOfTheMistsPathID.Tier4,
                                 PathDisplayText = "50",
-                                Nickname = "Tier 4 (41-50)",
                                 GoldReward = 0
                             },
                         }

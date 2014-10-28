@@ -293,7 +293,7 @@ namespace GW2PAO.Controllers
             this.ZoneCompletionController = new ZoneCompletionController(this.ZoneService, this.PlayerService, this.SystemService, this.ZoneName, this.ZoneCompletionSettings);
 
             logger.Debug("Creating dungeons controller");
-            this.DungeonsController = new DungeonsController(this.DungeonsService, this.BrowserController, this.DungeonSettings);
+            this.DungeonsController = new DungeonsController(this.DungeonsService, this.ZoneService, this.BrowserController, this.DungeonSettings);
 
             logger.Debug("Creating wvw controller");
             this.WvWController = new WvWController(this.WvWService, this.PlayerService, this.GuildService, this.WvWMap, this.WvWSettings);

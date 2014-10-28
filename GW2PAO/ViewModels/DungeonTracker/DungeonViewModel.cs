@@ -49,7 +49,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// <summary>
         /// Name of the zone in which the dungeon is located
         /// </summary>
-        public string ZoneName { get { return "Located in " + this.DungeonModel.Location; } }
+        public string ZoneName { get { return "Located in " + this.DungeonModel.MapName; } }
 
         /// <summary>
         /// Minimum level requirement for the dungeon

@@ -27,6 +27,11 @@ namespace GW2PAO.Controllers
         private IDungeonsService dungeonsService;
 
         /// <summary>
+        /// The zone service object
+        /// </summary>
+        private IZoneService zoneService;
+
+        /// <summary>
         /// Browser controller. Currently just passed through to DungeonViewModels
         /// </summary>
         private IBrowserController browserController;
@@ -77,10 +82,11 @@ namespace GW2PAO.Controllers
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
         /// <param name="userSettings">The dungeons user settings object</param>
-        public DungeonsController(IDungeonsService dungeonsService, IBrowserController browserController, DungeonSettings userSettings)
+        public DungeonsController(IDungeonsService dungeonsService, IZoneService zoneService, IBrowserController browserController, DungeonSettings userSettings)
         {
             logger.Debug("Initializing Dungeons Controller");
             this.dungeonsService = dungeonsService;
+            this.zoneService = zoneService;
             this.browserController = browserController;
             this.userSettings = userSettings;
 
@@ -149,6 +155,12 @@ namespace GW2PAO.Controllers
                 {
                     foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
                     {
+                        logger.Debug("Initializing localized strings for {0}", dungeon.ID);
+                        dungeon.Name = this.dungeonsService.GetLocalizedName(dungeon.ID);
+                        dungeon.MapName = this.zoneService.GetZoneName(dungeon.MapID);
+                        foreach (var path in dungeon.Paths)
+                            path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
+
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
                         this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userSettings));
                     }
