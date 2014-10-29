@@ -85,6 +85,7 @@
     <Compile Include="Data\Enums\Units.cs" />
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
+    <Compile Include="Data\Enums\WvWObjectiveID.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
     <Compile Include="Data\Entities\Guild.cs" />
     <Compile Include="Data\Entities\Item.cs" />

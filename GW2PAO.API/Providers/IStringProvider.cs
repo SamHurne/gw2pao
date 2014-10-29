@@ -12,4 +12,10 @@ namespace GW2PAO.API.Providers
         void SetCulture(CultureInfo culture);
         string GetString(T id);
     }
+
+    public interface IStringProvider<T1, T2>
+    {
+        void SetCulture(CultureInfo culture);
+        string GetString(T1 id, T2 selector);
+    }
 }

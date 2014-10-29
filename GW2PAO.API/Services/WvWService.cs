@@ -11,6 +11,7 @@ using GW2DotNET;
 using GW2DotNET.V1.WorldVersusWorld;
 using GW2DotNET.Entities.WorldVersusWorld;
 using GW2PAO.API.Data.Entities;
+using GW2PAO.API.Providers;
 
 namespace GW2PAO.API.Services
 {
@@ -25,6 +26,11 @@ namespace GW2PAO.API.Services
         /// The GW2.NET API service objective
         /// </summary>
         private ServiceManager service = new ServiceManager();
+
+        /// <summary>
+        /// String provider that provides objective names
+        /// </summary>
+        private IStringProvider<int, bool> objectiveNamesProvider;
 
         /// <summary>
         /// Internal cache of the current WvW matchup
@@ -45,6 +51,18 @@ namespace GW2PAO.API.Services
         /// The WvW objectives table
         /// </summary>
         public WvWObjectivesTable ObjectivesTable { get; private set; }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="objectiveNamesProvider">The StringProvider that supplies localized objective names. If null, a default implementation is used</param>
+        public WvWService(IStringProvider<int, bool> objectiveNamesProvider = null)
+        {
+            if (objectiveNamesProvider == null)
+                this.objectiveNamesProvider = new WvWObjectiveNamesProvider();
+            else
+                this.objectiveNamesProvider = objectiveNamesProvider;
+        }
 
         /// <summary>
         /// Loads the dungeons table and initializes all cached information
@@ -268,11 +286,28 @@ namespace GW2PAO.API.Services
                             if (objDetails != null)
                             {
                                 objData.Type = objDetails.Type;
-                                objData.Name = objDetails.Name;
-                                objData.FullName = objDetails.FullName;
+                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, true);
+                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, false);
                                 objData.Location = objDetails.Location;
                                 objData.MapLocation = objDetails.MapLocation;
-                                objData.Points = objDetails.Points;
+                            }
+
+                            switch (objData.Type)
+                            {
+                                case ObjectiveType.Castle:
+                                    objData.Points = 35;
+                                    break;
+                                case ObjectiveType.Keep:
+                                    objData.Points = 25;
+                                    break;
+                                case ObjectiveType.Tower:
+                                    objData.Points = 10;
+                                    break;
+                                case ObjectiveType.Camp:
+                                    objData.Points = 5;
+                                    break;
+                                default:
+                                    break;
                             }
 
                             switch (objective.Owner)
@@ -331,12 +366,29 @@ namespace GW2PAO.API.Services
                             if (objDetails != null)
                             {
                                 objData.Type = objDetails.Type;
-                                objData.Name = objDetails.Name;
-                                objData.FullName = objDetails.FullName;
+                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, true);
+                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, false);
                                 objData.Location = objDetails.Location;
                                 objData.MapLocation = objDetails.MapLocation;
                                 objData.ChatCode = objDetails.ChatCode;
-                                objData.Points = objDetails.Points;
+                            }
+
+                            switch (objData.Type)
+                            {
+                                case ObjectiveType.Castle:
+                                    objData.Points = 35;
+                                    break;
+                                case ObjectiveType.Keep:
+                                    objData.Points = 25;
+                                    break;
+                                case ObjectiveType.Tower:
+                                    objData.Points = 10;
+                                    break;
+                                case ObjectiveType.Camp:
+                                    objData.Points = 5;
+                                    break;
+                                default:
+                                    break;
                             }
 
                             if (mapDetails is BlueBorderlands)
