@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2DotNET;
 using GW2DotNET.V2.Items;
+using GW2PAO.API.Constants;
 using GW2PAO.API.Data.Enums;
 using Newtonsoft.Json;
 using NLog;
@@ -21,12 +23,13 @@ namespace GW2PAO.API.Data
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Filename for the names database file
+        /// The service responsible for providing item information data
         /// </summary>
-        public const string NAMES_DATABASE_FILENAME = "ItemDatabase.json";
-
         private ItemService itemService;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public ItemsDatabaseBuilder()
         {
             this.itemService = (ItemService)ServiceFactory.Default().GetItemService();
@@ -36,10 +39,17 @@ namespace GW2PAO.API.Data
         /// Loads the item names database from file
         /// </summary>
         /// <returns></returns>
-        public IDictionary<int, ItemDBEntry> LoadFromFile()
+        public IDictionary<int, ItemDBEntry> LoadFromFile(CultureInfo culture)
         {
-            // Load the names database
-            var db = File.ReadAllText(NAMES_DATABASE_FILENAME);
+            var lang = culture.TwoLetterISOLanguageName;
+
+            var supported = new[] { "en", "es", "fr", "de" };
+            if (!supported.Contains(lang))
+                lang = "en"; // Default to english if not supported
+
+            var filename = this.GetFilePath(lang);
+
+            var db = File.ReadAllText(filename);
             Dictionary<int, ItemDBEntry> itemDb = JsonConvert.DeserializeObject<Dictionary<int, ItemDBEntry>>(db);
             return itemDb;
         }
@@ -53,8 +63,9 @@ namespace GW2PAO.API.Data
         /// <param name="incrementProgressAction">Action to perform when the progress continues</param>
         /// <param name="cancelToken">Cancellation token in case the user wishes to cancel the task</param>
         /// <returns>Returns the total amount of requests that will be performed</returns>
-        public int RebuildItemDatabase(Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
+        public int RebuildItemDatabase(CultureInfo culture, Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
         {
+            this.itemService.Culture = culture;
             var itemIds = this.itemService.Discover();
 
             // We'll split this up into multiple requests
@@ -82,12 +93,27 @@ namespace GW2PAO.API.Data
                 }
 
                 var dbString = JsonConvert.SerializeObject(itemsDb);
-                File.WriteAllText(NAMES_DATABASE_FILENAME, dbString);
+                File.WriteAllText(this.GetFilePath(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName), dbString);
 
                 rebuildCompleteAction.Invoke();
             }, cancelToken);
 
             return totalRequests;
+        }
+
+        /// <summary>
+        /// Retrieves the full path of the stored names file using the given culture
+        /// </summary>
+        public string GetFilePath(string twoLetterIsoLangId)
+        {
+            string filename = Paths.LocalizationFolder + "ItemDatabase";
+
+            if (twoLetterIsoLangId != "en")
+                filename += "." + twoLetterIsoLangId;
+
+            filename += ".json";
+
+            return filename;
         }
     }
 

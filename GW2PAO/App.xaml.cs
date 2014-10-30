@@ -97,9 +97,6 @@ namespace GW2PAO
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             // Set up language information
-            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
-            //CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("de");
-            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
             if (string.IsNullOrWhiteSpace(GW2PAO.Properties.Settings.Default.Language))
             {
                 GW2PAO.Properties.Settings.Default.Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
@@ -109,6 +106,9 @@ namespace GW2PAO
             {
                 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(GW2PAO.Properties.Settings.Default.Language);
             }
+            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
+            //CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en");
+            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
 
 #if !NO_BROWSER
             // Initialize the WebCore for the web browser

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using GW2PAO.API.Data;
@@ -18,7 +19,7 @@ namespace GW2PAO.API.UnitTest
 
             var sw = new Stopwatch();
             sw.Start();
-            var itemDb = dbBuilder.LoadFromFile();
+            var itemDb = dbBuilder.LoadFromFile(new CultureInfo("en"));
             sw.Stop();
             Console.WriteLine("{0}ms to load {1} entries", sw.ElapsedMilliseconds, itemDb.Count);
 
@@ -30,17 +31,18 @@ namespace GW2PAO.API.UnitTest
         [ExpectedException(typeof(FileNotFoundException))]
         public void RebuildItemDatabase_LoadFromFile_NoDatabaseFile()
         {
+            ItemsDatabaseBuilder dbBuilder = new ItemsDatabaseBuilder();
+
             string renamedFilename = "renamedDB.json";
-            File.Move(ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME, renamedFilename);
+            File.Move(dbBuilder.GetFilePath("en"), renamedFilename);
 
             try
             {
-                ItemsDatabaseBuilder dbBuilder = new ItemsDatabaseBuilder();
-                var itemDb = dbBuilder.LoadFromFile();
+                var itemDb = dbBuilder.LoadFromFile(new CultureInfo("en"));
             }
             finally
             {
-                File.Move(renamedFilename, ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME);
+                File.Move(renamedFilename, dbBuilder.GetFilePath("en"));
             }
         }
 
@@ -48,19 +50,21 @@ namespace GW2PAO.API.UnitTest
         [ExpectedException(typeof(Newtonsoft.Json.JsonReaderException))]
         public void RebuildItemDatabase_LoadFromFile_InvalidDatabaseFile()
         {
+            ItemsDatabaseBuilder dbBuilder = new ItemsDatabaseBuilder();
+
             string renamedFilename = "renamedDB.json";
-            File.Move(ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME, renamedFilename);
-            File.WriteAllText(ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME, "invalid file");
+            File.Move(dbBuilder.GetFilePath("en"), renamedFilename);
+            File.WriteAllText(dbBuilder.GetFilePath("en"), "invalid file");
 
             try
             {
-                ItemsDatabaseBuilder dbBuilder = new ItemsDatabaseBuilder();
-                var itemDb = dbBuilder.LoadFromFile();
+                
+                var itemDb = dbBuilder.LoadFromFile(new CultureInfo("en"));
             }
             finally
             {
-                File.Delete(ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME);
-                File.Move(renamedFilename, ItemsDatabaseBuilder.NAMES_DATABASE_FILENAME);
+                File.Delete(dbBuilder.GetFilePath("en"));
+                File.Move(renamedFilename, dbBuilder.GetFilePath("en"));
             }
         }
 
@@ -80,6 +84,7 @@ namespace GW2PAO.API.UnitTest
             var sw = new Stopwatch();
             sw.Start();
             totalRequests = dbBuilder.RebuildItemDatabase(
+                CultureInfo.CurrentUICulture,
                 () =>
                 {
                     progress++;
@@ -118,6 +123,7 @@ namespace GW2PAO.API.UnitTest
             int totalRequests = 0;
 
             totalRequests = dbBuilder.RebuildItemDatabase(
+                CultureInfo.CurrentUICulture,
                 () =>
                 {
                     progress++;

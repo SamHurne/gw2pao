@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -75,7 +76,8 @@ namespace GW2PAO.ViewModels.PriceNotification
             this.Progress = 0;
 
             logger.Debug("Starting rebuild of item database");
-            this.TotalRequests = this.commerceService.ItemsDatabaseBuilder.RebuildItemDatabase(this.HandleIncrementProgress, this.HandleComplete, this.cancelToken.Token);
+            this.TotalRequests = this.commerceService.ItemsDatabaseBuilder.RebuildItemDatabase(
+                CultureInfo.CurrentUICulture, this.HandleIncrementProgress, this.HandleComplete, this.cancelToken.Token);
         }
 
         /// <summary>

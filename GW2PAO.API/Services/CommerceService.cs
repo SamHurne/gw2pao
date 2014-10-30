@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,7 +59,7 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var newItemsDb = this.ItemsDatabaseBuilder.LoadFromFile();
+                var newItemsDb = this.ItemsDatabaseBuilder.LoadFromFile(CultureInfo.CurrentUICulture);
                 this.ItemsDB.Clear();
                 foreach (var item in newItemsDb)
                     this.ItemsDB.TryAdd(item.Key, item.Value);
@@ -147,6 +148,7 @@ namespace GW2PAO.API.Services
 
             try
             {
+                this.itemService.Culture = CultureInfo.CurrentUICulture; // Make sure we keep the current UI culture updated
                 var itemDetails = this.itemService.Find(itemID);
                 if (itemDetails != null)
                 {
@@ -188,6 +190,7 @@ namespace GW2PAO.API.Services
                 // Remove all items with itemID of 0 or less
                 var validIDs = itemIDs.Where(id => id > 0).ToList();
 
+                this.itemService.Culture = CultureInfo.CurrentUICulture; // Make sure we keep the current UI culture updated
                 var itemDetails = this.itemService.FindAll(validIDs);
                 var prices = this.GetItemPrices(validIDs);
 
