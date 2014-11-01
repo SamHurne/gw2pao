@@ -15,7 +15,7 @@ using GW2PAO.Controllers.Interfaces;
 using GW2PAO.ViewModels.PriceNotification;
 using NLog;
 
-namespace GW2PAO.Views.PriceNotification
+namespace GW2PAO.Views.Commerce.PriceNotification
 {
     /// <summary>
     /// Interaction logic for EventNotificationWindow.xaml

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using GW2PAO.PresentationCore;
 
-namespace GW2PAO.ViewModels
+namespace GW2PAO.Data
 {
     /// <summary>
     /// Helper class containing the gold, silver, and copper components of a price in GW2

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
+using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
 
@@ -24,9 +25,9 @@ namespace GW2PAO.Controllers.Interfaces
         CommerceUserData UserData { get; }
 
         /// <summary>
-        /// Collection of price watches for the price watch notifications
+        /// Collection of item prices for the price watch tracker and notifications
         /// </summary>
-        ObservableCollection<PriceWatchViewModel> PriceWatches { get; }
+        ObservableCollection<ItemPriceViewModel> ItemPrices { get; }
 
         /// <summary>
         /// Collection of price notifications currently shown to the user

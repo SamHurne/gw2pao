@@ -11,9 +11,9 @@ using GW2PAO.Data;
 using GW2PAO.PresentationCore;
 using NLog;
 
-namespace GW2PAO.ViewModels.PriceNotification
+namespace GW2PAO.ViewModels
 {
-    public class PriceNotificationConfigViewModel : NotifyPropertyChangedBase
+    public class PriceWatchConfigViewModel : NotifyPropertyChangedBase
     {
         /// <summary>
         /// Default logger
@@ -47,9 +47,9 @@ namespace GW2PAO.ViewModels.PriceNotification
         }
 
         /// <summary>
-        /// Collection of active event notifications
+        /// Collection of monitored item prices
         /// </summary>
-        public ObservableCollection<PriceWatchViewModel> PriceWatches { get { return this.controller.PriceWatches; } }
+        public ObservableCollection<ItemPriceViewModel> ItemPrices { get { return this.controller.ItemPrices; } }
 
         /// <summary>
         /// Command to add a new pricewatch
@@ -60,7 +60,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// Default constructor
         /// </summary>
         /// <param name="controller">The commerce controller</param>
-        public PriceNotificationConfigViewModel(ICommerceService commerceService, ICommerceController controller)
+        public PriceWatchConfigViewModel(ICommerceService commerceService, ICommerceController controller)
         {
             this.commerceService = commerceService;
             this.controller = controller;
@@ -72,9 +72,9 @@ namespace GW2PAO.ViewModels.PriceNotification
         private void AddPriceWatch()
         {
             var priceWatch = new PriceWatch();
-            var priceWatchVm = new PriceWatchViewModel(priceWatch, null, this.controller, this.commerceService);
+            var priceWatchVm = new ItemPriceViewModel(priceWatch, null, this.controller, this.commerceService);
             this.controller.UserData.PriceWatches.Add(priceWatch);
-            this.PriceWatches.Add(priceWatchVm);
+            this.ItemPrices.Add(priceWatchVm);
         }
     }
 }

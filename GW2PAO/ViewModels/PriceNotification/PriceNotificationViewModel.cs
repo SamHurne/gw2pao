@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Data;
 using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
 
@@ -10,7 +11,7 @@ namespace GW2PAO.ViewModels.PriceNotification
 {
     public class PriceNotificationViewModel : NotifyPropertyChangedBase
     {
-        private PriceWatchViewModel itemPriceWatch;
+        private ItemPriceViewModel itemPriceWatch;
         private PriceNotificationType notificationType;
         private Price price;
         private bool isRemovingNotification;
@@ -51,7 +52,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// <summary>
         /// The original item price watch object
         /// </summary>
-        public PriceWatchViewModel PriceWatch
+        public ItemPriceViewModel PriceWatch
         {
             get { return this.itemPriceWatch; }
         }
@@ -76,7 +77,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// <param name="itemPriceWatch">The item's price watch information</param>
         /// <param name="notificationType">The notification type</param>
         /// <param name="price">The current price of the item, in copper</param>
-        public PriceNotificationViewModel(PriceWatchViewModel itemPriceWatch, PriceNotificationType notificationType, int price, ICollection<PriceNotificationViewModel> displayedNotificationsCollection)
+        public PriceNotificationViewModel(ItemPriceViewModel itemPriceWatch, PriceNotificationType notificationType, int price, ICollection<PriceNotificationViewModel> displayedNotificationsCollection)
         {
             this.itemPriceWatch = itemPriceWatch;
             this.notificationType = notificationType;

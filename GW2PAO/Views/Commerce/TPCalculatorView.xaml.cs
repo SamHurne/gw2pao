@@ -16,7 +16,7 @@ using GW2PAO.ViewModels.DungeonTracker;
 using GW2PAO.ViewModels.TradingPost;
 using NLog;
 
-namespace GW2PAO.Views.TradingPost
+namespace GW2PAO.Views.Commerce
 {
     /// <summary>
     /// Interaction logic for DungeonTrackerView.xaml

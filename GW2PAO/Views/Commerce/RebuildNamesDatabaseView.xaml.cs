@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.ViewModels.PriceNotification;
 
-namespace GW2PAO.Views.PriceNotification
+namespace GW2PAO.Views.Commerce
 {
     /// <summary>
     /// Interaction logic for NewVersionNotificationView.xaml

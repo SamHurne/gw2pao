@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using FeserWard.Controls;
 using GW2PAO.API.Services.Interfaces;
 
-namespace GW2PAO.ViewModels.PriceNotification
+namespace GW2PAO.Data
 {
     public class ItemResultsProvider : IIntelliboxResultsProvider
     {

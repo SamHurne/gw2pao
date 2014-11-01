@@ -1,4 +1,4 @@
-﻿<src:OverlayWindow x:Class="GW2PAO.Views.PriceNotification.PriceNotificationWindow"
+﻿<src:OverlayWindow x:Class="GW2PAO.Views.Commerce.PriceNotification.PriceNotificationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,7 +7,7 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        xmlns:View="clr-namespace:GW2PAO.Views.PriceNotification"
+        xmlns:View="clr-namespace:GW2PAO.Views.Commerce.PriceNotification"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         Topmost="True" ShowInTaskbar="False"
@@ -20,7 +20,7 @@
     <src:OverlayWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Style/BaseControlStyles/ToolTipStyle.xaml" />
+                <ResourceDictionary Source="../../../Style/BaseControlStyles/ToolTipStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <core:AutoRefreshCollectionViewSource Source="{Binding PriceNotifications}" x:Key="PriceNotificationsCollection" />
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />

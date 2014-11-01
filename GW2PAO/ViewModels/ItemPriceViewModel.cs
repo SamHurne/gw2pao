@@ -15,11 +15,12 @@ using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Data;
 using GW2PAO.PresentationCore;
+using GW2PAO.ViewModels.PriceNotification;
 using NLog;
 
-namespace GW2PAO.ViewModels.PriceNotification
+namespace GW2PAO.ViewModels
 {
-    public class PriceWatchViewModel : NotifyPropertyChangedBase
+    public class ItemPriceViewModel : NotifyPropertyChangedBase
     {
         /// <summary>
         /// Default logger
@@ -160,7 +161,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// </summary>
         /// <param name="modelData">The price watch model data</param>
         /// <param name="controller">Commerce controller</param>
-        public PriceWatchViewModel(PriceWatch priceData, Item itemData, ICommerceController controller, ICommerceService service)
+        public ItemPriceViewModel(PriceWatch priceData, Item itemData, ICommerceController controller, ICommerceService service)
         {
             this.Data = priceData;
             this.ItemData = itemData;
@@ -228,7 +229,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         private void Remove()
         {
             this.controller.UserData.PriceWatches.Remove(this.Data);
-            this.controller.PriceWatches.Remove(this);
+            this.controller.ItemPrices.Remove(this);
         }
 
         /// <summary>

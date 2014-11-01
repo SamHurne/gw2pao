@@ -10,6 +10,7 @@ using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
+using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
 using NLog;
@@ -35,7 +36,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Collection used for keeping track of when to reset the shown-state of notifications
         /// </summary>
-        private Dictionary<PriceWatchViewModel, DateTime> NotificationsResetDateTimes = new Dictionary<PriceWatchViewModel, DateTime>();
+        private Dictionary<ItemPriceViewModel, DateTime> NotificationsResetDateTimes = new Dictionary<ItemPriceViewModel, DateTime>();
 
         /// <summary>
         /// Keeps track of how many times Start() has been called in order
@@ -64,9 +65,9 @@ namespace GW2PAO.Controllers
         public CommerceUserData UserData { get; private set; }
 
         /// <summary>
-        /// Collection of price watches for the price watch notifications
+        /// Collection of items for the price watch tracker and notifications
         /// </summary>
-        public ObservableCollection<PriceWatchViewModel> PriceWatches { get; private set; }
+        public ObservableCollection<ItemPriceViewModel> ItemPrices { get; private set; }
 
         /// <summary>
         /// Collection of price notifications currently shown to the user
@@ -83,10 +84,10 @@ namespace GW2PAO.Controllers
             logger.Debug("Initializing Commerce Controller");
             this.commerceService = commerceService;
             this.UserData = userData;
-            this.PriceWatches = new ObservableCollection<PriceWatchViewModel>();
+            this.ItemPrices = new ObservableCollection<ItemPriceViewModel>();
             this.PriceNotifications = new ObservableCollection<PriceNotificationViewModel>();
 
-            this.InitializePriceWatches();
+            this.InitializeItemPrices();
 
             // Initialize the refresh timer
             this.refreshTimer = new Timer(this.Refresh);
@@ -141,7 +142,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Initializes the collection of price watches
         /// </summary>
-        private void InitializePriceWatches()
+        private void InitializeItemPrices()
         {
             // If for some reason there are items with an ID of 0, just remove them now
             var itemsToRemove = new List<PriceWatch>(this.UserData.PriceWatches.Where(pw => pw.ItemID == 0));
@@ -157,9 +158,9 @@ namespace GW2PAO.Controllers
                 foreach (var priceWatch in this.UserData.PriceWatches)
                 {
                     if (priceWatch.ItemID > 0)
-                        this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
+                        this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
                     else
-                        this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, null, this, this.commerceService));
+                        this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, null, this, this.commerceService));
                 }
             }
         }
@@ -173,18 +174,18 @@ namespace GW2PAO.Controllers
             lock (this.refreshTimerLock)
             {
                 // Using the UI thread, grab a snapshot of the current price watches
-                List<PriceWatchViewModel> priceWatches = null;
-                Threading.InvokeOnUI(() => priceWatches = new List<PriceWatchViewModel>(this.PriceWatches));
+                List<ItemPriceViewModel> itemPrices = null;
+                Threading.InvokeOnUI(() => itemPrices = new List<ItemPriceViewModel>(this.ItemPrices));
 
-                if (priceWatches != null)
+                if (itemPrices != null)
                 {
                     // Ignore anything with an itemId of 0 or less
-                    priceWatches.RemoveAll(pw => pw.Data.ItemID <= 0);
+                    itemPrices.RemoveAll(pw => pw.Data.ItemID <= 0);
 
                     // Retrieve price information for all price-watched items
-                    var allPrices = this.commerceService.GetItemPrices(priceWatches.Select(pw => pw.Data.ItemID).ToArray());
+                    var allPrices = this.commerceService.GetItemPrices(itemPrices.Select(pw => pw.Data.ItemID).ToArray());
 
-                    foreach (var priceWatch in priceWatches)
+                    foreach (var priceWatch in itemPrices)
                     {
                         // Determine if we need to reset the notifications shown-state
                         if (this.NotificationsResetDateTimes.ContainsKey(priceWatch))
@@ -304,7 +305,7 @@ namespace GW2PAO.Controllers
         /// <param name="objectiveData">The price watch's data</param>
         /// <param name="notificationType">The type of notification</param>
         /// <returns>True if the notification can be shown, else false</returns>
-        private bool CanShowNotification(PriceWatchViewModel priceWatch, PriceNotificationType notificationType)
+        private bool CanShowNotification(ItemPriceViewModel priceWatch, PriceNotificationType notificationType)
         {
             bool canShow = false;
 

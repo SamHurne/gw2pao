@@ -169,17 +169,18 @@
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
-    <Compile Include="ViewModels\PriceNotification\ItemResultsProvider.cs" />
-    <Compile Include="ViewModels\PriceNotification\PriceNotificationConfigViewModel.cs" />
-    <Compile Include="ViewModels\PriceNotification\PriceWatchViewModel.cs" />
+    <Compile Include="Data\ItemResultsProvider.cs" />
+    <Compile Include="ViewModels\PriceWatchConfigViewModel.cs" />
+    <Compile Include="ViewModels\ItemPriceViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\RebuildNamesDatabaseViewModel.cs" />
+    <Compile Include="ViewModels\PriceTracker\PriceListViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\ChannelViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceNotificationsViewModel.cs" />
     <Compile Include="ViewModels\PriceNotification\PriceNotificationViewModel.cs" />
-    <Compile Include="ViewModels\Price.cs" />
-    <Compile Include="ViewModels\PriceNotification\PriceWatch.cs" />
+    <Compile Include="Data\Price.cs" />
+    <Compile Include="Data\PriceWatch.cs" />
     <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
@@ -200,22 +201,22 @@
     <Compile Include="Views\OverlayMenuIconView.xaml.cs">
       <DependentUpon>OverlayMenuIconView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\ReadonlyPriceView.xaml.cs">
+    <Compile Include="Views\Commerce\ReadonlyPriceView.xaml.cs">
       <DependentUpon>ReadonlyPriceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml.cs">
+    <Compile Include="Views\Commerce\RebuildNamesDatabaseView.xaml.cs">
       <DependentUpon>RebuildNamesDatabaseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\PriceView.xaml.cs">
+    <Compile Include="Views\Commerce\PriceView.xaml.cs">
       <DependentUpon>PriceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\PriceWatchView.xaml.cs">
+    <Compile Include="Views\Commerce\PriceWatchView.xaml.cs">
       <DependentUpon>PriceWatchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\PriceNotificationView.xaml.cs">
+    <Compile Include="Views\Commerce\PriceNotification\PriceNotificationView.xaml.cs">
       <DependentUpon>PriceNotificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\PriceNotificationWindow.xaml.cs">
+    <Compile Include="Views\Commerce\PriceNotification\PriceNotificationWindow.xaml.cs">
       <DependentUpon>PriceNotificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Teamspeak\TSNotificationView.xaml.cs">
@@ -224,8 +225,8 @@
     <Compile Include="Views\Teamspeak\TeamspeakView.xaml.cs">
       <DependentUpon>TeamspeakView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PriceNotification\PriceNotificationConfigView.xaml.cs">
-      <DependentUpon>PriceNotificationConfigView.xaml</DependentUpon>
+    <Compile Include="Views\Commerce\PriceWatchConfigView.xaml.cs">
+      <DependentUpon>PriceWatchConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
@@ -249,7 +250,7 @@
       <DependentUpon>WorldEventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OverlayWindow.cs" />
-    <Compile Include="Views\TradingPost\TPCalculatorView.xaml.cs">
+    <Compile Include="Views\Commerce\TPCalculatorView.xaml.cs">
       <DependentUpon>TPCalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WvWNotification\WvWNotificationView.xaml.cs">
@@ -361,27 +362,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PriceNotification\ReadonlyPriceView.xaml">
+    <Page Include="Views\Commerce\ReadonlyPriceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\RebuildNamesDatabaseView.xaml">
+    <Page Include="Views\Commerce\RebuildNamesDatabaseView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\PriceView.xaml">
+    <Page Include="Views\Commerce\PriceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\PriceWatchView.xaml">
+    <Page Include="Views\Commerce\PriceWatchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\PriceNotificationView.xaml">
+    <Page Include="Views\Commerce\PriceNotification\PriceNotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\PriceNotificationWindow.xaml">
+    <Page Include="Views\Commerce\PriceNotification\PriceNotificationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -393,7 +394,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PriceNotification\PriceNotificationConfigView.xaml">
+    <Page Include="Views\Commerce\PriceWatchConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -425,7 +426,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TradingPost\TPCalculatorView.xaml">
+    <Page Include="Views\Commerce\TPCalculatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -554,6 +555,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Style\Brushes\" />
+    <Folder Include="Views\Commerce\PriceTracker\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />

@@ -13,17 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
+using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.DungeonTracker;
 using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
 using NLog;
 
-namespace GW2PAO.Views.PriceNotification
+namespace GW2PAO.Views.Commerce
 {
     /// <summary>
     /// Interaction logic for DungeonTrackerView.xaml
     /// </summary>
-    public partial class PriceNotificationConfigView : OverlayWindow
+    public partial class PriceWatchConfigView : OverlayWindow
     {
         /// <summary>
         /// Default logger
@@ -38,16 +39,16 @@ namespace GW2PAO.Views.PriceNotification
         /// <summary>
         /// View model object
         /// </summary>
-        private PriceNotificationConfigViewModel viewModel;
+        private PriceWatchConfigViewModel viewModel;
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public PriceNotificationConfigView(ICommerceService commerceService, ICommerceController controller)
+        public PriceWatchConfigView(ICommerceService commerceService, ICommerceController controller)
         {
-            logger.Debug("New PriceNotificationConfigView created");
+            logger.Debug("New PriceWatchConfigView created");
             this.controller = controller;
-            this.viewModel = new PriceNotificationConfigViewModel(commerceService, controller);
+            this.viewModel = new PriceWatchConfigViewModel(commerceService, controller);
             this.DataContext = this.viewModel;
             InitializeComponent();
 

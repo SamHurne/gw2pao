@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GW2PAO.Views.PriceNotification.PriceWatchView"
+﻿<UserControl x:Class="GW2PAO.Views.Commerce.PriceWatchView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             xmlns:view="clr-namespace:GW2PAO.Views.PriceNotification"
+             xmlns:view="clr-namespace:GW2PAO.Views.Commerce"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display">

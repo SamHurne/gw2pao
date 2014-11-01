@@ -17,12 +17,12 @@ using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.EventNotification;
 using NLog;
 
-namespace GW2PAO.Views.PriceNotification
+namespace GW2PAO.Views.Commerce.PriceNotification
 {
     /// <summary>
-    /// Interaction logic for PriceWatchView.xaml
+    /// Interaction logic for EventNotificationView.xaml
     /// </summary>
-    public partial class PriceWatchView : UserControl
+    public partial class PriceNotificationView : UserControl
     {
         /// <summary>
         /// Default logger
@@ -32,14 +32,21 @@ namespace GW2PAO.Views.PriceNotification
         /// <summary>
         /// Default constructor
         /// </summary>
-        public PriceWatchView()
+        public PriceNotificationView()
         {
             InitializeComponent();
         }
 
-        private void OnIntelliboxSuggestItem_MouseUp(object sender, MouseButtonEventArgs e)
+        private void CopyIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.ItemsEntryBox.ChooseCurrentItem();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                Image image = sender as Image;
+                ContextMenu contextMenu = image.ContextMenu;
+                contextMenu.PlacementTarget = image;
+                contextMenu.IsOpen = true;
+                e.Handled = true;
+            }
         }
     }
 }

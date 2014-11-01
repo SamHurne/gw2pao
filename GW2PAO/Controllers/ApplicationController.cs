@@ -17,12 +17,12 @@ using GW2PAO.ViewModels.TrayIcon;
 using GW2PAO.ViewModels.WvWTracker;
 using GW2PAO.ViewModels.ZoneCompletion;
 using GW2PAO.Views;
+using GW2PAO.Views.Commerce;
+using GW2PAO.Views.Commerce.PriceNotification;
 using GW2PAO.Views.DungeonTracker;
 using GW2PAO.Views.EventNotification;
 using GW2PAO.Views.EventTracker;
-using GW2PAO.Views.PriceNotification;
 using GW2PAO.Views.Teamspeak;
-using GW2PAO.Views.TradingPost;
 using GW2PAO.Views.WebBrowser;
 using GW2PAO.Views.WvWNotification;
 using GW2PAO.Views.WvWTracker;
@@ -210,9 +210,9 @@ namespace GW2PAO.Controllers
         private PriceNotificationWindow priceNotificationsView;
 
         /// <summary>
-        /// Window used for configuring price notifications
+        /// Window used for configuring item price watches
         /// </summary>
-        private PriceNotificationConfigView priceNotificationsConfigView;
+        private PriceWatchConfigView priceWatchConfigView;
 
         /// <summary>
         /// View used when rebuilding the item names database
@@ -748,14 +748,14 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void DisplayPriceNotificationsConfig()
         {
-            if (this.priceNotificationsConfigView == null || !this.priceNotificationsConfigView.IsVisible)
+            if (this.priceWatchConfigView == null || !this.priceWatchConfigView.IsVisible)
             {
-                this.priceNotificationsConfigView = new PriceNotificationConfigView(this.CommerceService, this.CommerceController);
-                this.priceNotificationsConfigView.Show();
+                this.priceWatchConfigView = new PriceWatchConfigView(this.CommerceService, this.CommerceController);
+                this.priceWatchConfigView.Show();
             }
             else
             {
-                this.priceNotificationsConfigView.Focus();
+                this.priceWatchConfigView.Focus();
             }
         }
 
@@ -780,7 +780,7 @@ namespace GW2PAO.Controllers
             }
             else
             {
-                this.priceNotificationsConfigView.Focus();
+                this.priceWatchConfigView.Focus();
             }
         }
 
