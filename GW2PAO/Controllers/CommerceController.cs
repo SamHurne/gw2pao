@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
@@ -58,9 +59,9 @@ namespace GW2PAO.Controllers
         public int RefreshInterval { get; set; }
 
         /// <summary>
-        /// The commers user settings
+        /// The commers user data
         /// </summary>
-        public CommerceSettings UserSettings { get; private set; }
+        public CommerceUserData UserData { get; private set; }
 
         /// <summary>
         /// Collection of price watches for the price watch notifications
@@ -75,13 +76,13 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="dungeonsService">The dungeons service object</param>
-        /// <param name="userSettings">The dungeons user settings object</param>
-        public CommerceController(ICommerceService commerceService, CommerceSettings userSettings)
+        /// <param name="commerceService">The commerce service object</param>
+        /// <param name="userData">The commerce user data object</param>
+        public CommerceController(ICommerceService commerceService, CommerceUserData userData)
         {
             logger.Debug("Initializing Commerce Controller");
             this.commerceService = commerceService;
-            this.UserSettings = userSettings;
+            this.UserData = userData;
             this.PriceWatches = new ObservableCollection<PriceWatchViewModel>();
             this.PriceNotifications = new ObservableCollection<PriceNotificationViewModel>();
 
@@ -143,17 +144,17 @@ namespace GW2PAO.Controllers
         private void InitializePriceWatches()
         {
             // If for some reason there are items with an ID of 0, just remove them now
-            var itemsToRemove = new List<PriceWatch>(this.UserSettings.PriceWatches.Where(pw => pw.ItemID == 0));
+            var itemsToRemove = new List<PriceWatch>(this.UserData.PriceWatches.Where(pw => pw.ItemID == 0));
             foreach (var emptyItem in itemsToRemove)
-                this.UserSettings.PriceWatches.Remove(emptyItem);
+                this.UserData.PriceWatches.Remove(emptyItem);
 
-            if (this.UserSettings.PriceWatches.Count > 0)
+            if (this.UserData.PriceWatches.Count > 0)
             {
-                var itemIds = this.UserSettings.PriceWatches.Select(pw => pw.ItemID);
+                var itemIds = this.UserData.PriceWatches.Select(pw => pw.ItemID);
                 var itemData = this.commerceService.GetItems(itemIds.ToArray());
 
                 // Initialize view models
-                foreach (var priceWatch in this.UserSettings.PriceWatches)
+                foreach (var priceWatch in this.UserData.PriceWatches)
                 {
                     if (priceWatch.ItemID > 0)
                         this.PriceWatches.Add(new PriceWatchViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
@@ -189,7 +190,7 @@ namespace GW2PAO.Controllers
                         if (this.NotificationsResetDateTimes.ContainsKey(priceWatch))
                         {
                             var lastResetTime = this.NotificationsResetDateTimes[priceWatch];
-                            if (DateTime.Now.Subtract(lastResetTime).TotalMilliseconds >= UserSettings.ResetPriceNotificationsInterval * 60000)
+                            if (DateTime.Now.Subtract(lastResetTime).TotalMilliseconds >= UserData.ResetPriceNotificationsInterval * 60000)
                             {
                                 priceWatch.IsBuyOrderNotificationShown = false;
                                 priceWatch.IsSellListingNotificationShown = false;
@@ -310,10 +311,10 @@ namespace GW2PAO.Controllers
             switch (notificationType)
             {
                 case PriceNotificationType.BuyOrder:
-                    canShow = this.UserSettings.AreBuyOrderPriceNotificationsEnabled && !priceWatch.IsBuyOrderNotificationShown;
+                    canShow = this.UserData.AreBuyOrderPriceNotificationsEnabled && !priceWatch.IsBuyOrderNotificationShown;
                     break;
                 case PriceNotificationType.SellListing:
-                    canShow = this.UserSettings.AreSellListingPriceNotificationsEnabled && !priceWatch.IsSellListingNotificationShown;
+                    canShow = this.UserData.AreSellListingPriceNotificationsEnabled && !priceWatch.IsSellListingNotificationShown;
                     break;
                 default:
                     break;

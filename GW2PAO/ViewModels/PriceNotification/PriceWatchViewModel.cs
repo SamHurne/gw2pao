@@ -13,7 +13,7 @@ using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -227,7 +227,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// </summary>
         private void Remove()
         {
-            this.controller.UserSettings.PriceWatches.Remove(this.Data);
+            this.controller.UserData.PriceWatches.Remove(this.Data);
             this.controller.PriceWatches.Remove(this);
         }
 

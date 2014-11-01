@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
 
@@ -18,9 +19,9 @@ namespace GW2PAO.Controllers.Interfaces
         int RefreshInterval { get; set; }
 
         /// <summary>
-        /// The commers user settings
+        /// The commers user data
         /// </summary>
-        CommerceSettings UserSettings { get; }
+        CommerceUserData UserData { get; }
 
         /// <summary>
         /// Collection of price watches for the price watch notifications

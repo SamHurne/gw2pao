@@ -13,13 +13,13 @@ using GW2PAO.ViewModels.PriceNotification;
 using GW2PAO.ViewModels.TradingPost;
 using NLog;
 
-namespace GW2PAO.Models
+namespace GW2PAO.Data.UserData
 {
     /// <summary>
-    /// User settings for Commerce overlays, like the price notifications
+    /// User data for Commerce overlays, like the price notifications
     /// </summary>
     [Serializable]
-    public class CommerceSettings : UserSettings<CommerceSettings>
+    public class CommerceUserData : UserData<CommerceUserData>
     {
         /// <summary>
         /// Default logger
@@ -29,7 +29,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public const string Filename = "CommerceSettings.xml";
+        public const string Filename = "CommerceUserData.xml";
 
         private int resetPriceNotificationsInterval;
         private bool areBuyOrderPriceNotificationsEnabled;
@@ -71,7 +71,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// Default constructor
         /// </summary>
-        public CommerceSettings()
+        public CommerceUserData()
         {
             // Defaults:
             this.ResetPriceNotificationsInterval = 15;
@@ -85,16 +85,16 @@ namespace GW2PAO.Models
         public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+            this.PropertyChanged += (o, e) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
             this.PriceWatches.CollectionChanged += PriceWatches_CollectionChanged;
 
             foreach (var pw in this.PriceWatches)
             {
-                pw.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.BuyOrderLowerLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.BuyOrderUpperLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.SellListingLowerLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
-                pw.SellListingUpperLimit.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                pw.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
+                pw.BuyOrderLowerLimit.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
+                pw.BuyOrderUpperLimit.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
+                pw.SellListingLowerLimit.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
+                pw.SellListingUpperLimit.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
             }
         }
 
@@ -108,11 +108,11 @@ namespace GW2PAO.Models
             {
                 foreach (PriceWatch newItem in e.NewItems)
                 {
-                    newItem.PropertyChanged += (o, arg) => CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+                    newItem.PropertyChanged += (o, arg) => CommerceUserData.SaveData(this, CommerceUserData.Filename);
                 }
             }
 
-            CommerceSettings.SaveSettings(this, CommerceSettings.Filename);
+            CommerceUserData.SaveData(this, CommerceUserData.Filename);
         }
     }
 }

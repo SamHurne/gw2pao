@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels.DungeonTracker;
 using NLog;
@@ -55,7 +56,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// User settings for dungeons
         /// </summary>
-        private DungeonSettings userSettings;
+        private DungeonUserData userData;
 
         /// <summary>
         /// The interval by which to refresh the dungeon reset state (in ms)
@@ -65,7 +66,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// The dungeon user settings
         /// </summary>
-        public DungeonSettings UserSettings { get { return this.userSettings; } }
+        public DungeonUserData UserData { get { return this.userData; } }
 
         /// <summary>
         /// Backing store of the Dungeons collection
@@ -81,14 +82,14 @@ namespace GW2PAO.Controllers
         /// Default constructor
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
-        /// <param name="userSettings">The dungeons user settings object</param>
-        public DungeonsController(IDungeonsService dungeonsService, IZoneService zoneService, IBrowserController browserController, DungeonSettings userSettings)
+        /// <param name="userData">The dungeons user data object</param>
+        public DungeonsController(IDungeonsService dungeonsService, IZoneService zoneService, IBrowserController browserController, DungeonUserData userData)
         {
             logger.Debug("Initializing Dungeons Controller");
             this.dungeonsService = dungeonsService;
             this.zoneService = zoneService;
             this.browserController = browserController;
-            this.userSettings = userSettings;
+            this.userData = userData;
 
             // Initialize the refresh timer
             this.dungeonsRefreshTimer = new Timer(this.RefreshDungeons);
@@ -162,7 +163,7 @@ namespace GW2PAO.Controllers
                             path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
 
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
-                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userSettings));
+                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userData));
                     }
                 });
         }
@@ -176,10 +177,10 @@ namespace GW2PAO.Controllers
             lock (this.resetTimerLock)
             {
                 // Refresh state of path completions
-                if (DateTime.UtcNow.Date.CompareTo(this.userSettings.LastResetDateTime.Date) != 0)
+                if (DateTime.UtcNow.Date.CompareTo(this.userData.LastResetDateTime.Date) != 0)
                 {
                     logger.Info("Resetting path completions state");
-                    this.userSettings.LastResetDateTime = DateTime.UtcNow;
+                    this.userData.LastResetDateTime = DateTime.UtcNow;
                     Threading.BeginInvokeOnUI(() =>
                     {
                         foreach (var dungeon in this.Dungeons)

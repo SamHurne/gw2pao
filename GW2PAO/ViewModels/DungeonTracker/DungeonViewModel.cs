@@ -9,7 +9,8 @@ using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using GW2PAO.Views.WebBrowser;
 using NLog;
@@ -23,7 +24,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private DungeonSettings userSettings;
+        private DungeonUserData userData;
         private bool isVisible;
 
         /// <summary>
@@ -93,23 +94,23 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// </summary>
         /// <param name="dungeon">The dungeon information</param>
         /// <param name="browser">The browser object for displaying wiki information</param>
-        /// <param name="userSettings">The dungeon user settings</param>
-        public DungeonViewModel(Dungeon dungeon, IBrowserController browserController, DungeonSettings userSettings)
+        /// <param name="userData">The dungeon user settings</param>
+        public DungeonViewModel(Dungeon dungeon, IBrowserController browserController, DungeonUserData userData)
         {
             this.DungeonModel = dungeon;
             this.browserController = browserController;
-            this.userSettings = userSettings;
+            this.userData = userData;
 
             // Initialize the path view models
             this.Paths = new ObservableCollection<PathViewModel>();
             foreach (var path in this.DungeonModel.Paths)
             {
-                this.Paths.Add(new PathViewModel(path, this.userSettings));
+                this.Paths.Add(new PathViewModel(path, this.userData));
             }
 
             this.RefreshVisibility();
-            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userSettings.HiddenDungeons.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userData.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userData.HiddenDungeons.CollectionChanged += (o, e) => this.RefreshVisibility();
         }
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         private void AddToHiddenDungeons()
         {
             logger.Debug("Adding \"{0}\" to hidden dungeons", this.DungeonName);
-            this.userSettings.HiddenDungeons.Add(this.DungeonId);
+            this.userData.HiddenDungeons.Add(this.DungeonId);
         }
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.DungeonName);
-            if (this.userSettings.HiddenDungeons.Any(id => id == this.DungeonId))
+            if (this.userData.HiddenDungeons.Any(id => id == this.DungeonId))
             {
                 this.IsVisible = false;
             }

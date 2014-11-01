@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.EventTracker;
 
@@ -33,9 +34,9 @@ namespace GW2PAO.Controllers.Interfaces
         int EventRefreshInterval { get; set; }
 
         /// <summary>
-        /// The event tracker user settings
+        /// The event tracker user data
         /// </summary>
-        EventSettings UserSettings { get; }
+        EventsUserData UserData { get; }
 
         /// <summary>
         /// Starts the controller

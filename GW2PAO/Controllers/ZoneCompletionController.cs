@@ -10,7 +10,8 @@ using System.Windows;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.ZoneCompletion;
@@ -100,9 +101,9 @@ namespace GW2PAO.Controllers
         public string CharacterName { get; private set; }
 
         /// <summary>
-        /// The zone completion user settings
+        /// The zone completion user data
         /// </summary>
-        public ZoneCompletionSettings UserSettings { get; private set; }
+        public ZoneCompletionUserData UserData { get; private set; }
 
         /// <summary>
         /// The interval by which to refresh zone information (in ms)
@@ -126,8 +127,8 @@ namespace GW2PAO.Controllers
         /// <param name="playerService">The player service</param>
         /// <param name="systemService">The system service</param>
         /// <param name="zoneNameObject">Zone name viewmodel object</param>
-        /// <param name="userSettings">User settings</param>
-        public ZoneCompletionController(IZoneService zoneService, IPlayerService playerService, ISystemService systemService, IHasZoneName zoneNameObject, ZoneCompletionSettings userSettings)
+        /// <param name="userData">User data</param>
+        public ZoneCompletionController(IZoneService zoneService, IPlayerService playerService, ISystemService systemService, IHasZoneName zoneNameObject, ZoneCompletionUserData userData)
         {
             logger.Debug("Initializing Zone Completion Controller");
             this.zoneService = zoneService;
@@ -135,7 +136,7 @@ namespace GW2PAO.Controllers
             this.systemService = systemService;
             this.zoneNameObject = zoneNameObject;
 
-            this.UserSettings = userSettings;
+            this.UserData = userData;
 
             // Initialize refresh timers
             this.zoneRefreshTimer = new Timer(this.RefreshZone);
@@ -223,7 +224,7 @@ namespace GW2PAO.Controllers
                                     // Ignore dungeons for now
                                     if (item.Type != API.Data.Enums.ZoneItemType.Dungeon)
                                     {
-                                        this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserSettings));
+                                        this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserData));
                                         this.distanceCounters.Add(item.ID, 0);
                                     }
                                 }
@@ -259,7 +260,7 @@ namespace GW2PAO.Controllers
                 {
                     foreach (var item in this.ZoneItems)
                     {
-                        var newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, this.UserSettings.DistanceUnits));
+                        var newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, this.UserData.DistanceUnits));
                         var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerPosition, item.ItemModel.Location),
                                                                CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionPosition));
 
@@ -281,21 +282,21 @@ namespace GW2PAO.Controllers
                             switch (item.ItemType)
                             {
                                 case API.Data.Enums.ZoneItemType.Waypoint:
-                                    if (this.UserSettings.AutoUnlockWaypoints
+                                    if (this.UserData.AutoUnlockWaypoints
                                         && ftDistance >= 0 && ftDistance < 75)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.PointOfInterest:
-                                    if (this.UserSettings.AutoUnlockPois
+                                    if (this.UserData.AutoUnlockPois
                                         && ftDistance >= 0 && ftDistance < 75)
                                     {
                                         Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.Vista:
-                                    if (this.UserSettings.AutoUnlockVistas
+                                    if (this.UserData.AutoUnlockVistas
                                         && ftDistance >= 0 && ftDistance < 8)
                                     {
                                         if (this.distanceCounters[item.ItemId] > 4)
@@ -314,7 +315,7 @@ namespace GW2PAO.Controllers
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.HeartQuest:
-                                    if (this.UserSettings.AutoUnlockHeartQuests
+                                    if (this.UserData.AutoUnlockHeartQuests
                                         && ftDistance >= 0 && ftDistance < 400)
                                     {
                                         if (this.distanceCounters[item.ItemId] > 90)
@@ -333,7 +334,7 @@ namespace GW2PAO.Controllers
                                     }
                                     break;
                                 case API.Data.Enums.ZoneItemType.SkillChallenge:
-                                    if (this.UserSettings.AutoUnlockSkillChallenges
+                                    if (this.UserData.AutoUnlockSkillChallenges
                                         && ftDistance >= 0 && ftDistance < 25)
                                     {
                                         if (this.distanceCounters[item.ItemId] > 15)

@@ -11,7 +11,8 @@ using GW2PAO.API.Data;
 using GW2PAO.API.Services;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels;
 using GW2PAO.ViewModels.EventTracker;
@@ -53,9 +54,9 @@ namespace GW2PAO.Controllers
         private readonly object refreshTimerLock = new object();
 
         /// <summary>
-        /// The user settings
+        /// The user data
         /// </summary>
-        private EventSettings userSettings;
+        private EventsUserData userData;
 
         /// <summary>
         /// Keeps track of how many times Start() has been called in order
@@ -89,22 +90,22 @@ namespace GW2PAO.Controllers
         public int EventRefreshInterval { get; set; }
 
         /// <summary>
-        /// The event tracker user settings
+        /// The event tracker user data
         /// </summary>
-        public EventSettings UserSettings { get { return this.userSettings; } }
+        public EventsUserData UserData { get { return this.userData; } }
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="eventsService">The events service</param>
-        /// <param name="userSettings">The user settings</param>
-        public EventsController(IEventsService eventsService, IZoneService zoneService, EventSettings userSettings)
+        /// <param name="userData">The user settings</param>
+        public EventsController(IEventsService eventsService, IZoneService zoneService, EventsUserData userData)
         {
             logger.Debug("Initializing Event Tracker Controller");
             this.eventsService = eventsService;
             this.zoneService = zoneService;
 
-            this.userSettings = userSettings;
+            this.userData = userData;
 
             // Initialize the refresh timer
             this.eventRefreshTimer = new Timer(this.RefreshEvents);
@@ -117,7 +118,7 @@ namespace GW2PAO.Controllers
             this.InitializeWorldEvents();
 
             // Set up handling of the event settings UseAdjustedTable property changed so that we can load the correct table when it changes
-            this.UserSettings.PropertyChanged += UserSettings_PropertyChanged;
+            this.UserData.PropertyChanged += UserData_PropertyChanged;
 
             logger.Info("Event Tracker Controller initialized");
         }
@@ -170,7 +171,7 @@ namespace GW2PAO.Controllers
             lock (refreshTimerLock)
             {
                 logger.Debug("Initializing world events");
-                this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+                this.eventsService.LoadTable(this.UserData.UseAdjustedTimeTable);
 
                 Threading.InvokeOnUI(() =>
                     {
@@ -183,7 +184,7 @@ namespace GW2PAO.Controllers
                             worldEvent.MapName = this.zoneService.GetZoneName(worldEvent.MapID);
 
                             logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                            this.WorldEvents.Add(new EventViewModel(worldEvent, this.userSettings, this.EventNotifications));
+                            this.WorldEvents.Add(new EventViewModel(worldEvent, this.userData, this.EventNotifications));
                         }
                     });
             }
@@ -234,10 +235,10 @@ namespace GW2PAO.Controllers
                 }
 
                 // Refresh state of daily treasures
-                if (DateTime.UtcNow.Date.CompareTo(this.userSettings.LastResetDateTime.Date) != 0)
+                if (DateTime.UtcNow.Date.CompareTo(this.userData.LastResetDateTime.Date) != 0)
                 {
                     logger.Info("Resetting daily treasures state");
-                    this.userSettings.LastResetDateTime = DateTime.UtcNow;
+                    this.userData.LastResetDateTime = DateTime.UtcNow;
                     Threading.BeginInvokeOnUI(() =>
                     {
                         foreach (var worldEvent in WorldEvents)
@@ -256,7 +257,7 @@ namespace GW2PAO.Controllers
         /// </summary>
         private void DisplayEventNotification(EventViewModel eventData)
         {
-            if (this.UserSettings.AreEventNotificationsEnabled)
+            if (this.UserData.AreEventNotificationsEnabled)
             {
                 Task.Factory.StartNew(() =>
                     {
@@ -267,7 +268,7 @@ namespace GW2PAO.Controllers
                         for (int i = 0; i < 40; i++)
                         {
                             System.Threading.Thread.Sleep(250);
-                            if (!this.UserSettings.AreEventNotificationsEnabled)
+                            if (!this.UserData.AreEventNotificationsEnabled)
                             {
                                 logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
                                 Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
@@ -292,7 +293,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// Handles the PropertyChanged event for the EventSettings
         /// </summary>
-        private void UserSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void UserData_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "UseAdjustedTimeTable")
             {
@@ -301,7 +302,7 @@ namespace GW2PAO.Controllers
                         // Load a different table
                         lock (refreshTimerLock)
                         {
-                            this.eventsService.LoadTable(this.UserSettings.UseAdjustedTimeTable);
+                            this.eventsService.LoadTable(this.UserData.UseAdjustedTimeTable);
                             Threading.InvokeOnUI(() =>
                                 {
                                     foreach (var worldEvent in this.WorldEvents)

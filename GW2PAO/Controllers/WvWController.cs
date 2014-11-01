@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using GW2PAO.API.Services.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
 using NLog;
 using GW2PAO.Controllers.Interfaces;
 using System.Collections.ObjectModel;
@@ -16,6 +16,7 @@ using GW2PAO.TrayIcon;
 using GW2PAO.API.Data;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.API.Util;
+using GW2PAO.Data.UserData;
 
 namespace GW2PAO.Controllers
 {
@@ -75,9 +76,9 @@ namespace GW2PAO.Controllers
         private int timerCount;
 
         /// <summary>
-        /// User settings for dungeons
+        /// User data for WvW
         /// </summary>
-        private WvWSettings userSettings;
+        private WvWUserData userData;
 
         /// <summary>
         /// The object containing the WvWMap shown to the user
@@ -119,8 +120,8 @@ namespace GW2PAO.Controllers
         /// </summary>
         public WvWMap MapOverride
         {
-            get { return this.UserSettings.MapOverride; }
-            set { this.UserSettings.MapOverride = value; }
+            get { return this.UserData.MapOverride; }
+            set { this.UserData.MapOverride = value; }
         }
 
         /// <summary>
@@ -131,7 +132,7 @@ namespace GW2PAO.Controllers
         /// <summary>
         /// The WvW user settings
         /// </summary>
-        public WvWSettings UserSettings { get { return this.userSettings; } }
+        public WvWUserData UserData { get { return this.userData; } }
 
         /// <summary>
         /// Backing store of the teams collection
@@ -177,15 +178,15 @@ namespace GW2PAO.Controllers
         /// Default constructor
         /// </summary>
         /// <param name="dungeonsService">The dungeons service object</param>
-        /// <param name="userSettings">The dungeons user settings object</param>
-        public WvWController(IWvWService wvwService, IPlayerService playerService, IGuildService guildService, IHasWvWMap mapObj, WvWSettings userSettings)
+        /// <param name="userData">The dungeons user data object</param>
+        public WvWController(IWvWService wvwService, IPlayerService playerService, IGuildService guildService, IHasWvWMap mapObj, WvWUserData userData)
         {
             logger.Debug("Initializing WvW Controller");
             this.wvwService = wvwService;
             this.playerService = playerService;
             this.guildService = guildService;
             this.mapObj = mapObj;
-            this.userSettings = userSettings;
+            this.userData = userData;
             this.timerCount = 0;
 
             // Initialize the refresh timer
@@ -285,14 +286,14 @@ namespace GW2PAO.Controllers
                 Threading.InvokeOnUI(() => this.AllObjectives.Clear());
 
                 // Determine the current match. If this changes, we don't need to re-initialize since the actual objectives don't change - just the owners change
-                var matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
+                var matchID = this.wvwService.GetMatchId(this.UserData.WorldSelection.ID);
                 var objectives = this.wvwService.GetAllObjectives(matchID);
 
                 while (objectives.Count() == 0 && this.startCallCount > 0)
                 {
                     // If we started up while in the middle of a reset, the objectives count will return 0, so loop until we get it
                     Thread.Sleep(1000);
-                    matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
+                    matchID = this.wvwService.GetMatchId(this.UserData.WorldSelection.ID);
                     objectives = this.wvwService.GetAllObjectives(matchID);
                 }
 
@@ -301,7 +302,7 @@ namespace GW2PAO.Controllers
                     foreach (var obj in objectives)
                     {
                         logger.Debug("Initializing view model for {0} - {1}", obj.Name, obj.Map);
-                        var vm = new WvWObjectiveViewModel(obj, this.UserSettings, this.Worlds, this.WvWNotifications);
+                        var vm = new WvWObjectiveViewModel(obj, this.UserData, this.Worlds, this.WvWNotifications);
                         this.AllObjectives.Add(vm);
                     }
                 });
@@ -333,7 +334,7 @@ namespace GW2PAO.Controllers
         {
             lock (this.objectivesRefreshTimerLock)
             {
-                var matchID = this.wvwService.GetMatchId(this.UserSettings.WorldSelection.ID);
+                var matchID = this.wvwService.GetMatchId(this.UserData.WorldSelection.ID);
                 if (this.matchID != matchID)
                 {
                     this.HandleMatchChange(matchID);
@@ -355,7 +356,7 @@ namespace GW2PAO.Controllers
                     this.RefreshTimers();
 
                     // Calculate distances if we are showing them
-                    if (this.UserSettings.AreTimeDistancesShown)
+                    if (this.UserData.AreTimeDistancesShown)
                     {
                         this.CalculateDistances();
                     }
@@ -552,7 +553,7 @@ namespace GW2PAO.Controllers
                     {
                         if (playerPosition != null && objective.ModelData.MapLocation != null)
                         {
-                            objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserSettings.DistanceUnits));
+                            objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserData.DistanceUnits));
                         }
                     }
                     else
@@ -610,19 +611,19 @@ namespace GW2PAO.Controllers
         {
             bool canShow = false;
 
-            var homeTeam = this.Worlds.First(t => t.WorldId == this.UserSettings.WorldSelection.ID);
+            var homeTeam = this.Worlds.First(t => t.WorldId == this.UserData.WorldSelection.ID);
 
-            if (this.UserSettings.NotifyWhenHomeTakesObjective
+            if (this.UserData.NotifyWhenHomeTakesObjective
                 && objectiveData.WorldOwner == homeTeam.Color)
             {
                 canShow = true;
             }
-            else if (this.UserSettings.NotifyWhenHomeLosesObjective
+            else if (this.UserData.NotifyWhenHomeLosesObjective
                 && objectiveData.PrevWorldOwner == homeTeam.Color)
             {
                 canShow = true;
             }
-            else if (this.UserSettings.NotifyWhenOtherTakesOtherObjective
+            else if (this.UserData.NotifyWhenOtherTakesOtherObjective
                 && objectiveData.PrevWorldOwner != homeTeam.Color
                 && objectiveData.WorldOwner != homeTeam.Color)
             {
@@ -634,16 +635,16 @@ namespace GW2PAO.Controllers
                 switch (objectiveData.Map)
                 {
                     case WvWMap.BlueBorderlands:
-                        canShow = this.UserSettings.AreBlueBorderlandsNotificationsEnabled;
+                        canShow = this.UserData.AreBlueBorderlandsNotificationsEnabled;
                         break;
                     case WvWMap.GreenBorderlands:
-                        canShow = this.UserSettings.AreGreenBorderlandsNotificationsEnabled;
+                        canShow = this.UserData.AreGreenBorderlandsNotificationsEnabled;
                         break;
                     case WvWMap.RedBorderlands:
-                        canShow = this.UserSettings.AreRedBorderlandsNotificationsEnabled;
+                        canShow = this.UserData.AreRedBorderlandsNotificationsEnabled;
                         break;
                     case WvWMap.EternalBattlegrounds:
-                        canShow = this.UserSettings.AreEternalBattlegroundsNotificationsEnabled;
+                        canShow = this.UserData.AreEternalBattlegroundsNotificationsEnabled;
                         break;
                     default:
                         canShow = false;

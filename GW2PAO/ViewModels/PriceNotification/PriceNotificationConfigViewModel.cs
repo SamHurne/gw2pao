@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -35,12 +35,12 @@ namespace GW2PAO.ViewModels.PriceNotification
         /// </summary>
         public int ResetPriceNotificationsInterval
         {
-            get { return this.controller.UserSettings.ResetPriceNotificationsInterval; }
+            get { return this.controller.UserData.ResetPriceNotificationsInterval; }
             set
             {
-                if (this.controller.UserSettings.ResetPriceNotificationsInterval != value)
+                if (this.controller.UserData.ResetPriceNotificationsInterval != value)
                 {
-                    this.controller.UserSettings.ResetPriceNotificationsInterval = value;
+                    this.controller.UserData.ResetPriceNotificationsInterval = value;
                     this.RaisePropertyChanged();
                 }
             }
@@ -73,7 +73,7 @@ namespace GW2PAO.ViewModels.PriceNotification
         {
             var priceWatch = new PriceWatch();
             var priceWatchVm = new PriceWatchViewModel(priceWatch, null, this.controller, this.commerceService);
-            this.controller.UserSettings.PriceWatches.Add(priceWatch);
+            this.controller.UserData.PriceWatches.Add(priceWatch);
             this.PriceWatches.Add(priceWatchVm);
         }
     }

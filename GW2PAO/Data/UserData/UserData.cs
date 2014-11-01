@@ -9,13 +9,13 @@ using System.Xml.Serialization;
 using GW2PAO.PresentationCore;
 using NLog;
 
-namespace GW2PAO.Models
+namespace GW2PAO.Data.UserData
 {
     /// <summary>
-    /// Base class for user setting classes
+    /// Base class for user data classes
     /// </summary>
-    /// <typeparam name="T">Type of user setting class, used when loading/saving the settings</typeparam>
-    public class UserSettings<T> : NotifyPropertyChangedBase
+    /// <typeparam name="T">Type of user data class, used when loading/saving the data</typeparam>
+    public class UserData<T> : NotifyPropertyChangedBase
     {
         /// <summary>
         /// Default logger
@@ -25,9 +25,9 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings directory
         /// </summary>
-        public static string SettingsDirectory
+        public static string DataDirectory
         {
-            get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "Settings" + Path.DirectorySeparatorChar; }
+            get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "UserData" + Path.DirectorySeparatorChar; }
         }
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace GW2PAO.Models
         /// Loads the user settings
         /// </summary>
         /// <returns>The loaded settings, or null if the load fails</returns>
-        public static T LoadSettings(string fileName)
+        public static T LoadData(string fileName)
         {
             logger.Debug("Loading user settings");
 
             XmlSerializer deserializer = new XmlSerializer(typeof(T));
             object loadedSettings = null;
 
-            string fullPath = SettingsDirectory + fileName;
+            string fullPath = DataDirectory + fileName;
 
             try
             {
@@ -81,17 +81,17 @@ namespace GW2PAO.Models
         /// Saves the user settings
         /// </summary>
         /// <param name="settings">The user settings to save</param>
-        public static void SaveSettings(T settings, string fileName)
+        public static void SaveData(T settings, string fileName)
         {
-            logger.Debug("Saving user settings");
+            logger.Debug("Saving user data");
             XmlSerializer serializer = new XmlSerializer(typeof(T));
 
-            if (!Directory.Exists(SettingsDirectory))
+            if (!Directory.Exists(DataDirectory))
             {
-                Directory.CreateDirectory(SettingsDirectory);
+                Directory.CreateDirectory(DataDirectory);
             }
 
-            string fullPath = SettingsDirectory + fileName;
+            string fullPath = DataDirectory + fileName;
 
             using (TextWriter writer = new StreamWriter(fullPath))
             {

@@ -7,7 +7,8 @@ using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -30,7 +31,7 @@ namespace GW2PAO.ViewModels
         private bool isNotificationShown;
         private bool isRemovingNotification;
         private ICollection<EventViewModel> displayedNotifications;
-        private EventSettings userSettings;
+        private EventsUserData userData;
 
         /// <summary>
         /// The primary model object containing the event information
@@ -99,19 +100,19 @@ namespace GW2PAO.ViewModels
         /// </summary>
         public bool IsTreasureObtained
         {
-            get { return this.userSettings.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
+            get { return this.userData.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
             set
             {
-                if (value && !this.userSettings.EventsWithTreasureObtained.Contains(this.EventModel.ID))
+                if (value && !this.userData.EventsWithTreasureObtained.Contains(this.EventModel.ID))
                 {
                     logger.Debug("Adding \"{0}\" to EventsWithTreasureObtained", this.EventName);
-                    this.userSettings.EventsWithTreasureObtained.Add(this.EventModel.ID);
+                    this.userData.EventsWithTreasureObtained.Add(this.EventModel.ID);
                     this.RaisePropertyChanged();
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from EventsWithTreasureObtained", this.EventName);
-                    if (this.userSettings.EventsWithTreasureObtained.Remove(this.EventModel.ID))
+                    if (this.userData.EventsWithTreasureObtained.Remove(this.EventModel.ID))
                         this.RaisePropertyChanged();
                 }
             }
@@ -155,12 +156,12 @@ namespace GW2PAO.ViewModels
         /// Default constructor
         /// </summary>
         /// <param name="eventData">The event's details/data</param>
-        /// <param name="userSettings">Event tracker user settings</param>
+        /// <param name="userData">Event tracker user data</param>
         /// <param name="displayedNotificationsCollection">Collection of displayed event notifications</param>
-        public EventViewModel(WorldEvent eventData, EventSettings userSettings, ICollection<EventViewModel> displayedNotificationsCollection)
+        public EventViewModel(WorldEvent eventData, EventsUserData userData, ICollection<EventViewModel> displayedNotificationsCollection)
         {
             this.EventModel = eventData;
-            this.userSettings = userSettings;
+            this.userData = userData;
             this.displayedNotifications = displayedNotificationsCollection;
             this.IsVisible = true;
             this.IsNotificationShown = false;
@@ -168,8 +169,8 @@ namespace GW2PAO.ViewModels
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;
-            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userSettings.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userData.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userData.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
         }
 
         /// <summary>
@@ -178,7 +179,7 @@ namespace GW2PAO.ViewModels
         private void AddToHiddenEvents()
         {
             logger.Debug("Adding \"{0}\" to hidden events", this.EventName);
-            this.userSettings.HiddenEvents.Add(this.EventModel.ID);
+            this.userData.HiddenEvents.Add(this.EventModel.ID);
         }
 
         /// <summary>
@@ -187,11 +188,11 @@ namespace GW2PAO.ViewModels
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.EventName);
-            if (this.userSettings.HiddenEvents.Any(id => id == this.EventId))
+            if (this.userData.HiddenEvents.Any(id => id == this.EventId))
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreInactiveEventsVisible
+            else if (!this.userData.AreInactiveEventsVisible
                     && this.State == EventState.Inactive)
             {
                 this.IsVisible = false;

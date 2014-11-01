@@ -13,13 +13,13 @@ using GW2PAO.API.Data.Enums;
 using GW2PAO.PresentationCore;
 using NLog;
 
-namespace GW2PAO.Models
+namespace GW2PAO.Data.UserData
 {
     /// <summary>
     /// User settings for WvW
     /// </summary>
     [Serializable]
-    public class WvWSettings : UserSettings<WvWSettings>
+    public class WvWUserData : UserData<WvWUserData>
     {
         /// <summary>
         /// Default logger
@@ -29,7 +29,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public const string Filename = "WvWSettings.xml";
+        public const string Filename = "WvWUserData.xml";
 
         private World worldSelection;
         private bool isTrackerHorizontal;
@@ -263,7 +263,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// Default constructor
         /// </summary>
-        public WvWSettings()
+        public WvWUserData()
         {
             this.WorldSelection = new World() { ID = 1019, Name = "Blackgate" };
             this.IsTrackerHorizontal = false;
@@ -289,7 +289,7 @@ namespace GW2PAO.Models
         public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => WvWSettings.SaveSettings(this, WvWSettings.Filename);
+            this.PropertyChanged += (o, e) => WvWUserData.SaveData(this, WvWUserData.Filename);
         }
     }
 }

@@ -112,7 +112,7 @@
                         <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                             <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="TimeDistance">
                                     <Setter Property="Text" Value="{Binding DistanceFromPlayer, Converter={StaticResource TimeConverter}, ConverterParameter=true}"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -125,10 +125,10 @@
                         <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                             <Setter Property="Text" Value=" ft"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="Meters">
+                                <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="Meters">
                                     <Setter Property="Text" Value=" m"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="TimeDistance">
                                     <Setter Property="Text" Value=""/>
                                 </DataTrigger>
                             </Style.Triggers>

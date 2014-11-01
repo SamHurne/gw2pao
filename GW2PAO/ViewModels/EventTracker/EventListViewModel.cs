@@ -11,7 +11,8 @@ using System.Windows;
 using System.Windows.Data;
 using GW2PAO.API.Data;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -43,9 +44,9 @@ namespace GW2PAO.ViewModels.EventTracker
         public DelegateCommand ResetHiddenEventsCommand { get { return new DelegateCommand(this.ResetHiddenEvents); } }
 
         /// <summary>
-        /// Event Tracker user settings
+        /// Event Tracker user data
         /// </summary>
-        public EventSettings UserSettings { get { return this.controller.UserSettings; } }
+        public EventsUserData UserData { get { return this.controller.UserData; } }
 
         /// <summary>
         /// Default constructor
@@ -62,7 +63,7 @@ namespace GW2PAO.ViewModels.EventTracker
         private void ResetHiddenEvents()
         {
             logger.Debug("Resetting hidden events");
-            this.UserSettings.HiddenEvents.Clear();
+            this.UserData.HiddenEvents.Clear();
         }
     }
 }

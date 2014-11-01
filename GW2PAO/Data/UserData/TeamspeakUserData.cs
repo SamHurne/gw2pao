@@ -9,13 +9,13 @@ using System.Xml.Serialization;
 using GW2PAO.PresentationCore;
 using NLog;
 
-namespace GW2PAO.Models
+namespace GW2PAO.Data.UserData
 {
     /// <summary>
     /// User settings for the Teamspeak Overlay
     /// </summary>
     [Serializable]
-    public class TeamspeakSettings : UserSettings<TeamspeakSettings>
+    public class TeamspeakUserData : UserData<TeamspeakUserData>
     {
         /// <summary>
         /// Default logger
@@ -25,7 +25,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// The default settings filename
         /// </summary>
-        public const string Filename = "TeamspeakSettings.xml";
+        public const string Filename = "TeamspeakUserData.xml";
 
         private bool showChatEntryBox;
         private bool showChannelName;
@@ -51,7 +51,7 @@ namespace GW2PAO.Models
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TeamspeakSettings()
+        public TeamspeakUserData()
         {
             this.ShowChatEntryBox = true;
             this.ShowChannelName = true;
@@ -63,7 +63,7 @@ namespace GW2PAO.Models
         public override void EnableAutoSave()
         {
             logger.Info("Enabling auto save");
-            this.PropertyChanged += (o, e) => TeamspeakSettings.SaveSettings(this, TeamspeakSettings.Filename);
+            this.PropertyChanged += (o, e) => TeamspeakUserData.SaveData(this, TeamspeakUserData.Filename);
         }
     }
 }

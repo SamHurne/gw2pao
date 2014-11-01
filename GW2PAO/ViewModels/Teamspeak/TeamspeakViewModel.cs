@@ -6,7 +6,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using GW2PAO.TS3.Services.Interfaces;
 using GW2PAO.Utility;
@@ -90,9 +91,9 @@ namespace GW2PAO.ViewModels.Teamspeak
         }
 
         /// <summary>
-        /// User settings for the Teamspeak Overlay
+        /// User data for the Teamspeak Overlay
         /// </summary>
-        public TeamspeakSettings UserSettings { get; private set; }
+        public TeamspeakUserData UserData { get; private set; }
 
         /// <summary>
         /// Collection of client notifications (speaking users, messages, users entering, etc)
@@ -112,10 +113,10 @@ namespace GW2PAO.ViewModels.Teamspeak
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TeamspeakViewModel(ITeamspeakService teamspeakService, TeamspeakSettings userSettings)
+        public TeamspeakViewModel(ITeamspeakService teamspeakService, TeamspeakUserData userData)
         {
             this.isShuttingDown = false;
-            this.UserSettings = userSettings;
+            this.UserData = userData;
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
             this.Channels = new ObservableCollection<ChannelViewModel>();
 

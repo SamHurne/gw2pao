@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Enums;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels;
 
 namespace GW2PAO.Controllers.Interfaces
@@ -24,9 +25,9 @@ namespace GW2PAO.Controllers.Interfaces
         int ObjectivesRefreshInterval { get; set; }
 
         /// <summary>
-        /// The WvW user settings
+        /// The WvW user data
         /// </summary>
-        WvWSettings UserSettings { get; }
+        WvWUserData UserData { get; }
 
         /// <summary>
         /// The collection of WvW Teams

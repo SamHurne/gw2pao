@@ -8,12 +8,13 @@ using System.Windows;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.PresentationCore;
 using NLog;
 using GW2PAO.Utility;
 using GW2PAO.API.Data.Entities;
+using GW2PAO.Data.UserData;
 
 namespace GW2PAO.ViewModels.ZoneCompletion
 {
@@ -47,12 +48,12 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         public bool IsFeetSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.Feet; }
+            get { return this.UserData.DistanceUnits == Units.Feet; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.Feet;
+                    this.UserData.DistanceUnits = Units.Feet;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -63,12 +64,12 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         public bool IsMetersSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.Meters; }
+            get { return this.UserData.DistanceUnits == Units.Meters; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.Meters;
+                    this.UserData.DistanceUnits = Units.Meters;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -79,12 +80,12 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// </summary>
         public bool IsTimeDistanceSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.TimeDistance; }
+            get { return this.UserData.DistanceUnits == Units.TimeDistance; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.TimeDistance;
+                    this.UserData.DistanceUnits = Units.TimeDistance;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -93,7 +94,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         /// <summary>
         /// The user settings
         /// </summary>
-        public ZoneCompletionSettings UserSettings { get { return this.controller.UserSettings; } }
+        public ZoneCompletionUserData UserData { get { return this.controller.UserData; } }
 
         /// <summary>
         /// Command to reset all unlocked zone items/points in the current zone
@@ -145,7 +146,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
             List<ZoneItem> toRemove = new List<ZoneItem>();
 
             // Only reset unlocked points for this character
-            var characterItems = this.UserSettings.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.controller.CharacterName);
+            var characterItems = this.UserData.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.controller.CharacterName);
             if (characterItems != null)
             {
                 foreach (var zoneItem in characterItems.ZoneItems)
@@ -167,7 +168,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void ResetUnlockedPoints_Global()
         {
             logger.Debug("Globally resetting unlocked points");
-            this.UserSettings.UnlockedZoneItems.Clear();
+            this.UserData.UnlockedZoneItems.Clear();
         }
 
         /// <summary>
@@ -177,7 +178,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         {
             logger.Debug("Resetting hidden points for zone {0}", this.controller.CurrentMapID);
             List<ZoneItem> toRemove = new List<ZoneItem>();
-            foreach (var zoneItem in this.UserSettings.HiddenZoneItems)
+            foreach (var zoneItem in this.UserData.HiddenZoneItems)
             {
                 if (zoneItem.MapId == this.controller.CurrentMapID)
                     toRemove.Add(zoneItem);
@@ -185,7 +186,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
 
             foreach (var zoneItem in toRemove)
             {
-                this.UserSettings.HiddenZoneItems.Remove(zoneItem);
+                this.UserData.HiddenZoneItems.Remove(zoneItem);
             }
         }
 
@@ -195,7 +196,7 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void ResetHiddenPoints_Global()
         {
             logger.Debug("Globally resetting hidden points");
-            this.UserSettings.HiddenZoneItems.Clear();
+            this.UserData.HiddenZoneItems.Clear();
         }
 
         /// <summary>
@@ -204,11 +205,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void ShowAllPoints()
         {
             logger.Debug("Showing all points");
-            this.UserSettings.AreWaypointsVisible = true;
-            this.UserSettings.ArePoisVisible = true;
-            this.UserSettings.AreHeartsVisible = true;
-            this.UserSettings.AreVistasVisible = true;
-            this.UserSettings.AreSkillChallengesVisible = true;
+            this.UserData.AreWaypointsVisible = true;
+            this.UserData.ArePoisVisible = true;
+            this.UserData.AreHeartsVisible = true;
+            this.UserData.AreVistasVisible = true;
+            this.UserData.AreSkillChallengesVisible = true;
         }
 
         /// <summary>
@@ -217,11 +218,11 @@ namespace GW2PAO.ViewModels.ZoneCompletion
         private void ShowNoPoints()
         {
             logger.Debug("Showing no points");
-            this.UserSettings.AreWaypointsVisible = false;
-            this.UserSettings.ArePoisVisible = false;
-            this.UserSettings.AreHeartsVisible = false;
-            this.UserSettings.AreVistasVisible = false;
-            this.UserSettings.AreSkillChallengesVisible = false;
+            this.UserData.AreWaypointsVisible = false;
+            this.UserData.ArePoisVisible = false;
+            this.UserData.AreHeartsVisible = false;
+            this.UserData.AreVistasVisible = false;
+            this.UserData.AreSkillChallengesVisible = false;
         }
 
         /// <summary>

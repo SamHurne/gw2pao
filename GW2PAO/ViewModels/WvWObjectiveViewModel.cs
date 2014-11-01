@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -29,7 +30,7 @@ namespace GW2PAO.ViewModels
         private bool isRIActive;
         private bool isNotificationShown;
         private bool isRemovingNotification;
-        private WvWSettings userSettings;
+        private WvWUserData userData;
 
         /// <summary>
         /// The primary backing model data for the viewmodel
@@ -191,7 +192,7 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// The WvW user settings
         /// </summary>
-        public WvWSettings UserSettings { get { return this.userSettings; } }
+        public WvWUserData UserData { get { return this.userData; } }
 
         /// <summary>
         /// Visibility of the objective
@@ -274,10 +275,10 @@ namespace GW2PAO.ViewModels
         /// </summary>
         /// <param name="objective">The objective details</param>
         /// <param name="wvwTeams">Collection containing all of the WvW Teams</param>
-        public WvWObjectiveViewModel(WvWObjective objective, WvWSettings userSettings, IEnumerable<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
+        public WvWObjectiveViewModel(WvWObjective objective, WvWUserData userData, IEnumerable<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
         {
             this.ModelData = objective;
-            this.userSettings = userSettings;
+            this.userData = userData;
             this.wvwTeams = wvwTeams;
             this.displayedNotificationsCollection = displayedNotificationsCollection;
 
@@ -290,8 +291,8 @@ namespace GW2PAO.ViewModels
             this.IsRemovingNotification = false;
             this.GuildClaimer = new GuildViewModel();
 
-            this.userSettings.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userSettings.HiddenObjectives.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.userData.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.userData.HiddenObjectives.CollectionChanged += (o, e) => this.RefreshVisibility();
             this.RefreshVisibility();
         }
 
@@ -301,7 +302,7 @@ namespace GW2PAO.ViewModels
         private void AddToHiddenObjectives()
         {
             logger.Debug("Adding \"{0}\" to hidden objectives", this.Name);
-            this.userSettings.HiddenObjectives.Add(this.ID);
+            this.userData.HiddenObjectives.Add(this.ID);
         }
 
         /// <summary>
@@ -310,43 +311,43 @@ namespace GW2PAO.ViewModels
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.Name);
-            if (this.userSettings.HiddenObjectives.Any(id => id == this.ID))
+            if (this.userData.HiddenObjectives.Any(id => id == this.ID))
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreRedObjectivesShown && this.WorldOwner == WorldColor.Red)
+            else if (!this.userData.AreRedObjectivesShown && this.WorldOwner == WorldColor.Red)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreGreenObjectivesShown && this.WorldOwner == WorldColor.Green)
+            else if (!this.userData.AreGreenObjectivesShown && this.WorldOwner == WorldColor.Green)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreBlueObjectivesShown && this.WorldOwner == WorldColor.Blue)
+            else if (!this.userData.AreBlueObjectivesShown && this.WorldOwner == WorldColor.Blue)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreNeutralObjectivesShown && this.WorldOwner == WorldColor.None)
+            else if (!this.userData.AreNeutralObjectivesShown && this.WorldOwner == WorldColor.None)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreCastlesShown && this.Type == ObjectiveType.Castle)
+            else if (!this.userData.AreCastlesShown && this.Type == ObjectiveType.Castle)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreKeepsShown && this.Type == ObjectiveType.Keep)
+            else if (!this.userData.AreKeepsShown && this.Type == ObjectiveType.Keep)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreTowersShown && this.Type == ObjectiveType.Tower)
+            else if (!this.userData.AreTowersShown && this.Type == ObjectiveType.Tower)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreCampsShown && this.Type == ObjectiveType.Camp)
+            else if (!this.userData.AreCampsShown && this.Type == ObjectiveType.Camp)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userSettings.AreBloodlustObjectivesShown &&
+            else if (!this.userData.AreBloodlustObjectivesShown &&
                         (this.Type == ObjectiveType.TempleofLostPrayers
                          || this.Type == ObjectiveType.BattlesHollow
                          || this.Type == ObjectiveType.BauersEstate
@@ -425,7 +426,7 @@ namespace GW2PAO.ViewModels
         {
             string distance = string.Empty;
             string distanceUnits = string.Empty;
-            switch (this.UserSettings.DistanceUnits)
+            switch (this.UserData.DistanceUnits)
             {
                 case Units.Feet:
                     distance = this.DistanceFromPlayer.ToString();

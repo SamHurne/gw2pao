@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -41,7 +42,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// <summary>
         /// Dungeon user settings
         /// </summary>
-        public DungeonSettings UserSettings { get { return this.controller.UserSettings; } }
+        public DungeonUserData UserData { get { return this.controller.UserData; } }
 
         /// <summary>
         /// Default constructor
@@ -58,7 +59,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         private void ResetHiddenDungeons()
         {
             logger.Debug("Resetting hidden dungeons");
-            this.UserSettings.HiddenDungeons.Clear();
+            this.UserData.HiddenDungeons.Clear();
         }
 
         /// <summary>

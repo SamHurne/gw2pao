@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using NLog;
 
@@ -18,7 +19,7 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private DungeonSettings userSettings;
+        private DungeonUserData userData;
 
         /// <summary>
         /// The primary model object containing the path's information
@@ -55,19 +56,19 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// </summary>
         public bool IsCompleted
         {
-            get { return this.userSettings.CompletedPaths.Contains(this.PathId); }
+            get { return this.userData.CompletedPaths.Contains(this.PathId); }
             set
             {
-                if (value && !this.userSettings.CompletedPaths.Contains(this.PathId))
+                if (value && !this.userData.CompletedPaths.Contains(this.PathId))
                 {
                     logger.Debug("Adding \"{0}\" to CompletedPaths", this.PathId);
-                    this.userSettings.CompletedPaths.Add(this.PathModel.ID);
+                    this.userData.CompletedPaths.Add(this.PathModel.ID);
                     this.RaisePropertyChanged();
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from CompletedPaths", this.PathId);
-                    if (this.userSettings.CompletedPaths.Remove(this.PathId))
+                    if (this.userData.CompletedPaths.Remove(this.PathId))
                         this.RaisePropertyChanged();
                 }
             }
@@ -77,11 +78,11 @@ namespace GW2PAO.ViewModels.DungeonTracker
         /// Default constructor
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="userSettings"></param>
-        public PathViewModel(DungeonPath path, DungeonSettings userSettings)
+        /// <param name="userData"></param>
+        public PathViewModel(DungeonPath path, DungeonUserData userData)
         {
             this.PathModel = path;
-            this.userSettings = userSettings;
+            this.userData = userData;
         }
     }
 }

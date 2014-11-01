@@ -68,7 +68,7 @@
         <Style TargetType="UserControl">
             <Setter Property="Width" Value="Auto" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                <DataTrigger Binding="{Binding UserData.AreTimeDistancesShown}" Value="False">
                     <DataTrigger.Setters>
                         <Setter Property="Width" Value="140" />
                     </DataTrigger.Setters>
@@ -139,7 +139,7 @@
                         <Style TargetType="ColumnDefinition">
                             <Setter Property="Width" Value="27"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding UserSettings.AreShortNamesShown}" Value="True">
+                                <DataTrigger Binding="{Binding UserData.AreShortNamesShown}" Value="True">
                                     <Setter Property="Width" Value="60"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -168,7 +168,7 @@
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                         <Setter Property="Text" Value="{Binding Location}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding UserSettings.AreShortNamesShown}" Value="True">
+                            <DataTrigger Binding="{Binding UserData.AreShortNamesShown}" Value="True">
                                 <Setter Property="Text" Value="{Binding ShortName}"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -185,14 +185,14 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left"
                             Margin="0,0,10,0"
-                            Visibility="{Binding UserSettings.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}">
+                            Visibility="{Binding UserData.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}">
 
                     <core:OutlinedTextBlock VerticalAlignment="Center">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                    <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="TimeDistance">
                                         <Setter Property="Text" Value="{Binding DistanceFromPlayer, Converter={StaticResource TimeConverter}, ConverterParameter=true}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -205,10 +205,10 @@
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value=" ft"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="Meters">
+                                    <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="Meters">
                                         <Setter Property="Text" Value=" m"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding UserSettings.DistanceUnits}" Value="TimeDistance">
+                                    <DataTrigger Binding="{Binding UserData.DistanceUnits}" Value="TimeDistance">
                                         <Setter Property="Text" Value=""/>
                                     </DataTrigger>
                                 </Style.Triggers>

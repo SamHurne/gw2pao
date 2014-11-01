@@ -83,7 +83,7 @@
                                 <MenuItem Header="{x:Static resx:Resources.Horizontal}" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.ShowDistances}" IsCheckable="True" IsChecked="{Binding UserSettings.AreTimeDistancesShown}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowDistances}" IsCheckable="True" IsChecked="{Binding UserData.AreTimeDistancesShown}" />
                             <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
                                 <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
                                 <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
@@ -92,16 +92,16 @@
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.ResetHiddenObjectives}" Command="{Binding ResetHiddenObjectivesCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.Show}">
-                                <MenuItem Header="{x:Static resx:Resources.RedObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreRedObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.GreenObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.BlueObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.NeutralObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.RedObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreRedObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.GreenObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BlueObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.NeutralObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
                                 <Separator />
-                                <MenuItem Header="{x:Static resx:Resources.Castles}" IsCheckable="True" IsChecked="{Binding UserSettings.AreCastlesShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Keeps}" IsCheckable="True" IsChecked="{Binding UserSettings.AreKeepsShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Towers}" IsCheckable="True" IsChecked="{Binding UserSettings.AreTowersShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Camps}" IsCheckable="True" IsChecked="{Binding UserSettings.AreCampsShown}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.BloodlustObjectives}" IsCheckable="True" IsChecked="{Binding UserSettings.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Castles}" IsCheckable="True" IsChecked="{Binding UserData.AreCastlesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Keeps}" IsCheckable="True" IsChecked="{Binding UserData.AreKeepsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Towers}" IsCheckable="True" IsChecked="{Binding UserData.AreTowersShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Camps}" IsCheckable="True" IsChecked="{Binding UserData.AreCampsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BloodlustObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <MenuItem Header="{x:Static resx:Resources.Names}">
                                 <MenuItem Header="{x:Static resx:Resources.CardinalDirections}" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
@@ -211,7 +211,7 @@
                                                 <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
                                                 <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                                    <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
                                                         <DataTrigger.Setters>
                                                             <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
                                                             <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
@@ -240,7 +240,7 @@
                                         <Style TargetType="StackPanel">
                                             <Setter Property="Orientation" Value="Vertical" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                                                <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
                                                     <DataTrigger.Setters>
                                                         <Setter Property="Orientation" Value="Horizontal" />
                                                     </DataTrigger.Setters>
@@ -253,7 +253,7 @@
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="ItemTemplate">
                                     <Setter.Value>
@@ -284,7 +284,7 @@
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger.Setters>
@@ -312,12 +312,12 @@
                     <Setter Property="Height" Value="115" />
                     <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding UserSettings.IsTrackerHorizontal}" Value="True">
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
                             <DataTrigger.Setters>
                                 <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger.Setters>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding UserSettings.AreTimeDistancesShown}" Value="False">
+                        <DataTrigger Binding="{Binding UserData.AreTimeDistancesShown}" Value="False">
                             <DataTrigger.Setters>
                                 <Setter Property="Height" Value="90" />
                             </DataTrigger.Setters>

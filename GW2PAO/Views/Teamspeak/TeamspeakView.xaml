@@ -81,8 +81,8 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChannelName}" />
-                            <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserSettings.ShowChatEntryBox}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChannelName}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChatEntryBox}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -177,7 +177,7 @@
         <Border Name="ChannelName"
                 Grid.Row="1" Margin="3"
                 BorderBrush="{StaticResource TitleBarBorderBrush}" BorderThickness="0,0,0,0"
-                Visibility="{Binding UserSettings.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
+                Visibility="{Binding UserData.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
             <TextBox Grid.Row="0"
                          Name="ChannelTextBox"
                          Text="{Binding ClientChannelName}"
@@ -209,7 +209,7 @@
 
         <Grid Name="TextEntryBox" Grid.Row="3"
               Margin="3"
-              Visibility="{Binding UserSettings.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding UserData.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>

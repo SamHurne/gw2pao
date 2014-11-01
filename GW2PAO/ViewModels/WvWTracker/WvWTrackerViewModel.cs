@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
 using GW2PAO.ViewModels.Interfaces;
 using NLog;
@@ -46,12 +47,12 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsVerticalOrientation
         {
-            get { return !this.UserSettings.IsTrackerHorizontal; }
+            get { return !this.UserData.IsTrackerHorizontal; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.IsTrackerHorizontal = false;
+                    this.UserData.IsTrackerHorizontal = false;
                     this.NotifyOrientationSelectionChanged();
                 }
             }
@@ -63,12 +64,12 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsHorizontalOrientation
         {
-            get { return this.UserSettings.IsTrackerHorizontal; }
+            get { return this.UserData.IsTrackerHorizontal; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.IsTrackerHorizontal = true;
+                    this.UserData.IsTrackerHorizontal = true;
                     this.NotifyOrientationSelectionChanged();
                 }
             }
@@ -159,12 +160,12 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsFeetSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.Feet; }
+            get { return this.UserData.DistanceUnits == Units.Feet; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.Feet;
+                    this.UserData.DistanceUnits = Units.Feet;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -175,12 +176,12 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsMetersSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.Meters; }
+            get { return this.UserData.DistanceUnits == Units.Meters; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.Meters;
+                    this.UserData.DistanceUnits = Units.Meters;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -191,12 +192,12 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsTimeDistanceSelected
         {
-            get { return this.UserSettings.DistanceUnits == Units.TimeDistance; }
+            get { return this.UserData.DistanceUnits == Units.TimeDistance; }
             set
             {
                 if (value)
                 {
-                    this.UserSettings.DistanceUnits = Units.TimeDistance;
+                    this.UserData.DistanceUnits = Units.TimeDistance;
                     this.NotifyUnitsSelectionChanged();
                 }
             }
@@ -207,10 +208,10 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsCardinalDirectionsSelected
         {
-            get { return !this.UserSettings.AreShortNamesShown; }
+            get { return !this.UserData.AreShortNamesShown; }
             set
             {
-                this.UserSettings.AreShortNamesShown = !value;
+                this.UserData.AreShortNamesShown = !value;
                 this.NotifyDisplayedNamesSelectionChanged();
             }
         }
@@ -220,18 +221,18 @@ namespace GW2PAO.ViewModels.WvWTracker
         /// </summary>
         public bool IsShortNamesSelected
         {
-            get { return this.UserSettings.AreShortNamesShown; }
+            get { return this.UserData.AreShortNamesShown; }
             set
             {
-                this.UserSettings.AreShortNamesShown = value;
+                this.UserData.AreShortNamesShown = value;
                 this.NotifyDisplayedNamesSelectionChanged();
             }
         }
 
         /// <summary>
-        /// WvW user settings
+        /// WvW user data
         /// </summary>
-        public WvWSettings UserSettings { get { return this.controller.UserSettings; } }
+        public WvWUserData UserData { get { return this.controller.UserData; } }
 
         /// <summary>
         /// Default constructor
@@ -250,7 +251,7 @@ namespace GW2PAO.ViewModels.WvWTracker
         private void ResetHiddenObjectives()
         {
             logger.Debug("Resetting hidden objectives");
-            this.UserSettings.HiddenObjectives.Clear();
+            this.UserData.HiddenObjectives.Clear();
         }
 
         /// <summary>

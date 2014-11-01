@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using GW2PAO.Models;
+using GW2PAO.Data;
 using GW2PAO.PresentationCore;
 
 namespace GW2PAO.ViewModels.PriceNotification

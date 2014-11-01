@@ -134,13 +134,13 @@
     <Compile Include="Converters\TreasureCheckboxConverter.cs" />
     <Compile Include="Converters\WorldColorConverter.cs" />
     <Compile Include="Converters\ZoneItemTypeImageSrcConverter.cs" />
-    <Compile Include="Models\CommerceSettings.cs" />
-    <Compile Include="Models\DungeonSettings.cs" />
-    <Compile Include="Models\EventSettings.cs" />
-    <Compile Include="Models\TeamspeakSettings.cs" />
-    <Compile Include="Models\UserSettings.cs" />
-    <Compile Include="Models\WvWSettings.cs" />
-    <Compile Include="Models\ZoneCompletionSettings.cs" />
+    <Compile Include="Data\UserData\CommerceUserData.cs" />
+    <Compile Include="Data\UserData\DungeonUserData.cs" />
+    <Compile Include="Data\UserData\EventsUserData.cs" />
+    <Compile Include="Data\UserData\TeamspeakUserData.cs" />
+    <Compile Include="Data\UserData\UserData.cs" />
+    <Compile Include="Data\UserData\WvWUserData.cs" />
+    <Compile Include="Data\UserData\ZoneCompletionUserData.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

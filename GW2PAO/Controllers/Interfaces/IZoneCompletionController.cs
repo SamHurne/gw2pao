@@ -5,7 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Models;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.ZoneCompletion;
 
@@ -28,9 +29,9 @@ namespace GW2PAO.Controllers.Interfaces
         string CharacterName { get; }
 
         /// <summary>
-        /// The zone completion user settings
+        /// The zone completion user data
         /// </summary>
-        ZoneCompletionSettings UserSettings { get; }
+        ZoneCompletionUserData UserData { get; }
 
         /// <summary>
         /// The interval by which to refresh zone information (in ms)
