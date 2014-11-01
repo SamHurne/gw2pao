@@ -10,7 +10,7 @@ using GW2PAO.Controllers.Interfaces;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
-using GW2PAO.ViewModels.DungeonTracker;
+using GW2PAO.ViewModels.Dungeon;
 using NLog;
 
 namespace GW2PAO.Controllers

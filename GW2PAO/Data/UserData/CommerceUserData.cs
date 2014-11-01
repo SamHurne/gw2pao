@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using GW2PAO.PresentationCore;
-using GW2PAO.ViewModels.PriceNotification;
-using GW2PAO.ViewModels.TradingPost;
+using GW2PAO.ViewModels.Commerce;
 using NLog;
 
 namespace GW2PAO.Data.UserData

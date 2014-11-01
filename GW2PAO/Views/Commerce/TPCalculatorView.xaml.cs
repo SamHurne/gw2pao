@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.ViewModels.DungeonTracker;
-using GW2PAO.ViewModels.TradingPost;
+using GW2PAO.ViewModels.Dungeon;
+using GW2PAO.ViewModels.Commerce;
 using NLog;
 
 namespace GW2PAO.Views.Commerce

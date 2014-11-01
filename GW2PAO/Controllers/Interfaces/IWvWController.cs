@@ -8,6 +8,7 @@ using GW2PAO.API.Data.Enums;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels;
+using GW2PAO.ViewModels.WvW;
 
 namespace GW2PAO.Controllers.Interfaces
 {

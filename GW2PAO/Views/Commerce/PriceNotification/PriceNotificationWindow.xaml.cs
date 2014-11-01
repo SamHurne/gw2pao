@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GW2PAO.Controllers.Interfaces;
-using GW2PAO.ViewModels.PriceNotification;
+using GW2PAO.ViewModels.Commerce.PriceNotification;
 using NLog;
 
 namespace GW2PAO.Views.Commerce.PriceNotification

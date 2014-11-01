@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GW2PAO.ViewModels;
-using GW2PAO.ViewModels.EventNotification;
 using NLog;
 
 namespace GW2PAO.Views.Commerce

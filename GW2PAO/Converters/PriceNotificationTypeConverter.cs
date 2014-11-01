@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using GW2PAO.ViewModels.PriceNotification;
+using GW2PAO.ViewModels.Commerce.PriceNotification;
 
 namespace GW2PAO.Converters
 {

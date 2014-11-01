@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels;
-using GW2PAO.ViewModels.PriceNotification;
-using GW2PAO.ViewModels.TradingPost;
+using GW2PAO.ViewModels.Commerce;
+using GW2PAO.ViewModels.Commerce.PriceNotification;
 
 namespace GW2PAO.Controllers.Interfaces
 {

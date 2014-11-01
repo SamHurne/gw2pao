@@ -8,7 +8,7 @@ using GW2PAO.API.Data;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.ViewModels;
-using GW2PAO.ViewModels.EventTracker;
+using GW2PAO.ViewModels.Events;
 
 namespace GW2PAO.Controllers.Interfaces
 {

@@ -17,6 +17,7 @@ using GW2PAO.API.Data;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Data.UserData;
+using GW2PAO.ViewModels.WvW;
 
 namespace GW2PAO.Controllers
 {

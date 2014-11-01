@@ -1,0 +1,83 @@
+﻿<src:OverlayWindow x:Class="GW2PAO.Views.WvW.WvWNotification.WvWNotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:view="clr-namespace:GW2PAO.Views.WvW.WvWNotification"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
+        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="NoResize"
+        Topmost="True" ShowInTaskbar="False"
+        TextOptions.TextFormattingMode="Display"
+        MinHeight="336" Height="Auto" SizeToContent="Height" Width="217"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <src:OverlayWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Style/BaseControlStyles/ToolTipStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <core:AutoRefreshCollectionViewSource Source="{Binding WvWNotifications}" x:Key="WvWNotificationsCollection" />
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        </ResourceDictionary>
+    </src:OverlayWindow.Resources>
+
+    <Grid>
+        <Border BorderThickness="0,0,2,10" CornerRadius="10" ClipToBounds="True" Margin="0,0,3,0"
+                Visibility="{Binding Source={x:Static properties:Settings.Default}, Path=AreNotificationWindowBordersVisible, Converter={StaticResource BoolToVisibility}}">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.75,0.63" StartPoint="1,1">
+                    <GradientStop Color="#BFFFA500" Offset="0.1" />
+                    <GradientStop Color="#00FFA500" Offset="0.7" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Effect>
+                <DropShadowEffect Direction="90" Color="Gold" ShadowDepth="3" BlurRadius="10" />
+            </Border.Effect>
+            <Border.ToolTip>
+                <TextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
+            </Border.ToolTip>
+        </Border>
+        <ItemsControl ItemsSource="{Binding Source={StaticResource WvWNotificationsCollection}}"
+                      Margin="0,0,0,5">
+
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel.LayoutTransform>
+                        <RotateTransform Angle="180"/>
+                    </StackPanel.LayoutTransform>
+
+                    <i:Interaction.Behaviors>
+                        <ei:FluidMoveBehavior Duration="0:0:0.5" AppliesTo="Children">
+                            <ei:FluidMoveBehavior.EaseY>
+                                <CubicEase EasingMode="EaseInOut"/>
+                            </ei:FluidMoveBehavior.EaseY>
+                            <ei:FluidMoveBehavior.EaseX>
+                                <CubicEase EasingMode="EaseInOut"/>
+                            </ei:FluidMoveBehavior.EaseX>
+                        </ei:FluidMoveBehavior>
+                    </i:Interaction.Behaviors>
+                </StackPanel>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <view:WvWNotificationView DataContext="{Binding}">
+                    <view:WvWNotificationView.LayoutTransform>
+                        <RotateTransform Angle="180"/>
+                    </view:WvWNotificationView.LayoutTransform>
+                </view:WvWNotificationView>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+
+    </ItemsControl>
+    </Grid>
+
+</src:OverlayWindow>

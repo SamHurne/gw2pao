@@ -7,7 +7,7 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:view="clr-namespace:GW2PAO.Views.Commerce"
-             xmlns:vm="clr-namespace:GW2PAO.ViewModels.PriceNotification"
+             xmlns:vm="clr-namespace:GW2PAO.ViewModels.Commerce.PriceNotification"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
              Height="60" Width="250">

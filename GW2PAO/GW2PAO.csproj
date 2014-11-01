@@ -157,38 +157,38 @@
     <Compile Include="Utility\UpdateChecker.cs" />
     <Compile Include="Utility\User32.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\DungeonTracker\DungeonTrackerViewModel.cs" />
-    <Compile Include="ViewModels\DungeonTracker\DungeonViewModel.cs" />
-    <Compile Include="ViewModels\DungeonTracker\PathViewModel.cs" />
-    <Compile Include="ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
-    <Compile Include="ViewModels\EventTracker\EventListViewModel.cs" />
-    <Compile Include="ViewModels\EventViewModel.cs" />
-    <Compile Include="ViewModels\GuildViewModel.cs" />
+    <Compile Include="ViewModels\Dungeon\DungeonTrackerViewModel.cs" />
+    <Compile Include="ViewModels\Dungeon\DungeonViewModel.cs" />
+    <Compile Include="ViewModels\Dungeon\PathViewModel.cs" />
+    <Compile Include="ViewModels\Events\EventNotification\EventNotificationsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Events\EventTracker\EventListViewModel.cs" />
+    <Compile Include="ViewModels\Events\EventViewModel.cs" />
+    <Compile Include="ViewModels\WvW\GuildViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IHasWvWMap.cs" />
     <Compile Include="ViewModels\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\Interfaces\IMenuViewModel.cs" />
     <Compile Include="OverlayMenuIcon.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
     <Compile Include="Data\ItemResultsProvider.cs" />
-    <Compile Include="ViewModels\PriceWatchConfigViewModel.cs" />
-    <Compile Include="ViewModels\ItemPriceViewModel.cs" />
-    <Compile Include="ViewModels\PriceNotification\RebuildNamesDatabaseViewModel.cs" />
-    <Compile Include="ViewModels\PriceTracker\PriceListViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\PriceWatchConfigViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\ItemPriceViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\RebuildNamesDatabaseViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\PriceTracker\PriceListViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\ChannelViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TeamspeakViewModel.cs" />
     <Compile Include="ViewModels\Teamspeak\TSNotificationViewModel.cs" />
-    <Compile Include="ViewModels\PriceNotification\PriceNotificationsViewModel.cs" />
-    <Compile Include="ViewModels\PriceNotification\PriceNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\PriceNotification\PriceNotificationsViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\PriceNotification\PriceNotificationViewModel.cs" />
     <Compile Include="Data\Price.cs" />
     <Compile Include="Data\PriceWatch.cs" />
-    <Compile Include="ViewModels\TradingPost\TPCalculatorViewModel.cs" />
+    <Compile Include="ViewModels\Commerce\TPCalculatorViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\TrayIcon\TrayIconViewModel.cs" />
-    <Compile Include="ViewModels\WvWNotification\WvWNotificationsWindowViewModel.cs" />
-    <Compile Include="ViewModels\WvWObjectiveViewModel.cs" />
-    <Compile Include="ViewModels\WvWTeamViewModel.cs" />
-    <Compile Include="ViewModels\WvWTracker\WvWMapViewModel.cs" />
-    <Compile Include="ViewModels\WvWTracker\WvWTrackerViewModel.cs" />
+    <Compile Include="ViewModels\WvW\WvWNotification\WvWNotificationsWindowViewModel.cs" />
+    <Compile Include="ViewModels\WvW\WvWObjectiveViewModel.cs" />
+    <Compile Include="ViewModels\WvW\WvWTeamViewModel.cs" />
+    <Compile Include="ViewModels\WvW\WvWTracker\WvWMapViewModel.cs" />
+    <Compile Include="ViewModels\WvW\WvWTracker\WvWTrackerViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneItemViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneCompletionViewModel.cs" />
     <Compile Include="ViewModels\ZoneCompletion\ZoneNameViewModel.cs" />
@@ -231,41 +231,41 @@
     <Compile Include="Views\WebBrowser\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DungeonTracker\DungeonTrackerView.xaml.cs">
+    <Compile Include="Views\Dungeon\DungeonTrackerView.xaml.cs">
       <DependentUpon>DungeonTrackerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DungeonTracker\DungeonView.xaml.cs">
+    <Compile Include="Views\Dungeon\DungeonView.xaml.cs">
       <DependentUpon>DungeonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventNotification\EventNotificationView.xaml.cs">
+    <Compile Include="Views\Events\EventNotification\EventNotificationView.xaml.cs">
       <DependentUpon>EventNotificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventNotification\EventNotificationWindow.xaml.cs">
+    <Compile Include="Views\Events\EventNotification\EventNotificationWindow.xaml.cs">
       <DependentUpon>EventNotificationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventTracker\EventTrackerView.xaml.cs">
+    <Compile Include="Views\Events\EventTracker\EventTrackerView.xaml.cs">
       <DependentUpon>EventTrackerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EventTracker\WorldEventView.xaml.cs">
+    <Compile Include="Views\Events\EventTracker\WorldEventView.xaml.cs">
       <DependentUpon>WorldEventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OverlayWindow.cs" />
     <Compile Include="Views\Commerce\TPCalculatorView.xaml.cs">
       <DependentUpon>TPCalculatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WvWNotification\WvWNotificationView.xaml.cs">
+    <Compile Include="Views\WvW\WvWNotification\WvWNotificationView.xaml.cs">
       <DependentUpon>WvWNotificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WvWNotification\WvWNotificationWindow.xaml.cs">
+    <Compile Include="Views\WvW\WvWNotification\WvWNotificationWindow.xaml.cs">
       <DependentUpon>WvWNotificationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WvWTracker\VerticalWvWObjectiveView.xaml.cs">
+    <Compile Include="Views\WvW\WvWTracker\VerticalWvWObjectiveView.xaml.cs">
       <DependentUpon>VerticalWvWObjectiveView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WvWTracker\HorizontalWvWObjectiveView.xaml.cs">
+    <Compile Include="Views\WvW\WvWTracker\HorizontalWvWObjectiveView.xaml.cs">
       <DependentUpon>HorizontalWvWObjectiveView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WvWTracker\WvWTrackerView.xaml.cs">
+    <Compile Include="Views\WvW\WvWTracker\WvWTrackerView.xaml.cs">
       <DependentUpon>WvWTrackerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ZoneCompletion\ZoneItemView.xaml.cs">
@@ -402,27 +402,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DungeonTracker\DungeonTrackerView.xaml">
+    <Page Include="Views\Dungeon\DungeonTrackerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DungeonTracker\DungeonView.xaml">
+    <Page Include="Views\Dungeon\DungeonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EventNotification\EventNotificationView.xaml">
+    <Page Include="Views\Events\EventNotification\EventNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EventNotification\EventNotificationWindow.xaml">
+    <Page Include="Views\Events\EventNotification\EventNotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EventTracker\EventTrackerView.xaml">
+    <Page Include="Views\Events\EventTracker\EventTrackerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EventTracker\WorldEventView.xaml">
+    <Page Include="Views\Events\EventTracker\WorldEventView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -430,23 +430,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WvWNotification\WvWNotificationView.xaml">
+    <Page Include="Views\WvW\WvWNotification\WvWNotificationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WvWNotification\WvWNotificationWindow.xaml">
+    <Page Include="Views\WvW\WvWNotification\WvWNotificationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WvWTracker\VerticalWvWObjectiveView.xaml">
+    <Page Include="Views\WvW\WvWTracker\VerticalWvWObjectiveView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WvWTracker\HorizontalWvWObjectiveView.xaml">
+    <Page Include="Views\WvW\WvWTracker\HorizontalWvWObjectiveView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\WvWTracker\WvWTrackerView.xaml">
+    <Page Include="Views\WvW\WvWTracker\WvWTrackerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

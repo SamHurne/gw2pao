@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
-using GW2PAO.ViewModels.DungeonTracker;
+using GW2PAO.ViewModels.Dungeon;
 
 namespace GW2PAO.Controllers.Interfaces
 {

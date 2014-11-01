@@ -15,7 +15,7 @@ using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels;
-using GW2PAO.ViewModels.EventTracker;
+using GW2PAO.ViewModels.Events;
 using GW2PAO.ViewModels.Interfaces;
 using GW2PAO.ViewModels.ZoneCompletion;
 using NLog;
