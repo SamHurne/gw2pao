@@ -28,6 +28,8 @@ namespace GW2PAO.ViewModels.Commerce
 
         private bool isBuyOrderNotificationShown;
         private bool isSellListingNotificationShown;
+        private bool isBuyOrderOutOfLimits;
+        private bool isSellListingOutOfLimits;
         private ItemDBEntry selectedItem;
 
         /// <summary>
@@ -141,6 +143,24 @@ namespace GW2PAO.ViewModels.Commerce
         }
 
         /// <summary>
+        /// True if the highest buy order is out of the configured limits, else false
+        /// </summary>
+        public bool IsBuyOrderOutOfLimits
+        {
+            get { return this.isBuyOrderOutOfLimits; }
+            set { this.SetField(ref this.isBuyOrderOutOfLimits, value); }
+        }
+
+        /// <summary>
+        /// True if the lowest sale listing is out of the configured limits, else false
+        /// </summary>
+        public bool IsSellListingOutOfLimits
+        {
+            get { return this.isSellListingOutOfLimits; }
+            set { this.SetField(ref this.isSellListingOutOfLimits, value); }
+        }
+
+        /// <summary>
         /// Removes the price watch
         /// </summary>
         public DelegateCommand RemoveCommand { get { return new DelegateCommand(this.Remove); } }
@@ -175,6 +195,9 @@ namespace GW2PAO.ViewModels.Commerce
 
             this.IsBuyOrderNotificationShown = false;
             this.IsSellListingNotificationShown = false;
+
+            this.IsBuyOrderOutOfLimits = false;
+            this.IsSellListingOutOfLimits = false;
 
             this.Data.PropertyChanged += Data_PropertyChanged;
             this.Data.BuyOrderUpperLimit.PropertyChanged += BuyOrderLimit_PropertyChanged;

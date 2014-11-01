@@ -195,6 +195,12 @@
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Commerce\PriceTracker\PriceTrackerView.xaml.cs">
+      <DependentUpon>PriceTrackerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commerce\PriceTracker\ItemPriceView.xaml.cs">
+      <DependentUpon>ItemPriceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewVersionNotificationView.xaml.cs">
       <DependentUpon>NewVersionNotificationView.xaml</DependentUpon>
     </Compile>
@@ -351,6 +357,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AboutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Commerce\PriceTracker\PriceTrackerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Commerce\PriceTracker\ItemPriceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -555,7 +569,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Style\Brushes\" />
-    <Folder Include="Views\Commerce\PriceTracker\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />

@@ -96,12 +96,12 @@
                                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
                                                             Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
                                                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderUpperLimit}" FontSize="12"/>
-                                                    <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
+                                                    <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
                                                             Visibility="{Binding PriceWatch.Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
                                                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderLowerLimit}" FontSize="12"/>
-                                                    <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
+                                                    <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Setter.Value>
@@ -115,12 +115,12 @@
                                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
                                                                         Visibility="{Binding PriceWatch.Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
                                                                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingUpperLimit}" FontSize="12"/>
-                                                                <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingUpperLimit}" />
+                                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingUpperLimit}" />
                                                             </StackPanel>
                                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
                                                                         Visibility="{Binding PriceWatch.Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
                                                                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingLowerLimit}" FontSize="12"/>
-                                                                <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding PriceWatch.Data.SellListingLowerLimit}" />
+                                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingLowerLimit}" />
                                                             </StackPanel>
                                                         </StackPanel>
                                                     </Setter.Value>

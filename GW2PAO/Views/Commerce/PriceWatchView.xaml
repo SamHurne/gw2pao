@@ -127,11 +127,11 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
                             <core:OutlinedTextBlock Text="{x:Static resx:Resources.CurrentHighestBuyOrder}" FontSize="12"/>
-                            <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentBuyOrder}" />
+                            <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding CurrentBuyOrder}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                             <core:OutlinedTextBlock Text="{x:Static resx:Resources.CurrentLowestSellListing}" FontSize="12"/>
-                            <view:ReadonlyPriceView Margin="5,0,0,0" DataContext="{Binding CurrentSellListing}" />
+                            <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding CurrentSellListing}" />
                         </StackPanel>
                     </StackPanel>
                 </ToolTip>

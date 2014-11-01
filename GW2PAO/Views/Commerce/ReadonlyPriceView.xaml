@@ -16,16 +16,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-        <core:OutlinedTextBlock Text="{Binding Gold}" />
+    <StackPanel Name="LayoutRoot"
+        Orientation="Horizontal" VerticalAlignment="Bottom">
+        <core:OutlinedTextBlock Text="{Binding Price.Gold}" Fill="{Binding TextFill}" TextAlignment="Right" />
         <Image Source="../../Images/Commerce/gold_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
-        <core:OutlinedTextBlock Text="{Binding Silver}"/>
+        <core:OutlinedTextBlock Text="{Binding Price.Silver}" Fill="{Binding TextFill}" TextAlignment="Right" Width="12"/>
         <Image Source="../../Images/Commerce/silver_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
-        <core:OutlinedTextBlock Text="{Binding Copper}"/>
+        <core:OutlinedTextBlock Text="{Binding Price.Copper}" Fill="{Binding TextFill}" TextAlignment="Right" Width="12"/>
         <Image Source="../../Images/Commerce/copper_coin.png"
                Height="11" Width="11"
                Margin="1,0,0,0"/>

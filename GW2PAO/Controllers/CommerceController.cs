@@ -203,22 +203,23 @@ namespace GW2PAO.Controllers
                         }
 
                         var prices = allPrices[priceWatch.Data.ItemID];
-                        //var prices = this.commerceService.GetItemPrices(priceWatch.Data.ItemID);
                         Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
                         Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
 
                         // Buy Order
-                        bool displayBuyOrderNotification = false;
+                        bool buyOrderOutOfLimits = false;
 
                         if (priceWatch.Data.IsBuyOrderUpperLimitEnabled && priceWatch.Data.IsBuyOrderLowerLimitEnabled)
-                            displayBuyOrderNotification = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value
+                            buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value
                                                         && prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
                         else if (priceWatch.Data.IsBuyOrderUpperLimitEnabled)
-                            displayBuyOrderNotification = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value;
+                            buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value;
                         else if (priceWatch.Data.IsBuyOrderLowerLimitEnabled)
-                            displayBuyOrderNotification = prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
+                            buyOrderOutOfLimits = prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
 
-                        if (displayBuyOrderNotification)
+                        Threading.InvokeOnUI(() => priceWatch.IsBuyOrderOutOfLimits = buyOrderOutOfLimits);
+
+                        if (buyOrderOutOfLimits)
                         {
                             if (this.CanShowNotification(priceWatch, PriceNotificationType.BuyOrder))
                             {
@@ -229,17 +230,19 @@ namespace GW2PAO.Controllers
                         }
 
                         // Sell Listing
-                        bool displaySellListingNotification = false;
+                        bool sellListingOutOfLimits = false;
 
                         if (priceWatch.Data.IsSellListingUpperLimitEnabled && priceWatch.Data.IsSellListingLowerLimitEnabled)
-                            displaySellListingNotification = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value
+                            sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value
                                                             && prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
                         else if (priceWatch.Data.IsSellListingUpperLimitEnabled)
-                            displaySellListingNotification = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value;
+                            sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value;
                         else if (priceWatch.Data.IsSellListingLowerLimitEnabled)
-                            displaySellListingNotification = prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
+                            sellListingOutOfLimits = prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
 
-                        if (displaySellListingNotification)
+                        Threading.InvokeOnUI(() => priceWatch.IsSellListingOutOfLimits = sellListingOutOfLimits);
+
+                        if (sellListingOutOfLimits)
                         {
                             if (this.CanShowNotification(priceWatch, PriceNotificationType.SellListing))
                             {

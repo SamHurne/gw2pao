@@ -562,5 +562,65 @@ namespace GW2PAO.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
+        public double PriceTrackerHeight {
+            get {
+                return ((double)(this["PriceTrackerHeight"]));
+            }
+            set {
+                this["PriceTrackerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public double PriceTrackerWidth {
+            get {
+                return ((double)(this["PriceTrackerWidth"]));
+            }
+            set {
+                this["PriceTrackerWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double PriceTrackerX {
+            get {
+                return ((double)(this["PriceTrackerX"]));
+            }
+            set {
+                this["PriceTrackerX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double PriceTrackerY {
+            get {
+                return ((double)(this["PriceTrackerY"]));
+            }
+            set {
+                this["PriceTrackerY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPriceTrackerOpen {
+            get {
+                return ((bool)(this["IsPriceTrackerOpen"]));
+            }
+            set {
+                this["IsPriceTrackerOpen"] = value;
+            }
+        }
     }
 }

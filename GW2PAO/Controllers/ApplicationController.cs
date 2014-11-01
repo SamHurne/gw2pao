@@ -18,6 +18,7 @@ using GW2PAO.ViewModels.ZoneCompletion;
 using GW2PAO.Views;
 using GW2PAO.Views.Commerce;
 using GW2PAO.Views.Commerce.PriceNotification;
+using GW2PAO.Views.Commerce.PriceTracker;
 using GW2PAO.Views.Dungeon;
 using GW2PAO.Views.Events.EventNotification;
 using GW2PAO.Views.Events.EventTracker;
@@ -219,6 +220,11 @@ namespace GW2PAO.Controllers
         private RebuildNamesDatabaseView rebuildItemNamesView;
 
         /// <summary>
+        /// The price tracker view
+        /// </summary>
+        private PriceTrackerView priceTrackerView;
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApplicationController()
@@ -351,6 +357,9 @@ namespace GW2PAO.Controllers
 
                             if (Properties.Settings.Default.IsTeamspeakOpen && this.CanDisplayTeamspeakOverlay())
                                 this.DisplayTeamspeakOverlay();
+
+                            if (Properties.Settings.Default.IsPriceTrackerOpen && this.CanDisplayPriceTracker())
+                                this.DisplayPriceTracker();
                         });
                 });
         }
@@ -416,6 +425,12 @@ namespace GW2PAO.Controllers
             {
                 Properties.Settings.Default.IsTeamspeakOpen = this.teamspeakView.IsVisible;
                 Threading.InvokeOnUI(() => this.teamspeakView.Close());
+            }
+
+            if (this.priceTrackerView != null)
+            {
+                Properties.Settings.Default.IsPriceTrackerOpen = this.priceTrackerView.IsVisible;
+                Threading.InvokeOnUI(() => this.priceTrackerView.Close());
             }
 
             Threading.InvokeOnUI(() => this.BrowserController.CloseBrowser());
@@ -541,17 +556,22 @@ namespace GW2PAO.Controllers
             // Commerce/Trade menus
             var commerceMenu = new MenuItemViewModel(Properties.Resources.Commerce, null);
 
-            // TP Calculator
-            commerceMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.TPCalculator, this.DisplayTPCalculator, this.CanDisplayTPCalculator));
+            // Price Tracker
+            commerceMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.PriceTracker, this.DisplayPriceTracker, this.CanDisplayPriceTracker));
 
             // Price Notifications
             var priceNotificationsMenu = new MenuItemViewModel(Properties.Resources.PriceNotifications, null);
-            priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.Configure, this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.RebuildItemNamesDatabase, this.DisplayRebuildItemNamesView, this.CanDisplayRebuildItemNamesView));
             priceNotificationsMenu.SubMenuItems.Add(null); // Null for a seperator
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.BuyOrderPriceNotifications, null, true, true, () => { return this.CommerceUserData.AreBuyOrderPriceNotificationsEnabled; }, (enabled) => this.CommerceUserData.AreBuyOrderPriceNotificationsEnabled = enabled, this.CommerceUserData, "AreBuyOrderPriceNotificationsEnabled"));
             priceNotificationsMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.SellListingPriceNotifications, null, true, true, () => { return this.CommerceUserData.AreSellListingPriceNotificationsEnabled; }, (enabled) => this.CommerceUserData.AreSellListingPriceNotificationsEnabled = enabled, this.CommerceUserData, "AreSellListingPriceNotificationsEnabled"));
             commerceMenu.SubMenuItems.Add(priceNotificationsMenu);
+            commerceMenu.SubMenuItems.Add(null); // Null for a seperator
+            commerceMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.Configure, this.DisplayPriceNotificationsConfig, this.CanDisplayPriceNotificationsConfig));
+            commerceMenu.SubMenuItems.Add(null); // Null for a seperator
+
+            // TP Calculator
+            commerceMenu.SubMenuItems.Add(new MenuItemViewModel(Properties.Resources.TPCalculator, this.DisplayTPCalculator, this.CanDisplayTPCalculator));
 
             this.menuItems.Add(commerceMenu);
 
@@ -787,6 +807,32 @@ namespace GW2PAO.Controllers
         /// Determines if the Rebuild Item Names Database window can be displayed
         /// </summary>
         private bool CanDisplayRebuildItemNamesView()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Price Tracker window, or, if already displayed, sets
+        /// focus to the window
+        /// </summary>
+        private void DisplayPriceTracker()
+        {
+            if (this.priceTrackerView == null || !this.priceTrackerView.IsVisible)
+            {
+                this.priceTrackerView = new PriceTrackerView(this.CommerceController);
+                this.priceTrackerView.Show();
+            }
+            else
+            {
+                this.priceTrackerView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the price tracker can be displayed
+        /// </summary>
+        /// <returns>Always true</returns>
+        private bool CanDisplayPriceTracker()
         {
             return true;
         }

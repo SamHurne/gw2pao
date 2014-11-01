@@ -844,6 +844,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price Tracker.
+        /// </summary>
+        public static string PriceTracker {
+            get {
+                return ResourceManager.GetString("PriceTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profit:.
         /// </summary>
         public static string Profit {
