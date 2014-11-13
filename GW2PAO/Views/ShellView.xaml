@@ -12,7 +12,6 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
-        WindowState="Maximized"
         Closing="ShellView_Closing">
 
     <src:OverlayWindow.Resources>
@@ -25,7 +24,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Separator}">
                                     <Grid>
-                                        <Rectangle Height="1" Stroke="White" />
+                                        <Rectangle Height="1" Stroke="Orange" Opacity="0.25" />
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -34,6 +33,21 @@
                 </Separator.Style>
             </Separator>
         </ControlTemplate>
+        
+        <Style x:Key="MainMenuItemStyle" TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+            <Setter Property="Command" Value="{Binding OnClickCommand}" />
+            <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+            <Setter Property="IsChecked" Value="{Binding IsChecked}" />
+            <Setter Property="StaysOpenOnClick" Value="{Binding StaysOpen}" />
+            <Setter Property="Header" Value="{Binding Header}" />
+            <Setter Property="ItemsSource" Value="{Binding SubMenuItems}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                    <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -44,23 +58,8 @@
                         MenuActivation="All"
                         ToolTipText="{x:Static resx:Resources.ApplicationName}">
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MainMenu}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-                            <Setter Property="Command" Value="{Binding OnClickCommand}" />
-                            <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
-                            <Setter Property="IsChecked" Value="{Binding IsChecked}" />
-                            <Setter Property="StaysOpenOnClick" Value="{Binding StaysOpen}" />
-                            <Setter Property="Header" Value="{Binding Header}" />
-                            <Setter Property="ItemsSource" Value="{Binding SubMenuItems}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                    <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
+                <ContextMenu ItemsSource="{Binding MainMenu}"
+                             ItemContainerStyle="{StaticResource MainMenuItemStyle}" />
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
 
@@ -115,23 +114,9 @@
                 </ToolTip>
             </Image.ToolTip>
             <Image.ContextMenu>
-                <ContextMenu Name="MainMenu">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-                            <Setter Property="Command" Value="{Binding OnClickCommand}" />
-                            <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
-                            <Setter Property="IsChecked" Value="{Binding IsChecked}" />
-                            <Setter Property="StaysOpenOnClick" Value="{Binding StaysOpen}" />
-                            <Setter Property="Header" Value="{Binding Header}" />
-                            <Setter Property="ItemsSource" Value="{Binding SubMenuItems}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                    <Setter Property="Template" Value="{StaticResource MenuSeparatorTemplate}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
+                <ContextMenu Name="MainMenu"
+                             ItemsSource="{Binding MainMenu}"
+                             ItemContainerStyle="{StaticResource MainMenuItemStyle}" />
             </Image.ContextMenu>
             <Image.Style>
                 <Style TargetType="Image">

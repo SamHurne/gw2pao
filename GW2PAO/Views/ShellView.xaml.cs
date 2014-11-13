@@ -38,6 +38,9 @@ namespace GW2PAO.Views
 
             InitializeComponent();
 
+            this.Left = Properties.Settings.Default.OverlayIconX;
+            this.Top = Properties.Settings.Default.OverlayIconY;
+
             this.Loaded += ShellView_Loaded;
             this.Closed += ShellView_Closed;
         }
