@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="GW2PAO.Modules.WvW.Views.WvWNotification.WvWNotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
+             mc:Ignorable="d" 
+             TextOptions.TextFormattingMode="Display"
+             Height="84" Width="215">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
+            <converters:WvWMapConverter x:Key="MapConverter" />
+            <converters:WorldColorConverter x:Key="WorldColorConverter" />
+            <converters:EventStateConverter x:Key="StateConverter" />
+            <converters:TimespanConverter x:Key="TimeConverter" />
+
+            <Storyboard x:Key="AddAnimation">
+                <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+            </Storyboard>
+            <Storyboard x:Key="RemoveAnimation">
+                <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+            </Storyboard>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Opacity" Value="1" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource AddAnimation}" Name="AddStoryboard" />
+                </EventTrigger>
+                <DataTrigger Binding="{Binding IsRemovingNotification}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard  BeginStoryboardName="AddStoryboard" />
+                        <BeginStoryboard Storyboard="{StaticResource RemoveAnimation}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+
+    <!--See code-behind for DataContext/ViewModel details-->
+    <Grid Background="Transparent">
+        
+        <Border Name="Border"
+                BorderThickness="2"
+                CornerRadius="0"
+                Margin="5"
+                Padding="5">
+
+            <Border.Background>
+                <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                    <GradientStop Color="#5024313D" Offset="0"/>
+                    <GradientStop Color="#FF24313D" Offset="1.5"/>
+                </RadialGradientBrush>
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <SolidColorBrush Color="Black" Opacity="0.75" />
+            </Border.BorderBrush>
+
+            <Border.Effect>
+                <DropShadowEffect Direction="0" BlurRadius="10" ShadowDepth="0" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Orientation="Vertical" >
+                    <Image Height="30" Width="30">
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource ObjTypeConverter}">
+                                <Binding Path="Type"/>
+                                <Binding Path="WorldOwner"/>
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
+                    <core:OutlinedTextBlock HorizontalAlignment="Center" Text="{Binding Location}" />
+                </StackPanel>
+
+                <Grid Grid.Row="0" Grid.Column="1"
+                      Margin="5,0,0,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Close button -->
+                    <Button Grid.Row="0" Grid.Column="1"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Width="16" Height="17" Padding="0"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Content="{StaticResource CloseGraphic}"
+                            Command="{Binding CloseNotificationCommand}"/>
+
+                    <!-- Objective Name -->
+                    <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                            VerticalAlignment="Bottom"
+                                            Fill="Orange" FontSize="13"
+                                            Text="{Binding Name}" />
+
+                    <!-- Map -->
+                    <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                            FontSize="12" Text="{Binding Map, Converter={StaticResource MapConverter}}" />
+                    
+                    <!-- Previous Owner Information -->
+                    <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="3,0,0,0" FontSize="11" Text="{Binding PrevWorldOwnerName, StringFormat={x:Static resx:Resources.TakenFrom}}" />
+
+                    <!-- Owner information -->
+                    <core:OutlinedTextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="3,0,0,0" FontSize="11" Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.TakenBy}}" />
+
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

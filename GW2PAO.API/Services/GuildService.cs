@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using NLog;
 
 namespace GW2PAO.API.Services
 {
+    [Export(typeof(IGuildService))]
     public class GuildService : IGuildService
     {
         /// <summary>

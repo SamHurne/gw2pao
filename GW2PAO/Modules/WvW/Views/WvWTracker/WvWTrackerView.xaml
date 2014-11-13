@@ -1,0 +1,330 @@
+﻿<src:OverlayWindow x:Class="GW2PAO.Modules.WvW.Views.WvWTracker.WvWTrackerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:view="clr-namespace:GW2PAO.Modules.WvW.Views.WvWTracker"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        x:Name="TrackerWindow"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerX}"
+        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="CanResizeWithGrip"
+        Topmost="True"
+        Closed="Window_Closed"
+        TextOptions.TextFormattingMode="Display">
+
+    <src:OverlayWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+            <converters:WvWMapConverter x:Key="MapConverter" />
+
+            <core:AutoRefreshCollectionViewSource Source="{Binding Objectives}" x:Key="ObjectivesCollection">
+                <CollectionViewSource.SortDescriptions>
+                    <scm:SortDescription PropertyName="Type" />
+                </CollectionViewSource.SortDescriptions>
+            </core:AutoRefreshCollectionViewSource>
+
+        </ResourceDictionary>
+    </src:OverlayWindow.Resources>
+
+    <Grid>
+        <Grid.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
+        </Grid.Effect>
+
+        <Grid.Background>
+            <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                <GradientStop Color="#FF5B4411" Offset="0"/>
+                <GradientStop Color="#005B4411" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
+                Grid.Row="0">
+            <Grid Margin="5,0,0,0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="35" />
+                </Grid.ColumnDefinitions>
+
+                <Image Name="TitleImage"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Height="30" Width="30"
+                       Margin="0,0,0,0"
+                       Source="/Images/Title/WorldvsWorld.png"
+                       MouseDown="TitleImage_MouseDown">
+                    <Image.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{x:Static resx:Resources.Orientation}">
+                                <MenuItem Header="{x:Static resx:Resources.Vertical}" IsCheckable="True" IsChecked="{Binding IsVerticalOrientation}" />
+                                <MenuItem Header="{x:Static resx:Resources.Horizontal}" IsCheckable="True" IsChecked="{Binding IsHorizontalOrientation}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.ShowDistances}" IsCheckable="True" IsChecked="{Binding UserData.AreTimeDistancesShown}" />
+                            <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
+                                <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.TimeDistances}" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenObjectives}" Command="{Binding ResetHiddenObjectivesCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.Show}">
+                                <MenuItem Header="{x:Static resx:Resources.RedObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreRedObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.GreenObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreGreenObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BlueObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreBlueObjectivesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.NeutralObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreNeutralObjectivesShown}" StaysOpenOnClick="True" />
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.Castles}" IsCheckable="True" IsChecked="{Binding UserData.AreCastlesShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Keeps}" IsCheckable="True" IsChecked="{Binding UserData.AreKeepsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Towers}" IsCheckable="True" IsChecked="{Binding UserData.AreTowersShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.Camps}" IsCheckable="True" IsChecked="{Binding UserData.AreCampsShown}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.BloodlustObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
+                            </MenuItem>
+                            <MenuItem Header="{x:Static resx:Resources.Names}">
+                                <MenuItem Header="{x:Static resx:Resources.CardinalDirections}" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.ShortNames}" IsCheckable="True" IsChecked="{Binding IsShortNamesSelected}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.UsePlayersMap}" IsCheckable="True" IsChecked="{Binding IsUsingPlayerMap}" />
+                            <MenuItem Header="{x:Static resx:Resources.OverrideDisplayedMap}">
+                                <MenuItem Header="{x:Static resx:Resources.RedBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingRedBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.GreenBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingGreenBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.BlueBorderlands}" IsCheckable="True" IsChecked="{Binding IsUsingBlueBorderlands}" />
+                                <MenuItem Header="{x:Static resx:Resources.EternalBattlegrounds}" IsCheckable="True" IsChecked="{Binding IsUsingEternalBattlegrounds}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                              Color="Goldenrod"
+                                              Opacity="0"
+                                              BlurRadius="25"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                        HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                        Fill="Orange" FontFamily="Candara" FontSize="12"
+                                        Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}" />
+
+                <Button Name="CollapseExpandButton"
+                    Grid.Column="2"
+                    Margin="5"
+                    Click="CollapseExpandButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=ObjectivesContainer}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Name="CloseWindowButton"
+                    Grid.Column="3"
+                    Margin="5"
+                    Style="{StaticResource TitleBarButtonStyle}"
+                    Content="{StaticResource CloseGraphic}"
+                    Click="CloseWindowButton_Click" />
+            </Grid>
+        </Border>
+
+
+        <ItemsControl Name="ObjectivesContainer" Grid.Row="1"
+                      ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
+                      HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                        Padding="{TemplateBinding Control.Padding}"
+                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                        Background="{TemplateBinding Panel.Background}"
+                                        SnapsToDevicePixels="True">
+                                    <ScrollViewer Padding="{TemplateBinding Control.Padding}"
+                                                  Focusable="False"
+                                                  PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                        <ScrollViewer.Style>
+                                            <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
+                                                <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+                                                <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
+                                                        <DataTrigger.Setters>
+                                                            <Setter Property="VerticalScrollBarVisibility" Value="Hidden" />
+                                                            <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
+                                                        </DataTrigger.Setters>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ScrollViewer.Style>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <view:HorizontalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" Width="{Binding ElementName=TrackerWindow, Path=ActualWidth}"/>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="ItemsPanel">
+                        <Setter.Value>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Orientation" Value="Vertical" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
+                                                    <DataTrigger.Setters>
+                                                        <Setter Property="Orientation" Value="Horizontal" />
+                                                    </DataTrigger.Setters>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                </StackPanel>
+                            </ItemsPanelTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="ItemTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <view:VerticalWvWObjectiveView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+        </ItemsControl>
+
+        <Grid Name="ResizeHeight" Grid.Row="2">
+            <Rectangle VerticalAlignment="Bottom"
+                       HorizontalAlignment="Stretch"
+                       Height="1">
+                <Rectangle.Fill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                        <GradientStop Color="#00FFA500" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+
+        <Grid Name="ResizeWidth" Grid.Row="0" Grid.RowSpan="3"
+              VerticalAlignment="Top">
+            <Rectangle VerticalAlignment="Stretch"
+                       HorizontalAlignment="Right"
+                       Width="1">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#00FFA500" Offset="0"/>
+                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                        <GradientStop Color="#00FFA500" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Height" Value="115" />
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding UserData.AreTimeDistancesShown}" Value="False">
+                            <DataTrigger.Setters>
+                                <Setter Property="Height" Value="90" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+    </Grid>
+</src:OverlayWindow>

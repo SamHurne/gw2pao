@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ using NLog;
 
 namespace GW2PAO.API.Services
 {
+    [Export(typeof(ICommerceService))]
     public class CommerceService : ICommerceService
     {
         /// <summary>

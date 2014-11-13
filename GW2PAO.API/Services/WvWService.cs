@@ -12,9 +12,11 @@ using GW2DotNET.V1.WorldVersusWorld;
 using GW2DotNET.Entities.WorldVersusWorld;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Providers;
+using System.ComponentModel.Composition;
 
 namespace GW2PAO.API.Services
 {
+    [Export(typeof(IWvWService))]
     public class WvWService : IWvWService
     {
         /// <summary>
@@ -56,12 +58,18 @@ namespace GW2PAO.API.Services
         /// Default constructor
         /// </summary>
         /// <param name="objectiveNamesProvider">The StringProvider that supplies localized objective names. If null, a default implementation is used</param>
-        public WvWService(IStringProvider<int, bool> objectiveNamesProvider = null)
+        public WvWService()
         {
-            if (objectiveNamesProvider == null)
-                this.objectiveNamesProvider = new WvWObjectiveNamesProvider();
-            else
-                this.objectiveNamesProvider = objectiveNamesProvider;
+            this.objectiveNamesProvider = new WvWObjectiveNamesProvider();
+        }
+
+        /// <summary>
+        /// Alternate constructor
+        /// </summary>
+        /// <param name="objectiveNamesProvider">The StringProvider that supplies localized objective names. If null, a default implementation is used</param>
+        public WvWService(IStringProvider<int, bool> objectiveNamesProvider)
+        {
+            this.objectiveNamesProvider = objectiveNamesProvider;
         }
 
         /// <summary>

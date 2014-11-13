@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -20,6 +21,7 @@ namespace GW2PAO.API.Services
     /// <summary>
     /// Service class for event information
     /// </summary>
+    [Export(typeof(IEventsService))]
     public class EventsService : IEventsService
     {
         /// <summary>
@@ -45,16 +47,20 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// Default constructor
         /// </summary>
+        public EventsService()
+        {
+            this.worldEventStringProvider = new WorldEventNamesProvider();
+            this.timeProvider = new DefaultTimeProvider();
+        }
+
+        /// <summary>
+        /// Alternate constructor
+        /// </summary>
         /// <param name="currentTimeProvider">A time provider for determining the current name. If null, the EventsServer will use the DefaultTimeProvider</param>
-        public EventsService(IStringProvider<Guid> worldEventNamesProvider = null, ITimeProvider currentTimeProvider = null)
+        public EventsService(IStringProvider<Guid> worldEventNamesProvider, ITimeProvider currentTimeProvider)
         {
             this.worldEventStringProvider = worldEventNamesProvider;
-            if (this.worldEventStringProvider == null)
-                this.worldEventStringProvider = new WorldEventNamesProvider();
-
             this.timeProvider = currentTimeProvider;
-            if (this.timeProvider == null)
-                this.timeProvider = new DefaultTimeProvider();
         }
 
         /// <summary>

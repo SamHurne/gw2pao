@@ -1,0 +1,12 @@
+﻿<Window x:Class="GW2PAO.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ShowInTaskbar="False"
+        Background="Transparent"
+        Title="{x:Static resx:Resources.ApplicationName}">
+    <Grid>
+    </Grid>
+</Window>

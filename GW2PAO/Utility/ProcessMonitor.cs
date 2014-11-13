@@ -95,7 +95,8 @@ namespace GW2PAO.Utility
                 {
                     if (!isAdminRightsErrorShown)
                     {
-                        App.TrayIcon.DisplayNotification(Properties.Resources.Warning, Properties.Resources.NotRunningAsAdmin, GW2PAO.TrayIcon.TrayInfoMessageType.Warning);
+                        // TODO: find a good way to do this... probably with an aggregate event or composite command
+                        //App.TrayIcon.DisplayNotification(Properties.Resources.Warning, Properties.Resources.NotRunningAsAdmin, GW2PAO.TrayIcon.TrayInfoMessageType.Warning);
                         logger.Warn(ex);
                         isAdminRightsErrorShown = true;
                     }

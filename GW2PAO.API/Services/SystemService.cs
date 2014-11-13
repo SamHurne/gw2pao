@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -15,6 +16,7 @@ namespace GW2PAO.API.Services
     /// <summary>
     /// Service class for system information
     /// </summary>
+    [Export(typeof(ISystemService))]
     public class SystemService : ISystemService
     {
         /// <summary>

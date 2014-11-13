@@ -19,9 +19,11 @@ using GW2PAO.TS3.Constants;
 using System.Timers;
 using GW2PAO.TS3.Data;
 using NLog;
+using System.ComponentModel.Composition;
 
 namespace GW2PAO.TS3.Services
 {
+    [Export(typeof(ITeamspeakService))]
     public class TeamspeakService : ITeamspeakService
     {
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace GW2PAO.API.Services
     /// <summary>
     /// Service class used to retrieve information such as points of interest, hearts, waypoints, etc
     /// </summary>
+    [Export(typeof(IZoneService))]
     public class ZoneService : IZoneService
     {
         /// <summary>

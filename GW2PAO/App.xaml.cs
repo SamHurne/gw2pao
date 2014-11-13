@@ -7,12 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Awesomium.Core;
-using GW2PAO.Controllers;
-using GW2PAO.TrayIcon;
+using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
 using GW2PAO.Utility.Interfaces;
-using GW2PAO.ViewModels.TrayIcon;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO
@@ -27,40 +26,37 @@ namespace GW2PAO
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// The actual taskbar icon object
-        /// </summary>
-        private static TaskbarIcon TaskbarIcon;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
-        /// <summary>
-        /// View model for the primary application tray icon
-        /// </summary>
-        private static TrayIconViewModel TrayIconVm;
+            this.InitializeSettings();
+            this.InitializeLogging();
 
-        /// <summary>
-        /// The primary application tray icon
-        /// </summary>
-        public static IApplicationTrayIcon TrayIcon { get; private set; }
+            // Log application information
+            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+            logger.Info("Application starting - " + executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version + " - " + fvi.FileVersion + " - " + fvi.ProductVersion);
 
-        /// <summary>
-        /// The main application controller
-        /// </summary>
-        private static ApplicationController AppController;
+            // Initialize the last chance exception handlers
+            logger.Debug("Registering last chance exception handlers");
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-        /// <summary>
-        /// The overlay menu icon (little icon that shows up on the screen, rather than in the tray)
-        /// </summary>
-        private static OverlayMenuIcon ApplicationOverlayMenuIcon;
+            this.InitializeInternationalization();
 
-        /// <summary>
-        /// The Process Monitor object that monitors the GW2 Process
-        /// </summary>
-        private static IProcessMonitor ProcessMonitor;
+            if (GW2PAO.Properties.Settings.Default.CheckForUpdates)
+                UpdateChecker.CheckForUpdateAndNotify();
 
-        /// <summary>
-        /// Application startup
-        /// </summary>
-        public void AppStartup(object sender, StartupEventArgs e)
+            ApplicationBootstrapper ab = new ApplicationBootstrapper();
+            ab.Run();
+
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.DoShutdown));
+
+            GW2PAO.Properties.Settings.Default.FirstTimeRun = false;
+            GW2PAO.Properties.Settings.Default.Save();
+        }
+
+        private void InitializeSettings()
         {
             // We save this so that if we perform an upgrade of settings,
             //  we still treat this startup as a first-time run of the application
@@ -74,7 +70,10 @@ namespace GW2PAO
                 GW2PAO.Properties.Settings.Default.FirstTimeRun = firstTimeUse;
                 GW2PAO.Properties.Settings.Default.Save();
             }
+        }
 
+        private void InitializeLogging()
+        {
 #if DEBUG
             // Enable logging if running in debug
             LogManager.GlobalThreshold = NLog.LogLevel.Trace;
@@ -87,15 +86,10 @@ namespace GW2PAO
             // Disable the debug assert windows that pop-up from NLog
             System.Diagnostics.Trace.Listeners.OfType<System.Diagnostics.DefaultTraceListener>().First().AssertUiEnabled = false;
 
-            // Log application information
-            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
-            logger.Info("Application starting - " + executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version + " - " + fvi.FileVersion + " - " + fvi.ProductVersion);
+        }
 
-            // Initialize the last chance exception handlers
-            logger.Debug("Registering last chance exception handlers");
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
+        private void InitializeInternationalization()
+        {
             // Set up language information
             if (string.IsNullOrWhiteSpace(GW2PAO.Properties.Settings.Default.Language))
             {
@@ -109,134 +103,11 @@ namespace GW2PAO
             ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
             //CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en");
             ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
-
-#if !NO_BROWSER
-            // Initialize the WebCore for the web browser
-            logger.Debug("Initializing Awesomium WebCore");
-            if (!WebCore.IsInitialized)
-            {
-                WebCore.Initialize(new WebConfig()
-                {
-                    HomeURL = "http://wiki.guildwars2.com/".ToUri(),
-                });
-            }
-#endif
-
-            // Create dummy window so that the only way to exit the app is by using the tray icon
-            Window dummyWindow = new Window()
-            {
-                WindowStyle = System.Windows.WindowStyle.None,
-                AllowsTransparency = true,
-                Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent),
-                ShowInTaskbar = false,
-                Title = GW2PAO.Properties.Resources.ApplicationName
-            };
-            dummyWindow.Show();
-            GW2PAO.Views.OverlayWindow.OwnerWindow = dummyWindow;
-
-            // Create the tray icon
-            logger.Debug("Creating tray icon");
-            TaskbarIcon = (TaskbarIcon)this.FindResource("TrayIcon");
-            TrayIconVm = new TrayIconViewModel();
-            TaskbarIcon.DataContext = TrayIconVm;
-            TaskbarIcon.ContextMenu.DataContext = TrayIconVm;
-            TaskbarIcon.ContextMenu.ItemsSource = TrayIconVm.MenuItems;
-            App.TrayIcon = new ApplicationTrayIcon(TaskbarIcon);
-            logger.Debug("Tray icon created");
-
-            // Initialize the application controller
-            AppController = new ApplicationController();
-
-            // Initialize the process monitor
-            ProcessMonitor = new ProcessMonitor(AppController.SystemService);
-            GW2PAO.Views.OverlayWindow.ProcessMonitor = ProcessMonitor;
-
-            // Initialize the OverlayMenuIcon
-            ApplicationOverlayMenuIcon = new OverlayMenuIcon(TrayIconVm);
-
-            // Set up the menu items
-            logger.Debug("Initializing menu items");
-            if (TrayIconVm != null)
-            {
-                foreach (var item in AppController.GetMenuItems())
-                    TrayIconVm.MenuItems.Add(item);
-
-                TrayIconVm.MenuItems.Add(null); // Null is treated as a seperator
-
-                var settingsMenu = new MenuItemViewModel(GW2PAO.Properties.Resources.Settings, null);
-
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.ShowNotificationBorders, null, true, false,
-                    () => { return GW2PAO.Properties.Settings.Default.AreNotificationWindowBordersVisible; },
-                    (enabled) =>
-                    {
-                        GW2PAO.Properties.Settings.Default.AreNotificationWindowBordersVisible = enabled;
-                        GW2PAO.Properties.Settings.Default.Save();
-                    },
-                    GW2PAO.Properties.Settings.Default, "AreNotificationWindowBordersVisible"));
-
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.NonInteractiveWindows, null, true, false,
-                    () => { return GW2PAO.Properties.Settings.Default.IsClickthroughEnabled; },
-                    (enabled) => {
-                                    GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = enabled;
-                                    GW2PAO.Properties.Settings.Default.Save();
-                                 },
-                    GW2PAO.Properties.Settings.Default, "IsClickthroughEnabled"));
-
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.StickyWindows, null, true, false,
-                    () => { return GW2PAO.Properties.Settings.Default.AreWindowsSticky; },
-                    (enabled) =>
-                    {
-                        GW2PAO.Properties.Settings.Default.AreWindowsSticky = enabled;
-                        GW2PAO.Properties.Settings.Default.Save();
-                    },
-                    GW2PAO.Properties.Settings.Default, "AreWindowsSticky"));
-
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.OverlayMenuIcon, null, true, false,
-                    () => { return ApplicationOverlayMenuIcon.IsVisible; },
-                    (show) => { ApplicationOverlayMenuIcon.IsVisible = show; },
-                    ApplicationOverlayMenuIcon, "IsVisible"));
-
-                settingsMenu.SubMenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.CheckForUpdatesAtStartup, null, true, false,
-                    () => { return GW2PAO.Properties.Settings.Default.CheckForUpdates; },
-                    (enabled) =>
-                    {
-                        GW2PAO.Properties.Settings.Default.CheckForUpdates = enabled;
-                        GW2PAO.Properties.Settings.Default.Save();
-                    },
-                    GW2PAO.Properties.Settings.Default, "CheckForUpdates"));
-
-                TrayIconVm.MenuItems.Add(settingsMenu);
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.About, () => new GW2PAO.Views.AboutView().Show()));
-                TrayIconVm.MenuItems.Add(new MenuItemViewModel(GW2PAO.Properties.Resources.Exit, this.ExitAndCleanup));
-            }
-
-            logger.Info("Program startup complete");
-
-            // Reopen windows based on user settings
-            AppController.ReopenWindowsFromSettings();
-
-            GW2PAO.Properties.Settings.Default.FirstTimeRun = false;
-            GW2PAO.Properties.Settings.Default.Save();
-
-            // Perform a check for new updates
-            if (GW2PAO.Properties.Settings.Default.CheckForUpdates)
-                UpdateChecker.CheckForUpdateAndNotify();
         }
 
-        /// <summary>
-        /// Exits and cleans up the application
-        /// </summary>
-        private void ExitAndCleanup()
+        private void DoShutdown()
         {
             logger.Info("Program shutting down");
-
-#if !NO_BROWSER
-            logger.Debug("Cleaning up Awesomium WebCore");
-            if (WebCore.IsInitialized)
-            {
-                WebCore.Shutdown();
-            }
-#endif
 
             // Really hate to have to do this, but I can't have logs filling up people's disk space
             //  There's no way to disable logging (tried but it didn't work)
@@ -249,10 +120,9 @@ namespace GW2PAO
             // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
             Task.Factory.StartNew(() =>
             {
-                ApplicationOverlayMenuIcon.Shutdown();
-                AppController.Shutdown();
-                ProcessMonitor.Dispose();
-                Application.Current.Dispatcher.Invoke(TaskbarIcon.Dispose);
+                if (GW2PAO.Views.OverlayWindow.ProcessMonitor != null)
+                    GW2PAO.Views.OverlayWindow.ProcessMonitor.Dispose();
+
                 Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
             });
         }

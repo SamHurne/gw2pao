@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -18,6 +19,7 @@ namespace GW2PAO.API.Services
     /// Service class for player information.
     /// Makes use of the Gw2 Mumble interface
     /// </summary>
+    [Export(typeof(IPlayerService))]
     public class PlayerService : IPlayerService
     {
         /// <summary>

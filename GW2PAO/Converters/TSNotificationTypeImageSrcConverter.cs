@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using GW2PAO.ViewModels.Teamspeak;
+using GW2PAO.Modules.Teamspeak.ViewModels;
 
 namespace GW2PAO.Converters
 {

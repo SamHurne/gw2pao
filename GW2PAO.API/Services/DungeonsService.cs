@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace GW2PAO.API.Services
     /// <summary>
     /// Service class for dungeon information
     /// </summary>
+    [Export(typeof(IDungeonsService))]
     public class DungeonsService : IDungeonsService
     {
         /// <summary>
@@ -33,12 +35,17 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DungeonsService(IStringProvider<Guid> dungeonNamesProvider = null)
+        public DungeonsService()
         {
-            if (dungeonNamesProvider == null)
-                this.dungeonsStringProvider = new DungeonNamesProvider();
-            else
-                this.dungeonsStringProvider = dungeonNamesProvider;
+            this.dungeonsStringProvider = new DungeonNamesProvider();
+        }
+
+        /// <summary>
+        /// Alternate constructor
+        /// </summary>
+        public DungeonsService(IStringProvider<Guid> dungeonNamesProvider)
+        {
+            this.dungeonsStringProvider = dungeonNamesProvider;
         }
 
         /// <summary>
