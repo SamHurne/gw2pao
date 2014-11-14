@@ -12,7 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GW2PAO.Infrastructure;
+using GW2PAO.Utility;
 using GW2PAO.ViewModels;
+using Microsoft.Practices.Prism.Commands;
 
 namespace GW2PAO.Views
 {
@@ -42,7 +45,10 @@ namespace GW2PAO.Views
             this.Top = Properties.Settings.Default.OverlayIconY;
 
             this.Loaded += ShellView_Loaded;
-            this.Closed += ShellView_Closed;
+
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.CleanupTrayIcon));
+
+            this.Closing += ShellView_Closing;
         }
 
         private void ShellView_Loaded(object sender, RoutedEventArgs e)
@@ -57,9 +63,9 @@ namespace GW2PAO.Views
             }
         }
 
-        private void ShellView_Closed(object sender, EventArgs e)
+        private void CleanupTrayIcon()
         {
-            this.TrayIcon.Dispose();
+            Threading.InvokeOnUI(() => this.TrayIcon.Dispose());
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
