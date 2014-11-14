@@ -11,22 +11,15 @@
              Height="60" Width="230">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
 
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <converters:TimespanConverter x:Key="TimeConverter" />
-
-            <Storyboard x:Key="AddAnimation">
-                <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
-            </Storyboard>
-            <Storyboard x:Key="RemoveAnimation">
-                <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
-            </Storyboard>
-
-        </ResourceDictionary>
+        <Storyboard x:Key="AddAnimation">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+        </Storyboard>
+        <Storyboard x:Key="RemoveAnimation">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+        </Storyboard>
     </UserControl.Resources>
     
     <UserControl.Style>

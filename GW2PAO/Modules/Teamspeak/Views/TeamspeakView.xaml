@@ -19,23 +19,16 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:SortedCollectionConverter x:Key="CollectionSorter" />
 
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-            <converters:SortedCollectionConverter x:Key="CollectionSorter" />
+        <core:AutoRefreshCollectionViewSource Source="{Binding Channels}" x:Key="ChannelsCollection">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="OrderIndex" />
+            </CollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
 
-            <core:AutoRefreshCollectionViewSource Source="{Binding Channels}" x:Key="ChannelsCollection">
-                <CollectionViewSource.SortDescriptions>
-                    <scm:SortDescription PropertyName="OrderIndex" />
-                </CollectionViewSource.SortDescriptions>
-            </core:AutoRefreshCollectionViewSource>
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding Notifications}" x:Key="NotificationsCollection" />
-
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding Notifications}" x:Key="NotificationsCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid>

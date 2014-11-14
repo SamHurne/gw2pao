@@ -38,7 +38,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ItemsControl">
+    <Style x:Key="ScrollingItemsControl" TargetType="ItemsControl">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>

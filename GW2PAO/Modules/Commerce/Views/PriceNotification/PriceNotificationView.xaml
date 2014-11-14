@@ -13,22 +13,15 @@
              Height="60" Width="250">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:PriceNotificationTypeConverter x:Key="NotificationTypeConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-            <converters:PriceNotificationTypeConverter x:Key="NotificationTypeConverter" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <Storyboard x:Key="AddAnimation">
-                <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.15"/>
-            </Storyboard>
-            <Storyboard x:Key="RemoveAnimation">
-                <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.15"/>
-            </Storyboard>
-
-        </ResourceDictionary>
+        <Storyboard x:Key="AddAnimation">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.15"/>
+        </Storyboard>
+        <Storyboard x:Key="RemoveAnimation">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.15"/>
+        </Storyboard>
     </UserControl.Resources>
     
     <UserControl.Style>

@@ -11,19 +11,12 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-            <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
-            <converters:WvWMapConverter x:Key="MapConverter" />
-            <converters:WorldColorConverter x:Key="WorldColorConverter" />
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <converters:TimespanConverter x:Key="TimeConverter" />
-
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
+        <converters:WvWMapConverter x:Key="MapConverter" />
+        <converters:WorldColorConverter x:Key="WorldColorConverter" />
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
     </UserControl.Resources>
 
     <UserControl.Style>

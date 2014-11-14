@@ -11,14 +11,6 @@
              Height="43"
              TextOptions.TextFormattingMode="Display">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
     <!--TODO: ContextMenu-->
     <!--<UserControl.ContextMenu>
         <ContextMenu>

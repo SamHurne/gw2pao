@@ -10,16 +10,8 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
-            <converters:TimespanConverter x:Key="TimeConverter" />
-
-        </ResourceDictionary>
-
+        <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
     </UserControl.Resources>
 
     <UserControl.ContextMenu>

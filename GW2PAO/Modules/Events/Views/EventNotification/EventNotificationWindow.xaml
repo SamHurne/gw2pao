@@ -17,13 +17,8 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/BaseControlStyles/ToolTipStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <core:AutoRefreshCollectionViewSource Source="{Binding EventNotifications}" x:Key="EventNotificationsCollection" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding EventNotifications}" x:Key="EventNotificationsCollection" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </src:OverlayWindow.Resources>
 
     <Grid>

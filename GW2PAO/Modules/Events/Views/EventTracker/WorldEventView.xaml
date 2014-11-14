@@ -11,16 +11,9 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <converters:TimespanConverter x:Key="TimeConverter" />
-            <converters:TreasureCheckboxConverter x:Key="TreasureConverter" />
-
-        </ResourceDictionary>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
+        <converters:TreasureCheckboxConverter x:Key="TreasureConverter" />
     </UserControl.Resources>
 
     <UserControl.ContextMenu>

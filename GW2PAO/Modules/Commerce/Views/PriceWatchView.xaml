@@ -12,82 +12,75 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:BoolToVisibleHiddenConverter x:Key="BoolToVisibility" />
+        <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
 
-            <converters:BoolToVisibleHiddenConverter x:Key="BoolToVisibility" />
-            <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
+        <DockPanel x:Key="RemoveGraphic" Height="8">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                    StrokeThickness="2">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="20,20"/>
+                            </PathFigure>
+                            <PathFigure StartPoint="0,20">
+                                <LineSegment Point="20,0"/>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </DockPanel>
 
-            <DockPanel x:Key="RemoveGraphic" Height="8">
-                <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                      StrokeThickness="2">
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathGeometry.Figures>
-                                <PathFigure StartPoint="0,0">
-                                    <LineSegment Point="20,20"/>
-                                </PathFigure>
-                                <PathFigure StartPoint="0,20">
-                                    <LineSegment Point="20,0"/>
-                                </PathFigure>
-                            </PathGeometry.Figures>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
-            </DockPanel>
+        <Style x:Key="CustomListViewItems" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <EventSetter Event="MouseUp" Handler="OnIntelliboxSuggestItem_MouseUp" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border"
+                                            Margin="1" Padding="0,2,0,2"
+                                            SnapsToDevicePixels="true"
+                                            Background="Transparent" CornerRadius="0">
+                            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Orange" Opacity="0.75" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Orange" Opacity="0.25" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <Style x:Key="CustomListViewItems" TargetType="{x:Type ListViewItem}">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="White"/>
-                <EventSetter Event="MouseUp" Handler="OnIntelliboxSuggestItem_MouseUp" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <Border x:Name="Border"
-                                                Margin="1" Padding="0,2,0,2"
-                                                SnapsToDevicePixels="true"
-                                                Background="Transparent" CornerRadius="0">
-                                <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Border" Property="Background">
-                                        <Setter.Value>
-                                            <SolidColorBrush Color="Orange" Opacity="0.75" />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Border" Property="Background">
-                                        <Setter.Value>
-                                            <SolidColorBrush Color="Orange" Opacity="0.25" />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <Style TargetType="{x:Type ListView}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="Black" Opacity="0.75" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ItemContainerStyle" Value="{StaticResource CustomListViewItems}" />
+        </Style>
 
-            <Style TargetType="{x:Type ListView}">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Black" Opacity="0.75" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="ItemContainerStyle" Value="{StaticResource CustomListViewItems}" />
-            </Style>
-
-            <auto:IntelliboxAlternateRowColorizer x:Key="IntelliboxRowColorizer" EvenRowBrush="Black" OddRowBrush="Black" />
-
-        </ResourceDictionary>
+        <auto:IntelliboxAlternateRowColorizer x:Key="IntelliboxRowColorizer" EvenRowBrush="Black" OddRowBrush="Black" />
     </UserControl.Resources>
 
     <!--See code-behind for DataContext/ViewModel details-->

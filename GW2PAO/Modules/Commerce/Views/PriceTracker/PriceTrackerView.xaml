@@ -20,18 +20,11 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding ItemPrices}" x:Key="ItemPricesCollection" />
-            <!-- TODO: Sorting this collection -->
-
-        </ResourceDictionary>
+        <!-- TODO: Sorting this collection -->
+        <core:AutoRefreshCollectionViewSource Source="{Binding ItemPrices}" x:Key="ItemPricesCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid>

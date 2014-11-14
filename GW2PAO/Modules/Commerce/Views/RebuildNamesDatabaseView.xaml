@@ -14,14 +14,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <converters:BoolToVisibleHiddenConverter x:Key="BoolToVisibility" />
-
-        </ResourceDictionary>
+        <converters:BoolToVisibleHiddenConverter x:Key="BoolToVisibility" />
     </src:OverlayWindow.Resources>
 
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">

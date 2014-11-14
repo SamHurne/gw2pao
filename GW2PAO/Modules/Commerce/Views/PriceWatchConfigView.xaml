@@ -16,16 +16,8 @@
         UseLayoutRounding="True">
     
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding ItemPrices}" x:Key="ItemPricesCollection" />
-
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <core:AutoRefreshCollectionViewSource Source="{Binding ItemPrices}" x:Key="ItemPricesCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid>

@@ -20,21 +20,15 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding WorldEvents}" x:Key="WorldEventsView">
-                <CollectionViewSource.SortDescriptions>
-                    <scm:SortDescription PropertyName="State" />
-                    <scm:SortDescription PropertyName="TimerValue" />
-                </CollectionViewSource.SortDescriptions>
-            </core:AutoRefreshCollectionViewSource>
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding WorldEvents}" x:Key="WorldEventsView">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="State" />
+                <scm:SortDescription PropertyName="TimerValue" />
+            </CollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
     </src:OverlayWindow.Resources>
 
     <Grid>

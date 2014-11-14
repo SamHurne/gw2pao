@@ -14,15 +14,8 @@
         TextOptions.TextFormattingMode="Display">
     
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-            <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
-            
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
     </src:OverlayWindow.Resources>
     
     <src:OverlayWindow.DataContext>
@@ -347,7 +340,7 @@
                 </StackPanel>
                 <Button Margin="85,0,0,0" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                         Command="{Binding ResetCommand}">
-                    <TextBlock Text="{x:Static resx:Resources.Quantity}" />
+                    <TextBlock Text="{x:Static resx:Resources.Reset}" />
                 </Button>
             </StackPanel>
 

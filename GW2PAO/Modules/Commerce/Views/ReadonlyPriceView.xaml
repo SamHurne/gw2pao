@@ -8,14 +8,6 @@
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
     <StackPanel Name="LayoutRoot"
         Orientation="Horizontal" VerticalAlignment="Bottom">
         <core:OutlinedTextBlock Text="{Binding Price.Gold}" Fill="{Binding TextFill}" TextAlignment="Right" />

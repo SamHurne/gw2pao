@@ -11,16 +11,10 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:TSNotificationTypeImageSrcConverter x:Key="NotificationTypeImgSrcConverter" />
 
-            <converters:TSNotificationTypeImageSrcConverter x:Key="NotificationTypeImgSrcConverter" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
-            <Geometry x:Key="PathCheckboxGeometry">M 0 6 L 5 12 L 12 0 L 12 0</Geometry>
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
+        <Geometry x:Key="PathCheckboxGeometry">M 0 6 L 5 12 L 12 0 L 12 0</Geometry>
     </UserControl.Resources>
 
     <!--Note: DataContext is set by the TeamspeakView-->

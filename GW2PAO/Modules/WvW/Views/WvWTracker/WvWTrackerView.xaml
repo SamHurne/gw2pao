@@ -18,21 +18,14 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:WvWMapConverter x:Key="MapConverter" />
 
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-            <converters:WvWMapConverter x:Key="MapConverter" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding Objectives}" x:Key="ObjectivesCollection">
-                <CollectionViewSource.SortDescriptions>
-                    <scm:SortDescription PropertyName="Type" />
-                </CollectionViewSource.SortDescriptions>
-            </core:AutoRefreshCollectionViewSource>
-
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding Objectives}" x:Key="ObjectivesCollection">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Type" />
+            </CollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
     </src:OverlayWindow.Resources>
 
     <Grid>

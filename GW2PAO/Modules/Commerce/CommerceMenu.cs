@@ -32,7 +32,7 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         public string Header
         {
-            get { return Properties.Resources.Events; }
+            get { return Properties.Resources.Commerce; }
         }
 
         /// <summary>

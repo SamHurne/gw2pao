@@ -14,60 +14,54 @@
         Height="700" Width="1200">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
+            <awecore:WebPreferences  ShrinkStandaloneImagesToFit="False" SmoothScrolling="True"
+                                        AllowInsecureContent="False"
+                                        CustomCSS="
+                                        ::-webkit-scrollbar              { background-color: #000000; }
+                                        ::-webkit-scrollbar-button       { background-color: #000000; }
+                                        ::-webkit-scrollbar-track        { background-color: #000000 }
+                                        ::-webkit-scrollbar-track-piece  { background-color: #000000 }
+                                        ::-webkit-scrollbar-thumb        { background-color: #FFA500; }
+                                        ::-webkit-scrollbar-corner       { background-color: #000000 }
+                                        ::-webkit-resizer                { background-color: #000000 }" />
+        </awe:WebSessionProvider>
             
-            <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
-                <awecore:WebPreferences  ShrinkStandaloneImagesToFit="False" SmoothScrolling="True"
-                                         AllowInsecureContent="False"
-                                         CustomCSS="
-                                            ::-webkit-scrollbar              { background-color: #000000; }
-                                            ::-webkit-scrollbar-button       { background-color: #000000; }
-                                            ::-webkit-scrollbar-track        { background-color: #000000 }
-                                            ::-webkit-scrollbar-track-piece  { background-color: #000000 }
-                                            ::-webkit-scrollbar-thumb        { background-color: #FFA500; }
-                                            ::-webkit-scrollbar-corner       { background-color: #000000 }
-                                            ::-webkit-resizer                { background-color: #000000 }" />
-            </awe:WebSessionProvider>
-            
-            <awe:UrlConverter x:Key="UrlConverter" />
-            <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <awe:UrlConverter x:Key="UrlConverter" />
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
 
-            <DockPanel x:Key="BackGraphic" Height="10">
-                <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                      StrokeThickness="1"
-                      Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      Data="M 0,40 L 20,20 20,32 60,32 60,48 20,48 20,60 0,40">
-                </Path>
-            </DockPanel>
+        <DockPanel x:Key="BackGraphic" Height="10">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                    StrokeThickness="1"
+                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Data="M 0,40 L 20,20 20,32 60,32 60,48 20,48 20,60 0,40">
+            </Path>
+        </DockPanel>
 
-            <DockPanel x:Key="ForwardGraphic" Height="10">
-                <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                      StrokeThickness="1"
-                      Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      Data="M 60,20 L 40,40 40,28 0,28 0,12 40,12 40,0 60,20">
-                </Path>
-            </DockPanel>
+        <DockPanel x:Key="ForwardGraphic" Height="10">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                    StrokeThickness="1"
+                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Data="M 60,20 L 40,40 40,28 0,28 0,12 40,12 40,0 60,20">
+            </Path>
+        </DockPanel>
 
-            <DockPanel x:Key="ReloadGraphic" Height="15">
-                <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                      StrokeThickness="1"
-                      Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
-                      Data="M 0,200   C 0,100 75,0 200,0   C 300,0 400,75 400,200  L 450,200  L 375,300  L 300,200  L 350,200  C 350,100 275,50 200,50  C 100,50 50,125 50,200 C 50,250 100,350 200,350  L 200,400  C 100,400 0,300 0,200">
-                </Path>
-            </DockPanel>
-        </ResourceDictionary>
+        <DockPanel x:Key="ReloadGraphic" Height="15">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                    StrokeThickness="1"
+                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Data="M 0,200   C 0,100 75,0 200,0   C 300,0 400,75 400,200  L 450,200  L 375,300  L 300,200  L 350,200  C 350,100 275,50 200,50  C 100,50 50,125 50,200 C 50,250 100,350 200,350  L 200,400  C 100,400 0,300 0,200">
+            </Path>
+        </DockPanel>
     </src:OverlayWindow.Resources>
 
     <awe:WebDialogsLayer>

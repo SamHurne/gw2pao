@@ -17,16 +17,8 @@
         TextOptions.TextFormattingMode="Display">
     
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding Dungeons}" x:Key="DungeonsCollection" />
-
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <core:AutoRefreshCollectionViewSource Source="{Binding Dungeons}" x:Key="DungeonsCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid>
@@ -145,7 +137,8 @@
         </Border>
 
         <ItemsControl Name="DungeonsContainer" Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource DungeonsCollection}}">
+                      ItemsSource="{Binding Source={StaticResource DungeonsCollection}}"
+                      Style="{StaticResource ScrollingItemsControl}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <view:DungeonView DataContext="{Binding}"

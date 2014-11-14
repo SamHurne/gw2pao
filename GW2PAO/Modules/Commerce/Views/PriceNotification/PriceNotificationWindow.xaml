@@ -18,13 +18,8 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../../Style/BaseControlStyles/ToolTipStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <core:AutoRefreshCollectionViewSource Source="{Binding PriceNotifications}" x:Key="PriceNotificationsCollection" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding PriceNotifications}" x:Key="PriceNotificationsCollection" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </src:OverlayWindow.Resources>
 
     <Grid>
@@ -48,8 +43,8 @@
 
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <i:Interaction.Behaviors>
+                    <StackPanel Orientation="Vertical">
+                        <i:Interaction.Behaviors>
                             <ei:FluidMoveBehavior Duration="0:0:0.25" AppliesTo="Children">
                                 <ei:FluidMoveBehavior.EaseY>
                                     <CubicEase EasingMode="EaseInOut"/>

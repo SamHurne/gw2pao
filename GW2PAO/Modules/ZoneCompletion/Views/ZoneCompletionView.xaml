@@ -25,20 +25,14 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-            <converters:EventStateConverter x:Key="StateConverter" />
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-            <core:AutoRefreshCollectionViewSource Source="{Binding ZoneItems}" x:Key="zoneItemsView">
-                <CollectionViewSource.SortDescriptions>
-                    <scm:SortDescription PropertyName="DistanceFromPlayer" />
-                </CollectionViewSource.SortDescriptions>
-            </core:AutoRefreshCollectionViewSource>
-        </ResourceDictionary>
+        <core:AutoRefreshCollectionViewSource Source="{Binding ZoneItems}" x:Key="zoneItemsView">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="DistanceFromPlayer" />
+            </CollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
     </src:OverlayWindow.Resources>
 
     <!--See code-behind for ViewModel details-->

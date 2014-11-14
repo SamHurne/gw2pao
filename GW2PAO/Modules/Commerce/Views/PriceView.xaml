@@ -9,13 +9,7 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
-        </ResourceDictionary>
+        <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
