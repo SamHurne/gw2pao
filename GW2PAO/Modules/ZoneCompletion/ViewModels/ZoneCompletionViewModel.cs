@@ -42,6 +42,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         /// <summary>
         /// Zone Name view model object
         /// </summary>
+        [Import]
         public IHasZoneName ZoneNameVM { get; private set; }
 
         /// <summary>

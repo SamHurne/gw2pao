@@ -81,8 +81,8 @@ namespace GW2PAO.Modules.Commerce
             var notificationsMenu = new MenuItem(Properties.Resources.PriceNotifications);
             notificationsMenu.SubMenuItems.Add(new MenuItem(Properties.Resources.RebuildItemNamesDatabase, viewFactory.DisplayRebuildItemNamesView, viewFactory.CanDisplayRebuildItemNamesView));
             notificationsMenu.SubMenuItems.Add(null); // Null for a seperator
-            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BuyOrderPriceNotifications, () => userData.AreBuyOrderPriceNotificationsEnabled, userData));
-            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.SellListingPriceNotifications, () => userData.AreSellListingPriceNotificationsEnabled, userData));
+            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BuyOrderPriceNotifications, true, () => userData.AreBuyOrderPriceNotificationsEnabled, userData));
+            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.SellListingPriceNotifications, true, () => userData.AreSellListingPriceNotificationsEnabled, userData));
 
             this.SubMenuItems.Add(notificationsMenu);
             this.SubMenuItems.Add(null); // Null for a seperator

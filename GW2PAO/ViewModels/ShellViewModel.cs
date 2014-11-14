@@ -42,7 +42,7 @@ namespace GW2PAO.ViewModels
             {
                 if (Settings.Default.IsOverlayIconVisible != value)
                 {
-                    Settings.Default.IsOverlayIconVisible = true;
+                    Settings.Default.IsOverlayIconVisible = value;
                     Settings.Default.Save();
                     this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible);
                 }
@@ -78,11 +78,11 @@ namespace GW2PAO.ViewModels
 
             // Settings
             var settingsMenu = new MenuItem(GW2PAO.Properties.Resources.Settings);
-            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.ShowNotificationBorders, () => Settings.Default.AreNotificationWindowBordersVisible, Settings.Default));
-            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.NonInteractiveWindows, () => Settings.Default.IsClickthroughEnabled, Settings.Default));
-            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.StickyWindows, () => Settings.Default.AreWindowsSticky, Settings.Default));
-            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.OverlayMenuIcon, () => this.IsOverlayMenuIconVisible, this));
-            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.CheckForUpdatesAtStartup, () => Settings.Default.CheckForUpdates, Settings.Default));
+            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.ShowNotificationBorders, false, () => Settings.Default.AreNotificationWindowBordersVisible, Settings.Default));
+            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.NonInteractiveWindows, false, () => Settings.Default.IsClickthroughEnabled, Settings.Default));
+            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.StickyWindows, false, () => Settings.Default.AreWindowsSticky, Settings.Default));
+            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.OverlayMenuIcon, false, () => this.IsOverlayMenuIconVisible, this));
+            settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.CheckForUpdatesAtStartup, false, () => Settings.Default.CheckForUpdates, Settings.Default));
             this.MainMenu.Add(settingsMenu);
 
             // About

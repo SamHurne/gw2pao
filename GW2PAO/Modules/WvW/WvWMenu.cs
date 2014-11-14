@@ -79,7 +79,7 @@ namespace GW2PAO.Modules.WvW
             var naWorlds = new MenuItem("NA");
             foreach (var world in wvwService.Worlds.Worlds.Where(wld => wld.ID < 2000))
             {
-                var worldMenuItem = new CheckableMenuItem(world.Name,
+                var worldMenuItem = new CheckableMenuItem(world.Name, false,
                     (selected) => { if (selected) userData.WorldSelection = world; },
                     () => { return userData.WorldSelection.ID == world.ID; },
                     userData,
@@ -92,7 +92,7 @@ namespace GW2PAO.Modules.WvW
             var euWorlds = new MenuItem("EU");
             foreach (var world in wvwService.Worlds.Worlds.Where(wld => wld.ID > 2000))
             {
-                var worldMenuItem = new CheckableMenuItem(world.Name,
+                var worldMenuItem = new CheckableMenuItem(world.Name, false,
                     (selected) => { if (selected) userData.WorldSelection = world; },
                     () => { return userData.WorldSelection.ID == world.ID; },
                     userData,
@@ -100,7 +100,7 @@ namespace GW2PAO.Modules.WvW
 
                 euWorlds.SubMenuItems.Add(worldMenuItem);
             }
-            worldSelectionMenu.SubMenuItems.Add(naWorlds);
+            worldSelectionMenu.SubMenuItems.Add(euWorlds);
 
             this.SubMenuItems.Add(worldSelectionMenu);
 
@@ -122,9 +122,9 @@ namespace GW2PAO.Modules.WvW
                 userData.NotifyWhenOtherTakesOtherObjective = false;
             }));
             notificationsMenu.SubMenuItems.Add(null); // Null for a seperator.
-            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenHomeWorldTakesObjective, () => userData.NotifyWhenHomeTakesObjective, userData));
-            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenHomeWorldLosesObjective, () => userData.NotifyWhenHomeLosesObjective, userData));
-            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenOtherWorldTakesOtherWorldsObjective, () => userData.NotifyWhenOtherTakesOtherObjective, userData));
+            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenHomeWorldTakesObjective, true, () => userData.NotifyWhenHomeTakesObjective, userData));
+            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenHomeWorldLosesObjective, true, () => userData.NotifyWhenHomeLosesObjective, userData));
+            notificationsMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WhenOtherWorldTakesOtherWorldsObjective, true, () => userData.NotifyWhenOtherTakesOtherObjective, userData));
             notificationsMenu.SubMenuItems.Add(null); // Null for a seperator
 
             var notificationsMapMenu = new MenuItem(Properties.Resources.Maps);
@@ -143,10 +143,10 @@ namespace GW2PAO.Modules.WvW
                 userData.AreRedBorderlandsNotificationsEnabled = false;
             }));
             notificationsMapMenu.SubMenuItems.Add(null); // Null for a seperator
-            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EternalBattlegrounds, () => userData.AreEternalBattlegroundsNotificationsEnabled, userData));
-            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BlueBorderlands, () => userData.AreBlueBorderlandsNotificationsEnabled, userData));
-            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.GreenBorderlands, () => userData.AreGreenBorderlandsNotificationsEnabled, userData));
-            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.RedBorderlands, () => userData.AreRedBorderlandsNotificationsEnabled, userData));
+            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EternalBattlegrounds, true, () => userData.AreEternalBattlegroundsNotificationsEnabled, userData));
+            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BlueBorderlands, true, () => userData.AreBlueBorderlandsNotificationsEnabled, userData));
+            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.GreenBorderlands, true, () => userData.AreGreenBorderlandsNotificationsEnabled, userData));
+            notificationsMapMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.RedBorderlands, true, () => userData.AreRedBorderlandsNotificationsEnabled, userData));
 
             notificationsMenu.SubMenuItems.Add(notificationsMapMenu);
 

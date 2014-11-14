@@ -33,7 +33,7 @@
                 </Separator.Style>
             </Separator>
         </ControlTemplate>
-        
+
         <Style x:Key="MainMenuItemStyle" TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
             <Setter Property="Command" Value="{Binding OnClickCommand}" />
             <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
@@ -48,9 +48,12 @@
             </Style.Triggers>
         </Style>
         
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
     </src:OverlayWindow.Resources>
 
-    <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center"
+          Visibility="{Binding IsOverlayMenuIconVisible, Converter={StaticResource BoolToVisibility}}">
 
         <!-- Tray Icon -->
         <tb:TaskbarIcon Name="TrayIcon"

@@ -62,7 +62,7 @@ namespace GW2PAO.Infrastructure.ViewModels
         /// True if the menu item does not close the menu on click, else false
         /// Always true.
         /// </summary>
-        public bool StaysOpen { get { return true; } }
+        public bool StaysOpen { get; private set; }
 
         /// <summary>
         /// True if the menu item is checked, else false
@@ -76,7 +76,7 @@ namespace GW2PAO.Infrastructure.ViewModels
                 else
                     return (bool)this.isCheckedProperty.GetValue(propertyOwner);
             }
-            set 
+            set
             {
                 if (this.isCheckedSetter != null)
                     this.isCheckedSetter(value);
@@ -89,8 +89,10 @@ namespace GW2PAO.Infrastructure.ViewModels
         /// Default constructor
         /// </summary>
         /// <param name="header">Header text to use for the menu item</param>
-        /// <param name="action">Action to perform when clicking the menu item, if any</param>
-        public CheckableMenuItem(string header, Expression<Func<bool>> isCheckedProperty, INotifyPropertyChanged propertyOwner)
+        /// <param name="staysOpen">Configures whether or not clicking the item closes the menu</param>
+        /// <param name="isCheckedProperty">The property to bind IsChecked to</param>
+        /// <param name="propertyOwner">Owner of the isCheckedProperty</param>
+        public CheckableMenuItem(string header, bool staysOpen, Expression<Func<bool>> isCheckedProperty, INotifyPropertyChanged propertyOwner)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.Header = header;
@@ -110,11 +112,12 @@ namespace GW2PAO.Infrastructure.ViewModels
         /// Alternate constructor
         /// </summary>
         /// <param name="header">Header text to use for the menu item</param>
+        /// <param name="staysOpen">Configures whether or not clicking the item closes the menu</param>
         /// <param name="setter">Getter for the IsChecked information</param>
         /// <param name="getter">Setter for the IsChecked information</param>
         /// <param name="propertyOwner">Owner of the IsChecked PropertyChanged event</param>
         /// <param name="isCheckedProperty">Lambda containing the property name for use with the PropertyChanged event</param>
-        public CheckableMenuItem(string header, Action<bool> setter = null, Func<bool> getter = null, INotifyPropertyChanged propertyOwner = null, Expression<Func<object>> isCheckedProperty = null)
+        public CheckableMenuItem(string header, bool staysOpen, Action<bool> setter = null, Func<bool> getter = null, INotifyPropertyChanged propertyOwner = null, Expression<Func<object>> isCheckedProperty = null)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.Header = header;
