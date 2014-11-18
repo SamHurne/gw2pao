@@ -117,14 +117,8 @@ namespace GW2PAO
                 f.Delete();
             }
 
-            // Do this on a worker thread so we don't dead-lock when shutting down controllers and views
-            Task.Factory.StartNew(() =>
-            {
-                if (GW2PAO.Views.OverlayWindow.ProcessMonitor != null)
-                    GW2PAO.Views.OverlayWindow.ProcessMonitor.Dispose();
-
-                Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
-            });
+            if (GW2PAO.Views.OverlayWindow.ProcessMonitor != null)
+                GW2PAO.Views.OverlayWindow.ProcessMonitor.Dispose();
         }
 
         /// <summary>

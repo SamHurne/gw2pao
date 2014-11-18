@@ -69,19 +69,24 @@ namespace GW2PAO.Modules.WvW
         /// </summary>
         public void Initialize()
         {
-            logger.Debug("Initializing WvW Module");
+            Task.Factory.StartNew(() =>
+                {
+                    logger.Debug("Initializing WvW Module");
 
-            this.wvwController = this.Container.GetExportedValue<IWvWController>();
-            this.viewController = this.Container.GetExportedValue<IWvWViewController>();
+                    this.wvwController = this.Container.GetExportedValue<IWvWController>();
+                    this.viewController = this.Container.GetExportedValue<IWvWViewController>();
 
-            // Register for shutdown
-            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+                    // Register for shutdown
+                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-            // Get the WvW controller started
-            this.wvwController.Start();
+                    // Get the WvW controller started
+                    this.wvwController.Start();
 
-            // Initialize the view controller
-            this.viewController.Initialize();
+                    // Initialize the view controller
+                    this.viewController.Initialize();
+
+                    logger.Debug("WvW Module initialized");
+                });
         }
 
         /// <summary>

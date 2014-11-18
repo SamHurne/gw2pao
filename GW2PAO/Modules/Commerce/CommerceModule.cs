@@ -69,19 +69,24 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         public void Initialize()
         {
-            logger.Debug("Initializing Commerce Module");
+            Task.Factory.StartNew(() =>
+                {
+                    logger.Debug("Initializing Commerce Module");
 
-            this.commerceController = this.Container.GetExportedValue<ICommerceController>();
-            this.viewController = this.Container.GetExportedValue<ICommerceViewController>();
+                    this.commerceController = this.Container.GetExportedValue<ICommerceController>();
+                    this.viewController = this.Container.GetExportedValue<ICommerceViewController>();
 
-            // Register for shutdown
-            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+                    // Register for shutdown
+                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-            // Get the commerce controller started
-            this.commerceController.Start();
+                    // Get the commerce controller started
+                    this.commerceController.Start();
 
-            // Initialize the view controller
-            this.viewController.Initialize();
+                    // Initialize the view controller
+                    this.viewController.Initialize();
+
+                    logger.Debug("Commerce Module initialized");
+                });
         }
 
         /// <summary>

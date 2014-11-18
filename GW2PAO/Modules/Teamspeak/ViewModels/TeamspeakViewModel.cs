@@ -112,6 +112,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// <summary>
         /// Default constructor
         /// </summary>
+        [ImportingConstructor]
         public TeamspeakViewModel(ITeamspeakService teamspeakService, TeamspeakUserData userData)
         {
             this.isShuttingDown = false;

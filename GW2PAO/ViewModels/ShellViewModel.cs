@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
@@ -94,6 +95,7 @@ namespace GW2PAO.ViewModels
                     Task.Factory.StartNew(() =>
                         {
                             Commands.ApplicationShutdownCommand.Execute(null);
+                            Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
                         });
                 }));
 

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Threading.Tasks;
 using GW2PAO.Data.UserData;
 using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Events.Interfaces;
@@ -65,19 +66,24 @@ namespace GW2PAO.Modules.Events
         /// </summary>
         public void Initialize()
         {
-            logger.Debug("Initializing Events Module");
+            Task.Factory.StartNew(() =>
+                {
+                    logger.Debug("Initializing Events Module");
 
-            this.eventsController = this.Container.GetExportedValue<IEventsController>();
-            this.viewController = this.Container.GetExportedValue<IEventsViewController>();
+                    this.eventsController = this.Container.GetExportedValue<IEventsController>();
+                    this.viewController = this.Container.GetExportedValue<IEventsViewController>();
 
-            // Register for shutdown
-            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+                    // Register for shutdown
+                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-            // Get the events controller started
-            this.eventsController.Start();
+                    // Get the events controller started
+                    this.eventsController.Start();
 
-            // Initialize the view controller
-            this.viewController.Initialize();
+                    // Initialize the view controller
+                    this.viewController.Initialize();
+
+                    logger.Debug("Events Module initialized");
+                });
         }
 
         /// <summary>

@@ -55,7 +55,7 @@ namespace GW2PAO.Modules.Dungeons
         /// <summary>
         /// Locking object for operations performed with the reset timer
         /// </summary>
-        private readonly object resetTimerLock = new object();
+        private readonly object refreshTimerLock = new object();
 
         /// <summary>
         /// User settings for dungeons
@@ -97,9 +97,6 @@ namespace GW2PAO.Modules.Dungeons
             this.userData = userData;
             this.isStopped = false;
 
-            // Make sure the dungeons service has loaded the dungeons table
-            this.dungeonsService.LoadTable();
-
             // Initialize the refresh timer
             this.dungeonsRefreshTimer = new Timer(this.RefreshDungeons);
             this.RefreshInterval = 1000;
@@ -107,7 +104,7 @@ namespace GW2PAO.Modules.Dungeons
             // Initialize the start call count to 0
             this.startCallCount = 0;
 
-            // Initialize the WorldEvents collection
+            // Initialize the dungeons
             this.InitializeDungeons();
 
             logger.Info("Dungeons Controller initialized");
@@ -147,7 +144,7 @@ namespace GW2PAO.Modules.Dungeons
             if (this.startCallCount == 0)
             {
                 logger.Debug("Stopping refresh timers");
-                lock (this.resetTimerLock)
+                lock (this.refreshTimerLock)
                 {
                     this.isStopped = true;
                     this.dungeonsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -162,7 +159,7 @@ namespace GW2PAO.Modules.Dungeons
         {
             logger.Debug("Shutdown called");
             logger.Debug("Stopping refresh timers");
-            lock (this.resetTimerLock)
+            lock (this.refreshTimerLock)
             {
                 this.isStopped = true;
                 this.dungeonsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -176,21 +173,23 @@ namespace GW2PAO.Modules.Dungeons
         {
             logger.Debug("Initializing dungeons");
             this.dungeonsService.LoadTable();
-
-            Threading.InvokeOnUI(() =>
+            //Task.Factory.StartNew(() => // This speeds up startup speed, but has some wierd side-effects...
+            //{
+                foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
                 {
-                    foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
-                    {
-                        logger.Debug("Initializing localized strings for {0}", dungeon.ID);
-                        dungeon.Name = this.dungeonsService.GetLocalizedName(dungeon.ID);
-                        dungeon.MapName = this.zoneService.GetZoneName(dungeon.MapID);
-                        foreach (var path in dungeon.Paths)
-                            path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
+                    logger.Debug("Initializing localized strings for {0}", dungeon.ID);
+                    dungeon.Name = this.dungeonsService.GetLocalizedName(dungeon.ID);
+                    dungeon.MapName = this.zoneService.GetZoneName(dungeon.MapID);
+                    foreach (var path in dungeon.Paths)
+                        path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
 
+                    Threading.InvokeOnUI(() =>
+                    {
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
                         this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userData));
-                    }
-                });
+                    });
+                }
+            //});
         }
 
         /// <summary>
@@ -199,7 +198,7 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         private void RefreshDungeons(object state = null)
         {
-            lock (this.resetTimerLock)
+            lock (this.refreshTimerLock)
             {
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped

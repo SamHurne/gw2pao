@@ -24,7 +24,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
     /// <summary>
     /// Interaction logic for WvWTrackerView.xaml
     /// </summary>
-    public partial class WvWTrackerView : OverlayWindow
+    public partial class WvWTrackerView : OverlayWindow, IPartImportsSatisfiedNotification
     {
         /// <summary>
         /// Default logger
@@ -98,7 +98,14 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
 
             this.vertical_objHeight = new HorizontalWvWObjectiveView().Height;
             this.horizontal_objWidth = new VerticalWvWObjectiveView().Width;
+        }
 
+        /// <summary>
+        /// Called when the view model is set.
+        /// Finish initialization when this occurs
+        /// </summary>
+        public void OnImportsSatisfied()
+        {
             // Set initial height and widths
             if (this.ViewModel.IsHorizontalOrientation)
             {
@@ -130,15 +137,15 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
 
             this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, this.ResizeWidth);
             this.Loaded += (o, e) =>
-                {
-                    this.RefreshWindowHeights(false);
-                    this.RefreshWindowWidths(false);
-                    this.RefreshResizeSnapping();
+            {
+                this.RefreshWindowHeights(false);
+                this.RefreshWindowWidths(false);
+                this.RefreshResizeSnapping();
 
-                    // Set the window size and location
-                    this.ViewModel.PropertyChanged += viewModel_PropertyChanged;
-                    this.ObjectivesContainer.LayoutUpdated += ObjectivesContainer_LayoutUpdated;
-                };
+                // Set the window size and location
+                this.ViewModel.PropertyChanged += viewModel_PropertyChanged;
+                this.ObjectivesContainer.LayoutUpdated += ObjectivesContainer_LayoutUpdated;
+            };
         }
 
         /// <summary>

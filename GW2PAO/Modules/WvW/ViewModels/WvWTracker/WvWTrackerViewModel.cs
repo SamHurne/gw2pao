@@ -12,7 +12,7 @@ using NLog;
 
 namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
 {
-    [Export]
+    [Export(typeof(WvWTrackerViewModel))]
     public class WvWTrackerViewModel : NotifyPropertyChangedBase
     {
         /// <summary>

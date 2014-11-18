@@ -180,13 +180,16 @@ namespace GW2PAO.Modules.Commerce
                 var itemData = this.commerceService.GetItems(itemIds.ToArray());
 
                 // Initialize view models
-                foreach (var priceWatch in this.UserData.PriceWatches)
-                {
-                    if (priceWatch.ItemID > 0)
-                        this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
-                    else
-                        this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, null, this, this.commerceService));
-                }
+                Threading.InvokeOnUI(() =>
+                    {
+                        foreach (var priceWatch in this.UserData.PriceWatches)
+                        {
+                            if (priceWatch.ItemID > 0)
+                                this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, itemData[priceWatch.ItemID], this, this.commerceService));
+                            else
+                                this.ItemPrices.Add(new ItemPriceViewModel(priceWatch, null, this, this.commerceService));
+                        }
+                    });
             }
         }
 

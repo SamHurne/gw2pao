@@ -70,19 +70,24 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         public void Initialize()
         {
-            logger.Debug("Initializing Dungeons Module");
+            Task.Factory.StartNew(() =>
+                {
+                    logger.Debug("Initializing Dungeons Module");
 
-            this.dungeonsController = this.Container.GetExportedValue<IDungeonsController>();
-            this.viewController = this.Container.GetExportedValue<IDungeonsViewController>();
+                    this.dungeonsController = this.Container.GetExportedValue<IDungeonsController>();
+                    this.viewController = this.Container.GetExportedValue<IDungeonsViewController>();
 
-            // Register for shutdown
-            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+                    // Register for shutdown
+                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-            // Get the dungeons controller started
-            this.dungeonsController.Start();
+                    // Get the dungeons controller started
+                    this.dungeonsController.Start();
 
-            // Initialize the view controller
-            this.viewController.Initialize();
+                    // Initialize the view controller
+                    this.viewController.Initialize();
+
+                    logger.Debug("Dungeons Module initialized");
+                });
         }
 
         /// <summary>
