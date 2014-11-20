@@ -25,6 +25,17 @@ namespace GW2PAO.Views
     [Export]
     public partial class ShellView : OverlayWindow
     {
+        /// <summary>
+        /// This window can never have click-through
+        /// </summary>
+        protected override bool NeverClickThrough
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         [Import]
         private ShellViewModel ViewModel
         {
