@@ -108,13 +108,13 @@
                                 Orientation="Horizontal">
                         <TextBlock FontSize="11" Foreground="White"
                                    Text="{x:Static resx:Resources.ThirdPartyLibraries}" />
-                        <TextBlock Margin="0,0,0,0"
+                        <TextBlock Margin="5,0,0,0"
                                    FontSize="11">
                             <Hyperlink Foreground="White" Command="{Binding GW2NetCommand}">GW2.NET</Hyperlink>
                         </TextBlock>
                     </StackPanel>
 
-                    
+
                     <!-- TODO: Move these into their own pop-up windows or something?
                     We should show licenses of all libaries in use...-->
                     <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"

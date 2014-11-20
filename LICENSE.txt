@@ -19,3 +19,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+
+
+
+This software makes use of the following Libraries:
+
+GW2.Net:
+https://gw2dotnet.codeplex.com/
+https://gw2dotnet.codeplex.com/license
+
+GwApiNET:
+https://gwapinet.codeplex.com/
+https://gwapinet.codeplex.com/license
+
+Awesomium.Core:
+http://www.awesomium.com/
+http://wiki.awesomium.com/licensing/licensing-overview.html
+
+Hardcodet.Wpf.TaskbarNotification:
+http://www.hardcodet.net/wpf-notifyicon
+http://www.codeproject.com/Articles/36468/WPF-NotifyIcon
+
+Intellibox:
+https://intellibox.codeplex.com/
+https://intellibox.codeplex.com/license
+
+Microsoft Prism:
+http://msdn.microsoft.com/en-us/library/ff648465.aspx
+http://msdn.microsoft.com/en-us/library/gg405489(v=pandp.40).aspx
+
+NLog:
+http://nlog-project.org/
+https://github.com/NLog/NLog/blob/master/LICENSE.txt
+
+TS3QueryLib.NET:
+https://github.com/Scordo/TS3QueryLib.Net
+https://github.com/Scordo/TS3QueryLib.Net/blob/master/LICENSE

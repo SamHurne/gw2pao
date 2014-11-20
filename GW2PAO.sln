@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.API", "GW2PAO.API\GW2PAO.API.csproj", "{65064198-8A49-4693-BEE2-FF6376F24188}"
 EndProject
@@ -28,6 +28,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.StickyWindows.UnitTest", "UnitTests\GW2PAO.StickyWindows.UnitTest\GW2PAO.StickyWindows.UnitTest.csproj", "{07C72D89-A5D4-4E95-A2B0-05BCAD2851B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2PAO.TS3.UnitTest", "UnitTests\GW2PAO.TS3.UnitTest\GW2PAO.TS3.UnitTest.csproj", "{C7532D5D-FB15-4868-94F5-B19B3DEA666D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Licenses", "Licenses", "{B6654944-7387-4455-BCE4-0BC38EC2F02D}"
+	ProjectSection(SolutionItems) = preProject
+		AnetCopyright.txt = AnetCopyright.txt
+		LICENSE.txt = LICENSE.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
