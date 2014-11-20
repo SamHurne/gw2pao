@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Licenses", "Licenses", "{B6
 	ProjectSection(SolutionItems) = preProject
 		AnetCopyright.txt = AnetCopyright.txt
 		LICENSE.txt = LICENSE.txt
+		ThirdPartyLicenses.txt = ThirdPartyLicenses.txt
 	EndProjectSection
 EndProject
 Global

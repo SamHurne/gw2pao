@@ -376,7 +376,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Design/art input by:.
+        ///   Looks up a localized string similar to Initial design/art input by:.
         /// </summary>
         public static string DesignArtBy {
             get {
@@ -1272,6 +1272,15 @@ namespace GW2PAO.Properties {
         public static string TPCalculator {
             get {
                 return ResourceManager.GetString("TPCalculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translations By:.
+        /// </summary>
+        public static string TranslationsBy {
+            get {
+                return ResourceManager.GetString("TranslationsBy", resourceCulture);
             }
         }
         

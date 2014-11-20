@@ -177,7 +177,7 @@
     <comment>The currently lowest sell listing</comment>
   </data>
   <data name="DesignArtBy" xml:space="preserve">
-    <value>Design/art input by:</value>
+    <value>Initial design/art input by:</value>
     <comment>Shown in About window</comment>
   </data>
   <data name="DevelopmentBy" xml:space="preserve">
@@ -645,5 +645,9 @@
   <data name="PriceTracker" xml:space="preserve">
     <value>Price Tracker</value>
     <comment>Price Tracker title (like Dungeons Tracker, but for tracking item prices)</comment>
+  </data>
+  <data name="TranslationsBy" xml:space="preserve">
+    <value>Translations By:</value>
+    <comment>Followed by a list of names (the translators)</comment>
   </data>
 </root>
