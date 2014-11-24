@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Modules.WvW.Interfaces;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
 {
@@ -14,7 +15,7 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
     /// WvWMap view model
     /// </summary>
     [Export(typeof(IHasWvWMap))]
-    public class WvWMapViewModel : NotifyPropertyChangedBase, IHasWvWMap
+    public class WvWMapViewModel : BindableBase, IHasWvWMap
     {
         private WvWMap map;
 
@@ -24,7 +25,7 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         public WvWMap Map
         {
             get { return this.map; }
-            set { SetField(ref this.map, value); }
+            set { SetProperty(ref this.map, value); }
         }
     }
 }

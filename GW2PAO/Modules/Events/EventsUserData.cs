@@ -44,7 +44,7 @@ namespace GW2PAO.Modules.Events
         public bool AreInactiveEventsVisible
         {
             get { return this.areInactiveEventsVisible; }
-            set { SetField(ref this.areInactiveEventsVisible, value); }
+            set { SetProperty(ref this.areInactiveEventsVisible, value); }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace GW2PAO.Modules.Events
         public bool AreEventNotificationsEnabled
         {
             get { return this.areEventNotificationsEnabled; }
-            set { SetField(ref this.areEventNotificationsEnabled, value); }
+            set { SetProperty(ref this.areEventNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace GW2PAO.Modules.Events
         public bool UseAdjustedTimeTable
         {
             get { return this.useAdjustedTimeTable; }
-            set { SetField(ref this.useAdjustedTimeTable, value); }
+            set { SetProperty(ref this.useAdjustedTimeTable, value); }
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace GW2PAO.Modules.Events
         public bool UseStandardTimeTable
         {
             get { return !this.useAdjustedTimeTable; }
-            set { SetField(ref this.useAdjustedTimeTable, !value); }
+            set { SetProperty(ref this.useAdjustedTimeTable, !value); }
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace GW2PAO.Modules.Events
         public DateTime LastResetDateTime
         {
             get { return this.lastResetDateTime; }
-            set { SetField(ref this.lastResetDateTime, value); }
+            set { SetProperty(ref this.lastResetDateTime, value); }
         }
 
         /// <summary>

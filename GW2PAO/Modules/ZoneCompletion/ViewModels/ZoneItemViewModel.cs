@@ -1,4 +1,13 @@
-﻿using System;
+﻿using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
+using GW2PAO.API.Data.Enums;
+using GW2PAO.API.Services.Interfaces;
+using GW2PAO.Data;
+using GW2PAO.Data.UserData;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,21 +15,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.API.Data;
-using GW2PAO.API.Data.Entities;
-using GW2PAO.API.Data.Enums;
-using GW2PAO.API.Services.Interfaces;
-using GW2PAO.Data;
-using GW2PAO.Data.UserData;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.ZoneCompletion.ViewModels
 {
     /// <summary>
     /// View model for zone items/points
     /// </summary>
-    public class ZoneItemViewModel : NotifyPropertyChangedBase
+    public class ZoneItemViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -69,7 +70,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         public double DistanceFromPlayer
         {
             get { return this.distanceFromPlayer; }
-            set { SetField(ref this.distanceFromPlayer, value); }
+            set { SetProperty(ref this.distanceFromPlayer, value); }
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         public double DirectionFromPlayer
         {
             get { return this.directionFromPlayer; }
-            set { SetField(ref this.directionFromPlayer, value); }
+            set { SetProperty(ref this.directionFromPlayer, value); }
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
                         if (!characterItems.ZoneItems.Contains(this.ItemModel))
                         {
                             characterItems.ZoneItems.Add(this.ItemModel);
-                            this.RaisePropertyChanged();
+                            this.OnPropertyChanged(() => this.IsUnlocked);
                         }
                     }
                     else
@@ -118,7 +119,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
                         characterItems = new CharacterZoneItems() { Character = this.playerService.CharacterName };
                         characterItems.ZoneItems.Add(this.ItemModel);
                         this.userData.UnlockedZoneItems.Add(characterItems);
-                        this.RaisePropertyChanged();
+                        this.OnPropertyChanged(() => this.IsUnlocked);
                     }
                 }
                 else  // Remove from UnlockedZoneItems
@@ -127,7 +128,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
                     {
                         if (characterItems.ZoneItems.Remove(this.ItemModel))
                         {
-                            this.RaisePropertyChanged();
+                            this.OnPropertyChanged(() => this.IsUnlocked);
                         }
                     }
                 }
@@ -144,7 +145,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         public bool IsVisible
         {
             get { return this.isVisible; }
-            set { SetField(ref this.isVisible, value); }
+            set { SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>

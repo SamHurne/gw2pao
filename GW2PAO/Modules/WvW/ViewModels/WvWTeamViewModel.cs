@@ -1,16 +1,17 @@
-﻿using System;
+﻿using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
+using GW2PAO.API.Data.Enums;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.API.Data;
-using GW2PAO.API.Data.Entities;
-using GW2PAO.API.Data.Enums;
-using GW2PAO.PresentationCore;
 
 namespace GW2PAO.Modules.WvW.ViewModels
 {
-    public class WvWTeamViewModel : NotifyPropertyChangedBase
+    public class WvWTeamViewModel : BindableBase
     {
         private World worldData;
         private string matchId;
@@ -34,7 +35,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public string MatchId
         {
             get { return this.matchId; }
-            set { SetField(ref this.matchId, value); }
+            set { SetProperty(ref this.matchId, value); }
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public WorldColor Color
         {
             get { return this.color; }
-            set { SetField(ref this.color, value); }
+            set { SetProperty(ref this.color, value); }
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public int Score
         {
             get { return this.score; }
-            set { SetField(ref this.score, value); }
+            set { SetProperty(ref this.score, value); }
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public int TickScore
         {
             get { return this.tickScore; }
-            set { SetField(ref this.tickScore, value); }
+            set { SetProperty(ref this.tickScore, value); }
         }
 
         /// <summary>

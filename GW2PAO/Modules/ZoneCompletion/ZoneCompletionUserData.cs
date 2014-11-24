@@ -55,7 +55,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AreHeartsVisible
         {
             get { return this.areHeartsVisible; }
-            set { SetField(ref this.areHeartsVisible, value); }
+            set { SetProperty(ref this.areHeartsVisible, value); }
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool ArePoisVisible
         {
             get { return this.arePoisVisible; }
-            set { SetField(ref this.arePoisVisible, value); }
+            set { SetProperty(ref this.arePoisVisible, value); }
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AreSkillChallengesVisible
         {
             get { return this.areSkillPointsVisible; }
-            set { SetField(ref this.areSkillPointsVisible, value); }
+            set { SetProperty(ref this.areSkillPointsVisible, value); }
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AreVistasVisible
         {
             get { return this.areVistasVisible; }
-            set { SetField(ref this.areVistasVisible, value); }
+            set { SetProperty(ref this.areVistasVisible, value); }
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AreWaypointsVisible
         {
             get { return this.areWaypointsVisible; }
-            set { SetField(ref this.areWaypointsVisible, value); }
+            set { SetProperty(ref this.areWaypointsVisible, value); }
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AutoUnlockWaypoints
         {
             get { return this.autoUnlockWaypoints; }
-            set { SetField(ref this.autoUnlockWaypoints, value); }
+            set { SetProperty(ref this.autoUnlockWaypoints, value); }
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AutoUnlockPois
         {
             get { return this.autoUnlockPois; }
-            set { SetField(ref this.autoUnlockPois, value); }
+            set { SetProperty(ref this.autoUnlockPois, value); }
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AutoUnlockVistas
         {
             get { return this.autoUnlockVistas; }
-            set { SetField(ref this.autoUnlockVistas, value); }
+            set { SetProperty(ref this.autoUnlockVistas, value); }
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AutoUnlockHeartQuests
         {
             get { return this.autoUnlockHeartQuests; }
-            set { SetField(ref this.autoUnlockHeartQuests, value); }
+            set { SetProperty(ref this.autoUnlockHeartQuests, value); }
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool AutoUnlockSkillChallenges
         {
             get { return this.autoUnlockSkillChallenges; }
-            set { SetField(ref this.autoUnlockSkillChallenges, value); }
+            set { SetProperty(ref this.autoUnlockSkillChallenges, value); }
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool ShowUnlockedPoints
         {
             get { return this.showUnlockedPoints; }
-            set { SetField(ref this.showUnlockedPoints, value); }
+            set { SetProperty(ref this.showUnlockedPoints, value); }
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         public Units DistanceUnits
         {
             get { return this.distanceUnits; }
-            set { SetField(ref this.distanceUnits, value); }
+            set { SetProperty(ref this.distanceUnits, value); }
         }
 
         /// <summary>

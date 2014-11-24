@@ -1,13 +1,14 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.PresentationCore;
 
 namespace GW2PAO.Modules.Teamspeak.ViewModels
 {
-    public class TSNotificationViewModel : NotifyPropertyChangedBase
+    public class TSNotificationViewModel : BindableBase
     {
         private string user;
         private string message;
@@ -28,7 +29,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string User
         {
             get { return this.user; }
-            set { this.SetField(ref this.user, value); }
+            set { this.SetProperty(ref this.user, value); }
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string Message
         {
             get { return this.message; }
-            set { this.SetField(ref this.message, value); }
+            set { this.SetProperty(ref this.message, value); }
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public bool IsVisible
         {
             get { return this.isVisible; }
-            set { this.SetField(ref this.isVisible, value); }
+            set { this.SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>

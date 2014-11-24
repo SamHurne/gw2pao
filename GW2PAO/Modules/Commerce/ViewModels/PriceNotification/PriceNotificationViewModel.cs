@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GW2PAO.Data;
+using GW2PAO.Modules.Commerce.Models;
+using GW2PAO.PresentationCore;
+using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Data;
-using GW2PAO.Modules.Commerce.Models;
-using GW2PAO.PresentationCore;
-using GW2PAO.Utility;
-using NLog;
 
 namespace GW2PAO.Modules.Commerce.ViewModels.PriceNotification
 {
-    public class PriceNotificationViewModel : NotifyPropertyChangedBase
+    public class PriceNotificationViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -70,7 +71,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels.PriceNotification
         public bool IsRemovingNotification
         {
             get { return this.isRemovingNotification; }
-            set { this.SetField(ref this.isRemovingNotification, value); }
+            set { this.SetProperty(ref this.isRemovingNotification, value); }
         }
 
         /// <summary>

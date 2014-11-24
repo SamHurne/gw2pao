@@ -1,4 +1,9 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using GW2PAO.TS3.Services.Interfaces;
+using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
@@ -6,15 +11,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2PAO.PresentationCore;
-using GW2PAO.TS3.Services.Interfaces;
-using GW2PAO.Utility;
-using NLog;
 
 namespace GW2PAO.Modules.Teamspeak.ViewModels
 {
     [Export(typeof(TeamspeakViewModel))]
-    public class TeamspeakViewModel : NotifyPropertyChangedBase
+    public class TeamspeakViewModel : BindableBase
     {
         private static Regex spacerRegex = new Regex(@"^\[[*]*[rcl]*spacer\d*\]");
 
@@ -50,7 +51,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string MessageText
         {
             get { return this.messageText; }
-            set { this.SetField(ref this.messageText, value); }
+            set { this.SetProperty(ref this.messageText, value); }
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string ServerName
         {
             get { return this.serverName; }
-            set { this.SetField(ref this.serverName, value); }
+            set { this.SetProperty(ref this.serverName, value); }
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string ServerAddress
         {
             get { return this.serverAddress; }
-            set { this.SetField(ref this.serverAddress, value); }
+            set { this.SetProperty(ref this.serverAddress, value); }
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string ClientChannelName
         {
             get { return this.clientChannelName; }
-            set { this.SetField(ref this.clientChannelName, value); }
+            set { this.SetProperty(ref this.clientChannelName, value); }
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public string ClientChannelDescription
         {
             get { return this.clientChannelDescription; }
-            set { this.SetField(ref this.clientChannelDescription, value); }
+            set { this.SetProperty(ref this.clientChannelDescription, value); }
         }
 
         /// <summary>

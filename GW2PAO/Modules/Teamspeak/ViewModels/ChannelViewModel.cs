@@ -1,12 +1,13 @@
-﻿using System.Collections.ObjectModel;
-using GW2PAO.PresentationCore;
+﻿using GW2PAO.PresentationCore;
 using GW2PAO.TS3.Data;
 using GW2PAO.TS3.Services.Interfaces;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System.Collections.ObjectModel;
 
 namespace GW2PAO.Modules.Teamspeak.ViewModels
 {
-    public class ChannelViewModel : NotifyPropertyChangedBase
+    public class ChannelViewModel : BindableBase
     {
         private ITeamspeakService teamspeakService;
         private Channel modelData;
@@ -27,7 +28,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 if (this.modelData.ID != value)
                 {
                     this.modelData.ID = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.ID);
                 }
             }
         }
@@ -43,7 +44,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 if (this.modelData.ParentID != value)
                 {
                     this.modelData.ParentID = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.ParentID);
                 }
             }
         }
@@ -59,7 +60,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 if (this.modelData.Name != value)
                 {
                     this.modelData.Name = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.Name);
                 }
             }
         }
@@ -75,7 +76,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 if (this.modelData.Order != value)
                 {
                     this.modelData.Order = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.OrderIndex);
                 }
             }
         }

@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GW2PAO.API.Data;
+﻿using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
-    public class PathViewModel : NotifyPropertyChangedBase
+    public class PathViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -63,13 +64,13 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
                 {
                     logger.Debug("Adding \"{0}\" to CompletedPaths", this.PathId);
                     this.userData.CompletedPaths.Add(this.PathModel.ID);
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.IsCompleted);
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from CompletedPaths", this.PathId);
                     if (this.userData.CompletedPaths.Remove(this.PathId))
-                        this.RaisePropertyChanged();
+                        this.OnPropertyChanged(() => this.IsCompleted);
                 }
             }
         }

@@ -1,20 +1,21 @@
-﻿using System;
+﻿using GW2PAO.Data;
+using GW2PAO.Data.UserData;
+using GW2PAO.Modules.Dungeons.Interfaces;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Data;
-using GW2PAO.Data.UserData;
-using GW2PAO.Modules.Dungeons.Interfaces;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
     [Export(typeof(DungeonTrackerViewModel))]
-    public class DungeonTrackerViewModel : NotifyPropertyChangedBase
+    public class DungeonTrackerViewModel : BindableBase
     {
         /// <summary>
         /// Default logger

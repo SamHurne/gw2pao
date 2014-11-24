@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using GW2PAO.PresentationCore;
 
 namespace GW2PAO.Modules.Commerce.Models
 {
     /// <summary>
     /// Price watch model class
     /// </summary>
-    public class PriceWatch : NotifyPropertyChangedBase
+    public class PriceWatch : BindableBase
     {
         private int itemId;
         private string itemName;
@@ -30,7 +31,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public int ItemID
         {
             get { return this.itemId; }
-            set { this.SetField(ref this.itemId, value); }
+            set { this.SetProperty(ref this.itemId, value); }
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public string ItemName
         {
             get { return this.itemName; }
-            set { this.SetField(ref this.itemName, value); }
+            set { this.SetProperty(ref this.itemName, value); }
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public bool IsBuyOrderUpperLimitEnabled
         {
             get { return this.isBuyOrderUpperLimitEnabled; }
-            set { this.SetField(ref this.isBuyOrderUpperLimitEnabled, value); }
+            set { this.SetProperty(ref this.isBuyOrderUpperLimitEnabled, value); }
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public bool IsBuyOrderLowerLimitEnabled
         {
             get { return this.isBuyOrderLowerLimitEnabled; }
-            set { this.SetField(ref this.isBuyOrderLowerLimitEnabled, value); }
+            set { this.SetProperty(ref this.isBuyOrderLowerLimitEnabled, value); }
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public Price BuyOrderUpperLimit
         {
             get { return this.buyOrderUpperLimit; }
-            set { this.SetField(ref this.buyOrderUpperLimit, value); }
+            set { this.SetProperty(ref this.buyOrderUpperLimit, value); }
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public Price BuyOrderLowerLimit
         {
             get { return this.buyOrderLowerLimit; }
-            set { this.SetField(ref this.buyOrderLowerLimit, value); }
+            set { this.SetProperty(ref this.buyOrderLowerLimit, value); }
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public bool IsSellListingUpperLimitEnabled
         {
             get { return this.isSellListingUpperLimitEnabled; }
-            set { this.SetField(ref this.isSellListingUpperLimitEnabled, value); }
+            set { this.SetProperty(ref this.isSellListingUpperLimitEnabled, value); }
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public bool IsSellListingLowerLimitEnabled
         {
             get { return this.isSellListingLowerLimitEnabled; }
-            set { this.SetField(ref this.isSellListingLowerLimitEnabled, value); }
+            set { this.SetProperty(ref this.isSellListingLowerLimitEnabled, value); }
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public Price SellListingUpperLimit
         {
             get { return this.sellListingUpperLimit; }
-            set { this.SetField(ref this.sellListingUpperLimit, value); }
+            set { this.SetProperty(ref this.sellListingUpperLimit, value); }
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public Price SellListingLowerLimit
         {
             get { return this.sellListingLowerLimit; }
-            set { this.SetField(ref this.sellListingLowerLimit, value); }
+            set { this.SetProperty(ref this.sellListingLowerLimit, value); }
         }
 
         /// <summary>

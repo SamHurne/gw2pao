@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GW2PAO.API.Data;
+using GW2PAO.API.Data.Entities;
+using GW2PAO.API.Data.Enums;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.API.Data;
-using GW2PAO.API.Data.Entities;
-using GW2PAO.API.Data.Enums;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.WvW.ViewModels
 {
-    public class WvWObjectiveViewModel : NotifyPropertyChangedBase
+    public class WvWObjectiveViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -56,10 +57,10 @@ namespace GW2PAO.Modules.WvW.ViewModels
                 if (this.ModelData.WorldOwner != value)
                 {
                     this.ModelData.WorldOwner = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.WorldOwner);
 
                     // Also refresh the world owner's name, and visiblity
-                    this.RaisePropertyChanged("WorldOwnerName");
+                    this.OnPropertyChanged(() => this.WorldOwnerName);
                     this.RefreshVisibility();
                 }
             }
@@ -95,10 +96,10 @@ namespace GW2PAO.Modules.WvW.ViewModels
             get { return this.prevWorldOwner; }
             set
             {
-                if (this.SetField(ref this.prevWorldOwner, value))
+                if (this.SetProperty(ref this.prevWorldOwner, value))
                 {
                     // Also refresh the world owner's name
-                    this.RaisePropertyChanged("PrevWorldOwnerName");
+                    this.OnPropertyChanged(() => this.PrevWorldOwnerName);
                 }
             }
         }
@@ -165,7 +166,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public DateTime FlipTime
         {
             get { return this.flipTime; }
-            set { SetField(ref this.flipTime, value); }
+            set { SetProperty(ref this.flipTime, value); }
         }
 
         /// <summary>
@@ -175,7 +176,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public double DistanceFromPlayer
         {
             get { return this.distanceFromPlayer; }
-            set { SetField(ref this.distanceFromPlayer, value); }
+            set { SetProperty(ref this.distanceFromPlayer, value); }
         }
 
         /// <summary>
@@ -184,7 +185,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public TimeSpan TimerValue
         {
             get { return this.timerValue; }
-            set { SetField(ref this.timerValue, value); }
+            set { SetProperty(ref this.timerValue, value); }
         }
 
         /// <summary>
@@ -202,7 +203,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public bool IsVisible
         {
             get { return this.isVisible; }
-            set { SetField(ref this.isVisible, value); }
+            set { SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>
@@ -211,7 +212,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public bool IsRIActive
         {
             get { return this.isRIActive; }
-            set { SetField(ref this.isRIActive, value); }
+            set { SetProperty(ref this.isRIActive, value); }
         }
 
         /// <summary>
@@ -220,7 +221,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public bool IsNotificationShown
         {
             get { return this.isNotificationShown; }
-            set { SetField(ref this.isNotificationShown, value); }
+            set { SetProperty(ref this.isNotificationShown, value); }
         }
 
         /// <summary>
@@ -230,7 +231,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public bool IsRemovingNotification
         {
             get { return this.isRemovingNotification; }
-            set { SetField(ref this.isRemovingNotification, value); }
+            set { SetProperty(ref this.isRemovingNotification, value); }
         }
 
         /// <summary>

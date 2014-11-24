@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using GW2PAO.API.Data;
+﻿using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Data;
@@ -14,7 +6,16 @@ using GW2PAO.Data.UserData;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace GW2PAO.Modules.ZoneCompletion.ViewModels
 {
@@ -22,7 +23,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
     /// Primatry Zone Completion Assistant view model class
     /// </summary>
     [Export]
-    public class ZoneCompletionViewModel : NotifyPropertyChangedBase
+    public class ZoneCompletionViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -241,9 +242,9 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         /// </summary>
         private void NotifyUnitsSelectionChanged()
         {
-            this.RaisePropertyChanged("IsFeetSelected");
-            this.RaisePropertyChanged("IsMetersSelected");
-            this.RaisePropertyChanged("IsTimeDistanceSelected");
+            this.OnPropertyChanged(() => this.IsFeetSelected);
+            this.OnPropertyChanged(() => this.IsMetersSelected);
+            this.OnPropertyChanged(() => this.IsTimeDistanceSelected);
         }
     }
 }

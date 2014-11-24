@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using GW2PAO.Modules.Events.Interfaces;
+﻿using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 
 namespace GW2PAO.Modules.Events.ViewModels.EventTracker
 {
@@ -10,7 +11,7 @@ namespace GW2PAO.Modules.Events.ViewModels.EventTracker
     /// Primary Event Tracker view model class
     /// </summary>
     [Export(typeof(EventTrackerViewModel))]
-    public class EventTrackerViewModel : NotifyPropertyChangedBase
+    public class EventTrackerViewModel : BindableBase
     {
         /// <summary>
         /// Default logger

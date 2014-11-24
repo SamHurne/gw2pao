@@ -1,14 +1,15 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.PresentationCore;
 
 namespace GW2PAO.ViewModels
 {
-    public class NewVersionNotificationViewModel : NotifyPropertyChangedBase
+    public class NewVersionNotificationViewModel : BindableBase
     {
         /// <summary>
         /// New version string

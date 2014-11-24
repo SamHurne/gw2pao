@@ -1,18 +1,19 @@
-﻿using System;
+﻿using GW2PAO.Data;
+using GW2PAO.Modules.Commerce.Models;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Data;
-using GW2PAO.Modules.Commerce.Models;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     [Export]
-    public class TPCalculatorViewModel : NotifyPropertyChangedBase
+    public class TPCalculatorViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -44,7 +45,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             {
                 if (value > 0)
                 {
-                    if (SetField(ref this.quantity, value))
+                    if (SetProperty(ref this.quantity, value))
                     {
                         // Recalculate when this changes
                         this.CalculateAll();

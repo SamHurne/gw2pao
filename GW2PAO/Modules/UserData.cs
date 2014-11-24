@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,8 +9,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Data.UserData
 {
@@ -15,7 +16,7 @@ namespace GW2PAO.Data.UserData
     /// Base class for user data classes
     /// </summary>
     /// <typeparam name="T">Type of user data class, used when loading/saving the data</typeparam>
-    public class UserData<T> : NotifyPropertyChangedBase
+    public class UserData<T> : BindableBase
     {
         /// <summary>
         /// Default logger

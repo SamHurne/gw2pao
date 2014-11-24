@@ -43,7 +43,7 @@ namespace GW2PAO.Modules.Commerce
         public int ResetPriceNotificationsInterval
         {
             get { return this.resetPriceNotificationsInterval; }
-            set { this.SetField(ref this.resetPriceNotificationsInterval, value); }
+            set { this.SetProperty(ref this.resetPriceNotificationsInterval, value); }
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace GW2PAO.Modules.Commerce
         public bool AreBuyOrderPriceNotificationsEnabled
         {
             get { return areBuyOrderPriceNotificationsEnabled; }
-            set { this.SetField(ref this.areBuyOrderPriceNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areBuyOrderPriceNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace GW2PAO.Modules.Commerce
         public bool AreSellListingPriceNotificationsEnabled
         {
             get { return areSellListingPriceNotificationsEnabled; }
-            set { this.SetField(ref this.areSellListingPriceNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areSellListingPriceNotificationsEnabled, value); }
         }
 
         /// <summary>

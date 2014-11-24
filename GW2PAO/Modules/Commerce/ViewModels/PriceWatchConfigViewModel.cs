@@ -12,11 +12,12 @@ using GW2PAO.Modules.Commerce.Interfaces;
 using GW2PAO.Modules.Commerce.Models;
 using GW2PAO.PresentationCore;
 using NLog;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     [Export]
-    public class PriceWatchConfigViewModel : NotifyPropertyChangedBase
+    public class PriceWatchConfigViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -44,7 +45,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
                 if (this.controller.UserData.ResetPriceNotificationsInterval != value)
                 {
                     this.controller.UserData.ResetPriceNotificationsInterval = value;
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.ResetPriceNotificationsInterval);
                 }
             }
         }

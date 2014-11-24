@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GW2PAO.API.Data.Entities;
+﻿using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.Modules.Events;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GW2PAO.Modules.Events.ViewModels
 {
     /// <summary>
     /// View model for an event shown by the event tracker
     /// </summary>
-    public class EventViewModel : NotifyPropertyChangedBase
+    public class EventViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -54,7 +55,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public EventState State
         {
             get { return this.state; }
-            set { if (SetField(ref this.state, value)) this.RefreshVisibility(); }
+            set { if (SetProperty(ref this.state, value)) this.RefreshVisibility(); }
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public TimeSpan TimerValue
         {
             get { return this.timerValue; }
-            set { SetField(ref this.timerValue, value); }
+            set { SetProperty(ref this.timerValue, value); }
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public TimeSpan TimeSinceActive
         {
             get { return this.timeSinceActive; }
-            set { SetField(ref this.timeSinceActive, value); }
+            set { SetProperty(ref this.timeSinceActive, value); }
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public bool IsVisible
         {
             get { return this.isVisible; }
-            set { SetField(ref this.isVisible, value); }
+            set { SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>
@@ -102,13 +103,13 @@ namespace GW2PAO.Modules.Events.ViewModels
                 {
                     logger.Debug("Adding \"{0}\" to EventsWithTreasureObtained", this.EventName);
                     this.userData.EventsWithTreasureObtained.Add(this.EventModel.ID);
-                    this.RaisePropertyChanged();
+                    this.OnPropertyChanged(() => this.IsTreasureObtained);
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from EventsWithTreasureObtained", this.EventName);
                     if (this.userData.EventsWithTreasureObtained.Remove(this.EventModel.ID))
-                        this.RaisePropertyChanged();
+                        this.OnPropertyChanged(() => this.IsTreasureObtained);
                 }
             }
         }
@@ -119,7 +120,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public bool IsNotificationShown
         {
             get { return this.isNotificationShown; }
-            set { SetField(ref this.isNotificationShown, value); }
+            set { SetProperty(ref this.isNotificationShown, value); }
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public bool IsRemovingNotification
         {
             get { return this.isRemovingNotification; }
-            set { SetField(ref this.isRemovingNotification, value); }
+            set { SetProperty(ref this.isRemovingNotification, value); }
         }
 
         /// <summary>

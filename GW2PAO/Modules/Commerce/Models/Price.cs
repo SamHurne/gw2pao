@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using GW2PAO.PresentationCore;
 
 namespace GW2PAO.Modules.Commerce.Models
 {
     /// <summary>
     /// Helper class containing the gold, silver, and copper components of a price in GW2
     /// </summary>
-    public class Price : NotifyPropertyChangedBase
+    public class Price : BindableBase
     {
         private int gold;
         private int silver;
@@ -25,7 +26,7 @@ namespace GW2PAO.Modules.Commerce.Models
         public bool IsNegative
         {
             get { return this.isNegative; }
-            set { SetField(ref this.isNegative, value); }
+            set { SetProperty(ref this.isNegative, value); }
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace GW2PAO.Modules.Commerce.Models
             }
             set
             {
-                SetField(ref this.gold, value);
+                SetProperty(ref this.gold, value);
             }
         }
 
@@ -57,9 +58,9 @@ namespace GW2PAO.Modules.Commerce.Models
             set
             {
                 if (value < 100)
-                    SetField(ref this.silver, value);
+                    SetProperty(ref this.silver, value);
                 else
-                    SetField(ref this.silver, 99);
+                    SetProperty(ref this.silver, 99);
             }
         }
 
@@ -76,9 +77,9 @@ namespace GW2PAO.Modules.Commerce.Models
             set
             {
                 if (value < 100)
-                    SetField(ref this.copper, value);
+                    SetProperty(ref this.copper, value);
                 else
-                    SetField(ref this.copper, 99);
+                    SetProperty(ref this.copper, 99);
             }
         }
 

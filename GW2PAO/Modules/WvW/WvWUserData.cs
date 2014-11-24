@@ -65,7 +65,7 @@ namespace GW2PAO.Modules.WvW
         public World WorldSelection
         {
             get { return this.worldSelection; }
-            set { this.SetField(ref this.worldSelection, value); }
+            set { this.SetProperty(ref this.worldSelection, value); }
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace GW2PAO.Modules.WvW
         public bool IsTrackerHorizontal
         {
             get { return this.isTrackerHorizontal; }
-            set { SetField(ref this.isTrackerHorizontal, value); }
+            set { this.SetProperty(ref this.isTrackerHorizontal, value); }
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreTimeDistancesShown
         {
             get { return this.areTimeDistancesShown; }
-            set { SetField(ref this.areTimeDistancesShown, value); }
+            set { this.SetProperty(ref this.areTimeDistancesShown, value); }
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreBlueBorderlandsNotificationsEnabled
         {
             get { return this.areBlueBorderlandsNotificationsEnabled; }
-            set { SetField(ref this.areBlueBorderlandsNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areBlueBorderlandsNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreGreenBorderlandsNotificationsEnabled
         {
             get { return this.areGreenBorderlandsNotificationsEnabled; }
-            set { SetField(ref this.areGreenBorderlandsNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areGreenBorderlandsNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreRedBorderlandsNotificationsEnabled
         {
             get { return this.areRedBorderlandsNotificationsEnabled; }
-            set { SetField(ref this.areRedBorderlandsNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areRedBorderlandsNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreEternalBattlegroundsNotificationsEnabled
         {
             get { return this.areEternalBattlegroundsNotificationsEnabled; }
-            set { SetField(ref this.areEternalBattlegroundsNotificationsEnabled, value); }
+            set { this.SetProperty(ref this.areEternalBattlegroundsNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace GW2PAO.Modules.WvW
         public bool NotifyWhenHomeTakesObjective
         {
             get { return this.notifyWhenHomeTakesObjective; }
-            set { this.SetField(ref this.notifyWhenHomeTakesObjective, value); }
+            set { this.SetProperty(ref this.notifyWhenHomeTakesObjective, value); }
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace GW2PAO.Modules.WvW
         public bool NotifyWhenHomeLosesObjective
         {
             get { return this.notifyWhenHomeLosesObjective; }
-            set { this.SetField(ref this.notifyWhenHomeLosesObjective, value); }
+            set { this.SetProperty(ref this.notifyWhenHomeLosesObjective, value); }
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace GW2PAO.Modules.WvW
         public bool NotifyWhenOtherTakesOtherObjective
         {
             get { return this.notifyWhenOtherTakesOtherObjective; }
-            set { this.SetField(ref this.notifyWhenOtherTakesOtherObjective, value); }
+            set { this.SetProperty(ref this.notifyWhenOtherTakesOtherObjective, value); }
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreCastlesShown
         {
             get { return this.areCastlesShown; }
-            set { SetField(ref this.areCastlesShown, value); }
+            set { this.SetProperty(ref this.areCastlesShown, value); }
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreKeepsShown
         {
             get { return this.areKeepsShown; }
-            set { SetField(ref this.areKeepsShown, value); }
+            set { this.SetProperty(ref this.areKeepsShown, value); }
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreTowersShown
         {
             get { return this.areTowersShown; }
-            set { SetField(ref this.areTowersShown, value); }
+            set { this.SetProperty(ref this.areTowersShown, value); }
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreCampsShown
         {
             get { return this.areCampsShown; }
-            set { SetField(ref this.areCampsShown, value); }
+            set { this.SetProperty(ref this.areCampsShown, value); }
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreBloodlustObjectivesShown
         {
             get { return this.areBloodlustObjectivesShown; }
-            set { SetField(ref this.areBloodlustObjectivesShown, value); }
+            set { this.SetProperty(ref this.areBloodlustObjectivesShown, value); }
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreRedObjectivesShown
         {
             get { return this.areRedObjectivesShown; }
-            set { SetField(ref this.areRedObjectivesShown, value); }
+            set { this.SetProperty(ref this.areRedObjectivesShown, value); }
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreGreenObjectivesShown
         {
             get { return this.areGreenObjectivesShown; }
-            set { SetField(ref this.areGreenObjectivesShown, value); }
+            set { this.SetProperty(ref this.areGreenObjectivesShown, value); }
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreBlueObjectivesShown
         {
             get { return this.areBlueObjectivesShown; }
-            set { SetField(ref this.areBlueObjectivesShown, value); }
+            set { this.SetProperty(ref this.areBlueObjectivesShown, value); }
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreNeutralObjectivesShown
         {
             get { return this.areNeutralObjectivesShown; }
-            set { SetField(ref this.areNeutralObjectivesShown, value); }
+            set { this.SetProperty(ref this.areNeutralObjectivesShown, value); }
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace GW2PAO.Modules.WvW
         public bool AreShortNamesShown
         {
             get { return this.areShortNamesShown; }
-            set { this.SetField(ref this.areShortNamesShown, value); }
+            set { this.SetProperty(ref this.areShortNamesShown, value); }
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace GW2PAO.Modules.WvW
         public WvWMap MapOverride
         {
             get { return this.mapOverride; }
-            set { this.SetField(ref this.mapOverride, value); }
+            set { this.SetProperty(ref this.mapOverride, value); }
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace GW2PAO.Modules.WvW
         public Units DistanceUnits
         {
             get { return this.distanceUnits; }
-            set { SetField(ref this.distanceUnits, value); }
+            set { this.SetProperty(ref this.distanceUnits, value); }
         }
 
         /// <summary>

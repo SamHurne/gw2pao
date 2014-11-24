@@ -1,13 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using GW2PAO.Modules.Events.Interfaces;
+﻿using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 
 namespace GW2PAO.Modules.Events.ViewModels.EventNotification
 {
     [Export(typeof(EventNotificationsWindowViewModel))]
-    public class EventNotificationsWindowViewModel : NotifyPropertyChangedBase
+    public class EventNotificationsWindowViewModel : BindableBase
     {
         /// <summary>
         /// Default logger

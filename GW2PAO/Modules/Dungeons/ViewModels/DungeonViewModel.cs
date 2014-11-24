@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GW2PAO.API.Data;
+﻿using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.Modules.WebBrowser.Interfaces;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
-    public class DungeonViewModel : NotifyPropertyChangedBase
+    public class DungeonViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -80,7 +81,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         public bool IsVisible
         {
             get { return this.isVisible; }
-            set { SetField(ref this.isVisible, value); }
+            set { SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>

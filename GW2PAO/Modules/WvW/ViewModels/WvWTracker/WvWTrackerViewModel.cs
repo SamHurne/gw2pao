@@ -1,19 +1,20 @@
-﻿using System;
+﻿using GW2PAO.API.Data.Enums;
+using GW2PAO.Modules.WvW.Interfaces;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.API.Data.Enums;
-using GW2PAO.Modules.WvW.Interfaces;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
 {
     [Export(typeof(WvWTrackerViewModel))]
-    public class WvWTrackerViewModel : NotifyPropertyChangedBase
+    public class WvWTrackerViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -259,11 +260,11 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// </summary>
         private void NotifyMapSelectionChanged()
         {
-            this.RaisePropertyChanged("IsUsingPlayerMap");
-            this.RaisePropertyChanged("IsUsingRedBorderlands");
-            this.RaisePropertyChanged("IsUsingBlueBorderlands");
-            this.RaisePropertyChanged("IsUsingGreenBorderlands");
-            this.RaisePropertyChanged("IsUsingEternalBattlegrounds");
+            this.OnPropertyChanged(() => this.IsUsingPlayerMap);
+            this.OnPropertyChanged(() => this.IsUsingRedBorderlands);
+            this.OnPropertyChanged(() => this.IsUsingBlueBorderlands);
+            this.OnPropertyChanged(() => this.IsUsingGreenBorderlands);
+            this.OnPropertyChanged(() => this.IsUsingEternalBattlegrounds);
         }
 
         /// <summary>
@@ -271,8 +272,8 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// </summary>
         private void NotifyOrientationSelectionChanged()
         {
-            this.RaisePropertyChanged("IsVerticalOrientation");
-            this.RaisePropertyChanged("IsHorizontalOrientation");
+            this.OnPropertyChanged(() => this.IsVerticalOrientation);
+            this.OnPropertyChanged(() => this.IsHorizontalOrientation);
         }
 
         /// <summary>
@@ -280,9 +281,9 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// </summary>
         private void NotifyUnitsSelectionChanged()
         {
-            this.RaisePropertyChanged("IsFeetSelected");
-            this.RaisePropertyChanged("IsMetersSelected");
-            this.RaisePropertyChanged("IsTimeDistanceSelected");
+            this.OnPropertyChanged(() => this.IsFeetSelected);
+            this.OnPropertyChanged(() => this.IsMetersSelected);
+            this.OnPropertyChanged(() => this.IsTimeDistanceSelected);
         }
 
         /// <summary>
@@ -290,8 +291,8 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// </summary>
         private void NotifyDisplayedNamesSelectionChanged()
         {
-            this.RaisePropertyChanged("IsCardinalDirectionsSelected");
-            this.RaisePropertyChanged("IsShortNamesSelected");
+            this.OnPropertyChanged(() => this.IsCardinalDirectionsSelected);
+            this.OnPropertyChanged(() => this.IsShortNamesSelected);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace GW2PAO.Modules.Teamspeak
         public bool ShowChatEntryBox
         {
             get { return this.showChatEntryBox; }
-            set { this.SetField(ref this.showChatEntryBox, value); }
+            set { this.SetProperty(ref this.showChatEntryBox, value); }
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace GW2PAO.Modules.Teamspeak
         public bool ShowChannelName
         {
             get { return this.showChannelName; }
-            set { this.SetField(ref this.showChannelName, value); }
+            set { this.SetProperty(ref this.showChannelName, value); }
         }
 
         /// <summary>

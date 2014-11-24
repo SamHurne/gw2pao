@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using FeserWard.Controls;
+﻿using FeserWard.Controls;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
@@ -17,14 +9,23 @@ using GW2PAO.Modules.Commerce.Interfaces;
 using GW2PAO.Modules.Commerce.Models;
 using GW2PAO.Modules.Commerce.Services;
 using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     /// <summary>
     /// ViewModel for an item's Price information
     /// </summary>
-    public class ItemPriceViewModel : NotifyPropertyChangedBase
+    public class ItemPriceViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -102,7 +103,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             get { return this.selectedItem; }
             set
             {
-                if (this.SetField(ref this.selectedItem, value))
+                if (this.SetProperty(ref this.selectedItem, value))
                 {
                     this.ItemData = this.commerceService.GetItem(value.ID);
                     this.Data.ItemID = this.ItemData.ID;
@@ -115,8 +116,8 @@ namespace GW2PAO.Modules.Commerce.ViewModels
                     this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
 
                     // Raise property-changed events for each of the info display properties
-                    this.RaisePropertyChanged("ItemName");
-                    this.RaisePropertyChanged("IconUrl");
+                    this.OnPropertyChanged(() => this.ItemName);
+                    this.OnPropertyChanged(() => this.IconUrl);
                 }
             }
         }
@@ -136,7 +137,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public bool IsBuyOrderNotificationShown
         {
             get { return this.isBuyOrderNotificationShown; }
-            set { this.SetField(ref this.isBuyOrderNotificationShown, value); }
+            set { this.SetProperty(ref this.isBuyOrderNotificationShown, value); }
         }
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public bool IsSellListingNotificationShown
         {
             get { return this.isSellListingNotificationShown; }
-            set { this.SetField(ref this.isSellListingNotificationShown, value); }
+            set { this.SetProperty(ref this.isSellListingNotificationShown, value); }
         }
 
         /// <summary>
@@ -154,7 +155,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public bool IsBuyOrderOutOfLimits
         {
             get { return this.isBuyOrderOutOfLimits; }
-            set { this.SetField(ref this.isBuyOrderOutOfLimits, value); }
+            set { this.SetProperty(ref this.isBuyOrderOutOfLimits, value); }
         }
 
         /// <summary>
@@ -163,7 +164,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public bool IsSellListingOutOfLimits
         {
             get { return this.isSellListingOutOfLimits; }
-            set { this.SetField(ref this.isSellListingOutOfLimits, value); }
+            set { this.SetProperty(ref this.isSellListingOutOfLimits, value); }
         }
 
         /// <summary>

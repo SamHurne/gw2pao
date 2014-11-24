@@ -1,15 +1,16 @@
-﻿using System;
+﻿using GW2PAO.API.Data;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.API.Data;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.WvW.ViewModels
 {
-    public class GuildViewModel : NotifyPropertyChangedBase
+    public class GuildViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -26,7 +27,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public Guid? ID
         {
             get { return this.guildId; }
-            set { this.SetField(ref this.guildId, value); }
+            set { this.SetProperty(ref this.guildId, value); }
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public string Name
         {
             get { return this.guildName; }
-            set { this.SetField(ref this.guildName, value); }
+            set { this.SetProperty(ref this.guildName, value); }
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public string Tag
         {
             get { return this.guildTag; }
-            set { this.SetField(ref this.guildTag, value); }
+            set { this.SetProperty(ref this.guildTag, value); }
         }
 
         /// <summary>

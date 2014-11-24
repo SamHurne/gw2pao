@@ -63,7 +63,6 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ExtensionLibrary\Bindings\FrameworkElementExtensions.cs" />
     <Compile Include="Interfaces\IRefreshableCommand.cs" />
-    <Compile Include="NotifyPropertyChangedBase.cs" />
     <Compile Include="OutlinedText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedResourceDictionary.cs" />

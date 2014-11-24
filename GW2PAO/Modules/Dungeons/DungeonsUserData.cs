@@ -32,7 +32,7 @@ namespace GW2PAO.Modules.Dungeons
         public DateTime LastResetDateTime
         {
             get { return this.lastResetDateTime; }
-            set { SetField(ref this.lastResetDateTime, value); }
+            set { SetProperty(ref this.lastResetDateTime, value); }
         }
 
         /// <summary>

@@ -1,19 +1,20 @@
-﻿using System;
+﻿using GW2PAO.Data.UserData;
+using GW2PAO.Modules.Commerce.Interfaces;
+using GW2PAO.PresentationCore;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2PAO.Data.UserData;
-using GW2PAO.Modules.Commerce.Interfaces;
-using GW2PAO.PresentationCore;
-using NLog;
 
 namespace GW2PAO.Modules.Commerce.ViewModels.PriceTracker
 {
     [Export]
-    public class PriceListViewModel : NotifyPropertyChangedBase
+    public class PriceListViewModel : BindableBase
     {
         /// <summary>
         /// Default logger

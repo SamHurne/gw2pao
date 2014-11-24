@@ -1,4 +1,9 @@
-﻿using System;
+﻿using GW2PAO.API.Services.Interfaces;
+using GW2PAO.PresentationCore;
+using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Mvvm;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Globalization;
@@ -6,15 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2PAO.API.Services.Interfaces;
-using GW2PAO.PresentationCore;
-using GW2PAO.Utility;
-using NLog;
 
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     [Export]
-    public class RebuildNamesDatabaseViewModel : NotifyPropertyChangedBase
+    public class RebuildNamesDatabaseViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -41,7 +42,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public int Progress
         {
             get { return this.progress; }
-            set { this.SetField(ref this.progress, value); }
+            set { this.SetProperty(ref this.progress, value); }
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public int TotalRequests
         {
             get { return this.totalRequests; }
-            set { this.SetField(ref this.totalRequests, value); }
+            set { this.SetProperty(ref this.totalRequests, value); }
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public bool IsComplete
         {
             get { return this.isComplete; }
-            set { this.SetField(ref this.isComplete, value); }
+            set { this.SetProperty(ref this.isComplete, value); }
         }
 
         /// <summary>
