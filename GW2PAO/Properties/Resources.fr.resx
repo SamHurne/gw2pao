@@ -117,4 +117,533 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>A propos</value>
+  </data>
+  <data name="ActiveIn" xml:space="preserve">
+    <value>démarre dans</value>
+    <comment>Used to communicate when an in-game event will be active - example: "active in 08:00:01"</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajout</value>
+    <comment>Add, as in mathematics addition</comment>
+  </data>
+  <data name="Adjusted" xml:space="preserve">
+    <value>Corrigé</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>GW2 Personal Assistant Overlay</value>
+  </data>
+  <data name="AutomaticUnlock" xml:space="preserve">
+    <value>Débloquage automatique</value>
+  </data>
+  <data name="BloodlustObjectives" xml:space="preserve">
+    <value>Ruines de puissance</value>
+  </data>
+  <data name="BlueBorderlands" xml:space="preserve">
+    <value>Territoire frontalier Bleu</value>
+  </data>
+  <data name="BlueObjectives" xml:space="preserve">
+    <value>Objectifs frontaliers Bleus</value>
+  </data>
+  <data name="BreakEven" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BuyOrder" xml:space="preserve">
+    <value>Ordre d'achat</value>
+    <comment>An order placed to buy an item</comment>
+  </data>
+  <data name="BuyOrderLowerLimit" xml:space="preserve">
+    <value>Ordre d'achat minimum:</value>
+    <comment>Lower limit for a buy order</comment>
+  </data>
+  <data name="BuyOrderPriceNotifications" xml:space="preserve">
+    <value>Avertissement prix d'achat HV</value>
+  </data>
+  <data name="BuyOrderUpperLimit" xml:space="preserve">
+    <value>Ordre d'achat maximum:</value>
+    <comment>Upper/higher limit for a buy order</comment>
+  </data>
+  <data name="BuyPrice" xml:space="preserve">
+    <value>Prix d'achat</value>
+  </data>
+  <data name="Camps" xml:space="preserve">
+    <value>Camps</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CardinalDirections" xml:space="preserve">
+    <value>Directions</value>
+  </data>
+  <data name="Castles" xml:space="preserve">
+    <value>Forts</value>
+  </data>
+  <data name="CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Vérifier les mises à jour au démarrage</value>
+  </data>
+  <data name="ClaimedBy" xml:space="preserve">
+    <value>Revendiqué par:</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+    <comment>Used for both buttons and menu items</comment>
+  </data>
+  <data name="Commerce" xml:space="preserve">
+    <value>Commerce</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Configurer</value>
+  </data>
+  <data name="CopyChatCode" xml:space="preserve">
+    <value>Copier dans le chan</value>
+    <comment>Used to copy &amp; paste a special chat code into the in-game chat</comment>
+  </data>
+  <data name="CopyEnemyHeadedTowards" xml:space="preserve">
+    <value>Copier la direction vers laquelle l'ennemi se dirige</value>
+    <comment>Copy text meant to notify others than enemy players are headed towards an objective</comment>
+  </data>
+  <data name="CopyName" xml:space="preserve">
+    <value>Copier le nom</value>
+    <comment>Copy the Name of something</comment>
+  </data>
+  <data name="CopyPlayerHeadedTowards" xml:space="preserve">
+    <value>Copier la direction vers laquelle le joueur se dirige</value>
+    <comment>Copy text meant to notify others that players are headed towards an objective</comment>
+  </data>
+  <data name="CopyRITimer" xml:space="preserve">
+    <value>Copier la durée d'Indignation Vertueuse restante</value>
+    <comment>Copy text including the Righteous Indignation timer value of an objective</comment>
+  </data>
+  <data name="CopyUnderAttack" xml:space="preserve">
+    <value>Copier l'avertissement d'attaque</value>
+    <comment>Copy text meant to notify others that an objective is under attack</comment>
+  </data>
+  <data name="CopyWaypointCode" xml:space="preserve">
+    <value>Copier le Point de passage</value>
+    <comment>Used to copy &amp; paste text into the in-game chat</comment>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Cout:</value>
+  </data>
+  <data name="CurrentHighestBuyOrder" xml:space="preserve">
+    <value>Ordre d'achat actuel le plus haut:</value>
+    <comment>The currently highest buy order</comment>
+  </data>
+  <data name="CurrentLowestSellListing" xml:space="preserve">
+    <value>Offre de vente actuelle la plus basse:</value>
+    <comment>The currently lowest sell listing</comment>
+  </data>
+  <data name="CurrentZone" xml:space="preserve">
+    <value>Zone actuelle</value>
+  </data>
+  <data name="DesignArtBy" xml:space="preserve">
+    <value>Conception par:</value>
+    <comment>Shown in About window</comment>
+  </data>
+  <data name="DevelopmentBy" xml:space="preserve">
+    <value>Développement par:</value>
+    <comment>Shown in About window</comment>
+  </data>
+  <data name="DisableAll" xml:space="preserve">
+    <value>Désactiver tout</value>
+  </data>
+  <data name="Distance" xml:space="preserve">
+    <value>Distance:</value>
+  </data>
+  <data name="DistanceUnits" xml:space="preserve">
+    <value>Unité de distance</value>
+    <comment>Distance units of measure</comment>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Réussi!</value>
+  </data>
+  <data name="DontShowAgain" xml:space="preserve">
+    <value>Ne plus montrer</value>
+    <comment>Shown in New Version Available popup</comment>
+  </data>
+  <data name="Dungeons" xml:space="preserve">
+    <value>Donjons</value>
+  </data>
+  <data name="DungeonsTracker" xml:space="preserve">
+    <value>Liste des donjons</value>
+  </data>
+  <data name="EnableAll" xml:space="preserve">
+    <value>Activer tout</value>
+  </data>
+  <data name="EnableLogging" xml:space="preserve">
+    <value>Activer le log</value>
+    <comment>Shown in About window</comment>
+  </data>
+  <data name="EternalBattlegrounds" xml:space="preserve">
+    <value>Champs de Bataille Eternels</value>
+  </data>
+  <data name="EventNotifications" xml:space="preserve">
+    <value>Notifications d'évènement</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Evènements</value>
+  </data>
+  <data name="EventTimeTable" xml:space="preserve">
+    <value>Calendrier d'évènements</value>
+    <comment>Events time table, like a time table for a bus or train</comment>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="Feet" xml:space="preserve">
+    <value>Feet</value>
+    <comment>Feet as in "ft"</comment>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Cliquer pour démarrer</value>
+    <comment>Shown in intial pop-up. Full text is "GW2 Personal Assistant Overlay is now running. Click here to Get Started"</comment>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="GoToDownloadPage" xml:space="preserve">
+    <value>Accéder au téléchargement</value>
+    <comment>Shown in New Version Available popup</comment>
+  </data>
+  <data name="GreenBorderlands" xml:space="preserve">
+    <value>Territoire frontalier Vert</value>
+  </data>
+  <data name="GreenObjectives" xml:space="preserve">
+    <value>Objectifs frontaliers Verts</value>
+  </data>
+  <data name="HeartQuests" xml:space="preserve">
+    <value>Quêtes de zone (coeur)</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aide</value>
+    <comment>Shown in About window</comment>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Masquer</value>
+    <comment>Used in several places, hides something from view</comment>
+  </data>
+  <data name="Horizontal" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value>IP:</value>
+    <comment>IP Address</comment>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Objet</value>
+    <comment>Item, as in an in-game item</comment>
+  </data>
+  <data name="ItemName" xml:space="preserve">
+    <value>Nom d'objet</value>
+  </data>
+  <data name="Keeps" xml:space="preserve">
+    <value>Conservations</value>
+    <comment>Keeps, as in castle keep</comment>
+  </data>
+  <data name="LastActiveXAgo" xml:space="preserve">
+    <value>Dernière activation il y a {0}</value>
+    <comment>Describes how long ago something was active (time) - example: "Last Active 01:23:45 ago"</comment>
+  </data>
+  <data name="ListingFee" xml:space="preserve">
+    <value>Taxes:</value>
+  </data>
+  <data name="LocatedInX" xml:space="preserve">
+    <value>Localisé à {0}</value>
+    <comment>Describes location of something - example: "Located in Lion's Arch"</comment>
+  </data>
+  <data name="Lower" xml:space="preserve">
+    <value>Inférieur</value>
+  </data>
+  <data name="Maps" xml:space="preserve">
+    <value>Cartes</value>
+  </data>
+  <data name="Meters" xml:space="preserve">
+    <value>Mètres</value>
+    <comment>Meters, as in "m"</comment>
+  </data>
+  <data name="Names" xml:space="preserve">
+    <value>Noms</value>
+  </data>
+  <data name="NeutralObjectives" xml:space="preserve">
+    <value>Objectifs Neutres</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>Nouvelle version disponible!</value>
+    <comment>Shown in New Version Available popup</comment>
+  </data>
+  <data name="NonInteractiveWindows" xml:space="preserve">
+    <value>Fenêtres non-interactives</value>
+    <comment>Non-interactive windows, or windows that do not receive any mouse-clicks</comment>
+  </data>
+  <data name="NotRunningAsAdmin" xml:space="preserve">
+    <value>Certaines options sont indisponibles car GW2 est lancé en tant qu'administrateur</value>
+  </data>
+  <data name="NowRunning" xml:space="preserve">
+    <value>est lancé correctement</value>
+    <comment>Shown in intial pop-up. Full text is "GW2 Personal Assistant Overlay is now running. Click here to Get Started"</comment>
+  </data>
+  <data name="OpenEventsTracker" xml:space="preserve">
+    <value>Ouvrir la liste d'évènements</value>
+    <comment>Performs an action - Opens the events tracker</comment>
+  </data>
+  <data name="OpenWikiPage" xml:space="preserve">
+    <value>Ouvrir la page du Wiki</value>
+    <comment>Opens the web browser to the GW2 Wiki</comment>
+  </data>
+  <data name="OpenWvWTracker" xml:space="preserve">
+    <value>Ouvrir les évènements McM</value>
+  </data>
+  <data name="Orientation" xml:space="preserve">
+    <value>Orientation</value>
+    <comment>Orientation, such as "Vertical" or "Horizontal"</comment>
+  </data>
+  <data name="OverlayMenuIcon" xml:space="preserve">
+    <value>Icône de l'overlay</value>
+  </data>
+  <data name="OverrideDisplayedMap" xml:space="preserve">
+    <value>Passer outre la carte</value>
+  </data>
+  <data name="OwnedBy" xml:space="preserve">
+    <value>Revendiquer par: {0}</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points: {0}</value>
+    <comment>As in score</comment>
+  </data>
+  <data name="POIs" xml:space="preserve">
+    <value>Points d'intérêt</value>
+    <comment>as in Points of Interest</comment>
+  </data>
+  <data name="PriceNotifications" xml:space="preserve">
+    <value>Avertissement de prix HV</value>
+  </data>
+  <data name="PriceTracker" xml:space="preserve">
+    <value>Surveillance HV</value>
+    <comment>Price Tracker title (like Dungeons Tracker, but for tracking item prices)</comment>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Profit:</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="RebuildingNamesDatabase" xml:space="preserve">
+    <value>Rafraichissement de la base en cours...</value>
+    <comment>Reconstruction of a database containing item names</comment>
+  </data>
+  <data name="RebuildItemNamesDatabase" xml:space="preserve">
+    <value>Rafraichir la base d'objets</value>
+    <comment>Rebuilds the item names database</comment>
+  </data>
+  <data name="RedBorderlands" xml:space="preserve">
+    <value>Territoire frontalier Rouge</value>
+  </data>
+  <data name="RedisplayNotificationsIntervalMinutes" xml:space="preserve">
+    <value>Intervalle de notification (min):</value>
+  </data>
+  <data name="RedObjectives" xml:space="preserve">
+    <value>Objectifs frontaliers Rouges</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Remise à zéro</value>
+    <comment>Start over, shown in a button</comment>
+  </data>
+  <data name="ResetCompletedPaths" xml:space="preserve">
+    <value>Remise à zéro des chemins</value>
+  </data>
+  <data name="ResetHiddenDungeons" xml:space="preserve">
+    <value>Remise à zéro des donjons</value>
+    <comment>Menu item for the Dungeons Tracker</comment>
+  </data>
+  <data name="ResetHiddenEvents" xml:space="preserve">
+    <value>Remise à zéro des évènements masqués</value>
+    <comment>Forces events hidden from view to be shown again</comment>
+  </data>
+  <data name="ResetHiddenObjectives" xml:space="preserve">
+    <value>Remise à zéro des objectifs masqués</value>
+  </data>
+  <data name="ResetHiddenPoints" xml:space="preserve">
+    <value>Remise à zéro des points d'intérêt masqués</value>
+    <comment>Reset hidden points, as in locations on the map</comment>
+  </data>
+  <data name="ResetUnlocks" xml:space="preserve">
+    <value>Remise à zéro des éléments débloqués</value>
+    <comment>Reset unlocked stuff</comment>
+  </data>
+  <data name="Revenue" xml:space="preserve">
+    <value>Revenu:</value>
+  </data>
+  <data name="Reward" xml:space="preserve">
+    <value>Récompense:</value>
+    <comment>Dungeons path reward</comment>
+  </data>
+  <data name="SaleFee" xml:space="preserve">
+    <value>Taxes de vente:</value>
+  </data>
+  <data name="SellListing" xml:space="preserve">
+    <value>Liste de vente</value>
+    <comment>A sale listing, where a player is listing an item to sell</comment>
+  </data>
+  <data name="SellListingLowerLimit" xml:space="preserve">
+    <value>Prix de vente minimum:</value>
+    <comment>Lower limit for a sell listing</comment>
+  </data>
+  <data name="SellListingPriceNotifications" xml:space="preserve">
+    <value>Avertissement prix de vente HV</value>
+  </data>
+  <data name="SellListingUpperLimit" xml:space="preserve">
+    <value>Prix de vente maximum:</value>
+    <comment>Upper/higher limit for a sell listing</comment>
+  </data>
+  <data name="SellPrice" xml:space="preserve">
+    <value>Prix de vente</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
+    <comment>Send, as in send a letter or send a message</comment>
+  </data>
+  <data name="Server" xml:space="preserve">
+    <value>Serveur:</value>
+    <comment>Teamspeak server name</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Réglages</value>
+  </data>
+  <data name="ShortNames" xml:space="preserve">
+    <value>Noms raccourcis</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Montrer</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Montrer tout</value>
+  </data>
+  <data name="ShowChannelBox" xml:space="preserve">
+    <value>Montrer salon TS</value>
+    <comment>Show teamspeak channel information box</comment>
+  </data>
+  <data name="ShowChatEntryBox" xml:space="preserve">
+    <value>Montrer chatbox TS</value>
+    <comment>Show text-chat entry box</comment>
+  </data>
+  <data name="ShowDistances" xml:space="preserve">
+    <value>Montrer Distances</value>
+  </data>
+  <data name="ShowInactiveEvents" xml:space="preserve">
+    <value>Montrer les évènements inactifs</value>
+    <comment>Show world events even if they are inactive</comment>
+  </data>
+  <data name="ShowNone" xml:space="preserve">
+    <value>Ne rien montrer</value>
+  </data>
+  <data name="ShowNotificationBorders" xml:space="preserve">
+    <value>Montrer les bordures sur notifications</value>
+    <comment>Show window borders for notification windows</comment>
+  </data>
+  <data name="ShowUnlockedZonePoints" xml:space="preserve">
+    <value>Montrer les sites débloqués</value>
+    <comment>Show unlocked points, as in locations on the map</comment>
+  </data>
+  <data name="SkillChallenges" xml:space="preserve">
+    <value>Point de compétence</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="StartTeamspeak" xml:space="preserve">
+    <value>Veuillez démarrer Teamspeak</value>
+    <comment>Instructing the user to start Teamspeak (in a nice sort of way)</comment>
+  </data>
+  <data name="StickyWindows" xml:space="preserve">
+    <value>Fenêtre magnétique</value>
+    <comment>Windows that stick to the screen-edge and to eachother</comment>
+  </data>
+  <data name="TakenBy" xml:space="preserve">
+    <value>En faveur de: {0}</value>
+    <comment>Taken by X, such as "By: Jade Quarry"</comment>
+  </data>
+  <data name="TakenFrom" xml:space="preserve">
+    <value>Au détriment de: {0}</value>
+    <comment>Taken from X, such as "From: Jade Quarry"</comment>
+  </data>
+  <data name="Teamspeak" xml:space="preserve">
+    <value>Teamspeak</value>
+  </data>
+  <data name="TeamspeakOverlay" xml:space="preserve">
+    <value>Overlay Teamspeak</value>
+  </data>
+  <data name="ThirdPartyLibraries" xml:space="preserve">
+    <value>Cette application utilise</value>
+    <comment>Shown in About window</comment>
+  </data>
+  <data name="TimeDistances" xml:space="preserve">
+    <value>Temps de trajet</value>
+    <comment>Time-distances, which are estimated time to travel based on distanced</comment>
+  </data>
+  <data name="Towers" xml:space="preserve">
+    <value>Tours</value>
+    <comment>Towers, as in guard towers</comment>
+  </data>
+  <data name="TPCalculator" xml:space="preserve">
+    <value>Calculatrice HV</value>
+    <comment>Trading Post Calculator</comment>
+  </data>
+  <data name="TranslationsBy" xml:space="preserve">
+    <value>Traductions par:</value>
+    <comment>Followed by a list of names (the translators)</comment>
+  </data>
+  <data name="Upper" xml:space="preserve">
+    <value>Superieur</value>
+  </data>
+  <data name="UsePlayersMap" xml:space="preserve">
+    <value>Utiliser la carte actuelle</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version:</value>
+    <comment>Shown in New Version Available popup</comment>
+  </data>
+  <data name="Vertical" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="Vistas" xml:space="preserve">
+    <value>Panoramas</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
+  <data name="Waypoints" xml:space="preserve">
+    <value>Points de passage</value>
+  </data>
+  <data name="WebBrowser" xml:space="preserve">
+    <value>Navigateur</value>
+  </data>
+  <data name="WhenHomeWorldLosesObjective" xml:space="preserve">
+    <value>Lorsqu'un objectif est perdu sur la home</value>
+    <comment>As in when the home world loses an objective to another world</comment>
+  </data>
+  <data name="WhenHomeWorldTakesObjective" xml:space="preserve">
+    <value>Lorsqu'un objectif est repris sur la home</value>
+    <comment>As in when the home world takes an objective from another world</comment>
+  </data>
+  <data name="WhenOtherWorldTakesOtherWorldsObjective" xml:space="preserve">
+    <value>Lorsqu'un objectif est capturé par un autre monde en dehors de la home</value>
+    <comment>As in when a world other than the home world takes an objective from another world that is not the home world</comment>
+  </data>
+  <data name="WorldEvents" xml:space="preserve">
+    <value>Evènements Mondiaux</value>
+  </data>
+  <data name="WorldSelection" xml:space="preserve">
+    <value>Choix du Monde</value>
+  </data>
+  <data name="WorldvsWorld" xml:space="preserve">
+    <value>Monde contre Monde</value>
+  </data>
+  <data name="WvWNotifications" xml:space="preserve">
+    <value>Notifications McM</value>
+    <comment>World vs World Notifications</comment>
+  </data>
+  <data name="ZoneCompletionAssistant" xml:space="preserve">
+    <value>Assistant d'exploration</value>
+  </data>
 </root>
