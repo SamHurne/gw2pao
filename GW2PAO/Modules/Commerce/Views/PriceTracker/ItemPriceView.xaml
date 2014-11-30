@@ -10,6 +10,34 @@
              mc:Ignorable="d" d:DesignWidth="200"
              Height="43"
              TextOptions.TextFormattingMode="Display">
+    <UserControl.Resources>
+        <Storyboard x:Key="OutOfLimitsEnterAction">
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"/>
+            <DoubleAnimation To="0.25"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:0.5"/>
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:01"/>
+            <DoubleAnimation To="0.25"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:01.5"/>
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:02"/>
+        </Storyboard>
+        <Storyboard x:Key="OutOfLimitsExitAction">
+            <DoubleAnimation To="0"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00"/>
+        </Storyboard>
+    </UserControl.Resources>
 
     <!--TODO: ContextMenu-->
     <!--<UserControl.ContextMenu>
@@ -74,13 +102,23 @@
             <view:ReadonlyPriceView Grid.Row="0" Grid.Column="3" 
                                     HorizontalAlignment="Right"
                                     Margin="5,0,0,0"
-                                    Price="{Binding CurrentSellListing}">
+                                    Price="{Binding CurrentSellListing}"
+                                    TextFill="White">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
-                        <Setter Property="TextFill" Value="White" />
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Yellow" BlurRadius="20" Direction="0" ShadowDepth="0" Opacity="0" />
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSellListingOutOfLimits}" Value="True">
-                                <Setter Property="TextFill" Value="#FF5E5E" />
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OutOfLimitsEnterAction}" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OutOfLimitsExitAction}" />
+                                </DataTrigger.ExitActions>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -96,19 +134,28 @@
             <view:ReadonlyPriceView Grid.Row="1" Grid.Column="3"
                                     HorizontalAlignment="Right"
                                     Margin="5,5,0,0"
-                                    Price="{Binding CurrentBuyOrder}">
+                                    Price="{Binding CurrentBuyOrder}"
+                                    TextFill="White">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
-                        <Setter Property="TextFill" Value="White" />
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Yellow" BlurRadius="20" Direction="0" ShadowDepth="0" Opacity="0" />
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsBuyOrderOutOfLimits}" Value="True">
-                                <Setter Property="TextFill" Value="#FF5E5E" />
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OutOfLimitsEnterAction}" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource OutOfLimitsExitAction}" />
+                                </DataTrigger.ExitActions>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </view:ReadonlyPriceView.Style>
             </view:ReadonlyPriceView>
-
         </Grid>
     </Border>
 </UserControl>
