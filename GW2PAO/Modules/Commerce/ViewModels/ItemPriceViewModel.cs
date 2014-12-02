@@ -11,6 +11,8 @@ using GW2PAO.Modules.Commerce.Services;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using OxyPlot;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -131,6 +133,18 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             private set;
         }
 
+        public ObservableCollection<DataPoint> PastBuyOrders
+        {
+            get;
+            private set;
+        }
+
+        public ObservableCollection<DataPoint> PastSaleListings
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// True if the buy order notification has been shown, else false
         /// </summary>
@@ -196,6 +210,8 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.CurrentBuyOrder = new Price();
             this.CurrentSellListing = new Price();
             this.ItemsProvider = new ItemResultsProvider(this.commerceService);
+            this.PastBuyOrders = new ObservableCollection<DataPoint>();
+            this.PastSaleListings = new ObservableCollection<DataPoint>();
 
             if (this.ItemData != null)
                 this.selectedItem = this.commerceService.ItemsDB[this.ItemData.ID];

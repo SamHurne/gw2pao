@@ -110,6 +110,15 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2014.1.546\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -137,11 +146,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationBootstrapper.cs" />
+    <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
+    <Compile Include="Converters\DoubleToPriceConverter.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
     <Compile Include="Modules\Commerce\CommerceViewController.cs" />
     <Compile Include="Modules\Commerce\Interfaces\ICommerceViewController.cs" />
+    <Compile Include="Modules\Commerce\Views\PriceTracker\PricePlot.xaml.cs">
+      <DependentUpon>PricePlot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Events\EventsMenu.cs" />
     <Compile Include="Modules\Events\EventsModule.cs" />
     <Compile Include="Modules\Events\EventsViewController.cs" />
@@ -335,6 +349,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\Commerce\Views\PriceTracker\PricePlot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -591,6 +609,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="FodyWeavers.xml" />
+    <Resource Include="Images\Commerce\graph_ico.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

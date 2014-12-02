@@ -31,3 +31,7 @@ https://github.com/NLog/NLog/blob/master/LICENSE.txt
 TS3QueryLib.NET:
 https://github.com/Scordo/TS3QueryLib.Net
 https://github.com/Scordo/TS3QueryLib.Net/blob/master/LICENSE
+
+Oxyplot:
+http://oxyplot.org/
+http://oxyplot.org/documentation/license

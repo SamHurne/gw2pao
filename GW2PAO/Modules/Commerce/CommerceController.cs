@@ -16,6 +16,8 @@ using GW2PAO.Modules.Commerce.ViewModels.PriceNotification;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels;
 using NLog;
+using OxyPlot;
+using OxyPlot.Axes;
 
 namespace GW2PAO.Modules.Commerce
 {
@@ -283,6 +285,13 @@ namespace GW2PAO.Modules.Commerce
                                 this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
                             }
                         }
+
+                        // Update the historical values for the item
+                        Threading.BeginInvokeOnUI(() =>
+                            {
+                                priceWatch.PastBuyOrders.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentBuyOrder.Value));
+                                priceWatch.PastSaleListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
+                            });
                     }
                 }
 

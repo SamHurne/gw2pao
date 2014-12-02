@@ -7,6 +7,7 @@
              xmlns:view="clr-namespace:GW2PAO.Modules.Commerce.Views"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" d:DesignWidth="200"
              Height="43"
              TextOptions.TextFormattingMode="Display">
@@ -37,6 +38,86 @@
                             Storyboard.TargetProperty="(Effect).Opacity"
                             Duration="00:00:00"/>
         </Storyboard>
+
+        <converters:DateTimeGraphValueConverter x:Key="DateTimeGraphValConverter" />
+        <converters:DoubleToPriceConverter x:Key="DoubleToPrice" />
+
+        <Style x:Key="PlotViewStyle" TargetType="oxy:PlotView">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="PlotAreaBorderColor" Value="White" />
+            <Setter Property="PlotAreaBorderThickness" Value="1" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="TitleFontSize" Value="10" />
+            <Setter Property="LegendMargin" Value="20" />
+            <Setter Property="LegendPadding" Value="3" />
+            <Setter Property="LegendBackground" Value="#60000000" />
+            <Setter Property="DefaultTrackerTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <oxy:TrackerControl Position="{Binding Position}"
+                                            ShowPointer="False"
+                                            CornerRadius="3"
+                                            BorderEdgeMode="Unspecified"
+                                            LineExtents="{Binding PlotModel.PlotArea}"
+                                            Background="#A0000000"
+                                            Foreground="White">
+                            <oxy:TrackerControl.Content>
+                                <StackPanel Margin="5">
+                                    <TextBlock Text="{Binding DataPoint.X, Converter={StaticResource DateTimeGraphValConverter}}"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                DataContext="{Binding DataPoint.Y, Converter={StaticResource DoubleToPrice}}">
+                                        <TextBlock Text="{Binding Gold}" Margin="0,1,0,0" Foreground="White" />
+                                        <Image Source="../../../../Images/Commerce/gold_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                        <TextBlock Text="{Binding Silver}" Margin="0,1,0,0" Foreground="White"/>
+                                        <Image Source="../../../../Images/Commerce/silver_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,5,0"/>
+                                        <TextBlock Text="{Binding Copper}" Margin="0,1,0,0" Foreground="White"/>
+                                        <Image Source="../../../../Images/Commerce/copper_coin.png"
+                                           Height="11" Width="11"
+                                           Margin="1,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </oxy:TrackerControl.Content>
+                        </oxy:TrackerControl>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LinearAxisStyle" TargetType="oxy:LinearAxis">
+            <Setter Property="TicklineColor" Value="White" />
+            <Setter Property="MajorGridlineColor" Value="#50FFFFFF" />
+            <Setter Property="MinorGridlineColor" Value="#10FFFFFF" />
+            <Setter Property="AxislineColor" Value="White" />
+            <Setter Property="TickStyle" Value="Crossing" />
+            <Setter Property="MajorGridlineStyle" Value="Solid" />
+            <Setter Property="MinorGridlineStyle" Value="Dot" />
+            <Setter Property="MinimumPadding" Value="0.05" />
+            <Setter Property="MaximumPadding" Value="0.05" />
+            <Setter Property="IsZoomEnabled" Value="False" />
+            <Setter Property="IsPanEnabled" Value="False" />
+        </Style>
+
+        <Style x:Key="DateTimeAxisStyle" TargetType="oxy:DateTimeAxis">
+            <Setter Property="TicklineColor" Value="White" />
+            <Setter Property="MajorGridlineColor" Value="#50FFFFFF" />
+            <Setter Property="MinorGridlineColor" Value="#10FFFFFF" />
+            <Setter Property="AxislineColor" Value="White" />
+            <Setter Property="TickStyle" Value="Crossing" />
+            <Setter Property="MajorGridlineStyle" Value="Solid" />
+            <Setter Property="MinorGridlineStyle" Value="Dot" />
+            <Setter Property="MinimumPadding" Value="0.05" />
+            <Setter Property="MaximumPadding" Value="0.05" />
+        </Style>
+
+        <Style x:Key="LineSeriesStyle" TargetType="oxy:LineSeries">
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="CanTrackerInterpolatePoints" Value="False" />
+        </Style>
     </UserControl.Resources>
 
     <!--TODO: ContextMenu-->
@@ -46,14 +127,6 @@
             <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>-->
-
-    <!-- TODO: TrackedPrice tooltip -->
-    <!--<UserControl.ToolTip>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding ZoneName, StringFormat={x:Static resx:Resources.LocatedInX}}" />
-            <TextBlock Text="{Binding TimeSinceActive, StringFormat={x:Static resx:Resources.LastActiveXAgo}, Converter={StaticResource TimeConverter}}" />
-        </StackPanel>
-    </UserControl.ToolTip>-->
 
     <!--Note: DataContext is set by the PriceTrackerView-->
     <Border CornerRadius="0" Margin="0,0,5,0" Padding="5,0,5,5" BorderThickness="0,0,0,1">
@@ -77,6 +150,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -156,6 +230,93 @@
                     </Style>
                 </view:ReadonlyPriceView.Style>
             </view:ReadonlyPriceView>
+
+
+            <Image Name="GraphIcon"
+                   Grid.Row="0" Grid.Column="4" Grid.RowSpan="2"
+                   Height="12" Width="12"
+                   Margin="8,1,0,1"
+                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                   Source="../../../../Images/Commerce/graph_ico.png"
+                   MouseDown="GraphIcon_MouseDown">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="0"
+                                                  Color="White"
+                                                  Opacity="0"
+                                                  BlurRadius="10"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:00.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            
+            <Popup Name="GraphPopup" StaysOpen="True"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   PlacementTarget="{Binding ElementName=GraphIcon}"
+                   AllowsTransparency="True" PopupAnimation="Fade"
+                   HorizontalOffset="24">
+                <Border Height="250" Width="600"
+                        BorderThickness="2" CornerRadius="3">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF24313D" Offset="0"/>
+                            <GradientStop Color="#8024313D" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="Black" Opacity="1" />
+                    </Border.BorderBrush>
+                    <oxy:PlotView Name="HistoricalPlot"
+                          Margin="0,0,10,0"
+                          Style="{StaticResource PlotViewStyle}">
+                        <oxy:PlotView.Axes>
+                            <oxy:LinearAxis Name="HistoricalPlotYAxis"
+                                    Style="{StaticResource LinearAxisStyle}"
+                                    Position="Left"/>
+                            <oxy:DateTimeAxis Name="HistoricalPlotXAxis"
+                                      IntervalType="Hours" MinorIntervalType="Minutes"
+                                      Style="{StaticResource DateTimeAxisStyle}"
+                                      Position="Bottom"/>
+                        </oxy:PlotView.Axes>
+                        <oxy:PlotView.Series>
+                            <oxy:LineSeries Name="BuyOrderPlotSeries"
+                                    Title="Highest Buy Order"
+                                    Style="{StaticResource LineSeriesStyle}"
+                                    Color="Yellow"/>
+                            <oxy:LineSeries Name="SellListingPlotSeries"
+                                    Title="Lowest Sell Listing"
+                                    Style="{StaticResource LineSeriesStyle}"
+                                    Color="OrangeRed"/>
+                        </oxy:PlotView.Series>
+                    </oxy:PlotView>
+                </Border>
+            </Popup>
+
         </Grid>
     </Border>
 </UserControl>
