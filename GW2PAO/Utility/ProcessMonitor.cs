@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
+using GW2PAO.Infrastructure;
 using GW2PAO.Utility.Interfaces;
+using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
 
 namespace GW2PAO.Utility
@@ -28,6 +31,7 @@ namespace GW2PAO.Utility
         private bool disposed;
         private ISystemService systemService;
         private bool isAdminRightsErrorShown;
+        private EventAggregator eventAggregator;
 
         /// <summary>
         /// Timer responsible for refreshing
@@ -53,11 +57,12 @@ namespace GW2PAO.Utility
         /// Default constructor
         /// </summary>
         /// <param name="systemService"></param>
-        public ProcessMonitor(ISystemService systemService)
+        public ProcessMonitor(ISystemService systemService, EventAggregator eventAggregator)
         {
             this.systemService = systemService;
             this.doesGw2HaveFocus = false;
             this.isAdminRightsErrorShown = false;
+            this.eventAggregator = eventAggregator;
             this.refreshTimer = new Timer(this.Refresh, null, REFRESH_INTERVAL, REFRESH_INTERVAL);
         }
 
@@ -95,8 +100,7 @@ namespace GW2PAO.Utility
                 {
                     if (!isAdminRightsErrorShown)
                     {
-                        // TODO: find a good way to do this... probably with an aggregate event or composite command
-                        //App.TrayIcon.DisplayNotification(Properties.Resources.Warning, Properties.Resources.NotRunningAsAdmin, GW2PAO.TrayIcon.TrayInfoMessageType.Warning);
+                        this.eventAggregator.GetEvent<InsufficientPrivilegesEvent>().Publish(null);
                         logger.Warn(ex);
                         isAdminRightsErrorShown = true;
                     }

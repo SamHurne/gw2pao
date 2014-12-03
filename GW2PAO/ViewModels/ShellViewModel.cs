@@ -13,6 +13,7 @@ using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Properties;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
 
 namespace GW2PAO.ViewModels
@@ -54,12 +55,12 @@ namespace GW2PAO.ViewModels
         /// Default constructor
         /// </summary>
         [ImportingConstructor]
-        public ShellViewModel(ISystemService systemService)
+        public ShellViewModel(ISystemService systemService, EventAggregator eventAggregator)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
 
             // Initialize the process monitor
-            GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService);
+            GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);
         }
 
         /// <summary>

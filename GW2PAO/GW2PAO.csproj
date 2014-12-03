@@ -148,6 +148,7 @@
     <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Infrastructure\AggregateEvents.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />

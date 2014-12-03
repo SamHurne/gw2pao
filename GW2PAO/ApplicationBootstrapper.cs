@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using GW2PAO.Views;
 using Microsoft.Practices.Prism.MefExtensions;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace GW2PAO
 {
@@ -44,6 +45,7 @@ namespace GW2PAO
         {
             var container = base.CreateContainer();
             container.ComposeExportedValue(container);
+            container.ComposeExportedValue(new EventAggregator());
             return container;
         }
     }

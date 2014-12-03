@@ -15,7 +15,9 @@ using System.Windows.Shapes;
 using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels;
+using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace GW2PAO.Views
 {
@@ -25,6 +27,8 @@ namespace GW2PAO.Views
     [Export]
     public partial class ShellView : OverlayWindow
     {
+        private EventAggregator eventAggregator;
+
         /// <summary>
         /// This window can never have click-through
         /// </summary>
@@ -36,17 +40,12 @@ namespace GW2PAO.Views
             }
         }
 
-        [Import]
-        private ShellViewModel ViewModel
+        [ImportingConstructor]
+        public ShellView(ShellViewModel vm, EventAggregator eventAggregator)
         {
-            set
-            {
-                this.DataContext = value;
-            }
-        }
+            this.DataContext = vm;
+            this.eventAggregator = eventAggregator;
 
-        public ShellView()
-        {
             // All overlay windows created will be children of this window
             OverlayWindow.OwnerWindow = this;
 
@@ -58,6 +57,11 @@ namespace GW2PAO.Views
             this.Loaded += ShellView_Loaded;
 
             Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.CleanupTrayIcon));
+
+            this.eventAggregator.GetEvent<InsufficientPrivilegesEvent>().Subscribe((o) =>
+                {
+                    this.TrayIcon.ShowBalloonTip(Properties.Resources.Warning, Properties.Resources.NotRunningAsAdmin, BalloonIcon.Warning);
+                });
 
             this.Closing += ShellView_Closing;
         }
