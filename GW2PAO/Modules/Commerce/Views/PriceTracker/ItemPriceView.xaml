@@ -278,6 +278,17 @@
                    PlacementTarget="{Binding ElementName=GraphIcon}"
                    AllowsTransparency="True" PopupAnimation="Fade"
                    HorizontalOffset="24">
+                <Popup.ToolTip>
+                    <ToolTip> <!-- Hide the tooltip -->
+                        <ToolTip.Style>
+                            <Style TargetType="ToolTip">
+                                <Style.Setters>
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </Style.Setters>
+                            </Style>
+                        </ToolTip.Style>
+                    </ToolTip>
+                </Popup.ToolTip>
                 <Border Height="250" Width="600"
                         BorderThickness="0,1,0,1" CornerRadius="0">
                     <Border.Background>
@@ -287,7 +298,6 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <Border.BorderBrush>
-                        <!--<SolidColorBrush Color="Black" Opacity="1" />-->
                         <LinearGradientBrush Opacity="0.65">
                             <GradientStop Color="#FFFFA500" Offset="0.5"/>
                             <GradientStop Color="#00FFA500" Offset="1"/>
