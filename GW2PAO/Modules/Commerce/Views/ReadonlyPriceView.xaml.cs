@@ -35,7 +35,7 @@ namespace GW2PAO.Modules.Commerce.Views
         }
 
         /// <summary>
-        /// Identified the Label dependency property
+        /// Identified the TextFill dependency property
         /// </summary>
         public static readonly DependencyProperty TextFillProperty = DependencyProperty.Register("TextFill", typeof(Brush), typeof(ReadonlyPriceView), new PropertyMetadata(Brushes.White));
 
@@ -49,9 +49,25 @@ namespace GW2PAO.Modules.Commerce.Views
         }
 
         /// <summary>
-        /// Identified the Label dependency property
+        /// Identified the Price dependency property
         /// </summary>
         public static readonly DependencyProperty PriceProperty = DependencyProperty.Register("Price", typeof(Price), typeof(ReadonlyPriceView), new PropertyMetadata(new Price()));
+
+        /// <summary>
+        /// If true, the silver and copper values will include spacing
+        /// so that multiple ReadonlyPriceViews will have aligned silver & copper values
+        /// Defaults to False
+        /// </summary>
+        public bool AlignSilverCopper
+        {
+            get { return (bool)GetValue(AlignSilverCopperProperty); }
+            set { SetValue(AlignSilverCopperProperty, value); }
+        }
+
+        /// <summary>
+        /// Identified the AlignSilverCopper dependency property
+        /// </summary>
+        public static readonly DependencyProperty AlignSilverCopperProperty = DependencyProperty.Register("AlignSilverCopper", typeof(bool), typeof(ReadonlyPriceView), new PropertyMetadata(false));
 
         /// <summary>
         /// Default logger

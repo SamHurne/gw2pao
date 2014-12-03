@@ -239,6 +239,7 @@ namespace GW2PAO.Modules.Commerce
                         var prices = allPrices[priceWatch.Data.ItemID];
                         Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
                         Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
+                        Threading.InvokeOnUI(() => priceWatch.CurrentProfit.Value = (prices.LowestSellListing * 0.85) - prices.HighestBuyOrder);
 
                         // Buy Order
                         bool buyOrderOutOfLimits = false;
@@ -290,7 +291,7 @@ namespace GW2PAO.Modules.Commerce
                         Threading.BeginInvokeOnUI(() =>
                             {
                                 priceWatch.PastBuyOrders.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentBuyOrder.Value));
-                                priceWatch.PastSaleListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
+                                priceWatch.PastSellListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
                             });
                     }
                 }

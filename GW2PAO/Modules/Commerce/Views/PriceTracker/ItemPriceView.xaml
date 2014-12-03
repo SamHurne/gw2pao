@@ -48,7 +48,7 @@
             <Setter Property="PlotAreaBorderColor" Value="White" />
             <Setter Property="PlotAreaBorderThickness" Value="1" />
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="TitleFontSize" Value="10" />
+            <Setter Property="TitleFontSize" Value="12" />
             <Setter Property="LegendMargin" Value="20" />
             <Setter Property="LegendPadding" Value="3" />
             <Setter Property="LegendBackground" Value="#60000000" />
@@ -60,26 +60,13 @@
                                             CornerRadius="3"
                                             BorderEdgeMode="Unspecified"
                                             LineExtents="{Binding PlotModel.PlotArea}"
-                                            Background="#A0000000"
+                                            Background="#E0000000"
                                             Foreground="White">
                             <oxy:TrackerControl.Content>
                                 <StackPanel Margin="5">
                                     <TextBlock Text="{Binding DataPoint.X, Converter={StaticResource DateTimeGraphValConverter}}"/>
-                                    <StackPanel Orientation="Horizontal"
-                                                DataContext="{Binding DataPoint.Y, Converter={StaticResource DoubleToPrice}}">
-                                        <TextBlock Text="{Binding Gold}" Margin="0,1,0,0" Foreground="White" />
-                                        <Image Source="../../../../Images/Commerce/gold_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,5,0"/>
-                                        <TextBlock Text="{Binding Silver}" Margin="0,1,0,0" Foreground="White"/>
-                                        <Image Source="../../../../Images/Commerce/silver_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,5,0"/>
-                                        <TextBlock Text="{Binding Copper}" Margin="0,1,0,0" Foreground="White"/>
-                                        <Image Source="../../../../Images/Commerce/copper_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,0,0"/>
-                                    </StackPanel>
+                                    <view:ReadonlyPriceView Price="{Binding DataPoint.Y, Converter={StaticResource DoubleToPrice}}"
+                                                            TextFill="White"/>
                                 </StackPanel>
                             </oxy:TrackerControl.Content>
                         </oxy:TrackerControl>
@@ -117,6 +104,8 @@
         <Style x:Key="LineSeriesStyle" TargetType="oxy:LineSeries">
             <Setter Property="StrokeThickness" Value="2" />
             <Setter Property="CanTrackerInterpolatePoints" Value="False" />
+            <Setter Property="MarkerType" Value="Circle" />
+            <Setter Property="MarkerSize" Value="3" />
         </Style>
     </UserControl.Resources>
 
@@ -127,6 +116,15 @@
             <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>-->
+    
+    <UserControl.ToolTip>
+        <StackPanel Orientation="Horizontal">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.Profit}" FontSize="12"/>
+            <view:ReadonlyPriceView Margin="5,0,0,0"
+                                    Price="{Binding CurrentProfit}"
+                                    TextFill="White" />
+        </StackPanel>
+    </UserControl.ToolTip>
 
     <!--Note: DataContext is set by the PriceTrackerView-->
     <Border CornerRadius="0" Margin="0,0,5,0" Padding="5,0,5,5" BorderThickness="0,0,0,1">
@@ -177,7 +175,7 @@
                                     HorizontalAlignment="Right"
                                     Margin="5,0,0,0"
                                     Price="{Binding CurrentSellListing}"
-                                    TextFill="White">
+                                    TextFill="White" AlignSilverCopper="True">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
                         <Setter Property="Effect">
@@ -209,7 +207,7 @@
                                     HorizontalAlignment="Right"
                                     Margin="5,5,0,0"
                                     Price="{Binding CurrentBuyOrder}"
-                                    TextFill="White">
+                                    TextFill="White" AlignSilverCopper="True">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
                         <Setter Property="Effect">
@@ -234,7 +232,7 @@
 
             <Image Name="GraphIcon"
                    Grid.Row="0" Grid.Column="4" Grid.RowSpan="2"
-                   Height="12" Width="12"
+                   Height="12" Width="13"
                    Margin="8,1,0,1"
                    HorizontalAlignment="Right" VerticalAlignment="Center"
                    Source="../../../../Images/Commerce/graph_ico.png"
@@ -281,37 +279,44 @@
                    AllowsTransparency="True" PopupAnimation="Fade"
                    HorizontalOffset="24">
                 <Border Height="250" Width="600"
-                        BorderThickness="2" CornerRadius="3">
+                        BorderThickness="0,1,0,1" CornerRadius="0">
                     <Border.Background>
                         <LinearGradientBrush>
-                            <GradientStop Color="#FF24313D" Offset="0"/>
-                            <GradientStop Color="#8024313D" Offset="1"/>
+                            <GradientStop Color="#605B4411" Offset="0"/>
+                            <GradientStop Color="#015B4411" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
                     <Border.BorderBrush>
-                        <SolidColorBrush Color="Black" Opacity="1" />
+                        <!--<SolidColorBrush Color="Black" Opacity="1" />-->
+                        <LinearGradientBrush Opacity="0.65">
+                            <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                            <GradientStop Color="#00FFA500" Offset="1"/>
+                        </LinearGradientBrush>
                     </Border.BorderBrush>
                     <oxy:PlotView Name="HistoricalPlot"
-                          Margin="0,0,10,0"
-                          Style="{StaticResource PlotViewStyle}">
+                                    Margin="0,0,10,0"
+                                    Title="{Binding ItemName}"
+                                    Style="{StaticResource PlotViewStyle}">
                         <oxy:PlotView.Axes>
                             <oxy:LinearAxis Name="HistoricalPlotYAxis"
-                                    Style="{StaticResource LinearAxisStyle}"
-                                    Position="Left"/>
+                                            Style="{StaticResource LinearAxisStyle}"
+                                            Position="Left"/>
                             <oxy:DateTimeAxis Name="HistoricalPlotXAxis"
-                                      IntervalType="Hours" MinorIntervalType="Minutes"
-                                      Style="{StaticResource DateTimeAxisStyle}"
-                                      Position="Bottom"/>
+                                              IntervalType="Hours" MinorIntervalType="Minutes"
+                                              Style="{StaticResource DateTimeAxisStyle}"
+                                              Position="Bottom"/>
                         </oxy:PlotView.Axes>
                         <oxy:PlotView.Series>
                             <oxy:LineSeries Name="BuyOrderPlotSeries"
-                                    Title="Highest Buy Order"
-                                    Style="{StaticResource LineSeriesStyle}"
-                                    Color="Yellow"/>
+                                            Title="Highest Buy Order"
+                                            Style="{StaticResource LineSeriesStyle}"
+                                            Color="Yellow"
+                                            MarkerFill="Yellow"/>
                             <oxy:LineSeries Name="SellListingPlotSeries"
-                                    Title="Lowest Sell Listing"
-                                    Style="{StaticResource LineSeriesStyle}"
-                                    Color="OrangeRed"/>
+                                            Title="Lowest Sell Listing"
+                                            Style="{StaticResource LineSeriesStyle}"
+                                            Color="OrangeRed"
+                                            MarkerFill="OrangeRed"/>
                         </oxy:PlotView.Series>
                     </oxy:PlotView>
                 </Border>

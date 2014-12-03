@@ -8,17 +8,60 @@
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+
     <StackPanel Name="LayoutRoot"
         Orientation="Horizontal" VerticalAlignment="Bottom">
-        <core:OutlinedTextBlock Text="{Binding Price.Gold}" Fill="{Binding TextFill}" TextAlignment="Right" />
+        <core:OutlinedTextBlock Text="-" 
+                                Fill="{Binding TextFill}"
+                                Visibility="{Binding Price.IsNegative, Converter={StaticResource BoolToVisibility}}" />
+        <core:OutlinedTextBlock Text="{Binding Price.Gold}"
+                                Fill="{Binding TextFill}"
+                                TextAlignment="Right" />
         <Image Source="../../../Images/Commerce/gold_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
-        <core:OutlinedTextBlock Text="{Binding Price.Silver}" Fill="{Binding TextFill}" TextAlignment="Right" Width="12"/>
+        <core:OutlinedTextBlock Text="{Binding Price.Silver}"
+                                Fill="{Binding TextFill}"
+                                TextAlignment="Right">
+            <core:OutlinedTextBlock.Style>
+                <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                    <Style.Setters>
+                        <Setter Property="Width" Value="Auto" />
+                    </Style.Setters>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding AlignSilverCopper}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Width" Value="12" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </core:OutlinedTextBlock.Style>
+        </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/silver_coin.png"
                Height="11" Width="11"
                Margin="1,0,5,0"/>
-        <core:OutlinedTextBlock Text="{Binding Price.Copper}" Fill="{Binding TextFill}" TextAlignment="Right" Width="12"/>
+        <core:OutlinedTextBlock Text="{Binding Price.Copper}"
+                                Fill="{Binding TextFill}"
+                                TextAlignment="Right">
+            <core:OutlinedTextBlock.Style>
+                <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                    <Style.Setters>
+                        <Setter Property="Width" Value="Auto" />
+                    </Style.Setters>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding AlignSilverCopper}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Width" Value="12" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </core:OutlinedTextBlock.Style>
+        </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/copper_coin.png"
                Height="11" Width="11"
                Margin="1,0,0,0"/>

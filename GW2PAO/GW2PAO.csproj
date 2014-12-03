@@ -153,9 +153,6 @@
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
     <Compile Include="Modules\Commerce\CommerceViewController.cs" />
     <Compile Include="Modules\Commerce\Interfaces\ICommerceViewController.cs" />
-    <Compile Include="Modules\Commerce\Views\PriceTracker\PricePlot.xaml.cs">
-      <DependentUpon>PricePlot.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Events\EventsMenu.cs" />
     <Compile Include="Modules\Events\EventsModule.cs" />
     <Compile Include="Modules\Events\EventsViewController.cs" />
@@ -349,10 +346,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Modules\Commerce\Views\PriceTracker\PricePlot.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -36,13 +36,13 @@ namespace GW2PAO.Modules.Commerce.Views.PriceTracker
         {
             var vm = this.DataContext as ItemPriceViewModel;
             this.BuyOrderPlotSeries.ItemsSource = vm.PastBuyOrders;
-            this.SellListingPlotSeries.ItemsSource = vm.PastSaleListings;
+            this.SellListingPlotSeries.ItemsSource = vm.PastSellListings;
             this.HistoricalPlot.InvalidatePlot(true);
             vm.PastBuyOrders.CollectionChanged += (o, e) =>
             {
                 this.HistoricalPlot.InvalidatePlot(true);
             };
-            vm.PastSaleListings.CollectionChanged += (o, e) =>
+            vm.PastSellListings.CollectionChanged += (o, e) =>
             {
                 this.HistoricalPlot.InvalidatePlot(true);
             };

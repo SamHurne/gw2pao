@@ -72,6 +72,11 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public Price CurrentBuyOrder { get; private set; }
 
         /// <summary>
+        /// The current profit margin based on the highest buy order and lowest sell listing
+        /// </summary>
+        public Price CurrentProfit { get; private set; }
+
+        /// <summary>
         /// Name of the item, for display purposes
         /// </summary>
         public string ItemName
@@ -133,13 +138,19 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             private set;
         }
 
+        /// <summary>
+        /// Collection of past highest-buy order prices
+        /// </summary>
         public ObservableCollection<DataPoint> PastBuyOrders
         {
             get;
             private set;
         }
 
-        public ObservableCollection<DataPoint> PastSaleListings
+        /// <summary>
+        /// Collection of past lowest-sell listing prices
+        /// </summary>
+        public ObservableCollection<DataPoint> PastSellListings
         {
             get;
             private set;
@@ -209,9 +220,10 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.commerceService = service;
             this.CurrentBuyOrder = new Price();
             this.CurrentSellListing = new Price();
+            this.CurrentProfit = new Price();
             this.ItemsProvider = new ItemResultsProvider(this.commerceService);
             this.PastBuyOrders = new ObservableCollection<DataPoint>();
-            this.PastSaleListings = new ObservableCollection<DataPoint>();
+            this.PastSellListings = new ObservableCollection<DataPoint>();
 
             if (this.ItemData != null)
                 this.selectedItem = this.commerceService.ItemsDB[this.ItemData.ID];
