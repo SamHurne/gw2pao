@@ -46,6 +46,17 @@ namespace GW2PAO.Modules.Events.Views.EventNotification
         }
 
         /// <summary>
+        /// Notification windows are never sticky
+        /// </summary>
+        protected override bool NeverSticky
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public EventNotificationWindow()

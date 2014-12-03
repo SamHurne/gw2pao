@@ -45,6 +45,17 @@ namespace GW2PAO.Modules.Commerce.Views.PriceNotification
         }
 
         /// <summary>
+        /// Notification windows are never sticky
+        /// </summary>
+        protected override bool NeverSticky
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public PriceNotificationWindow()

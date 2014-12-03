@@ -45,6 +45,17 @@ namespace GW2PAO.Modules.WvW.Views.WvWNotification
         }
 
         /// <summary>
+        /// Notification windows are never sticky
+        /// </summary>
+        protected override bool NeverSticky
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="controller">The events controller</param>
