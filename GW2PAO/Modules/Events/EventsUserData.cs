@@ -71,8 +71,15 @@ namespace GW2PAO.Modules.Events
         [XmlIgnore]
         public bool UseStandardTimeTable
         {
-            get { return !this.useAdjustedTimeTable; }
-            set { SetProperty(ref this.useAdjustedTimeTable, !value); }
+            get { return !this.UseAdjustedTimeTable; }
+            set
+            {
+                if (this.UseAdjustedTimeTable != !value)
+                {
+                    this.UseAdjustedTimeTable = !value;
+                    this.OnPropertyChanged(() => this.UseStandardTimeTable);
+                }
+            }
         }
 
         /// <summary>
