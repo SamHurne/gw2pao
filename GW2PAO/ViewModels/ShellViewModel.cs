@@ -27,7 +27,7 @@ namespace GW2PAO.ViewModels
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         [ImportMany]
-        private Lazy<IMenuItem, IOrderMetadata>[] unorderedMainMenu;
+        private Lazy<IMenuItem, IOrderMetadata>[] unorderedMainMenu { get; set; }
 
         /// <summary>
         /// Collection of menu items that make up the application's main menu
