@@ -27,7 +27,7 @@ namespace GW2PAO.Modules.Commerce
         /// Composition container of composed parts
         /// </summary>
         [Import]
-        private CompositionContainer Container { get; set; }
+        private CompositionContainer container { get; set; }
 
         /// <summary>
         /// Commerce controller
@@ -73,8 +73,8 @@ namespace GW2PAO.Modules.Commerce
                 {
                     logger.Debug("Initializing Commerce Module");
 
-                    this.commerceController = this.Container.GetExportedValue<ICommerceController>();
-                    this.viewController = this.Container.GetExportedValue<ICommerceViewController>();
+                    this.commerceController = this.container.GetExportedValue<ICommerceController>();
+                    this.viewController = this.container.GetExportedValue<ICommerceViewController>();
 
                     // Register for shutdown
                     Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));

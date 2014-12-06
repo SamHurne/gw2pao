@@ -28,7 +28,7 @@ namespace GW2PAO.Modules.Dungeons
         /// Composition container of composed parts
         /// </summary>
         [Import]
-        private CompositionContainer Container { get; set; }
+        private CompositionContainer container { get; set; }
 
         /// <summary>
         /// Dungeons controller
@@ -74,8 +74,8 @@ namespace GW2PAO.Modules.Dungeons
                 {
                     logger.Debug("Initializing Dungeons Module");
 
-                    this.dungeonsController = this.Container.GetExportedValue<IDungeonsController>();
-                    this.viewController = this.Container.GetExportedValue<IDungeonsViewController>();
+                    this.dungeonsController = this.container.GetExportedValue<IDungeonsController>();
+                    this.viewController = this.container.GetExportedValue<IDungeonsViewController>();
 
                     // Register for shutdown
                     Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));

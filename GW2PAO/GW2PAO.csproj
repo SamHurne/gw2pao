@@ -178,16 +178,30 @@
     <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
+    <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
     <Compile Include="Modules\Commerce\CommerceViewController.cs" />
     <Compile Include="Modules\Commerce\Interfaces\ICommerceViewController.cs" />
+    <Compile Include="Modules\Commerce\ViewModels\CommerceSettingsViewModel.cs" />
+    <Compile Include="Modules\Commerce\Views\CommerceSettingsView.xaml.cs">
+      <DependentUpon>CommerceSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dungeons\ViewModels\DungeonSettingsViewModel.cs" />
+    <Compile Include="Modules\Dungeons\Views\DungeonSettingsView.xaml.cs">
+      <DependentUpon>DungeonSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Events\EventsMenu.cs" />
     <Compile Include="Modules\Events\EventsModule.cs" />
     <Compile Include="Modules\Events\EventsViewController.cs" />
     <Compile Include="Modules\Events\Interfaces\IEventsViewController.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventSettingsViewModel.cs" />
+    <Compile Include="Modules\Events\Views\EventSettingsView.xaml.cs">
+      <DependentUpon>EventSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Teamspeak\Interfaces\ITeamspeakViewController.cs" />
     <Compile Include="Modules\Teamspeak\TeamspeakModule.cs" />
     <Compile Include="Modules\Teamspeak\TeamspeakMenu.cs" />
@@ -205,6 +219,10 @@
     <Compile Include="Modules\WvW\Interfaces\IWvWController.cs" />
     <Compile Include="Modules\WvW\Interfaces\IWvWViewController.cs" />
     <Compile Include="Modules\WvW\Interfaces\IHasWvWMap.cs" />
+    <Compile Include="Modules\WvW\ViewModels\WvWSettingsViewModel.cs" />
+    <Compile Include="Modules\WvW\Views\WvWSettingsView.xaml.cs">
+      <DependentUpon>WvWSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\WvW\WvWMenu.cs" />
     <Compile Include="Modules\WvW\WvWModule.cs" />
     <Compile Include="Modules\WvW\WvWViewController.cs" />
@@ -260,6 +278,8 @@
     <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\EventTracker\EventListViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
+    <Compile Include="ViewModels\HotkeySettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\WvW\ViewModels\GuildViewModel.cs" />
     <Compile Include="Modules\ZoneCompletion\Interfaces\IHasZoneName.cs" />
@@ -294,6 +314,13 @@
     <Compile Include="Modules\Commerce\Views\PriceTracker\ItemPriceView.xaml.cs">
       <DependentUpon>ItemPriceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GeneralSettingsView.xaml.cs">
+      <DependentUpon>GeneralSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HotkeySettingsView.xaml.cs">
+      <DependentUpon>HotkeySettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ISettingsView.cs" />
     <Compile Include="Views\NewVersionNotificationView.xaml.cs">
       <DependentUpon>NewVersionNotificationView.xaml</DependentUpon>
     </Compile>
@@ -314,6 +341,9 @@
     </Compile>
     <Compile Include="Modules\Commerce\Views\PriceNotification\PriceNotificationWindow.xaml.cs">
       <DependentUpon>PriceNotificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -377,6 +407,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\Commerce\Views\CommerceSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Dungeons\Views\DungeonSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Events\Views\EventSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\WvW\Views\WvWSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -457,6 +503,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\GeneralSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HotkeySettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewVersionNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -484,6 +538,10 @@
     <Page Include="Modules\Commerce\Views\PriceNotification\PriceNotificationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

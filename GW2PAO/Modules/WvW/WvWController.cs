@@ -427,30 +427,33 @@ namespace GW2PAO.Modules.WvW
             {
                 // Refresh all team colors
                 var teamColors = this.wvwService.GetTeamColors();
-                Threading.InvokeOnUI(() =>
+                if (teamColors.Count == this.Worlds.Count)
                 {
-                    foreach (var team in this.Worlds)
+                    Threading.InvokeOnUI(() =>
                     {
-                        team.Color = teamColors[team.WorldId];
-                    }
-                });
+                        foreach (var team in this.Worlds)
+                        {
+                            team.Color = teamColors[team.WorldId];
+                        }
+                    });
 
-                // Refresh state of all objectives
-                var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                Threading.InvokeOnUI(() =>
-                {
-                    foreach (var objective in this.AllObjectives)
+                    // Refresh state of all objectives
+                    var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                    Threading.InvokeOnUI(() =>
                     {
-                        var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                        objective.ModelData.MatchId = this.matchID;
-                        objective.PrevWorldOwner = latestData.WorldOwner;
-                        objective.WorldOwner = latestData.WorldOwner;
-                        objective.FlipTime = DateTime.UtcNow;
-                        objective.DistanceFromPlayer = 0;
-                        objective.TimerValue = TimeSpan.Zero;
-                        objective.IsRIActive = false;
-                    }
-                });
+                        foreach (var objective in this.AllObjectives)
+                        {
+                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+                            objective.ModelData.MatchId = this.matchID;
+                            objective.PrevWorldOwner = latestData.WorldOwner;
+                            objective.WorldOwner = latestData.WorldOwner;
+                            objective.FlipTime = DateTime.UtcNow;
+                            objective.DistanceFromPlayer = 0;
+                            objective.TimerValue = TimeSpan.Zero;
+                            objective.IsRIActive = false;
+                        }
+                    });
+                }
             }
         }
 

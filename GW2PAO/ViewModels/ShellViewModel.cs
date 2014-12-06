@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Properties;
 using GW2PAO.Utility;
+using GW2PAO.Views;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
@@ -28,6 +31,11 @@ namespace GW2PAO.ViewModels
 
         [ImportMany]
         private Lazy<IMenuItem, IOrderMetadata>[] unorderedMainMenu { get; set; }
+
+        /// <summary>
+        /// MEF container
+        /// </summary>
+        private CompositionContainer container;
 
         /// <summary>
         /// Collection of menu items that make up the application's main menu
@@ -55,9 +63,10 @@ namespace GW2PAO.ViewModels
         /// Default constructor
         /// </summary>
         [ImportingConstructor]
-        public ShellViewModel(ISystemService systemService, EventAggregator eventAggregator)
+        public ShellViewModel(ISystemService systemService, CompositionContainer container, EventAggregator eventAggregator)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
+            this.container = container;
 
             // Initialize the process monitor
             GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);
@@ -86,6 +95,13 @@ namespace GW2PAO.ViewModels
             settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.OverlayMenuIcon, false, () => this.IsOverlayMenuIconVisible, this));
             settingsMenu.SubMenuItems.Add(new CheckableMenuItem(GW2PAO.Properties.Resources.CheckForUpdatesAtStartup, false, () => Settings.Default.CheckForUpdates, Settings.Default));
             this.MainMenu.Add(settingsMenu);
+
+            this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.Settings, () =>
+                {
+                    var settingsView = new SettingsView();
+                    this.container.ComposeParts(settingsView);
+                    settingsView.Show();
+                }));
 
             // About
             this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.About, () => new GW2PAO.Views.AboutView().Show()));

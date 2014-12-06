@@ -24,7 +24,7 @@ namespace GW2PAO.Modules.Events
         /// Composition container of composed parts
         /// </summary>
         [Import]
-        private CompositionContainer Container { get; set; }
+        private CompositionContainer container { get; set; }
 
         /// <summary>
         /// Events controller
@@ -70,8 +70,8 @@ namespace GW2PAO.Modules.Events
                 {
                     logger.Debug("Initializing Events Module");
 
-                    this.eventsController = this.Container.GetExportedValue<IEventsController>();
-                    this.viewController = this.Container.GetExportedValue<IEventsViewController>();
+                    this.eventsController = this.container.GetExportedValue<IEventsController>();
+                    this.viewController = this.container.GetExportedValue<IEventsViewController>();
 
                     // Register for shutdown
                     Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
