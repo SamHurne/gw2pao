@@ -42,6 +42,14 @@ namespace GW2PAO.Views
         [Import]
         private GeneralSettingsView GeneralSettings { get; set; }
 
+        protected override bool NeverClickThrough
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public SettingsView()
         {
             InitializeComponent();

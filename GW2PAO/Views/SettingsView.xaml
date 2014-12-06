@@ -62,6 +62,7 @@
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header" Value="{Binding SettingsHeader}" />
+                        <Setter Property="MinWidth" Value="95" />
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>

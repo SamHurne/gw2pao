@@ -3,9 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Margin="30,10,0,0">
+        <CheckBox IsChecked="{Binding AreNotificationWindowBordersVisible}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowNotificationBorders}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding IsClickthroughEnabled}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.NonInteractiveWindows}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding AreWindowsSticky}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.StickyWindows}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding IsOverlayMenuIconVisible}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.OverlayMenuIcon}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding CheckForUpdates}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CheckForUpdatesAtStartup}" />
+        </CheckBox>
+    </StackPanel>
 </UserControl>
