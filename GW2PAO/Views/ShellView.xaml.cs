@@ -46,6 +46,9 @@ namespace GW2PAO.Views
             this.DataContext = vm;
             this.eventAggregator = eventAggregator;
 
+            // Register all windows show/hide hotkey
+            HotkeyCommands.ToggleAllWindowsCommand.RegisterCommand(new DelegateCommand(this.ToggleVisibility));
+
             // All overlay windows created will be children of this window
             OverlayWindow.OwnerWindow = this;
 
@@ -130,6 +133,20 @@ namespace GW2PAO.Views
                 Properties.Settings.Default.OverlayIconX = this.Left;
                 Properties.Settings.Default.OverlayIconY = this.Top;
                 Properties.Settings.Default.Save();
+            }
+        }
+
+        private void ToggleVisibility()
+        {
+            foreach (Window window in this.OwnedWindows)
+            {
+                if (window != null)
+                {
+                    if (window.IsVisible)
+                        window.Hide();
+                    else
+                        window.Show();
+                }
             }
         }
     }

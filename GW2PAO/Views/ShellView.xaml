@@ -53,7 +53,7 @@
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center"
-          Visibility="{Binding IsOverlayMenuIconVisible, Converter={StaticResource BoolToVisibility}}">
+          Visibility="{Binding Source={x:Static resx:Settings.Default}, Path=IsOverlayIconVisible, Converter={StaticResource BoolToVisibility}}">
 
         <!-- Tray Icon -->
         <tb:TaskbarIcon Name="TrayIcon"
