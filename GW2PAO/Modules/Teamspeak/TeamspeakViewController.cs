@@ -5,9 +5,11 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Teamspeak.Interfaces;
 using GW2PAO.Modules.Teamspeak.Views;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO.Modules.Teamspeak
@@ -38,6 +40,10 @@ namespace GW2PAO.Modules.Teamspeak
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleTeamspeakOverlayCommand.RegisterCommand(new DelegateCommand(this.ToggleTeamspeakOverlay));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsTeamspeakOpen && this.CanDisplayTeamspeakOverlay())
@@ -86,6 +92,21 @@ namespace GW2PAO.Modules.Teamspeak
         public bool CanDisplayTeamspeakOverlay()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the teamspeak overlay is visible
+        /// </summary>
+        private void ToggleTeamspeakOverlay()
+        {
+            if (this.teamspeakView == null || !this.teamspeakView.IsVisible)
+            {
+                this.DisplayTeamspeakOverlay();
+            }
+            else
+            {
+                this.teamspeakView.Close();
+            }
         }
     }
 }

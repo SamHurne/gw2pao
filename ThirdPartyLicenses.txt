@@ -35,3 +35,7 @@ https://github.com/Scordo/TS3QueryLib.Net/blob/master/LICENSE
 Oxyplot:
 http://oxyplot.org/
 http://oxyplot.org/documentation/license
+
+NHotkey:
+https://github.com/thomaslevesque/NHotkey
+https://github.com/thomaslevesque/NHotkey/blob/master/LICENSE.md

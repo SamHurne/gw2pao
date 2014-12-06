@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="GW2PAO.Views.HotkeyUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             mc:Ignorable="d">
+    <Grid Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <CheckBox Name="EnabledCheckbox"
+                  Grid.Column="0"
+                  VerticalAlignment="Center"
+                  IsChecked="{Binding Hotkey.IsRegistered}"
+                  Style="{StaticResource AlternateCheckboxStyle}">
+            <core:OutlinedTextBlock Text="{Binding Path=Label, StringFormat={}{0}:}" />
+        </CheckBox>
+        <TextBox Name="EntryBox"
+                 Grid.Column="1"
+                 Margin="5,0,0,0"
+                 Width="75"
+                 Text="{Binding Hotkey, Mode=OneWay}"
+                 KeyDown="EntryBox_KeyDown"
+                 KeyUp="EntryBox_KeyUp"
+                 GotKeyboardFocus="EntryBox_GotKeyboardFocus"
+                 GotMouseCapture="EntryBox_GotMouseCapture"/>
+    </Grid>
+</UserControl>

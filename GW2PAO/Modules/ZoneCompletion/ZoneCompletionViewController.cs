@@ -5,9 +5,11 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.Modules.ZoneCompletion.Views;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 namespace GW2PAO.Modules.ZoneCompletion
 {
@@ -37,6 +39,10 @@ namespace GW2PAO.Modules.ZoneCompletion
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleZoneAssistantCommand.RegisterCommand(new DelegateCommand(this.ToggleZoneCompletionAssistant));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsZoneAssistantOpen && this.CanDisplayZoneCompletionAssistant())
@@ -84,6 +90,21 @@ namespace GW2PAO.Modules.ZoneCompletion
         public bool CanDisplayZoneCompletionAssistant()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the zone assistant is visible
+        /// </summary>
+        private void ToggleZoneCompletionAssistant()
+        {
+            if (this.zoneCompletionAssistantView == null || !this.zoneCompletionAssistantView.IsVisible)
+            {
+                this.DisplayZoneCompletionAssistant();
+            }
+            else
+            {
+                this.zoneCompletionAssistantView.Close();
+            }
         }
     }
 }

@@ -137,6 +137,12 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="NHotkey">
+      <HintPath>..\packages\NHotkey.1.2.1\lib\net20\NHotkey.dll</HintPath>
+    </Reference>
+    <Reference Include="NHotkey.Wpf">
+      <HintPath>..\packages\NHotkey.Wpf.1.2.1\lib\net35\NHotkey.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -181,6 +187,8 @@
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
+    <Compile Include="Infrastructure\Hotkey.cs" />
+    <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
@@ -319,6 +327,9 @@
     </Compile>
     <Compile Include="Views\HotkeySettingsView.xaml.cs">
       <DependentUpon>HotkeySettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HotkeyUserControl.xaml.cs">
+      <DependentUpon>HotkeyUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ISettingsView.cs" />
     <Compile Include="Views\NewVersionNotificationView.xaml.cs">
@@ -508,6 +519,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HotkeySettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HotkeyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

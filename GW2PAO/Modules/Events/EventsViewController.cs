@@ -5,10 +5,12 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.Modules.Events.Views.EventNotification;
 using GW2PAO.Modules.Events.Views.EventTracker;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO.Modules.Events
@@ -44,6 +46,10 @@ namespace GW2PAO.Modules.Events
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsEventTrackerOpen && this.CanDisplayEventsTracker())
@@ -114,6 +120,21 @@ namespace GW2PAO.Modules.Events
         public bool CanDisplayEventNotificationsWindow()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the events tracker is visible
+        /// </summary>
+        private void ToggleEventsTracker()
+        {
+            if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
+            {
+                this.DisplayEventsTracker();
+            }
+            else
+            {
+                this.eventTrackerView.Close();
+            }
         }
     }
 }

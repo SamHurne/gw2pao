@@ -63,10 +63,11 @@ namespace GW2PAO.ViewModels
         /// Default constructor
         /// </summary>
         [ImportingConstructor]
-        public ShellViewModel(ISystemService systemService, CompositionContainer container, EventAggregator eventAggregator)
+        public ShellViewModel(ISystemService systemService, HotkeySettingsViewModel hotkeySettingsVm, CompositionContainer container, EventAggregator eventAggregator)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
             this.container = container;
+            hotkeySettingsVm.InitializeHotkeys();
 
             // Initialize the process monitor
             GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);

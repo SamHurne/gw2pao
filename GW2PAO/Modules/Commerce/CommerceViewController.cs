@@ -5,11 +5,13 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Commerce.Interfaces;
 using GW2PAO.Modules.Commerce.Views;
 using GW2PAO.Modules.Commerce.Views.PriceNotification;
 using GW2PAO.Modules.Commerce.Views.PriceTracker;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO.Modules.Commerce
@@ -60,6 +62,10 @@ namespace GW2PAO.Modules.Commerce
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.TogglePriceTrackerCommand.RegisterCommand(new DelegateCommand(this.TogglePriceTracker));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsTPCalculatorOpen && this.CanDisplayTPCalculator())
@@ -225,6 +231,21 @@ namespace GW2PAO.Modules.Commerce
         public bool CanDisplayPriceNotificationsWindow()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the price tracker is visible
+        /// </summary>
+        private void TogglePriceTracker()
+        {
+            if (this.priceTrackerView == null || !this.priceTrackerView.IsVisible)
+            {
+                this.DisplayPriceTracker();
+            }
+            else
+            {
+                this.priceTrackerView.Close();
+            }
         }
     }
 }

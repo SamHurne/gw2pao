@@ -5,9 +5,11 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Modules.Dungeons.Views;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO.Modules.Dungeons
@@ -38,6 +40,10 @@ namespace GW2PAO.Modules.Dungeons
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleDungeonsTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleDungeonTracker));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsDungeonTrackerOpen && this.CanDisplayDungeonTracker())
@@ -86,6 +92,21 @@ namespace GW2PAO.Modules.Dungeons
         public bool CanDisplayDungeonTracker()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the dungeon tracker is visible
+        /// </summary>
+        private void ToggleDungeonTracker()
+        {
+            if (this.dungeonTrackerView == null || !this.dungeonTrackerView.IsVisible)
+            {
+                this.DisplayDungeonTracker();
+            }
+            else
+            {
+                this.dungeonTrackerView.Close();
+            }
         }
     }
 }

@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.WebBrowser;
 using GW2PAO.Modules.WebBrowser.Interfaces;
 using GW2PAO.Modules.WebBrowser.Views;
+using Microsoft.Practices.Prism.Commands;
 
 namespace GW2PAO.Modules.WebBrowser
 {
@@ -20,6 +22,16 @@ namespace GW2PAO.Modules.WebBrowser
         /// </summary>
         private BrowserView browser;
 #endif
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public WebBrowserController()
+        {
+#if !NO_BROWSER
+            HotkeyCommands.ToggleWebBrowserCommand.RegisterCommand(new DelegateCommand(this.ToggleWebBrowser));
+#endif
+        }
 
         /// <summary>
         /// Opens the browser window
@@ -74,6 +86,21 @@ namespace GW2PAO.Modules.WebBrowser
             // No browser, just start a process with the URL and let windows handle it
             Process.Start(url);
 #endif
+        }
+
+        /// <summary>
+        /// Toggles whether or not the web browser is open
+        /// </summary>
+        private void ToggleWebBrowser()
+        {
+            if (this.browser == null || !this.browser.IsVisible)
+            {
+                this.OpenBrowser();
+            }
+            else
+            {
+                this.CloseBrowser();
+            }
         }
     }
 }

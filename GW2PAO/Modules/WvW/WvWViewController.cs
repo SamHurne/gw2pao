@@ -5,10 +5,12 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.WvW.Interfaces;
 using GW2PAO.Modules.WvW.Views.WvWNotification;
 using GW2PAO.Modules.WvW.Views.WvWTracker;
 using GW2PAO.Utility;
+using Microsoft.Practices.Prism.Commands;
 using NLog;
 
 namespace GW2PAO.Modules.WvW
@@ -44,6 +46,10 @@ namespace GW2PAO.Modules.WvW
         public void Initialize()
         {
             logger.Debug("Initializing");
+
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleWvWTrackerCommmand.RegisterCommand(new DelegateCommand(this.ToggleWvWTracker));
+
             Threading.BeginInvokeOnUI(() =>
             {
                 if (Properties.Settings.Default.IsWvWTrackerOpen && this.CanDisplayWvWTracker())
@@ -116,6 +122,21 @@ namespace GW2PAO.Modules.WvW
         public bool CanDisplayWvWNotificationsWindow()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the wvw tracker is visible
+        /// </summary>
+        private void ToggleWvWTracker()
+        {
+            if (this.wvwTrackerView == null || !this.wvwTrackerView.IsVisible)
+            {
+                this.DisplayWvWTracker();
+            }
+            else
+            {
+                this.wvwTrackerView.Close();
+            }
         }
     }
 }
