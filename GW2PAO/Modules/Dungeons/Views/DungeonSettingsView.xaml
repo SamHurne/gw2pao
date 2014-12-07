@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock Text="Dungeons" Foreground="White" />
+        <!-- TODO: Hidden dungeons, etc -->
     </Grid>
 </UserControl>

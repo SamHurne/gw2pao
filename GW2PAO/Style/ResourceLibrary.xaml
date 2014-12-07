@@ -4,9 +4,11 @@
         <ResourceDictionary Source="BaseControlStyles/ButtonStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/CheckboxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ContextMenuStyle.xaml" />
-        <ResourceDictionary Source="BaseControlStyles/DataGridStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/GroupBoxStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/ListViewStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/OutlinedTextStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ProgressBarStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/RadioButtonStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ResizeGripStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ScrollBarStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/SliderStyle.xaml" />

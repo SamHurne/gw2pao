@@ -11,7 +11,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        Height="400" Width="650">
+        Height="500" Width="700">
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>
             <LinearGradientBrush>
@@ -63,6 +63,7 @@
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header" Value="{Binding SettingsHeader}" />
                         <Setter Property="MinWidth" Value="95" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>

@@ -38,7 +38,6 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         private bool isSellListingNotificationShown;
         private bool isBuyOrderOutOfLimits;
         private bool isSellListingOutOfLimits;
-        private ItemDBEntry selectedItem;
 
         /// <summary>
         /// Service object, used for looking up names, etc
@@ -59,22 +58,22 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         /// <summary>
         /// Item data
         /// </summary>
-        public Item ItemData { get; private set; }
+        public Item ItemData { get; set; }
 
         /// <summary>
         /// The current lowest sell listing
         /// </summary>
-        public Price CurrentSellListing { get; private set; }
+        public Price CurrentSellListing { get; set; }
 
         /// <summary>
         /// The current highest buy order
         /// </summary>
-        public Price CurrentBuyOrder { get; private set; }
+        public Price CurrentBuyOrder { get; set; }
 
         /// <summary>
         /// The current profit margin based on the highest buy order and lowest sell listing
         /// </summary>
-        public Price CurrentProfit { get; private set; }
+        public Price CurrentProfit { get; set; }
 
         /// <summary>
         /// Name of the item, for display purposes
@@ -100,42 +99,6 @@ namespace GW2PAO.Modules.Commerce.ViewModels
                     return this.ItemData.Icon.ToString();
                 }
             }
-        }
-
-        /// <summary>
-        /// The item selected by the user when configuring this price watch
-        /// </summary>
-        public ItemDBEntry SelectedItem
-        {
-            get { return this.selectedItem; }
-            set
-            {
-                if (this.SetProperty(ref this.selectedItem, value))
-                {
-                    this.ItemData = this.commerceService.GetItem(value.ID);
-                    this.Data.ItemID = this.ItemData.ID;
-                    this.Data.ItemName = this.ItemData.Name;
-                    this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
-                    this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
-                    this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
-                    this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
-                    this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
-                    this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
-
-                    // Raise property-changed events for each of the info display properties
-                    this.OnPropertyChanged(() => this.ItemName);
-                    this.OnPropertyChanged(() => this.IconUrl);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provider object for finding an item for the user to select
-        /// </summary>
-        public IIntelliboxResultsProvider ItemsProvider
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -221,12 +184,8 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.CurrentBuyOrder = new Price();
             this.CurrentSellListing = new Price();
             this.CurrentProfit = new Price();
-            this.ItemsProvider = new ItemResultsProvider(this.commerceService);
             this.PastBuyOrders = new ObservableCollection<DataPoint>();
             this.PastSellListings = new ObservableCollection<DataPoint>();
-
-            if (this.ItemData != null)
-                this.selectedItem = this.commerceService.ItemsDB[this.ItemData.ID];
 
             this.IsBuyOrderNotificationShown = false;
             this.IsSellListingNotificationShown = false;
@@ -239,6 +198,30 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.Data.BuyOrderLowerLimit.PropertyChanged += BuyOrderLimit_PropertyChanged;
             this.Data.SellListingUpperLimit.PropertyChanged += SellListingLimit_PropertyChanged;
             this.Data.SellListingLowerLimit.PropertyChanged += SellListingLimit_PropertyChanged;
+        }
+
+        /// <summary>
+        /// Sets this item as the item with the given ID
+        /// </summary>
+        /// <param name="newItemID">The ID to set this item as</param>
+        public void SetItem(int newItemID)
+        {
+            this.ItemData = this.commerceService.GetItem(newItemID);
+            this.Data.ItemID = this.ItemData.ID;
+            this.Data.ItemName = this.ItemData.Name;
+            if (this.ItemData.Prices != null)
+            {
+                this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
+                this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
+                this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
+                this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
+                this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
+                this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
+            }
+
+            // Raise property-changed events for each of the info display properties
+            this.OnPropertyChanged(() => this.ItemName);
+            this.OnPropertyChanged(() => this.IconUrl);
         }
 
         /// <summary>

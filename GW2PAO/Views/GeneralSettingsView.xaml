@@ -6,7 +6,9 @@
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True">
     <StackPanel Margin="30,10,0,0">
         <CheckBox IsChecked="{Binding AreNotificationWindowBordersVisible}"
                   Style="{StaticResource AlternateCheckboxStyle}"

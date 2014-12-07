@@ -293,7 +293,7 @@
     <Compile Include="Modules\ZoneCompletion\Interfaces\IHasZoneName.cs" />
     <Compile Include="ViewModels\NewVersionNotificationViewModel.cs" />
     <Compile Include="Modules\Commerce\Services\ItemResultsProvider.cs" />
-    <Compile Include="Modules\Commerce\ViewModels\PriceWatchConfigViewModel.cs" />
+    <Compile Include="Modules\Commerce\ViewModels\MonitoredItemsConfigViewModel.cs" />
     <Compile Include="Modules\Commerce\ViewModels\ItemPriceViewModel.cs" />
     <Compile Include="Modules\Commerce\ViewModels\RebuildNamesDatabaseViewModel.cs" />
     <Compile Include="Modules\Commerce\ViewModels\PriceTracker\PriceListViewModel.cs" />
@@ -434,6 +434,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\BaseControlStyles\ListViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\BaseControlStyles\RadioButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\BaseControlStyles\GroupBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -471,10 +483,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\BaseControlStyles\ContextMenuStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Style\BaseControlStyles\DataGridStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

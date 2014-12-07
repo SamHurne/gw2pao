@@ -23,11 +23,11 @@ namespace GW2PAO.Modules.Commerce.Views
         /// View model
         /// </summary>
         [Import]
-        public PriceWatchConfigViewModel ViewModel
+        public MonitoredItemsConfigViewModel ViewModel
         {
             get
             {
-                return this.DataContext as PriceWatchConfigViewModel;
+                return this.DataContext as MonitoredItemsConfigViewModel;
             }
             set
             {

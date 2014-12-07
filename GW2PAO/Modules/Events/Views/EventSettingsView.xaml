@@ -3,9 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="Events" Foreground="White" />
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300"
+             Width="300"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True">
+    <UserControl.Resources>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource AlternateCheckboxStyle}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="20,10,0,0">
+        <GroupBox Margin="0,5,5,5">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventTimeTable}" />
+            </GroupBox.Header>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                <RadioButton IsChecked="{Binding UserData.UseAdjustedTimeTable}"
+                             Margin="2,0,0,0">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Adjusted}" />
+                </RadioButton>
+                <RadioButton IsChecked="{Binding UserData.UseStandardTimeTable}"
+                             Margin="70,0,0,0">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Standard}" />
+                </RadioButton>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Margin="0,5,5,10">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="Events Tracker" /> <!-- TODO: Resource String -->
+            </GroupBox.Header>
+            <CheckBox HorizontalAlignment="Left" IsChecked="{Binding UserData.AreInactiveEventsVisible}">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />
+            </CheckBox>
+        </GroupBox>
+
+        <CheckBox IsChecked="{Binding UserData.AreEventNotificationsEnabled}">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotifications}" />
+        </CheckBox>
+
+        <!-- TODO: Notifications Configuration -->
+    </StackPanel>
 </UserControl>

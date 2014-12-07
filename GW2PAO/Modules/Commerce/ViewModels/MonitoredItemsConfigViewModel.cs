@@ -13,12 +13,17 @@ using GW2PAO.Modules.Commerce.Models;
 using GW2PAO.PresentationCore;
 using NLog;
 using Microsoft.Practices.Prism.Mvvm;
+using GW2PAO.Modules.Commerce.Services;
+using FeserWard.Controls;
+using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     [Export]
-    public class PriceWatchConfigViewModel : BindableBase
+    public class MonitoredItemsConfigViewModel : BindableBase
     {
+        private ItemDBEntry selectedItem;
+
         /// <summary>
         /// Default logger
         /// </summary>
@@ -51,6 +56,42 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         }
 
         /// <summary>
+        /// Provider object for finding an item for the user to select
+        /// </summary>
+        public IIntelliboxResultsProvider ItemsProvider
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The item selected by the user when configuring this price watch
+        /// </summary>
+        public ItemDBEntry SelectedItem
+        {
+            get { return this.selectedItem; }
+            set
+            {
+                if (this.SetProperty(ref this.selectedItem, value))
+                {
+                    if (this.selectedItem != null)
+                        this.ItemToAdd.SetItem(this.selectedItem.ID);
+                    else
+                        this.ItemToAdd = new ItemPriceViewModel(new PriceWatch(), new Item(-1, null), this.controller, this.commerceService);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The item that will be added to the collection of monitored item prices
+        /// </summary>
+        private ItemPriceViewModel ItemToAdd
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Collection of monitored item prices
         /// </summary>
         public ObservableCollection<ItemPriceViewModel> ItemPrices { get { return this.controller.ItemPrices; } }
@@ -65,10 +106,13 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         /// </summary>
         /// <param name="controller">The commerce controller</param>
         [ImportingConstructor]
-        public PriceWatchConfigViewModel(ICommerceService commerceService, ICommerceController controller)
+        public MonitoredItemsConfigViewModel(ICommerceService commerceService, ICommerceController controller)
         {
             this.commerceService = commerceService;
             this.controller = controller;
+
+            this.ItemsProvider = new ItemResultsProvider(this.commerceService);
+            this.ItemToAdd = new ItemPriceViewModel(new PriceWatch(), new Item(-1, null), this.controller, this.commerceService);
         }
 
         /// <summary>
@@ -76,10 +120,12 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         /// </summary>
         private void AddPriceWatch()
         {
-            var priceWatch = new PriceWatch();
-            var priceWatchVm = new ItemPriceViewModel(priceWatch, null, this.controller, this.commerceService);
-            this.controller.UserData.PriceWatches.Add(priceWatch);
-            this.ItemPrices.Add(priceWatchVm);
+            if (this.ItemToAdd.ItemData.ID != -1)
+            {
+                this.controller.UserData.PriceWatches.Add(this.ItemToAdd.Data);
+                this.ItemPrices.Add(this.ItemToAdd);
+                this.SelectedItem = null;
+            }
         }
     }
 }
