@@ -58,6 +58,7 @@ namespace GW2PAO.Modules.Commerce
                     this.userData = CommerceUserData.LoadData(CommerceUserData.Filename);
                     if (this.userData == null)
                         this.userData = new CommerceUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;

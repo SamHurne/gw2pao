@@ -59,6 +59,7 @@ namespace GW2PAO.Modules.Dungeons
                     this.userData = DungeonsUserData.LoadData(DungeonsUserData.Filename);
                     if (this.userData == null)
                         this.userData = new DungeonsUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;

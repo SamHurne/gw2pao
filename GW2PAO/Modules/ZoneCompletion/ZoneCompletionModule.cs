@@ -58,6 +58,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                     this.userData = ZoneCompletionUserData.LoadData(ZoneCompletionUserData.Filename);
                     if (this.userData == null)
                         this.userData = new ZoneCompletionUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;

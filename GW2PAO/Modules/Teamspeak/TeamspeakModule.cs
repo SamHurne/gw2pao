@@ -53,6 +53,7 @@ namespace GW2PAO.Modules.Teamspeak
                     this.userData = TeamspeakUserData.LoadData(TeamspeakUserData.Filename);
                     if (this.userData == null)
                         this.userData = new TeamspeakUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;

@@ -58,6 +58,7 @@ namespace GW2PAO.Modules.WvW
                     this.userData = WvWUserData.LoadData(WvWUserData.Filename);
                     if (this.userData == null)
                         this.userData = new WvWUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;

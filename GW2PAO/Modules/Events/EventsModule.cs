@@ -55,6 +55,7 @@ namespace GW2PAO.Modules.Events
                     this.userData = EventsUserData.LoadData(EventsUserData.Filename);
                     if (this.userData == null)
                         this.userData = new EventsUserData();
+                    this.userData.EnableAutoSave();
                 }
 
                 return this.userData;
