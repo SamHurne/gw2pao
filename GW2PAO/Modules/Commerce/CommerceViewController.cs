@@ -41,11 +41,6 @@ namespace GW2PAO.Modules.Commerce
         private PriceNotificationWindow priceNotificationsView;
 
         /// <summary>
-        /// Window used for configuring item price watches
-        /// </summary>
-        private PriceWatchConfigView priceWatchConfigView;
-
-        /// <summary>
         /// View used when rebuilding the item names database
         /// </summary>
         private RebuildNamesDatabaseView rebuildItemNamesView;
@@ -129,32 +124,6 @@ namespace GW2PAO.Modules.Commerce
         }
 
         /// <summary>
-        /// Displays the Price Notifications Configuration window, or, if already displayed,
-        /// sets focus to the window
-        /// </summary>
-        public void DisplayPriceNotificationsConfig()
-        {
-            if (this.priceWatchConfigView == null || !this.priceWatchConfigView.IsVisible)
-            {
-                this.priceWatchConfigView = new PriceWatchConfigView();
-                this.Container.ComposeParts(this.priceWatchConfigView);
-                this.priceWatchConfigView.Show();
-            }
-            else
-            {
-                this.priceWatchConfigView.Focus();
-            }
-        }
-
-        /// <summary>
-        /// Determines if the Price Notifications Configuration window can be displayed
-        /// </summary>
-        public bool CanDisplayPriceNotificationsConfig()
-        {
-            return true;
-        }
-
-        /// <summary>
         /// Displays the Price Rebuild Item Names Database window, or, if already displayed,
         /// sets focus to the window
         /// </summary>
@@ -168,7 +137,7 @@ namespace GW2PAO.Modules.Commerce
             }
             else
             {
-                this.priceWatchConfigView.Focus();
+                this.rebuildItemNamesView.Focus();
             }
         }
 

@@ -11,9 +11,6 @@ namespace GW2PAO.Modules.Commerce.Interfaces
         void Initialize();
         void Shutdown();
 
-        void DisplayPriceNotificationsConfig();
-        bool CanDisplayPriceNotificationsConfig();
-
         void DisplayRebuildItemNamesView();
         bool CanDisplayRebuildItemNamesView();
 
