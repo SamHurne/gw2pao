@@ -182,6 +182,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationBootstrapper.cs" />
+    <Compile Include="Controllers\SettingsViewController.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Infrastructure\Hotkey.cs" />
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
+    <Compile Include="Interfaces\ISettingsViewController.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
     <Compile Include="Modules\Commerce\CommerceViewController.cs" />
@@ -364,9 +366,6 @@
     </Compile>
     <Compile Include="Modules\Teamspeak\Views\TeamspeakView.xaml.cs">
       <DependentUpon>TeamspeakView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Commerce\Views\PriceWatchConfigView.xaml.cs">
-      <DependentUpon>PriceWatchConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\WebBrowser\Views\BrowserView.xaml.cs">
       <DependentUpon>BrowserView.xaml</DependentUpon>
@@ -575,10 +574,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Teamspeak\Views\TeamspeakView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Commerce\Views\PriceWatchConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

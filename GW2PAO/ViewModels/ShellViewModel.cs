@@ -12,6 +12,7 @@ using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Infrastructure.ViewModels;
+using GW2PAO.Interfaces;
 using GW2PAO.Properties;
 using GW2PAO.Utility;
 using GW2PAO.Views;
@@ -63,11 +64,17 @@ namespace GW2PAO.ViewModels
         /// Default constructor
         /// </summary>
         [ImportingConstructor]
-        public ShellViewModel(ISystemService systemService, HotkeySettingsViewModel hotkeySettingsVm, CompositionContainer container, EventAggregator eventAggregator)
+        public ShellViewModel(
+            ISystemService systemService,
+            HotkeySettingsViewModel hotkeySettingsVm,
+            ISettingsViewController settingsViewController,
+            CompositionContainer container,
+            EventAggregator eventAggregator)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
             this.container = container;
             hotkeySettingsVm.InitializeHotkeys();
+            settingsViewController.Initialize();
 
             // Initialize the process monitor
             GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);
@@ -89,12 +96,7 @@ namespace GW2PAO.ViewModels
             this.MainMenu.Add(null); // Null for separator
 
             // Settings
-            this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.Settings, () =>
-                {
-                    var settingsView = new SettingsView();
-                    this.container.ComposeParts(settingsView);
-                    settingsView.Show();
-                }));
+            this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.Settings, () => Commands.OpenGeneralSettingsCommand.Execute(null)));
 
             // About
             this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.About, () => new GW2PAO.Views.AboutView().Show()));

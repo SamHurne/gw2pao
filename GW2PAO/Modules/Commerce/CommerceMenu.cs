@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Modules.Commerce.Interfaces;
@@ -75,7 +76,7 @@ namespace GW2PAO.Modules.Commerce
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
 
             // Build up the sub menu items
-            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, viewFactory.DisplayPriceNotificationsConfig, viewFactory.CanDisplayPriceNotificationsConfig));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenCommerceSettingsCommand.Execute(null)));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.PriceTracker, viewFactory.DisplayPriceTracker, viewFactory.CanDisplayPriceTracker));
 
             var notificationsMenu = new MenuItem(Properties.Resources.PriceNotifications);

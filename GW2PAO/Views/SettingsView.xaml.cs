@@ -25,22 +25,22 @@ namespace GW2PAO.Views
     public partial class SettingsView : OverlayWindow, IPartImportsSatisfiedNotification
     {
         [Import]
-        private EventSettingsView EventSettings { get; set; }
+        public EventSettingsView EventSettings { get; private set; }
 
         [Import]
-        private DungeonSettingsView DungeonSettings { get; set; }
+        public DungeonSettingsView DungeonSettings { get; private set; }
 
         [Import]
-        private CommerceSettingsView CommerceSettings { get; set; }
+        public CommerceSettingsView CommerceSettings { get; private set; }
 
         [Import]
-        private WvWSettingsView WvWSettings { get; set; }
+        public WvWSettingsView WvWSettings { get; private set; }
 
         [Import]
-        private HotkeySettingsView HotkeySettings { get; set; }
+        public HotkeySettingsView HotkeySettings { get; private set; }
 
         [Import]
-        private GeneralSettingsView GeneralSettings { get; set; }
+        public GeneralSettingsView GeneralSettings { get; private set; }
 
         protected override bool NeverClickThrough
         {

@@ -82,6 +82,15 @@ namespace GW2PAO.Views
         public StickyWindow StickyHelper { get; private set; }
 
         /// <summary>
+        /// True if the window has been closed, else false
+        /// </summary>
+        public bool IsClosed
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Helper for snapping any resizing
         /// </summary>
         protected ResizeSnapHelper ResizeHelper;
@@ -94,6 +103,9 @@ namespace GW2PAO.Views
             this.Owner = OwnerWindow;
             this.Loaded += OverlayWindowBase_Loaded;
             this.ResizeHelper = new ResizeSnapHelper(this);
+
+            this.IsClosed = false;
+            this.Closed += (o, e) => this.IsClosed = true;
 
             if (ProcessMonitor != null)
             {
