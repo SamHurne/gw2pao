@@ -19,6 +19,9 @@ namespace GW2PAO.ViewModels
     public class HotkeySettingsViewModel : BindableBase, ISettingsViewModel
     {
         private Hotkey toggleAllWindowsHotkey;
+        private Hotkey toggleInteractiveWindowsHotkey;
+        private Hotkey toggleNotificationWindowBordersHotkey;
+        private Hotkey toggleOverlayMenuIconHotkey;
         private Hotkey toggleEventTrackerHotkey;
         private Hotkey toggleDungeonsTrackerHotkey;
         private Hotkey togglePriceTrackerHotkey;
@@ -42,6 +45,33 @@ namespace GW2PAO.ViewModels
         {
             get { return this.toggleAllWindowsHotkey; }
             set { this.SetProperty(ref this.toggleAllWindowsHotkey, value); }
+        }
+
+        /// <summary>
+        /// Hotkey to toggle intractive windows on/off
+        /// </summary>
+        public Hotkey ToggleInteractiveWindowsHotkey
+        {
+            get { return this.toggleInteractiveWindowsHotkey; }
+            set { this.SetProperty(ref this.toggleInteractiveWindowsHotkey, value); }
+        }
+
+        /// <summary>
+        /// Hotkey to toggle notification window borders on/off
+        /// </summary>
+        public Hotkey ToggleNotificationWindowBordersHotkey
+        {
+            get { return this.toggleNotificationWindowBordersHotkey; }
+            set { this.SetProperty(ref this.toggleNotificationWindowBordersHotkey, value); }
+        }
+
+        /// <summary>
+        /// Hotkey to toggle the overlay menu icon on/off
+        /// </summary>
+        public Hotkey ToggleOverlayMenuIconHotkey
+        {
+            get { return this.toggleOverlayMenuIconHotkey; }
+            set { this.SetProperty(ref this.toggleOverlayMenuIconHotkey, value); }
         }
 
         /// <summary>
@@ -115,6 +145,18 @@ namespace GW2PAO.ViewModels
             this.ToggleAllWindowsHotkey = new Hotkey(Key.F9, true, false, false, false);
             this.ToggleAllWindowsHotkey.Pressed += (o, e) => HotkeyCommands.ToggleAllWindowsCommand.Execute(null);
             this.ToggleAllWindowsHotkey.IsRegistered = true;
+
+            this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.F8, true, false, false, false);
+            this.ToggleInteractiveWindowsHotkey.Pressed += (o, e) => HotkeyCommands.ToggleInteractiveWindowsCommand.Execute(null);
+            this.ToggleInteractiveWindowsHotkey.IsRegistered = true;
+
+            this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.F10, true, false, false, false);
+            this.ToggleNotificationWindowBordersHotkey.Pressed += (o, e) => HotkeyCommands.ToggleNotificationWindowBordersCommand.Execute(null);
+            this.ToggleNotificationWindowBordersHotkey.IsRegistered = true;
+
+            this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.F11, true, false, false, false);
+            this.ToggleOverlayMenuIconHotkey.Pressed += (o, e) => HotkeyCommands.ToggleOverlayMenuIconCommand.Execute(null);
+            this.ToggleOverlayMenuIconHotkey.IsRegistered = true;
 
             this.ToggleEventTrackerHotkey = new Hotkey(Key.F1, true, false, false, false);
             this.ToggleEventTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleEventTrackerCommand.Execute(null);

@@ -4,7 +4,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
+using GW2PAO.PresentationCore;
 using GW2PAO.Properties;
 using Microsoft.Practices.Prism.Mvvm;
 
@@ -102,6 +104,25 @@ namespace GW2PAO.ViewModels
                     this.OnPropertyChanged(() => this.CheckForUpdates);
                 }
             }
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public GeneralSettingsViewModel()
+        {
+            // Register for any general-setting hotkey commands
+            this.InitializeHotkeyCommandHandlers();
+        }
+
+        /// <summary>
+        /// Initializes any setting-related hotkey command handlers
+        /// </summary>
+        private void InitializeHotkeyCommandHandlers()
+        {
+            HotkeyCommands.ToggleInteractiveWindowsCommand.RegisterCommand(new DelegateCommand(() => this.IsClickthroughEnabled = !this.IsClickthroughEnabled));
+            HotkeyCommands.ToggleNotificationWindowBordersCommand.RegisterCommand(new DelegateCommand(() => this.AreNotificationWindowBordersVisible = !this.AreNotificationWindowBordersVisible));
+            HotkeyCommands.ToggleOverlayMenuIconCommand.RegisterCommand(new DelegateCommand(() => this.IsOverlayMenuIconVisible = !this.IsOverlayMenuIconVisible));
         }
     }
 }

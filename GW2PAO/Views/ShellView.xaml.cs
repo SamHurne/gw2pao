@@ -112,9 +112,7 @@ namespace GW2PAO.Views
                 contextMenu.IsOpen = false;
 
                 // Toggle global click-through
-                // TODO: This probably belongs in a view model rather than here in the view...
-                GW2PAO.Properties.Settings.Default.IsClickthroughEnabled = !GW2PAO.Properties.Settings.Default.IsClickthroughEnabled;
-                GW2PAO.Properties.Settings.Default.Save();
+                HotkeyCommands.ToggleInteractiveWindowsCommand.Execute(null);
 
                 e.Handled = true;
             }

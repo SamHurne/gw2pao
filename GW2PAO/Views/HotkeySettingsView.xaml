@@ -6,12 +6,12 @@
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:views="clr-namespace:GW2PAO.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="500"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
         <Style TargetType="views:HotkeyUserControl">
-            <Setter Property="Margin" Value="1" />
+            <Setter Property="Margin" Value="5,1,1,1" />
         </Style>
     </UserControl.Resources>
     <StackPanel Margin="30,10,0,0" HorizontalAlignment="Left">
@@ -32,5 +32,13 @@
                                  Hotkey="{Binding ToggleTeamspeakTrackerHotkey}"/>
         <views:HotkeyUserControl Label="Toggle Web Browser"
                                  Hotkey="{Binding ToggleWebBrowserHotkey}"/>
+
+        <views:HotkeyUserControl Margin="5,20,1,1"
+                                 Label="Toggle Non-Interactive Windows"
+                                 Hotkey="{Binding ToggleInteractiveWindowsHotkey}"/>
+        <views:HotkeyUserControl Label="Toggle Notification Window Borders"
+                                 Hotkey="{Binding ToggleNotificationWindowBordersHotkey}"/>
+        <views:HotkeyUserControl Label="Toggle Overlay Menu Icon"
+                                 Hotkey="{Binding ToggleOverlayMenuIconHotkey}"/>
     </StackPanel>
 </UserControl>
