@@ -16,6 +16,7 @@ using GW2PAO.Interfaces;
 using GW2PAO.Properties;
 using GW2PAO.Utility;
 using GW2PAO.Views;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
@@ -32,6 +33,9 @@ namespace GW2PAO.ViewModels
 
         [ImportMany]
         private Lazy<IMenuItem, IOrderMetadata>[] unorderedMainMenu { get; set; }
+
+        private HotkeySettingsViewModel hotkeySettingsVm;
+        private ISettingsViewController settingsViewController;
 
         /// <summary>
         /// MEF container
@@ -66,18 +70,28 @@ namespace GW2PAO.ViewModels
         [ImportingConstructor]
         public ShellViewModel(
             ISystemService systemService,
-            HotkeySettingsViewModel hotkeySettingsVm,
             ISettingsViewController settingsViewController,
+            GeneralSettingsViewModel generalSettingsVm,
+            HotkeySettingsViewModel hotkeySettingsVm,
             CompositionContainer container,
             EventAggregator eventAggregator)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
             this.container = container;
-            hotkeySettingsVm.InitializeHotkeys();
-            settingsViewController.Initialize();
+
+            generalSettingsVm.InitializeHotkeyCommandHandlers();
+
+            this.hotkeySettingsVm = hotkeySettingsVm;
+            this.hotkeySettingsVm.InitializeHotkeys();
+
+            this.settingsViewController = settingsViewController;
+            this.settingsViewController.Initialize();
 
             // Initialize the process monitor
             GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);
+
+            // Initialize shutdown handling
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
         }
 
         /// <summary>
@@ -113,6 +127,15 @@ namespace GW2PAO.ViewModels
 
             // At this point, the program startup should be completed
             logger.Info("Program startup complete");
+        }
+
+        /// <summary>
+        /// Performs shutdown and cleanup activities
+        /// </summary>
+        private void Shutdown()
+        {
+            this.hotkeySettingsVm.SaveHotkeys();
+            this.settingsViewController.Shutdown();
         }
     }
 }

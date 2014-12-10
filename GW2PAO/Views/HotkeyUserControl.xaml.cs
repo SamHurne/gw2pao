@@ -61,6 +61,7 @@ namespace GW2PAO.Views
         {
             InitializeComponent();
             this.LayoutRoot.DataContext = this;
+            this.WarningTextBlock.Visibility = Visibility.Hidden;
         }
 
         private void EntryBox_KeyDown(object sender, KeyEventArgs e)
@@ -74,13 +75,39 @@ namespace GW2PAO.Views
                     && e.Key != Key.LeftAlt
                     && e.Key != Key.RightAlt
                     && e.Key != Key.LWin
-                    && e.Key != Key.RWin)
+                    && e.Key != Key.RWin
+                    && e.Key != Key.Escape)
                 {
-                    this.Hotkey.Key = e.Key;
-                    this.Hotkey.Shift = e.KeyboardDevice.IsKeyDown(Key.LeftShift) || e.KeyboardDevice.IsKeyDown(Key.RightShift);
-                    this.Hotkey.Control = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) || e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
-                    this.Hotkey.Alt = e.KeyboardDevice.IsKeyDown(Key.LeftAlt) || e.KeyboardDevice.IsKeyDown(Key.RightAlt);
-                    this.Hotkey.Windows = e.KeyboardDevice.IsKeyDown(Key.LWin) || e.KeyboardDevice.IsKeyDown(Key.RWin);
+
+                    // Before we go and apply the hotkey, first try it and make sure it will work
+                    this.WarningTextBlock.Visibility = Visibility.Hidden;
+
+                    bool shift = e.KeyboardDevice.IsKeyDown(Key.LeftShift) || e.KeyboardDevice.IsKeyDown(Key.RightShift);
+                    bool control = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) || e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
+                    bool alt = e.KeyboardDevice.IsKeyDown(Key.LeftAlt) || e.KeyboardDevice.IsKeyDown(Key.RightAlt);
+                    bool windows = e.KeyboardDevice.IsKeyDown(Key.LWin) || e.KeyboardDevice.IsKeyDown(Key.RWin);
+                    if (Hotkey.CanSet(e.Key, shift, control, alt, windows))
+                    {
+                        // Valid, go ahead and set it
+                        this.Hotkey.Key = e.Key;
+                        this.Hotkey.Shift = shift;
+                        this.Hotkey.Control = control;
+                        this.Hotkey.Alt = alt;
+                        this.Hotkey.Windows = windows;
+
+                        if (this.Hotkey.IsEnabled)
+                            this.Hotkey.Refresh();
+                    }
+                    else
+                    {
+                        // Invalid key combo
+                        this.WarningTextBlock.Visibility = Visibility.Visible;
+                    }
+                }
+                else if (e.Key == Key.Escape)
+                {
+                    // Remove focus
+                    this.HiddenBox.Focus();
                 }
             }
 
@@ -102,14 +129,15 @@ namespace GW2PAO.Views
             e.Handled = true;
         }
 
-        private void EntryBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        private void EntryBox_GotFocus(object sender, RoutedEventArgs e)
         {
             ((TextBox)sender).SelectAll();
+            HotkeyCommands.PauseHotkeys.Execute(null);
         }
 
-        private void EntryBox_GotMouseCapture(object sender, MouseEventArgs e)
+        private void EntryBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            ((TextBox)sender).SelectAll();
+            HotkeyCommands.ResumeHotkeys.Execute(null);
         }
     }
 }

@@ -107,18 +107,9 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Default constructor
-        /// </summary>
-        public GeneralSettingsViewModel()
-        {
-            // Register for any general-setting hotkey commands
-            this.InitializeHotkeyCommandHandlers();
-        }
-
-        /// <summary>
         /// Initializes any setting-related hotkey command handlers
         /// </summary>
-        private void InitializeHotkeyCommandHandlers()
+        public void InitializeHotkeyCommandHandlers()
         {
             HotkeyCommands.ToggleInteractiveWindowsCommand.RegisterCommand(new DelegateCommand(() => this.IsClickthroughEnabled = !this.IsClickthroughEnabled));
             HotkeyCommands.ToggleNotificationWindowBordersCommand.RegisterCommand(new DelegateCommand(() => this.AreNotificationWindowBordersVisible = !this.AreNotificationWindowBordersVisible));

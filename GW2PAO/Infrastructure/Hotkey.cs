@@ -23,12 +23,15 @@ namespace GW2PAO.Infrastructure
         [XmlIgnore]
         private string id = Guid.NewGuid().ToString();
 
+        [XmlIgnore]
+        private bool isRegistered;
+
         private Key key;
         private bool shift;
         private bool control;
         private bool alt;
         private bool windows;
-        private bool isRegistered;
+        private bool isEnabled;
 
         /// <summary>
         /// The actual key to use as the hotkey
@@ -36,15 +39,7 @@ namespace GW2PAO.Infrastructure
         public Key Key
         {
             get { return this.key; }
-            set
-            {
-                if (this.key != value)
-                {
-                    this.key = value;
-                    if (this.IsRegistered)
-                        this.Reregister();
-                }
-            }
+            set { this.SetProperty(ref this.key, value); }
         }
 
         /// <summary>
@@ -53,15 +48,7 @@ namespace GW2PAO.Infrastructure
         public bool Shift
         {
             get { return this.shift; }
-            set
-            {
-                if (this.shift != value)
-                {
-                    this.shift = value;
-                    if (this.IsRegistered)
-                        this.Reregister();
-                }
-            }
+            set { this.SetProperty(ref this.shift, value); }
         }
 
         /// <summary>
@@ -70,15 +57,7 @@ namespace GW2PAO.Infrastructure
         public bool Control
         {
             get { return this.control; }
-            set
-            {
-                if (this.control != value)
-                {
-                    this.control = value;
-                    if (this.IsRegistered)
-                        this.Reregister();
-                }
-            }
+            set { this.SetProperty(ref this.control, value); }
         }
 
         /// <summary>
@@ -87,15 +66,7 @@ namespace GW2PAO.Infrastructure
         public bool Alt
         {
             get { return this.alt; }
-            set
-            {
-                if (this.alt != value)
-                {
-                    this.alt = value;
-                    if (this.IsRegistered)
-                        this.Reregister();
-                }
-            }
+            set { this.SetProperty(ref this.alt, value); }
         }
 
         /// <summary>
@@ -104,15 +75,7 @@ namespace GW2PAO.Infrastructure
         public bool Windows
         {
             get { return this.windows; }
-            set
-            {
-                if (this.windows != value)
-                {
-                    this.windows = value;
-                    if (this.IsRegistered)
-                        this.Reregister();
-                }
-            }
+            set { this.SetProperty(ref this.windows, value); }
         }
 
         /// <summary>
@@ -127,18 +90,17 @@ namespace GW2PAO.Infrastructure
         /// True if the hotkey is registered, else false
         /// This is the primary property used for enabling/disabling the hotkey
         /// </summary>
-        public bool IsRegistered
+        public bool IsEnabled
         {
-            get { return this.isRegistered; }
+            get { return this.isEnabled; }
             set
             {
-                if (this.isRegistered != value)
+                if (this.SetProperty(ref this.isEnabled, value))
                 {
                     if (value)
-                        this.Register();
+                        this.Register(); // User-Enabled
                     else
-                        this.Unregister();
-                    this.OnPropertyChanged(() => this.IsRegistered);
+                        this.Unregister(); // User-Disabled
                 }
             }
         }
@@ -147,6 +109,11 @@ namespace GW2PAO.Infrastructure
         /// Event raised when the hotkey with modifiers (if any) is pressed
         /// </summary>
         public event EventHandler Pressed;
+
+        /// <summary>
+        /// Event raised when a hotkey is already registered
+        /// </summary>
+        public event EventHandler AlreadyRegistered;
 
         /// <summary>
         /// Default constructor
@@ -175,10 +142,25 @@ namespace GW2PAO.Infrastructure
         }
 
         /// <summary>
+        /// Performs a refresh with the current hotkey configuration, including key and all modifiers
+        /// </summary>
+        /// <remarks>
+        /// This should be called anytime the hotkey changes
+        /// </remarks>
+        public void Refresh()
+        {
+            this.Unregister();
+            this.Register();
+        }
+
+        /// <summary>
         /// Registers the hotkey with modifies (if any)
         /// </summary>
         private void Register()
         {
+            if (this.isRegistered)
+                return; // Do nothing if we are already registered
+
             if (this.Key == Key.None)
                 return; // Do nothing if the hotkey is "none"
 
@@ -193,8 +175,22 @@ namespace GW2PAO.Infrastructure
                 modifiers |= ModifierKeys.Windows;
 
             logger.Trace("Registering hotkey {0} | {1} | {2}", this.id, this.Key, modifiers);
-            HotkeyManager.Current.AddOrReplace(this.id, this.Key, modifiers, this.OnPressed);
-            this.isRegistered = true;
+            try
+            {
+                HotkeyManager.Current.AddOrReplace(this.id, this.Key, modifiers, this.OnPressed);
+            }
+            catch (HotkeyAlreadyRegisteredException)
+            {
+                // Key is already registered, so reset
+                this.Key = Key.None;
+                this.Alt = false;
+                this.Control = false;
+                this.Shift = false;
+                this.Windows = false;
+
+                this.isRegistered = false;
+                this.OnHotkeyAlreadyRegistered(this, new HotkeyAlreadyRegisteredEventArgs(this.ToString()));
+            }
         }
 
         /// <summary>
@@ -206,14 +202,17 @@ namespace GW2PAO.Infrastructure
             {
                 logger.Trace("Unregistering hotkey {0}", this.id);
                 HotkeyManager.Current.Remove(this.id);
-                this.isRegistered = false;
+                this.IsEnabled = false;
             }
         }
 
-        private void Reregister()
+        private void OnHotkeyAlreadyRegistered(object sender, HotkeyAlreadyRegisteredEventArgs e)
         {
-            this.Unregister();
-            this.Register();
+            logger.Trace("{0} hotkey already registered", e.Name);
+            if (this.AlreadyRegistered != null)
+            {
+                this.AlreadyRegistered(this, e);
+            }
         }
 
         private void OnPressed(object o, HotkeyEventArgs e)
@@ -222,6 +221,7 @@ namespace GW2PAO.Infrastructure
             if (this.Pressed != null)
             {
                 this.Pressed(this, e);
+                e.Handled = false;
             }
         }
 
@@ -235,6 +235,30 @@ namespace GW2PAO.Infrastructure
             string keyName = Enum.GetName(typeof(Key), this.Key); ;
             switch (this.Key)
             {
+                case Key.Oem1:
+                    keyName = "OemSemicolon";
+                    break;
+                case Key.Oem3:
+                    keyName = "OemTilde";
+                    break;
+                case Key.Oem5:
+                    keyName = "OemPipe";
+                    break;
+                case Key.Oem6:
+                    keyName = "OemCloseBrackets";
+                    break;
+                case Key.Oem7:
+                    keyName = "OemQuotes";
+                    break;
+                case Key.DeadCharProcessed:
+                    keyName = "OemClear";
+                    break;
+                case Key.Next:
+                    keyName = "PageDown";
+                    break;
+                case Key.Capital:
+                    keyName = "CapsLock";
+                    break;
                 case Key.D0:
                 case Key.D1:
                 case Key.D2:
@@ -253,6 +277,10 @@ namespace GW2PAO.Infrastructure
                     break;
             }
 
+            // Strip "Oem" from the keyName if it is there
+            if (keyName.StartsWith("Oem"))
+                keyName = keyName.Substring(3);
+
             // Build modifiers
             string modifiers = string.Empty;
             if (this.shift)
@@ -266,6 +294,47 @@ namespace GW2PAO.Infrastructure
 
             // Return result
             return modifiers + keyName;
+        }
+
+        /// <summary>
+        /// Tests to see if the given combination of keys is available as a hotkey
+        /// </summary>
+        /// <param name="key">The key to use for the hotkey</param>
+        /// <param name="shift">True if the Shift modifier key should be used, else false</param>
+        /// <param name="control">True if the Control modifier key should be used, else false</param>
+        /// <param name="alt">True if the Alt modifier key should be used, else false</param>
+        /// <param name="windows">True if the Windows modifier key should be used, else false</param>
+        /// <returns>True if the given combination is valid, else false</returns>
+        public static bool CanSet(Key key, bool shift, bool control, bool alt, bool windows)
+        {
+            if (key == Key.None)
+                return false; // Do nothing if the hotkey is "none"
+
+            ModifierKeys modifiers = ModifierKeys.None;
+            if (shift)
+                modifiers |= ModifierKeys.Shift;
+            if (control)
+                modifiers |= ModifierKeys.Control;
+            if (alt)
+                modifiers |= ModifierKeys.Alt;
+            if (windows)
+                modifiers |= ModifierKeys.Windows;
+
+            var id = Guid.NewGuid().ToString();
+            logger.Trace("Testing hotkey {0} | {1}", key, modifiers);
+            try
+            {
+                HotkeyManager.Current.AddOrReplace(id, key, modifiers, (o, e) => { });
+                HotkeyManager.Current.Remove(id);
+
+                // Valid
+                return true;
+            }
+            catch (HotkeyAlreadyRegisteredException)
+            {
+                // Not valid
+                return false;
+            }
         }
     }
 }

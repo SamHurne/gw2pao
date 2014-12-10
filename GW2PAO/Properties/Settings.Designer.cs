@@ -622,5 +622,17 @@ namespace GW2PAO.Properties {
                 this["IsPriceTrackerOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Hotkeys {
+            get {
+                return ((string)(this["Hotkeys"]));
+            }
+            set {
+                this["Hotkeys"] = value;
+            }
+        }
     }
 }
