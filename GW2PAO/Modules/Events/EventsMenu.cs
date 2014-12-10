@@ -68,13 +68,6 @@ namespace GW2PAO.Modules.Events
         public EventsMenu(IEventsViewController viewFactory, EventsUserData userData)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
-
-            // Build up the sub menu items
-            var timeTableMenu = new MenuItem(Properties.Resources.EventTimeTable);
-            timeTableMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.Standard, false, () => userData.UseStandardTimeTable, userData));
-            timeTableMenu.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.Adjusted, false, () => userData.UseAdjustedTimeTable, userData));
-
-            this.SubMenuItems.Add(timeTableMenu);
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenEventsTracker, viewFactory.DisplayEventsTracker, viewFactory.CanDisplayEventsTracker));
             this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EventNotifications, false, () => userData.AreEventNotificationsEnabled, userData));
         }

@@ -35,7 +35,7 @@
 
         <GroupBox Margin="0,5,5,10">
             <GroupBox.Header>
-                <core:OutlinedTextBlock Text="Events Tracker" /> <!-- TODO: Resource String -->
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventsTracker}" />
             </GroupBox.Header>
             <CheckBox HorizontalAlignment="Left" IsChecked="{Binding UserData.AreInactiveEventsVisible}">
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />

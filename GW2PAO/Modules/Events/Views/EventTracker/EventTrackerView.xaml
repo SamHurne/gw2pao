@@ -75,6 +75,8 @@
                             <MenuItem Header="{x:Static resx:Resources.ResetHiddenEvents}" Command="{Binding ResetHiddenEventsCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowInactiveEvents}" IsCheckable="True" IsChecked="{Binding UserData.AreInactiveEventsVisible}" />
                             <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.Settings}" Command="{Binding SettingsCommand}" />
+                            <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>

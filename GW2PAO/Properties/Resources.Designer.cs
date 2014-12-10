@@ -502,6 +502,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Events Tracker.
+        /// </summary>
+        public static string EventsTracker {
+            get {
+                return ResourceManager.GetString("EventsTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event Time Table.
         /// </summary>
         public static string EventTimeTable {

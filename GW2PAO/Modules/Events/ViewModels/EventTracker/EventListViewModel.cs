@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using NLog;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using GW2PAO.Infrastructure;
 
 namespace GW2PAO.Modules.Events.ViewModels.EventTracker
 {
@@ -26,12 +27,28 @@ namespace GW2PAO.Modules.Events.ViewModels.EventTracker
         /// <summary>
         /// Collection of all World Events
         /// </summary>
-        public ObservableCollection<EventViewModel> WorldEvents { get { return this.controller.WorldEvents; } }
+        public ObservableCollection<EventViewModel> WorldEvents
+        {
+            get { return this.controller.WorldEvents; }
+        }
 
         /// <summary>
         /// Command to reset all hidden events
         /// </summary>
-        public DelegateCommand ResetHiddenEventsCommand { get { return new DelegateCommand(this.ResetHiddenEvents); } }
+        public DelegateCommand ResetHiddenEventsCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Command to open the settings for the Events Tracker
+        /// </summary>
+        public DelegateCommand SettingsCommand
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Event Tracker user data
@@ -46,6 +63,8 @@ namespace GW2PAO.Modules.Events.ViewModels.EventTracker
         public EventTrackerViewModel(IEventsController eventTrackerController)
         {
             this.controller = eventTrackerController;
+            this.ResetHiddenEventsCommand = new DelegateCommand(this.ResetHiddenEvents);
+            this.SettingsCommand = new DelegateCommand(() => Commands.OpenEventSettingsCommand.Execute(null));
         }
 
         /// <summary>
