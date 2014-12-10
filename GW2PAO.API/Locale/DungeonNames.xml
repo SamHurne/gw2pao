@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDungeonName xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DungeonName>
+    <ID>efbbdc31-9087-4a14-a4c9-11eaa47d5ad5</ID>
+    <Name>Ascalonian Catacombs</Name>
+    <PathNames>
+      <PathName>
+        <ID>9530eb25-b780-469a-ba50-d90a0780bf6f</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>fde363f9-6b3b-4ac6-9139-87ef101e8529</ID>
+        <Name>Hodgins</Name>
+      </PathName>
+      <PathName>
+        <ID>b3155076-5f24-443c-932e-d940586f5fe4</ID>
+        <Name>Detha</Name>
+      </PathName>
+      <PathName>
+        <ID>66bd5e90-8459-43d1-b659-a7dac370c3cc</ID>
+        <Name>Tzark</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>b0c5b28f-0f94-468b-8dd5-fa0c41a7125a</ID>
+    <Name>Caudecus's Manor</Name>
+    <PathNames>
+      <PathName>
+        <ID>566b305e-f5e7-4c76-852f-fd257ba773e1</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>e6ca060b-53f0-4c44-8a31-9e675072d02f</ID>
+        <Name>Asura</Name>
+      </PathName>
+      <PathName>
+        <ID>50e8028e-b181-47c7-9241-08881bfb5fd2</ID>
+        <Name>Seraph</Name>
+      </PathName>
+      <PathName>
+        <ID>75df1960-fa81-490e-828c-00f5196bb9c5</ID>
+        <Name>Butler</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>6f3faf71-5054-483c-978e-8613d45c41ea</ID>
+    <Name>Twilight Arbor</Name>
+    <PathNames>
+      <PathName>
+        <ID>2fa6be06-a80f-43c4-aea1-361a589e6081</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>00c43af7-5ce7-48f5-a364-86858097a60c</ID>
+        <Name>Leurent (Up)</Name>
+      </PathName>
+      <PathName>
+        <ID>2fa68349-f278-4a82-9b4d-96993a1386f1</ID>
+        <Name>Aetherpath</Name>
+      </PathName>
+      <PathName>
+        <ID>85dc8022-8bd8-462c-ad73-4c600574ea23</ID>
+        <Name>Vevina (Forward)</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>5641eeb7-88d3-49c0-8d6b-7b843d3e4ac0</ID>
+    <Name>Sorrow's Embrace</Name>
+    <PathNames>
+      <PathName>
+        <ID>633bc3b5-3182-4d0a-8076-84c7ff2d1ed2</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>d887ed43-38df-4e12-8d9d-93b1b331c1ac</ID>
+        <Name>Fergg</Name>
+      </PathName>
+      <PathName>
+        <ID>fec34879-40f7-46d7-99d9-618f89b1e828</ID>
+        <Name>Rasolov</Name>
+      </PathName>
+      <PathName>
+        <ID>3ff2b548-1443-4605-8fff-2adf3bf953f3</ID>
+        <Name>Koptev</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>9a575a34-95a6-4148-8cc0-79db73f4fe3d</ID>
+    <Name>Citadel of Flame</Name>
+    <PathNames>
+      <PathName>
+        <ID>273586fc-21cd-4cbd-afc1-98b2b952e7a3</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>124b4638-1f49-4e2b-9aa6-9764f438c430</ID>
+        <Name>Ferrah</Name>
+      </PathName>
+      <PathName>
+        <ID>88c721b9-dddb-462c-ac99-e32eb0450267</ID>
+        <Name>Magg</Name>
+      </PathName>
+      <PathName>
+        <ID>029c1bb4-3a31-4de4-b8e8-c02d412c7bea</ID>
+        <Name>Rhiannon</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>32d7e5cd-42c1-499e-ae29-053c764d8cbd</ID>
+    <Name>Honor of the Waves</Name>
+    <PathNames>
+      <PathName>
+        <ID>fc32543a-557c-4622-81fb-0f86cbd40cbc</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>398ffa78-a23d-448a-b7b7-d99da1adae09</ID>
+        <Name>Butcher</Name>
+      </PathName>
+      <PathName>
+        <ID>65b1d419-7632-41da-a9b9-747b3dd4aa35</ID>
+        <Name>Plunderer</Name>
+      </PathName>
+      <PathName>
+        <ID>3d672765-7b11-4c81-99f8-e2327fafba24</ID>
+        <Name>Zealot</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>6608807f-0957-4648-a5c4-e4bc8b53b2d4</ID>
+    <Name>Crucible of Eternity</Name>
+    <PathNames>
+      <PathName>
+        <ID>9e7588fd-7719-4224-912a-02c6a784d02c</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>a18ed907-9eeb-4725-80cb-aee604b57b4f</ID>
+        <Name>Submarine</Name>
+      </PathName>
+      <PathName>
+        <ID>f52abae1-a47b-4810-aaba-a65e00b3d220</ID>
+        <Name>Teleporter</Name>
+      </PathName>
+      <PathName>
+        <ID>cfcc1e1c-b146-4e42-97fe-372e8dd97514</ID>
+        <Name>Front Door</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>93505164-e616-421a-bfb2-8d10425f9892</ID>
+    <Name>Ruined City of Arah</Name>
+    <PathNames>
+      <PathName>
+        <ID>b95b8796-2b65-481d-b9eb-21f08dba9812</ID>
+        <Name>Story</Name>
+      </PathName>
+      <PathName>
+        <ID>2c63abfc-70e4-43f7-9d9b-433b2da25414</ID>
+        <Name>Jotun</Name>
+      </PathName>
+      <PathName>
+        <ID>8762090c-bd69-4b2b-b61a-727a7f39584b</ID>
+        <Name>Mursaat</Name>
+      </PathName>
+      <PathName>
+        <ID>dc3fea5c-f4b7-4450-81e8-294e3eb33158</ID>
+        <Name>Forgotten</Name>
+      </PathName>
+      <PathName>
+        <ID>bb8badb5-c2c6-4cbc-a232-6056c13335a5</ID>
+        <Name>Seer</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+  <DungeonName>
+    <ID>fbbc04e3-5461-49ab-be44-476ee13ecb47</ID>
+    <Name>Fractals of the Mists</Name>
+    <PathNames>
+      <PathName>
+        <ID>98e43d83-e1a1-4f42-92a1-ed52bb26e793</ID>
+        <Name>Tier 0 (1-10)</Name>
+      </PathName>
+      <PathName>
+        <ID>1b168788-bc77-4a40-b5c8-6aba625784c2</ID>
+        <Name>Tier 1 (11-20)</Name>
+      </PathName>
+      <PathName>
+        <ID>ea219361-b4b4-4d41-a1fe-837af3d940ba</ID>
+        <Name>Tier 2 (21-30)</Name>
+      </PathName>
+      <PathName>
+        <ID>ea030722-486c-475d-9784-6c801a1615f3</ID>
+        <Name>Tier 3 (31-40)</Name>
+      </PathName>
+      <PathName>
+        <ID>ee8e0695-1f19-4f44-a7c9-c7a8e4b9834a</ID>
+        <Name>Tier 4 (41-50)</Name>
+      </PathName>
+    </PathNames>
+  </DungeonName>
+</ArrayOfDungeonName>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfObjectiveNames xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ObjectiveNames>
+    <ID>1</ID>
+    <Name>Overlook</Name>
+    <ShortName>Overlook</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>2</ID>
+    <Name>Valley</Name>
+    <ShortName>Valley</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>3</ID>
+    <Name>Lowlands</Name>
+    <ShortName>Lowlands</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>4</ID>
+    <Name>Golanta Clearing</Name>
+    <ShortName>Golanta</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>5</ID>
+    <Name>Pangloss Rise</Name>
+    <ShortName>Pangloss</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>6</ID>
+    <Name>Speldan Clearcut</Name>
+    <ShortName>Speldan</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>7</ID>
+    <Name>Danelon Passage</Name>
+    <ShortName>Danelon</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>8</ID>
+    <Name>Umberglade Woods</Name>
+    <ShortName>Umberglade</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>9</ID>
+    <Name>Stonemist Castle</Name>
+    <ShortName>Stonemist</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>10</ID>
+    <Name>Rogue's Quarry</Name>
+    <ShortName>Rogue's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>11</ID>
+    <Name>Aldon's Ledge</Name>
+    <ShortName>Aldon's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>12</ID>
+    <Name>Wildcreek Run</Name>
+    <ShortName>Wildcreek</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>13</ID>
+    <Name>Jerrifer's Slough</Name>
+    <ShortName>Jerrifer's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>14</ID>
+    <Name>Klovan Gully</Name>
+    <ShortName>Klovan</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>15</ID>
+    <Name>Langor Gulch</Name>
+    <ShortName>Langor</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>16</ID>
+    <Name>Quentin Lake</Name>
+    <ShortName>Quentin</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>17</ID>
+    <Name>Mendon's Gap</Name>
+    <ShortName>Mendon's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>18</ID>
+    <Name>Anzalias Pass</Name>
+    <ShortName>Anzalias</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>19</ID>
+    <Name>Ogrewatch Cut</Name>
+    <ShortName>Ogrewatch</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>20</ID>
+    <Name>Veloka Slope</Name>
+    <ShortName>Veloka</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>21</ID>
+    <Name>Durios Gulch</Name>
+    <ShortName>Durios</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>22</ID>
+    <Name>Bravost Escarpment</Name>
+    <ShortName>Bravost</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>23</ID>
+    <Name>Garrison</Name>
+    <ShortName>Garrison</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>24</ID>
+    <Name>Champion's Demense</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>25</ID>
+    <Name>Redbriar</Name>
+    <ShortName>Redbriar</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>26</ID>
+    <Name>Greenlake</Name>
+    <ShortName>Greenlake</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>27</ID>
+    <Name>Ascension Bay</Name>
+    <ShortName>Bay</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>28</ID>
+    <Name>Dawn's Eyrie</Name>
+    <ShortName>Dawn's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>29</ID>
+    <Name>The Spiritholme</Name>
+    <ShortName>Spiritholme</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>30</ID>
+    <Name>Woodhaven</Name>
+    <ShortName>Woodhaven</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>31</ID>
+    <Name>Askalion Hills</Name>
+    <ShortName>Hills</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>32</ID>
+    <Name>Etheron Hills</Name>
+    <ShortName>Hills</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>33</ID>
+    <Name>Dreaming Bay</Name>
+    <ShortName>Bay</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>34</ID>
+    <Name>Victors's Lodge</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>35</ID>
+    <Name>Greenbriar</Name>
+    <ShortName>Greenbriar</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>36</ID>
+    <Name>Bluelake</Name>
+    <ShortName>Bluelake</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>37</ID>
+    <Name>Garrison</Name>
+    <ShortName>Garrison</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>38</ID>
+    <Name>Longview</Name>
+    <ShortName>Longview</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>39</ID>
+    <Name>The Godsword</Name>
+    <ShortName>Godsword</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>40</ID>
+    <Name>Cliffside</Name>
+    <ShortName>Cliffside</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>41</ID>
+    <Name>Shadaran Hills</Name>
+    <ShortName>Hills</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>42</ID>
+    <Name>Redlake</Name>
+    <ShortName>Redlake</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>43</ID>
+    <Name>Hero's Lodge</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>44</ID>
+    <Name>Dreadfall Bay</Name>
+    <ShortName>Bay</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>45</ID>
+    <Name>Bluebriar</Name>
+    <ShortName>Bluebriar</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>46</ID>
+    <Name>Garrison</Name>
+    <ShortName>Garrison</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>47</ID>
+    <Name>Sunnyhill</Name>
+    <ShortName>Sunnyhill</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>48</ID>
+    <Name>Faithleap</Name>
+    <ShortName>Faithleap</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>49</ID>
+    <Name>Bluevale Refuge</Name>
+    <ShortName>Bluevale</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>50</ID>
+    <Name>Bluewater Lowlands</Name>
+    <ShortName>Bluewater</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>51</ID>
+    <Name>Astralholme</Name>
+    <ShortName>Astralholme</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>52</ID>
+    <Name>Arah's Hope</Name>
+    <ShortName>Arah's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>53</ID>
+    <Name>Greenvale Refuge</Name>
+    <ShortName>Greenvale</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>54</ID>
+    <Name>Foghaven</Name>
+    <ShortName>Foghaven</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>55</ID>
+    <Name>Redwater Lowlands</Name>
+    <ShortName>Redwater</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>56</ID>
+    <Name>The Titanpaw</Name>
+    <ShortName>Titanpaw</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>57</ID>
+    <Name>Cragtop</Name>
+    <ShortName>Cragtop</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>58</ID>
+    <Name>Godslore</Name>
+    <ShortName>Godslore</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>59</ID>
+    <Name>Redvale Refuge</Name>
+    <ShortName>Redvale</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>60</ID>
+    <Name>Stargrove</Name>
+    <ShortName>Stargrove</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>61</ID>
+    <Name>Greenwater Lowlands</Name>
+    <ShortName>Greenwater</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>62</ID>
+    <Name>Temple of Lost Prayers</Name>
+    <ShortName>Temple</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>63</ID>
+    <Name>Battle's Hollow</Name>
+    <ShortName>Hollow</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>64</ID>
+    <Name>Bauer's Estate</Name>
+    <ShortName>Estate</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>65</ID>
+    <Name>Orchard Overlook</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>66</ID>
+    <Name>Carver's Ascent</Name>
+    <ShortName>Carver's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>67</ID>
+    <Name>Carver's Ascent</Name>
+    <ShortName>Carver's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>68</ID>
+    <Name>Orchard Overlook</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>69</ID>
+    <Name>Bauer's Estate</Name>
+    <ShortName>Estate</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>70</ID>
+    <Name>Battle's Hollow</Name>
+    <ShortName>Hollow</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>71</ID>
+    <Name>Temple of Lost Prayers</Name>
+    <ShortName>Temple</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>72</ID>
+    <Name>Carver's Ascent</Name>
+    <ShortName>Carver's</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>73</ID>
+    <Name>Orchard Overlook</Name>
+    <ShortName>Orchard</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>74</ID>
+    <Name>Bauer's Estate</Name>
+    <ShortName>Estate</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>75</ID>
+    <Name>Battle's Hollow</Name>
+    <ShortName>Hollow</ShortName>
+  </ObjectiveNames>
+  <ObjectiveNames>
+    <ID>76</ID>
+    <Name>Temple of Lost Prayers</Name>
+    <ShortName>Temple</ShortName>
+  </ObjectiveNames>
+</ArrayOfObjectiveNames>

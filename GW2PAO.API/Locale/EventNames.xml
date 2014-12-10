@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEventName xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EventName>
+    <ID>c876757a-ef3e-4fbe-a484-07ff790d9b05</ID>
+    <Name>Megadestroyer</Name>
+  </EventName>
+  <EventName>
+    <ID>568a30cf-8512-462f-9d67-647d69befaed</ID>
+    <Name>Tequatl</Name>
+  </EventName>
+  <EventName>
+    <ID>f479b4cf-2e11-457a-b279-90822511b53b</ID>
+    <Name>Karka Queen</Name>
+  </EventName>
+  <EventName>
+    <ID>5a22ead4-8302-4da3-a450-3fc051bd6a3c</ID>
+    <Name>Evolved Jungle Wurm</Name>
+  </EventName>
+  <EventName>
+    <ID>03bf176a-d59f-49ca-a311-39fc6f533f2f</ID>
+    <Name>Shatterer</Name>
+  </EventName>
+  <EventName>
+    <ID>0464cb9e-1848-4aaa-ba31-4779a959dd71</ID>
+    <Name>Claw of Jormag</Name>
+  </EventName>
+  <EventName>
+    <ID>e6872a86-e434-4fc1-b803-89921ff0f6d6</ID>
+    <Name>Modniir Ulgoth</Name>
+  </EventName>
+  <EventName>
+    <ID>9aa133dc-f630-4a0e-bb5d-ee34a2b306c2</ID>
+    <Name>Inquest Golem Mark II</Name>
+  </EventName>
+  <EventName>
+    <ID>242bd241-e360-48f1-a8d9-57180e146789</ID>
+    <Name>Taidha Covington</Name>
+  </EventName>
+  <EventName>
+    <ID>c5972f64-b894-45b4-bc31-2deea6b7c033</ID>
+    <Name>Jungle Wurm</Name>
+  </EventName>
+  <EventName>
+    <ID>31ceba08-e44d-472f-81b0-7143d73797f5</ID>
+    <Name>Shadow Behemoth</Name>
+  </EventName>
+  <EventName>
+    <ID>33f76e9e-0bb6-46d0-a3a9-be4cdfc4a3a4</ID>
+    <Name>Fire Elemental</Name>
+  </EventName>
+  <EventName>
+    <ID>f7d9d427-5e54-4f12-977a-9809b23fba99</ID>
+    <Name>Frozen Maw</Name>
+  </EventName>
+</ArrayOfEventName>
