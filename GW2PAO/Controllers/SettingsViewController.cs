@@ -51,6 +51,7 @@ namespace GW2PAO.Controllers
             Commands.OpenDungeonSettingsCommand.RegisterCommand(new DelegateCommand(() => this.OpenSettings(typeof(DungeonSettingsView))));
             Commands.OpenCommerceSettingsCommand.RegisterCommand(new DelegateCommand(() => this.OpenSettings(typeof(CommerceSettingsView))));
             Commands.OpenWvWSettingsCommand.RegisterCommand(new DelegateCommand(() => this.OpenSettings(typeof(WvWSettingsView))));
+            Commands.PromptForRestartCommand.RegisterCommand(new DelegateCommand(this.PromptForRestart));
         }
 
         /// <summary>
@@ -94,6 +95,16 @@ namespace GW2PAO.Controllers
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Displays the window that prompts the user to restart the application
+        /// </summary>
+        private void PromptForRestart()
+        {
+            var promptView = new RestartPromptView();
+            this.Container.ComposeParts(promptView);
+            promptView.Show();
         }
     }
 }

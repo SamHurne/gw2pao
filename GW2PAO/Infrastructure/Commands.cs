@@ -11,6 +11,8 @@ namespace GW2PAO.Infrastructure
     {
         public static readonly CompositeCommand ApplicationShutdownCommand = new CompositeCommand();
 
+        public static readonly CompositeCommand PromptForRestartCommand = new CompositeCommand();
+
         public static readonly CompositeCommand OpenGeneralSettingsCommand = new CompositeCommand();
         public static readonly CompositeCommand OpenHotkeySettingsCommand = new CompositeCommand();
         public static readonly CompositeCommand OpenEventSettingsCommand = new CompositeCommand();

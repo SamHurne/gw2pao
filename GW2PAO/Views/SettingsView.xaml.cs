@@ -53,6 +53,7 @@ namespace GW2PAO.Views
         public SettingsView()
         {
             InitializeComponent();
+            this.CenterWindowOnScreen();
         }
 
         public void OnImportsSatisfied()
@@ -65,6 +66,17 @@ namespace GW2PAO.Views
             tabItems.Add(this.CreateTabItem(this.CommerceSettings));
             tabItems.Add(this.CreateTabItem(this.WvWSettings));
             this.SettingsTabControl.ItemsSource = tabItems;
+        }
+
+        /// <summary>
+        /// Centers the window on the screen
+        /// </summary>
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Left = (screenWidth / 2) - (this.Width / 2);
+            this.Top = (screenHeight / 2) - (this.Height / 2);
         }
 
         private TabItem CreateTabItem(UserControl view)

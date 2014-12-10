@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="BaseControlStyles/ButtonStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/CheckboxStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/ComboBoxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ContextMenuStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/GroupBoxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ListViewStyle.xaml" />

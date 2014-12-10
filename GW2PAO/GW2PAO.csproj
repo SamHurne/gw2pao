@@ -196,6 +196,7 @@
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
     <Compile Include="Modules\Commerce\CommerceViewController.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Modules\Events\ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
     <Compile Include="ViewModels\HotkeySettingsViewModel.cs" />
+    <Compile Include="ViewModels\RestartPromptViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\WvW\ViewModels\GuildViewModel.cs" />
     <Compile Include="Modules\ZoneCompletion\Interfaces\IHasZoneName.cs" />
@@ -358,6 +360,9 @@
     </Compile>
     <Compile Include="Modules\Commerce\Views\PriceNotification\PriceNotificationWindow.xaml.cs">
       <DependentUpon>PriceNotificationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RestartPromptView.xaml.cs">
+      <DependentUpon>RestartPromptView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -436,6 +441,10 @@
     <Page Include="Modules\WvW\Views\WvWSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\BaseControlStyles\ComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\BaseControlStyles\ListViewStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -564,6 +573,10 @@
     <Page Include="Modules\Commerce\Views\PriceNotification\PriceNotificationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RestartPromptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
@@ -833,6 +846,10 @@ del inspector.pak
 del libEGL.dll
 del libGLESv2.dll
 del xinput9_1_0.dll</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

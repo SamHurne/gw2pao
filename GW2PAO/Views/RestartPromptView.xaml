@@ -1,0 +1,54 @@
+﻿<src:OverlayWindow x:Class="GW2PAO.Views.RestartPromptView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        Width="250" MinHeight="125"
+        SizeToContent="Height"
+        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="NoResize"
+        Topmost="True"
+        TextOptions.TextFormattingMode="Display"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Color="Black" Direction="315" Opacity="0.8"/>
+        </Border.Effect>
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#FF24313D" Offset="0"/>
+                <GradientStop Color="#8024313D" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <core:OutlinedTextBlock Grid.Column="0" Grid.ColumnSpan="2"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="13"
+                                    TextAlignment="Center"
+                                    Text="The application must restart for the settings to be applied." />
+            <Button Name="OKButton"
+                    Grid.Column="0" Grid.Row="1"
+                    Width="50" Margin="5,5,5,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding RestartApplicationCommand}"
+                    Content="OK" />
+            <Button Name="LaterButton"
+                    Grid.Column="1" Grid.Row="1"
+                    Width="50" Margin="5,5,5,0"
+                    HorizontalAlignment="Left"
+                    Click="LaterButton_Click"
+                    Content="Later" />
+        </Grid>
+    </Border>
+</src:OverlayWindow>
