@@ -650,8 +650,16 @@
     <value>Translations By:</value>
     <comment>Followed by a list of names (the translators)</comment>
   </data>
+  <data name="EventNotificationSettings" xml:space="preserve">
+    <value>Event Notification Settings</value>
+    <comment>Settings for Event Notifications</comment>
+  </data>
   <data name="EventsTracker" xml:space="preserve">
     <value>Events Tracker</value>
     <comment>Name of the Events Tracker</comment>
+  </data>
+  <data name="EventNotificationConfigTooltip" xml:space="preserve">
+    <value>Show notification at this time before event begins</value>
+    <comment>Instructions shown describing what the entry box for notifications means</comment>
   </data>
 </root>

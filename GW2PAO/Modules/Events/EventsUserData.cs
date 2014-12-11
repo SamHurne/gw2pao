@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace GW2PAO.Modules.Events
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
+        private ObservableCollection<EventNotificationSettings> notificationSettings = new ObservableCollection<EventNotificationSettings>();
 
         /// <summary>
         /// True if inactive events are visible, else false
@@ -102,6 +104,11 @@ namespace GW2PAO.Modules.Events
         public ObservableCollection<Guid> EventsWithTreasureObtained { get { return this.eventsWithTreasureObtained; } }
 
         /// <summary>
+        /// Collection of notification settings
+        /// </summary>
+        public ObservableCollection<EventNotificationSettings> NotificationSettings { get { return this.notificationSettings; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public EventsUserData()
@@ -121,6 +128,21 @@ namespace GW2PAO.Modules.Events
             this.PropertyChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
             this.HiddenEvents.CollectionChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
             this.EventsWithTreasureObtained.CollectionChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
+            this.NotificationSettings.CollectionChanged += (o, e) =>
+                {
+                    EventsUserData.SaveData(this, EventsUserData.Filename);
+                    if (e.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        foreach (EventNotificationSettings ens in e.NewItems)
+                        {
+                            ens.PropertyChanged += (obj, arg) => EventsUserData.SaveData(this, EventsUserData.Filename);
+                        }
+                    }
+                };
+            foreach (EventNotificationSettings ens in this.NotificationSettings)
+            {
+                ens.PropertyChanged += (obj, arg) => EventsUserData.SaveData(this, EventsUserData.Filename);
+            }
         }
     }
 }

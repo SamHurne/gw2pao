@@ -484,11 +484,29 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show notification at this time before event begins.
+        /// </summary>
+        public static string EventNotificationConfigTooltip {
+            get {
+                return ResourceManager.GetString("EventNotificationConfigTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event Notifications.
         /// </summary>
         public static string EventNotifications {
             get {
                 return ResourceManager.GetString("EventNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event Notification Settings.
+        /// </summary>
+        public static string EventNotificationSettings {
+            get {
+                return ResourceManager.GetString("EventNotificationSettings", resourceCulture);
             }
         }
         

@@ -39,3 +39,7 @@ http://oxyplot.org/documentation/license
 NHotkey:
 https://github.com/thomaslevesque/NHotkey
 https://github.com/thomaslevesque/NHotkey/blob/master/LICENSE.md
+
+Extended WPF Toolkip:
+https://wpftoolkit.codeplex.com/
+https://wpftoolkit.codeplex.com/license

@@ -203,6 +203,20 @@ namespace GW2PAO.Modules.Events
 
                         logger.Debug("Initializing view model for {0}", worldEvent.ID);
                         this.WorldEvents.Add(new EventViewModel(worldEvent, this.userData, this.EventNotifications));
+
+                        // If the user data does not contain this event, add it to that collection as well
+                        var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == worldEvent.ID);
+                        if (ens == null)
+                        {
+                            this.UserData.NotificationSettings.Add(new EventNotificationSettings(worldEvent.ID)
+                            {
+                                EventName = worldEvent.Name
+                            });
+                        }
+                        else
+                        {
+                            ens.EventName = worldEvent.Name;
+                        }
                     }
                 });
             }
@@ -239,18 +253,23 @@ namespace GW2PAO.Modules.Events
                         Threading.BeginInvokeOnUI(() => worldEvent.TimerValue = timeUntilActive);
 
                         // Check to see if we need to display a notification for this event
-                        if (timeUntilActive.CompareTo(TimeSpan.FromMinutes(1)) < 0)
+                        var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == worldEvent.EventId);
+                        if (ens != null)
                         {
-                            if (!worldEvent.IsNotificationShown)
+                            if (ens.IsNotificationEnabled
+                                && timeUntilActive.CompareTo(ens.NotificationInterval) < 0)
                             {
-                                worldEvent.IsNotificationShown = true;
-                                this.DisplayEventNotification(worldEvent);
+                                if (!worldEvent.IsNotificationShown)
+                                {
+                                    worldEvent.IsNotificationShown = true;
+                                    this.DisplayEventNotification(worldEvent);
+                                }
                             }
-                        }
-                        else
-                        {
-                            // Reset the IsNotificationShown state
-                            worldEvent.IsNotificationShown = false;
+                            else
+                            {
+                                // Reset the IsNotificationShown state
+                                worldEvent.IsNotificationShown = false;
+                            }
                         }
                     }
                 }

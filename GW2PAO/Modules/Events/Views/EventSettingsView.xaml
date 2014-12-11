@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Width="300"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
@@ -16,7 +16,9 @@
         </Style>
     </UserControl.Resources>
     <StackPanel Margin="20,10,0,0">
-        <GroupBox Margin="0,5,5,5">
+        <GroupBox Margin="0,5,5,5"
+                  Width="250"
+                  HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventTimeTable}" />
             </GroupBox.Header>
@@ -33,7 +35,9 @@
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Margin="0,5,5,10">
+        <GroupBox Margin="0,5,5,10"
+                  Width="250"
+                  HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventsTracker}" />
             </GroupBox.Header>
@@ -41,11 +45,53 @@
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />
             </CheckBox>
         </GroupBox>
-
-        <CheckBox IsChecked="{Binding UserData.AreEventNotificationsEnabled}">
+        <CheckBox Name="NotificationsEnabledCheckbox"
+                  IsChecked="{Binding UserData.AreEventNotificationsEnabled}">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotifications}" />
         </CheckBox>
-
-        <!-- TODO: Notifications Configuration -->
+        <GroupBox Margin="0,5,5,10">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotificationSettings}" />
+            </GroupBox.Header>
+            <ItemsControl ItemsSource="{Binding UserData.NotificationSettings}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="3,3,10,3" Width="215">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0"
+                                      IsChecked="{Binding IsNotificationEnabled}">
+                                <core:OutlinedTextBlock VerticalAlignment="Center"
+                                                        Text="{Binding EventName}" />
+                            </CheckBox>
+                            <xctk:TimeSpanUpDown Grid.Column="1"
+                                                 HorizontalAlignment="Right"
+                                                 Width="75"
+                                                 Value="{Binding NotificationInterval}"
+                                                 Maximum="{Binding MaxNotificationInterval}"
+                                                 Minimum="{Binding MinNotificationInterval}"
+                                                 ToolTip="{x:Static resx:Resources.EventNotificationConfigTooltip}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <GroupBox.Style>
+                <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=NotificationsEnabledCheckbox, Path=IsChecked}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </GroupBox.Style>
+        </GroupBox>
     </StackPanel>
 </UserControl>

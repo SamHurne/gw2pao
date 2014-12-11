@@ -179,6 +179,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\ExtendedWPFToolkit\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -196,6 +199,7 @@
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Modules\Events\EventNotificationSettings.cs" />
     <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
@@ -283,6 +287,7 @@
     <Compile Include="Utility\Interfaces\IProcessMonitor.cs" />
     <Compile Include="Utility\ProcessMonitor.cs" />
     <Compile Include="Utility\ResizeSnapHelper.cs" />
+    <Compile Include="Utility\SerializableTimespan.cs" />
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\UpdateChecker.cs" />
     <Compile Include="Utility\User32.cs" />
@@ -447,6 +452,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\BaseControlStyles\ListViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\BaseControlStyles\TimespanUpDownStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
