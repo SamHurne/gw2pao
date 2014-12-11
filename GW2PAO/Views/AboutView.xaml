@@ -94,7 +94,7 @@
 
                     <TextBlock Grid.Row="2" Grid.Column="1"
                            FontSize="11" Foreground="White"
-                           Text="Shawni Roux [FR]" />
+                           Text="Shawni Roux [FR], Vacendak.5962 [DE]" />
 
                     <TextBlock Grid.Row="1" Grid.Column="2"
                                HorizontalAlignment="Right"
