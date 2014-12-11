@@ -662,4 +662,12 @@
     <value>Show notification at this time before event begins</value>
     <comment>Instructions shown describing what the entry box for notifications means</comment>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+    <comment>Set a setting or action</comment>
+  </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>Language:</value>
+    <comment>Shown in the general settings, next to the dropdown that allows selection of the current language.</comment>
+  </data>
 </root>

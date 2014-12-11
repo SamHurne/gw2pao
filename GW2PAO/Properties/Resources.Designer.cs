@@ -106,6 +106,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic Unlock.
         /// </summary>
         public static string AutomaticUnlock {
@@ -669,6 +678,15 @@ namespace GW2PAO.Properties {
         public static string Keeps {
             get {
                 return ResourceManager.GetString("Keeps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language:.
+        /// </summary>
+        public static string LanguageSetting {
+            get {
+                return ResourceManager.GetString("LanguageSetting", resourceCulture);
             }
         }
         

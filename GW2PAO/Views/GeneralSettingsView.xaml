@@ -43,17 +43,18 @@
             </Grid.ColumnDefinitions>
             <core:OutlinedTextBlock Grid.Column="0"
                                     VerticalAlignment="Center"
-                                    Text="Language:" />
+                                    Text="{x:Static resx:Resources.LanguageSetting}" />
             <ComboBox Grid.Column="1"
                       ItemsSource="{Binding PossibleLanguages}"
                       SelectedItem="{Binding CurrentLanguage}"
                       HorizontalAlignment="Left"
                       Margin="5"
+                      Height="24"
                       Width="150"/>
             <Button Name="ApplyLanguageButton"
                     Grid.Column="2"
                     Height="25" MinWidth="45"
-                    Content="Apply"
+                    Content="{x:Static resx:Resources.Apply}"
                     Command="{Binding ApplyLanguageCommand}"/>
         </Grid>
     </StackPanel>

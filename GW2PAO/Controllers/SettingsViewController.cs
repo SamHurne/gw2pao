@@ -13,6 +13,7 @@ using GW2PAO.Modules.Dungeons.Views;
 using GW2PAO.Modules.Events.Views;
 using GW2PAO.Modules.WvW.Views;
 using GW2PAO.PresentationCore;
+using GW2PAO.Utility;
 using GW2PAO.Views;
 using NLog;
 
@@ -61,8 +62,11 @@ namespace GW2PAO.Controllers
         {
             if (this.settingsView != null && !this.settingsView.IsClosed)
             {
-                this.settingsView.Close();
-                this.settingsView = null;
+                Threading.InvokeOnUI(() =>
+                    {
+                        this.settingsView.Close();
+                        this.settingsView = null;
+                    });
             }
         }
 
