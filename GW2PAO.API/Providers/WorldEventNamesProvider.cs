@@ -210,14 +210,7 @@ namespace GW2PAO.API.Providers
         /// </summary>
         private string GetFilePath(string twoLetterIsoLangId)
         {
-            string filename = Paths.LocalizationFolder + "EventNames";
-
-            if (twoLetterIsoLangId != "en")
-                filename += "." + twoLetterIsoLangId;
-
-            filename += ".xml";
-
-            return filename;
+            return string.Format("{0}\\{1}\\{2}", Paths.LocalizationFolder, twoLetterIsoLangId, "EventNames.xml");
         }
 
         /// <summary>

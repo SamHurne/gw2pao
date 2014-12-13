@@ -106,14 +106,7 @@ namespace GW2PAO.API.Data
         /// </summary>
         public string GetFilePath(string twoLetterIsoLangId)
         {
-            string filename = Paths.LocalizationFolder + "ItemDatabase";
-
-            if (twoLetterIsoLangId != "en")
-                filename += "." + twoLetterIsoLangId;
-
-            filename += ".json";
-
-            return filename;
+            return string.Format("{0}\\{1}\\{2}", Paths.LocalizationFolder, twoLetterIsoLangId, "ItemDatabase.json");
         }
     }
 
