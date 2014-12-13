@@ -34,16 +34,16 @@ namespace GW2PAO.ViewModels
         private void RestartApplication()
         {
             // Perform shutdown operations
-            Threading.InvokeOnUI(() =>
+            Task.Factory.StartNew(() =>
                 {
                     Commands.ApplicationShutdownCommand.Execute(null);
+
+                    // Start up the new process
+                    Process.Start(Application.ResourceAssembly.Location);
+
+                    // Shutdown the currect process
+                    Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
                 });
-
-            // Start up the new process
-            Process.Start(Application.ResourceAssembly.Location);
-
-            // Shutdown the currect process
-            Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
         }
     }
 }
