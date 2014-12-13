@@ -13,5 +13,8 @@ namespace GW2PAO.Modules.Dungeons.Interfaces
 
         void DisplayDungeonTracker();
         bool CanDisplayDungeonTracker();
+
+        void DisplayDungeonTimer();
+        bool CanDisplayDungeonTimer();
     }
 }

@@ -293,8 +293,8 @@
                         BorderThickness="0,1,0,1" CornerRadius="0">
                     <Border.Background>
                         <LinearGradientBrush>
-                            <GradientStop Color="#605B4411" Offset="0"/>
-                            <GradientStop Color="#015B4411" Offset="1"/>
+                            <GradientStop Color="#FF5B4411" Offset="0"/>
+                            <GradientStop Color="#505B4411" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
                     <Border.BorderBrush>

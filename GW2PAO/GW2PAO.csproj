@@ -199,6 +199,10 @@
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Modules\Dungeons\ViewModels\DungeonTimer\DungeonTimerViewModel.cs" />
+    <Compile Include="Modules\Dungeons\Views\DungeonTimer\DungeonTimerView.xaml.cs">
+      <DependentUpon>DungeonTimerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
     <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
@@ -436,6 +440,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Dungeons\Views\DungeonSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Dungeons\Views\DungeonTimer\DungeonTimerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

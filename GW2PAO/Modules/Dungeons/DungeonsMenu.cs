@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GW2PAO.Infrastructure.Interfaces;
+using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 
@@ -26,7 +27,7 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         public string Header
         {
-            get { return Properties.Resources.DungeonsTracker; }
+            get { return Properties.Resources.Dungeons; }
         }
 
         /// <summary>
@@ -65,8 +66,9 @@ namespace GW2PAO.Modules.Dungeons
         [ImportingConstructor]
         public DungeonsMenu(IDungeonsViewController viewFactory)
         {
-            // For now, the only option is to open the dungeons tracker, which is this menu item itself
-            this.OnClickCommand = new DelegateCommand(viewFactory.DisplayDungeonTracker, viewFactory.CanDisplayDungeonTracker);
+            this.SubMenuItems = new ObservableCollection<IMenuItem>();
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.DungeonsTracker, viewFactory.DisplayDungeonTracker, viewFactory.CanDisplayDungeonTracker));
+            this.SubMenuItems.Add(new MenuItem("Dungeons Timer", viewFactory.DisplayDungeonTimer, viewFactory.CanDisplayDungeonTimer));
         }
     }
 }

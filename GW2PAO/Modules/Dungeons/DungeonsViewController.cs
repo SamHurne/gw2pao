@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Modules.Dungeons.Views;
+using GW2PAO.Modules.Dungeons.Views.DungeonTimer;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using NLog;
@@ -32,6 +33,11 @@ namespace GW2PAO.Modules.Dungeons
         /// The dungeons tracker view
         /// </summary>
         private DungeonTrackerView dungeonTrackerView;
+
+        /// <summary>
+        /// The dungeons timer view
+        /// </summary>
+        private DungeonTimerView dungeonTimerView;
 
         /// <summary>
         /// Displays all previously-opened windows and other windows
@@ -90,6 +96,33 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         /// <returns></returns>
         public bool CanDisplayDungeonTracker()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Dungeon Timer window, or, if already displayed,
+        /// sets focus to the window
+        /// </summary>
+        public void DisplayDungeonTimer()
+        {
+            if (this.dungeonTimerView == null || !this.dungeonTimerView.IsVisible)
+            {
+                this.dungeonTimerView = new DungeonTimerView();
+                this.Container.ComposeParts(this.dungeonTimerView);
+                this.dungeonTimerView.Show();
+            }
+            else
+            {
+                this.dungeonTimerView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the dungeon timer can be displayed
+        /// </summary>
+        /// <returns></returns>
+        public bool CanDisplayDungeonTimer()
         {
             return true;
         }
