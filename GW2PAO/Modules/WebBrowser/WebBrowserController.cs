@@ -93,6 +93,7 @@ namespace GW2PAO.Modules.WebBrowser
         /// </summary>
         private void ToggleWebBrowser()
         {
+#if !NO_BROWSER
             if (this.browser == null || !this.browser.IsVisible)
             {
                 this.OpenBrowser();
@@ -101,6 +102,7 @@ namespace GW2PAO.Modules.WebBrowser
             {
                 this.CloseBrowser();
             }
+#endif
         }
     }
 }

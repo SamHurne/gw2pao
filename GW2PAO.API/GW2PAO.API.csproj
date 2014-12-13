@@ -157,16 +157,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Locale\ItemDatabase.de.json">
+    <None Include="Locale\de\ItemDatabase.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\ItemDatabase.es.json">
+    <None Include="Locale\es\ItemDatabase.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\ItemDatabase.fr.json">
+    <None Include="Locale\fr\ItemDatabase.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\ItemDatabase.json">
+    <None Include="Locale\en\ItemDatabase.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -179,40 +179,40 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Locale\DungeonNames.de.xml">
+    <None Include="Locale\de\DungeonNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\DungeonNames.es.xml">
+    <None Include="Locale\es\DungeonNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\DungeonNames.fr.xml">
+    <None Include="Locale\fr\DungeonNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\DungeonNames.xml">
+    <None Include="Locale\en\DungeonNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\EventNames.de.xml">
+    <None Include="Locale\de\EventNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\EventNames.es.xml">
+    <None Include="Locale\es\EventNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\EventNames.fr.xml">
+    <None Include="Locale\fr\EventNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\EventNames.xml">
+    <None Include="Locale\en\EventNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\WvWObjectiveNames.de.xml">
+    <None Include="Locale\de\WvWObjectiveNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\WvWObjectiveNames.es.xml">
+    <None Include="Locale\es\WvWObjectiveNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\WvWObjectiveNames.fr.xml">
+    <None Include="Locale\fr\WvWObjectiveNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Locale\WvWObjectiveNames.xml">
+    <None Include="Locale\en\WvWObjectiveNames.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

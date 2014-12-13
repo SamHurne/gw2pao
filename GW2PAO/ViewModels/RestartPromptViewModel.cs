@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GW2PAO.Infrastructure;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -33,13 +34,16 @@ namespace GW2PAO.ViewModels
         private void RestartApplication()
         {
             // Perform shutdown operations
-            Commands.ApplicationShutdownCommand.Execute(null);
+            Task.Factory.StartNew(() =>
+                {
+                    Commands.ApplicationShutdownCommand.Execute(null);
 
-            // Start up the new process
-            Process.Start(Application.ResourceAssembly.Location);
+                    // Start up the new process
+                    Process.Start(Application.ResourceAssembly.Location);
 
-            // Shutdown the currect process
-            Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                    // Shutdown the currect process
+                    Application.Current.Dispatcher.BeginInvokeShutdown(System.Windows.Threading.DispatcherPriority.Normal);
+                });
         }
     }
 }
