@@ -687,6 +687,35 @@ namespace GW2PAO.Modules.WvW
                 }
             }
 
+            if (canShow)
+            {
+                switch (objectiveData.Type)
+                {
+                    case ObjectiveType.Castle:
+                        canShow = this.UserData.AreCastleNotificationsEnabled;
+                        break;
+                    case ObjectiveType.Keep:
+                        canShow = this.UserData.AreKeepNotificationsEnabled;
+                        break;
+                    case ObjectiveType.Tower:
+                        canShow = this.UserData.AreTowerNotificationsEnabled;
+                        break;
+                    case ObjectiveType.Camp:
+                        canShow = this.UserData.AreCampNotificationsEnabled;
+                        break;
+                    case ObjectiveType.BattlesHollow:
+                    case ObjectiveType.BauersEstate:
+                    case ObjectiveType.CarversAscent:
+                    case ObjectiveType.OrchardOverlook:
+                    case ObjectiveType.TempleofLostPrayers:
+                        canShow = this.UserData.AreBloodlustNotificationsEnabled;
+                        break;
+                    default:
+                        canShow = false;
+                        break;
+                }
+            }
+
             return canShow;
         }
     }

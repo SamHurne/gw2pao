@@ -44,6 +44,11 @@ namespace GW2PAO.Modules.WvW
         private bool notifyWhenHomeTakesObjective;
         private bool notifyWhenHomeLosesObjective;
         private bool notifyWhenOtherTakesOtherObjective;
+        private bool areCastleNotificationsEnabled;
+        private bool areKeepNotificationsEnabled;
+        private bool areTowerNotificationsEnabled;
+        private bool areCampNotificationsEnabled;
+        private bool areBloodlustNotificationsEnabled;
 
         private bool areCastlesShown;
         private bool areKeepsShown;
@@ -147,6 +152,51 @@ namespace GW2PAO.Modules.WvW
         {
             get { return this.notifyWhenOtherTakesOtherObjective; }
             set { this.SetProperty(ref this.notifyWhenOtherTakesOtherObjective, value); }
+        }
+
+        /// <summary>
+        /// True if notifications for castles are enabled, else false
+        /// </summary>
+        public bool AreCastleNotificationsEnabled
+        {
+            get { return this.areCastleNotificationsEnabled; }
+            set { this.SetProperty(ref this.areCastleNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if notifications for keeps are enabled, else false
+        /// </summary>
+        public bool AreKeepNotificationsEnabled
+        {
+            get { return this.areKeepNotificationsEnabled; }
+            set { this.SetProperty(ref this.areKeepNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if notifications for towers are enabled, else false
+        /// </summary>
+        public bool AreTowerNotificationsEnabled
+        {
+            get { return this.areTowerNotificationsEnabled; }
+            set { this.SetProperty(ref this.areTowerNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if notifications for camps are enabled, else false
+        /// </summary>
+        public bool AreCampNotificationsEnabled
+        {
+            get { return this.areCampNotificationsEnabled; }
+            set { this.SetProperty(ref this.areCampNotificationsEnabled, value); }
+        }
+
+        /// <summary>
+        /// True if notifications for bloodlust objectives are enabled, else false
+        /// </summary>
+        public bool AreBloodlustNotificationsEnabled
+        {
+            get { return this.areBloodlustNotificationsEnabled; }
+            set { this.SetProperty(ref this.areBloodlustNotificationsEnabled, value); }
         }
 
         /// <summary>

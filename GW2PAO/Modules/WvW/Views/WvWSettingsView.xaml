@@ -4,11 +4,118 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <core:OutlinedTextBlock VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Text="Under Construction" />
-    </Grid>
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             SnapsToDevicePixels="True" UseLayoutRounding="True"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource AlternateCheckboxStyle}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="20,10,0,0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <core:OutlinedTextBlock Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    Text="{x:Static resx:Resources.WorldSelection}" />
+            <ComboBox Grid.Column="1"
+                      DisplayMemberPath="Name"
+                      ItemsSource="{Binding PossibleWorlds}"
+                      SelectedItem="{Binding UserData.WorldSelection}"
+                      HorizontalAlignment="Left"
+                      Margin="5"
+                      Height="21"
+                      Width="150"/>
+        </Grid>
+        <GroupBox>
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"
+                          IsChecked="{Binding UserData.NotifyWhenHomeTakesObjective}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.WhenHomeWorldTakesObjective}" />
+                </CheckBox>
+                <CheckBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1"
+                          IsChecked="{Binding UserData.NotifyWhenHomeLosesObjective}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.WhenHomeWorldLosesObjective}" />
+                </CheckBox>
+                <CheckBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2"
+                          IsChecked="{Binding UserData.NotifyWhenOtherTakesOtherObjective}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.WhenOtherWorldTakesOtherWorldsObjective}" />
+                </CheckBox>
+
+                <CheckBox Grid.Column="0" Grid.Row="3"
+                          Margin="2,10,2,2"
+                          Grid.ColumnSpan="2"
+                          IsChecked="{Binding UserData.AreBlueBorderlandsNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BlueBorderlands}" />
+                </CheckBox>
+                <CheckBox Grid.Column="2" Grid.Row="3"
+                          Grid.ColumnSpan="2"
+                          Margin="2,10,2,2"
+                          IsChecked="{Binding UserData.AreGreenBorderlandsNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.GreenBorderlands}" />
+                </CheckBox>
+                <CheckBox Grid.Column="4" Grid.Row="3"
+                          Grid.ColumnSpan="2"
+                          Margin="2,10,2,2"
+                          IsChecked="{Binding UserData.AreRedBorderlandsNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.RedBorderlands}" />
+                </CheckBox>
+                <CheckBox Grid.Column="0" Grid.Row="4"
+                          Grid.ColumnSpan="3"
+                          IsChecked="{Binding UserData.AreEternalBattlegroundsNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.EternalBattlegrounds}" />
+                </CheckBox>
+
+                <CheckBox Grid.Column="0" Grid.Row="5"
+                          Margin="2,10,2,2"
+                          IsChecked="{Binding UserData.AreCastleNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Castles}" />
+                </CheckBox>
+                <CheckBox Grid.Column="1" Grid.Row="5"
+                          Margin="10,10,2,2"
+                          IsChecked="{Binding UserData.AreKeepNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Keeps}" />
+                </CheckBox>
+                <CheckBox Grid.Column="2" Grid.Row="5"
+                          Margin="10,10,2,2"
+                          IsChecked="{Binding UserData.AreTowerNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Towers}" />
+                </CheckBox>
+                <CheckBox Grid.Column="3" Grid.Row="5"
+                          Margin="10,10,2,2"
+                          IsChecked="{Binding UserData.AreCampNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.Camps}" />
+                </CheckBox>
+                <CheckBox Grid.Column="4" Grid.Row="5"
+                          Margin="10,10,2,2"
+                          IsChecked="{Binding UserData.AreBloodlustNotificationsEnabled}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BloodlustObjectives}" />
+                </CheckBox>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
 </UserControl>
