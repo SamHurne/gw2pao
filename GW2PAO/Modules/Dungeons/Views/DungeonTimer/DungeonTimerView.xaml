@@ -6,19 +6,20 @@
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         Title="DungeonTimerView"
-        Width="250" Height="120"
+        MinWidth="150" Width="250"
+        MinHeight="140" Height="140"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Topmost="True"
         TextOptions.TextFormattingMode="Display">
-    
+
     <src:OverlayWindow.Resources>
         <DockPanel x:Key="PlayGraphic" Height="10"
                    SnapsToDevicePixels="True"
                    Margin="1,0,0,0">
             <Path VerticalAlignment="Center"
                   Stretch="Uniform"
-                  Stroke="Black" Fill="Black"
+                  Stroke="Orange" Fill="Orange"
                   StrokeStartLineCap="Round"  StrokeEndLineCap="Round"
                   StrokeLineJoin="Round"
                   StrokeThickness="1"
@@ -29,12 +30,12 @@
                    Margin="2,0,0,0"
                    SnapsToDevicePixels="True">
             <Line VerticalAlignment="Center"
-                  Stroke="Black" Fill="Black"
+                  Stroke="Orange" Fill="Orange"
                   StrokeThickness="2"
                   X1="0" X2="0"
                   Y1="0" Y2="10" />
             <Line VerticalAlignment="Center"
-                  Stroke="Black" Fill="Black"
+                  Stroke="Orange" Fill="Orange"
                   StrokeThickness="2"
                   X1="2" X2="2"
                   Y1="0" Y2="10" />
@@ -42,27 +43,50 @@
         <DockPanel x:Key="StopGraphic" Height="10"
                    SnapsToDevicePixels="True">
             <Rectangle VerticalAlignment="Center"
-                  Stroke="Black" Fill="Black"
+                  Stroke="Orange" Fill="Orange"
                   StrokeThickness="2"
                   Height="8" Width="8"/>
         </DockPanel>
+        <StackPanel x:Key="BestTimesGraphic" Height="10"
+                    SnapsToDevicePixels="True"
+                    Margin="2,0,0,0">
+            <Line VerticalAlignment="Center"
+                  Stroke="Orange" Fill="Orange"
+                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                  StrokeThickness="2" Margin="0,1,0,1"
+                  X1="0" X2="10"
+                  Y1="0" Y2="0" />
+            <Line VerticalAlignment="Center"
+                  Stroke="Orange" Fill="Orange"
+                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                  StrokeThickness="2" Margin="0,1,0,1"
+                  X1="0" X2="10"
+                  Y1="0" Y2="0" />
+            <Line VerticalAlignment="Center"
+                  Stroke="Orange" Fill="Orange"
+                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                  StrokeThickness="2" Margin="0,1,0,1"
+                  X1="0" X2="10"
+                  Y1="0" Y2="0" />
+        </StackPanel>
     </src:OverlayWindow.Resources>
-    
+
     <Grid Name="MainPanel"
           Background="#01000000">
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="32" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <Border Name="TitleBar"
                 Grid.Row="0"
-                Grid.Column="0" Grid.ColumnSpan="2"
+                Grid.Column="0" Grid.ColumnSpan="3"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                 MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
             <Grid Margin="5,0,0,0">
@@ -136,38 +160,80 @@
             </Grid>
             <Border.Style>
                 <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
-                    <Setter Property="Visibility" Value="Hidden" />
+                    <Setter Property="Opacity" Value="0" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
-                            <Setter Property="Visibility" Value="Visible" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
         </Border>
-        
+
         <StackPanel Name="ButtonsPanel"
                     Grid.Row="1"
                     Grid.Column="0"
                     Width="29">
             <Button Height="21"
                     Margin="3"
+                    Style="{StaticResource TitleBarButtonStyle}"
                     Command="{Binding StartTimerCommand}"
                     Content="{StaticResource PlayGraphic}" />
             <Button Height="21"
                     Margin="3"
+                    Style="{StaticResource TitleBarButtonStyle}"
                     Command="{Binding PauseTimerCommand}"
                     Content="{StaticResource PauseGraphic}" />
             <Button Height="21"
                     Margin="3"
+                    Style="{StaticResource TitleBarButtonStyle}"
                     Command="{Binding StopTimerCommand}"
                     Content="{StaticResource StopGraphic}" />
+            <Button Height="21"
+                    Margin="3"
+                    Style="{StaticResource TitleBarButtonStyle}"
+                    Content="{StaticResource BestTimesGraphic}"
+                    Click="BestTimesButton_Click"/>
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
-                    <Setter Property="Visibility" Value="Hidden" />
+                    <Setter Property="Opacity" Value="0" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
-                            <Setter Property="Visibility" Value="Visible" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -181,5 +247,78 @@
                                     Fill="White"
                                     Text="{Binding TimerValue, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
         </Viewbox>
+
+        <Popup Name="BestTimesPopup"
+               StaysOpen="True"
+               AllowsTransparency="True" PopupAnimation="Fade"
+               Width="{Binding ElementName=MainPanel, Path=ActualWidth}"
+               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Border BorderThickness="0,1,0,0">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="Orange" Opacity="0.5" />
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <core:OutlinedTextBlock Grid.Row="0" Margin="0,2,0,1"
+                                            HorizontalAlignment="Center" 
+                                            FontSize="15" Fill="Orange"
+                                            Text="Best" />
+                    <ItemsControl Grid.Row="1"
+                                  ItemsSource="{Binding CurrentDungeon.BestPathTimes}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <core:OutlinedTextBlock Grid.Column="0"
+                                                    Margin="2"
+                                                    FontSize="13"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding PathData.DisplayName}" />
+                                    <core:OutlinedTextBlock Grid.Column="2"
+                                                    Margin="5,2,2,2"
+                                                    FontSize="13"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Opacity" Value="0" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+        </Popup>
     </Grid>
 </src:OverlayWindow>

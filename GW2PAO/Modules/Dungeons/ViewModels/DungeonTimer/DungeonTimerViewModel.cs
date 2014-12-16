@@ -14,9 +14,10 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer
 {
-    [Export(typeof(DungeonTimerViewModel))]
     public class DungeonTimerViewModel : BindableBase
     {
+        private DungeonViewModel currentDungeon;
+        private PathViewModel currentPath;
         private TimeSpan timerValue;
         private static readonly TimeSpan TimerInterval = TimeSpan.FromMilliseconds(50);
 
@@ -37,6 +38,63 @@ namespace GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer
         {
             get { return this.timerValue; }
             set { this.SetProperty(ref this.timerValue, value); }
+        }
+
+        /// <summary>
+        /// The current dungeon
+        /// </summary>
+        public DungeonViewModel CurrentDungeon
+        {
+            get { return this.currentDungeon; }
+            set
+            { 
+                if (this.currentDungeon != value)
+                {
+                    if (this.currentDungeon != null)
+                        this.currentDungeon.IsActive = false;
+
+                    this.currentDungeon = value;
+
+                    if (this.currentDungeon != null)
+                        this.currentDungeon.IsActive = true;
+
+                    this.OnPropertyChanged(() => this.CurrentDungeon);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The current dungeon path
+        /// </summary>
+        public PathViewModel CurrentPath
+        {
+            get { return this.currentPath; }
+            set
+            {
+                if (this.currentPath != value)
+                {
+                    if (this.currentPath != null)
+                        this.currentPath.IsActive = false;
+
+                    this.currentPath = value;
+
+                    if (this.currentPath != null)
+                        this.currentPath.IsActive = true;
+
+                    this.OnPropertyChanged(() => this.CurrentPath);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the timer is currently running, else false
+        /// </summary>
+        public bool IsTimerRunning
+        {
+            get
+            {
+                return this.stopWatch.IsRunning;
+            }
         }
 
         /// <summary>

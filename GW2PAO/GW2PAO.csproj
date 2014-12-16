@@ -199,6 +199,7 @@
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Modules\Dungeons\Data\PathTime.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\DungeonTimer\DungeonTimerViewModel.cs" />
     <Compile Include="Modules\Dungeons\Views\DungeonTimer\DungeonTimerView.xaml.cs">
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>

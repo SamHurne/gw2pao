@@ -14,6 +14,33 @@
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
+        <Storyboard x:Key="IsActiveEnterAction">
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"/>
+            <DoubleAnimation To="0.25"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:0.5"/>
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:01"/>
+            <DoubleAnimation To="0.25"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:01.5"/>
+            <DoubleAnimation To="1"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00.5"
+                            BeginTime="00:00:02"/>
+        </Storyboard>
+        <Storyboard x:Key="IsActiveExitAction">
+            <DoubleAnimation To="0"
+                            Storyboard.TargetProperty="(Effect).Opacity"
+                            Duration="00:00:00"/>
+        </Storyboard>
+        
         <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
         <Geometry x:Key="PathCheckboxGeometry">M 0 6 L 5 12 L 12 0 L 12 0</Geometry>
     </UserControl.Resources>
@@ -56,7 +83,27 @@
                                     Grid.Row="0" Grid.Column="0"
                                     VerticalAlignment="Center" HorizontalAlignment="Left"
                                     FontSize="13"
-                                    Text="{Binding DungeonName}"/>
+                                    Text="{Binding DungeonName}">
+                <core:OutlinedTextBlock.Style>
+                    <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Yellow" BlurRadius="20" Direction="0" ShadowDepth="0" Opacity="0" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </core:OutlinedTextBlock.Style>
+            </core:OutlinedTextBlock>
 
             <ItemsControl Grid.Row="0" Grid.Column="1"
                           VerticalAlignment="Center"
@@ -89,10 +136,7 @@
                                                             <Style TargetType="{x:Type core:OutlinedTextBlock}">
                                                                 <Setter Property="Effect">
                                                                     <Setter.Value>
-                                                                        <DropShadowEffect ShadowDepth="0"
-                                                                                          Color="Goldenrod"
-                                                                                          Opacity="0"
-                                                                                          BlurRadius="15"/>
+                                                                        <DropShadowEffect Color="Yellow" BlurRadius="20" Direction="0" ShadowDepth="0" Opacity="0" />
                                                                     </Setter.Value>
                                                                 </Setter>
                                                                 <Style.Triggers>
@@ -100,7 +144,7 @@
                                                                         <Trigger.EnterActions>
                                                                             <BeginStoryboard>
                                                                                 <Storyboard>
-                                                                                    <DoubleAnimation To="1"
+                                                                                    <DoubleAnimation To="0.5"
                                                                                                  Storyboard.TargetProperty="(Effect).Opacity"
                                                                                                  Duration="00:00:00.1"/>
                                                                                 </Storyboard>
@@ -116,6 +160,14 @@
                                                                             </BeginStoryboard>
                                                                         </Trigger.ExitActions>
                                                                     </Trigger>
+                                                                    <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                                                        <DataTrigger.EnterActions>
+                                                                            <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                                                        </DataTrigger.EnterActions>
+                                                                        <DataTrigger.ExitActions>
+                                                                            <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                                                        </DataTrigger.ExitActions>
+                                                                    </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </core:OutlinedTextBlock.Style>

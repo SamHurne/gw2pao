@@ -88,6 +88,20 @@ namespace GW2PAO.API.Util
         }
 
         /// <summary>
+        ///  Determines if point B is within the given spherical radius of point A
+        /// </summary>
+        /// <param name="ptA">The static/origin point</param>
+        /// <param name="ptB">Point to test</param>
+        /// <param name="radius">Radius to test with</param>
+        /// <returns>True if point B is within the given spherical radius of point A, else false</returns>
+        public static bool IsInRadius(API.Data.Entities.Point ptA, API.Data.Entities.Point ptB, double radius)
+        {
+            return Math.Pow((ptB.X - ptA.X), 2)
+                 + Math.Pow((ptB.Y - ptA.Y), 2)
+                 + Math.Pow((ptB.Z - ptA.Z), 2) <= Math.Pow(radius, 2);
+        }
+
+        /// <summary>
         /// Helper class for representing a vector
         /// </summary>
         public class Vector

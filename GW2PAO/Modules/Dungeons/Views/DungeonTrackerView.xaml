@@ -150,8 +150,13 @@
         <Grid Name="ResizeHeight" Grid.Row="2">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
-                       Height="2"
-                       Fill="#01FFA500">
+                       Height="1">
+                <Rectangle.Fill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                        <GradientStop Color="#00FFA500" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
             </Rectangle>
         </Grid>
     </Grid>

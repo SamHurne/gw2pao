@@ -10,7 +10,7 @@ namespace GW2PAO.API.Data.Entities
     {
         public string Name { get; set; }
         public Guid ID { get; set; }
-        public int MapID { get; set; }
+        public int WorldMapID { get; set; }
         public string MapName { get; set; }
         public int MinimumLevel { get; set; }
         public string WaypointCode { get; set; }
@@ -20,10 +20,21 @@ namespace GW2PAO.API.Data.Entities
 
     public class DungeonPath
     {
-        public int PathNumber { get; set; }
         public Guid ID { get; set; }
+        public int PathNumber { get; set; }
+        public int InstanceMapID { get; set; }
         public string PathDisplayText { get; set; }
         public string Nickname { get; set; }
         public double GoldReward { get; set; }
+        public Point EndPoint { get; set; }
+        public List<Point> IdentifyingPoints { get; set; }
+        public List<Point> CompletionPrereqPoints { get; set; }
+        public double PointDetectionRadius { get; set; }
+
+        public DungeonPath()
+        {
+            this.IdentifyingPoints = new List<Point>();
+            this.CompletionPrereqPoints = new List<Point>();
+        }
     }
 }

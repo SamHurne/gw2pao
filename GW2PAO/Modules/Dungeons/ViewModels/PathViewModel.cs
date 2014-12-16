@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -21,6 +22,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private DungeonsUserData userData;
+        private bool isActivePath;
 
         /// <summary>
         /// The primary model object containing the path's information
@@ -76,6 +78,49 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         }
 
         /// <summary>
+        /// True if the path is currently being completed by the player
+        /// </summary>
+        public bool IsActive
+        {
+            get { return this.isActivePath; }
+            set { this.SetProperty(ref this.isActivePath, value); }
+        }
+
+        /// <summary>
+        /// The in-game end location for the path
+        /// </summary>
+        public Point EndPoint
+        {
+            get { return this.PathModel.EndPoint; }
+        }
+
+        /// <summary>
+        /// The radius to use when detected if the player is near a point
+        /// </summary>
+        public double PointDetectionRadius
+        {
+            get { return this.PathModel.PointDetectionRadius; }
+        }
+
+        /// <summary>
+        /// Collection of pre-requisite points and their status for this path
+        /// </summary>
+        public ConcurrentDictionary<Point, bool> CompletionPrerequisitePoints
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of in-game points that identify this path
+        /// </summary>
+        public List<Point> IdentifyingPoints
+        {
+            get { return this.PathModel.IdentifyingPoints; }
+        }
+
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="path"></param>
@@ -84,6 +129,12 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         {
             this.PathModel = path;
             this.userData = userData;
+
+            this.CompletionPrerequisitePoints = new ConcurrentDictionary<Point, bool>();
+            foreach (var preReq in path.CompletionPrereqPoints)
+            {
+                this.CompletionPrerequisitePoints.TryAdd(preReq, false);
+            }
         }
     }
 }

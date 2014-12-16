@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Modules.Dungeons.Data;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -26,6 +27,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
 
         private DungeonsUserData userData;
         private bool isVisible;
+        private bool isActiveDungeon;
 
         /// <summary>
         /// The browser controller used for displaying the dungeon's wiki page
@@ -85,9 +87,26 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         }
 
         /// <summary>
+        /// True if the dungeon is currently being completed by the player
+        /// </summary>
+        public bool IsActive
+        {
+            get { return this.isActiveDungeon; }
+            set { this.SetProperty(ref this.isActiveDungeon, value); }
+        }
+
+        /// <summary>
         /// Collection of dungeon paths for this dungeon
         /// </summary>
         public ObservableCollection<PathViewModel> Paths { get; private set; }
+
+        /// <summary>
+        /// Collection of best path times for this dungeon
+        /// </summary>
+        public ICollection<PathTime> BestPathTimes
+        {
+            get { return this.userData.BestPathTimes.Where(pt => this.Paths.Any(p => p.PathId == pt.PathID)).ToList(); }
+        }
 
         /// <summary>
         /// Default constructor

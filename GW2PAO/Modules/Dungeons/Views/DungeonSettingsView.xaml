@@ -3,12 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <core:OutlinedTextBlock VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Text="Under Construction" />
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True">
+    <UserControl.Resources>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource AlternateCheckboxStyle}">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="20,10,0,0">
+        <GroupBox Margin="0,5,5,5"
+                  Width="250"
+                  HorizontalAlignment="Left">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="Dungeons Timer" />
+            </GroupBox.Header>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding UserData.AutoStartDungeonTimer}">
+                    <core:OutlinedTextBlock Text="Auto-Start" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding UserData.AutoStopDungeonTimer}"
+                          Margin="50,2,2,2">
+                    <core:OutlinedTextBlock Text="Auto-Stop" />
+                </CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="0,5,5,5"
+                  Width="250"
+                  HorizontalAlignment="Left">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.DungeonsTracker}" />
+            </GroupBox.Header>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding UserData.AutoCompleteDungeons}">
+                    <core:OutlinedTextBlock Text="Auto-Complete" />
+                </CheckBox>
+            </StackPanel>
+        </GroupBox>
+        
+    </StackPanel>
 </UserControl>

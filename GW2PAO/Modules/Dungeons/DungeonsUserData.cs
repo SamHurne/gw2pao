@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using GW2PAO.Data.UserData;
+using GW2PAO.Modules.Dungeons.Data;
 using NLog;
 
 namespace GW2PAO.Modules.Dungeons
@@ -22,9 +24,41 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         public const string Filename = "DungeonsUserData.xml";
 
+        private bool autoStartDungeonTimer;
+        private bool autoStopDungeonTimer;
+        private bool autoCompleteDungeons;
+
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenDungeons = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> completedPaths = new ObservableCollection<Guid>();
+        private ObservableCollection<PathTime> bestPathTimes = new ObservableCollection<PathTime>();
+
+        /// <summary>
+        /// True if the dungeon timer should automatically start, else false
+        /// </summary>
+        public bool AutoStartDungeonTimer
+        {
+            get { return this.autoStartDungeonTimer; }
+            set { this.SetProperty(ref this.autoStartDungeonTimer, value); }
+        }
+
+        /// <summary>
+        /// True if the dungeon timer should automatically stop, else false
+        /// </summary>
+        public bool AutoStopDungeonTimer
+        {
+            get { return this.autoStopDungeonTimer; }
+            set { this.SetProperty(ref this.autoStopDungeonTimer, value); }
+        }
+
+        /// <summary>
+        /// True if dungeons will automatically be marked as completed, else false
+        /// </summary>
+        public bool AutoCompleteDungeons
+        {
+            get { return this.autoCompleteDungeons; }
+            set { this.SetProperty(ref this.autoCompleteDungeons, value); }
+        }
 
         /// <summary>
         /// The last recorded server-reset date/time
@@ -46,6 +80,11 @@ namespace GW2PAO.Modules.Dungeons
         public ObservableCollection<Guid> CompletedPaths { get { return this.completedPaths; } }
 
         /// <summary>
+        /// Collection of best dungeon path completion times
+        /// </summary>
+        public ObservableCollection<PathTime> BestPathTimes { get { return this.bestPathTimes; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public DungeonsUserData()
@@ -62,6 +101,21 @@ namespace GW2PAO.Modules.Dungeons
             this.PropertyChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
             this.HiddenDungeons.CollectionChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
             this.CompletedPaths.CollectionChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
+            this.BestPathTimes.CollectionChanged += (o, e) =>
+                {
+                    DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
+                    if (e.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        foreach (PathTime pt in e.NewItems)
+                        {
+                            pt.PropertyChanged += (obj, arg) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
+                        }
+                    }
+                };
+            foreach (PathTime pt in this.BestPathTimes)
+            {
+                pt.PropertyChanged += (obj, arg) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
+            }
         }
     }
 }
