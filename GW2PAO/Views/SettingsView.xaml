@@ -14,10 +14,34 @@
         Height="500" Width="700">
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>
-            <LinearGradientBrush>
+            <!--<LinearGradientBrush>
                 <GradientStop Color="#E5151E27" Offset="0.75"/>
                 <GradientStop Color="#E0151E27" Offset="1"/>
-            </LinearGradientBrush>
+            </LinearGradientBrush>-->
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Grid>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#E5151E27" Offset="0.75"/>
+                                    <GradientStop Color="#E0151E27" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image Source="../Images/background1.png" Opacity="0.1"
+                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            <!--<Image.OpacityMask>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#50151E27" Offset="0"/>
+                                    <GradientStop Color="#00151E27" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Image.OpacityMask>-->
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
@@ -62,7 +86,7 @@
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="Header" Value="{Binding SettingsHeader}" />
-                        <Setter Property="MinWidth" Value="95" />
+                        <Setter Property="MinWidth" Value="115" />
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>

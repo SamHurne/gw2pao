@@ -745,6 +745,9 @@
     </EmbeddedResource>
     <Resource Include="FodyWeavers.xml" />
     <Resource Include="Images\Commerce\graph_ico.png" />
+    <Resource Include="Images\background1.png" />
+    <Resource Include="Images\background2.png" />
+    <Resource Include="Images\background3.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
