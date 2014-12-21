@@ -20,12 +20,6 @@
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:WvWMapConverter x:Key="MapConverter" />
-
-        <core:AutoRefreshCollectionViewSource Source="{Binding Objectives}" x:Key="ObjectivesCollection">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Type" />
-            </CollectionViewSource.SortDescriptions>
-        </core:AutoRefreshCollectionViewSource>
     </src:OverlayWindow.Resources>
 
     <Grid>
@@ -96,6 +90,13 @@
                                 <MenuItem Header="{x:Static resx:Resources.Towers}" IsCheckable="True" IsChecked="{Binding UserData.AreTowersShown}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.Camps}" IsCheckable="True" IsChecked="{Binding UserData.AreCampsShown}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.BloodlustObjectives}" IsCheckable="True" IsChecked="{Binding UserData.AreBloodlustObjectivesShown}" StaysOpenOnClick="True" />
+                            </MenuItem>
+                            <MenuItem Header="{x:Static resx:Resources.SortBy}">
+                                <MenuItem Header="{x:Static resx:Resources.ObjectiveType}" IsCheckable="True" IsChecked="{Binding SortByType}" />
+                                <MenuItem Header="{x:Static resx:Resources.Name}" IsCheckable="True" IsChecked="{Binding SortByName}" />
+                                <MenuItem Header="{x:Static resx:Resources.Owner}" IsCheckable="True" IsChecked="{Binding SortByOwner}" />
+                                <MenuItem Header="{x:Static resx:Resources.Location}" IsCheckable="True" IsChecked="{Binding SortByLocation}" />
+                                <MenuItem Header="{x:Static resx:Resources.Distance}" IsCheckable="True" IsChecked="{Binding SortByDistance}" />
                             </MenuItem>
                             <MenuItem Header="{x:Static resx:Resources.Names}">
                                 <MenuItem Header="{x:Static resx:Resources.CardinalDirections}" IsCheckable="True" IsChecked="{Binding IsCardinalDirectionsSelected}" />
@@ -183,7 +184,7 @@
 
 
         <ItemsControl Name="ObjectivesContainer" Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource ObjectivesCollection}}"
+                      ItemsSource="{Binding Objectives.View}"
                       HorizontalAlignment="Left" VerticalAlignment="Top">
             <ItemsControl.Style>
                 <Style TargetType="ItemsControl">

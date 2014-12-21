@@ -670,4 +670,23 @@
     <value>Language:</value>
     <comment>Shown in the general settings, next to the dropdown that allows selection of the current language.</comment>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Name (singular)</comment>
+  </data>
+  <data name="ObjectiveType" xml:space="preserve">
+    <value>Objective Type</value>
+    <comment>World vs World Objective Type</comment>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+    <comment>Owner, as in World Owner</comment>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort By</value>
+    <comment>Sort a list by a specific property</comment>
+  </data>
 </root>

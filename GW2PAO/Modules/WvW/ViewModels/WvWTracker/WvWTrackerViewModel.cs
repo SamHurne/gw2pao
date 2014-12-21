@@ -10,6 +10,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
 {
@@ -34,7 +35,11 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// <summary>
         /// Collection of WvW objectives for the configured map
         /// </summary>
-        public ObservableCollection<WvWObjectiveViewModel> Objectives { get { return this.controller.CurrentObjectives; } }
+        public AutoRefreshCollectionViewSource Objectives
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Command to reset all hidden objectives
@@ -230,6 +235,96 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         }
 
         /// <summary>
+        /// True if the objectives should be sorted by objective Type, else false
+        /// </summary>
+        public bool SortByType
+        {
+            get
+            {
+                return this.UserData.ObjectivesSortProperty == "Type";
+            }
+            set
+            {
+                if (this.UserData.ObjectivesSortProperty != "Type")
+                {
+                    this.OnSortingPropertyChanged("Type", ListSortDirection.Ascending);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the objectives should be sorted by Distance, else false
+        /// </summary>
+        public bool SortByDistance
+        {
+            get
+            {
+                return this.UserData.ObjectivesSortProperty == "DistanceFromPlayer";
+            }
+            set
+            {
+                if (this.UserData.ObjectivesSortProperty != "DistanceFromPlayer")
+                {
+                    this.OnSortingPropertyChanged("DistanceFromPlayer", ListSortDirection.Ascending);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the objectives should be sorted by Name, else false
+        /// </summary>
+        public bool SortByName
+        {
+            get
+            {
+                return this.UserData.ObjectivesSortProperty == "ShortName";
+            }
+            set
+            {
+                if (this.UserData.ObjectivesSortProperty != "ShortName")
+                {
+                    this.OnSortingPropertyChanged("ShortName", ListSortDirection.Ascending);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the objectives should be sorted by Location, else false
+        /// </summary>
+        public bool SortByLocation
+        {
+            get
+            {
+                return this.UserData.ObjectivesSortProperty == "Location";
+            }
+            set
+            {
+                if (this.UserData.ObjectivesSortProperty != "Location")
+                {
+                    this.OnSortingPropertyChanged("Location", ListSortDirection.Ascending);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the objectives should be sorted by World Owner, else false
+        /// </summary>
+        public bool SortByOwner
+        {
+            get
+            {
+                return this.UserData.ObjectivesSortProperty == "WorldOwner";
+            }
+            set
+            {
+                if (this.UserData.ObjectivesSortProperty != "WorldOwner")
+                {
+                    this.OnSortingPropertyChanged("WorldOwner", ListSortDirection.Ascending);
+                }
+            }
+        }
+
+        /// <summary>
         /// WvW user data
         /// </summary>
         public WvWUserData UserData { get { return this.controller.UserData; } }
@@ -244,6 +339,32 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         {
             this.controller = wvwController;
             this.WvWMapVM = wvwMapVM;
+
+            var collectionViewSource = new AutoRefreshCollectionViewSource();
+            collectionViewSource.Source = this.controller.CurrentObjectives;
+            this.Objectives = collectionViewSource;
+
+            switch (this.UserData.ObjectivesSortProperty)
+            {
+                case "Type":
+                    this.OnSortingPropertyChanged("Type", ListSortDirection.Ascending);
+                    break;
+                case "DistanceFromPlayer":
+                    this.OnSortingPropertyChanged("DistanceFromPlayer", ListSortDirection.Ascending);
+                    break;
+                case "ShortName":
+                    this.OnSortingPropertyChanged("ShortName", ListSortDirection.Ascending);
+                    break;
+                case "Location":
+                    this.OnSortingPropertyChanged("Location", ListSortDirection.Ascending);
+                    break;
+                case "WorldOwner":
+                    this.OnSortingPropertyChanged("WorldOwner", ListSortDirection.Ascending);
+                    break;
+                default:
+                    this.OnSortingPropertyChanged("Type", ListSortDirection.Ascending);
+                    break;
+            }
         }
 
         /// <summary>
@@ -293,6 +414,23 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         {
             this.OnPropertyChanged(() => this.IsCardinalDirectionsSelected);
             this.OnPropertyChanged(() => this.IsShortNamesSelected);
+        }
+
+        /// <summary>
+        /// Handles updating the sorting descriptions of the Objectives collection
+        /// and raising INotifyPropertyChanged for all sort properties
+        /// </summary>
+        private void OnSortingPropertyChanged(string property, ListSortDirection direction)
+        {
+            this.Objectives.SortDescriptions.Clear();
+            this.Objectives.SortDescriptions.Add(new SortDescription(property, direction));
+            this.Objectives.View.Refresh();
+
+            this.UserData.ObjectivesSortProperty = property;
+            this.OnPropertyChanged(() => this.SortByType);
+            this.OnPropertyChanged(() => this.SortByDistance);
+            this.OnPropertyChanged(() => this.SortByName);
+            this.OnPropertyChanged(() => this.SortByOwner);
         }
     }
 }

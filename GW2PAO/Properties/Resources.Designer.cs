@@ -718,6 +718,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string Location {
+            get {
+                return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lower.
         /// </summary>
         public static string Lower {
@@ -741,6 +750,15 @@ namespace GW2PAO.Properties {
         public static string Meters {
             get {
                 return ResourceManager.GetString("Meters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -795,6 +813,15 @@ namespace GW2PAO.Properties {
         public static string NowRunning {
             get {
                 return ResourceManager.GetString("NowRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objective Type.
+        /// </summary>
+        public static string ObjectiveType {
+            get {
+                return ResourceManager.GetString("ObjectiveType", resourceCulture);
             }
         }
         
@@ -858,6 +885,15 @@ namespace GW2PAO.Properties {
         public static string OwnedBy {
             get {
                 return ResourceManager.GetString("OwnedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string Owner {
+            get {
+                return ResourceManager.GetString("Owner", resourceCulture);
             }
         }
         
@@ -1218,6 +1254,15 @@ namespace GW2PAO.Properties {
         public static string SkillChallenges {
             get {
                 return ResourceManager.GetString("SkillChallenges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort By.
+        /// </summary>
+        public static string SortBy {
+            get {
+                return ResourceManager.GetString("SortBy", resourceCulture);
             }
         }
         

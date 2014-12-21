@@ -50,6 +50,8 @@ namespace GW2PAO.Modules.WvW
         private bool areCampNotificationsEnabled;
         private bool areBloodlustNotificationsEnabled;
 
+        private string objectivesSortProperty;
+
         private bool areCastlesShown;
         private bool areKeepsShown;
         private bool areTowersShown;
@@ -287,6 +289,15 @@ namespace GW2PAO.Modules.WvW
         {
             get { return this.areShortNamesShown; }
             set { this.SetProperty(ref this.areShortNamesShown, value); }
+        }
+
+        /// <summary>
+        /// The property name to use when sorting objectives in the WvW tracker
+        /// </summary>
+        public string ObjectivesSortProperty
+        {
+            get { return this.objectivesSortProperty; }
+            set { this.SetProperty(ref objectivesSortProperty, value); }
         }
 
         /// <summary>
