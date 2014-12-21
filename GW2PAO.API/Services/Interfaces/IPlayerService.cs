@@ -43,6 +43,11 @@ namespace GW2PAO.API.Services.Interfaces
         bool HasValidWorldId { get; }
 
         /// <summary>
+        /// Returns the mumble interface tick value
+        /// </summary>
+        uint Tick { get; }
+
+        /// <summary>
         /// The profession of the Character
         /// </summary>
         Profession Profession { get; }
