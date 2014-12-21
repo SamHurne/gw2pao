@@ -32,7 +32,7 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// String provider that provides objective names
         /// </summary>
-        private IStringProvider<int, bool> objectiveNamesProvider;
+        private IStringProvider<int, WvWObjectiveNameEnum> objectiveNamesProvider;
 
         /// <summary>
         /// Internal cache of the current WvW matchup
@@ -67,7 +67,7 @@ namespace GW2PAO.API.Services
         /// Alternate constructor
         /// </summary>
         /// <param name="objectiveNamesProvider">The StringProvider that supplies localized objective names. If null, a default implementation is used</param>
-        public WvWService(IStringProvider<int, bool> objectiveNamesProvider)
+        public WvWService(IStringProvider<int, WvWObjectiveNameEnum> objectiveNamesProvider)
         {
             this.objectiveNamesProvider = objectiveNamesProvider;
         }
@@ -294,9 +294,9 @@ namespace GW2PAO.API.Services
                             if (objDetails != null)
                             {
                                 objData.Type = objDetails.Type;
-                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, true);
-                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, false);
-                                objData.Location = objDetails.Location;
+                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Short);
+                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Full);
+                                objData.Location = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Cardinal);
                                 objData.MapLocation = objDetails.MapLocation;
                             }
 
@@ -374,9 +374,9 @@ namespace GW2PAO.API.Services
                             if (objDetails != null)
                             {
                                 objData.Type = objDetails.Type;
-                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, true);
-                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, false);
-                                objData.Location = objDetails.Location;
+                                objData.Name = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Short);
+                                objData.FullName = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Full);
+                                objData.Location = this.objectiveNamesProvider.GetString(objData.ID, WvWObjectiveNameEnum.Cardinal);
                                 objData.MapLocation = objDetails.MapLocation;
                                 objData.ChatCode = objDetails.ChatCode;
                             }
