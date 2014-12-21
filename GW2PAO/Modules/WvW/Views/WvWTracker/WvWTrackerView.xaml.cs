@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
@@ -175,7 +176,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         /// </summary>
         private void RefreshWindowHeights(bool resetHeight)
         {
-            var objsCount = ((ICollection<object>)this.ViewModel.Objectives.Source).Count();
+            var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
             if (objsCount > 0)
             {
                 if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
@@ -220,7 +221,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         /// </summary>
         private void RefreshWindowWidths(bool resetWidth)
         {
-            var objsCount = ((ICollection<object>)this.ViewModel.Objectives.Source).Count();
+            var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
             if (objsCount > 0)
             {
                 if (this.ViewModel.IsHorizontalOrientation)
@@ -251,7 +252,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         /// </summary>
         private void ObjectivesContainer_LayoutUpdated(object sender, EventArgs e)
         {
-            var objsCount = ((ICollection<object>)this.ViewModel.Objectives.Source).Count();
+            var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
             if (prevObjsCount != objsCount)
             {
                 prevObjsCount = objsCount;
@@ -329,7 +330,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
             }
             else
             {
-                var objsCount = ((ICollection<object>)this.ViewModel.Objectives.Source).Count();
+                var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
                 if (this.ViewModel.IsHorizontalOrientation)
                 {
                     // Horizontal Orientation
