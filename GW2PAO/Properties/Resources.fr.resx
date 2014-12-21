@@ -249,7 +249,7 @@
     <value>Désactiver tout</value>
   </data>
   <data name="Distance" xml:space="preserve">
-    <value>Distance:</value>
+    <value>Distance</value>
   </data>
   <data name="DistanceUnits" xml:space="preserve">
     <value>Unité de distance</value>

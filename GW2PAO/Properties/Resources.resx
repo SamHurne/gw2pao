@@ -420,7 +420,7 @@
     <value>Disable All</value>
   </data>
   <data name="Distance" xml:space="preserve">
-    <value>Distance: </value>
+    <value>Distance</value>
   </data>
   <data name="DistanceUnits" xml:space="preserve">
     <value>Distance Units</value>

@@ -412,7 +412,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Distance: .
+        ///   Looks up a localized string similar to Distance.
         /// </summary>
         public static string Distance {
             get {
