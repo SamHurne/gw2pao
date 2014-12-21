@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         Title="DungeonTimerView"
         MinWidth="150" Width="250"
-        MinHeight="140" Height="140"
+        MinHeight="110" Height="110"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Topmost="True"
@@ -69,6 +69,25 @@
                   X1="0" X2="10"
                   Y1="0" Y2="0" />
         </StackPanel>
+
+        <!-- Override the default resize grip style so that it is visible -->
+        <Style TargetType="{x:Type ResizeGrip}">
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                        <Grid SnapsToDevicePixels="True">
+                            <Rectangle Width="3" Height="3" Fill="Black" Opacity="0.5" />
+                            <Grid.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
+                            </Grid.Effect>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel"
@@ -76,8 +95,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
+            <!--<RowDefinition Height="Auto" />-->
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -188,7 +207,7 @@
         </Border>
 
         <StackPanel Name="ButtonsPanel"
-                    Grid.Row="1"
+                    Grid.Row="1" Grid.RowSpan="2"
                     Grid.Column="0"
                     Width="29">
             <Button Height="21"
@@ -206,11 +225,6 @@
                     Style="{StaticResource TitleBarButtonStyle}"
                     Command="{Binding StopTimerCommand}"
                     Content="{StaticResource StopGraphic}" />
-            <Button Height="21"
-                    Margin="3"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Content="{StaticResource BestTimesGraphic}"
-                    Click="BestTimesButton_Click"/>
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Setter Property="Opacity" Value="0" />
@@ -240,85 +254,30 @@
             </StackPanel.Style>
         </StackPanel>
 
-        <Viewbox Stretch="Uniform"
+        <core:OutlinedTextBlock Grid.Row="1" Grid.Column="1"
+                                VerticalAlignment="Top" HorizontalAlignment="Center"
+                                Margin="5"
+                                FontSize="13" Fill="Gray" Opacity="0.5"
+                                Text="{Binding CurrentPath.BestTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}">
+            <core:OutlinedTextBlock.Style>
+                <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentPath.BestTime}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </core:OutlinedTextBlock.Style>
+        </core:OutlinedTextBlock>
+
+        <Viewbox Name="CurrentTimePanel"
+                 VerticalAlignment="Center" HorizontalAlignment="Center"
+                 Stretch="Uniform"
                  Grid.Row="1" Grid.Column="1">
-            <core:OutlinedTextBlock FontSize="50"
+            <core:OutlinedTextBlock FontSize="75"
                                     StrokeThickness="5"
                                     Fill="White"
                                     Text="{Binding TimerValue, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
         </Viewbox>
-
-        <Popup Name="BestTimesPopup"
-               StaysOpen="True"
-               AllowsTransparency="True" PopupAnimation="Fade"
-               Width="{Binding ElementName=MainPanel, Path=ActualWidth}"
-               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <Border BorderThickness="0,1,0,0">
-                <Border.BorderBrush>
-                    <SolidColorBrush Color="Orange" Opacity="0.5" />
-                </Border.BorderBrush>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <core:OutlinedTextBlock Grid.Row="0" Margin="0,2,0,1"
-                                            HorizontalAlignment="Center" 
-                                            FontSize="15" Fill="Orange"
-                                            Text="Best" />
-                    <ItemsControl Grid.Row="1"
-                                  ItemsSource="{Binding CurrentDungeon.BestPathTimes}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-
-                                <Grid HorizontalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <core:OutlinedTextBlock Grid.Column="0"
-                                                    Margin="2"
-                                                    FontSize="13"
-                                                    VerticalAlignment="Center"
-                                                    Text="{Binding PathData.DisplayName}" />
-                                    <core:OutlinedTextBlock Grid.Column="2"
-                                                    Margin="5,2,2,2"
-                                                    FontSize="13"
-                                                    VerticalAlignment="Center"
-                                                    Text="{Binding Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Opacity" Value="0" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:0.1"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-            </Border>
-        </Popup>
     </Grid>
 </src:OverlayWindow>

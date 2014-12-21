@@ -72,13 +72,5 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
                 this.UpdateLayout();
             }
         }
-
-        private void BestTimesButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.BestTimesPopup.IsOpen)
-                this.BestTimesPopup.IsOpen = false;
-            else
-                this.BestTimesPopup.IsOpen = true;
-        }
     }
 }

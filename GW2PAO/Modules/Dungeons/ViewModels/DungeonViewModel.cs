@@ -101,14 +101,6 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         public ObservableCollection<PathViewModel> Paths { get; private set; }
 
         /// <summary>
-        /// Collection of best path times for this dungeon
-        /// </summary>
-        public ICollection<PathTime> BestPathTimes
-        {
-            get { return this.userData.BestPathTimes.Where(pt => this.Paths.Any(p => p.PathId == pt.PathID)).ToList(); }
-        }
-
-        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="dungeon">The dungeon information</param>

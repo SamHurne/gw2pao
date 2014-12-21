@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using GW2PAO.Modules.Dungeons.Data;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -119,6 +120,13 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
             get { return this.PathModel.IdentifyingPoints; }
         }
 
+        /// <summary>
+        /// Best completion time for this path
+        /// </summary>
+        public PathTime BestTime
+        {
+            get { return this.userData.BestPathTimes.FirstOrDefault(pt => pt.PathID == this.PathId); }
+        }
 
         /// <summary>
         /// Default constructor
