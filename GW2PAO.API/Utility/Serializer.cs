@@ -20,7 +20,7 @@ namespace GW2PAO.API.Util
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextWriter textWriter = new StreamWriter(filename);
+            TextWriter textWriter = new StreamWriter(filename, false, Encoding.Unicode);
             try
             {
                 serializer.Serialize(textWriter, obj);

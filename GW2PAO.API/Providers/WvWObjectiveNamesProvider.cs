@@ -224,8 +224,91 @@ namespace GW2PAO.API.Providers
             // Spanish TODO
             List<ObjectiveNames> spanish = new List<ObjectiveNames>();
 
-            // French TODO
-            List<ObjectiveNames> french = new List<ObjectiveNames>();
+            // French
+            List<ObjectiveNames> french = new List<ObjectiveNames>()
+            {
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Keep_Overlook, Name = "Belvédère", ShortName = "Belvédère" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Keep_Valley, Name = "Vallée", ShortName = "Vallée" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Keep_Lowlands, Name = "Basses Terres", ShortName = "Basses Terres" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Golanta, Name = "Clairière de Golanta", ShortName = "Golanta" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Pangloss, Name = "Mine de Pangloss", ShortName = "Pangloss" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Speldan, Name = "Forêt de Speldan", ShortName = "Speldan" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Danelon, Name = "Passage de Danelon", ShortName = "Danelon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Umberglade, Name = "Bois d'Ombreclair", ShortName = "Ombreclair" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Castle_Stonemist, Name = "Chateau Brumepierre", ShortName = "Brumepierre" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Camp_Rogues, Name = "Carrière du Voleur", ShortName = "Voleur" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Aldons, Name = "Corniche d'Aldon", ShortName = "Aldon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Wildcreek, Name = "Piste du Ruisseau sauvage", ShortName = "Ruisseau" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Jerrifers, Name = "Bourbier de Jerrifer", ShortName = "Jerrifer" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Klovan, Name = "Ravin de Klovan", ShortName = "Klovan" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Langor, Name = "Ravin de Langor", ShortName = "Langor" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Quentin, Name = "Lac Quentin", ShortName = "Quentin" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Mendons, Name = "Faille de Mendon", ShortName = "Mendon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Anzalias, Name = "Col d'Anzalias", ShortName = "Anzalias" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Ogrewatch, Name = "Percée de Gardogre", ShortName = "Gardogre" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Veloka, Name = "Flanc de Veloka", ShortName = "Veloka" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Durios, Name = "Ravin de Durios", ShortName = "Durios" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.EB_Tower_Bravost, Name = "Falaise de Bravost", ShortName = "Bravost" },
+
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Keep_Garrison, Name = "Garnison", ShortName = "Garnison" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Orchard, Name = "Fief du Champion", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Tower_Redbriar, Name = "Bruyerouge", ShortName = "Bruyerouge" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Tower_Greenlake, Name = "Lac Vert", ShortName = "Lac Vert" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Keep_Bay, Name = "Baie de l'Ascension", ShortName = "Baie" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Tower_Dawns, Name = "Repaire de l'AUbe", ShortName = "Aube" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Spiritholme, Name = "Le Heaume Spirituel", ShortName = "Heaume" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Tower_Woodhaven, Name = "Boisrefuge", ShortName = "Boisrefuge" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Keep_Hills, Name = "Collines d'Askalion", ShortName = "Askalion" },
+
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Keep_Hills, Name = "Collines d'Etheron", ShortName = "Etheron" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Keep_Bay, Name = "Baie des Rêves", ShortName = "Baie" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Orchard, Name = "Pavillon du Vainqueur", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Tower_Greenbriar, Name = "Vert-Bruyère", ShortName = "Vert-Bruyère" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Tower_Bluelake, Name = "Lac Bleu", ShortName = "Lac Bleu" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Keep_Garrison, Name = "Garnison", ShortName = "Garnison" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Tower_Longview, Name = "Longuevue", ShortName = "Longuevue" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Godsword, Name = "Epée Divine", ShortName = "Epée" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Tower_Cliffside, Name = "Flanc de Falaise", ShortName = "Falaise" },
+
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Keep_Hills, Name = "Collines Shadaran", ShortName = "Shadaran" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Tower_Redlake, Name = "Lac Rouge", ShortName = "Lac Rouge" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Orchard, Name = "Pavillon du Héros", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Keep_Bay, Name = "Baie du Déclin Noir", ShortName = "Baie" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Tower_Bluebriar, Name = "Bruyazur", ShortName = "Bruyazur" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Keep_Garrison, Name = "Garnison", ShortName = "Garnison" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Tower_Sunnyhill, Name = "Colline ensoleillée", ShortName = "Colline" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Faithleap, Name = "Saut de la Foi", ShortName = "Saut de la Foi" },
+
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Bluevale, Name = "Refuge de Bleuval", ShortName = "Bleuval" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Bluewater, Name = "Basses terres d'Eau-Azur", ShortName = "Basses terres" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Astralholme, Name = "Heaume Astral", ShortName = "Astral" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Arahs, Name = "Espoir d'Arah", ShortName = "Arah" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Camp_Greenvale, Name = "Refuge de Valvert", ShortName = "Valvert" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Foghaven, Name = "Havre Gris", ShortName = "Havre" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Redwater, Name = "Basses terres de Rubicon", ShortName = "Basses terres" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Camp_Titanpaw, Name = "Bras du Titan", ShortName = "Titan" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Tower_Cragtop, Name = "Sommet de HautCrag", ShortName = "Hautcrag" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Godslore, Name = "Savoir Divin", ShortName = "Divi" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Redvale, Name = "Refuge de Valrouge", ShortName = "Valrouge" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Stargrove, Name = "Bosquet Etoilé", ShortName = "Bosquet" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Camp_Greenwater, Name = "Basses terres d'Eau-Verdoyante", ShortName = "Basses terres" },
+
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Temple, Name = "Temple des Prières Perdues", ShortName = "Temple" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Hollow, Name = "Vallon de bataille", ShortName = "Vallon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Estate, Name = "Domaine de Bauer", ShortName = "Bauer" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Orchard, Name = "Belvédère du Berger", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.RB_Carvers, Name = "Côte du Couteau", ShortName = "Carver's" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Carvers, Name = "Côte du Couteau", ShortName = "Carver's" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Orchard, Name = "Belvédère du Berger", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Estate, Name = "Domaine de Bauer", ShortName = "Bauer" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Hollow, Name = "Vallon de bataille", ShortName = "Vallon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.BB_Temple, Name = "Temple des Prières Perdues", ShortName = "Temple" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Carvers, Name = "Côte du Couteau", ShortName = "Carver's" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Orchard, Name = "Belvédère du Berger", ShortName = "Verger" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Estate, Name = "Domaine de Bauer", ShortName = "Bauer" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Hollow, Name = "Vallon de bataille", ShortName = "Vallon" },
+                new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Temple, Name = "Temple des Prières Perdues", ShortName = "Temple" }
+            };
 
             // German TODO
             List<ObjectiveNames> german = new List<ObjectiveNames>();
