@@ -51,10 +51,31 @@
                 Padding="5">
 
             <Border.Background>
-                <RadialGradientBrush Opacity="0.75" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                    <GradientStop Color="#5024313D" Offset="0"/>
-                    <GradientStop Color="#FF24313D" Offset="1.5"/>
-                </RadialGradientBrush>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#5024313D" Offset="0"/>
+                                        <GradientStop Color="#B024313D" Offset="0.5"/>
+                                        <GradientStop Color="#FF574111" Offset="1.3"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Image Source="../../../../Images/background1.png" Opacity="0.1"
+                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <Image.OpacityMask>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#5024313D" Offset="0"/>
+                                        <GradientStop Color="#FF24313D" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Image.OpacityMask>
+                            </Image>
+                        </Grid>
+                    </VisualBrush.Visual>
+                </VisualBrush>
             </Border.Background>
 
             <Border.BorderBrush>

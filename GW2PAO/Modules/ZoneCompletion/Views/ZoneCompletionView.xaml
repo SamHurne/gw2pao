@@ -37,175 +37,191 @@
 
     <!--See code-behind for ViewModel details-->
     <Grid>
-
-        <!--<Grid.Effect>
-            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
-        </Grid.Effect>-->
-
         <Grid.Background>
-            <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                <GradientStop Color="#FF5B4411" Offset="0"/>
-                <GradientStop Color="#015B4411" Offset="1"/>
-            </RadialGradientBrush>
+            <VisualBrush Viewport="0,0,300,1080" ViewportUnits="Absolute">
+                <VisualBrush.Visual>
+                    <Grid>
+                        <Image Source="../../../Images/background2.png"
+                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            <Image.OpacityMask>
+                                <RadialGradientBrush Opacity="0.2" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                                    <GradientStop Color="#FF5B4411" Offset="0"/>
+                                    <GradientStop Color="#005B4411" Offset="0.75"/>
+                                </RadialGradientBrush>
+                            </Image.OpacityMask>
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
         </Grid.Background>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        <Grid>
 
-        <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
-                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
-                Grid.Row="0">
-            <Grid Margin="5,0,0,0"
-                  Height="32">
+            <Grid.Background>
+                <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                    <GradientStop Color="#FF5B4411" Offset="0"/>
+                    <GradientStop Color="#015B4411" Offset="1"/>
+                </RadialGradientBrush>
+            </Grid.Background>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="35" />
-                    <ColumnDefinition Width="35" />
-                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Image Name="TitleImage"
-                       Grid.Column="0"
-                       VerticalAlignment="Center"
-                       Height="30" Width="30"
-                       Margin="0,0,0,0"
-                       Source="/Images/Title/zone.png"
-                       MouseDown="TitleImage_MouseDown">
-                    <Image.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="{x:Static resx:Resources.ResetUnlocks}">
-                                <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneUnlocksCommand}" />
-                                <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllUnlocksCommand}" />
-                            </MenuItem>
-                            <MenuItem Header="{x:Static resx:Resources.ResetHiddenPoints}">
-                                <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneHiddenCommand}" />
-                                <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllHiddenCommand}" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
-                                <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.TimeDistances}" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" StaysOpenOnClick="True" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.AutomaticUnlock}">
-                                <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockWaypoints}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockPois}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockVistas}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.ShowUnlockedZonePoints}" IsCheckable="True" IsChecked="{Binding UserData.ShowUnlockedPoints}" />
-                            <MenuItem Header="{x:Static resx:Resources.Show}">
-                                <MenuItem Header="{x:Static resx:Resources.ShowAll}" Command="{Binding ShowAllCommand}" />
-                                <MenuItem Header="{x:Static resx:Resources.ShowNone}" Command="{Binding ShowNoneCommand}" />
+            <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                    MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
+                    Grid.Row="0">
+                <Grid Margin="5,0,0,0"
+                      Height="32">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="35" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Name="TitleImage"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Height="30" Width="30"
+                           Margin="0,0,0,0"
+                           Source="/Images/Title/zone.png"
+                           MouseDown="TitleImage_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{x:Static resx:Resources.ResetUnlocks}">
+                                    <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneUnlocksCommand}" />
+                                    <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllUnlocksCommand}" />
+                                </MenuItem>
+                                <MenuItem Header="{x:Static resx:Resources.ResetHiddenPoints}">
+                                    <MenuItem Header="{x:Static resx:Resources.CurrentZone}" Command="{Binding ResetZoneHiddenCommand}" />
+                                    <MenuItem Header="{x:Static resx:Resources.Global}" Command="{Binding ResetAllHiddenCommand}" />
+                                </MenuItem>
                                 <Separator />
-                                <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserData.AreWaypointsVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.ArePoisVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AreHeartsVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AreVistasVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
-                        </ContextMenu>
-                    </Image.ContextMenu>
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0"
-                                              Color="Goldenrod"
-                                              Opacity="0"
-                                              BlurRadius="25"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:00.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:0.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+                                <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
+                                    <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.TimeDistances}" IsCheckable="True" IsChecked="{Binding IsTimeDistanceSelected}" StaysOpenOnClick="True" />
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.AutomaticUnlock}">
+                                    <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockWaypoints}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockPois}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockVistas}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.ShowUnlockedZonePoints}" IsCheckable="True" IsChecked="{Binding UserData.ShowUnlockedPoints}" />
+                                <MenuItem Header="{x:Static resx:Resources.Show}">
+                                    <MenuItem Header="{x:Static resx:Resources.ShowAll}" Command="{Binding ShowAllCommand}" />
+                                    <MenuItem Header="{x:Static resx:Resources.ShowNone}" Command="{Binding ShowNoneCommand}" />
+                                    <Separator />
+                                    <MenuItem Header="{x:Static resx:Resources.Waypoints}" IsCheckable="True" IsChecked="{Binding UserData.AreWaypointsVisible}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.ArePoisVisible}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AreHeartsVisible}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AreVistasVisible}" StaysOpenOnClick="True" />
+                                    <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                                  Color="Goldenrod"
+                                                  Opacity="0"
+                                                  BlurRadius="25"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:00.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:0.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
 
-                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
-                                        HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                        Fill="Orange"
-                                        FontFamily="Candara" FontSize="14"
-                                        Text="{Binding ZoneNameVM.ZoneName}" />
+                    <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                            Fill="Orange"
+                                            FontFamily="Candara" FontSize="14"
+                                            Text="{Binding ZoneNameVM.ZoneName}" />
 
-                <Button Name="CollapseExpandButton"
-                    Grid.Column="2"
-                    Margin="5"
-                    Click="CollapseExpandButton_Click">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
-                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Visibility, ElementName=ItemsContainer}" Value="Collapsed">
-                                    <DataTrigger.Setters>
-                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
-                                    </DataTrigger.Setters>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    <Button Name="CollapseExpandButton"
+                        Grid.Column="2"
+                        Margin="5"
+                        Click="CollapseExpandButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=ItemsContainer}" Value="Collapsed">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
-                <Button Name="CloseWindowButton"
-                    Grid.Column="3"
-                    Margin="5"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Content="{StaticResource CloseGraphic}"
-                    Click="CloseWindowButton_Click" />
+                    <Button Name="CloseWindowButton"
+                        Grid.Column="3"
+                        Margin="5"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource CloseGraphic}"
+                        Click="CloseWindowButton_Click" />
+                </Grid>
+            </Border>
+
+            <ItemsControl Name="ItemsContainer" Grid.Row="1"
+                          ItemsSource="{Binding Source={StaticResource zoneItemsView}}"
+                          Style="{StaticResource VirtualizingItemsControlStyle}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>      
+            </ItemsControl>
+
+            <Grid Name="ResizeHeight" Grid.Row="2">
+                <Rectangle VerticalAlignment="Bottom"
+                           HorizontalAlignment="Stretch"
+                           Height="1">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                            <GradientStop Color="#00FFA500" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
             </Grid>
-        </Border>
-
-        <ItemsControl Name="ItemsContainer" Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource zoneItemsView}}"
-                      Style="{StaticResource VirtualizingItemsControlStyle}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <View:ZoneItemView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>      
-        </ItemsControl>
-
-        <Grid Name="ResizeHeight" Grid.Row="2">
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
-                       Height="1">
-                <Rectangle.Fill>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                        <GradientStop Color="#00FFA500" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
         </Grid>
     </Grid>
 </src:OverlayWindow>

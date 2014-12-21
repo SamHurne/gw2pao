@@ -32,203 +32,222 @@
     </src:OverlayWindow.Resources>
 
     <Grid>
-
-        <Grid.Effect>
-            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
-        </Grid.Effect>
-        
         <Grid.Background>
-            <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                <GradientStop Color="#FF5B4411" Offset="0"/>
-                <GradientStop Color="#015B4411" Offset="1"/>
-            </RadialGradientBrush>
+            <VisualBrush Viewport="0,0,300,1080" ViewportUnits="Absolute">
+                <VisualBrush.Visual>
+                    <Grid>
+                        <Image Source="../../../Images/background2.png"
+                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            <Image.OpacityMask>
+                                <RadialGradientBrush Opacity="0.2" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                                    <GradientStop Color="#FF5B4411" Offset="0"/>
+                                    <GradientStop Color="#005B4411" Offset="0.75"/>
+                                </RadialGradientBrush>
+                            </Image.OpacityMask>
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
         </Grid.Background>
+        <Grid>
+            <Grid.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
+            </Grid.Effect>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+            <Grid.Background>
+                <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                    <GradientStop Color="#FF5B4411" Offset="0"/>
+                    <GradientStop Color="#015B4411" Offset="1"/>
+                </RadialGradientBrush>
+            </Grid.Background>
 
-        <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
-                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
-                Grid.Row="0">
-            <Grid Margin="5,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
+            <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                    MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
+                    Grid.Row="0">
+                <Grid Margin="5,0,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="35" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Name="TitleImage"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Height="30" Width="30"
+                           Margin="0,0,0,0"
+                           Source="/Images/Title/community.png"
+                           MouseDown="TitleImage_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChannelName}" />
+                                <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChatEntryBox}" />
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                                  Color="Goldenrod"
+                                                  Opacity="0"
+                                                  BlurRadius="25"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:00.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="(Effect).Opacity"
+                                                             Duration="00:00:0.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Fill="Orange" FontFamily="Candara" FontSize="17"
+                                            Text="{x:Static resx:Resources.Teamspeak}">
+                        <core:OutlinedTextBlock.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
+                                                            Text="{x:Static resx:Resources.Server}"/>
+                                    <core:OutlinedTextBlock FontSize="13"
+                                                            Margin="3,0,0,0"
+                                                            Text="{Binding ServerName}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
+                                                            Text="{x:Static resx:Resources.IP}"/>
+                                    <core:OutlinedTextBlock FontSize="13"
+                                                            Margin="3,0,0,0"
+                                                            Text="{Binding ServerAddress}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </core:OutlinedTextBlock.ToolTip>
+                    </core:OutlinedTextBlock>
+
+                    <Button Name="CollapseExpandButton"
+                        Grid.Column="2"
+                        Margin="5"
+                        Click="CollapseExpandButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=NotificationsContainer}" Value="Collapsed">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Name="CloseWindowButton"
+                        Grid.Column="3"
+                        Margin="5"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource CloseGraphic}"
+                        Click="CloseWindowButton_Click" />
+                </Grid>
+            </Border>
+
+            <Border Name="ChannelName"
+                    Grid.Row="1" Margin="3"
+                    BorderBrush="{StaticResource TitleBarBorderBrush}" BorderThickness="0,0,0,0"
+                    Visibility="{Binding UserData.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
+                <TextBox Grid.Row="0"
+                             Name="ChannelTextBox"
+                             Text="{Binding ClientChannelName}"
+                             IsReadOnly="True"
+                             PreviewMouseDown="ChannelTextBox_PreviewMouseDown">
+                    <TextBox.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding Source={StaticResource ChannelsCollection}}">
+                            <ContextMenu.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Subchannels, Converter={StaticResource CollectionSorter}, ConverterParameter=OrderIndex}">
+                                    <TextBlock Name="ChannelContextMenuItem" Text="{Binding Name}"
+                                               MouseLeftButtonDown="ChannelContextMenuItem_MouseLeftButtonDown" />
+                                </HierarchicalDataTemplate>
+                            </ContextMenu.ItemTemplate>
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
+            </Border>
+
+            <ItemsControl Name="NotificationsContainer" Grid.Row="2"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Grid Name="TextEntryBox" Grid.Row="3"
+                  Margin="3"
+                  Visibility="{Binding UserData.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="35" />
-                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Name="TitleImage"
-                       Grid.Column="0"
-                       VerticalAlignment="Center"
-                       Height="30" Width="30"
-                       Margin="0,0,0,0"
-                       Source="/Images/Title/community.png"
-                       MouseDown="TitleImage_MouseDown">
-                    <Image.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChannelName}" />
-                            <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChatEntryBox}" />
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
-                        </ContextMenu>
-                    </Image.ContextMenu>
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0"
-                                              Color="Goldenrod"
-                                              Opacity="0"
-                                              BlurRadius="25"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:00.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:0.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-
-                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="{x:Static resx:Resources.Teamspeak}">
-                    <core:OutlinedTextBlock.ToolTip>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
-                                                        Text="{x:Static resx:Resources.Server}"/>
-                                <core:OutlinedTextBlock FontSize="13"
-                                                        Margin="3,0,0,0"
-                                                        Text="{Binding ServerName}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock FontSize="13" FontWeight="Bold"
-                                                        Text="{x:Static resx:Resources.IP}"/>
-                                <core:OutlinedTextBlock FontSize="13"
-                                                        Margin="3,0,0,0"
-                                                        Text="{Binding ServerAddress}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </core:OutlinedTextBlock.ToolTip>
-                </core:OutlinedTextBlock>
-
-                <Button Name="CollapseExpandButton"
-                    Grid.Column="2"
-                    Margin="5"
-                    Click="CollapseExpandButton_Click">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
-                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Visibility, ElementName=NotificationsContainer}" Value="Collapsed">
-                                    <DataTrigger.Setters>
-                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
-                                    </DataTrigger.Setters>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
+                <TextBox Name="MessageEntryBox" Grid.Column="0"
+                         Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
+                         KeyDown="MessageEntryBox_KeyDown"/>
+                <Button Name="MessageSendBox" Grid.Column="1"
+                        Margin="3,0,3,0"
+                        Command="{Binding SendMessageCommand}">
+                    <TextBlock Text="{x:Static resx:Resources.Send}" />
                 </Button>
-
-                <Button Name="CloseWindowButton"
-                    Grid.Column="3"
-                    Margin="5"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Content="{StaticResource CloseGraphic}"
-                    Click="CloseWindowButton_Click" />
             </Grid>
-        </Border>
 
-        <Border Name="ChannelName"
-                Grid.Row="1" Margin="3"
-                BorderBrush="{StaticResource TitleBarBorderBrush}" BorderThickness="0,0,0,0"
-                Visibility="{Binding UserData.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
-            <TextBox Grid.Row="0"
-                         Name="ChannelTextBox"
-                         Text="{Binding ClientChannelName}"
-                         IsReadOnly="True"
-                         PreviewMouseDown="ChannelTextBox_PreviewMouseDown">
-                <TextBox.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding Source={StaticResource ChannelsCollection}}">
-                        <ContextMenu.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Subchannels, Converter={StaticResource CollectionSorter}, ConverterParameter=OrderIndex}">
-                                <TextBlock Name="ChannelContextMenuItem" Text="{Binding Name}"
-                                           MouseLeftButtonDown="ChannelContextMenuItem_MouseLeftButtonDown" />
-                            </HierarchicalDataTemplate>
-                        </ContextMenu.ItemTemplate>
-                    </ContextMenu>
-                </TextBox.ContextMenu>
-            </TextBox>
-        </Border>
-
-        <ItemsControl Name="NotificationsContainer" Grid.Row="2"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <Grid Name="TextEntryBox" Grid.Row="3"
-              Margin="3"
-              Visibility="{Binding UserData.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBox Name="MessageEntryBox" Grid.Column="0"
-                     Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
-                     KeyDown="MessageEntryBox_KeyDown"/>
-            <Button Name="MessageSendBox" Grid.Column="1"
-                    Margin="3,0,3,0"
-                    Command="{Binding SendMessageCommand}">
-                <TextBlock Text="{x:Static resx:Resources.Send}" />
-            </Button>
-        </Grid>
-
-        <Grid Name="ResizeHeight" Grid.Row="4">
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
-                       Height="1">
-                <Rectangle.Fill>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                        <GradientStop Color="#00FFA500" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+            <Grid Name="ResizeHeight" Grid.Row="4">
+                <Rectangle VerticalAlignment="Bottom"
+                           HorizontalAlignment="Stretch"
+                           Height="1">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FFFFA500" Offset="0.5"/>
+                            <GradientStop Color="#00FFA500" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
         </Grid>
     </Grid>
 </src:OverlayWindow>

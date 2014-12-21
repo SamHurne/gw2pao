@@ -10,7 +10,7 @@
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
-        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
@@ -23,10 +23,24 @@
         </Border.Effect>
 
         <Border.Background>
-            <LinearGradientBrush>
-                <GradientStop Color="#FF24313D" Offset="0"/>
-                <GradientStop Color="#8024313D" Offset="1"/>
-            </LinearGradientBrush>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Grid>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#E5151E27" Offset="0.75"/>
+                                    <GradientStop Color="#E0151E27" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Image Source="../../../Images/background3.png" Opacity="0.1"
+                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
         </Border.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

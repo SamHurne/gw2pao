@@ -4,6 +4,31 @@
 
     <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">Scroll</PopupAnimation>
 
+    <VisualBrush x:Key="TooltipBackground">
+        <VisualBrush.Visual>
+            <Grid>
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF24313D" Offset="0"/>
+                            <GradientStop Color="#8024313D" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Image Source="../../Images/background1.png" Opacity="0.25"
+                                        Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                        SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Image.OpacityMask>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF24313D" Offset="0"/>
+                            <GradientStop Color="#8024313D" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Image.OpacityMask>
+                </Image>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
     <Style TargetType="ToolTip">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="HasDropShadow" Value="True"/>
@@ -12,13 +37,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
                     <Border Name="Border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                BorderThickness="2" CornerRadius="3">
-                        <Border.Background>
-                            <LinearGradientBrush>
-                                <GradientStop Color="#FF24313D" Offset="0"/>
-                                <GradientStop Color="#8024313D" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                                BorderThickness="2" CornerRadius="3"
+                                Background="{StaticResource TooltipBackground}">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="Black" Opacity="1" />
                         </Border.BorderBrush>

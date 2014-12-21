@@ -81,10 +81,30 @@
                     </Path.Effect>
 
                     <Path.Fill>
-                        <LinearGradientBrush>
-                            <GradientStop Color="#FF24313D" Offset="0"/>
-                            <GradientStop Color="#8024313D" Offset="1"/>
-                        </LinearGradientBrush>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Grid>
+                                    <Rectangle>
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#FF24313D" Offset="0"/>
+                                                <GradientStop Color="#8024313D" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Image Source="../Images/background1.png" Opacity="0.1"
+                                        Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                        SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                        <Image.OpacityMask>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#FF24313D" Offset="0"/>
+                                                <GradientStop Color="#8024313D" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Image.OpacityMask>
+                                    </Image>
+                                </Grid>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
                     </Path.Fill>
                 </Path>
 

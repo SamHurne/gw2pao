@@ -292,10 +292,30 @@
                 <Border Height="250" Width="600"
                         BorderThickness="0,1,0,1" CornerRadius="0">
                     <Border.Background>
-                        <LinearGradientBrush>
-                            <GradientStop Color="#FF5B4411" Offset="0"/>
-                            <GradientStop Color="#505B4411" Offset="1"/>
-                        </LinearGradientBrush>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Grid>
+                                    <Rectangle>
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#FF5B4411" Offset="0"/>
+                                                <GradientStop Color="#505B4411" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Image Source="../../../../Images/background1.png" Opacity="0.1"
+                                           Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                           SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                        <Image.OpacityMask>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#FF5B4411" Offset="0"/>
+                                                <GradientStop Color="#505B4411" Offset=".75"/>
+                                            </LinearGradientBrush>
+                                        </Image.OpacityMask>
+                                    </Image>
+                                </Grid>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
                     </Border.Background>
                     <Border.BorderBrush>
                         <LinearGradientBrush Opacity="0.65">
