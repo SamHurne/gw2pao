@@ -57,6 +57,11 @@ namespace GW2PAO.Modules.Dungeons
         private bool isStopped;
 
         /// <summary>
+        /// Previous UI tick of the mumble interface
+        /// </summary>
+        private uint previousPlayerTick;
+
+        /// <summary>
         /// The primary reset timer object
         /// </summary>
         private Timer dungeonsRefreshTimer;
@@ -278,11 +283,14 @@ namespace GW2PAO.Modules.Dungeons
                         // Reset current dungeon/path information
                         this.DungeonTimerData.CurrentDungeon = null;
                         this.DungeonTimerData.CurrentPath = null;
+                    }
 
-                        if (this.DungeonTimerData.IsTimerRunning
-                            && this.UserData.AutoStopDungeonTimer)
+                    if (this.playerService.Tick == previousPlayerTick)
+                    {
+                        // The tick hasn't updated, so we must have just entered a loading screen
+                        if (this.DungeonTimerData.IsTimerRunning && this.UserData.AutoStopDungeonTimer)
                         {
-                            // If enabled, stop the timer when the user changes map
+                            // If enabled, stop the timer when the user changes map (enters a loading screen)
                             logger.Info("Pausing dungeon timer - Timer: {0}", this.DungeonTimerData.TimerValue);
                             this.DungeonTimerData.PauseTimer();
 
@@ -301,6 +309,7 @@ namespace GW2PAO.Modules.Dungeons
                             }
                         }
                     }
+                    this.previousPlayerTick = this.playerService.Tick;
 
                     // Determine if the current map is a dungeon map
                     var dungeonVm = this.GetDungeonViewModel(this.currentMapId);
