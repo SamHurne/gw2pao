@@ -1,0 +1,273 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>GW2NET</name>
+  </assembly>
+  <members>
+    <member name="T:GW2NET.Factories.FactoryBase">
+      <summary>Provides access to the Guild Wars 2 service.</summary>
+      <invariant>this.serviceClient != null</invariant>
+    </member>
+    <member name="F:GW2NET.Factories.FactoryBase.serviceClient">
+      <summary>Infrastructure. Holds a reference to a service client.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryBase.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryBase" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="serviceClient != default(GW2NET.Common.IServiceClient)" vb="serviceClient &lt;&gt; Nothing">serviceClient != default(GW2NET.Common.IServiceClient)</requires>
+      <exception cref="T:System.ArgumentNullException">serviceClient == default(GW2NET.Common.IServiceClient)</exception>
+      <ensures csharp="this.serviceClient != null" vb="Me.serviceClient &lt;&gt; Nothing">this.serviceClient != null</ensures>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryBase.ServiceClient">
+      <summary>Gets an instance of a service client.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForLocal">
+      <summary>Provides access to specialty services that do not require a network connection.</summary>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForLocal.EventRotations">
+      <summary>Provides access to event rotations data.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForRendering">
+      <summary>Provides access to the rendering service.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryForRendering.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryForRendering" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires csharp="serviceClient != null" vb="serviceClient &lt;&gt; Nothing">serviceClient != null</requires>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForRendering.RenderService">
+      <summary>Provides access to the rendering service.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForV1">
+      <summary>Provides access to version 1 of the public API.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryForV1.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryForV1" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires csharp="serviceClient != null" vb="serviceClient &lt;&gt; Nothing">serviceClient != null</requires>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Build">
+      <summary>Provides access to the builds data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Colors">
+      <summary>Provides access to the colors data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Continents">
+      <summary>Provides access to the continents data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.EventNames">
+      <summary>Provides access to the event names data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Events">
+      <summary>Provides access to the events data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Files">
+      <summary>Provides access to the files data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Floors">
+      <summary>Provides access to the floors data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Guilds">
+      <summary>Provides access to the guilds data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Items">
+      <summary>Provides access to the items data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.MapNames">
+      <summary>Provides access to the map names data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Maps">
+      <summary>Provides access to the maps data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Recipes">
+      <summary>Provides access to the recipes data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Skins">
+      <summary>Provides access to the skins data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.Worlds">
+      <summary>Provides access to the worlds data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1.WvW">
+      <summary>Provides access to WvW data sources.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForV1WvW">
+      <summary>Provides access to WvW data sources.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryForV1WvW.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryForV1WvW" /> class. Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryBase" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires csharp="serviceClient != null" vb="serviceClient &lt;&gt; Nothing">serviceClient != null</requires>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1WvW.Matches">
+      <summary>Provides access to the matches data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV1WvW.Objectives">
+      <summary>Provides access to the objective names data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForV2">
+      <summary>Provides access to version 2 of the public API.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryForV2.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryForV2" /> class. Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryBase" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires csharp="serviceClient != null" vb="serviceClient &lt;&gt; Nothing">serviceClient != null</requires>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2.Commerce">
+      <summary>Provides access to commerce data sources.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2.Items">
+      <summary>Provides access to the items data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2.Quaggans">
+      <summary>Provides access to the Quaggans data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2.Recipes">
+      <summary>Provides access to the recipes data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2.Worlds">
+      <summary>Provides access to the worlds data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.Factories.FactoryForV2Commerce">
+      <summary>Provides access to commerce data sources.</summary>
+    </member>
+    <member name="M:GW2NET.Factories.FactoryForV2Commerce.#ctor(GW2NET.Common.IServiceClient)">
+      <summary>Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryForV2Commerce" /> class. Initializes a new instance of the <see cref="T:GW2NET.Factories.FactoryBase" /> class.</summary>
+      <param name="serviceClient">The service client.</param>
+      <requires csharp="serviceClient != null" vb="serviceClient &lt;&gt; Nothing">serviceClient != null</requires>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2Commerce.Exchange">
+      <summary>Provides access to the gem exchange data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2Commerce.Listings">
+      <summary>Provides access to the listings data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="P:GW2NET.Factories.FactoryForV2Commerce.Prices">
+      <summary>Provides access to the aggregate listings data source.</summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:GW2NET.GW2">
+      <summary>Provides access to Guild Wars 2 data sources and services.</summary>
+    </member>
+    <member name="M:GW2NET.GW2.#cctor">
+      <summary>Initializes static members of the <see cref="T:GW2NET.GW2" /> class.</summary>
+    </member>
+    <member name="M:GW2NET.GW2.GetRenderingProxy">
+      <summary>Infrastructure. Creates and configures an instance of the default service client.</summary>
+      <returns>The <see cref="T:GW2NET.Common.IServiceClient" />.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:GW2NET.GW2.GetRenderingUri">
+      <summary>Gets the base URI.</summary>
+      <returns>A <see cref="T:System.Uri" />.</returns>
+      <ensures csharp="result != (System.Uri)null" vb="result &lt;&gt; ((System.Uri)Nothing) ">result != (System.Uri)null</ensures>
+      <ensures csharp="result.IsAbsoluteUri" vb="result.IsAbsoluteUri">result.IsAbsoluteUri</ensures>
+    </member>
+    <member name="M:GW2NET.GW2.GetRepositoryProxy">
+      <summary>Infrastructure. Creates and configures an instance of the default service client.</summary>
+      <returns>The <see cref="T:GW2NET.Common.IServiceClient" />.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:GW2NET.GW2.GetRepositoryUri">
+      <summary>Gets the base URI.</summary>
+      <returns>A <see cref="T:System.Uri" />.</returns>
+      <ensures csharp="result != (System.Uri)null" vb="result &lt;&gt; ((System.Uri)Nothing) ">result != (System.Uri)null</ensures>
+      <ensures csharp="result.IsAbsoluteUri" vb="result.IsAbsoluteUri">result.IsAbsoluteUri</ensures>
+    </member>
+    <member name="P:GW2NET.GW2.Local">
+      <summary>Provides access to specialty services that do not require a network connection.</summary>
+    </member>
+    <member name="P:GW2NET.GW2.Rendering">
+      <summary>Provides access to the rendering service.</summary>
+    </member>
+    <member name="P:GW2NET.GW2.V1">
+      <summary>Provides access to version 1 of the public API.</summary>
+    </member>
+    <member name="P:GW2NET.GW2.V2">
+      <summary>Provides access to version 2 of the public API.</summary>
+    </member>
+  </members>
+</doc>
