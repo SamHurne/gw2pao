@@ -4,11 +4,12 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2DotNET;
+using GW2NET;
+using GW2NET.Guilds;
 using GW2PAO.API.Data;
-using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using NLog;
+using Guild = GW2PAO.API.Data.Entities.Guild;
 
 namespace GW2PAO.API.Services
 {
@@ -23,7 +24,7 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// The GW2.NET API service object
         /// </summary>
-        private ServiceManager service = new ServiceManager();
+        private IGuildRepository guildService = GW2.V1.Guilds;
 
         /// <summary>
         /// Retrieves guild information using the given guild ID
@@ -39,7 +40,7 @@ namespace GW2PAO.API.Services
             try
             {
 
-                var details = this.service.GetGuildDetailsById(id);
+                var details = this.guildService.Find(id);
                 if (details != null)
                 {
                     guild = new Guild(id)
@@ -49,7 +50,7 @@ namespace GW2PAO.API.Services
                     };
                 }
             }
-            catch (GW2DotNET.Common.ServiceException ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
                 // Don't crash on a service exception... just log it
                 logger.Warn(ex);
@@ -74,7 +75,7 @@ namespace GW2PAO.API.Services
 
             Guild guild = null;
 
-            var details = this.service.GetGuildDetailsByName(name);
+            var details = this.guildService.FindByName(name);
             if (details != null)
             {
                 guild = new Guild(details.GuildId)

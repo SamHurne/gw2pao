@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2DotNET;
+using GW2NET;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
@@ -28,11 +28,6 @@ namespace GW2PAO.API.Services
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        /// <summary>
-        /// The GW2.NET API service objective
-        /// </summary>
-        private ServiceManager service = new ServiceManager();
 
         /// <summary>
         /// String provider for world event names
@@ -98,7 +93,7 @@ namespace GW2PAO.API.Services
             string evtName = this.worldEventStringProvider.GetString(id);
             if (string.IsNullOrEmpty(evtName))
             {
-                var allNames = this.service.GetDynamicEventNames(CultureInfo.CurrentUICulture);
+                var allNames = GW2.V1.EventNames.ForCurrentUICulture().FindAll();
                 return allNames[id].Name;
             }
             return evtName;

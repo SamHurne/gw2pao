@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
-using GW2DotNET;
-using GW2DotNET.V1.WorldVersusWorld;
-using GW2DotNET.Entities.WorldVersusWorld;
+using GW2NET;
+using GW2NET.WorldVersusWorld;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Providers;
 using System.ComponentModel.Composition;
@@ -27,7 +24,7 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// The GW2.NET API service objective
         /// </summary>
-        private ServiceManager service = new ServiceManager();
+        private IMatchRepository matchService = GW2.V1.WvW.Matches;
 
         /// <summary>
         /// String provider that provides objective names
@@ -112,12 +109,12 @@ namespace GW2PAO.API.Services
         {
             Dictionary<int, string> worldMatchIDs = new Dictionary<int, string>();
 
-            var matches = this.service.GetMatches();
+            var matches = this.matchService.Discover();
             foreach (var match in matches)
             {
-                worldMatchIDs.Add(match.Value.BlueWorldId, match.Key);
-                worldMatchIDs.Add(match.Value.GreenWorldId, match.Key);
-                worldMatchIDs.Add(match.Value.RedWorldId, match.Key);
+                worldMatchIDs.Add(match.BlueWorldId, match.MatchId);
+                worldMatchIDs.Add(match.GreenWorldId, match.MatchId);
+                worldMatchIDs.Add(match.RedWorldId, match.MatchId);
             }
 
             return worldMatchIDs;
@@ -154,12 +151,12 @@ namespace GW2PAO.API.Services
         {
             Dictionary<int, WorldColor> teamColors = new Dictionary<int, WorldColor>();
 
-            var matches = this.service.GetMatches();
+            var matches = this.matchService.Discover();
             foreach (var match in matches)
             {
-                teamColors.Add(match.Value.BlueWorldId, WorldColor.Blue);
-                teamColors.Add(match.Value.GreenWorldId, WorldColor.Green);
-                teamColors.Add(match.Value.RedWorldId, WorldColor.Red);
+                teamColors.Add(match.BlueWorldId, WorldColor.Blue);
+                teamColors.Add(match.GreenWorldId, WorldColor.Green);
+                teamColors.Add(match.RedWorldId, WorldColor.Red);
             }
 
             return teamColors;
@@ -219,7 +216,7 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var details = this.service.GetMatchDetails(matchId);
+                var details = this.matchService.Find(new Matchup { MatchId = matchId });
                 if (details != null)
                 {
                     switch (this.GetTeamColor(worldId))
@@ -257,7 +254,7 @@ namespace GW2PAO.API.Services
             List<WvWObjective> objectives = new List<WvWObjective>();
             try
             {
-                var matchDetails = this.service.GetMatchDetails(matchId);
+                var matchDetails = this.matchService.Find(new Matchup { MatchId = matchId });
                 if (matchDetails != null)
                 {
                     CompetitiveMap mapDetails = null;
@@ -357,7 +354,7 @@ namespace GW2PAO.API.Services
             List<WvWObjective> objectives = new List<WvWObjective>();
             try
             {
-                var matchDetails = this.service.GetMatchDetails(matchId);
+                var matchDetails = this.matchService.Find(new Matchup { MatchId = matchId });
                 if (matchDetails != null)
                 {
                     foreach (var mapDetails in matchDetails.Maps)
@@ -451,10 +448,10 @@ namespace GW2PAO.API.Services
                 || (this.currentMatchup.EndTime.CompareTo(DateTimeOffset.UtcNow) < 0))
             {
                 // We've never requested the current matchup, or we've passed the end time for the current matchup
-                var matches = this.service.GetMatches();
-                this.currentMatchup = matches.Values.FirstOrDefault(match => match.BlueWorldId == worldId
-                                                                            || match.GreenWorldId == worldId
-                                                                            || match.RedWorldId == worldId);
+                var matches = this.matchService.Discover();
+                this.currentMatchup = matches.FirstOrDefault(match => match.BlueWorldId == worldId
+                                                                        || match.GreenWorldId == worldId
+                                                                        || match.RedWorldId == worldId);
                 this.cachedWorldID = worldId;
             }
 

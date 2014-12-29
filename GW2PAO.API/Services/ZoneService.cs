@@ -5,8 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2DotNET;
-using GW2DotNET.Entities.Maps;
+using GW2NET;
+using GW2NET.Maps;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
@@ -28,11 +28,6 @@ namespace GW2PAO.API.Services
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// The GW2.NET API service objective
-        /// </summary>
-        private ServiceManager service = new ServiceManager();
-
-        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>
@@ -43,20 +38,22 @@ namespace GW2PAO.API.Services
             try
             {
                 // Get the continents (used later in determining the location of items)
-                var continents = this.service.GetContinents();
+                var continents = GW2.V1.Continents.ForCurrentUICulture().FindAll();
 
                 // Get the current map info
-                var map = this.service.GetMap(mapId, CultureInfo.CurrentUICulture);
+                var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
                 if (map != null)
                 {
                     // Find the map's continent
                     var continent = continents[map.ContinentId];
                     map.Continent = continent;
 
+                    var floorService = GW2.V1.Floors.ForCurrentUICulture(map.ContinentId);
+
                     // Retrieve details of items on every floor of the map
                     foreach (var floorId in map.Floors)
                     {
-                        var floor = this.service.GetMapFloor(map.ContinentId, floorId, CultureInfo.CurrentUICulture);
+                        var floor = floorService.Find(floorId);
                         if (floor != null && floor.Regions != null)
                         {
                             // Find the region that this map is located in
@@ -87,11 +84,11 @@ namespace GW2PAO.API.Services
                                                 zoneItem.ChatCode = mapChatLink.ToString();
 
                                             // Translate the item's type
-                                            if (item is GW2DotNET.Entities.Maps.Vista)
+                                            if (item is GW2NET.Maps.Vista)
                                                 zoneItem.Type = ZoneItemType.Vista;
-                                            else if (item is GW2DotNET.Entities.Maps.Waypoint)
+                                            else if (item is GW2NET.Maps.Waypoint)
                                                 zoneItem.Type = ZoneItemType.Waypoint;
-                                            else if (item is GW2DotNET.Entities.Maps.Dungeon)
+                                            else if (item is GW2NET.Maps.Dungeon)
                                                 zoneItem.Type = ZoneItemType.Dungeon;
                                             else
                                                 zoneItem.Type = ZoneItemType.PointOfInterest;
@@ -167,7 +164,7 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var map = this.service.GetMap(mapId, CultureInfo.CurrentUICulture);
+                var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
                 if (map != null)
                     return map.MapName;
                 else

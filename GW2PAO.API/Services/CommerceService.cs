@@ -7,10 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2DotNET;
-using GW2DotNET.Entities.Items;
-using GW2DotNET.V2.Commerce;
-using GW2DotNET.V2.Items;
+using GW2NET;
+using GW2NET.Commerce;
+using GW2NET.Items;
+using GW2NET.V2.Commerce;
+using GW2NET.V2.Items;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
@@ -26,9 +27,7 @@ namespace GW2PAO.API.Services
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private ServiceManager serviceManager;
-        private PriceService priceService;
-        private ItemService itemService;
+        private IAggregateListingRepository priceService;
 
         /// <summary>
         /// Cache of item names loaded fromthe ItemNames.json file
@@ -45,10 +44,7 @@ namespace GW2PAO.API.Services
         /// </summary>
         public CommerceService()
         {
-            ServiceFactory sf = ServiceFactory.Default();
-            this.priceService = (PriceService)sf.GetPriceService();
-            this.itemService = (ItemService)sf.GetItemService();
-            this.serviceManager = new ServiceManager();
+            this.priceService = GW2.V2.Commerce.Prices;
             this.ItemsDatabaseBuilder = new ItemsDatabaseBuilder();
             this.ItemsDB = new ConcurrentDictionary<int, ItemDBEntry>();
             this.ReloadDatabase();
@@ -150,8 +146,8 @@ namespace GW2PAO.API.Services
 
             try
             {
-                this.itemService.Culture = CultureInfo.CurrentUICulture; // Make sure we keep the current UI culture updated
-                var itemDetails = this.itemService.Find(itemID);
+                var itemService = GW2.V2.Items.ForCurrentUICulture();
+                var itemDetails = itemService.Find(itemID);
                 if (itemDetails != null)
                 {
                     item = new Data.Entities.Item(itemID, itemDetails.Name);
@@ -169,7 +165,7 @@ namespace GW2PAO.API.Services
                     // TODO: Finish this up, get all details, such as Type, SkinID
                 }
             }
-            catch (GW2DotNET.Common.ServiceException ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding item with id {0}: {1}", itemID, ex);
@@ -192,8 +188,8 @@ namespace GW2PAO.API.Services
                 // Remove all items with itemID of 0 or less
                 var validIDs = itemIDs.Where(id => id > 0).ToList();
 
-                this.itemService.Culture = CultureInfo.CurrentUICulture; // Make sure we keep the current UI culture updated
-                var itemDetails = this.itemService.FindAll(validIDs);
+                var itemService = GW2.V2.Items.ForCurrentUICulture();
+                var itemDetails = itemService.FindAll(validIDs);
                 var prices = this.GetItemPrices(validIDs);
 
                 foreach (var itemDetail in itemDetails)
@@ -218,7 +214,7 @@ namespace GW2PAO.API.Services
                     items.Add(item.ID, item);
                 }
             }
-            catch (GW2DotNET.Common.ServiceException ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding item: {0}", ex);
@@ -249,7 +245,7 @@ namespace GW2PAO.API.Services
                     };
                 }
             }
-            catch (GW2DotNET.Common.ServiceException ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding prices for itemId {0}: {1}", ex);
@@ -285,7 +281,7 @@ namespace GW2PAO.API.Services
                     }
                 }
             }
-            catch (GW2DotNET.Common.ServiceException ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding prices: {0}", ex);

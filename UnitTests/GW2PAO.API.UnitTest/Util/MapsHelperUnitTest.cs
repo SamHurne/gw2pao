@@ -1,6 +1,6 @@
 ﻿using System;
-using GW2DotNET.Entities.Maps;
-using GW2PAO.API.Data;
+using GW2NET.Common.Drawing;
+using GW2NET.Maps;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,10 +18,10 @@ namespace GW2PAO.API.UnitTest.Util
             Map testMap = new Map();
             int x = random.Next();
             int y = random.Next();
-            testMap.MapRectangle = new Rectangle(new Point2D(x, y), new Point2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            testMap.MapRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
             x = random.Next();
             y = random.Next();
-            testMap.ContinentRectangle = new Rectangle(new Point2D(x, y), new Point2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            testMap.ContinentRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
             testMap.Continent = new Continent();
 
             Point inputPoint = new Point(
@@ -42,10 +42,10 @@ namespace GW2PAO.API.UnitTest.Util
             Map testMap = new Map();
             int x = random.Next();
             int y = random.Next();
-            testMap.MapRectangle = new Rectangle(new Point2D(x, y), new Point2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            testMap.MapRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
             x = random.Next();
             y = random.Next();
-            testMap.ContinentRectangle = new Rectangle(new Point2D(x, y), new Point2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            testMap.ContinentRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
             testMap.Continent = new Continent();
 
             testMap.MaximumLevel = random.Next();

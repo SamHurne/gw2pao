@@ -70,15 +70,14 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2.NET, Version=0.9.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET\lib\net40\GW2.NET.dll</HintPath>
+    <Reference Include="GW2NET">
+      <HintPath>..\packages\GW2.NET.0.9.12.1\net40\GW2NET.dll</HintPath>
     </Reference>
-    <Reference Include="GW2.NET.Core, Version=0.9.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET\lib\net40\GW2.NET.Core.dll</HintPath>
+    <Reference Include="GW2NET.Core">
+      <HintPath>..\packages\GW2.NET.0.9.12.1\net40\GW2NET.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
