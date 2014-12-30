@@ -579,24 +579,27 @@ namespace GW2PAO.Modules.WvW
         {
             // Calculate time distances for all objectives, based on the player's position, if the player is in the same map as the objective
             // Note: these are approximations at best
-            var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
-            Threading.InvokeOnUI(() =>
+            if (this.playerService.HasValidMapId)
             {
-                foreach (var objective in this.CurrentObjectives)
+                var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
+                Threading.InvokeOnUI(() =>
                 {
-                    if (this.PlayerMap == objective.Map)
+                    foreach (var objective in this.CurrentObjectives)
                     {
-                        if (playerPosition != null && objective.ModelData.MapLocation != null)
+                        if (this.PlayerMap == objective.Map)
                         {
-                            objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserData.DistanceUnits));
+                            if (playerPosition != null && objective.ModelData.MapLocation != null)
+                            {
+                                objective.DistanceFromPlayer = Math.Round(CalcUtil.CalculateDistance(playerPosition, objective.ModelData.MapLocation, this.UserData.DistanceUnits));
+                            }
+                        }
+                        else
+                        {
+                            objective.DistanceFromPlayer = 0;
                         }
                     }
-                    else
-                    {
-                        objective.DistanceFromPlayer = 0;
-                    }
-                }
-            });
+                });
+            }
         }
 
         /// <summary>
