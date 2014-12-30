@@ -88,12 +88,14 @@
                                       KeyboardNavigation.DirectionalNavigation="Contained">
                             <Border Background="{TemplateBinding Background}"
                                     CornerRadius="0" Padding="5">
-                                <ContentPresenter Content="{TemplateBinding SelectedContent}" 
-                                                  ContentTemplate="{TemplateBinding SelectedContentTemplate}" 
-                                                  ContentStringFormat="{TemplateBinding SelectedContentStringFormat}" 
-                                                  ContentSource="SelectedContent" 
-                                                  Name="PART_SelectedContentHost"
-                                                  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                    <ContentPresenter Content="{TemplateBinding SelectedContent}" 
+                                                      ContentTemplate="{TemplateBinding SelectedContentTemplate}" 
+                                                      ContentStringFormat="{TemplateBinding SelectedContentStringFormat}" 
+                                                      ContentSource="SelectedContent" 
+                                                      Name="PART_SelectedContentHost"
+                                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                </ScrollViewer>
                             </Border>
                         </Grid>
                     </Grid>

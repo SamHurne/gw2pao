@@ -7,7 +7,7 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
@@ -44,6 +44,68 @@
                 </CheckBox>
             </StackPanel>
         </GroupBox>
-        
+        <GroupBox Margin="0,5,5,5">
+            <GroupBox.Header>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BestTimes}"/>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Content="{x:Static resx:Resources.ResetAll}"
+                        HorizontalAlignment="Left"
+                        Command="{Binding ResetAllBestTimesCommand}"
+                        Width="100"/>
+                <ItemsControl ItemsSource="{Binding Dungeons}"
+                              Name="BestTimesItemsControl"
+                              Grid.Row="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5,5,20,5" MinWidth="135">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <core:OutlinedTextBlock Grid.Row="0"
+                                                        Text="{Binding DungeonName}"
+                                                        FontSize="13"/>
+                                <ItemsControl Grid.Row="1" ItemsSource="{Binding Paths}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="15,2,2,2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <core:OutlinedTextBlock Grid.Column="0"
+                                                                        VerticalAlignment="Center"
+                                                                        Text="{Binding DisplayName, StringFormat={}{0}:}"/>
+                                                <core:OutlinedTextBlock Grid.Column="1"
+                                                                        VerticalAlignment="Center"
+                                                                        Margin="5,0,5,0"
+                                                                        Text="{Binding BestTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
+                                                <Button Grid.Column="2" 
+                                                        VerticalAlignment="Center"
+                                                        Margin="5,0,5,0"
+                                                        Command="{Binding DataContext.ResetBestTimeCommand, ElementName=BestTimesItemsControl}"
+                                                        CommandParameter="{Binding}"
+                                                        Content="{x:Static resx:Resources.Reset}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </GroupBox>
     </StackPanel>
 </UserControl>

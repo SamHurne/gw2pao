@@ -124,6 +124,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Best Times.
+        /// </summary>
+        public static string BestTimes {
+            get {
+                return ResourceManager.GetString("BestTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bloodlust Objectives.
         /// </summary>
         public static string BloodlustObjectives {
@@ -1002,6 +1011,15 @@ namespace GW2PAO.Properties {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset All.
+        /// </summary>
+        public static string ResetAll {
+            get {
+                return ResourceManager.GetString("ResetAll", resourceCulture);
             }
         }
         

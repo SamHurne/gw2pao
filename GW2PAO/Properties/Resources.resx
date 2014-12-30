@@ -689,4 +689,11 @@
     <value>Sort By</value>
     <comment>Sort a list by a specific property</comment>
   </data>
+  <data name="BestTimes" xml:space="preserve">
+    <value>Best Times</value>
+    <comment>Best dungeon path completion times</comment>
+  </data>
+  <data name="ResetAll" xml:space="preserve">
+    <value>Reset All</value>
+  </data>
 </root>
