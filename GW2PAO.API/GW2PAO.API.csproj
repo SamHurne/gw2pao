@@ -76,6 +76,9 @@
     <Reference Include="GW2NET.Core">
       <HintPath>..\packages\GW2.NET.0.9.12.1\net40\GW2NET.Core.dll</HintPath>
     </Reference>
+    <Reference Include="GW2NET.MumbleLink">
+      <HintPath>..\packages\GW2.NET.0.9.12.1\net40\GW2NET.MumbleLink.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -171,12 +174,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GW2PAO.Mumble\GW2PAO.Mumble.csproj">
-      <Project>{4fb110cf-9cef-4c97-8c25-5ca5912039af}</Project>
-      <Name>GW2PAO.Mumble</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
