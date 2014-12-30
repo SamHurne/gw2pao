@@ -72,5 +72,17 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
                 this.UpdateLayout();
             }
         }
+
+        private void OverlayWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                Properties.Settings.Default.DungeonTimerHeight = this.Height;
+                Properties.Settings.Default.DungeonTimerWidth = this.Width;
+                Properties.Settings.Default.DungeonTimerX = this.Left;
+                Properties.Settings.Default.DungeonTimerY = this.Top;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

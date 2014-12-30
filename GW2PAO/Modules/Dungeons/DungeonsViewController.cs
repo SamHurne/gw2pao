@@ -54,6 +54,9 @@ namespace GW2PAO.Modules.Dungeons
             {
                 if (Properties.Settings.Default.IsDungeonTrackerOpen && this.CanDisplayDungeonTracker())
                     this.DisplayDungeonTracker();
+
+                if (Properties.Settings.Default.IsDungeonTimerOpen && this.CanDisplayDungeonTimer())
+                    this.DisplayDungeonTimer();
             });
         }
 
@@ -68,6 +71,12 @@ namespace GW2PAO.Modules.Dungeons
             {
                 Properties.Settings.Default.IsDungeonTrackerOpen = this.dungeonTrackerView.IsVisible;
                 Threading.InvokeOnUI(() => this.dungeonTrackerView.Close());
+            }
+
+            if (this.dungeonTimerView != null)
+            {
+                Properties.Settings.Default.IsDungeonTimerOpen = this.dungeonTimerView.IsVisible;
+                Threading.InvokeOnUI(() => this.dungeonTimerView.Close());
             }
 
             Properties.Settings.Default.Save();

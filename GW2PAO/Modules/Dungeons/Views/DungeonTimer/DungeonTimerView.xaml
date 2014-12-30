@@ -5,13 +5,19 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         Title="DungeonTimerView"
-        MinWidth="150" Width="250"
-        MinHeight="110" Height="110"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerX}"
+        MinWidth="150"
+        MinHeight="110"
+        Height="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerHeight}"
+        Width="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Topmost="True"
-        TextOptions.TextFormattingMode="Display">
+        TextOptions.TextFormattingMode="Display"
+        Closing="OverlayWindow_Closing">
 
     <src:OverlayWindow.Resources>
         <DockPanel x:Key="PlayGraphic" Height="10"

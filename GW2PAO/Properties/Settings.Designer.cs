@@ -634,5 +634,65 @@ namespace GW2PAO.Properties {
                 this["Hotkeys"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDungeonTimerOpen {
+            get {
+                return ((bool)(this["IsDungeonTimerOpen"]));
+            }
+            set {
+                this["IsDungeonTimerOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTimerX {
+            get {
+                return ((double)(this["DungeonTimerX"]));
+            }
+            set {
+                this["DungeonTimerX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DungeonTimerY {
+            get {
+                return ((double)(this["DungeonTimerY"]));
+            }
+            set {
+                this["DungeonTimerY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110")]
+        public double DungeonTimerHeight {
+            get {
+                return ((double)(this["DungeonTimerHeight"]));
+            }
+            set {
+                this["DungeonTimerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public double DungeonTimerWidth {
+            get {
+                return ((double)(this["DungeonTimerWidth"]));
+            }
+            set {
+                this["DungeonTimerWidth"] = value;
+            }
+        }
     }
 }
