@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GW2DotNET.Entities.Maps;
+using GW2NET.Maps;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 

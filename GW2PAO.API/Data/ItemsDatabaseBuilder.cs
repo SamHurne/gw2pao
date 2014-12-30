@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2DotNET;
-using GW2DotNET.V2.Items;
+using GW2NET;
 using GW2PAO.API.Constants;
 using GW2PAO.API.Data.Enums;
 using Newtonsoft.Json;
@@ -21,19 +19,6 @@ namespace GW2PAO.API.Data
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        /// <summary>
-        /// The service responsible for providing item information data
-        /// </summary>
-        private ItemService itemService;
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public ItemsDatabaseBuilder()
-        {
-            this.itemService = (ItemService)ServiceFactory.Default().GetItemService();
-        }
 
         /// <summary>
         /// Loads the item names database from file
@@ -65,8 +50,8 @@ namespace GW2PAO.API.Data
         /// <returns>Returns the total amount of requests that will be performed</returns>
         public int RebuildItemDatabase(CultureInfo culture, Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
         {
-            this.itemService.Culture = culture;
-            var itemIds = this.itemService.Discover();
+            var itemService = GW2.V2.Items.ForCulture(culture);
+            var itemIds = itemService.Discover();
 
             // We'll split this up into multiple requests
             int requestSize = 200; // maybe tweak this
@@ -83,7 +68,7 @@ namespace GW2PAO.API.Data
                         return;
                     }
 
-                    var items = this.itemService.GetPage(i, requestSize);
+                    var items = itemService.FindPage(i, requestSize);
                     foreach (var item in items)
                     {
                         var entry = new ItemDBEntry(item.ItemId, item.Name, (ItemRarity)item.Rarity, item.Level);
