@@ -77,6 +77,11 @@ namespace GW2PAO.Modules.Dungeons
         private int currentMapId;
 
         /// <summary>
+        /// The previous player tick
+        /// </summary>
+        private long previousPlayerTick;
+
+        /// <summary>
         /// The interval by which to refresh the dungeon reset state (in ms)
         /// </summary>
         public int RefreshInterval { get; set; }
@@ -249,21 +254,10 @@ namespace GW2PAO.Modules.Dungeons
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped
 
-                // Refresh state of path completions
+                // Check for the daily reset
                 if (DateTime.UtcNow.Date.CompareTo(this.userData.LastResetDateTime.Date) != 0)
                 {
-                    logger.Info("Resetting path completions state");
-                    this.userData.LastResetDateTime = DateTime.UtcNow;
-                    Threading.BeginInvokeOnUI(() =>
-                    {
-                        foreach (var dungeon in this.Dungeons)
-                        {
-                            foreach (var path in dungeon.Paths)
-                            {
-                                path.IsCompleted = false;
-                            }
-                        }
-                    });
+                    this.OnDailyReset();
                 }
 
                 // Check if the player is in a dungeon map
@@ -279,27 +273,8 @@ namespace GW2PAO.Modules.Dungeons
                         this.DungeonTimerData.CurrentDungeon = null;
                         this.DungeonTimerData.CurrentPath = null;
 
-                        if (this.DungeonTimerData.IsTimerRunning
-                            && this.UserData.AutoStopDungeonTimer)
-                        {
-                            // If enabled, stop the timer when the user changes map
-                            logger.Info("Pausing dungeon timer - Timer: {0}", this.DungeonTimerData.TimerValue);
+                        if (this.UserData.AutoStopDungeonTimer)
                             this.DungeonTimerData.PauseTimer();
-
-                            // Save the dungeon time if the player completed the dungeon
-                            if (this.DungeonTimerData.CurrentPath != null
-                                && this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints.Values.All(preReqMet => preReqMet == true)
-                                && this.DungeonTimerData.CurrentPath.IsCompleted)
-                            {
-                                var bestPathTime = this.UserData.BestPathTimes.FirstOrDefault(pt => pt.PathID == this.DungeonTimerData.CurrentPath.PathId);
-                                if (this.DungeonTimerData.TimerValue.CompareTo(bestPathTime.Time) < 0)
-                                {
-                                    logger.Info("New best time for {0} ({1}) detected: {2}", bestPathTime.PathID, bestPathTime.PathData.DisplayName, this.DungeonTimerData.TimerValue);
-                                    bestPathTime.Time = this.DungeonTimerData.TimerValue;
-                                    bestPathTime.Timestamp = DateTime.Now;
-                                }
-                            }
-                        }
                     }
 
                     // Determine if the current map is a dungeon map
@@ -323,43 +298,17 @@ namespace GW2PAO.Modules.Dungeons
 
                         // Loop through the dungeon paths and see if we know what path we are in
                         if (this.DungeonTimerData.CurrentPath == null)
-                        {
-                            foreach (var path in dungeonVm.Paths)
-                            {
-                                if (this.IsPlayerInPath(path))
-                                {
-                                    logger.Trace("Dungeon path detected: {0}", path.DisplayName);
-                                    Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentPath = path);
-                                    break;
-                                }
-                            }
-                        }
+                            this.DeterminePath(dungeonVm);
 
                         if (this.DungeonTimerData.CurrentPath != null)
                         {
-                            // The current path is known, so monitor the player position to mark any pre-requisite points as met
-                            foreach (var preReq in this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints.Keys)
-                            {
-                                if (this.IsPlayerNear(preReq, this.DungeonTimerData.CurrentPath.PointDetectionRadius))
-                                {
-                                    this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints[preReq] = true;
-                                }
-                            }
-
-                            if (!this.DungeonTimerData.CurrentPath.IsCompleted && this.UserData.AutoCompleteDungeons)
-                            {
-                                // If the player has reached the end of the path and met all pre-requisite points,
-                                // mark that path as completed, if enabled
-                                if (this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint, this.DungeonTimerData.CurrentPath.PointDetectionRadius))
-                                {
-                                    if (this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints.Values.All(preReqMet => preReqMet == true))
-                                    {
-                                        logger.Trace("End of path reached, marking as completed");
-                                        this.DungeonTimerData.CurrentPath.IsCompleted = true;
-                                    }
-                                }
-                            }
+                            // Current path is known
+                            this.RefreshPrereqPointsState(this.DungeonTimerData.CurrentPath);
+                            this.CheckForPathEnd();
                         }
+
+                        // Keep the previousPlayerTick value up-to-date
+                        previousPlayerTick = this.playerService.Tick;
                     }
                 }
 
@@ -425,6 +374,108 @@ namespace GW2PAO.Modules.Dungeons
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Performs the appropriate actions (like resetting dungeons) for
+        /// the daily reset
+        /// </summary>
+        private void OnDailyReset()
+        {
+            logger.Info("Resetting path completions state");
+            this.userData.LastResetDateTime = DateTime.UtcNow;
+            Threading.BeginInvokeOnUI(() =>
+            {
+                foreach (var dungeon in this.Dungeons)
+                {
+                    foreach (var path in dungeon.Paths)
+                    {
+                        path.IsCompleted = false;
+                    }
+                }
+            });
+        }
+
+        /// <summary>
+        /// Attempts to determine the path that the player is in, using the given dungeon VM
+        /// </summary>
+        /// <param name="dungeonVm">The dungeon VM to use when determining the current path</param>
+        private void DeterminePath(DungeonViewModel dungeonVm)
+        {
+            foreach (var path in dungeonVm.Paths)
+            {
+                if (this.IsPlayerInPath(path))
+                {
+                    logger.Trace("Dungeon path detected: {0}", path.DisplayName);
+                    Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentPath = path);
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the pre-requisite points state of all pre-req points for the given dungeon path
+        /// </summary>
+        /// <param name="dungeonPath">The dungeon path to refres</param>
+        private void RefreshPrereqPointsState(PathViewModel dungeonPath)
+        {
+            // The current path is known, so monitor the player position to mark any pre-requisite points as met
+            foreach (var preReq in dungeonPath.CompletionPrerequisitePoints.Keys)
+            {
+                if (this.IsPlayerNear(preReq, this.DungeonTimerData.CurrentPath.PointDetectionRadius))
+                {
+                    this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints[preReq] = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Resets the pre-requisite points state of all pre-req points for the given dungeon path
+        /// </summary>
+        /// <param name="dungeonPath">The dungeon path to update</param>
+        private void ResetPrereqPointsState(PathViewModel dungeonPath)
+        {
+            foreach (var preReq in dungeonPath.CompletionPrerequisitePoints.Keys)
+            {
+                this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints[preReq] = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks to see if the player has reached the end of the dungeon path and performs appropriate actions if so
+        /// </summary>
+        private void CheckForPathEnd()
+        {
+            if (this.playerService.Tick == this.previousPlayerTick)
+            {
+                // The mumble tick is not updating, so we are either in a cutscene or in a loading screen
+                // In this situation, we automatically stop the timer, save the best time, and mark the dungeon as completed
+                if (this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint, this.DungeonTimerData.CurrentPath.PointDetectionRadius)
+                    && this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints.Values.All(preReqMet => preReqMet == true))
+                {
+                    if (this.DungeonTimerData.IsTimerRunning && this.UserData.AutoStopDungeonTimer)
+                    {
+                        // Stop the timer and save it's value as the best time if it's the best time
+                        this.DungeonTimerData.PauseTimer();
+
+                        var bestPathTime = this.DungeonTimerData.CurrentPath.BestTime;
+                        if (bestPathTime.Time == TimeSpan.Zero
+                            || this.DungeonTimerData.TimerValue.CompareTo(bestPathTime.Time) < 0)
+                        {
+                            logger.Info("New best time for {0} ({1}) detected: {2}", bestPathTime.PathID, bestPathTime.PathData.DisplayName, this.DungeonTimerData.TimerValue);
+                            bestPathTime.Time = this.DungeonTimerData.TimerValue;
+                            bestPathTime.Timestamp = DateTime.Now;
+                        }
+                    }
+
+                    if (!this.DungeonTimerData.CurrentPath.IsCompleted
+                        && this.UserData.AutoCompleteDungeons)
+                    {
+                        logger.Trace("End of path reached, marking as completed");
+                        this.DungeonTimerData.CurrentPath.IsCompleted = true;
+                    }
+                }
             }
         }
     }
