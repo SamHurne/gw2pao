@@ -132,6 +132,7 @@
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu>
+                            <MenuItem Header="{x:Static resx:Resources.Settings}" Command="{Binding OpenSettingsCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
@@ -185,19 +186,14 @@
             </Grid>
             <Border.Style>
                 <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
-                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="Opacity" Value="1" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding UserData.AutoHideTimerBorder}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation To="0"
@@ -205,8 +201,17 @@
                                                          Duration="00:00:0.1"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
@@ -233,19 +238,14 @@
                     Content="{StaticResource StopGraphic}" />
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
-                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="Opacity" Value="1" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding UserData.AutoHideTimerBorder}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation To="0"
@@ -253,8 +253,17 @@
                                                          Duration="00:00:0.1"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>

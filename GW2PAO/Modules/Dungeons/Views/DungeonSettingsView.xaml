@@ -42,6 +42,10 @@
                 <CheckBox IsChecked="{Binding UserData.AutoCompleteDungeons}">
                     <core:OutlinedTextBlock Text="Auto-Complete" />
                 </CheckBox>
+                <CheckBox IsChecked="{Binding UserData.AutoHideTimerBorder}"
+                          Margin="25,2,2,2">
+                    <core:OutlinedTextBlock Text="Auto-Hide Border" />
+                </CheckBox>
             </StackPanel>
         </GroupBox>
         <GroupBox Margin="0,5,5,5">

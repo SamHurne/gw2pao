@@ -27,6 +27,7 @@ namespace GW2PAO.Modules.Dungeons
         private bool autoStartDungeonTimer;
         private bool autoStopDungeonTimer;
         private bool autoCompleteDungeons;
+        private bool autoHideTimerBorder;
 
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenDungeons = new ObservableCollection<Guid>();
@@ -61,6 +62,15 @@ namespace GW2PAO.Modules.Dungeons
         }
 
         /// <summary>
+        /// True if the dungeon timer's border should automatically hide, else false
+        /// </summary>
+        public bool AutoHideTimerBorder
+        {
+            get { return this.autoHideTimerBorder; }
+            set { SetProperty(ref this.autoHideTimerBorder, value); }
+        }
+
+        /// <summary>
         /// The last recorded server-reset date/time
         /// </summary>
         public DateTime LastResetDateTime
@@ -89,7 +99,12 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         public DungeonsUserData()
         {
+            // Defaults:
             this.LastResetDateTime = DateTime.UtcNow;
+            this.AutoStartDungeonTimer = true;
+            this.AutoStopDungeonTimer = true;
+            this.AutoCompleteDungeons = true;
+            this.AutoHideTimerBorder = true;
         }
 
         /// <summary>

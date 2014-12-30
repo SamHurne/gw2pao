@@ -128,7 +128,7 @@ namespace GW2PAO.Modules.Dungeons
             this.isStopped = false;
 
             // Initialize the dungeon timer view model
-            this.DungeonTimerData = new DungeonTimerViewModel();
+            this.DungeonTimerData = new DungeonTimerViewModel(userData);
 
             // Initialize the refresh timer
             this.dungeonsRefreshTimer = new Timer(this.Refresh);

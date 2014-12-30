@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
+using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -30,6 +31,15 @@ namespace GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer
         /// The stopwatch object that provides the accurate timer values
         /// </summary>
         private Stopwatch stopWatch;
+
+        /// <summary>
+        /// Dungeons user data object
+        /// </summary>
+        public DungeonsUserData UserData
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// The actual timer value
@@ -125,10 +135,21 @@ namespace GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer
         }
 
         /// <summary>
+        /// Command to open the dungeon timer settings
+        /// </summary>
+        public ICommand OpenSettingsCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
-        public DungeonTimerViewModel()
+        /// <param name="userData">The dungeons user data</param>
+        public DungeonTimerViewModel(DungeonsUserData userData)
         {
+            this.UserData = userData;
             this.stopWatch = new Stopwatch();
             this.timer = new Timer(TimerInterval.TotalMilliseconds);
             this.timer.AutoReset = true;
@@ -137,6 +158,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer
             this.StartTimerCommand = new DelegateCommand(this.StartTimer);
             this.PauseTimerCommand = new DelegateCommand(this.PauseTimer);
             this.StopTimerCommand = new DelegateCommand(this.StopTimer);
+            this.OpenSettingsCommand = new DelegateCommand(() => Commands.OpenDungeonSettingsCommand.Execute(null));
         }
 
         /// <summary>
