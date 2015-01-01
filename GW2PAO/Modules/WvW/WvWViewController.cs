@@ -73,7 +73,10 @@ namespace GW2PAO.Modules.WvW
                 Threading.InvokeOnUI(() => this.wvwTrackerView.Close());
             }
 
-            // TODO: Also close down the notifications window
+            if (this.wvwNotificationsView != null)
+            {
+                this.wvwNotificationsView.Close();
+            }
 
             Properties.Settings.Default.Save();
         }
