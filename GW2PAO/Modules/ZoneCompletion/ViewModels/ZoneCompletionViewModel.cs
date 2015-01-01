@@ -22,6 +22,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
     /// <summary>
     /// Primatry Zone Completion Assistant view model class
     /// </summary>
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     [Export]
     public class ZoneCompletionViewModel : BindableBase
     {

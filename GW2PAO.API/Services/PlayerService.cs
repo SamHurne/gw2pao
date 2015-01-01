@@ -19,13 +19,24 @@ namespace GW2PAO.API.Services
     /// Service class for player information.
     /// Makes use of the Gw2 Mumble interface
     /// </summary>
+    [PartCreationPolicy(CreationPolicy.Shared)]
     [Export(typeof(IPlayerService))]
-    public class PlayerService : IPlayerService
+    public class PlayerService : IPlayerService, IDisposable
     {
         /// <summary>
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// The actual memory-mapped file that serves as the mumble link
+        /// </summary>
+        private MumbleLinkFile mumbleLink;
+
+        /// <summary>
+        /// True if this object has been disposed, else false
+        /// </summary>
+        private bool disposed = false;
 
         /// <summary>
         /// Name of the current character
@@ -34,14 +45,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.Name;
-                    else
-                        return null;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.Identity.Name;
+                else
+                    return null;
             }
         }
 
@@ -50,16 +61,16 @@ namespace GW2PAO.API.Services
         /// </summary>
         public bool IsCommander
         {
-            get 
+            get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.Commander;
-                    else
-                        return false;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.Identity.Commander;
+                else
+                    return false;
             }
         }
 
@@ -70,14 +81,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Context.MapId;
-                    else
-                        return 0;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.Context.MapId;
+                else
+                    return 0;
             }
         }
 
@@ -99,14 +110,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.WorldId;
-                    else
-                        return 0;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.Identity.WorldId;
+                else
+                    return 0;
             }
         }
 
@@ -128,14 +139,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.UiTick;
-                    else
-                        return 0;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.UiTick;
+                else
+                    return 0;
             }
         }
 
@@ -146,33 +157,33 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return Profession.Unknown;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    switch (data.Identity.Profession)
-                    {
-                        case GW2NET.Common.Profession.Elementalist:
-                            return Profession.Elementalist;
-                        case GW2NET.Common.Profession.Engineer:
-                            return Profession.Engineer;
-                        case GW2NET.Common.Profession.Guardian:
-                            return Profession.Guardian;
-                        case GW2NET.Common.Profession.Mesmer:
-                            return Profession.Mesmer;
-                        case GW2NET.Common.Profession.Necromancer:
-                            return Profession.Necromancer;
-                        case GW2NET.Common.Profession.Ranger:
-                            return Profession.Ranger;
-                        case GW2NET.Common.Profession.Thief:
-                            return Profession.Thief;
-                        case GW2NET.Common.Profession.Warrior:
-                            return Profession.Warrior;
-                        default:
-                            return Profession.Unknown;
-                    }
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return Profession.Unknown;
+
+                switch (data.Identity.Profession)
+                {
+                    case GW2NET.Common.Profession.Elementalist:
+                        return Profession.Elementalist;
+                    case GW2NET.Common.Profession.Engineer:
+                        return Profession.Engineer;
+                    case GW2NET.Common.Profession.Guardian:
+                        return Profession.Guardian;
+                    case GW2NET.Common.Profession.Mesmer:
+                        return Profession.Mesmer;
+                    case GW2NET.Common.Profession.Necromancer:
+                        return Profession.Necromancer;
+                    case GW2NET.Common.Profession.Ranger:
+                        return Profession.Ranger;
+                    case GW2NET.Common.Profession.Thief:
+                        return Profession.Thief;
+                    case GW2NET.Common.Profession.Warrior:
+                        return Profession.Warrior;
+                    default:
+                        return Profession.Unknown;
                 }
             }
         }
@@ -182,18 +193,18 @@ namespace GW2PAO.API.Services
         /// Note: GW2 returns the Y and Z reversed, so a correction is made here.
         /// </summary>
         public Point PlayerPosition
-        { 
-            get 
+        {
+            get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
-                }
-            } 
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return null;
+
+                return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
+            }
         }
 
         /// <summary>
@@ -204,14 +215,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
-                }
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return null;
+
+                return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
             }
         }
 
@@ -223,14 +234,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
-                }
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return null;
+
+                return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
             }
         }
 
@@ -242,14 +253,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
-                }
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return null;
+
+                return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
             }
         }
 
@@ -261,14 +272,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
 
-                    return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
-                }
+                var data = this.mumbleLink.Read();
+                if (data == null)
+                    return null;
+
+                return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
             }
         }
 
@@ -279,14 +290,14 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Context.ServerAddress;
-                    else
-                        return null;
-                }
+                if (this.disposed)
+                    throw new ObjectDisposedException(this.ToString());
+
+                var data = this.mumbleLink.Read();
+                if (data != null)
+                    return data.Context.ServerAddress;
+                else
+                    return null;
             }
         }
 
@@ -296,6 +307,40 @@ namespace GW2PAO.API.Services
         public PlayerService()
         {
             logger.Info("Creating PlayerService");
+            this.mumbleLink = new MumbleLinkFile();
+        }
+
+        /// <summary>
+        /// Default finalizer
+        /// </summary>
+        ~PlayerService()
+        {
+            this.Dispose(false);
+        }
+
+        /// <summary>
+        /// Releases resources made us of by this instance
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases resources made us of by this instance
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+                return;
+
+            if (disposing)
+            {
+                this.mumbleLink.Dispose();
+            }
+
+            this.disposed = true;
         }
     }
 }
