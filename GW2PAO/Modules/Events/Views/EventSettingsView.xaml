@@ -41,9 +41,14 @@
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventsTracker}" />
             </GroupBox.Header>
-            <CheckBox HorizontalAlignment="Left" IsChecked="{Binding UserData.AreInactiveEventsVisible}">
-                <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />
-            </CheckBox>
+            <StackPanel>
+                <CheckBox IsChecked="{Binding UserData.AreInactiveEventsVisible}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding UserData.AutoDetectCompletion}">
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoComplete}" />
+                </CheckBox>
+            </StackPanel>
         </GroupBox>
         <CheckBox Name="NotificationsEnabledCheckbox"
                   IsChecked="{Binding UserData.AreEventNotificationsEnabled}">

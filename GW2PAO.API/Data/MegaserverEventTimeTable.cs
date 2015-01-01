@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using GW2PAO.API.Constants;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 
@@ -78,280 +79,250 @@ namespace GW2PAO.API.Data
             MegaserverEventTimeTable tt = new MegaserverEventTimeTable();
             tt.WorldEvents = new List<WorldEvent>();
 
-            if (adjustedTimes)
-            {
-                #region Adjusted times
-                tt.WorldEvents.Add(new WorldEvent()
-                    {
-                        Name = "Megadestroyer",
-                        ID = new Guid("C876757A-EF3E-4FBE-A484-07FF790D9B05"),
-                        ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 30, 0), new EventTimespan(3, 30, 0), new EventTimespan(6, 30, 0), new EventTimespan(9, 30, 0), new EventTimespan(12, 30, 0), new EventTimespan(15, 30, 0), new EventTimespan(18, 30, 0), new EventTimespan(21, 30, 0) },
-                        Duration = new EventTimespan(0, 12, 0),
-                        WarmupDuration = new EventTimespan(0, 2, 0),
-                        MapID = 39,
-                        WaypointCode = "[&BM0CAAA=]"
-                    });
-                tt.WorldEvents.Add(new WorldEvent()
-                    {
-                        Name = "Tequatl",
-                        ID = new Guid("568A30CF-8512-462F-9D67-647D69BEFAED"),
-                        ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(11, 30, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0) },
-                        Duration = new EventTimespan(0, 15, 0),
-                        WarmupDuration = new EventTimespan(0, 0, 0),
-                        MapID = 53,
-                        WaypointCode = "[&BNABAAA=]"
-                    });
-                tt.WorldEvents.Add(new WorldEvent()
+            var megadestroyer = new WorldEvent()
+                {
+                    Name = "Megadestroyer",
+                    ID = WorldEventID.Megadestroyer,
+                    MapID = 39,
+                    WaypointCode = "[&BM0CAAA=]",
+                    CompletionLocation = new Point(-317.3, -271.8, 15.4185),
+                    CompletionRadius = 50
+                };
+            var tequatl = new WorldEvent()
+                {
+                    Name = "Tequatl",
+                    ID = WorldEventID.Tequatl,
+                    MapID = 53,
+                    WaypointCode = "[&BNABAAA=]",
+                    CompletionLocation = new Point(-562.4, -907.4, 0.3),
+                    CompletionRadius = 50
+                };
+            var karkaQueen = new WorldEvent()
                 {
                     Name = "Karka Queen",
-                    ID = new Guid("F479B4CF-2E11-457A-B279-90822511B53B"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 3, 0), new EventTimespan(6, 3, 0), new EventTimespan(10, 33, 0), new EventTimespan(15, 3, 0), new EventTimespan(18, 3, 0), new EventTimespan(23, 3, 0) },
-                    Duration = new EventTimespan(0, 5, 0),
-                    WarmupDuration = new EventTimespan(0, 5, 0),
+                    ID = WorldEventID.KarkaQueen,
                     MapID = 873,
-                    WaypointCode = "[&BNcGAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BNcGAAA=]",
+                    CompletionLocation = new Point(0, 0, 0), // TODO: Karka Queen Location
+                    CompletionRadius = 0
+                };
+            var evolvedJungleWurm = new WorldEvent()
                 {
                     Name = "Evolved Jungle Wurm",
-                    ID = new Guid("5A22EAD4-8302-4DA3-A450-3FC051BD6A3C"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(12, 30, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0) },
-                    Duration = new EventTimespan(0, 15, 0),
-                    WarmupDuration = new EventTimespan(0, 10, 0),
+                    ID = WorldEventID.EvolvedJungleWurm,
                     MapID = 73,
-                    WaypointCode = "[&BKoBAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BKoBAAA=]",
+                    CompletionLocation = new Point(0, 0, 0), // TODO: Evolved Jungle Wurm Location
+                    CompletionRadius = 0
+                };
+            var shatterer = new WorldEvent()
                 {
                     Name = "Shatterer",
-                    ID = new Guid("03BF176A-D59F-49CA-A311-39FC6F533F2F"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(16, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) },
-                    Duration = new EventTimespan(0, 7, 0),
-                    WarmupDuration = new EventTimespan(0, 6, 0),
+                    ID = WorldEventID.Shatterer,
                     MapID = 20,
-                    WaypointCode = "[&BE4DAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BE4DAAA=]",
+                    CompletionLocation = new Point(-269.9, 928.2, 3.2),
+                    CompletionRadius = 50
+                };
+            var clawOfJormag = new WorldEvent()
                 {
                     Name = "Claw of Jormag",
-                    ID = new Guid("0464CB9E-1848-4AAA-BA31-4779A959DD71"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 33, 0), new EventTimespan(5, 33, 0), new EventTimespan(8, 33, 0), new EventTimespan(11, 33, 0), new EventTimespan(14, 33, 0), new EventTimespan(17, 33, 0), new EventTimespan(20, 33, 0), new EventTimespan(23, 33, 0) },
-                    Duration = new EventTimespan(0, 17, 0),
-                    WarmupDuration = new EventTimespan(0, 3, 0),
+                    ID = WorldEventID.ClawOfJormag,
                     MapID = 30,
-                    WaypointCode = "[&BHoCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BHoCAAA=]",
+                    CompletionLocation = new Point(449.9, 468.4, 23.2),
+                    CompletionRadius = 75
+                };
+            var modniirUlgoth = new WorldEvent()
                 {
                     Name = "Modniir Ulgoth",
-                    ID = new Guid("E6872A86-E434-4FC1-B803-89921FF0F6D6"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 30, 0), new EventTimespan(4, 30, 0), new EventTimespan(7, 30, 0), new EventTimespan(10, 30, 0), new EventTimespan(13, 30, 0), new EventTimespan(16, 30, 0), new EventTimespan(19, 30, 0), new EventTimespan(22, 30, 0) },
-                    Duration = new EventTimespan(0, 4, 0),
-                    WarmupDuration = new EventTimespan(0, 15, 0),
+                    ID = WorldEventID.ModniirUlgoth,
                     MapID = 17,
-                    WaypointCode = "[&BLEAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BLEAAAA=]",
+                    CompletionLocation = new Point(803.02, 663.3, 143.8),
+                    CompletionRadius = 50
+                };
+            var inquestGolemMarkII = new WorldEvent()
                 {
                     Name = "Inquest Golem Mark II",
-                    ID = new Guid("9AA133DC-F630-4A0E-BB5D-EE34A2B306C2"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 4, 0), new EventTimespan(5, 4, 0), new EventTimespan(8, 4, 0), new EventTimespan(11, 4, 0), new EventTimespan(14, 4, 0), new EventTimespan(17, 4, 0), new EventTimespan(20, 4, 0), new EventTimespan(23, 4, 0) },
-                    Duration = new EventTimespan(0, 6, 0),
-                    WarmupDuration = new EventTimespan(0, 2, 0),
+                    ID = WorldEventID.InquestGolemMarkII,
                     MapID = 17,
-                    WaypointCode = "[&BNQCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BNQCAAA=]",
+                    CompletionLocation = new Point(902.5, 75.4, 9.6),
+                    CompletionRadius = 50
+                };
+            var taidhaCovington = new WorldEvent()
                 {
                     Name = "Taidha Covington",
-                    ID = new Guid("242BD241-E360-48F1-A8D9-57180E146789"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(21, 15, 0) },
-                    Duration = new EventTimespan(0, 4, 0),
-                    WarmupDuration = new EventTimespan(0, 15, 0),
+                    ID = WorldEventID.TaidhaCovington,
                     MapID = 73,
-                    WaypointCode = "[&BNQCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BNQCAAA=]",
+                    CompletionLocation = new Point(-178.4, 229.5, 18.5),
+                    CompletionRadius = 50
+                };
+            var jungleWurm = new WorldEvent()
                 {
                     Name = "Jungle Wurm",
-                    ID = new Guid("C5972F64-B894-45B4-BC31-2DEEA6B7C033"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(5, 15, 0), new EventTimespan(7, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(11, 15, 0), new EventTimespan(13, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(17, 15, 0), new EventTimespan(19, 15, 0), new EventTimespan(21, 15, 0), new EventTimespan(23, 15, 0) },
-                    Duration = new EventTimespan(0, 5, 0),
-                    WarmupDuration = new EventTimespan(0, 2, 0),
+                    ID = WorldEventID.JungleWurm,
                     MapID = 34,
-                    WaypointCode = "[&BEEFAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BEEFAAA=]",
+                    CompletionLocation = new Point(-401.6, 841.7, 0),
+                    CompletionRadius = 50
+                };
+            var shadowBehemoth = new WorldEvent()
                 {
                     Name = "Shadow Behemoth",
-                    ID = new Guid("31CEBA08-E44D-472F-81B0-7143D73797F5"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 46, 0), new EventTimespan(3, 46, 0), new EventTimespan(5, 46, 0), new EventTimespan(7, 46, 0), new EventTimespan(9, 46, 0), new EventTimespan(11, 46, 0), new EventTimespan(13, 46, 0), new EventTimespan(15, 46, 0), new EventTimespan(17, 46, 0), new EventTimespan(19, 46, 0), new EventTimespan(21, 46, 0), new EventTimespan(23, 46, 0) },
-                    Duration = new EventTimespan(0, 9, 0),
-                    WarmupDuration = new EventTimespan(0, 1, 0),
+                    ID = WorldEventID.ShadowBehemoth,
                     MapID = 15,
-                    WaypointCode = "[&BPwAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BPwAAAA=]",
+                    CompletionLocation = new Point(261.9, -432.2, -0.75),
+                    CompletionRadius = 50
+                };
+            var fireElemental = new WorldEvent()
                 {
                     Name = "Fire Elemental",
-                    ID = new Guid("33F76E9E-0BB6-46D0-A3A9-BE4CDFC4A3A4"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 54, 0), new EventTimespan(2, 54, 0), new EventTimespan(4, 54, 0), new EventTimespan(6, 54, 0), new EventTimespan(8, 54, 0), new EventTimespan(10, 54, 0), new EventTimespan(12, 54, 0), new EventTimespan(14, 54, 0), new EventTimespan(16, 54, 0), new EventTimespan(18, 54, 0), new EventTimespan(20, 54, 0), new EventTimespan(22, 54, 0) },
-                    Duration = new EventTimespan(0, 3, 0),
-                    WarmupDuration = new EventTimespan(0, 9, 0),
+                    ID = WorldEventID.FireElemental,
                     MapID = 35,
-                    WaypointCode = "[&BEYAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
+                    WaypointCode = "[&BEYAAAA=]",
+                    CompletionLocation = new Point(-371.9, 885.8, 21.63),
+                    CompletionRadius = 50
+                };
+            var frozenMaw = new WorldEvent()
                 {
                     Name = "Frozen Maw",
-                    ID = new Guid("F7D9D427-5E54-4F12-977A-9809B23FBA99"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 17, 0), new EventTimespan(2, 17, 0), new EventTimespan(4, 17, 0), new EventTimespan(6, 17, 0), new EventTimespan(8, 17, 0), new EventTimespan(10, 17, 0), new EventTimespan(12, 17, 0), new EventTimespan(14, 17, 0), new EventTimespan(16, 17, 0), new EventTimespan(18, 17, 0), new EventTimespan(20, 17, 0), new EventTimespan(22, 17, 0) },
-                    Duration = new EventTimespan(0, 3, 30),
-                    WarmupDuration = new EventTimespan(0, 2, 0),
+                    ID = WorldEventID.FrozenMaw,
                     MapID = 28,
-                    WaypointCode = "[&BH4BAAA=]"
-                });
-                #endregion
+                    WaypointCode = "[&BH4BAAA=]",
+                    CompletionLocation = new Point(390.7, 345.2, 71.9),
+                    CompletionRadius = 50
+                };
+
+            if (adjustedTimes)
+            {
+                megadestroyer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 35, 0), new EventTimespan(3, 35, 0), new EventTimespan(6, 35, 0), new EventTimespan(9, 35, 0), new EventTimespan(12, 35, 0), new EventTimespan(15, 35, 0), new EventTimespan(18, 35, 0), new EventTimespan(21, 35, 0) };
+                megadestroyer.Duration = new EventTimespan(0, 10, 0);
+                megadestroyer.WarmupDuration = new EventTimespan(0, 7, 0);
+
+                tequatl.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(11, 30, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0) };
+                tequatl.Duration = new EventTimespan(0, 15, 0);
+                tequatl.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                karkaQueen.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 3, 0), new EventTimespan(6, 3, 0), new EventTimespan(10, 33, 0), new EventTimespan(15, 3, 0), new EventTimespan(18, 3, 0), new EventTimespan(23, 3, 0) };
+                karkaQueen.Duration = new EventTimespan(0, 5, 0);
+                karkaQueen.WarmupDuration = new EventTimespan(0, 5, 0);
+
+                evolvedJungleWurm.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(12, 30, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0) };
+                evolvedJungleWurm.Duration = new EventTimespan(0, 15, 0);
+                evolvedJungleWurm.WarmupDuration = new EventTimespan(0, 10, 0);
+
+                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(16, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) };
+                shatterer.Duration = new EventTimespan(0, 7, 0);
+                shatterer.WarmupDuration = new EventTimespan(0, 6, 0);
+
+                clawOfJormag.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 33, 0), new EventTimespan(5, 33, 0), new EventTimespan(8, 33, 0), new EventTimespan(11, 33, 0), new EventTimespan(14, 33, 0), new EventTimespan(17, 33, 0), new EventTimespan(20, 33, 0), new EventTimespan(23, 33, 0) };
+                clawOfJormag.Duration = new EventTimespan(0, 17, 0);
+                clawOfJormag.WarmupDuration = new EventTimespan(0, 3, 0);
+
+                modniirUlgoth.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 30, 0), new EventTimespan(4, 30, 0), new EventTimespan(7, 30, 0), new EventTimespan(10, 30, 0), new EventTimespan(13, 30, 0), new EventTimespan(16, 30, 0), new EventTimespan(19, 30, 0), new EventTimespan(22, 30, 0) };
+                modniirUlgoth.Duration = new EventTimespan(0, 4, 0);
+                modniirUlgoth.WarmupDuration = new EventTimespan(0, 15, 0);
+
+                inquestGolemMarkII.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 4, 0), new EventTimespan(5, 4, 0), new EventTimespan(8, 4, 0), new EventTimespan(11, 4, 0), new EventTimespan(14, 4, 0), new EventTimespan(17, 4, 0), new EventTimespan(20, 4, 0), new EventTimespan(23, 4, 0) };
+                inquestGolemMarkII.Duration = new EventTimespan(0, 6, 0);
+                inquestGolemMarkII.WarmupDuration = new EventTimespan(0, 2, 0);
+
+                taidhaCovington.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(21, 15, 0) };
+                taidhaCovington.Duration = new EventTimespan(0, 4, 0);
+                taidhaCovington.WarmupDuration = new EventTimespan(0, 15, 0);
+
+                jungleWurm.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(5, 15, 0), new EventTimespan(7, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(11, 15, 0), new EventTimespan(13, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(17, 15, 0), new EventTimespan(19, 15, 0), new EventTimespan(21, 15, 0), new EventTimespan(23, 15, 0) };
+                jungleWurm.Duration = new EventTimespan(0, 5, 0);
+                jungleWurm.WarmupDuration = new EventTimespan(0, 2, 0);
+
+                shadowBehemoth.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 46, 0), new EventTimespan(3, 46, 0), new EventTimespan(5, 46, 0), new EventTimespan(7, 46, 0), new EventTimespan(9, 46, 0), new EventTimespan(11, 46, 0), new EventTimespan(13, 46, 0), new EventTimespan(15, 46, 0), new EventTimespan(17, 46, 0), new EventTimespan(19, 46, 0), new EventTimespan(21, 46, 0), new EventTimespan(23, 46, 0) };
+                shadowBehemoth.Duration = new EventTimespan(0, 9, 0);
+                shadowBehemoth.WarmupDuration = new EventTimespan(0, 1, 0);
+
+                fireElemental.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 54, 0), new EventTimespan(2, 54, 0), new EventTimespan(4, 54, 0), new EventTimespan(6, 54, 0), new EventTimespan(8, 54, 0), new EventTimespan(10, 54, 0), new EventTimespan(12, 54, 0), new EventTimespan(14, 54, 0), new EventTimespan(16, 54, 0), new EventTimespan(18, 54, 0), new EventTimespan(20, 54, 0), new EventTimespan(22, 54, 0) };
+                fireElemental.Duration = new EventTimespan(0, 3, 0);
+                fireElemental.WarmupDuration = new EventTimespan(0, 9, 0);
+
+                frozenMaw.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 17, 0), new EventTimespan(2, 17, 0), new EventTimespan(4, 17, 0), new EventTimespan(6, 17, 0), new EventTimespan(8, 17, 0), new EventTimespan(10, 17, 0), new EventTimespan(12, 17, 0), new EventTimespan(14, 17, 0), new EventTimespan(16, 17, 0), new EventTimespan(18, 17, 0), new EventTimespan(20, 17, 0), new EventTimespan(22, 17, 0) };
+                frozenMaw.Duration = new EventTimespan(0, 3, 30);
+                frozenMaw.WarmupDuration = new EventTimespan(0, 2, 0);
 
                 filename = AdjustedFilename;
             }
             else
             {
-                #region Standard times
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Megadestroyer",
-                    ID = new Guid("C876757A-EF3E-4FBE-A484-07FF790D9B05"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 30, 0), new EventTimespan(3, 30, 0), new EventTimespan(6, 30, 0), new EventTimespan(9, 30, 0), new EventTimespan(12, 30, 0), new EventTimespan(15, 30, 0), new EventTimespan(18, 30, 0), new EventTimespan(21, 30, 0) },
-                    Duration = new EventTimespan(0, 12, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 39,
-                    WaypointCode = "[&BM0CAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Tequatl",
-                    ID = new Guid("568A30CF-8512-462F-9D67-647D69BEFAED"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(11, 30, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0) },
-                    Duration = new EventTimespan(0, 15, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 53,
-                    WaypointCode = "[&BNABAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Karka Queen",
-                    ID = new Guid("F479B4CF-2E11-457A-B279-90822511B53B"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 0, 0), new EventTimespan(6, 0, 0), new EventTimespan(10, 30, 0), new EventTimespan(15, 0, 0), new EventTimespan(18, 0, 0), new EventTimespan(23, 0, 0) },
-                    Duration = new EventTimespan(0, 5, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 873,
-                    WaypointCode = "[&BNcGAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Evolved Jungle Wurm",
-                    ID = new Guid("5A22EAD4-8302-4DA3-A450-3FC051BD6A3C"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(12, 30, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0) },
-                    Duration = new EventTimespan(0, 15, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 73,
-                    WaypointCode = "[&BKoBAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Shatterer",
-                    ID = new Guid("03BF176A-D59F-49CA-A311-39FC6F533F2F"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) },
-                    Duration = new EventTimespan(0, 7, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 20,
-                    WaypointCode = "[&BE4DAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Claw of Jormag",
-                    ID = new Guid("0464CB9E-1848-4AAA-BA31-4779A959DD71"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 30, 0), new EventTimespan(5, 30, 0), new EventTimespan(8, 30, 0), new EventTimespan(11, 30, 0), new EventTimespan(14, 30, 0), new EventTimespan(17, 30, 0), new EventTimespan(20, 30, 0), new EventTimespan(23, 30, 0) },
-                    Duration = new EventTimespan(0, 17, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 30,
-                    WaypointCode = "[&BHoCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Modniir Ulgoth",
-                    ID = new Guid("E6872A86-E434-4FC1-B803-89921FF0F6D6"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 30, 0), new EventTimespan(4, 30, 0), new EventTimespan(7, 30, 0), new EventTimespan(10, 30, 0), new EventTimespan(13, 30, 0), new EventTimespan(16, 30, 0), new EventTimespan(19, 30, 0), new EventTimespan(22, 30, 0) },
-                    Duration = new EventTimespan(0, 8, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 17,
-                    WaypointCode = "[&BLEAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Inquest Golem Mark II",
-                    ID = new Guid("9AA133DC-F630-4A0E-BB5D-EE34A2B306C2"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 0, 0), new EventTimespan(5, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(11, 0, 0), new EventTimespan(14, 0, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0), new EventTimespan(23, 0, 0) },
-                    Duration = new EventTimespan(0, 7, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 17,
-                    WaypointCode = "[&BNQCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Taidha Covington",
-                    ID = new Guid("242BD241-E360-48F1-A8D9-57180E146789"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(6, 0, 0), new EventTimespan(9, 0, 0), new EventTimespan(12, 0, 0), new EventTimespan(15, 0, 0), new EventTimespan(18, 0, 0), new EventTimespan(21, 0, 0) },
-                    Duration = new EventTimespan(0, 10, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 73,
-                    WaypointCode = "[&BNQCAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Jungle Wurm",
-                    ID = new Guid("C5972F64-B894-45B4-BC31-2DEEA6B7C033"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(5, 15, 0), new EventTimespan(7, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(11, 15, 0), new EventTimespan(13, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(17, 15, 0), new EventTimespan(19, 15, 0), new EventTimespan(21, 15, 0), new EventTimespan(23, 15, 0) },
-                    Duration = new EventTimespan(0, 8, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 34,
-                    WaypointCode = "[&BEEFAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Shadow Behemoth",
-                    ID = new Guid("31CEBA08-E44D-472F-81B0-7143D73797F5"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 45, 0), new EventTimespan(3, 45, 0), new EventTimespan(5, 45, 0), new EventTimespan(7, 45, 0), new EventTimespan(9, 45, 0), new EventTimespan(11, 45, 0), new EventTimespan(13, 45, 0), new EventTimespan(15, 45, 0), new EventTimespan(17, 45, 0), new EventTimespan(19, 45, 0), new EventTimespan(21, 45, 0), new EventTimespan(23, 45, 0) },
-                    Duration = new EventTimespan(0, 10, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 15,
-                    WaypointCode = "[&BPwAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Fire Elemental",
-                    ID = new Guid("33F76E9E-0BB6-46D0-A3A9-BE4CDFC4A3A4"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 45, 0), new EventTimespan(2, 45, 0), new EventTimespan(4, 45, 0), new EventTimespan(6, 45, 0), new EventTimespan(8, 45, 0), new EventTimespan(10, 45, 0), new EventTimespan(12, 45, 0), new EventTimespan(14, 45, 0), new EventTimespan(16, 45, 0), new EventTimespan(18, 45, 0), new EventTimespan(20, 45, 0), new EventTimespan(22, 45, 0) },
-                    Duration = new EventTimespan(0, 8, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 35,
-                    WaypointCode = "[&BEYAAAA=]"
-                });
-                tt.WorldEvents.Add(new WorldEvent()
-                {
-                    Name = "Frozen Maw",
-                    ID = new Guid("F7D9D427-5E54-4F12-977A-9809B23FBA99"),
-                    ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(2, 15, 0), new EventTimespan(4, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(8, 15, 0), new EventTimespan(10, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(14, 15, 0), new EventTimespan(16, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(20, 15, 0), new EventTimespan(22, 15, 0) },
-                    Duration = new EventTimespan(0, 5, 0),
-                    WarmupDuration = new EventTimespan(0, 0, 0),
-                    MapID = 28,
-                    WaypointCode = "[&BH4BAAA=]"
-                });
-                #endregion
+                megadestroyer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 30, 0), new EventTimespan(3, 30, 0), new EventTimespan(6, 30, 0), new EventTimespan(9, 30, 0), new EventTimespan(12, 30, 0), new EventTimespan(15, 30, 0), new EventTimespan(18, 30, 0), new EventTimespan(21, 30, 0) };
+                megadestroyer.Duration = new EventTimespan(0, 12, 0);
+                megadestroyer.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                tequatl.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(11, 30, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0) };
+                tequatl.Duration = new EventTimespan(0, 15, 0);
+                tequatl.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                karkaQueen.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 0, 0), new EventTimespan(6, 0, 0), new EventTimespan(10, 30, 0), new EventTimespan(15, 0, 0), new EventTimespan(18, 0, 0), new EventTimespan(23, 0, 0) };
+                karkaQueen.Duration = new EventTimespan(0, 5, 0);
+                karkaQueen.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                evolvedJungleWurm.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(12, 30, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0) };
+                evolvedJungleWurm.Duration = new EventTimespan(0, 15, 0);
+                evolvedJungleWurm.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) };
+                shatterer.Duration = new EventTimespan(0, 7, 0);
+                shatterer.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                clawOfJormag.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 30, 0), new EventTimespan(5, 30, 0), new EventTimespan(8, 30, 0), new EventTimespan(11, 30, 0), new EventTimespan(14, 30, 0), new EventTimespan(17, 30, 0), new EventTimespan(20, 30, 0), new EventTimespan(23, 30, 0) };
+                clawOfJormag.Duration = new EventTimespan(0, 17, 0);
+                clawOfJormag.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                modniirUlgoth.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 30, 0), new EventTimespan(4, 30, 0), new EventTimespan(7, 30, 0), new EventTimespan(10, 30, 0), new EventTimespan(13, 30, 0), new EventTimespan(16, 30, 0), new EventTimespan(19, 30, 0), new EventTimespan(22, 30, 0) };
+                modniirUlgoth.Duration = new EventTimespan(0, 8, 0);
+                modniirUlgoth.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                inquestGolemMarkII.ActiveTimes = new List<EventTimespan>() { new EventTimespan(2, 0, 0), new EventTimespan(5, 0, 0), new EventTimespan(8, 0, 0), new EventTimespan(11, 0, 0), new EventTimespan(14, 0, 0), new EventTimespan(17, 0, 0), new EventTimespan(20, 0, 0), new EventTimespan(23, 0, 0) };
+                inquestGolemMarkII.Duration = new EventTimespan(0, 7, 0);
+                inquestGolemMarkII.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                taidhaCovington.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 0, 0), new EventTimespan(3, 0, 0), new EventTimespan(6, 0, 0), new EventTimespan(9, 0, 0), new EventTimespan(12, 0, 0), new EventTimespan(15, 0, 0), new EventTimespan(18, 0, 0), new EventTimespan(21, 0, 0) };
+                taidhaCovington.Duration = new EventTimespan(0, 10, 0);
+                taidhaCovington.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                jungleWurm.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(5, 15, 0), new EventTimespan(7, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(11, 15, 0), new EventTimespan(13, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(17, 15, 0), new EventTimespan(19, 15, 0), new EventTimespan(21, 15, 0), new EventTimespan(23, 15, 0) };
+                jungleWurm.Duration = new EventTimespan(0, 8, 0);
+                jungleWurm.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                shadowBehemoth.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 45, 0), new EventTimespan(3, 45, 0), new EventTimespan(5, 45, 0), new EventTimespan(7, 45, 0), new EventTimespan(9, 45, 0), new EventTimespan(11, 45, 0), new EventTimespan(13, 45, 0), new EventTimespan(15, 45, 0), new EventTimespan(17, 45, 0), new EventTimespan(19, 45, 0), new EventTimespan(21, 45, 0), new EventTimespan(23, 45, 0) };
+                shadowBehemoth.Duration = new EventTimespan(0, 10, 0);
+                shadowBehemoth.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                fireElemental.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 45, 0), new EventTimespan(2, 45, 0), new EventTimespan(4, 45, 0), new EventTimespan(6, 45, 0), new EventTimespan(8, 45, 0), new EventTimespan(10, 45, 0), new EventTimespan(12, 45, 0), new EventTimespan(14, 45, 0), new EventTimespan(16, 45, 0), new EventTimespan(18, 45, 0), new EventTimespan(20, 45, 0), new EventTimespan(22, 45, 0) };
+                fireElemental.Duration = new EventTimespan(0, 8, 0);
+                fireElemental.WarmupDuration = new EventTimespan(0, 0, 0);
+
+                frozenMaw.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(2, 15, 0), new EventTimespan(4, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(8, 15, 0), new EventTimespan(10, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(14, 15, 0), new EventTimespan(16, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(20, 15, 0), new EventTimespan(22, 15, 0) };
+                frozenMaw.Duration = new EventTimespan(0, 5, 0);
+                frozenMaw.WarmupDuration = new EventTimespan(0, 0, 0);
 
                 filename = StandardFilename;
             }
+
+            tt.WorldEvents.Add(megadestroyer);
+            tt.WorldEvents.Add(tequatl);
+            tt.WorldEvents.Add(karkaQueen);
+            tt.WorldEvents.Add(evolvedJungleWurm);
+            tt.WorldEvents.Add(shatterer);
+            tt.WorldEvents.Add(clawOfJormag);
+            tt.WorldEvents.Add(modniirUlgoth);
+            tt.WorldEvents.Add(inquestGolemMarkII);
+            tt.WorldEvents.Add(taidhaCovington);
+            tt.WorldEvents.Add(jungleWurm);
+            tt.WorldEvents.Add(shadowBehemoth);
+            tt.WorldEvents.Add(fireElemental);
+            tt.WorldEvents.Add(frozenMaw);
 
             XmlSerializer serializer = new XmlSerializer(typeof(MegaserverEventTimeTable));
             TextWriter textWriter = new StreamWriter(filename);

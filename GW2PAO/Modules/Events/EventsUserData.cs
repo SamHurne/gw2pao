@@ -35,6 +35,7 @@ namespace GW2PAO.Modules.Events
         private bool areInactiveEventsVisible;
         private bool areEventNotificationsEnabled;
         private bool useAdjustedTimeTable;
+        private bool autoDetectCompletion;
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
@@ -65,6 +66,15 @@ namespace GW2PAO.Modules.Events
         {
             get { return this.useAdjustedTimeTable; }
             set { SetProperty(ref this.useAdjustedTimeTable, value); }
+        }
+
+        /// <summary>
+        /// True of event daily completion should be automatically detected, else false
+        /// </summary>
+        public bool AutoDetectCompletion
+        {
+            get { return this.autoDetectCompletion; }
+            set { SetProperty(ref this.autoDetectCompletion, value); }
         }
 
         /// <summary>
@@ -116,6 +126,7 @@ namespace GW2PAO.Modules.Events
             this.AreInactiveEventsVisible = true;
             this.AreEventNotificationsEnabled = true;
             this.UseAdjustedTimeTable = true;
+            this.AutoDetectCompletion = true;
             this.LastResetDateTime = DateTime.UtcNow;
         }
 

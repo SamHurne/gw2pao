@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
+using GW2PAO.API.Util;
 using GW2PAO.Data.UserData;
 using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.Modules.Events.ViewModels;
@@ -34,6 +35,11 @@ namespace GW2PAO.Modules.Events
         /// Service responsible for Zone information
         /// </summary>
         private IZoneService zoneService;
+
+        /// <summary>
+        /// Service that provides player location information
+        /// </summary>
+        private IPlayerService playerService;
 
         /// <summary>
         /// The primary event refresh timer object
@@ -97,11 +103,12 @@ namespace GW2PAO.Modules.Events
         /// <param name="eventsService">The events service</param>
         /// <param name="userData">The user settings</param>
         [ImportingConstructor]
-        public EventsController(IEventsService eventsService, IZoneService zoneService, EventsUserData userData)
+        public EventsController(IEventsService eventsService, IZoneService zoneService, IPlayerService playerService, EventsUserData userData)
         {
             logger.Debug("Initializing Event Tracker Controller");
             this.eventsService = eventsService;
             this.zoneService = zoneService;
+            this.playerService = playerService;
             this.isStopped = false;
 
             // Make sure the events service has loaded the appropriate table
@@ -269,6 +276,26 @@ namespace GW2PAO.Modules.Events
                             {
                                 // Reset the IsNotificationShown state
                                 worldEvent.IsNotificationShown = false;
+                            }
+                        }
+                    }
+
+                    // Check to see if the player is within range of any active events
+                    // If so, automatically mark them as completed, if that feature is enabled
+                    if (this.UserData.AutoDetectCompletion
+                        && !worldEvent.IsTreasureObtained)
+                    {
+                        if (worldEvent.State == API.Data.Enums.EventState.Active
+                            && this.playerService.HasValidMapId
+                            && this.playerService.MapId == worldEvent.EventModel.MapID)
+                        {
+                            // Event is active and player is on the same map
+                            // At this point, if the player is in range of the event for completion, mark it as completed
+                            bool isInRange = CalcUtil.IsInRadius(worldEvent.EventModel.CompletionLocation, this.playerService.PlayerPosition, worldEvent.EventModel.CompletionRadius);
+                            if (isInRange)
+                            {
+                                logger.Info("Auto-detected completion of \"{0}\"", worldEvent.EventName);
+                                Threading.InvokeOnUI(() => worldEvent.IsTreasureObtained = true);
                             }
                         }
                     }

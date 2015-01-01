@@ -115,7 +115,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auto-Complete.
+        ///   Looks up a localized string similar to Auto-Detect Completion.
         /// </summary>
         public static string AutoComplete {
             get {

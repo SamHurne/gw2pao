@@ -17,6 +17,8 @@ namespace GW2PAO.API.Data.Entities
         public EventTimespan Duration { get; set; }
         public EventTimespan WarmupDuration { get; set; }
         public string WaypointCode { get; set; }
+        public Point CompletionLocation { get; set; }
+        public double CompletionRadius { get; set; }
 
         public WorldEvent()
         {
