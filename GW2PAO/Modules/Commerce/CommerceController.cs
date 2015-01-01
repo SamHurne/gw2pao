@@ -216,86 +216,89 @@ namespace GW2PAO.Modules.Commerce
                     // Ignore anything with an itemId of 0 or less
                     itemPrices.RemoveAll(pw => pw.Data.ItemID <= 0);
 
-                    // Retrieve price information for all price-watched items
-                    var allPrices = this.commerceService.GetItemPrices(itemPrices.Select(pw => pw.Data.ItemID).ToArray());
-
-                    foreach (var priceWatch in itemPrices)
+                    if (itemPrices.Count > 0)
                     {
-                        // Determine if we need to reset the notifications shown-state
-                        if (this.NotificationsResetDateTimes.ContainsKey(priceWatch))
+                        // Retrieve price information for all price-watched items
+                        var allPrices = this.commerceService.GetItemPrices(itemPrices.Select(pw => pw.Data.ItemID).ToArray());
+
+                        foreach (var priceWatch in itemPrices)
                         {
-                            var lastResetTime = this.NotificationsResetDateTimes[priceWatch];
-                            if (DateTime.Now.Subtract(lastResetTime).TotalMilliseconds >= UserData.ResetPriceNotificationsInterval * 60000)
+                            // Determine if we need to reset the notifications shown-state
+                            if (this.NotificationsResetDateTimes.ContainsKey(priceWatch))
                             {
-                                priceWatch.IsBuyOrderNotificationShown = false;
-                                priceWatch.IsSellListingNotificationShown = false;
-                            }
-                        }
-                        else
-                        {
-                            this.NotificationsResetDateTimes.Add(priceWatch, DateTime.Now);
-                        }
-
-                        if (allPrices.ContainsKey(priceWatch.Data.ItemID))
-                        {
-                            var prices = allPrices[priceWatch.Data.ItemID];
-                            Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
-                            Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
-                            Threading.InvokeOnUI(() => priceWatch.CurrentProfit.Value = (prices.LowestSellListing * 0.85) - prices.HighestBuyOrder);
-
-                            // Buy Order
-                            bool buyOrderOutOfLimits = false;
-
-                            if (priceWatch.Data.IsBuyOrderUpperLimitEnabled && priceWatch.Data.IsBuyOrderLowerLimitEnabled)
-                                buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value
-                                                            && prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
-                            else if (priceWatch.Data.IsBuyOrderUpperLimitEnabled)
-                                buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value;
-                            else if (priceWatch.Data.IsBuyOrderLowerLimitEnabled)
-                                buyOrderOutOfLimits = prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
-
-                            Threading.InvokeOnUI(() => priceWatch.IsBuyOrderOutOfLimits = buyOrderOutOfLimits);
-
-                            if (buyOrderOutOfLimits)
-                            {
-                                if (this.CanShowNotification(priceWatch, PriceNotificationType.BuyOrder))
+                                var lastResetTime = this.NotificationsResetDateTimes[priceWatch];
+                                if (DateTime.Now.Subtract(lastResetTime).TotalMilliseconds >= UserData.ResetPriceNotificationsInterval * 60000)
                                 {
-                                    priceWatch.IsBuyOrderNotificationShown = true;
-                                    this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.BuyOrder, prices.HighestBuyOrder, this.PriceNotifications));
-                                    this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
+                                    priceWatch.IsBuyOrderNotificationShown = false;
+                                    priceWatch.IsSellListingNotificationShown = false;
+                                }
+                            }
+                            else
+                            {
+                                this.NotificationsResetDateTimes.Add(priceWatch, DateTime.Now);
+                            }
+
+                            if (allPrices.ContainsKey(priceWatch.Data.ItemID))
+                            {
+                                var prices = allPrices[priceWatch.Data.ItemID];
+                                Threading.InvokeOnUI(() => priceWatch.CurrentBuyOrder.Value = prices.HighestBuyOrder);
+                                Threading.InvokeOnUI(() => priceWatch.CurrentSellListing.Value = prices.LowestSellListing);
+                                Threading.InvokeOnUI(() => priceWatch.CurrentProfit.Value = (prices.LowestSellListing * 0.85) - prices.HighestBuyOrder);
+
+                                // Buy Order
+                                bool buyOrderOutOfLimits = false;
+
+                                if (priceWatch.Data.IsBuyOrderUpperLimitEnabled && priceWatch.Data.IsBuyOrderLowerLimitEnabled)
+                                    buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value
+                                                                && prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
+                                else if (priceWatch.Data.IsBuyOrderUpperLimitEnabled)
+                                    buyOrderOutOfLimits = prices.HighestBuyOrder <= priceWatch.Data.BuyOrderUpperLimit.Value;
+                                else if (priceWatch.Data.IsBuyOrderLowerLimitEnabled)
+                                    buyOrderOutOfLimits = prices.HighestBuyOrder >= priceWatch.Data.BuyOrderLowerLimit.Value;
+
+                                Threading.InvokeOnUI(() => priceWatch.IsBuyOrderOutOfLimits = buyOrderOutOfLimits);
+
+                                if (buyOrderOutOfLimits)
+                                {
+                                    if (this.CanShowNotification(priceWatch, PriceNotificationType.BuyOrder))
+                                    {
+                                        priceWatch.IsBuyOrderNotificationShown = true;
+                                        this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.BuyOrder, prices.HighestBuyOrder, this.PriceNotifications));
+                                        this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
+                                    }
+                                }
+
+                                // Sell Listing
+                                bool sellListingOutOfLimits = false;
+
+                                if (priceWatch.Data.IsSellListingUpperLimitEnabled && priceWatch.Data.IsSellListingLowerLimitEnabled)
+                                    sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value
+                                                                    && prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
+                                else if (priceWatch.Data.IsSellListingUpperLimitEnabled)
+                                    sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value;
+                                else if (priceWatch.Data.IsSellListingLowerLimitEnabled)
+                                    sellListingOutOfLimits = prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
+
+                                Threading.InvokeOnUI(() => priceWatch.IsSellListingOutOfLimits = sellListingOutOfLimits);
+
+                                if (sellListingOutOfLimits)
+                                {
+                                    if (this.CanShowNotification(priceWatch, PriceNotificationType.SellListing))
+                                    {
+                                        priceWatch.IsSellListingNotificationShown = true;
+                                        this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.SellListing, prices.LowestSellListing, this.PriceNotifications));
+                                        this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
+                                    }
                                 }
                             }
 
-                            // Sell Listing
-                            bool sellListingOutOfLimits = false;
-
-                            if (priceWatch.Data.IsSellListingUpperLimitEnabled && priceWatch.Data.IsSellListingLowerLimitEnabled)
-                                sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value
-                                                                && prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
-                            else if (priceWatch.Data.IsSellListingUpperLimitEnabled)
-                                sellListingOutOfLimits = prices.LowestSellListing <= priceWatch.Data.SellListingUpperLimit.Value;
-                            else if (priceWatch.Data.IsSellListingLowerLimitEnabled)
-                                sellListingOutOfLimits = prices.LowestSellListing >= priceWatch.Data.SellListingLowerLimit.Value;
-
-                            Threading.InvokeOnUI(() => priceWatch.IsSellListingOutOfLimits = sellListingOutOfLimits);
-
-                            if (sellListingOutOfLimits)
-                            {
-                                if (this.CanShowNotification(priceWatch, PriceNotificationType.SellListing))
+                            // Update the historical values for the item
+                            Threading.BeginInvokeOnUI(() =>
                                 {
-                                    priceWatch.IsSellListingNotificationShown = true;
-                                    this.DisplayNotification(new PriceNotificationViewModel(priceWatch, PriceNotificationType.SellListing, prices.LowestSellListing, this.PriceNotifications));
-                                    this.NotificationsResetDateTimes[priceWatch] = DateTime.Now;
-                                }
-                            }
+                                    priceWatch.PastBuyOrders.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentBuyOrder.Value));
+                                    priceWatch.PastSellListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
+                                });
                         }
-
-                        // Update the historical values for the item
-                        Threading.BeginInvokeOnUI(() =>
-                            {
-                                priceWatch.PastBuyOrders.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentBuyOrder.Value));
-                                priceWatch.PastSellListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
-                            });
                     }
                 }
 
