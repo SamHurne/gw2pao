@@ -75,7 +75,7 @@ namespace GW2PAO.Modules.WvW
 
             if (this.wvwNotificationsView != null)
             {
-                this.wvwNotificationsView.Close();
+                Threading.InvokeOnUI(() => this.wvwNotificationsView.Close());
             }
 
             Properties.Settings.Default.Save();
