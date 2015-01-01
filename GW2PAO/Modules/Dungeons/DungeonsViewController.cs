@@ -49,6 +49,7 @@ namespace GW2PAO.Modules.Dungeons
 
             logger.Debug("Registering hotkey commands");
             HotkeyCommands.ToggleDungeonsTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleDungeonTracker));
+            HotkeyCommands.ToggleDungeonTimerCommand.RegisterCommand(new DelegateCommand(this.ToggleDungeonTimer));
 
             Threading.BeginInvokeOnUI(() =>
             {
@@ -148,6 +149,21 @@ namespace GW2PAO.Modules.Dungeons
             else
             {
                 this.dungeonTrackerView.Close();
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether or not the dungeon timer is visible
+        /// </summary>
+        private void ToggleDungeonTimer()
+        {
+            if (this.dungeonTimerView == null || !this.dungeonTimerView.IsVisible)
+            {
+                this.DisplayDungeonTimer();
+            }
+            else
+            {
+                this.dungeonTimerView.Close();
             }
         }
     }

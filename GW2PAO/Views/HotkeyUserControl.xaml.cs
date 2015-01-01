@@ -122,6 +122,12 @@ namespace GW2PAO.Views
                 if (e.Key == Key.Back || e.Key == Key.Delete)
                 {
                     this.Hotkey.Key = Key.None;
+                    this.Hotkey.Shift = false;
+                    this.Hotkey.Control = false;
+                    this.Hotkey.Alt = false;
+                    this.Hotkey.Windows = false;
+                    if (this.Hotkey.IsEnabled)
+                        this.Hotkey.Refresh();
                 }
             }
 

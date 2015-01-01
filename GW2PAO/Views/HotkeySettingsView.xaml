@@ -21,6 +21,8 @@
                                  Hotkey="{Binding ToggleEventTrackerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDungeonsTracker}"
                                  Hotkey="{Binding ToggleDungeonsTrackerHotkey}"/>
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDungeonTimer}"
+                                 Hotkey="{Binding ToggleDungeonTimerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.TogglePriceTracker}"
                                  Hotkey="{Binding TogglePriceTrackerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWvWTracker}"

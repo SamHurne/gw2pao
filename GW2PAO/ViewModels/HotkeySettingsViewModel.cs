@@ -36,6 +36,7 @@ namespace GW2PAO.ViewModels
         private Hotkey toggleOverlayMenuIconHotkey;
         private Hotkey toggleEventTrackerHotkey;
         private Hotkey toggleDungeonsTrackerHotkey;
+        private Hotkey toggleDungeonTimerHotkey;
         private Hotkey togglePriceTrackerHotkey;
         private Hotkey toggleWvWTrackerHotkey;
         private Hotkey toggleZoneAssistantHotkey;
@@ -105,6 +106,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Hotkey to toggle the dungeon timer on/off
+        /// </summary>
+        public Hotkey ToggleDungeonTimerHotkey
+        {
+            get { return this.toggleDungeonTimerHotkey; }
+            set { this.SetProperty(ref this.toggleDungeonTimerHotkey, value); }
+        }
+
+        /// <summary>
         /// Hotkey to toggle the price tracker on/off
         /// </summary>
         public Hotkey TogglePriceTrackerHotkey
@@ -154,9 +164,21 @@ namespace GW2PAO.ViewModels
         /// </summary>
         public void InitializeHotkeys()
         {
-            bool useDefaults = true;
+            // Initialize as blank at first
+            this.ToggleEventTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleDungeonsTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleDungeonTimerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.TogglePriceTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleWvWTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleZoneAssistantHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleTeamspeakTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleWebBrowserHotkey = new Hotkey(Key.None, false, true, false, false);
+            this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleAllWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, false, false, false, false);
 
-            // Try to load the hotkeys from user settings first
+            // Try to load the hotkeys from user settings
             if (!string.IsNullOrEmpty(Properties.Settings.Default.Hotkeys))
             {
                 logger.Debug("Loading hotkeys");
@@ -165,67 +187,51 @@ namespace GW2PAO.ViewModels
                     var loadedHotkeys = JsonConvert.DeserializeObject<HotkeySettingsViewModel>(Properties.Settings.Default.Hotkeys);
                     if (loadedHotkeys != null)
                     {
-                        this.ToggleAllWindowsHotkey = loadedHotkeys.ToggleAllWindowsHotkey;
-                        this.ToggleInteractiveWindowsHotkey = loadedHotkeys.ToggleInteractiveWindowsHotkey;
-                        this.ToggleNotificationWindowBordersHotkey = loadedHotkeys.ToggleNotificationWindowBordersHotkey;
-                        this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleOverlayMenuIconHotkey;
-                        this.ToggleEventTrackerHotkey = loadedHotkeys.ToggleEventTrackerHotkey;
-                        this.ToggleDungeonsTrackerHotkey = loadedHotkeys.ToggleDungeonsTrackerHotkey;
-                        this.TogglePriceTrackerHotkey = loadedHotkeys.TogglePriceTrackerHotkey;
-                        this.ToggleWvWTrackerHotkey = loadedHotkeys.ToggleWvWTrackerHotkey;
-                        this.ToggleZoneAssistantHotkey = loadedHotkeys.ToggleZoneAssistantHotkey;
-                        this.ToggleTeamspeakTrackerHotkey = loadedHotkeys.ToggleTeamspeakTrackerHotkey;
-                        this.ToggleWebBrowserHotkey = loadedHotkeys.ToggleWebBrowserHotkey;
-                        useDefaults = false;
+                        if (loadedHotkeys.ToggleAllWindowsHotkey != null)
+                            this.ToggleAllWindowsHotkey = loadedHotkeys.ToggleAllWindowsHotkey;
+
+                        if (loadedHotkeys.ToggleInteractiveWindowsHotkey != null)
+                            this.ToggleInteractiveWindowsHotkey = loadedHotkeys.ToggleInteractiveWindowsHotkey;
+
+                        if (loadedHotkeys.ToggleNotificationWindowBordersHotkey != null)
+                            this.ToggleNotificationWindowBordersHotkey = loadedHotkeys.ToggleNotificationWindowBordersHotkey;
+
+                        if (loadedHotkeys.ToggleOverlayMenuIconHotkey != null)
+                            this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleOverlayMenuIconHotkey;
+
+                        if (loadedHotkeys.ToggleEventTrackerHotkey != null)
+                            this.ToggleEventTrackerHotkey = loadedHotkeys.ToggleEventTrackerHotkey;
+
+                        if (loadedHotkeys.ToggleDungeonsTrackerHotkey != null)
+                            this.ToggleDungeonsTrackerHotkey = loadedHotkeys.ToggleDungeonsTrackerHotkey;
+
+                        if (loadedHotkeys.ToggleDungeonTimerHotkey != null)
+                            this.ToggleDungeonTimerHotkey = loadedHotkeys.ToggleDungeonTimerHotkey;
+
+                        if (loadedHotkeys.TogglePriceTrackerHotkey != null)
+                            this.TogglePriceTrackerHotkey = loadedHotkeys.TogglePriceTrackerHotkey;
+
+                        if (loadedHotkeys.ToggleWvWTrackerHotkey != null)
+                            this.ToggleWvWTrackerHotkey = loadedHotkeys.ToggleWvWTrackerHotkey;
+
+                        if (loadedHotkeys.ToggleZoneAssistantHotkey != null)
+                            this.ToggleZoneAssistantHotkey = loadedHotkeys.ToggleZoneAssistantHotkey;
+
+                        if (loadedHotkeys.ToggleTeamspeakTrackerHotkey != null)
+                            this.ToggleTeamspeakTrackerHotkey = loadedHotkeys.ToggleTeamspeakTrackerHotkey;
+
+                        if (loadedHotkeys.ToggleWebBrowserHotkey != null)
+                            this.ToggleWebBrowserHotkey = loadedHotkeys.ToggleWebBrowserHotkey;
                     }
                     else
                     {
-                        logger.Warn("Unable to load user hotkeys!");
+                        logger.Warn("Unable to load all user hotkeys!");
                     }
                 }
                 catch (Exception ex)
                 {
                     logger.Warn("Unable to load user hotkeys! Exception: ", ex);
                 }
-            }
-
-            if (useDefaults)
-            {
-                // Use defaults
-                logger.Debug("Using default hotkeys");
-
-                this.ToggleAllWindowsHotkey = new Hotkey(Key.F9, true, false, false, false);
-                this.ToggleAllWindowsHotkey.IsEnabled = true;
-
-                this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.F8, true, false, false, false);
-                this.ToggleInteractiveWindowsHotkey.IsEnabled = true;
-
-                this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.F10, true, false, false, false);
-                this.ToggleNotificationWindowBordersHotkey.IsEnabled = true;
-
-                this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.F11, true, false, false, false);
-                this.ToggleOverlayMenuIconHotkey.IsEnabled = true;
-
-                this.ToggleEventTrackerHotkey = new Hotkey(Key.F1, true, false, false, false);
-                this.ToggleEventTrackerHotkey.IsEnabled = true;
-
-                this.ToggleDungeonsTrackerHotkey = new Hotkey(Key.F2, true, false, false, false);
-                this.ToggleDungeonsTrackerHotkey.IsEnabled = true;
-
-                this.TogglePriceTrackerHotkey = new Hotkey(Key.F3, true, false, false, false);
-                this.TogglePriceTrackerHotkey.IsEnabled = true;
-
-                this.ToggleWvWTrackerHotkey = new Hotkey(Key.F4, true, false, false, false);
-                this.ToggleWvWTrackerHotkey.IsEnabled = true;
-
-                this.ToggleZoneAssistantHotkey = new Hotkey(Key.F5, true, false, false, false);
-                this.ToggleZoneAssistantHotkey.IsEnabled = true;
-
-                this.ToggleTeamspeakTrackerHotkey = new Hotkey(Key.F6, true, false, false, false);
-                this.ToggleTeamspeakTrackerHotkey.IsEnabled = true;
-
-                this.ToggleWebBrowserHotkey = new Hotkey(Key.F7, true, false, false, false);
-                this.ToggleWebBrowserHotkey.IsEnabled = true;
             }
 
             // Register for the pause/resume commands
@@ -241,6 +247,7 @@ namespace GW2PAO.ViewModels
             this.ToggleOverlayMenuIconHotkey.Refresh();
             this.ToggleEventTrackerHotkey.Refresh();
             this.ToggleDungeonsTrackerHotkey.Refresh();
+            this.ToggleDungeonTimerHotkey.Refresh();
             this.TogglePriceTrackerHotkey.Refresh();
             this.ToggleWvWTrackerHotkey.Refresh();
             this.ToggleZoneAssistantHotkey.Refresh();
@@ -272,6 +279,7 @@ namespace GW2PAO.ViewModels
                 this.ToggleOverlayMenuIconHotkey.Pressed += OnPressed;
                 this.ToggleEventTrackerHotkey.Pressed += OnPressed;
                 this.ToggleDungeonsTrackerHotkey.Pressed += OnPressed;
+                this.ToggleDungeonTimerHotkey.Pressed += OnPressed;
                 this.TogglePriceTrackerHotkey.Pressed += OnPressed;
                 this.ToggleWvWTrackerHotkey.Pressed += OnPressed;
                 this.ToggleZoneAssistantHotkey.Pressed += OnPressed;
@@ -294,6 +302,7 @@ namespace GW2PAO.ViewModels
                 this.ToggleOverlayMenuIconHotkey.Pressed -= OnPressed;
                 this.ToggleEventTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleDungeonsTrackerHotkey.Pressed -= OnPressed;
+                this.ToggleDungeonTimerHotkey.Pressed -= OnPressed;
                 this.TogglePriceTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleWvWTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleZoneAssistantHotkey.Pressed -= OnPressed;
@@ -323,6 +332,8 @@ namespace GW2PAO.ViewModels
                     HotkeyCommands.ToggleEventTrackerCommand.Execute(null);
                 else if (hotkey == this.ToggleDungeonsTrackerHotkey)
                     HotkeyCommands.ToggleDungeonsTrackerCommand.Execute(null);
+                else if (hotkey == this.ToggleDungeonTimerHotkey)
+                    HotkeyCommands.ToggleDungeonTimerCommand.Execute(null);
                 else if (hotkey == this.TogglePriceTrackerHotkey)
                     HotkeyCommands.TogglePriceTrackerCommand.Execute(null);
                 else if (hotkey == this.ToggleWvWTrackerHotkey)
