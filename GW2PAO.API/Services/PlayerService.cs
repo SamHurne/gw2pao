@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using GW2NET.MumbleLink;
-using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
 using GW2PAO.API.Services.Interfaces;
-using GW2PAO.API.Util;
 using NLog;
 
 namespace GW2PAO.API.Services
@@ -34,14 +28,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.Name;
-                    else
-                        return null;
-                }
+                var data = ReadBlocking();
+                return data.Identity.Name;
             }
         }
 
@@ -50,16 +38,10 @@ namespace GW2PAO.API.Services
         /// </summary>
         public bool IsCommander
         {
-            get 
+            get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.Commander;
-                    else
-                        return false;
-                }
+                var data = ReadBlocking();
+                return data.Identity.Commander;
             }
         }
 
@@ -70,14 +52,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Context.MapId;
-                    else
-                        return 0;
-                }
+                var data = ReadBlocking();
+                return data.Context.MapId;
             }
         }
 
@@ -99,14 +75,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Identity.WorldId;
-                    else
-                        return 0;
-                }
+                var data = ReadBlocking();
+                return data.Identity.WorldId;
             }
         }
 
@@ -128,14 +98,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.UiTick;
-                    else
-                        return 0;
-                }
+                var data = ReadBlocking();
+                return data.UiTick;
             }
         }
 
@@ -146,33 +110,27 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
+                var data = ReadBlocking();
+                switch (data.Identity.Profession)
                 {
-                    var data = mumbleLink.Read();
-                    if (data == null)
+                    case GW2NET.Common.Profession.Elementalist:
+                        return Profession.Elementalist;
+                    case GW2NET.Common.Profession.Engineer:
+                        return Profession.Engineer;
+                    case GW2NET.Common.Profession.Guardian:
+                        return Profession.Guardian;
+                    case GW2NET.Common.Profession.Mesmer:
+                        return Profession.Mesmer;
+                    case GW2NET.Common.Profession.Necromancer:
+                        return Profession.Necromancer;
+                    case GW2NET.Common.Profession.Ranger:
+                        return Profession.Ranger;
+                    case GW2NET.Common.Profession.Thief:
+                        return Profession.Thief;
+                    case GW2NET.Common.Profession.Warrior:
+                        return Profession.Warrior;
+                    default:
                         return Profession.Unknown;
-
-                    switch (data.Identity.Profession)
-                    {
-                        case GW2NET.Common.Profession.Elementalist:
-                            return Profession.Elementalist;
-                        case GW2NET.Common.Profession.Engineer:
-                            return Profession.Engineer;
-                        case GW2NET.Common.Profession.Guardian:
-                            return Profession.Guardian;
-                        case GW2NET.Common.Profession.Mesmer:
-                            return Profession.Mesmer;
-                        case GW2NET.Common.Profession.Necromancer:
-                            return Profession.Necromancer;
-                        case GW2NET.Common.Profession.Ranger:
-                            return Profession.Ranger;
-                        case GW2NET.Common.Profession.Thief:
-                            return Profession.Thief;
-                        case GW2NET.Common.Profession.Warrior:
-                            return Profession.Warrior;
-                        default:
-                            return Profession.Unknown;
-                    }
                 }
             }
         }
@@ -182,18 +140,12 @@ namespace GW2PAO.API.Services
         /// Note: GW2 returns the Y and Z reversed, so a correction is made here.
         /// </summary>
         public Point PlayerPosition
-        { 
-            get 
+        {
+            get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
-
-                    return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
-                }
-            } 
+                var data = ReadBlocking();
+                return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
+            }
         }
 
         /// <summary>
@@ -204,14 +156,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
-
-                    return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
-                }
+                var data = ReadBlocking();
+                return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
             }
         }
 
@@ -223,14 +169,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
-
-                    return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
-                }
+                var data = ReadBlocking();
+                return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
             }
         }
 
@@ -242,14 +182,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
-
-                    return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
-                }
+                var data = ReadBlocking();
+                return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
             }
         }
 
@@ -261,14 +195,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data == null)
-                        return null;
-
-                    return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
-                }
+                var data = ReadBlocking();
+                return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
             }
         }
 
@@ -279,14 +207,8 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                using (var mumbleLink = new MumbleLinkFile())
-                {
-                    var data = mumbleLink.Read();
-                    if (data != null)
-                        return data.Context.ServerAddress;
-                    else
-                        return null;
-                }
+                var data = ReadBlocking();
+                return data.Context.ServerAddress;
             }
         }
 
@@ -296,6 +218,35 @@ namespace GW2PAO.API.Services
         public PlayerService()
         {
             logger.Info("Creating PlayerService");
+        }
+
+        /// <summary>Retrieves data from Mumble's shared memory block. Blocks the calling thread until data is available.</summary>
+        /// <returns>Positional data.</returns>
+        private static Avatar ReadBlocking()
+        {
+            Avatar data;
+            using (var mumbleLink = new MumbleLinkFile())
+            {
+                do
+                {
+                    data = mumbleLink.Read();
+                    if (data == null)
+                    {
+                        /*
+                         * If no data was available, this typically means one of two things:
+                         *  (1) the game is not running, in which case this loop will never exit.
+                         *  (2) the game hasn't had enough time to fill the shared memory block.
+                         *
+                         * Let's assume that the second case is true.
+                         * The game ticks approximately every 33 milliseconds.
+                         * Wait 35 milliseconds to ensure that enough time has passed, then retry.
+                         */
+                        Thread.Sleep(35);
+                    }
+                } while (data == null);
+            }
+
+            return data;
         }
     }
 }
