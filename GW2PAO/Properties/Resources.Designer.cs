@@ -115,11 +115,47 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Complete.
+        /// </summary>
+        public static string AutoComplete {
+            get {
+                return ResourceManager.GetString("AutoComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Hide Border.
+        /// </summary>
+        public static string AutoHideBorder {
+            get {
+                return ResourceManager.GetString("AutoHideBorder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic Unlock.
         /// </summary>
         public static string AutomaticUnlock {
             get {
                 return ResourceManager.GetString("AutomaticUnlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Start.
+        /// </summary>
+        public static string AutoStart {
+            get {
+                return ResourceManager.GetString("AutoStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Stop.
+        /// </summary>
+        public static string AutoStop {
+            get {
+                return ResourceManager.GetString("AutoStop", resourceCulture);
             }
         }
         
@@ -475,6 +511,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dungeon Timer.
+        /// </summary>
+        public static string DungeonTimer {
+            get {
+                return ResourceManager.GetString("DungeonTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable All.
         /// </summary>
         public static string EnableAll {
@@ -574,6 +619,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click Here to Get Started.
         /// </summary>
         public static string GetStarted {
@@ -655,6 +709,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid input. Try again..
+        /// </summary>
+        public static string InvalidHotkey {
+            get {
+                return ResourceManager.GetString("InvalidHotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IP: .
         /// </summary>
         public static string IP {
@@ -705,6 +768,15 @@ namespace GW2PAO.Properties {
         public static string LastActiveXAgo {
             get {
                 return ResourceManager.GetString("LastActiveXAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Later.
+        /// </summary>
+        public static string Later {
+            get {
+                return ResourceManager.GetString("Later", resourceCulture);
             }
         }
         
@@ -831,6 +903,15 @@ namespace GW2PAO.Properties {
         public static string ObjectiveType {
             get {
                 return ResourceManager.GetString("ObjectiveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -1074,6 +1155,15 @@ namespace GW2PAO.Properties {
         public static string ResetUnlocks {
             get {
                 return ResourceManager.GetString("ResetUnlocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application must restart for the settings to be applied..
+        /// </summary>
+        public static string RestartApplicationInstruction {
+            get {
+                return ResourceManager.GetString("RestartApplicationInstruction", resourceCulture);
             }
         }
         
@@ -1362,6 +1452,114 @@ namespace GW2PAO.Properties {
         public static string TimeDistances {
             get {
                 return ResourceManager.GetString("TimeDistances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle All Windows.
+        /// </summary>
+        public static string ToggleAllWindows {
+            get {
+                return ResourceManager.GetString("ToggleAllWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Dungeons Tracker.
+        /// </summary>
+        public static string ToggleDungeonsTracker {
+            get {
+                return ResourceManager.GetString("ToggleDungeonsTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Dungeon Timer.
+        /// </summary>
+        public static string ToggleDungeonTimer {
+            get {
+                return ResourceManager.GetString("ToggleDungeonTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Events Tracker.
+        /// </summary>
+        public static string ToggleEventsTracker {
+            get {
+                return ResourceManager.GetString("ToggleEventsTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Non-Interactive Windows.
+        /// </summary>
+        public static string ToggleNonInteractiveWindow {
+            get {
+                return ResourceManager.GetString("ToggleNonInteractiveWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Notification Window Borders.
+        /// </summary>
+        public static string ToggleNotificationBorders {
+            get {
+                return ResourceManager.GetString("ToggleNotificationBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Overlay Menu Icon.
+        /// </summary>
+        public static string ToggleOverlayMenuIcon {
+            get {
+                return ResourceManager.GetString("ToggleOverlayMenuIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Price Tracker.
+        /// </summary>
+        public static string TogglePriceTracker {
+            get {
+                return ResourceManager.GetString("TogglePriceTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Teamspeak Overlay.
+        /// </summary>
+        public static string ToggleTeamspeakOverlay {
+            get {
+                return ResourceManager.GetString("ToggleTeamspeakOverlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Web Browser.
+        /// </summary>
+        public static string ToggleWebBrowser {
+            get {
+                return ResourceManager.GetString("ToggleWebBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle WvW Tracker.
+        /// </summary>
+        public static string ToggleWvWTracker {
+            get {
+                return ResourceManager.GetString("ToggleWvWTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Zone Completion Assistant.
+        /// </summary>
+        public static string ToggleZoneCompletionAssistant {
+            get {
+                return ResourceManager.GetString("ToggleZoneCompletionAssistant", resourceCulture);
             }
         }
         

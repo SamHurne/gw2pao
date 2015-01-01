@@ -28,8 +28,7 @@ namespace GW2PAO.ViewModels
 
         public string SettingsHeader
         {
-            // TODO: Add resource string
-            get { return "General"; }
+            get { return Properties.Resources.General; }
         }
 
         /// <summary>

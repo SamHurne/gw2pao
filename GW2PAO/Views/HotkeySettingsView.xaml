@@ -15,30 +15,29 @@
         </Style>
     </UserControl.Resources>
     <StackPanel Margin="30,10,0,0" HorizontalAlignment="Left">
-        <!-- TODO: Resource Strings -->
-        <views:HotkeyUserControl Label="Toggle All Windows"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAllWindows}"
                                  Hotkey="{Binding ToggleAllWindowsHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Events Tracker"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleEventsTracker}"
                                  Hotkey="{Binding ToggleEventTrackerHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Dungeons Tracker"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDungeonsTracker}"
                                  Hotkey="{Binding ToggleDungeonsTrackerHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Price Tracker"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.TogglePriceTracker}"
                                  Hotkey="{Binding TogglePriceTrackerHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle WvW Tracker"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWvWTracker}"
                                  Hotkey="{Binding ToggleWvWTrackerHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Zone Completion Assistant"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleZoneCompletionAssistant}"
                                  Hotkey="{Binding ToggleZoneAssistantHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Teamspeak Overlay"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleZoneCompletionAssistant}"
                                  Hotkey="{Binding ToggleTeamspeakTrackerHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Web Browser"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWebBrowser}"
                                  Hotkey="{Binding ToggleWebBrowserHotkey}"/>
 
         <views:HotkeyUserControl Margin="5,20,1,1"
-                                 Label="Toggle Non-Interactive Windows"
+                                 Label="{x:Static resx:Resources.ToggleNonInteractiveWindow}"
                                  Hotkey="{Binding ToggleInteractiveWindowsHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Notification Window Borders"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleNotificationBorders}"
                                  Hotkey="{Binding ToggleNotificationWindowBordersHotkey}"/>
-        <views:HotkeyUserControl Label="Toggle Overlay Menu Icon"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleOverlayMenuIcon}"
                                  Hotkey="{Binding ToggleOverlayMenuIconHotkey}"/>
     </StackPanel>
 </UserControl>

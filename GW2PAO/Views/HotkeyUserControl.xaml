@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
              mc:Ignorable="d"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
@@ -36,7 +37,7 @@
                                 VerticalAlignment="Center"
                                 Name="WarningTextBlock"
                                 Fill="Orange"
-                                Text="Invalid shortcut. Try again.">
+                                Text="{x:Static resx:Resources.InvalidHotkey}">
             <core:OutlinedTextBlock.Style>
                 <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                     <Setter Property="Opacity" Value="1.0" />

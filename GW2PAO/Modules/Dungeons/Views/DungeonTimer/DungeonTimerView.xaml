@@ -175,7 +175,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="Orange" FontFamily="Candara" FontSize="17"
-                                        Text="Dungeon Timer" />
+                                        Text="{x:Static resx:Resources.DungeonTimer}" />
 
                 <Button Name="CloseWindowButton"
                     Grid.Column="3"

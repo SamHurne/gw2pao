@@ -696,4 +696,87 @@
   <data name="ResetAll" xml:space="preserve">
     <value>Reset All</value>
   </data>
+  <data name="AutoComplete" xml:space="preserve">
+    <value>Auto-Complete</value>
+  </data>
+  <data name="AutoHideBorder" xml:space="preserve">
+    <value>Auto-Hide Border</value>
+  </data>
+  <data name="AutoStart" xml:space="preserve">
+    <value>Auto-Start</value>
+    <comment>Automatically start</comment>
+  </data>
+  <data name="AutoStop" xml:space="preserve">
+    <value>Auto-Stop</value>
+    <comment>Automatically stop</comment>
+  </data>
+  <data name="DungeonTimer" xml:space="preserve">
+    <value>Dungeon Timer</value>
+  </data>
+  <data name="InvalidHotkey" xml:space="preserve">
+    <value>Invalid input. Try again.</value>
+    <comment>Shown if the user tries to set a hotkey with an invalid key or key combo</comment>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="RestartApplicationInstruction" xml:space="preserve">
+    <value>The application must restart for the settings to be applied.</value>
+    <comment>Message shown when the user changes a setting that requires an application restart (like changing the language)</comment>
+  </data>
+  <data name="ToggleAllWindows" xml:space="preserve">
+    <value>Toggle All Windows</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleDungeonsTracker" xml:space="preserve">
+    <value>Toggle Dungeons Tracker</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleDungeonTimer" xml:space="preserve">
+    <value>Toggle Dungeon Timer</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleEventsTracker" xml:space="preserve">
+    <value>Toggle Events Tracker</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleNonInteractiveWindow" xml:space="preserve">
+    <value>Toggle Non-Interactive Windows</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleNotificationBorders" xml:space="preserve">
+    <value>Toggle Notification Window Borders</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleOverlayMenuIcon" xml:space="preserve">
+    <value>Toggle Overlay Menu Icon</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="TogglePriceTracker" xml:space="preserve">
+    <value>Toggle Price Tracker</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleTeamspeakOverlay" xml:space="preserve">
+    <value>Toggle Teamspeak Overlay</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWebBrowser" xml:space="preserve">
+    <value>Toggle Web Browser</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWvWTracker" xml:space="preserve">
+    <value>Toggle WvW Tracker</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleZoneCompletionAssistant" xml:space="preserve">
+    <value>Toggle Zone Completion Assistant</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+    <comment>General Settings Header</comment>
+  </data>
 </root>

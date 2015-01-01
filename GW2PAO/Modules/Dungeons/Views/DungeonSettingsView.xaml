@@ -20,15 +20,15 @@
                   Width="250"
                   HorizontalAlignment="Left">
             <GroupBox.Header>
-                <core:OutlinedTextBlock Text="Dungeons Timer" />
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.DungeonTimer}" />
             </GroupBox.Header>
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding UserData.AutoStartDungeonTimer}">
-                    <core:OutlinedTextBlock Text="Auto-Start" />
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoStart}" />
                 </CheckBox>
                 <CheckBox IsChecked="{Binding UserData.AutoStopDungeonTimer}"
                           Margin="50,2,2,2">
-                    <core:OutlinedTextBlock Text="Auto-Stop" />
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoStop}" />
                 </CheckBox>
             </StackPanel>
         </GroupBox>
@@ -40,11 +40,11 @@
             </GroupBox.Header>
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding UserData.AutoCompleteDungeons}">
-                    <core:OutlinedTextBlock Text="Auto-Complete" />
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoComplete}" />
                 </CheckBox>
                 <CheckBox IsChecked="{Binding UserData.AutoHideTimerBorder}"
                           Margin="25,2,2,2">
-                    <core:OutlinedTextBlock Text="Auto-Hide Border" />
+                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideBorder}" />
                 </CheckBox>
             </StackPanel>
         </GroupBox>
