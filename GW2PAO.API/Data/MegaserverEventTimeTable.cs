@@ -156,7 +156,7 @@ namespace GW2PAO.API.Data
                     Name = "Taidha Covington",
                     ID = WorldEventID.TaidhaCovington,
                     MapID = 73,
-                    WaypointCode = "[&BNQCAAA=]",
+                    WaypointCode = "[&BKgBAAA=]",
                     CompletionLocation = new Point(-178.4, 229.5, 18.5),
                     CompletionRadius = 50
                 };
