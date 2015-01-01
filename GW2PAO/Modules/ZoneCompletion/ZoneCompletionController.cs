@@ -287,107 +287,112 @@ namespace GW2PAO.Modules.ZoneCompletion
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped
 
-                var playerPosition = CalcUtil.ConvertToMapPosition(this.playerService.PlayerPosition);
-                var cameraDirectionPosition = CalcUtil.ConvertToMapPosition(this.playerService.CameraDirection);
-
-                lock (this.zoneItemsLock)
+                var playerPos = this.playerService.PlayerPosition;
+                var cameraDir = this.playerService.CameraDirection;
+                if (playerPos != null && cameraDir != null)
                 {
-                    foreach (var item in this.ZoneItems)
+                    var playerMapPosition = CalcUtil.ConvertToMapPosition(playerPos);
+                    var cameraDirectionMapPosition = CalcUtil.ConvertToMapPosition(cameraDir);
+
+                    lock (this.zoneItemsLock)
                     {
-                        var newDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, this.UserData.DistanceUnits));
-                        var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerPosition, item.ItemModel.Location),
-                                                               CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionPosition));
-
-                        if (item.DistanceFromPlayer != newDistance)
+                        foreach (var item in this.ZoneItems)
                         {
-                            Threading.BeginInvokeOnUI(() => item.DistanceFromPlayer = newDistance);
-                        }
+                            var newDistance = Math.Round(CalcUtil.CalculateDistance(playerMapPosition, item.ItemModel.Location, this.UserData.DistanceUnits));
+                            var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerMapPosition, item.ItemModel.Location),
+                                                                   CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionMapPosition));
 
-                        if (item.DirectionFromPlayer != newAngle)
-                        {
-                            Threading.BeginInvokeOnUI(() => item.DirectionFromPlayer = newAngle);
-                        }
-
-                        if (!item.IsUnlocked)
-                        {
-                            // If the zone item isn't already unlocked, check to see if it should be automatically unlocked
-                            //  based on the item's distance from the player and based on how long the player has been near the item
-                            var ftDistance = Math.Round(CalcUtil.CalculateDistance(playerPosition, item.ItemModel.Location, API.Data.Enums.Units.Feet));
-                            switch (item.ItemType)
+                            if (item.DistanceFromPlayer != newDistance)
                             {
-                                case API.Data.Enums.ZoneItemType.Waypoint:
-                                    if (this.UserData.AutoUnlockWaypoints
-                                        && ftDistance >= 0 && ftDistance < 75)
-                                    {
-                                        Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
-                                    }
-                                    break;
-                                case API.Data.Enums.ZoneItemType.PointOfInterest:
-                                    if (this.UserData.AutoUnlockPois
-                                        && ftDistance >= 0 && ftDistance < 75)
-                                    {
-                                        Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
-                                    }
-                                    break;
-                                case API.Data.Enums.ZoneItemType.Vista:
-                                    if (this.UserData.AutoUnlockVistas
-                                        && ftDistance >= 0 && ftDistance < 8)
-                                    {
-                                        if (this.distanceCounters[item.ItemId] > 4)
+                                Threading.BeginInvokeOnUI(() => item.DistanceFromPlayer = newDistance);
+                            }
+
+                            if (item.DirectionFromPlayer != newAngle)
+                            {
+                                Threading.BeginInvokeOnUI(() => item.DirectionFromPlayer = newAngle);
+                            }
+
+                            if (!item.IsUnlocked)
+                            {
+                                // If the zone item isn't already unlocked, check to see if it should be automatically unlocked
+                                //  based on the item's distance from the player and based on how long the player has been near the item
+                                var ftDistance = Math.Round(CalcUtil.CalculateDistance(playerMapPosition, item.ItemModel.Location, API.Data.Enums.Units.Feet));
+                                switch (item.ItemType)
+                                {
+                                    case API.Data.Enums.ZoneItemType.Waypoint:
+                                        if (this.UserData.AutoUnlockWaypoints
+                                            && ftDistance >= 0 && ftDistance < 75)
                                         {
-                                            this.distanceCounters[item.ItemId] = 0;
                                             Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        break;
+                                    case API.Data.Enums.ZoneItemType.PointOfInterest:
+                                        if (this.UserData.AutoUnlockPois
+                                            && ftDistance >= 0 && ftDistance < 75)
+                                        {
+                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        break;
+                                    case API.Data.Enums.ZoneItemType.Vista:
+                                        if (this.UserData.AutoUnlockVistas
+                                            && ftDistance >= 0 && ftDistance < 8)
+                                        {
+                                            if (this.distanceCounters[item.ItemId] > 4)
+                                            {
+                                                this.distanceCounters[item.ItemId] = 0;
+                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                            }
+                                            else
+                                            {
+                                                this.distanceCounters[item.ItemId] += 1;
+                                            }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] += 1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        this.distanceCounters[item.ItemId] = 0;
-                                    }
-                                    break;
-                                case API.Data.Enums.ZoneItemType.HeartQuest:
-                                    if (this.UserData.AutoUnlockHeartQuests
-                                        && ftDistance >= 0 && ftDistance < 400)
-                                    {
-                                        if (this.distanceCounters[item.ItemId] > 90)
-                                        {
                                             this.distanceCounters[item.ItemId] = 0;
-                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        break;
+                                    case API.Data.Enums.ZoneItemType.HeartQuest:
+                                        if (this.UserData.AutoUnlockHeartQuests
+                                            && ftDistance >= 0 && ftDistance < 400)
+                                        {
+                                            if (this.distanceCounters[item.ItemId] > 90)
+                                            {
+                                                this.distanceCounters[item.ItemId] = 0;
+                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                            }
+                                            else
+                                            {
+                                                this.distanceCounters[item.ItemId] += 1;
+                                            }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] += 1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        this.distanceCounters[item.ItemId] = 0;
-                                    }
-                                    break;
-                                case API.Data.Enums.ZoneItemType.SkillChallenge:
-                                    if (this.UserData.AutoUnlockSkillChallenges
-                                        && ftDistance >= 0 && ftDistance < 25)
-                                    {
-                                        if (this.distanceCounters[item.ItemId] > 15)
-                                        {
                                             this.distanceCounters[item.ItemId] = 0;
-                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                        }
+                                        break;
+                                    case API.Data.Enums.ZoneItemType.SkillChallenge:
+                                        if (this.UserData.AutoUnlockSkillChallenges
+                                            && ftDistance >= 0 && ftDistance < 25)
+                                        {
+                                            if (this.distanceCounters[item.ItemId] > 15)
+                                            {
+                                                this.distanceCounters[item.ItemId] = 0;
+                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                            }
+                                            else
+                                            {
+                                                this.distanceCounters[item.ItemId] += 1;
+                                            }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] += 1;
+                                            this.distanceCounters[item.ItemId] = 0;
                                         }
-                                    }
-                                    else
-                                    {
-                                        this.distanceCounters[item.ItemId] = 0;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }
