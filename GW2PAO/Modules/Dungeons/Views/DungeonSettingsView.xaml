@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <StackPanel Margin="20,10,0,0">
         <GroupBox Margin="0,5,5,5"
-                  Width="250"
+                  MinWidth="250"
                   HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.DungeonTimer}" />
@@ -33,7 +33,7 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Margin="0,5,5,5"
-                  Width="250"
+                  MinWidth="250"
                   HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.DungeonsTracker}" />

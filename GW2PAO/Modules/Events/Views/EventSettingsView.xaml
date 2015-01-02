@@ -7,7 +7,7 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <StackPanel Margin="20,10,0,0">
         <GroupBox Margin="0,5,5,5"
-                  Width="250"
+                  MinWidth="200"
                   HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventTimeTable}" />
@@ -25,27 +25,29 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left">
                 <RadioButton IsChecked="{Binding UserData.UseAdjustedTimeTable}"
-                             Margin="2,0,0,0">
+                             Margin="2,2,2,2">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.Adjusted}" />
                 </RadioButton>
                 <RadioButton IsChecked="{Binding UserData.UseStandardTimeTable}"
-                             Margin="70,0,0,0">
+                             Margin="30,2,2,2">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.Standard}" />
                 </RadioButton>
             </StackPanel>
         </GroupBox>
 
         <GroupBox Margin="0,5,5,10"
-                  Width="250"
+                  MinWidth="250"
                   HorizontalAlignment="Left">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventsTracker}" />
             </GroupBox.Header>
-            <StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
                 <CheckBox IsChecked="{Binding UserData.AreInactiveEventsVisible}">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowInactiveEvents}" />
                 </CheckBox>
-                <CheckBox IsChecked="{Binding UserData.AutoDetectCompletion}">
+                <CheckBox Margin="20,2,2,2"
+                          IsChecked="{Binding UserData.AutoDetectCompletion}">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoComplete}" />
                 </CheckBox>
             </StackPanel>
