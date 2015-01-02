@@ -98,6 +98,24 @@
                        VerticalAlignment="Center" HorizontalAlignment="Center"
                        Height="40" Width="40"
                        Source="/Images/Title/bosses.png" />
+                <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                       Height="20" Width="20"
+                       Source="/Images/Misc/treasure.png">
+                    <Image.Effect>
+                        <DropShadowEffect Color="Goldenrod" BlurRadius="10" ShadowDepth="0" />
+                    </Image.Effect>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Opacity" Value="0" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsTreasureObtained}" Value="True">
+                                    <Setter Property="Opacity" Value="0.75" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
 
                 <!-- We also need to add an 'x' button and a 'don't show again' button -->
                 <Grid Grid.Row="0" Grid.Column="1"
