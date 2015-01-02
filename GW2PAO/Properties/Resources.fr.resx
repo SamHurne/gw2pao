@@ -646,4 +646,131 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Assistant d'exploration</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Appliquer</value>
+    <comment>Set a setting or action</comment>
+  </data>
+  <data name="AutoComplete" xml:space="preserve">
+    <value>Détection Automatique d'achèvement de Donjon</value>
+  </data>
+  <data name="AutoHideBorder" xml:space="preserve">
+    <value>Masquer automatiquement les Bordures</value>
+  </data>
+  <data name="AutoStart" xml:space="preserve">
+    <value>Démarrage automatique</value>
+  </data>
+  <data name="AutoStop" xml:space="preserve">
+    <value>Arrêt automatique</value>
+  </data>
+  <data name="BestTimes" xml:space="preserve">
+    <value>Meilleur Temps:</value>
+    <comment>Best dungeon path completion times</comment>
+  </data>
+  <data name="DungeonTimer" xml:space="preserve">
+    <value>Chronomètre Donjon:</value>
+  </data>
+  <data name="EventNotificationConfigTooltip" xml:space="preserve">
+    <value>Délai entre l'alerte et le début de l'évènement</value>
+    <comment>Instructions shown describing what the entry box for notifications means</comment>
+  </data>
+  <data name="EventNotificationSettings" xml:space="preserve">
+    <value>Réglages Alerte Evènements</value>
+    <comment>Settings for Event Notifications</comment>
+  </data>
+  <data name="EventsTracker" xml:space="preserve">
+    <value>Suivi des évènements</value>
+    <comment>Name of the Events Tracker</comment>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Général</value>
+    <comment>General Settings Header</comment>
+  </data>
+  <data name="InvalidHotkey" xml:space="preserve">
+    <value>Entrée incorrecte. Veuillez réessayer.</value>
+    <comment>Shown if the user tries to set a hotkey with an invalid key or key combo</comment>
+  </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>Langue:</value>
+    <comment>Shown in the general settings, next to the dropdown that allows selection of the current language.</comment>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Name (singular)</comment>
+  </data>
+  <data name="ObjectiveType" xml:space="preserve">
+    <value>Type d'objectif</value>
+    <comment>World vs World Objective Type</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Propriétaire</value>
+    <comment>Owner, as in World Owner</comment>
+  </data>
+  <data name="ResetAll" xml:space="preserve">
+    <value>Remise à zéro</value>
+  </data>
+  <data name="RestartApplicationInstruction" xml:space="preserve">
+    <value>L'application doit redémarrer pour prendre en compte les nouveaux réglages.</value>
+    <comment>Message shown when the user changes a setting that requires an application restart (like changing the language)</comment>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Trier par</value>
+    <comment>Sort a list by a specific property</comment>
+  </data>
+  <data name="ToggleAllWindows" xml:space="preserve">
+    <value>Montrer/Masquer les Fenêtres</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleDungeonsTracker" xml:space="preserve">
+    <value>Montrer/Masquer la Liste de Donjons</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleDungeonTimer" xml:space="preserve">
+    <value>Montrer/Masquer les Records Donjons</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleEventsTracker" xml:space="preserve">
+    <value>Montrer/Masquer les Evènements Mondiaux</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleNonInteractiveWindow" xml:space="preserve">
+    <value>Activer/Couper Fenêtre non-intéractives</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleNotificationBorders" xml:space="preserve">
+    <value>Montrer/Masquer les Bordures de Fenêtres</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleOverlayMenuIcon" xml:space="preserve">
+    <value>Montrer/Masquer l'icône de Menu</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="TogglePriceTracker" xml:space="preserve">
+    <value>Montrer/Masquer la Surveillance HV</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleTeamspeakOverlay" xml:space="preserve">
+    <value>Montrer/Masquer l'Overlay Teamspeak</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWebBrowser" xml:space="preserve">
+    <value>Montrer/Masquer le Navigateur</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWvWTracker" xml:space="preserve">
+    <value>Montrer/Masquer les Evènements McM</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleZoneCompletionAssistant" xml:space="preserve">
+    <value>Montrer/Masquer l'Assistant d'exploration</value>
+    <comment>Hotkey label</comment>
+  </data>
 </root>
