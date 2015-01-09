@@ -146,9 +146,9 @@ namespace GW2PAO.API.Data
                 {
                     Name = "Inquest Golem Mark II",
                     ID = WorldEventID.InquestGolemMarkII,
-                    MapID = 17,
+                    MapID = 39,
                     WaypointCode = "[&BNQCAAA=]",
-                    CompletionLocation = new Point(902.5, 75.4, 9.6),
+                    CompletionLocation = new Point(926.17, 51.20, 10.72),
                     CompletionRadius = 50
                 };
             var taidhaCovington = new WorldEvent()
