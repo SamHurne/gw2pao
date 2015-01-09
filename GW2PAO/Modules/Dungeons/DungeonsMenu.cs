@@ -68,7 +68,7 @@ namespace GW2PAO.Modules.Dungeons
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.DungeonsTracker, viewFactory.DisplayDungeonTracker, viewFactory.CanDisplayDungeonTracker));
-            this.SubMenuItems.Add(new MenuItem("Dungeons Timer", viewFactory.DisplayDungeonTimer, viewFactory.CanDisplayDungeonTimer));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.DungeonTimer, viewFactory.DisplayDungeonTimer, viewFactory.CanDisplayDungeonTimer));
         }
     }
 }

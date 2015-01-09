@@ -29,7 +29,7 @@
                                  Hotkey="{Binding ToggleWvWTrackerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleZoneCompletionAssistant}"
                                  Hotkey="{Binding ToggleZoneAssistantHotkey}"/>
-        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleZoneCompletionAssistant}"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleTeamspeakOverlay}"
                                  Hotkey="{Binding ToggleTeamspeakTrackerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWebBrowser}"
                                  Hotkey="{Binding ToggleWebBrowserHotkey}"/>

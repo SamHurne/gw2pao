@@ -177,7 +177,7 @@
     <value>Directions</value>
   </data>
   <data name="Castles" xml:space="preserve">
-    <value>Forts</value>
+    <value>Château</value>
   </data>
   <data name="CheckForUpdatesAtStartup" xml:space="preserve">
     <value>Vérifier les mises à jour au démarrage</value>
@@ -338,7 +338,7 @@
     <value>Nom d'objet</value>
   </data>
   <data name="Keeps" xml:space="preserve">
-    <value>Conservations</value>
+    <value>Forts</value>
     <comment>Keeps, as in castle keep</comment>
   </data>
   <data name="LastActiveXAgo" xml:space="preserve">

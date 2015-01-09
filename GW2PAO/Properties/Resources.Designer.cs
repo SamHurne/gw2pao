@@ -709,6 +709,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotkeys.
+        /// </summary>
+        public static string Hotkeys {
+            get {
+                return ResourceManager.GetString("Hotkeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input. Try again..
         /// </summary>
         public static string InvalidHotkey {
@@ -1578,6 +1587,15 @@ namespace GW2PAO.Properties {
         public static string TPCalculator {
             get {
                 return ResourceManager.GetString("TPCalculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracked Items.
+        /// </summary>
+        public static string TrackedItems {
+            get {
+                return ResourceManager.GetString("TrackedItems", resourceCulture);
             }
         }
         

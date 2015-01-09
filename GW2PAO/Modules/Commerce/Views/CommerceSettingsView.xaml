@@ -48,7 +48,7 @@
         <!-- Tracked Items Configuration -->
         <GroupBox Height="301" Width="539">
             <GroupBox.Header>
-                <core:OutlinedTextBlock Text="Tracked Items" />
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.TrackedItems}" />
             </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -66,7 +66,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="191"
-                                            Header="Item"
+                                            Header="{x:Static resx:Resources.Item}"
                                             DisplayMemberBinding="{Binding ItemName}"/>
                         </GridView>
                     </ListView.View>

@@ -48,7 +48,7 @@ namespace GW2PAO.ViewModels
         /// </summary>
         public string SettingsHeader
         {
-            get { return "Hotkeys"; }
+            get { return Properties.Resources.Hotkeys; }
         }
 
         /// <summary>
