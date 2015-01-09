@@ -134,7 +134,10 @@ namespace GW2PAO.API.Data
                                 ID = CaudecusManorPathID.Story,
                                 InstanceMapID = 75,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(252.10, 163.32, 37.48),
+                                CompletionPrereqPoints = new List<Point> { new Point(162.28, 84.15, 30.90), new Point(139.54, 232.16, 30.81), new Point(236.73, 259.42, 40.62) },
+                                PointDetectionRadius = 50
                             },
                             new DungeonPath()
                             {
@@ -142,7 +145,11 @@ namespace GW2PAO.API.Data
                                 ID = CaudecusManorPathID.P1,
                                 InstanceMapID = 76,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-195.62,193.663,2.571),
+                                IdentifyingPoints = new List<Point> { new Point(126.991, 9.363, 30.898) },
+                                CompletionPrereqPoints = new List<Point> { new Point(70.671, 77.091, 22.536), new Point(-41.897, 119.5, 20.746), new Point(55.904, 188.298, 26.573) },
+                                PointDetectionRadius = 30
                             },
                             new DungeonPath()
                             {
@@ -150,7 +157,11 @@ namespace GW2PAO.API.Data
                                 ID = CaudecusManorPathID.P2,
                                 InstanceMapID = 76,
                                 PathDisplayText = "P2",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(252.08, 268.50, 41.53),
+                                IdentifyingPoints = new List<Point> { new Point(46.79, 58.08, 40.08) },
+                                CompletionPrereqPoints = new List<Point> { new Point(46.79, 58.08, 40.08), new Point(261.97, -8.27, 41.18) },
+                                PointDetectionRadius = 30
                             },
                             new DungeonPath()
                             {
@@ -158,7 +169,11 @@ namespace GW2PAO.API.Data
                                 ID = CaudecusManorPathID.P3,
                                 InstanceMapID = 76,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-215.50, 233.00, 0.49),
+                                IdentifyingPoints = new List<Point> { new Point(17.30, 30.58, 16.18) },
+                                CompletionPrereqPoints = new List<Point> { new Point(94.86, 127.90, 22.54), new Point(136.28, 239.42, 30.61) },
+                                PointDetectionRadius = 30
                             }
                         }
             });
