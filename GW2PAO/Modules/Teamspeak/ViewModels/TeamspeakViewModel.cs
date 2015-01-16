@@ -17,8 +17,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
     [Export(typeof(TeamspeakViewModel))]
     public class TeamspeakViewModel : BindableBase
     {
-        private static Regex spacerRegex = new Regex(@"^\[[*]*[rcl]*spacer\d*\]");
-
         private string messageText;
         private string serverName;
         private string serverAddress;
@@ -280,13 +278,10 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         {
             Threading.BeginInvokeOnUI(() =>
                 {
-                    var newChannel = new ChannelViewModel(e.Channel, this.TeamspeakService);
+                    if (e.Channel.IsSpacer)
+                        return; // Totally ignore spacers
 
-                    if (spacerRegex.IsMatch(newChannel.Name))
-                    {
-                        // Totally ignore spacers
-                        return;
-                    }
+                    var newChannel = new ChannelViewModel(e.Channel, this.TeamspeakService);
 
                     // Check if we have any orphans who is a subchannel of this new channel
                     var matchingOrphans = this.orphanChannels.Where(c => c.ParentID == newChannel.ID);

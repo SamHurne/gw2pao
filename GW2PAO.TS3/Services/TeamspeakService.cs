@@ -20,6 +20,7 @@ using System.Timers;
 using GW2PAO.TS3.Data;
 using NLog;
 using System.ComponentModel.Composition;
+using TS3QueryLib.Core.Common.Entities;
 
 namespace GW2PAO.TS3.Services
 {
@@ -31,8 +32,14 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public AsyncTcpDispatcher QueryDispatcher { get; private set; }
-        public QueryRunner QueryRunner { get; private set; }
+        private const string Host = "localhost";
+        private const int Port = 25639;
+
+        public AsyncTcpDispatcher CommandQueryDispatcher { get; private set; }
+        public QueryRunner CommandQueryRunner { get; private set; }
+
+        public AsyncTcpDispatcher EventQueryDispatcher { get; private set; }
+        public QueryRunner EventQueryRunner { get; private set; }
 
         /// <summary>
         /// The current connected state of the service
@@ -136,20 +143,27 @@ namespace GW2PAO.TS3.Services
         public void Connect()
         {
             // do not connect when already connected or during connection establishing
-            if (this.QueryRunner != null)
+            if (this.CommandQueryRunner != null || this.EventQueryRunner != null)
                 return;
 
             this.ConnectionState = ConnectionState.Connecting;
 
-            this.QueryDispatcher = new AsyncTcpDispatcher("localhost", 25639);
-            this.QueryDispatcher.BanDetected += QueryDispatcher_BanDetected;
-            this.QueryDispatcher.ReadyForSendingCommands += QueryDispatcher_ReadyForSendingCommands;
-            this.QueryDispatcher.ServerClosedConnection += QueryDispatcher_ServerClosedConnection;
-            this.QueryDispatcher.SocketError += QueryDispatcher_SocketError;
-            this.QueryDispatcher.NotificationReceived += QueryDispatcher_NotificationReceived;
+            // Start a new thread for running the 
+
+            this.CommandQueryDispatcher = new AsyncTcpDispatcher(TeamspeakService.Host, TeamspeakService.Port);
+            this.CommandQueryDispatcher.ReadyForSendingCommands += CommandQueryDispatcher_ReadyForSendingCommands;
+            this.CommandQueryDispatcher.SocketError += QueryDispatcher_SocketError;
+
+            this.EventQueryDispatcher = new AsyncTcpDispatcher(TeamspeakService.Host, TeamspeakService.Port);
+            this.EventQueryDispatcher.BanDetected += QueryDispatcher_BanDetected;
+            this.EventQueryDispatcher.ReadyForSendingCommands += EventQueryDispatcher_ReadyForSendingCommands;
+            this.EventQueryDispatcher.ServerClosedConnection += EventQueryDispatcher_ServerClosedConnection;
+            this.EventQueryDispatcher.SocketError += QueryDispatcher_SocketError;
+            this.EventQueryDispatcher.NotificationReceived += EventQueryDispatcher_NotificationReceived;
 
             logger.Info("Connecting");
-            this.QueryDispatcher.Connect();
+            this.CommandQueryDispatcher.Connect();
+            this.EventQueryDispatcher.Connect();
         }
 
         /// <summary>
@@ -166,11 +180,15 @@ namespace GW2PAO.TS3.Services
                 this.clients.Clear();
 
                 // QueryRunner disposes the Dispatcher too
-                if (this.QueryRunner != null)
-                    this.QueryRunner.Dispose();
+                if (this.CommandQueryRunner != null)
+                    this.CommandQueryRunner.Dispose();
+                if (this.EventQueryRunner != null)
+                    this.EventQueryRunner.Dispose();
 
-                this.QueryDispatcher = null;
-                this.QueryRunner = null;
+                this.CommandQueryDispatcher = null;
+                this.CommandQueryRunner = null;
+                this.EventQueryDispatcher = null;
+                this.EventQueryRunner = null;
                 this.ConnectionState = ConnectionState.Disconnected;
             }
         }
@@ -181,11 +199,11 @@ namespace GW2PAO.TS3.Services
         /// <param name="msg">The message to send</param>
         public void SendChannelMessage(string msg)
         {
-            if (this.QueryRunner != null)
+            if (this.CommandQueryRunner != null)
             {
                 logger.Info("Sending text message: {0}", msg);
                 var command = new Command("sendtextmessage targetmode=2 msg=" + this.EncodeString(msg));
-                this.QueryRunner.SendCommand(command);
+                this.CommandQueryRunner.SendCommand(command);
             }
         }
 
@@ -195,11 +213,11 @@ namespace GW2PAO.TS3.Services
         /// <param name="channelID"></param>
         public void ChangeChannel(uint channelID)
         {
-            if (this.QueryRunner != null)
+            if (this.CommandQueryRunner != null)
             {
                 logger.Info("Moving client to channel {0}", channelID);
                 var command = new Command(string.Format("clientmove cid={0} clid={1}", channelID, this.currentClientID));
-                string restul = this.QueryRunner.SendCommand(command);
+                string restul = this.CommandQueryRunner.SendCommand(command);
             }
         }
 
@@ -216,16 +234,16 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Handler for the ReadyForSendingCommands event
         /// </summary>
-        private void QueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
+        private void CommandQueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
         {
-            logger.Info("Ready For Sending Commands");
+            logger.Info("Command - Ready For Sending Commands");
             this.ConnectionState = ConnectionState.Connected;
+
             // you can only run commands on the queryrunner when this event has been raised first!
-            this.QueryRunner = new QueryRunner(QueryDispatcher);
-            this.QueryRunner.Notifications.TalkStatusChanged += Notifications_TalkStatusChanged;
+            this.CommandQueryRunner = new QueryRunner(this.CommandQueryDispatcher);
 
             // Determine who we are
-            var whoami = this.QueryRunner.SendWhoAmI();
+            var whoami = this.CommandQueryRunner.SendWhoAmI();
             this.currentClientID = whoami.ClientId;
             this.currentChannelID = whoami.ChannelId;
             logger.Info("Current Client ID: {0}", this.currentClientID);
@@ -243,7 +261,7 @@ namespace GW2PAO.TS3.Services
             {
                 // Send a request for the full list of clients
                 logger.Info("Sending request for client list");
-                string result = this.QueryRunner.SendCommand(new Command("clientlist"));
+                string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
                 this.AddClients(result);
 
                 // Request the client and channel lists last - these can take a little while...
@@ -253,10 +271,6 @@ namespace GW2PAO.TS3.Services
                     this.InitializeChannelList();
                 }
 
-                // Start handling notifications
-                logger.Info("Registering for notifications");
-                this.QueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
-
                 // Start a timer to send a message every so often, keeping the connection open
                 logger.Info("Starting poll timer");
                 this.pollTimer.Start();
@@ -264,9 +278,27 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
+        /// Handler for the ReadyForSendingCommands event
+        /// </summary>
+        private void EventQueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
+        {
+            logger.Info("Event - Ready For Sending Commands");
+            this.ConnectionState = ConnectionState.Connected;
+
+            // you can only run commands on the queryrunner when this event has been raised first!
+            this.EventQueryRunner = new QueryRunner(this.EventQueryDispatcher);
+            this.EventQueryRunner.Notifications.TalkStatusChanged += Notifications_TalkStatusChanged;
+
+            Task.Factory.StartNew(() =>
+            {
+                this.EventQueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
+            });
+        }
+
+        /// <summary>
         /// Handler for the ServerClosedConnection event
         /// </summary>
-        private void QueryDispatcher_ServerClosedConnection(object sender, EventArgs e)
+        private void EventQueryDispatcher_ServerClosedConnection(object sender, EventArgs e)
         {
             logger.Info("Server closed connection");
         }
@@ -298,7 +330,7 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Handler for the NotificationReceived event
         /// </summary>
-        private void QueryDispatcher_NotificationReceived(object sender, EventArgs<string> e)
+        private void EventQueryDispatcher_NotificationReceived(object sender, EventArgs<string> e)
         {
             logger.Trace("Notification: {0}", e.Value.Trim());
 
@@ -321,7 +353,7 @@ namespace GW2PAO.TS3.Services
 
                     // Also figure out our new server, client, and channel
                     System.Threading.Thread.Sleep(250);
-                    var whoami = this.QueryRunner.SendWhoAmI();
+                    var whoami = this.CommandQueryRunner.SendWhoAmI();
                     this.currentClientID = whoami.ClientId;
                     this.currentChannelID = whoami.ChannelId;
                     logger.Trace("New Client ID: {0}", this.currentClientID);
@@ -559,7 +591,7 @@ namespace GW2PAO.TS3.Services
         private void UpdateServerInfo()
         {
             // Determine the current server information
-            string result = this.QueryRunner.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
+            string result = this.CommandQueryRunner.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
             string serverName = this.ParseStringProperty(result, true, Properties.ServerName);
             string serverAddress = this.ParseStringProperty(result, false, Properties.ServerIP);
 
@@ -573,7 +605,7 @@ namespace GW2PAO.TS3.Services
         private void UpdateChannelInfo()
         {
             var command = new Command(string.Format("channelvariable {0}={1} {2} {3}", Properties.ChannelID, this.currentChannelID, Properties.ChannelName, Properties.ChannelDescription));
-            string result = this.QueryRunner.SendCommand(command);
+            string result = this.CommandQueryRunner.SendCommand(command);
 
             // Parse the channel info
             string channelName = this.ParseStringProperty(result, true, Properties.ChannelName);
@@ -589,7 +621,7 @@ namespace GW2PAO.TS3.Services
         private void InitializeChannelList()
         {
             var command = new Command("channellist");
-            string result = this.QueryRunner.SendCommand(command);
+            string result = this.CommandQueryRunner.SendCommand(command);
             if (result != null)
             {
                 var channelStrings = result.Split('|');
@@ -640,7 +672,9 @@ namespace GW2PAO.TS3.Services
             if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelClientsCount)) != null)
                 clientsCount = this.ParseUintProperty(channelString, Properties.ChannelClientsCount);
 
-            Channel channelInfo = new Channel(id, name)
+            bool isSpacer = SpacerInfo.Parse(name) != null;
+
+            Channel channelInfo = new Channel(id, name, isSpacer)
             {
                 ParentID = parentId,
                 Order = order,
@@ -747,9 +781,16 @@ namespace GW2PAO.TS3.Services
         {
             lock (this.pollLock)
             {
-                if (this.QueryRunner != null && !this.QueryRunner.IsDisposed)
+                if (this.CommandQueryRunner != null && !this.CommandQueryRunner.IsDisposed)
                 {
-                    var whoami = this.QueryRunner.SendWhoAmI();
+                    var whoami = this.CommandQueryRunner.SendWhoAmI();
+                    this.currentClientID = whoami.ClientId;
+                    this.currentChannelID = whoami.ChannelId;
+                }
+
+                if (this.EventQueryRunner != null && !this.EventQueryRunner.IsDisposed)
+                {
+                    var whoami = this.EventQueryRunner.SendWhoAmI();
                     this.currentClientID = whoami.ClientId;
                     this.currentChannelID = whoami.ChannelId;
                 }
@@ -827,9 +868,7 @@ namespace GW2PAO.TS3.Services
         /// <returns>The normal string representation of the input</returns>
         private string DecodeString(string input)
         {
-            string output = input.Replace(@"\s", " "); // spaces come through as \s
-            output = output.Replace(@"\", string.Empty); // additional '\' characters come through as well
-            return output;
+            return Ts3Util.DecodeString(input);
         }
 
         /// <summary>
@@ -839,9 +878,7 @@ namespace GW2PAO.TS3.Services
         /// <returns>The encoded string representation of the input</returns>
         private string EncodeString(string input)
         {
-            string output = input.Replace(@"\", "\\");
-            output = output.Replace(" ", @"\s");
-            return output;
+            return Ts3Util.EncodeString(input);
         }
     }
 }
