@@ -297,6 +297,11 @@ namespace GW2PAO.Modules.Commerce
                                 {
                                     priceWatch.PastBuyOrders.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentBuyOrder.Value));
                                     priceWatch.PastSellListings.Add(new DataPoint(DateTimeAxis.ToDouble(DateTime.Now), priceWatch.CurrentSellListing.Value));
+
+                                    if (priceWatch.PastBuyOrders.Count > this.UserData.MaxHistoricalDataPoints)
+                                        priceWatch.PastBuyOrders.RemoveAt(0);
+                                    if (priceWatch.PastSellListings.Count > this.UserData.MaxHistoricalDataPoints)
+                                        priceWatch.PastSellListings.RemoveAt(0);
                                 });
                         }
                     }

@@ -35,6 +35,7 @@ namespace GW2PAO.Modules.Commerce
         private int resetPriceNotificationsInterval;
         private bool areBuyOrderPriceNotificationsEnabled;
         private bool areSellListingPriceNotificationsEnabled;
+        private int maxHistoricalDataPoints;
         private ObservableCollection<PriceWatch> priceWatches = new ObservableCollection<PriceWatch>();
 
         /// <summary>
@@ -65,6 +66,15 @@ namespace GW2PAO.Modules.Commerce
         }
 
         /// <summary>
+        /// The maximum amount of data points to store for historical data
+        /// </summary>
+        public int MaxHistoricalDataPoints
+        {
+            get { return this.maxHistoricalDataPoints; }
+            set { this.SetProperty(ref this.maxHistoricalDataPoints, value); }
+        }
+
+        /// <summary>
         /// Collection of price watches for the price watch notifications
         /// </summary>
         public ObservableCollection<PriceWatch> PriceWatches { get { return this.priceWatches; } }
@@ -78,6 +88,7 @@ namespace GW2PAO.Modules.Commerce
             this.ResetPriceNotificationsInterval = 15;
             this.AreBuyOrderPriceNotificationsEnabled = true;
             this.AreSellListingPriceNotificationsEnabled = true;
+            this.MaxHistoricalDataPoints = 600; // 600 data points = 10 hours of data
         }
 
         /// <summary>
