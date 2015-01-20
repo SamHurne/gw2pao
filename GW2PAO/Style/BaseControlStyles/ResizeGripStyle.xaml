@@ -3,23 +3,21 @@
 
     <!-- For now all resize grippers are hidden -->
     <Style TargetType="{x:Type ResizeGrip}">
-        <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
-        <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+        <Setter Property="Height" Value="2" />
+        <Setter Property="Width" Value="2" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ResizeGrip}">
                     <Grid SnapsToDevicePixels="True"
-                          Margin="10,10,0,0">
-                        <Rectangle Width="3" Height="3" Fill="Orange" Opacity="0.05" />
-                        <Grid.Effect>
-                            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
-                        </Grid.Effect>
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Bottom">
+                        <Rectangle Width="2" Height="2" Fill="Black" Opacity="0.1" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Visibility" Value="Hidden"/>
+        <Setter Property="Visibility" Value="Visible"/>
     </Style>
 
 </ResourceDictionary>

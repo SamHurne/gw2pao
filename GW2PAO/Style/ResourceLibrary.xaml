@@ -17,6 +17,7 @@
         <ResourceDictionary Source="BaseControlStyles/TextBoxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/TimespanUpDownStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ToolTipStyle.xaml" />
+        <ResourceDictionary Source="Brushes/Brushes.xaml" />
         <ResourceDictionary Source="NamedStyles/AlternateCheckboxStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/ScrollingItemsControlStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />

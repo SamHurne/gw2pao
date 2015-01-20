@@ -11,6 +11,8 @@
         AllowsTransparency="True" WindowStyle="None"
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
         Height="700" Width="1200">
 
     <src:OverlayWindow.Resources>
@@ -26,11 +28,11 @@
                                         ::-webkit-scrollbar-corner       { background-color: #000000 }
                                         ::-webkit-resizer                { background-color: #000000 }" />
         </awe:WebSessionProvider>
-            
+
         <awe:UrlConverter x:Key="UrlConverter" />
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
 
-        <DockPanel x:Key="BackGraphic" Height="10">
+        <DockPanel x:Key="BackGraphic">
             <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                     Stretch="Uniform"
                     Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
@@ -41,7 +43,7 @@
             </Path>
         </DockPanel>
 
-        <DockPanel x:Key="ForwardGraphic" Height="10">
+        <DockPanel x:Key="ForwardGraphic">
             <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                     Stretch="Uniform"
                     Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
@@ -52,7 +54,7 @@
             </Path>
         </DockPanel>
 
-        <DockPanel x:Key="ReloadGraphic" Height="15">
+        <DockPanel x:Key="ReloadGraphic">
             <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                     Stretch="Uniform"
                     Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
@@ -77,12 +79,6 @@
                     MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                     Grid.Row="0">
                 <Grid>
-                    <Grid.Background>
-                        <RadialGradientBrush Opacity="0.5" Center="0,0" GradientOrigin="0,0" RadiusX="1" RadiusY="1">
-                            <GradientStop Color="#FF5B4411" Offset="0"/>
-                            <GradientStop Color="#015B4411" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
@@ -90,8 +86,8 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="35" />
-                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Image Name="TitleImage"
@@ -102,7 +98,7 @@
                            Source="/Images/Title/community.png"
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu Name="MainMenu">
                                 <!--Should probably do this in a better way... but this will work for now-->
                                 <MenuItem Name="WikiLink" Header="GW2 Wiki" Click="BookmarkLink_Click" />
                                 <MenuItem Name="DulfyLink" Header="Dulfy" Click="BookmarkLink_Click" />
@@ -116,9 +112,9 @@
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect ShadowDepth="0"
-                                              Color="Goldenrod"
+                                              Color="Blue"
                                               Opacity="0"
-                                              BlurRadius="25"/>
+                                              BlurRadius="10"/>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
@@ -149,7 +145,8 @@
 
                     <!--Navigation Buttons-->
                     <Button Grid.Column="1" Grid.Row="0"
-                            Margin="35,5,1,5" Width="30"
+                            Margin="35,5,2,5"
+                            Width="20" Height="20"
                             HorizontalAlignment="Right"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource BackGraphic}"
@@ -157,7 +154,8 @@
                             CommandTarget="{Binding ElementName=webControl}"/>
 
                     <Button Grid.Column="2" Grid.Row="0"
-                            Margin="1,5,1,5" Width="30"
+                            Margin="2,5,2,5"
+                            Width="20" Height="20"
                             HorizontalAlignment="Left"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource ForwardGraphic}"
@@ -165,7 +163,8 @@
                             CommandTarget="{Binding ElementName=webControl}"/>
 
                     <Button Grid.Column="3" Grid.Row="0"
-                            Margin="1,5,5,5" Width="30" 
+                            Margin="5,5,5,5"
+                            Width="20" Height="20"
                             HorizontalAlignment="Left"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource ReloadGraphic}"
@@ -182,14 +181,15 @@
                              Text="{data:SourceBinding webControl}">
                         <TextBox.Background>
                             <LinearGradientBrush>
-                                <GradientStop Color="#70000000" Offset="0"/>
+                                <GradientStop Color="#B0000000" Offset="0"/>
                                 <GradientStop Color="#00000000" Offset="1"/>
                             </LinearGradientBrush>
                         </TextBox.Background>
                     </TextBox>
                     
                     <!-- Opacity Slider -->
-                    <Slider Grid.Column="5" Grid.Row="0" MinWidth="75"
+                    <Slider Grid.Column="5" Grid.Row="0"
+                            MinWidth="100"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Maximum="1" Minimum="0" SmallChange="0.1" LargeChange="0.25"
@@ -198,7 +198,7 @@
                     <!-- Minimize and Close Buttons -->
                     <Button Name="CollapseExpandButton"
                             Grid.Column="6" Grid.Row="0"
-                            Margin="5"
+                            Margin="3"
                             Click="CollapseExpandButton_Click">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
@@ -216,7 +216,7 @@
 
                     <Button Name="CloseWindowButton"
                             Grid.Column="7" Grid.Row="0"
-                            Margin="5"
+                            Margin="3,3,5,3"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
                             Click="CloseWindowButton_Click" />

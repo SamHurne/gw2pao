@@ -81,7 +81,7 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
         private void EventTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
             // Set up resize snapping
-            this.ResizeHelper.SnappingHeightOffset = 7;
+            this.ResizeHelper.SnappingHeightOffset = 12;
             this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
             this.ResizeHelper.SnappingIncrementHeight = (int)this.eventHeight;
 

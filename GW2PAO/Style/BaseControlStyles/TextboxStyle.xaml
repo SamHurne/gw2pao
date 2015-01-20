@@ -2,17 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="TextBoxBackgroundColor">#70000000</Color>
-    <Color x:Key="TextBoxBorderColor">#FFFFA500</Color>
+    <Color x:Key="TextBoxBorderColor">#FFEEE8AA</Color>
     <Color x:Key="TextBoxDisabledBackgroundColor">#20000000</Color>
-    <Color x:Key="TextBoxDisabledBorderColor">#20FFA500</Color>
-    <Color x:Key="TextBoxTextColor">#FFFFA500</Color>
-    <Color x:Key="TextBoxCaretColor">#FFFFA500</Color>
-    <Color x:Key="TextBoxHighlightColor">#90FFA500</Color>
+    <Color x:Key="TextBoxDisabledBorderColor">#20EEE8AA</Color>
+    <Color x:Key="TextBoxTextColor">#FFEEE8AA</Color>
+    <Color x:Key="TextBoxCaretColor">#FFEEE8AA</Color>
+    <Color x:Key="TextBoxHighlightColor">#40EEE8AA</Color>
 
-    <LinearGradientBrush x:Key="TextBoxBorderBrush" Opacity="1">
-        <GradientStop Color="#FFFFA500" Offset="0"/>
-        <GradientStop Color="#00FFA500" Offset="1"/>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#50EEE8AA" />
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />

@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="MenuItemHighlightBrush" Color="Orange" Opacity="0.25" />
-    <SolidColorBrush x:Key="MenuItemPressedBrush" Color="Orange" Opacity="0.75" />
-    <SolidColorBrush x:Key="SeperatorBrush" Color="Orange" Opacity="0.25" />
+    <SolidColorBrush x:Key="MenuItemHighlightBrush" Color="#FFEEE8AA" Opacity="0.1" />
+    <SolidColorBrush x:Key="MenuItemPressedBrush" Color="#FFEEE8AA" Opacity="0.25" />
+    <SolidColorBrush x:Key="SeperatorBrush" Color="#FFEEE8AA" Opacity="0.25" />
     
     <SolidColorBrush x:Key="MenuItemEnabledColor" Color="White"/>
     <SolidColorBrush x:Key="MenuItemDisabledColor" Color="White" Opacity="0.5"/>
@@ -52,17 +52,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
                     <Border Name="Border"
-                            BorderThickness="0,1,0,1"
-                            CornerRadius="0"
-                            Padding="1,1,1,1">
+                            Padding="1">
 
                         <Border.Background>
                             <SolidColorBrush Color="Black" Opacity="0.80" />
                         </Border.Background>
-                        
-                        <Border.BorderBrush>
-                            <SolidColorBrush Color="Orange" Opacity="0.5" />
-                        </Border.BorderBrush>
 
                         <ScrollViewer Style="{StaticResource ContextMenuScrollViewer}"
                                       HorizontalScrollBarVisibility="Hidden"

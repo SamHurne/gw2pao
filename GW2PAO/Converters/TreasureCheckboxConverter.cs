@@ -17,9 +17,9 @@ namespace GW2PAO.Converters
         {
             bool isChecked = (bool)value;
             if (isChecked)
-                return @"/Images/Misc/treasure.png";
+                return @"/Images/Misc/treasure_15px.png";
             else
-                return @"/Images/Misc/treasure_gray.png";
+                return @"/Images/Misc/treasure_gray_15px.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:src="clr-namespace:GW2PAO.Views"
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d" d:DesignWidth="200"
-             Height="28"
+             Height="20"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
@@ -31,14 +34,15 @@
     </UserControl.ToolTip>
 
     <!--Note: DataContext is set by the EventTrackerView-->
-    <Border CornerRadius="0" Margin="0,0,5,0" Padding="15,0,5,5" BorderThickness="0,0,0,1">
+    <Border Name="EventMainPanel" CornerRadius="0" Margin="0,0,0,0" Padding="15,0,5,1"
+            Background="{StaticResource ItemMouseOverBackground}">
 
         <Border.Style>
             <Style TargetType="Border">
                 <Setter Property="Effect">
                     <Setter.Value>
                         <DropShadowEffect ShadowDepth="0" Color="LawnGreen"
-                                          Opacity="0" BlurRadius="30"/>
+                                          Opacity="0" BlurRadius="10"/>
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
@@ -82,22 +86,31 @@
                             </BeginStoryboard>
                         </DataTrigger.ExitActions>
                     </DataTrigger>
+                    <DataTrigger Binding="{Binding ElementName=EventMainPanel, Path=IsMouseOver}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:00.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
                 </Style.Triggers>
             </Style>
         </Border.Style>
 
-        <Border.BorderBrush>
-            <LinearGradientBrush Opacity="0.65">
-                <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                <GradientStop Color="#00FFA500" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-
-        <Border.Background>
-            <SolidColorBrush Color="#01FFFFFF" />
-        </Border.Background>
-
-        <Grid Margin="0,5,0,0">
+        <Grid Margin="0,1,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -124,6 +137,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type CheckBox}">
                                     <Image Height="15"
+                                           SnapsToDevicePixels="True"
                                            Source="{Binding IsTreasureObtained, Converter={StaticResource TreasureConverter}}"/>
                                 </ControlTemplate>
                             </Setter.Value>

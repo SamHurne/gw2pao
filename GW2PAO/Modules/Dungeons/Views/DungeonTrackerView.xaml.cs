@@ -79,7 +79,7 @@ namespace GW2PAO.Modules.Dungeons.Views
         private void DungeonTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
             // Set up resize snapping
-            this.ResizeHelper.SnappingHeightOffset = 5;
+            this.ResizeHelper.SnappingHeightOffset = 12;
             this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
             this.ResizeHelper.SnappingIncrementHeight = (int)this.dungeonHeight;
 

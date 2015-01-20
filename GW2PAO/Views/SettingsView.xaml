@@ -12,36 +12,10 @@
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
         Height="500" Width="700">
+    
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>
-            <!--<LinearGradientBrush>
-                <GradientStop Color="#E5151E27" Offset="0.75"/>
-                <GradientStop Color="#E0151E27" Offset="1"/>
-            </LinearGradientBrush>-->
-            <VisualBrush>
-                <VisualBrush.Visual>
-                    <Grid>
-                        <Rectangle>
-                            <Rectangle.Fill>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#E5151E27" Offset="0.75"/>
-                                    <GradientStop Color="#E0151E27" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Image Source="../Images/background1.png" Opacity="0.1"
-                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
-                               SnapsToDevicePixels="True" UseLayoutRounding="True">
-                            <!--<Image.OpacityMask>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#50151E27" Offset="0"/>
-                                    <GradientStop Color="#00151E27" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Image.OpacityMask>-->
-                        </Image>
-                    </Grid>
-                </VisualBrush.Visual>
-            </VisualBrush>
+            <ImageBrush Viewbox="0,50,800,700" ViewboxUnits="Absolute" ImageSource="/Images/Backgrounds/Large1.png" />
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
@@ -69,7 +43,7 @@
                     <core:OutlinedTextBlock Grid.Column="0"
                                             Margin="10,0,0,0"
                                             VerticalAlignment="Center"
-                                            Fill="Orange" FontFamily="Candara" FontSize="17"
+                                            Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
                                             Text="{x:Static resx:Resources.Settings}" />
 
                     <Button Name="CloseWindowButton"

@@ -4,17 +4,17 @@
                     xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
 
     <SolidColorBrush x:Key="TimeSpanBackgroundBrush" Color="#70000000" Opacity="0.5" />
-    <SolidColorBrush x:Key="TimeSpanBorderBrush" Color="#FFFFA500" Opacity="0.5" />
+    <SolidColorBrush x:Key="TimeSpanBorderBrush" Color="#FFEEE8AA" Opacity="0.5" />
 
     <SolidColorBrush x:Key="TimeSpanDisabledBackgroundBrush" Color="#20000000" />
-    <SolidColorBrush x:Key="TimeSpanDisabledBorderBrush" Color="#20FFA500" />
+    <SolidColorBrush x:Key="TimeSpanDisabledBorderBrush" Color="#20EEE8AA" />
 
-    <SolidColorBrush x:Key="TimespanTextBrush" Color="#FFFFA500" />
-    <SolidColorBrush x:Key="TimespanCaretBrush" Color="#FFFFA500" />
-    <SolidColorBrush x:Key="TimespanHighlightBrush" Color="#90FFA500" />
+    <SolidColorBrush x:Key="TimespanTextBrush" Color="#FFEEE8AA" />
+    <SolidColorBrush x:Key="TimespanCaretBrush" Color="#FFEEE8AA" />
+    <SolidColorBrush x:Key="TimespanHighlightBrush" Color="#50EEE8AA" />
 
-    <SolidColorBrush x:Key="TimespanMouseOverBorderBrush" Color="#FFFFA500" />
-    <SolidColorBrush x:Key="TimespanSelectedBorderBrush" Color="#FFFFA500" />
+    <SolidColorBrush x:Key="TimespanMouseOverBorderBrush" Color="#FFEEE8AA" />
+    <SolidColorBrush x:Key="TimespanSelectedBorderBrush" Color="#FFEEE8AA" />
 
     <Style TargetType="xctk:TimeSpanUpDown">
         <Style.Resources>

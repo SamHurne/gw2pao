@@ -382,9 +382,6 @@
     <Compile Include="Modules\Commerce\Views\PriceView.xaml.cs">
       <DependentUpon>PriceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Commerce\Views\PriceWatchView.xaml.cs">
-      <DependentUpon>PriceWatchView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Commerce\Views\PriceNotification\PriceNotificationView.xaml.cs">
       <DependentUpon>PriceNotificationView.xaml</DependentUpon>
     </Compile>
@@ -496,6 +493,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Style\Brushes\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -597,10 +598,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Commerce\Views\PriceView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Commerce\Views\PriceWatchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -768,6 +765,16 @@
     <Resource Include="Images\background1.png" />
     <Resource Include="Images\background2.png" />
     <Resource Include="Images\background3.png" />
+    <Resource Include="Images\Backgrounds\Large1.png" />
+    <Resource Include="Images\Backgrounds\Medium1.png" />
+    <Resource Include="Images\Backgrounds\Large2.png" />
+    <Resource Include="Images\Backgrounds\Large3.png" />
+    <Resource Include="Images\Backgrounds\Small1.png" />
+    <Resource Include="Images\Backgrounds\Medium2.png" />
+    <Resource Include="Images\Backgrounds\Medium3.png" />
+    <Resource Include="Images\Backgrounds\Medium4.png" />
+    <Resource Include="Images\Misc\treasure_15px.png" />
+    <Resource Include="Images\Misc\treasure_gray_15px.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -786,9 +793,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Style\Brushes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />
   </ItemGroup>

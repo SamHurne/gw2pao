@@ -16,84 +16,67 @@
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Topmost="True"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display"
         Closing="OverlayWindow_Closing">
 
     <src:OverlayWindow.Resources>
-        <DockPanel x:Key="PlayGraphic" Height="10"
+        <DockPanel x:Key="PlayGraphic"
                    SnapsToDevicePixels="True"
                    Margin="1,0,0,0">
             <Path VerticalAlignment="Center"
                   Stretch="Uniform"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeStartLineCap="Round"  StrokeEndLineCap="Round"
                   StrokeLineJoin="Round"
                   StrokeThickness="1"
                   Data="M 50,50 L 0,100 0,0 50,50">
             </Path>
         </DockPanel>
-        <DockPanel x:Key="PauseGraphic" Height="10"
+        <DockPanel x:Key="PauseGraphic"
                    Margin="2,0,0,0"
                    SnapsToDevicePixels="True">
             <Line VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeThickness="2"
                   X1="0" X2="0"
                   Y1="0" Y2="10" />
             <Line VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeThickness="2"
                   X1="2" X2="2"
                   Y1="0" Y2="10" />
         </DockPanel>
-        <DockPanel x:Key="StopGraphic" Height="10"
+        <DockPanel x:Key="StopGraphic"
                    SnapsToDevicePixels="True">
             <Rectangle VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeThickness="2"
                   Height="8" Width="8"/>
         </DockPanel>
-        <StackPanel x:Key="BestTimesGraphic" Height="10"
+        <StackPanel x:Key="BestTimesGraphic"
                     SnapsToDevicePixels="True"
                     Margin="2,0,0,0">
             <Line VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   StrokeThickness="2" Margin="0,1,0,1"
                   X1="0" X2="10"
                   Y1="0" Y2="0" />
             <Line VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   StrokeThickness="2" Margin="0,1,0,1"
                   X1="0" X2="10"
                   Y1="0" Y2="0" />
             <Line VerticalAlignment="Center"
-                  Stroke="Orange" Fill="Orange"
+                  Stroke="Black" Fill="Black"
                   StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                   StrokeThickness="2" Margin="0,1,0,1"
                   X1="0" X2="10"
                   Y1="0" Y2="0" />
         </StackPanel>
-
-        <!-- Override the default resize grip style so that it is visible -->
-        <Style TargetType="{x:Type ResizeGrip}">
-            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
-            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ResizeGrip}">
-                        <Grid SnapsToDevicePixels="True">
-                            <Rectangle Width="3" Height="3" Fill="Black" Opacity="0.5" />
-                            <Grid.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.5" Direction="0" ShadowDepth="0" />
-                            </Grid.Effect>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel"
@@ -101,7 +84,6 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
-            <!--<RowDefinition Height="Auto" />-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -119,8 +101,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="35" />
-                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Image Name="TitleImage"
@@ -131,7 +113,7 @@
                        Source="/Images/Title/dungeons.png"
                        MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu Name="MainMenu">
                             <MenuItem Header="{x:Static resx:Resources.Settings}" Command="{Binding OpenSettingsCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -141,9 +123,9 @@
                             <Setter Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect ShadowDepth="0"
-                                              Color="Goldenrod"
+                                              Color="LightGreen"
                                               Opacity="0"
-                                              BlurRadius="25"/>
+                                              BlurRadius="7"/>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
@@ -174,12 +156,30 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="Orange" FontFamily="Candara" FontSize="17"
+                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
                                         Text="{x:Static resx:Resources.DungeonTimer}" />
+
+                <Button Name="CollapseExpandButton"
+                        Grid.Column="2"
+                        Margin="3"
+                        Click="CollapseExpandButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=CurrentTimePanel}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
                 <Button Name="CloseWindowButton"
                     Grid.Column="3"
-                    Margin="5"
+                    Margin="3,3,5,3"
                     Style="{StaticResource TitleBarButtonStyle}"
                     Content="{StaticResource CloseGraphic}"
                     Click="CloseWindowButton_Click" />
@@ -191,7 +191,9 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding UserData.AutoHideTimerBorder}" Value="True" />
+                                <Condition Binding="{Binding ElementName=CurrentTimePanel, Path=Visibility}" Value="Visible" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -221,20 +223,18 @@
                     Grid.Row="1" Grid.RowSpan="2"
                     Grid.Column="0"
                     Width="29">
-            <Button Height="21"
-                    Margin="3"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Command="{Binding StartTimerCommand}"
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Margin" Value="3" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Command="{Binding StartTimerCommand}"
                     Content="{StaticResource PlayGraphic}" />
-            <Button Height="21"
-                    Margin="3"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Command="{Binding PauseTimerCommand}"
+            <Button Command="{Binding PauseTimerCommand}"
                     Content="{StaticResource PauseGraphic}" />
-            <Button Height="21"
-                    Margin="3"
-                    Style="{StaticResource TitleBarButtonStyle}"
-                    Command="{Binding StopTimerCommand}"
+            <Button Command="{Binding StopTimerCommand}"
                     Content="{StaticResource StopGraphic}" />
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
@@ -243,7 +243,8 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding UserData.AutoHideTimerBorder}" Value="True" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>

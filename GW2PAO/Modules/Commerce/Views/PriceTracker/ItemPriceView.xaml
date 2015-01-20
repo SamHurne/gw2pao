@@ -10,6 +10,8 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" d:DesignWidth="200"
              Height="43"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True"
              TextOptions.TextFormattingMode="Display">
     <UserControl.Resources>
         <Storyboard x:Key="OutOfLimitsEnterAction">
@@ -127,18 +129,36 @@
     </UserControl.ToolTip>
 
     <!--Note: DataContext is set by the PriceTrackerView-->
-    <Border CornerRadius="0" Margin="0,0,5,0" Padding="5,0,5,5" BorderThickness="0,0,0,1">
+    <Border Name="ItemMainPanel"
+            Margin="0,0,5,0" Padding="5,0,5,5"
+            Background="{StaticResource ItemMouseOverBackground}">
 
-        <Border.BorderBrush>
-            <LinearGradientBrush Opacity="0.65">
-                <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                <GradientStop Color="#00FFA500" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-
-        <Border.Background>
-            <SolidColorBrush Color="#01FFFFFF" />
-        </Border.Background>
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=ItemMainPanel, Path=IsMouseOver}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:00.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
 
         <Grid Margin="0,5,0,0">
             <Grid.RowDefinitions>
@@ -290,39 +310,11 @@
                     </ToolTip>
                 </Popup.ToolTip>
                 <Border Height="250" Width="600"
-                        BorderThickness="0,1,0,1" CornerRadius="0">
+                        BorderThickness="2" CornerRadius="2"
+                        BorderBrush="Black">
                     <Border.Background>
-                        <VisualBrush>
-                            <VisualBrush.Visual>
-                                <Grid>
-                                    <Rectangle>
-                                        <Rectangle.Fill>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#FF5B4411" Offset="0"/>
-                                                <GradientStop Color="#505B4411" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                    <Image Source="../../../../Images/background1.png" Opacity="0.1"
-                                           Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
-                                           SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                        <Image.OpacityMask>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#FF5B4411" Offset="0"/>
-                                                <GradientStop Color="#505B4411" Offset=".75"/>
-                                            </LinearGradientBrush>
-                                        </Image.OpacityMask>
-                                    </Image>
-                                </Grid>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
+                        <ImageBrush Viewport="0,0,800,450" ViewportUnits="Absolute" ImageSource="/Images/Backgrounds/Large3.png" />
                     </Border.Background>
-                    <Border.BorderBrush>
-                        <LinearGradientBrush Opacity="0.65">
-                            <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                            <GradientStop Color="#00FFA500" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.BorderBrush>
                     <oxy:PlotView Name="HistoricalPlot"
                                     Margin="0,0,10,0"
                                     Title="{Binding ItemName}"

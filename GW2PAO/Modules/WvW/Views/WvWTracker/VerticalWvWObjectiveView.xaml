@@ -8,7 +8,10 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d"
              Width="51"
-             TextOptions.TextFormattingMode="Display">
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             TextOptions.TextFormattingMode="Display"
+             ToolTipService.InitialShowDelay="0">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
@@ -44,7 +47,7 @@
             <MenuItem Header="{x:Static resx:Resources.CopyRITimer}" Command="{Binding CopyRITextCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
-    
+
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
             <core:OutlinedTextBlock Fill="Orange" FontSize="12" Text="{Binding Name}"/>
@@ -71,10 +74,10 @@
     </UserControl.ToolTip>
 
     <!--Note: DataContext is set by the DungeonTrackerView-->
-    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,0,0" Padding="5,2,5,0" BorderThickness="1,0,0,0">
+    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,0,0" Padding="5,2,5,0">
 
         <Border.Effect>
-            <DropShadowEffect ShadowDepth="0" Opacity="0" BlurRadius="50"
+            <DropShadowEffect ShadowDepth="0" Opacity="0" BlurRadius="15"
                               Color="{Binding WorldOwner, Converter={StaticResource WorldColorConverter}}" />
         </Border.Effect>
 
@@ -109,17 +112,39 @@
                 </BeginStoryboard>
             </EventTrigger>
         </Border.Triggers>
-        
-        <Border.BorderBrush>
-            <LinearGradientBrush Opacity="0.65" StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="#00FFA500" Offset="0"/>
-                <GradientStop Color="#FFFFA500" Offset="0.5"/>
-                <GradientStop Color="#00FFA500" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
+
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=MainBorder, Path=IsMouseOver}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:00.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
 
         <Border.Background>
-            <SolidColorBrush Color="#01FFFFFF" />
+            <LinearGradientBrush Opacity="0" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#A0000000" Offset="0"/>
+                <GradientStop Color="#00000000" Offset="1"/>
+            </LinearGradientBrush>
         </Border.Background>
 
         <Grid Margin="0,0,0,0">
@@ -162,7 +187,7 @@
             <StackPanel Orientation="Vertical" Grid.Row="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         Margin="0,5,0,0">
-                
+
                 <!--Distance-->
                 <StackPanel Orientation="Horizontal" Grid.Row="2"
                             VerticalAlignment="Center" HorizontalAlignment="Center"

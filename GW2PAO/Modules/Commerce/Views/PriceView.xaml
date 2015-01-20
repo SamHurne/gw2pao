@@ -6,10 +6,12 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
+        <SolidColorBrush x:Key="TextBoxBorder" Color="#FFEEE8AA" Opacity="0.5" />
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">

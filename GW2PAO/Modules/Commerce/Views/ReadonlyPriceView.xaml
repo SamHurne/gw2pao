@@ -6,6 +6,8 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              mc:Ignorable="d" 
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>

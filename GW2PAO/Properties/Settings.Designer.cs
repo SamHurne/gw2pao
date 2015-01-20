@@ -694,5 +694,17 @@ namespace GW2PAO.Properties {
                 this["DungeonTimerWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoHideTitleBars {
+            get {
+                return ((bool)(this["AutoHideTitleBars"]));
+            }
+            set {
+                this["AutoHideTitleBars"] = value;
+            }
+        }
     }
 }

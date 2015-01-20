@@ -15,8 +15,8 @@
     <SolidColorBrush x:Key="TabItemForeground" Color="White" Opacity="0.85" />
     <SolidColorBrush x:Key="TabItemBorderBrush" Color="Black" Opacity="0.85" />
     <LinearGradientBrush x:Key="SelectedTabItemBackgroundBrush" Opacity="0.75">
-        <GradientStop Color="#FF5B4411" Offset="0"/>
-        <GradientStop Color="#00151E27" Offset="0.90"/>
+        <GradientStop Color="#30EEE8AA" Offset="0"/>
+        <GradientStop Color="#00EEE8AA" Offset="0.90"/>
     </LinearGradientBrush>
 
     <converters:TabSizeConverter x:Key="TabSizeConverter" />

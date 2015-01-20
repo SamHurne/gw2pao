@@ -29,9 +29,20 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
             set { this.DataContext = value; }
         }
 
+        /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
+        private const double MIN_WIDTH= 150;
+        private const double MIN_HEIGHT = 110;
+
         public DungeonTimerView()
         {
             InitializeComponent();
+
+            this.MinHeight = MIN_HEIGHT;
+            this.MinWidth = MIN_WIDTH;
         }
 
         private void CloseWindowButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +81,25 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
                 // Restore resize grips (removed on mouse-down to prevent Aero snapping)
                 this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
                 this.UpdateLayout();
+            }
+        }
+
+        private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.CurrentTimePanel.Visibility == System.Windows.Visibility.Visible)
+            {
+                this.beforeCollapseHeight = this.Height;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.MaxHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
+                this.CurrentTimePanel.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.CurrentTimePanel.Visibility = System.Windows.Visibility.Visible;
+                this.MinHeight = MIN_HEIGHT;
+                this.MaxHeight = double.PositiveInfinity;
+                this.Height = this.beforeCollapseHeight;
             }
         }
 
