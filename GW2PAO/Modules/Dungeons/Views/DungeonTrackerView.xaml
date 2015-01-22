@@ -179,7 +179,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.Style>
-                <Style TargetType="ItemsControl" BasedOn="{StaticResource VirtualizingItemsControlStyle}">
+                <Style TargetType="ItemsControl">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="False">
                             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
