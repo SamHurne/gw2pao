@@ -25,11 +25,6 @@
                   Margin="5">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.NonInteractiveWindows}" />
         </CheckBox>
-        <CheckBox IsChecked="{Binding AreWindowsSticky}"
-                  Style="{StaticResource AlternateCheckboxStyle}"
-                  Margin="5">
-            <core:OutlinedTextBlock Text="{x:Static resx:Resources.StickyWindows}" />
-        </CheckBox>
         <CheckBox IsChecked="{Binding IsOverlayMenuIconVisible}"
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="5">

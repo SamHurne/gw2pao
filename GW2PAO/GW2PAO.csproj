@@ -818,10 +818,6 @@
       <Project>{1ceddc1b-a058-4828-b333-ed79a69c4172}</Project>
       <Name>GW2PAO.PresentationCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GW2PAO.StickyWindows\GW2PAO.StickyWindows.csproj">
-      <Project>{4f2d6eeb-63e9-48cd-a62d-5043a1a446f6}</Project>
-      <Name>GW2PAO.StickyWindows</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GW2PAO.TS3\GW2PAO.TS3.csproj">
       <Project>{47c6cbdd-7e9d-4737-96ef-c58a4c92c271}</Project>
       <Name>GW2PAO.TS3</Name>
