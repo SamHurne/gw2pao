@@ -37,7 +37,7 @@
             </Path>
         </DockPanel>
 
-        <SolidColorBrush x:Key="TextBoxBorder" Color="Orange" Opacity="0.5" />
+        <SolidColorBrush x:Key="TextBoxBorder" Color="PaleGoldenrod" Opacity="0.5" />
 
         <auto:IntelliboxAlternateRowColorizer x:Key="IntelliboxRowColorizer" EvenRowBrush="Black" OddRowBrush="Black" />
 
@@ -367,5 +367,12 @@
                      Height="10" Width="25"
                      Text="{Binding UserData.ResetPriceNotificationsInterval, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
+        
+        <!--Items Database Rebuild Button-->
+        <Button MaxWidth="250"
+                Margin="5"
+                Command="{Binding RebuildNamesDatabaseCommand}">
+            <TextBlock Text="{x:Static resx:Resources.RebuildItemNamesDatabase}" />
+        </Button>
     </StackPanel>
 </UserControl>

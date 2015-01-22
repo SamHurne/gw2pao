@@ -146,7 +146,7 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         public bool CanDisplayRebuildItemNamesView()
         {
-            return true;
+            return this.rebuildItemNamesView == null || this.rebuildItemNamesView.IsClosed;
         }
 
         /// <summary>
