@@ -37,8 +37,25 @@ namespace GW2PAO.Modules.Commerce.Services
         /// <returns>An IEnumerable of search results</returns>
         public IEnumerable DoSearch(string searchTerm, int maxResults, object extraInfo)
         {
-            var possibleItems = this.commerceService.ItemsDB.Values.Where(item => item.Name.Contains(searchTerm)).Take(maxResults);
-            return possibleItems;
+            var allItems = this.commerceService.ItemsDB.Values;
+
+            // First, filter by all items that contain the given searchTerm
+            var matches = allItems.Where(item => item.Name.Contains(searchTerm));
+
+            // Then, pull out any items where the name is an exact match
+            var exactMatches = matches.Where(item => item.Name.Equals(searchTerm));
+
+            if (exactMatches.Count() >= maxResults)
+            {
+                return exactMatches.Take(maxResults);
+            }
+            else
+            {
+                var nonExactMatches = matches.Where(item => !item.Name.Equals(searchTerm));
+                var sortedNonExact = matches.OrderBy(item => item.Name.Length);
+
+                return exactMatches.Concat(sortedNonExact).Take(maxResults);
+            }
         }
     }
 }

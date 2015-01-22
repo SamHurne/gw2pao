@@ -6,14 +6,14 @@
     <SolidColorBrush x:Key="ListViewBorder" Color="Black" Opacity="1" />
 
     <Color x:Key="ListViewHeaderBorderBrush">#7F000000</Color>
-    <Color x:Key="ListViewHeaderBackground">#3FFFFFFF</Color>
-    <Color x:Key="ListViewHeaderMouseOverBackground">#7FFFFFFF</Color>
-    <Color x:Key="ListViewHeaderPressedBackground">#BBFFFFFF</Color>
+    <Color x:Key="ListViewHeaderBackground">#3FEEE8AA</Color>
+    <Color x:Key="ListViewHeaderMouseOverBackground">#7FEEE8AA</Color>
+    <Color x:Key="ListViewHeaderPressedBackground">#BBEEE8AA</Color>
 
     <SolidColorBrush x:Key="ListItemForeground" Color="White" Opacity="0.9" />
     <SolidColorBrush x:Key="ListItemBackground" Color="White" Opacity="0" />
-    <SolidColorBrush x:Key="ListItemHoverBackground" Color="White" Opacity="0.1" />
-    <SolidColorBrush x:Key="ListItemSelectedBackground" Color="White" Opacity="0.25" />
+    <SolidColorBrush x:Key="ListItemHoverBackground" Color="PaleGoldenrod" Opacity="0.1" />
+    <SolidColorBrush x:Key="ListItemSelectedBackground" Color="PaleGoldenrod" Opacity="0.25" />
 
 
     <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}" TargetType="ScrollViewer">

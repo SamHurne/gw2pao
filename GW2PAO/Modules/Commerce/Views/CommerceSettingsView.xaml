@@ -255,23 +255,23 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListBoxItem">
                                             <Border x:Name="Border"
-                                            Margin="1" Padding="0,2,0,2"
-                                            SnapsToDevicePixels="true"
-                                            Background="Transparent" CornerRadius="0">
+                                                    Margin="1" Padding="0,2,0,2"
+                                                    SnapsToDevicePixels="true"
+                                                    Background="Transparent" CornerRadius="0">
                                                 <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsSelected" Value="True">
                                                     <Setter TargetName="Border" Property="Background">
                                                         <Setter.Value>
-                                                            <SolidColorBrush Color="Orange" Opacity="0.75" />
+                                                            <SolidColorBrush Color="PaleGoldenrod" Opacity="0.5" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Trigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="Border" Property="Background">
                                                         <Setter.Value>
-                                                            <SolidColorBrush Color="Orange" Opacity="0.25" />
+                                                            <SolidColorBrush Color="PaleGoldenrod" Opacity="0.15" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Trigger>
@@ -294,12 +294,12 @@
                             <Style TargetType="Border">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Black" Opacity="0.75" />
+                                        <SolidColorBrush Color="Black" Opacity="0.8" />
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="BorderBrush">
                                     <Setter.Value>
-                                        <SolidColorBrush Color="Orange" Opacity="0.5" />
+                                        <SolidColorBrush Color="Transparent" />
                                     </Setter.Value>
                                 </Setter>
                             </Style>
@@ -313,6 +313,7 @@
                                          WatermarkText="{x:Static resx:Resources.ItemName}"
                                          WatermarkForeground="Gray"
                                          Height="21" Width="200"
+                                         MinimumPrefixLength="2"
                                          DataProvider="{Binding MonitoredItemsConfigViewModel.ItemsProvider}"
                                          SelectedItem="{Binding MonitoredItemsConfigViewModel.SelectedItem}"
                                          DisplayedValueBinding="{Binding Name}"
