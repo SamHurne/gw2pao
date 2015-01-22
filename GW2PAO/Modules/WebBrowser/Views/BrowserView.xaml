@@ -24,7 +24,7 @@
                                         ::-webkit-scrollbar-button       { background-color: #000000; }
                                         ::-webkit-scrollbar-track        { background-color: #000000 }
                                         ::-webkit-scrollbar-track-piece  { background-color: #000000 }
-                                        ::-webkit-scrollbar-thumb        { background-color: #FFA500; }
+                                        ::-webkit-scrollbar-thumb        { background-color: #EEE8AA; }
                                         ::-webkit-scrollbar-corner       { background-color: #000000 }
                                         ::-webkit-resizer                { background-color: #000000 }" />
         </awe:WebSessionProvider>
@@ -78,6 +78,9 @@
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                     MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                     Grid.Row="0">
+                <Border.Background>
+                    <SolidColorBrush Color="#01000000" />
+                </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -112,7 +115,7 @@
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect ShadowDepth="0"
-                                              Color="Blue"
+                                              Color="LightBlue"
                                               Opacity="0"
                                               BlurRadius="10"/>
                                     </Setter.Value>
