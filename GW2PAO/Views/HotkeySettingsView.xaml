@@ -39,6 +39,8 @@
                                  Hotkey="{Binding ToggleInteractiveWindowsHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleNotificationBorders}"
                                  Hotkey="{Binding ToggleNotificationWindowBordersHotkey}"/>
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAutoFadeBorders}"
+                                 Hotkey="{Binding ToggleAutoFadeBordersHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleOverlayMenuIcon}"
                                  Hotkey="{Binding ToggleOverlayMenuIconHotkey}"/>
     </StackPanel>

@@ -184,6 +184,7 @@ namespace GW2PAO.ViewModels
         {
             HotkeyCommands.ToggleInteractiveWindowsCommand.RegisterCommand(new DelegateCommand(() => this.IsClickthroughEnabled = !this.IsClickthroughEnabled));
             HotkeyCommands.ToggleNotificationWindowBordersCommand.RegisterCommand(new DelegateCommand(() => this.AreNotificationWindowBordersVisible = !this.AreNotificationWindowBordersVisible));
+            HotkeyCommands.ToggleAutoFadeBordersCommand.RegisterCommand(new DelegateCommand(() => this.AutoFadeBorders = !this.AutoFadeBorders));
             HotkeyCommands.ToggleOverlayMenuIconCommand.RegisterCommand(new DelegateCommand(() => this.IsOverlayMenuIconVisible = !this.IsOverlayMenuIconVisible));
         }
 

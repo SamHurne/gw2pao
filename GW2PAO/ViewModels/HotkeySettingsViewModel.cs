@@ -33,6 +33,7 @@ namespace GW2PAO.ViewModels
         private Hotkey toggleAllWindowsHotkey;
         private Hotkey toggleInteractiveWindowsHotkey;
         private Hotkey toggleNotificationWindowBordersHotkey;
+        private Hotkey toggleAutoFadeBordersHotkey;
         private Hotkey toggleOverlayMenuIconHotkey;
         private Hotkey toggleEventTrackerHotkey;
         private Hotkey toggleDungeonsTrackerHotkey;
@@ -76,6 +77,15 @@ namespace GW2PAO.ViewModels
         {
             get { return this.toggleNotificationWindowBordersHotkey; }
             set { this.SetProperty(ref this.toggleNotificationWindowBordersHotkey, value); }
+        }
+
+        /// <summary>
+        /// Hotkey to toggle the auto-fade borders feature on/off
+        /// </summary>
+        public Hotkey ToggleAutoFadeBordersHotkey
+        {
+            get { return this.toggleAutoFadeBordersHotkey; }
+            set { this.SetProperty(ref this.toggleAutoFadeBordersHotkey, value); }
         }
 
         /// <summary>
@@ -176,6 +186,7 @@ namespace GW2PAO.ViewModels
             this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleAllWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleAutoFadeBordersHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, false, false, false, false);
 
             // Try to load the hotkeys from user settings
@@ -195,6 +206,9 @@ namespace GW2PAO.ViewModels
 
                         if (loadedHotkeys.ToggleNotificationWindowBordersHotkey != null)
                             this.ToggleNotificationWindowBordersHotkey = loadedHotkeys.ToggleNotificationWindowBordersHotkey;
+
+                        if (loadedHotkeys.ToggleAutoFadeBordersHotkey != null)
+                            this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleAutoFadeBordersHotkey;
 
                         if (loadedHotkeys.ToggleOverlayMenuIconHotkey != null)
                             this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleOverlayMenuIconHotkey;
@@ -244,6 +258,7 @@ namespace GW2PAO.ViewModels
             this.ToggleAllWindowsHotkey.Refresh();
             this.ToggleInteractiveWindowsHotkey.Refresh();
             this.ToggleNotificationWindowBordersHotkey.Refresh();
+            this.ToggleAutoFadeBordersHotkey.Refresh();
             this.ToggleOverlayMenuIconHotkey.Refresh();
             this.ToggleEventTrackerHotkey.Refresh();
             this.ToggleDungeonsTrackerHotkey.Refresh();
@@ -276,6 +291,7 @@ namespace GW2PAO.ViewModels
                 this.ToggleAllWindowsHotkey.Pressed += OnPressed;
                 this.ToggleInteractiveWindowsHotkey.Pressed += OnPressed;
                 this.ToggleNotificationWindowBordersHotkey.Pressed += OnPressed;
+                this.ToggleAutoFadeBordersHotkey.Pressed += OnPressed;
                 this.ToggleOverlayMenuIconHotkey.Pressed += OnPressed;
                 this.ToggleEventTrackerHotkey.Pressed += OnPressed;
                 this.ToggleDungeonsTrackerHotkey.Pressed += OnPressed;
@@ -299,6 +315,7 @@ namespace GW2PAO.ViewModels
                 this.ToggleAllWindowsHotkey.Pressed -= OnPressed;
                 this.ToggleInteractiveWindowsHotkey.Pressed -= OnPressed;
                 this.ToggleNotificationWindowBordersHotkey.Pressed -= OnPressed;
+                this.ToggleAutoFadeBordersHotkey.Pressed -= OnPressed;
                 this.ToggleOverlayMenuIconHotkey.Pressed -= OnPressed;
                 this.ToggleEventTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleDungeonsTrackerHotkey.Pressed -= OnPressed;
@@ -326,6 +343,8 @@ namespace GW2PAO.ViewModels
                     HotkeyCommands.ToggleInteractiveWindowsCommand.Execute(null);
                 else if (hotkey == this.ToggleNotificationWindowBordersHotkey)
                     HotkeyCommands.ToggleNotificationWindowBordersCommand.Execute(null);
+                else if (hotkey == this.ToggleAutoFadeBordersHotkey)
+                    HotkeyCommands.ToggleAutoFadeBordersCommand.Execute(null);
                 else if (hotkey == this.ToggleOverlayMenuIconHotkey)
                     HotkeyCommands.ToggleOverlayMenuIconCommand.Execute(null);
                 else if (hotkey == this.ToggleEventTrackerHotkey)

@@ -1483,6 +1483,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toggle Auto-Fade Window Borders.
+        /// </summary>
+        public static string ToggleAutoFadeBorders {
+            get {
+                return ResourceManager.GetString("ToggleAutoFadeBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Dungeons Tracker.
         /// </summary>
         public static string ToggleDungeonsTracker {

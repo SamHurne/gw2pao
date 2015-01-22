@@ -788,4 +788,7 @@
   <data name="AutoFadeBorders" xml:space="preserve">
     <value>Auto-Fade Window Borders</value>
   </data>
+  <data name="ToggleAutoFadeBorders" xml:space="preserve">
+    <value>Toggle Auto-Fade Window Borders</value>
+  </data>
 </root>

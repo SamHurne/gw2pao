@@ -13,6 +13,7 @@ namespace GW2PAO.Infrastructure
 
         public static readonly CompositeCommand ToggleInteractiveWindowsCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleNotificationWindowBordersCommand = new CompositeCommand();
+        public static readonly CompositeCommand ToggleAutoFadeBordersCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleOverlayMenuIconCommand = new CompositeCommand();
 
         public static readonly CompositeCommand ToggleEventTrackerCommand = new CompositeCommand();
