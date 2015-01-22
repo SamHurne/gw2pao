@@ -27,6 +27,11 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        public const string PRICE_TRACKER_SORT_NAME = "ItemName";
+        public const string PRICE_TRACKER_SORT_BUY_PRICE = "CurrentBuyOrder";
+        public const string PRICE_TRACKER_SORT_SALE_PRICE = "CurrentSellListing";
+        public const string PRICE_TRACKER_SORT_PROFIT = "CurrentProfit";
+
         /// <summary>
         /// The default settings filename
         /// </summary>
@@ -36,6 +41,7 @@ namespace GW2PAO.Modules.Commerce
         private bool areBuyOrderPriceNotificationsEnabled;
         private bool areSellListingPriceNotificationsEnabled;
         private int maxHistoricalDataPoints;
+        private string priceTrackerSortProperty;
         private ObservableCollection<PriceWatch> priceWatches = new ObservableCollection<PriceWatch>();
 
         /// <summary>
@@ -72,6 +78,15 @@ namespace GW2PAO.Modules.Commerce
         {
             get { return this.maxHistoricalDataPoints; }
             set { this.SetProperty(ref this.maxHistoricalDataPoints, value); }
+        }
+
+        /// <summary>
+        /// The property name to use when sorting items in the Price Tracker
+        /// </summary>
+        public string PriceTrackerSortProperty
+        {
+            get { return this.priceTrackerSortProperty; }
+            set { this.SetProperty(ref priceTrackerSortProperty, value); }
         }
 
         /// <summary>

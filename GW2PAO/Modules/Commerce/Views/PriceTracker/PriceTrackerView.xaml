@@ -24,9 +24,6 @@
     <src:OverlayWindow.Resources>
         <converters:EventStateConverter x:Key="StateConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-        <!-- TODO: Sorting this collection -->
-        <core:AutoRefreshCollectionViewSource Source="{Binding ItemPrices}" x:Key="ItemPricesCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
@@ -64,9 +61,13 @@
                         MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
-                            <!-- TODO: Context Menu -->
-                            <!--<MenuItem Header="{x:Static resx:Resources.ResetHiddenEvents}" Command="{Binding ResetHiddenEventsCommand}" />
-                            <MenuItem Header="{x:Static resx:Resources.ShowInactiveEvents}" IsCheckable="True" IsChecked="{Binding UserData.AreInactiveEventsVisible}" />-->
+                            <MenuItem Header="{x:Static resx:Resources.Configure}" Command="{Binding ConfigureCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.SortBy}">
+                                <MenuItem Header="{x:Static resx:Resources.Name}" IsCheckable="True" IsChecked="{Binding SortByName}" />
+                                <MenuItem Header="{x:Static resx:Resources.BuyPrice}" IsCheckable="True" IsChecked="{Binding SortByBuyPrice}" />
+                                <MenuItem Header="{x:Static resx:Resources.SellPrice}" IsCheckable="True" IsChecked="{Binding SortBySellPrice}" />
+                                <MenuItem Header="{x:Static resx:Resources.Profit}" IsCheckable="True" IsChecked="{Binding SortByProfit}" />
+                            </MenuItem>
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -174,7 +175,7 @@
 
         <ItemsControl Name="ItemsContainer"
                       Grid.Row="1"
-                      ItemsSource="{Binding Source={StaticResource ItemPricesCollection}}">
+                      ItemsSource="{Binding ItemPrices.View}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <View:ItemPriceView DataContext="{Binding}"/>

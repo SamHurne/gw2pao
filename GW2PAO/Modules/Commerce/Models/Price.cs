@@ -12,7 +12,7 @@ namespace GW2PAO.Modules.Commerce.Models
     /// <summary>
     /// Helper class containing the gold, silver, and copper components of a price in GW2
     /// </summary>
-    public class Price : BindableBase
+    public class Price : BindableBase, IComparable<Price>, IComparable
     {
         private int gold;
         private int silver;
@@ -100,6 +100,29 @@ namespace GW2PAO.Modules.Commerce.Models
                 this.Copper = (int)((value - (this.gold * 10000.0) - (this.silver * 100.0)));
                 this.IsNegative = value < 0;
             }
+        }
+
+        /// <summary>
+        /// Compares this Price to another
+        /// </summary>
+        public int CompareTo(Price obj)
+        {
+            return this.Value.CompareTo(obj.Value);
+        }
+
+        /// <summary>
+        /// Compares this Price to another
+        /// </summary>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+                return -1;
+
+            Price other = obj as Price;
+            if (other == null)
+                throw new InvalidOperationException("The other object to compare must be of type 'Price'");
+            else
+                return this.Value.CompareTo(other.Value);
         }
     }
 }
