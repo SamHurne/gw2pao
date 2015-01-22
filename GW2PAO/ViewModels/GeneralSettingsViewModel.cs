@@ -100,6 +100,23 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// True if borders and title bars should automatically fade out, else fase
+        /// </summary>
+        public bool AutoFadeBorders
+        {
+            get { return Settings.Default.AutoHideTitleBars; }
+            set
+            {
+                if (Settings.Default.AutoHideTitleBars != value)
+                {
+                    Settings.Default.AutoHideTitleBars = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged(() => this.AutoFadeBorders);
+                }
+            }
+        }
+
+        /// <summary>
         /// True if the application should check for updates at startup, else false
         /// </summary>
         public bool CheckForUpdates

@@ -21,26 +21,8 @@
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Color="Black" Direction="315" Opacity="0.8"/>
         </Border.Effect>
-
         <Border.Background>
-            <VisualBrush>
-                <VisualBrush.Visual>
-                    <Grid>
-                        <Rectangle>
-                            <Rectangle.Fill>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#E5151E27" Offset="0.75"/>
-                                    <GradientStop Color="#E0151E27" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Image Source="../../../Images/background3.png" Opacity="0.1"
-                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
-                               SnapsToDevicePixels="True" UseLayoutRounding="True">
-                        </Image>
-                    </Grid>
-                </VisualBrush.Visual>
-            </VisualBrush>
+            <ImageBrush ImageSource="/Images/Backgrounds/Small1.png" />
         </Border.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -15,6 +15,11 @@
                   Margin="5">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.ShowNotificationBorders}" />
         </CheckBox>
+        <CheckBox IsChecked="{Binding AutoFadeBorders}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoFadeBorders}" />
+        </CheckBox>
         <CheckBox IsChecked="{Binding IsClickthroughEnabled}"
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="5">

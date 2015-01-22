@@ -9,16 +9,18 @@
     <Color x:Key="ButtonPressedBackgroundColor">#CCEEE8AA</Color>
     <Color x:Key="ButtonPressedForegroundColor">Black</Color>
 
+    <SolidColorBrush x:Key="GraphicColor" Color="Black" />
+
     <DockPanel x:Key="MinimizeGraphic" x:Shared="false" Height="8">
         <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center"
-                           Height="3" Width="10"
-                           Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
+                   Height="3" Width="10"
+                   Fill="{StaticResource GraphicColor}" />
     </DockPanel>
 
     <DockPanel x:Key="CollapseGraphic" x:Shared="false">
         <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                       Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                      Stroke="{StaticResource GraphicColor}"
                       StrokeStartLineCap="Square" StrokeEndLineCap="Square"
                       StrokeThickness="2"
                       Data="M 0,10 L 10,0 L 20,10">
@@ -31,7 +33,7 @@
     <DockPanel x:Key="ExpandGraphic" x:Shared="false">
         <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                       Stretch="Uniform"
-                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                      Stroke="{StaticResource GraphicColor}"
                       StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                       StrokeThickness="2"
                       Data="M 0,0 L 10,10 L 20,0">

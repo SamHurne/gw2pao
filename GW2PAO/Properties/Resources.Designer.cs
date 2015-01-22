@@ -124,6 +124,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Fade Window Borders.
+        /// </summary>
+        public static string AutoFadeBorders {
+            get {
+                return ResourceManager.GetString("AutoFadeBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-Hide Border.
         /// </summary>
         public static string AutoHideBorder {

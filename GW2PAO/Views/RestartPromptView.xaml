@@ -16,10 +16,7 @@
             <DropShadowEffect BlurRadius="10" Color="Black" Direction="315" Opacity="0.8"/>
         </Border.Effect>
         <Border.Background>
-            <LinearGradientBrush>
-                <GradientStop Color="#FF24313D" Offset="0"/>
-                <GradientStop Color="#8024313D" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="/Images/Backgrounds/Small1.png" />
         </Border.Background>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>

@@ -762,9 +762,6 @@
     </EmbeddedResource>
     <Resource Include="FodyWeavers.xml" />
     <Resource Include="Images\Commerce\graph_ico.png" />
-    <Resource Include="Images\background1.png" />
-    <Resource Include="Images\background2.png" />
-    <Resource Include="Images\background3.png" />
     <Resource Include="Images\Backgrounds\Large1.png" />
     <Resource Include="Images\Backgrounds\Medium1.png" />
     <Resource Include="Images\Backgrounds\Large2.png" />

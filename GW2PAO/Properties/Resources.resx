@@ -785,4 +785,7 @@
   <data name="TrackedItems" xml:space="preserve">
     <value>Tracked Items</value>
   </data>
+  <data name="AutoFadeBorders" xml:space="preserve">
+    <value>Auto-Fade Window Borders</value>
+  </data>
 </root>

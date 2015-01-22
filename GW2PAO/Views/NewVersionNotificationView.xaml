@@ -13,24 +13,12 @@
         TextOptions.TextFormattingMode="Display"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
-    <src:OverlayWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Style/ResourceLibrary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </src:OverlayWindow.Resources>
-
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" Color="Black" Direction="315" Opacity="0.8"/>
         </Border.Effect>
-
         <Border.Background>
-            <LinearGradientBrush>
-                <GradientStop Color="#FF24313D" Offset="0"/>
-                <GradientStop Color="#8024313D" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="/Images/Backgrounds/Small1.png" />
         </Border.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -39,7 +27,7 @@
             <core:OutlinedTextBlock HorizontalAlignment="Center"
                                     Fill="White" FontWeight="Bold" FontSize="15"
                                     Text="{x:Static resx:Resources.NewVersionAvailable}" />
-            
+
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <core:OutlinedTextBlock Fill="White" FontWeight="Bold" FontSize="13"
@@ -57,9 +45,35 @@
                 <core:OutlinedTextBlock.Style>
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                         <Setter Property="Fill" Value="White"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="0"
+                                                  Color="Goldenrod"
+                                                  Opacity="0"
+                                                  BlurRadius="10"/>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Fill" Value="Goldenrod"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:00.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -72,7 +86,8 @@
                     Click="CloseButton_Click"/>
 
             <CheckBox HorizontalAlignment="Center"
-                      Margin="0,4,0,0"
+                      Margin="0,10,0,0"
+                      Style="{StaticResource AlternateCheckboxStyle}"
                       IsChecked="{Binding DontCheckForUpdates}">
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.DontShowAgain}"/>
             </CheckBox>
