@@ -270,10 +270,6 @@ namespace GW2PAO.TS3.Services
                 {
                     this.InitializeChannelList();
                 }
-
-                // Start a timer to send a message every so often, keeping the connection open
-                logger.Info("Starting poll timer");
-                this.pollTimer.Start();
             });
         }
 
@@ -292,6 +288,10 @@ namespace GW2PAO.TS3.Services
             Task.Factory.StartNew(() =>
             {
                 this.EventQueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
+
+                // Start a timer to send a message every so often, keeping the connection open
+                logger.Info("Starting poll timer");
+                this.pollTimer.Start();
             });
         }
 

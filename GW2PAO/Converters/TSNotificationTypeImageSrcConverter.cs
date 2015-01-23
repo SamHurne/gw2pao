@@ -21,8 +21,6 @@ namespace GW2PAO.Converters
             {
                 case TSNotificationType.CannotConnect:
                     return @"/Images/Misc/warning.png";
-                case TSNotificationType.Text:
-                    return @"/Images/Teamspeak/chat_bubble.png";
                 case TSNotificationType.Speech:
                     return @"/Images/Teamspeak/speaker.png";
                 case TSNotificationType.UserEntered:

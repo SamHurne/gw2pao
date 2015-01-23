@@ -94,6 +94,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public TeamspeakUserData UserData { get; private set; }
 
         /// <summary>
+        /// Observable collection of sent/received chat messages
+        /// </summary>
+        public ObservableCollection<ChatMsgViewModel> ChatMessages { get; private set; }
+
+        /// <summary>
         /// Collection of client notifications (speaking users, messages, users entering, etc)
         /// </summary>
         public ObservableCollection<TSNotificationViewModel> Notifications { get; private set; }
@@ -116,6 +121,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         {
             this.isShuttingDown = false;
             this.UserData = userData;
+            this.ChatMessages = new ObservableCollection<ChatMsgViewModel>();
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
             this.Channels = new ObservableCollection<ChannelViewModel>();
 
@@ -234,13 +240,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_TextMessageReceived(object sender, TS3.Data.TextMessageEventArgs e)
         {
-            Task.Factory.StartNew(() =>
-                {
-                    var messageNotification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.Text, e.Message);
-                    Threading.InvokeOnUI(() => this.Notifications.Add(messageNotification));
-                    Thread.Sleep(10000); // Let text messages stay for 10 seconds
-                    Threading.InvokeOnUI(() => this.Notifications.Remove(messageNotification));
-                });
+            this.ChatMessages.Insert(0, new ChatMsgViewModel(DateTime.Now, e.ClientName, e.Message));
         }
 
         /// <summary>

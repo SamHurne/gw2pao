@@ -75,13 +75,6 @@
                     </Style>
                 </core:OutlinedTextBlock.Style>
             </core:OutlinedTextBlock>
-
-            <core:OutlinedTextBlock Name="Message"
-                                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                                    VerticalAlignment="Center" HorizontalAlignment="Left"
-                                    FontSize="11"
-                                    Margin="5,0,0,0"
-                                    Text="{Binding Message}" />
         </Grid>
     </Border>
 </UserControl>

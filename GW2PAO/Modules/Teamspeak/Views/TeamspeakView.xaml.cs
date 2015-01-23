@@ -183,5 +183,10 @@ namespace GW2PAO.Modules.Teamspeak.Views
                 vm.SelectChannelCommand.Execute(null);
             }
         }
+
+        private void ChatMessagesScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ChatMessagesScrollViewer.ScrollToBottom();
+        }
     }
 }

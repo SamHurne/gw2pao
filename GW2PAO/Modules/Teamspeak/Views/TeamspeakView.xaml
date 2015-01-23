@@ -28,7 +28,10 @@
             </CollectionViewSource.SortDescriptions>
         </core:AutoRefreshCollectionViewSource>
 
+        <ScaleTransform x:Key="Transform" ScaleY="-1" />
+        
         <core:AutoRefreshCollectionViewSource Source="{Binding Notifications}" x:Key="NotificationsCollection" />
+        <core:AutoRefreshCollectionViewSource Source="{Binding ChatMessages}" x:Key="ChatMsgsCollection" />
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
@@ -42,6 +45,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -167,6 +171,7 @@
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=NotificationsContainer, Path=Visibility}" Value="Visible" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
@@ -220,6 +225,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
@@ -247,9 +253,9 @@
         </Border>
 
         <ItemsControl Name="NotificationsContainer" Grid.Row="2"
-                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
@@ -257,19 +263,174 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Grid Name="TextEntryBox" Grid.Row="3"
-                Margin="3"
-                Visibility="{Binding UserData.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
+        <GridSplitter Grid.Row="3"
+                      Height="2"
+                      HorizontalAlignment="Stretch"
+                      Background="Black">
+            <GridSplitter.Style>
+                <Style TargetType="GridSplitter">
+                    <Setter Property="Opacity" Value="0.25" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.25"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </GridSplitter.Style>
+        </GridSplitter>
+
+        <Grid Name="ChatContainer" Grid.Row="4">
+            <Grid.Background>
+                <LinearGradientBrush Opacity="1" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#00000000" Offset="0"/>
+                    <GradientStop Color="#80000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <ScrollViewer Name="ChatMessagesScrollViewer"
+                          Loaded="ChatMessagesScrollViewer_Loaded">
+                <ItemsControl Name="ChatItemsControl"
+                              Margin="4,0,0,0"
+                              MinHeight="600"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer}, Path=ActualHeight}"
+                              ItemsSource="{Binding Source={StaticResource ChatMsgsCollection}}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel VerticalAlignment="Bottom" LayoutTransform="{StaticResource Transform}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid LayoutTransform="{StaticResource Transform}">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <EventTrigger.Actions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard BeginTime="00:01:30">
+                                                            <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:05"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger.Actions>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <FlowDocumentScrollViewer Margin="2" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                                            SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                    <FlowDocument FontSize="0.1" TextAlignment="Left">
+                                        <Paragraph FontSize="12" FontFamily="Gisha" FontWeight="SemiBold"
+                                                    RenderOptions.ClearTypeHint="Enabled">
+                                            <Run Text="{Binding Timestamp, StringFormat={}[{0:hh:mm tt]}, Mode=OneWay}"
+                                                    Foreground="Gray" />
+                                            <Run Text="{Binding SenderName, StringFormat={}{0}:, Mode=OneWay}"
+                                                    Foreground="#FF527DFF" />
+                                            <Run Text="{Binding Message, Mode=OneWay}" 
+                                                    Foreground="#FFB5C8FF" />
+                                        </Paragraph>
+                                    </FlowDocument>
+                                    <FlowDocumentScrollViewer.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="2" Direction="-45" ShadowDepth="2" Opacity="0.5" />
+                                    </FlowDocumentScrollViewer.Effect>
+                                </FlowDocumentScrollViewer>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+            </ScrollViewer>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity" Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                                     Storyboard.TargetProperty="(Background).Opacity"
+                                                                     Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                                     Storyboard.TargetProperty="(Background).Opacity"
+                                                                     Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+
+        <Grid Name="TextEntryBox" Grid.Row="5"
+              Visibility="{Binding UserData.ShowChatEntryBox, Converter={StaticResource BoolToVisibility}}">
+
+            <Grid.Background>
+                <LinearGradientBrush Opacity="1" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#80000000" Offset="0"/>
+                    <GradientStop Color="#A0000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <TextBox Name="MessageEntryBox" Grid.Column="0"
-                        Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
-                        KeyDown="MessageEntryBox_KeyDown"/>
+                     Margin="3"
+                     Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="MessageEntryBox_KeyDown"/>
             <Button Name="MessageSendBox" Grid.Column="1"
-                    Margin="3,0,3,0"
+                    Margin="3"
                     Command="{Binding SendMessageCommand}">
                 <TextBlock Text="{x:Static resx:Resources.Send}" />
             </Button>
@@ -281,6 +442,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
@@ -307,7 +469,7 @@
             </Grid.Style>
         </Grid>
 
-        <Grid Name="ResizeHeight" Grid.Row="2">
+        <Grid Name="ResizeHeight" Grid.Row="5">
             <Rectangle VerticalAlignment="Bottom"
                        HorizontalAlignment="Stretch"
                        Height="1" Fill="{StaticResource TitleBarBorderBrush}" />
@@ -319,6 +481,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>

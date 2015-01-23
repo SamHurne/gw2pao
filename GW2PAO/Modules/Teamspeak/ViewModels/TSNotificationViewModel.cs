@@ -42,15 +42,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         }
 
         /// <summary>
-        /// Message (if any) for the notification
-        /// </summary>
-        public string Message
-        {
-            get { return this.message; }
-            set { this.SetProperty(ref this.message, value); }
-        }
-
-        /// <summary>
         /// True if the notification is visible, else false
         /// </summary>
         public bool IsVisible
@@ -66,12 +57,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// <param name="user">The username/nickname of the client</param>
         /// <param name="notificationType">The type of client notification</param>
         /// <param name="message">Message (if any) for the notification</param>
-        public TSNotificationViewModel(uint clientId, string user, TSNotificationType notificationType, string message = "")
+        public TSNotificationViewModel(uint clientId, string user, TSNotificationType notificationType)
         {
             this.ClientID = clientId;
             this.User = user;
             this.NotificationType = notificationType;
-            this.Message = message;
             this.IsVisible = true;
         }
 
@@ -87,8 +77,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
 
                 return (other.ClientID == this.ClientID)
                     && (other.User == this.User)
-                    && (other.NotificationType == this.NotificationType)
-                    && (other.Message == this.Message);
+                    && (other.NotificationType == this.NotificationType);
             }
             else
             {
@@ -105,7 +94,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 hash = hash * 23 + this.ClientID.GetHashCode();
                 hash = hash * 23 + this.User.GetHashCode();
                 hash = hash * 23 + this.NotificationType.GetHashCode();
-                hash = hash * 23 + this.Message.GetHashCode();
                 return hash;
             }
         }
@@ -115,7 +103,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
     {
         CannotConnect,
         Speech,
-        Text,
         UserEntered,
         UserExited
     }
