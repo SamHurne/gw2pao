@@ -42,9 +42,13 @@ namespace GW2PAO.API.Services
         private int cachedWorldID;
 
         /// <summary>
-        /// The Worlds table
+        /// The collection of worlds
         /// </summary>
-        public WorldsTable Worlds { get; private set; }
+        public List<World> Worlds
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// The WvW objectives table
@@ -70,21 +74,29 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
-        /// Loads the dungeons table and initializes all cached information
+        /// Loads the WvW objects  and initializes all cached information
         /// </summary>
-        public void LoadTable()
+        public void LoadData()
         {
-            logger.Info("Loading Worlds Table");
             try
             {
-                this.Worlds = WorldsTable.LoadTable();
+                logger.Info("Loading worlds via API");
+                this.Worlds = new List<World>();
+                var worldRepository = GW2.V2.Worlds.ForCurrentUICulture();
+                var worlds = worldRepository.FindAll();
+                foreach (var world in worlds.Values)
+                {
+                    this.Worlds.Add(new World()
+                        {
+                            ID = world.WorldId,
+                            Name = world.Name
+                        });
+                }
             }
-            catch (Exception ex)
+            catch (GW2NET.Common.ServiceException ex)
             {
+                logger.Error("Failed to load worlds data: ");
                 logger.Error(ex);
-                logger.Info("Error loading Worlds Table, re-creating table");
-                WorldsTable.CreateTable();
-                this.Worlds = WorldsTable.LoadTable();
             }
 
             logger.Info("Loading Objectives Table");

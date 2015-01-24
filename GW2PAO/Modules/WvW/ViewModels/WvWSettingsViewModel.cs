@@ -49,8 +49,8 @@ namespace GW2PAO.Modules.WvW.ViewModels
             this.PossibleWorlds = new ObservableCollection<World>();
 
             if (wvwService.Worlds == null)
-                wvwService.LoadTable();
-            foreach (var world in wvwService.Worlds.Worlds.OrderBy(wld => wld.Name))
+                wvwService.LoadData();
+            foreach (var world in wvwService.Worlds.OrderBy(wld => wld.Name))
             {
                 this.PossibleWorlds.Add(world);
             }

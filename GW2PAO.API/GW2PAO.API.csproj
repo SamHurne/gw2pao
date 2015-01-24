@@ -148,7 +148,6 @@
     <Compile Include="Data\MegaserverEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
-    <Compile Include="Data\WorldsTable.cs" />
     <Compile Include="Data\WvWObjectivesTable.cs" />
     <Compile Include="Services\WvWService.cs" />
     <Compile Include="Services\ZoneService.cs" />

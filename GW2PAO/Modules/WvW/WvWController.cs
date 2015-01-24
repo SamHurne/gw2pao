@@ -199,7 +199,7 @@ namespace GW2PAO.Modules.WvW
             this.isStopped = false;
 
             // Make sure the WvW Service has loaded the world names
-            this.wvwService.LoadTable();
+            this.wvwService.LoadData();
 
             // Initialize the refresh timer
             this.objectivesRefreshTimer = new Timer(this.Refresh);
@@ -207,9 +207,6 @@ namespace GW2PAO.Modules.WvW
 
             // Initialize the start call count to 0
             this.startCallCount = 0;
-
-            // Have the WvW service load the worlds table
-            this.wvwService.LoadTable();
 
             // Initialize the collections, but do it on a seperate thread since it can take a little time
             logger.Info("WvW Controller initialized");
@@ -291,7 +288,7 @@ namespace GW2PAO.Modules.WvW
                 var matchIDs = this.wvwService.GetMatchIDs();
                 var teamColors = this.wvwService.GetTeamColors();
 
-                foreach (var world in this.wvwService.Worlds.Worlds)
+                foreach (var world in this.wvwService.Worlds)
                 {
                     var team = new WvWTeamViewModel(world);
                     if (matchIDs.ContainsKey(team.WorldId))

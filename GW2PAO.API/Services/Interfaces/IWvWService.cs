@@ -13,9 +13,9 @@ namespace GW2PAO.API.Services.Interfaces
     public interface IWvWService
     {
         /// <summary>
-        /// The Worlds table
+        /// The collection of worlds
         /// </summary>
-        WorldsTable Worlds { get; }
+        List<World> Worlds { get; }
 
         /// <summary>
         /// The WvW objectives table
@@ -23,9 +23,9 @@ namespace GW2PAO.API.Services.Interfaces
         WvWObjectivesTable ObjectivesTable { get; }
 
         /// <summary>
-        /// Loads the worlds and objectives tables and initializes any/all cached information
+        /// Loads the worlds and objectives data and initializes any/all cached information
         /// </summary>
-        void LoadTable();
+        void LoadData();
 
         /// <summary>
         /// Retrieves a full list of all match IDs for all servers
