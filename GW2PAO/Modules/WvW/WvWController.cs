@@ -384,11 +384,8 @@ namespace GW2PAO.Modules.WvW
 
                     this.RefreshTimers();
 
-                    // Calculate distances if we are showing them
-                    if (this.UserData.AreTimeDistancesShown)
-                    {
-                        this.CalculateDistances();
-                    }
+                    // Calculate distances
+                    this.CalculateDistances();
                 }
                 this.objectivesRefreshTimer.Change(this.ObjectivesRefreshInterval, Timeout.Infinite);
             }
