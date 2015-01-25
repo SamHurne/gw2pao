@@ -291,7 +291,13 @@ namespace GW2PAO.Modules.Events
                         {
                             // Event is active and player is on the same map
                             // At this point, if the player is in range of the event for completion, mark it as completed
-                            bool isInRange = CalcUtil.IsInRadius(worldEvent.EventModel.CompletionLocation, this.playerService.PlayerPosition, worldEvent.EventModel.CompletionRadius);
+                            bool isInRange = false;
+                            foreach (var location in worldEvent.EventModel.CompletionLocations)
+                            {
+                                isInRange = CalcUtil.IsInRadius(location, this.playerService.PlayerPosition, worldEvent.EventModel.CompletionRadius);
+                                if (isInRange)
+                                    break;
+                            }
                             if (isInRange)
                             {
                                 logger.Info("Auto-detected completion of \"{0}\"", worldEvent.EventName);

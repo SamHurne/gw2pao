@@ -85,7 +85,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.Megadestroyer,
                     MapID = 39,
                     WaypointCode = "[&BM0CAAA=]",
-                    CompletionLocation = new Point(-317.3, -271.8, 15.4185),
+                    CompletionLocations = new List<Point>() { new Point(-317.3, -271.8, 15.4185) },
                     CompletionRadius = 50
                 };
             var tequatl = new WorldEvent()
@@ -94,7 +94,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.Tequatl,
                     MapID = 53,
                     WaypointCode = "[&BNABAAA=]",
-                    CompletionLocation = new Point(-562.4, -907.4, 0.3),
+                    CompletionLocations = new List<Point>() { new Point(-562.4, -907.4, 0.3) },
                     CompletionRadius = 50
                 };
             var karkaQueen = new WorldEvent()
@@ -103,7 +103,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.KarkaQueen,
                     MapID = 873,
                     WaypointCode = "[&BNcGAAA=]",
-                    CompletionLocation = new Point(0, 0, 0), // TODO: Karka Queen Location
+                    CompletionLocations = new List<Point>() { new Point(605.74, 313.42, 2.24), new Point(490.17, 121.94, 28.21), new Point(92.86, -5.77, 43.5), new Point(20.34, -311.43, 21.48) },
                     CompletionRadius = 0
                 };
             var evolvedJungleWurm = new WorldEvent()
@@ -112,8 +112,8 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.EvolvedJungleWurm,
                     MapID = 73,
                     WaypointCode = "[&BKoBAAA=]",
-                    CompletionLocation = new Point(0, 0, 0), // TODO: Evolved Jungle Wurm Location
-                    CompletionRadius = 0
+                    CompletionLocations = new List<Point>() { new Point(217.04, -430.25, 16.22), new Point(-263.30, -861.60, 0.31), new Point(657.93, -599.51, 0.5) },
+                    CompletionRadius = 75
                 };
             var shatterer = new WorldEvent()
                 {
@@ -121,7 +121,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.Shatterer,
                     MapID = 20,
                     WaypointCode = "[&BE4DAAA=]",
-                    CompletionLocation = new Point(-269.9, 928.2, 3.2),
+                    CompletionLocations = new List<Point>() { new Point(-269.9, 928.2, 3.2) },
                     CompletionRadius = 50
                 };
             var clawOfJormag = new WorldEvent()
@@ -130,7 +130,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.ClawOfJormag,
                     MapID = 30,
                     WaypointCode = "[&BHoCAAA=]",
-                    CompletionLocation = new Point(449.9, 468.4, 23.2),
+                    CompletionLocations = new List<Point>() { new Point(449.9, 468.4, 23.2) },
                     CompletionRadius = 75
                 };
             var modniirUlgoth = new WorldEvent()
@@ -139,7 +139,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.ModniirUlgoth,
                     MapID = 17,
                     WaypointCode = "[&BLEAAAA=]",
-                    CompletionLocation = new Point(803.02, 663.3, 143.8),
+                    CompletionLocations = new List<Point>() { new Point(803.02, 663.3, 143.8) },
                     CompletionRadius = 50
                 };
             var inquestGolemMarkII = new WorldEvent()
@@ -148,7 +148,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.InquestGolemMarkII,
                     MapID = 39,
                     WaypointCode = "[&BNQCAAA=]",
-                    CompletionLocation = new Point(926.17, 51.20, 10.72),
+                    CompletionLocations = new List<Point>() { new Point(926.17, 51.20, 10.72) },
                     CompletionRadius = 50
                 };
             var taidhaCovington = new WorldEvent()
@@ -157,7 +157,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.TaidhaCovington,
                     MapID = 73,
                     WaypointCode = "[&BKgBAAA=]",
-                    CompletionLocation = new Point(-178.4, 229.5, 18.5),
+                    CompletionLocations = new List<Point>() { new Point(-178.4, 229.5, 18.5) },
                     CompletionRadius = 50
                 };
             var jungleWurm = new WorldEvent()
@@ -166,7 +166,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.JungleWurm,
                     MapID = 34,
                     WaypointCode = "[&BEEFAAA=]",
-                    CompletionLocation = new Point(-401.6, 841.7, 0),
+                    CompletionLocations = new List<Point>() { new Point(-401.6, 841.7, 0) },
                     CompletionRadius = 50
                 };
             var shadowBehemoth = new WorldEvent()
@@ -175,7 +175,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.ShadowBehemoth,
                     MapID = 15,
                     WaypointCode = "[&BPwAAAA=]",
-                    CompletionLocation = new Point(261.9, -432.2, -0.75),
+                    CompletionLocations = new List<Point>() { new Point(261.9, -432.2, -0.75) },
                     CompletionRadius = 50
                 };
             var fireElemental = new WorldEvent()
@@ -184,7 +184,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.FireElemental,
                     MapID = 35,
                     WaypointCode = "[&BEYAAAA=]",
-                    CompletionLocation = new Point(-371.9, 885.8, 21.63),
+                    CompletionLocations = new List<Point>() { new Point(-371.9, 885.8, 21.63) },
                     CompletionRadius = 50
                 };
             var frozenMaw = new WorldEvent()
@@ -193,7 +193,7 @@ namespace GW2PAO.API.Data
                     ID = WorldEventID.FrozenMaw,
                     MapID = 28,
                     WaypointCode = "[&BH4BAAA=]",
-                    CompletionLocation = new Point(390.7, 345.2, 71.9),
+                    CompletionLocations = new List<Point>() { new Point(390.7, 345.2, 71.9) },
                     CompletionRadius = 50
                 };
 
