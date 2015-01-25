@@ -42,210 +42,192 @@
     </UserControl.Style>
 
     <!--See code-behind for DataContext/ViewModel details-->
-    <Grid Background="Transparent">
-        
-        <Border Name="Border"
-                BorderThickness="2"
-                CornerRadius="0"
-                Margin="5"
-                Padding="5">
+    <Border Name="Border"
+            BorderThickness="2"
+            CornerRadius="0"
+            Margin="5"
+            Padding="5">
 
-            <Border.Background>
-                <VisualBrush>
-                    <VisualBrush.Visual>
-                        <Grid>
-                            <Rectangle>
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#5024313D" Offset="0"/>
-                                        <GradientStop Color="#B024313D" Offset="0.5"/>
-                                        <GradientStop Color="#FF574111" Offset="1.3"/>
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Image Source="../../../../Images/background1.png" Opacity="0.1"
-                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
-                               SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Image.OpacityMask>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#5024313D" Offset="0"/>
-                                        <GradientStop Color="#FF24313D" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Image.OpacityMask>
-                            </Image>
-                        </Grid>
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </Border.Background>
+        <Border.Background>
+            <VisualBrush Viewport="0,0,250,50" ViewportUnits="Absolute" Opacity="0.75">
+                <VisualBrush.Visual>
+                    <Grid>
+                        <Image Source="../../../../Images/Backgrounds/Small1.png"
+                                Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.Background>
 
-            <Border.BorderBrush>
-                <SolidColorBrush Color="Black" Opacity="0.75" />
-            </Border.BorderBrush>
+        <Border.BorderBrush>
+            <SolidColorBrush Color="Black" Opacity="0.75" />
+        </Border.BorderBrush>
 
-            <Border.Effect>
-                <DropShadowEffect Direction="0" BlurRadius="10" ShadowDepth="0" />
-            </Border.Effect>
+        <Border.Effect>
+            <DropShadowEffect Direction="0" BlurRadius="10" ShadowDepth="0" />
+        </Border.Effect>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
                 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
-                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Height="40" Width="40"
-                       Source="{Binding PriceWatch.IconUrl}">
-                    <Image.ToolTip>
-                        <ToolTip>
-                            <ToolTip.Style>
-                                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
-                                    <Setter Property="Content">
-                                        <Setter.Value>
-                                            <StackPanel Orientation="Vertical">
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
-                                                            Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderUpperLimit}" FontSize="12"/>
-                                                    <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
-                                                            Visibility="{Binding PriceWatch.Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderLowerLimit}" FontSize="12"/>
-                                                    <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding NotificationType}" Value="{x:Static vm:PriceNotificationType.SellListing}">
-                                            <DataTrigger.Setters>
-                                                <Setter Property="Content">
-                                                    <Setter.Value>
-                                                        <StackPanel Orientation="Vertical">
-                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
-                                                                        Visibility="{Binding PriceWatch.Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingUpperLimit}" FontSize="12"/>
-                                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingUpperLimit}" />
-                                                            </StackPanel>
-                                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
-                                                                        Visibility="{Binding PriceWatch.Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
-                                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingLowerLimit}" FontSize="12"/>
-                                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingLowerLimit}" />
-                                                            </StackPanel>
-                                                        </StackPanel>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger.Setters>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ToolTip.Style>
-                        </ToolTip>
-                    </Image.ToolTip>
-                </Image>
-
-                <Grid Grid.Row="0" Grid.Column="1"
-                      Margin="5,0,0,0">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="18" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="163" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Item Name -->
-                    <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
-                                            Margin="0,3,0,0"
-                                            HorizontalAlignment="Left" VerticalAlignment="Center"
-                                            Fill="Orange" FontSize="13"
-                                            Text="{Binding ItemName}" />
-
-                    <!-- Close button -->
-                    <Button Grid.Row="0" Grid.Column="1"
-                            HorizontalAlignment="Right" VerticalAlignment="Top"
-                            Width="16" Height="17" Padding="0"
-                            Style="{StaticResource TitleBarButtonStyle}"
-                            Content="{StaticResource CloseGraphic}"
-                            Command="{Binding CloseNotificationCommand}"/>
-
-                    <!-- Price -->
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                Orientation="Horizontal" VerticalAlignment="Center">
-                        <core:OutlinedTextBlock Text="{Binding NotificationType, Converter={StaticResource NotificationTypeConverter}}" FontSize="12"/>
-                        <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
-                            <core:OutlinedTextBlock Text="{Binding Price.Gold}" Margin="0,1,0,0" />
-                            <Image Source="../../../../Images/Commerce/gold_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,5,0"/>
-                            <core:OutlinedTextBlock Text="{Binding Price.Silver}" Margin="0,1,0,0"/>
-                            <Image Source="../../../../Images/Commerce/silver_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,5,0"/>
-                            <core:OutlinedTextBlock Text="{Binding Price.Copper}" Margin="0,1,0,0"/>
-                            <Image Source="../../../../Images/Commerce/copper_coin.png"
-                                           Height="11" Width="11"
-                                           Margin="1,0,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <Image Name="CopyIcon"
-                           Grid.Row="1" Grid.Column="1"
-                           Height="12" Width="12"
-                           Margin="1"
-                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                           Source="../../../../Images/Misc/copy.png"
-                           MouseDown="CopyIcon_MouseDown">
-                        <Image.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="{x:Static resx:Resources.CopyName}" Command="{Binding PriceWatch.CopyNameCommand}" />
-                                <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding PriceWatch.CopyChatcodeCommand}" />
-                            </ContextMenu>
-                        </Image.ContextMenu>
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Effect">
+            <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Height="40" Width="40"
+                    Source="{Binding PriceWatch.IconUrl}">
+                <Image.ToolTip>
+                    <ToolTip>
+                        <ToolTip.Style>
+                            <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                                <Setter Property="Content">
                                     <Setter.Value>
-                                        <DropShadowEffect ShadowDepth="0"
-                                                         Color="White"
-                                                         Opacity="0"
-                                                         BlurRadius="10"/>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
+                                                        Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderUpperLimit}" FontSize="12"/>
+                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
+                                                        Visibility="{Binding PriceWatch.Data.IsBuyOrderLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderLowerLimit}" FontSize="12"/>
+                                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderLowerLimit}" />
+                                            </StackPanel>
+                                        </StackPanel>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation To="1"
-                                                                     Storyboard.TargetProperty="(Effect).Opacity"
-                                                                     Duration="00:00:00.1"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                        <Trigger.ExitActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation To="0"
-                                                                     Storyboard.TargetProperty="(Effect).Opacity"
-                                                                     Duration="00:00:0.1"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.ExitActions>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding NotificationType}" Value="{x:Static vm:PriceNotificationType.SellListing}">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="Content">
+                                                <Setter.Value>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
+                                                                    Visibility="{Binding PriceWatch.Data.IsSellListingUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingUpperLimit}" FontSize="12"/>
+                                                            <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingUpperLimit}" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0"
+                                                                    Visibility="{Binding PriceWatch.Data.IsSellListingLowerLimitEnabled, Converter={StaticResource BoolToVisibility}}">
+                                                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellListingLowerLimit}" FontSize="12"/>
+                                                            <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.SellListingLowerLimit}" />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Image.Style>
-                    </Image>
-                </Grid>
+                        </ToolTip.Style>
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
+
+            <Grid Grid.Row="0" Grid.Column="1"
+                    Margin="5,0,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                    
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="163" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Item Name -->
+                <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
+                                        Margin="0,3,0,0"
+                                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Fill="Orange" FontSize="13"
+                                        Text="{Binding ItemName}" />
+
+                <!-- Close button -->
+                <Button Grid.Row="0" Grid.Column="1"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Width="15" Height="15" Padding="0"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource CloseGraphic}"
+                        Command="{Binding CloseNotificationCommand}"/>
+
+                <!-- Price -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            Orientation="Horizontal" VerticalAlignment="Center">
+                    <core:OutlinedTextBlock Text="{Binding NotificationType, Converter={StaticResource NotificationTypeConverter}}" FontSize="12"/>
+                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                        <core:OutlinedTextBlock Text="{Binding Price.Gold}" Margin="0,1,0,0" />
+                        <Image Source="../../../../Images/Commerce/gold_coin.png"
+                                        Height="11" Width="11"
+                                        Margin="1,0,5,0"/>
+                        <core:OutlinedTextBlock Text="{Binding Price.Silver}" Margin="0,1,0,0"/>
+                        <Image Source="../../../../Images/Commerce/silver_coin.png"
+                                        Height="11" Width="11"
+                                        Margin="1,0,5,0"/>
+                        <core:OutlinedTextBlock Text="{Binding Price.Copper}" Margin="0,1,0,0"/>
+                        <Image Source="../../../../Images/Commerce/copper_coin.png"
+                                        Height="11" Width="11"
+                                        Margin="1,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Image Name="CopyIcon"
+                        Grid.Row="1" Grid.Column="1"
+                        Height="12" Width="12"
+                        Margin="1"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Source="../../../../Images/Misc/copy.png"
+                        MouseDown="CopyIcon_MouseDown">
+                    <Image.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{x:Static resx:Resources.CopyName}" Command="{Binding PriceWatch.CopyNameCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding PriceWatch.CopyChatcodeCommand}" />
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                        Color="White"
+                                                        Opacity="0"
+                                                        BlurRadius="10"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                                    Storyboard.TargetProperty="(Effect).Opacity"
+                                                                    Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                                    Storyboard.TargetProperty="(Effect).Opacity"
+                                                                    Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </Grid>
-        </Border>
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
