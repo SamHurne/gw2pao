@@ -26,6 +26,8 @@ namespace GW2PAO.Converters
                         return Properties.Resources.RedBorderlands;
                     case WvWMap.EternalBattlegrounds:
                         return Properties.Resources.EternalBattlegrounds;
+                    case WvWMap.Unknown:
+                        return Properties.Resources.Unknown;
                     default:
                         return map.ToString();
                 }

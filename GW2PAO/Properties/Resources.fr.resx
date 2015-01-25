@@ -773,4 +773,20 @@
     <value>Montrer/Masquer l'Assistant d'exploration</value>
     <comment>Hotkey label</comment>
   </data>
+  <data name="AutoFadeBorders" xml:space="preserve">
+    <value>Fondu automatique des Bordures</value>
+  </data>
+  <data name="Hotkeys" xml:space="preserve">
+    <value>Raccourcis</value>
+  </data>
+  <data name="ToggleAutoFadeBorders" xml:space="preserve">
+    <value>Activer/Couper fondu auto. des bordures</value>
+  </data>
+  <data name="TrackedItems" xml:space="preserve">
+    <value>Objets suivis</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Inconnu</value>
+    <comment>WvW Header when player isn't on a WvW map</comment>
+  </data>
 </root>

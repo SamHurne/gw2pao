@@ -791,4 +791,8 @@
   <data name="ToggleAutoFadeBorders" xml:space="preserve">
     <value>Toggle Auto-Fade Window Borders</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>WvW Header when player isn't on a WvW map</comment>
+  </data>
 </root>
