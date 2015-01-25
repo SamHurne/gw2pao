@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              mc:Ignorable="d"
-             Height="27"
+             Height="25"
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
              TextOptions.TextFormattingMode="Display"
@@ -74,7 +74,7 @@
     </UserControl.Style>
 
     <!--Note: DataContext is set by the DungeonTrackerView-->
-    <Border Name="MainBorder" CornerRadius="0" Margin="0,0,1,0" Padding="2,0,0,0"
+    <Border Name="MainBorder" Margin="0,0,1,0" Padding="2,0,0,0"
             Background="{StaticResource ItemMouseOverBackground}">
 
         <Border.Effect>
@@ -141,7 +141,7 @@
             </Style>
         </Border.Style>
 
-        <Grid Margin="0,1,0,0">
+        <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
