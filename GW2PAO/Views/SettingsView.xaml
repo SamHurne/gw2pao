@@ -15,7 +15,7 @@
     
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>
-            <ImageBrush Viewbox="0,50,800,700" ViewboxUnits="Absolute" ImageSource="/Images/Backgrounds/Large1.png" />
+            <ImageBrush Viewbox="0,50,800,700" ViewboxUnits="Absolute" ImageSource="/Images/Backgrounds/Large3.png" />
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
