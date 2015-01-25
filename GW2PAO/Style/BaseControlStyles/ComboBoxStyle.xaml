@@ -38,6 +38,7 @@
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
                 <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{StaticResource ComboBoxButtonBackgroundMouseOver}"/>
+                <Setter Property="Shape.Fill" TargetName="Arrow" Value="#60FFFFFF"/>
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="True">
                 <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{StaticResource ComboBoxButtonBackgroundMouseOver}"/>
