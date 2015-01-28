@@ -71,7 +71,8 @@ namespace GW2PAO.Views
 
         private void ShellView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.FirstTimeRun)
+            if (Properties.Settings.Default.FirstTimeRun
+                && Properties.Settings.Default.IsOverlayIconVisible)
             {
                 Task.Factory.StartNew(() =>
                 {
