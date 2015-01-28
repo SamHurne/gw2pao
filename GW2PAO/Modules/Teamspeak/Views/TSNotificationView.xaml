@@ -7,18 +7,16 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200"
+             xmlns:vm="clr-namespace:GW2PAO.Modules.Teamspeak.ViewModels"
+             mc:Ignorable="d" d:DesignHeight="100" d:DesignWidth="200"
              TextOptions.TextFormattingMode="Display">
 
     <UserControl.Resources>
-        <converters:TSNotificationTypeImageSrcConverter x:Key="NotificationTypeImgSrcConverter" />
-
         <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
-        <Geometry x:Key="PathCheckboxGeometry">M 0 6 L 5 12 L 12 0 L 12 0</Geometry>
     </UserControl.Resources>
 
     <!--Note: DataContext is set by the TeamspeakView-->
-    <Border CornerRadius="0" Margin="0,0,5,0" Padding="5,0,0,0" BorderThickness="0,0,0,0">
+    <Border Name="MainPanel" CornerRadius="0" Margin="0,0,5,0" Padding="5,0,0,0" BorderThickness="0,0,0,0">
 
         <Border.BorderBrush>
             <LinearGradientBrush Opacity="0.65">
@@ -41,10 +39,59 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <Image Grid.Row="0" Grid.Column="0"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Source="{Binding NotificationType, Converter={StaticResource NotificationTypeImgSrcConverter}}" />
+
+            <Grid Grid.Row="0" Grid.Column="0"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Height" Value="24" />
+                            <Setter Property="Content" Value="{StaticResource SpeakerIcon}" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="White" BlurRadius="5" ShadowDepth="0" />
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DataContext.NotificationType, ElementName=MainPanel}" Value="{x:Static vm:TSNotificationType.CannotConnect}">
+                                    <Setter Property="Height" Value="50" />
+                                    <Setter Property="Content" Value="{StaticResource WarningIcon}" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Yellow" BlurRadius="10" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding DataContext.NotificationType, ElementName=MainPanel}" Value="{x:Static vm:TSNotificationType.UserEntered}">
+                                    <Setter Property="Content" Value="{StaticResource EnterIcon}" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="LightGreen" BlurRadius="5" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding DataContext.NotificationType, ElementName=MainPanel}" Value="{x:Static vm:TSNotificationType.UserExited}">
+                                    <Setter Property="Content" Value="{StaticResource ExitIcon}" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Red" BlurRadius="5" ShadowDepth="0" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+            </Grid>
+
+            <!--<Grid Grid.Row="0" Grid.Column="0"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Height="24">
+                <ContentControl Content="{Binding Path=DataContext.NotificationType, ElementName=MainPanel, Converter={StaticResource NotificationTypeImgSrcConverter}}" />
+                <Grid.Effect>
+                    <DropShadowEffect Color="LightBlue" BlurRadius="5" ShadowDepth="0" />
+                </Grid.Effect>
+            </Grid>-->
 
             <core:OutlinedTextBlock Name="User"
                                     Grid.Row="0" Grid.Column="1"

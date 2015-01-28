@@ -94,6 +94,14 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public TeamspeakUserData UserData { get; private set; }
 
         /// <summary>
+        /// True if channels have been loaded, else false
+        /// </summary>
+        public bool AreChannelsLoaded
+        {
+            get { return this.Channels.Count > 0; }
+        }
+
+        /// <summary>
         /// Observable collection of sent/received chat messages
         /// </summary>
         public ObservableCollection<ChatMsgViewModel> ChatMessages { get; private set; }
@@ -172,8 +180,13 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_NewServerInfo(object sender, TS3.Data.NewServerInfoEventArgs e)
         {
-            this.ServerName = e.ServerName;
-            this.ServerAddress = e.ServerAddress;
+            Threading.InvokeOnUI(() =>
+                {
+                    this.ServerName = e.ServerName;
+                    this.ServerAddress = e.ServerAddress;
+                    this.ChatMessages.Clear();
+                    this.Notifications.Clear();
+                });
         }
 
         /// <summary>
@@ -181,8 +194,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_ClientChannelChanged(object sender, TS3.Data.ChannelEventArgs e)
         {
-            this.ClientChannelName = e.Channel.Name;
-            this.ClientChannelDescription = e.Channel.Description;
+            Threading.InvokeOnUI(() =>
+                {
+                    this.ClientChannelName = e.Channel.Name;
+                    this.ClientChannelDescription = e.Channel.Description;
+                });
         }
 
         /// <summary>
@@ -311,6 +327,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                         // No parent
                         this.Channels.Add(newChannel);
                     }
+
+                    this.OnPropertyChanged(() => this.AreChannelsLoaded);
                 });
         }
 
@@ -340,6 +358,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                         var toRemove = this.Channels.FirstOrDefault(channel => channel.ID == removedChannel.ID);
                         this.Channels.Remove(toRemove);
                     }
+
+                    this.OnPropertyChanged(() => this.AreChannelsLoaded);
                 });
         }
 
@@ -362,6 +382,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
 
                     existingChannel.Name = e.Channel.Name;
                     existingChannel.OrderIndex = e.Channel.Order;
+                    existingChannel.ClientsCount = e.Channel.ClientsCount;
 
                     // Check to see if the parent ID has changed. If so, update it and move the channel
                     if (existingChannel.ParentID != e.Channel.ParentID)
@@ -392,6 +413,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                             this.orphanChannels.Add(existingChannel);
                         }
                     }
+
+                    this.OnPropertyChanged(() => this.AreChannelsLoaded);
                 });
         }
 

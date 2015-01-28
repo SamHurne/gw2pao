@@ -127,6 +127,14 @@ namespace GW2PAO.TS3.Services
         public event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientExitedChannel;
 
         /// <summary>
+        /// The channel ID that the user is current in
+        /// </summary>
+        public uint CurrentChannelID
+        {
+            get { return this.currentChannelID; }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public TeamspeakService()
@@ -353,17 +361,6 @@ namespace GW2PAO.TS3.Services
                         this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
                     this.clients.Clear();
 
-                    // Also figure out our new server, client, and channel
-                    System.Threading.Thread.Sleep(250);
-                    var whoami = this.CommandQueryRunner.SendWhoAmI();
-                    this.currentClientID = whoami.ClientId;
-                    this.currentChannelID = whoami.ChannelId;
-                    logger.Trace("New Client ID: {0}", this.currentClientID);
-                    logger.Trace("New Channel ID: {0}", this.currentChannelID);
-
-                    this.UpdateServerInfo();
-                    this.UpdateChannelInfo();
-
                     // Reset our channel list
                     foreach (var channel in this.channels.Values)
                     {
@@ -371,9 +368,19 @@ namespace GW2PAO.TS3.Services
                     }
                     this.channels.Clear();
 
-                    // Do this on another thread... could take awhile
                     Task.Factory.StartNew(() =>
                     {
+                        // Also figure out our new server, client, and channel
+                        System.Threading.Thread.Sleep(250);
+                        var whoami = this.CommandQueryRunner.SendWhoAmI();
+                        this.currentClientID = whoami.ClientId;
+                        this.currentChannelID = whoami.ChannelId;
+                        logger.Trace("New Client ID: {0}", this.currentClientID);
+                        logger.Trace("New Channel ID: {0}", this.currentChannelID);
+
+                        this.UpdateServerInfo();
+                        this.UpdateChannelInfo();
+
                         this.InitializeChannelList();
                     });
                 }
@@ -384,18 +391,35 @@ namespace GW2PAO.TS3.Services
                 if (this.currentClientID == this.ParseUintProperty(e.Value, Properties.ClientID))
                 {
                     // The current user moved channel, so update our current channel
+                    uint prevChannelId = this.currentChannelID;
                     uint channelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
                     this.currentChannelID = channelId;
                     logger.Trace("New Channel ID: {0}", this.currentChannelID);
                     this.UpdateChannelInfo();
+
+                    // Also raise channel updated for the channel that lost the client and the channel that gained the client
+                    if (this.channels.ContainsKey(prevChannelId))
+                    {
+                        this.channels[prevChannelId].ClientsCount--;
+                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
+                    }
+
+                    if (this.channels.ContainsKey(this.currentChannelID))
+                    {
+                        this.channels[this.currentChannelID].ClientsCount++;
+                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[this.currentChannelID]));
+                    }
                 }
                 else
                 {
                     // Someone else moved - raise the client entered/exited based on what channel they moved to
                     uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                     uint newChannelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
+                    uint prevChannelId = 0;
                     if (this.clients.ContainsKey(clientId))
                     {
+                        prevChannelId = this.clients[clientId].ChannelID;
+
                         if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
                         {
                             // Someone joined the channel
@@ -407,6 +431,19 @@ namespace GW2PAO.TS3.Services
                             this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                         }
                         this.clients[clientId].ChannelID = newChannelId;
+                    }
+
+                    // Also raise channel updated for the channel that lost the client and the channel that gained the client
+                    if (this.channels.ContainsKey(prevChannelId))
+                    {
+                        this.channels[prevChannelId].ClientsCount--;
+                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
+                    }
+
+                    if (this.channels.ContainsKey(newChannelId))
+                    {
+                        this.channels[newChannelId].ClientsCount++;
+                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[newChannelId]));
                     }
                 }
             }

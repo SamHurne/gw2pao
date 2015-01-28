@@ -1,0 +1,104 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Viewbox Stretch="Uniform" x:Shared="false"
+             x:Key="EnterIcon">
+        <Canvas Width="512" Height="512" Canvas.Left="0" Canvas.Top="0">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Canvas.RenderTransform>
+            <Canvas.Resources/>
+            <!--Unknown tag: metadata-->
+            <!--Unknown tag: sodipodi:namedview-->
+            <Path Fill="#000000">
+                <Path.Data>
+                    <PathGeometry Figures="M192 256H32v-64h160v-64l96 96l-96 96V256z M512 0v416l-192 96v-96H128V288h32v96h160V96l128-64H160v128h-32V0H512z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+
+    <Viewbox Stretch="Uniform" x:Shared="false"
+             x:Key="ExitIcon">
+        <Canvas Width="512" Height="512" Canvas.Left="0" Canvas.Top="0">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Canvas.RenderTransform>
+            <Canvas.Resources/>
+            <!--Unknown tag: metadata-->
+            <!--Unknown tag: sodipodi:namedview-->
+            <Path Fill="#000000">
+                <Path.Data>
+                    <PathGeometry Figures="M384 320v-64H224v-64h160v-64l96 96L384 320z M352 288v128H192v96L0 416V0h352v160h-32V32H64l128 64v288h128v-96H352z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+
+    <Viewbox Stretch="Uniform" x:Shared="false"
+             x:Key="SpeakerIcon">
+        <Canvas Width="75" Height="75">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Canvas.RenderTransform>
+            <Canvas.Resources/>
+            <!--Unknown tag: sodipodi:namedview-->
+            <!--Unknown tag: metadata-->
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <MatrixTransform Matrix="-1 0 0 1 76.128 0"/>
+                </Canvas.RenderTransform>
+                <Polygon Points="22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769 39.389,13.769 " FillRule="NonZero" Fill="#FF111111" StrokeThickness="5" Stroke="#FF111111" StrokeLineJoin="Round"/>
+                <Path StrokeThickness="5" Stroke="#FF111111" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="m 48.128 49.03 c 1.929 -3.096 3.062 -6.739 3.062 -10.653 0 -3.978 -1.164 -7.674 -3.147 -10.8" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path StrokeThickness="5" Stroke="#FF111111" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="m 55.082 20.537 c 3.695 4.986 5.884 11.157 5.884 17.84 0 6.621 -2.151 12.738 -5.788 17.699" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path StrokeThickness="5" Stroke="#FF111111" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="m 61.71 62.611 c 5.267 -6.666 8.418 -15.08 8.418 -24.233 0 -9.217 -3.192 -17.682 -8.519 -24.368" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+
+    <Viewbox Stretch="Uniform" x:Shared="false"
+             x:Key="WarningIcon">
+        <Canvas Width="156" Height="144">
+            <Canvas.Resources/>
+            <!--Unknown tag: metadata-->
+            <!--Unknown tag: sodipodi:namedview-->
+            <Canvas>
+                <Path Fill="#FFFFFFFF" StrokeThickness="2" Stroke="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="M 12.473000 121.08200 C 11.559033 122.84329 10.481800 124.49000 10.481700 126.42300 L 10.490728 127.23088 C 10.490728 131.40288 13.756600 133.92500 17.511300 133.92500 L 138.83100 133.92500 C 142.58600 133.92500 145.81986 130.79848 145.81986 126.62648 L 145.78000 125.81500 C 145.78000 123.88200 144.82971 122.20348 143.78900 120.47400 L 83.705600 12.693800 C 81.051000 9.7442300 76.747300 9.7442300 74.092300 12.694200 L 12.473000 121.08200 z " FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path Fill="#FFFFCC00" StrokeThickness="5" Stroke="#FF000000" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="M 78.703 16.2915L 15.2797 128.128L 76.4667 128.128L 79.3188 128.128L 139.826 128.128L 79.5155 16.2915L 78.703 16.2915z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+            <Canvas>
+                <Path Fill="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="M 84.366054 45.157900 C 85.289904 46.139400 85.469800 46.370250 85.931700 48.160100 C 86.393600 49.949950 87.405817 53.469087 86.291592 57.462546 C 85.829592 64.390946 86.129850 70.967972 85.856575 77.979383 C 85.583663 84.981490 87.317400 93.426000 79.234100 95.042600 C 77.155600 95.273600 75.077100 93.887900 74.268800 91.924800 C 72.883100 77.837000 71.497500 64.442000 70.111700 50.700600 C 71.266400 47.120900 74.153200 43.656700 77.617500 43.194800 C 81.081800 42.732900 83.442204 44.176400 84.366054 45.157900 z " FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path Fill="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="M 83.1603 103.357C 86.3936 105.32 86.9709 108.9 86.9709 112.479C 85.5852 115.944 84.0841 119.985 79.5806 119.985C 76.8092 119.87 74.1533 119.292 72.3057 117.214C 71.151 113.057 68.4951 108.784 72.3057 105.32C 75.1926 101.278 79.2341 102.318 83.1603 103.357z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+
+</ResourceDictionary>

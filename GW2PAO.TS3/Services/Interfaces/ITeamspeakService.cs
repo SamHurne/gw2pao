@@ -65,6 +65,11 @@ namespace GW2PAO.TS3.Services.Interfaces
         event EventHandler<GW2PAO.TS3.Data.ClientEventArgs> ClientExitedChannel;
 
         /// <summary>
+        /// The channel ID that the user is current in
+        /// </summary>
+        uint CurrentChannelID { get; }
+
+        /// <summary>
         /// Connects to the Teamspeak Client Query interface
         /// </summary>
         void Connect();

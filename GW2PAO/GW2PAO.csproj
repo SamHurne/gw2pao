@@ -280,7 +280,6 @@
     <Compile Include="Converters\SortedCollectionConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventStateConverter.cs" />
-    <Compile Include="Converters\TSNotificationTypeImageSrcConverter.cs" />
     <Compile Include="Converters\WvWMapConverter.cs" />
     <Compile Include="Converters\ObjectiveTypeImageSrcConverter.cs" />
     <Compile Include="Converters\TimespanConverter.cs" />
@@ -494,9 +493,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Style\BaseControlStyles\TreeViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Style\Brushes\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Images\Spinners.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Images\TeamspeakIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\NamedStyles\ScrollingItemsControlStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -707,11 +718,6 @@
     <Resource Include="Images\Commerce\unknown_icon.png" />
     <Resource Include="Images\OverlayMenuIcon_Color.png" />
     <Resource Include="Images\Misc\warning.png" />
-    <Resource Include="Images\Teamspeak\exit.png" />
-    <Resource Include="Images\Teamspeak\enter.png" />
-    <Resource Include="Images\Teamspeak\chat_bubble.png" />
-    <Resource Include="Images\Teamspeak\speaker_mute.png" />
-    <Resource Include="Images\Teamspeak\speaker.png" />
     <Resource Include="Images\OverlayMenuIcon.png" />
     <Resource Include="Images\Commerce\copper_coin.png" />
     <Resource Include="Images\Title\merchant.png" />

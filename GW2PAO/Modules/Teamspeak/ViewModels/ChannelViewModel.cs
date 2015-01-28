@@ -10,7 +10,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
     public class ChannelViewModel : BindableBase
     {
         private ITeamspeakService teamspeakService;
-        private Channel modelData;
+        private uint id;
+        private uint parentId;
+        private string name;
+        private uint orderIndex;
+        private uint clientsCount;
 
         /// <summary>
         /// Default logger
@@ -22,15 +26,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         public uint ID
         {
-            get { return this.modelData.ID; }
-            set
-            {
-                if (this.modelData.ID != value)
-                {
-                    this.modelData.ID = value;
-                    this.OnPropertyChanged(() => this.ID);
-                }
-            }
+            get { return this.id; }
+            set { this.SetProperty(ref this.id, value); }
         }
 
         /// <summary>
@@ -38,15 +35,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         public uint ParentID
         {
-            get { return this.modelData.ParentID; }
-            set
-            {
-                if (this.modelData.ParentID != value)
-                {
-                    this.modelData.ParentID = value;
-                    this.OnPropertyChanged(() => this.ParentID);
-                }
-            }
+            get { return this.parentId; }
+            set { this.SetProperty(ref this.parentId, value); }
         }
 
         /// <summary>
@@ -54,15 +44,8 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         public string Name
         {
-            get { return this.modelData.Name; }
-            set
-            {
-                if (this.modelData.Name != value)
-                {
-                    this.modelData.Name = value;
-                    this.OnPropertyChanged(() => this.Name);
-                }
-            }
+            get { return this.name; }
+            set { this.SetProperty(ref this.name, value); }
         }
 
         /// <summary>
@@ -70,15 +53,17 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         public uint OrderIndex
         {
-            get { return this.modelData.Order; }
-            set
-            {
-                if (this.modelData.Order != value)
-                {
-                    this.modelData.Order = value;
-                    this.OnPropertyChanged(() => this.OrderIndex);
-                }
-            }
+            get { return this.orderIndex; }
+            set { this.SetProperty(ref this.orderIndex, value); }
+        }
+
+        /// <summary>
+        /// Number of clients in the channel
+        /// </summary>
+        public uint ClientsCount
+        {
+            get { return this.clientsCount; }
+            set { this.SetProperty(ref this.clientsCount, value); }
         }
 
         /// <summary>
@@ -97,7 +82,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// <param name="channelData">The channel's data</param>
         public ChannelViewModel(Channel channelData, ITeamspeakService teamspeakService)
         {
-            this.modelData = channelData;
+            this.ID = channelData.ID;
+            this.ParentID = channelData.ParentID;
+            this.Name = channelData.Name;
+            this.OrderIndex = channelData.Order;
+            this.ClientsCount = channelData.ClientsCount;
             this.teamspeakService = teamspeakService;
             this.Subchannels = new ObservableCollection<ChannelViewModel>();
         }

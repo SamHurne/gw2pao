@@ -17,10 +17,15 @@
         <ResourceDictionary Source="BaseControlStyles/TextBoxStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/TimespanUpDownStyle.xaml" />
         <ResourceDictionary Source="BaseControlStyles/ToolTipStyle.xaml" />
+        <ResourceDictionary Source="BaseControlStyles/TreeViewStyle.xaml" />
         <ResourceDictionary Source="Brushes/Brushes.xaml" />
         <ResourceDictionary Source="NamedStyles/AlternateCheckboxStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/ScrollingItemsControlStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/VirtualizingItemsControlStyle.xaml" />
+        
+        <!--XAML Images-->
+        <ResourceDictionary Source="Images/Spinners.xaml" />
+        <ResourceDictionary Source="Images/TeamspeakIcons.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

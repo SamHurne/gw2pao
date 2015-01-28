@@ -162,25 +162,23 @@ namespace GW2PAO.Modules.Teamspeak.Views
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                TextBox textbox = sender as TextBox;
-                ContextMenu contextMenu = textbox.ContextMenu;
-                contextMenu.PlacementTarget = textbox;
-                contextMenu.Visibility = System.Windows.Visibility.Visible;
-                contextMenu.IsOpen = true;
+                this.ChannelListPopup.IsOpen = true;
                 e.Handled = true;
             }
         }
 
-        private void ChannelContextMenuItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Channel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // This is kind of a hacky way to do this, but in order to allow users to select channels that have subchannels,
-            // we have to manually execute the command. MenuItems with children do not execute their commands, so we have to
-            // to it manually.
-            var dataContext = (sender as TextBlock).DataContext;
-            var vm = dataContext as ChannelViewModel;
-            if (vm != null)
+            if (e.ClickCount == 2)
             {
-                vm.SelectChannelCommand.Execute(null);
+                var dataContext = ((FrameworkElement)sender).DataContext;
+                var vm = dataContext as ChannelViewModel;
+                if (vm != null)
+                {
+                    vm.SelectChannelCommand.Execute(null);
+                }
+                this.ChannelListPopup.IsOpen = false;
+                e.Handled = true;
             }
         }
 
