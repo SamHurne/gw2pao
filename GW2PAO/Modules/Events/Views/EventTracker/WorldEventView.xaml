@@ -11,7 +11,8 @@
              Height="20"
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
-             TextOptions.TextFormattingMode="Display">
+             TextOptions.TextFormattingMode="Display"
+             MouseDown="UserControl_MouseDown">
 
     <UserControl.Resources>
         <converters:EventStateConverter x:Key="StateConverter" />

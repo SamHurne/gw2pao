@@ -144,6 +144,11 @@ namespace GW2PAO.Modules.Events.ViewModels
         public DelegateCommand CopyWaypointCommand { get { return new DelegateCommand(this.CopyWaypointCode); } }
 
         /// <summary>
+        /// Command to copy the information about the event to the clipboard
+        /// </summary>
+        public DelegateCommand CopyDataCommand { get { return new DelegateCommand(this.CopyEventData); } }
+
+        /// <summary>
         /// Closes the displayed notification
         /// </summary>
         public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
@@ -215,6 +220,31 @@ namespace GW2PAO.Modules.Events.ViewModels
         private void CloseNotification()
         {
             this.displayedNotifications.Remove(this);
+        }
+
+        /// <summary>
+        /// Places a string of data on the clipboard for pasting into the game
+        /// Contains the event name, status, time until active, waypoint code, etc
+        /// </summary>
+        private void CopyEventData()
+        {
+            string fullText;
+            if (this.State == EventState.Active)
+            {
+                fullText = string.Format("{0} - {1}",
+                    this.EventName,
+                    this.EventModel.WaypointCode);
+            }
+            else
+            {
+                fullText = string.Format("{0} - {1} {2} - {3}",
+                    this.EventName,
+                    GW2PAO.Properties.Resources.ActiveIn, this.TimerValue.ToString("hh\\:mm\\:ss"),
+                    this.EventModel.WaypointCode);
+            }
+
+            logger.Debug("Copying \"{0}\" to clipboard", fullText);
+            System.Windows.Clipboard.SetText(fullText);
         }
 
     }

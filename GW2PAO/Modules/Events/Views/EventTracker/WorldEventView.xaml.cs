@@ -24,5 +24,13 @@ namespace GW2PAO.Views.Events.EventTracker
         {
             InitializeComponent();
         }
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                ((GW2PAO.Modules.Events.ViewModels.EventViewModel)this.DataContext).CopyDataCommand.Execute(null);
+            }
+        }
     }
 }
