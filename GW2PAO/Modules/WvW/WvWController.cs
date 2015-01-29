@@ -29,12 +29,6 @@ namespace GW2PAO.Modules.WvW
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const int EternalBattlegroundsMapID = 38;
-        private const int RedBorderlandsMapID = 94;
-        private const int GreenBorderlandsMapID = 95;
-        private const int BlueBorderlandsMapID = 96;
-        private const int EdgeOfMistsMapID = 968;
-
         /// <summary>
         /// Service responsible for WvW information
         /// </summary>
@@ -107,13 +101,13 @@ namespace GW2PAO.Modules.WvW
                 var currentMapId = this.playerService.MapId;
                 switch (currentMapId)
                 {
-                    case EternalBattlegroundsMapID:
+                    case WvWMapIDs.EternalBattlegrounds:
                         return WvWMap.EternalBattlegrounds;
-                    case RedBorderlandsMapID:
+                    case WvWMapIDs.RedBorderlands:
                         return WvWMap.RedBorderlands;
-                    case GreenBorderlandsMapID:
+                    case WvWMapIDs.GreenBorderlands:
                         return WvWMap.GreenBorderlands;
-                    case BlueBorderlandsMapID:
+                    case WvWMapIDs.BlueBorderlands:
                         return WvWMap.BlueBorderlands;
                     default:
                         return WvWMap.Unknown;

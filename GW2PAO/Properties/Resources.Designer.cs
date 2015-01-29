@@ -151,6 +151,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatically open and close tracker when entering/exiting WvW.
+        /// </summary>
+        public static string AutoOpenCloseWvW {
+            get {
+                return ResourceManager.GetString("AutoOpenCloseWvW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-Start.
         /// </summary>
         public static string AutoStart {

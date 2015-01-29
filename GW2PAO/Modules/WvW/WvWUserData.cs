@@ -64,6 +64,7 @@ namespace GW2PAO.Modules.WvW
         private bool areShortNamesShown;
         private WvWMap mapOverride;
         private Units distanceUnits;
+        private bool autoOpenCloseTracker;
         private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
 
         /// <summary>
@@ -316,6 +317,15 @@ namespace GW2PAO.Modules.WvW
         {
             get { return this.distanceUnits; }
             set { this.SetProperty(ref this.distanceUnits, value); }
+        }
+
+        /// <summary>
+        /// True if the tracker should automatically open/close when entering/exiting WvW
+        /// </summary>
+        public bool AutoOpenCloseTracker
+        {
+            get { return this.autoOpenCloseTracker; }
+            set { SetProperty(ref this.autoOpenCloseTracker, value); }
         }
 
         /// <summary>

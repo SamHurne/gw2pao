@@ -795,4 +795,7 @@
     <value>Unknown</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
   </data>
+  <data name="AutoOpenCloseWvW" xml:space="preserve">
+    <value>Automatically open and close tracker when entering/exiting WvW</value>
+  </data>
 </root>

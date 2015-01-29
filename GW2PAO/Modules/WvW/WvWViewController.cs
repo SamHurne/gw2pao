@@ -11,6 +11,7 @@ using GW2PAO.Modules.WvW.Views.WvWNotification;
 using GW2PAO.Modules.WvW.Views.WvWTracker;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
 
 namespace GW2PAO.Modules.WvW
@@ -28,6 +29,18 @@ namespace GW2PAO.Modules.WvW
         /// </summary>
         [Import]
         private CompositionContainer Container { get; set; }
+
+        /// <summary>
+        /// The event aggregator
+        /// </summary>
+        [Import]
+        private EventAggregator eventAggregator { get; set; }
+
+        /// <summary>
+        /// The WvW user data and settings
+        /// </summary>
+        [Import]
+        private WvWUserData userData { get; set; }
 
         /// <summary>
         /// The wvw tracker view
@@ -49,6 +62,29 @@ namespace GW2PAO.Modules.WvW
 
             logger.Debug("Registering hotkey commands");
             HotkeyCommands.ToggleWvWTrackerCommmand.RegisterCommand(new DelegateCommand(this.ToggleWvWTracker));
+
+            eventAggregator.GetEvent<PlayerEnteredPvE>().Subscribe(o =>
+                {
+                    if (this.userData.AutoOpenCloseTracker)
+                    {
+                        Threading.InvokeOnUI(() =>
+                            {
+                                if (this.wvwTrackerView != null && this.wvwTrackerView.IsVisible)
+                                    this.wvwTrackerView.Close();
+                            });
+                    }
+                });
+
+            eventAggregator.GetEvent<PlayerEnteredWvW>().Subscribe(o =>
+                {
+                    if (this.userData.AutoOpenCloseTracker)
+                    {
+                         Threading.InvokeOnUI(() =>
+                            {
+                                this.DisplayWvWTracker();
+                            });
+                    }
+                });
 
             Threading.BeginInvokeOnUI(() =>
             {

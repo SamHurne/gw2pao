@@ -8,4 +8,8 @@ using Microsoft.Practices.Prism.PubSubEvents;
 namespace GW2PAO.Infrastructure
 {
     public class InsufficientPrivilegesEvent : PubSubEvent<object> { }
+
+    public class PlayerEnteredPvE : PubSubEvent<object> { }
+
+    public class PlayerEnteredWvW : PubSubEvent<object> { }
 }

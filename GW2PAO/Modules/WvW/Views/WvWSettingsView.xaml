@@ -117,5 +117,11 @@
                 </CheckBox>
             </Grid>
         </GroupBox>
+        <CheckBox Margin="2,5,2,5"
+                  IsChecked="{Binding UserData.AutoOpenCloseTracker}">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoOpenCloseWvW}" />
+        </CheckBox>
+
+
     </StackPanel>
 </UserControl>
