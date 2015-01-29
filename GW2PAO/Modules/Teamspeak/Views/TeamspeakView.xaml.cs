@@ -186,5 +186,11 @@ namespace GW2PAO.Modules.Teamspeak.Views
         {
             this.ChatMessagesScrollViewer.ScrollToBottom();
         }
+
+        private void PeopleIcon_Click(object sender, RoutedEventArgs e)
+        {
+            this.ClientListPopup.IsOpen = true;
+            e.Handled = true;
+        }
     }
 }

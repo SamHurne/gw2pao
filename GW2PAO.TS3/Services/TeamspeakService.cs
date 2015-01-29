@@ -62,6 +62,11 @@ namespace GW2PAO.TS3.Services
         private ConcurrentDictionary<uint, Client> clients = new ConcurrentDictionary<uint, Client>();
 
         /// <summary>
+        /// Collection of clients in the current channel
+        /// </summary>
+        private ConcurrentDictionary<uint, Client> localClients = new ConcurrentDictionary<uint, Client>();
+
+        /// <summary>
         /// Collection of channels on the current server
         /// </summary>
         private ConcurrentDictionary<uint, Channel> channels = new ConcurrentDictionary<uint, Channel>();
@@ -368,6 +373,13 @@ namespace GW2PAO.TS3.Services
                     }
                     this.channels.Clear();
 
+                    // Reset our local clients
+                    foreach (var client in this.localClients.Values)
+                    {
+                        this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                    }
+                    this.localClients.Clear();
+
                     Task.Factory.StartNew(() =>
                     {
                         // Also figure out our new server, client, and channel
@@ -377,6 +389,10 @@ namespace GW2PAO.TS3.Services
                         this.currentChannelID = whoami.ChannelId;
                         logger.Trace("New Client ID: {0}", this.currentClientID);
                         logger.Trace("New Channel ID: {0}", this.currentChannelID);
+
+                        // Request the client list for the current channel
+                        string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
+                        this.AddClients(result);
 
                         this.UpdateServerInfo();
                         this.UpdateChannelInfo();
@@ -397,6 +413,12 @@ namespace GW2PAO.TS3.Services
                     logger.Trace("New Channel ID: {0}", this.currentChannelID);
                     this.UpdateChannelInfo();
 
+                    foreach (var client in this.localClients.Values)
+                    {
+                        this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                    }
+                    this.localClients.Clear();
+
                     // Also raise channel updated for the channel that lost the client and the channel that gained the client
                     if (this.channels.ContainsKey(prevChannelId))
                     {
@@ -409,6 +431,13 @@ namespace GW2PAO.TS3.Services
                         this.channels[this.currentChannelID].ClientsCount++;
                         this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[this.currentChannelID]));
                     }
+
+                    // Request the client list for the current channel
+                    Task.Factory.StartNew(() =>
+                        {
+                            string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
+                            this.AddClients(result);
+                        });
                 }
                 else
                 {
@@ -416,20 +445,25 @@ namespace GW2PAO.TS3.Services
                     uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
                     uint newChannelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
                     uint prevChannelId = 0;
+
                     if (this.clients.ContainsKey(clientId))
                     {
                         prevChannelId = this.clients[clientId].ChannelID;
 
-                        if (this.clients[clientId].ChannelID != this.currentChannelID && newChannelId == this.currentChannelID)
-                        {
-                            // Someone joined the channel
-                            this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-                        }
-                        else if (this.clients[clientId].ChannelID == this.currentChannelID && newChannelId != this.currentChannelID)
+                        if (this.localClients.ContainsKey(clientId))
                         {
                             // Someone left the channel
+                            Client throwAway;
+                            this.localClients.TryRemove(clientId, out throwAway);
                             this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                         }
+                        else
+                        {
+                            // Someone joined the channel
+                            this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
+                            this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                        }
+
                         this.clients[clientId].ChannelID = newChannelId;
                     }
 
@@ -458,6 +492,7 @@ namespace GW2PAO.TS3.Services
                 {
                     // Someone joined the channel
                     uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
+                    this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
                     this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                 }
             }
@@ -471,6 +506,8 @@ namespace GW2PAO.TS3.Services
                     if (client.ChannelID == this.currentChannelID)
                     {
                         // They were in our channel, so raise the client left channel event
+                        Client throwAway;
+                        this.localClients.TryRemove(clientId, out throwAway);
                         this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, client.Name));
                     }
                 }
@@ -604,6 +641,12 @@ namespace GW2PAO.TS3.Services
 
                     var client = new Client(clientId, clientNickname, channelId);
                     this.clients.AddOrUpdate(clientId, client, (key, oldValue) => client);
+
+                    if (client.ChannelID == this.CurrentChannelID)
+                    {
+                        this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
+                        this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                    }
                 }
             }
         }

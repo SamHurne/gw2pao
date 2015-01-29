@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace GW2PAO.Modules.Teamspeak.ViewModels
 {
@@ -117,6 +118,16 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         public ObservableCollection<ChannelViewModel> Channels { get; private set; }
 
         /// <summary>
+        /// Collection view of channels
+        /// </summary>
+        public AutoRefreshCollectionViewSource ChannelsSource { get; private set; }
+
+        /// <summary>
+        /// Collection clients in the current channel
+        /// </summary>
+        public ObservableCollection<ClientViewModel> CurrentChannelClients { get; private set; }
+
+        /// <summary>
         /// Command to reset all hidden objectives
         /// </summary>
         public DelegateCommand SendMessageCommand { get { return new DelegateCommand(this.SendMessage); } }
@@ -132,6 +143,12 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
             this.ChatMessages = new ObservableCollection<ChatMsgViewModel>();
             this.Notifications = new ObservableCollection<TSNotificationViewModel>();
             this.Channels = new ObservableCollection<ChannelViewModel>();
+            this.CurrentChannelClients = new ObservableCollection<ClientViewModel>();
+
+            var channelsSource = new AutoRefreshCollectionViewSource();
+            channelsSource.Source = this.Channels;
+            this.ChannelsSource = channelsSource;
+            this.ChannelsSource.SortDescriptions.Add(new SortDescription("OrderIndex", ListSortDirection.Ascending));
 
             this.TeamspeakService = teamspeakService;
             this.TeamspeakService.NewServerInfo += TeamspeakService_NewServerInfo;
@@ -271,6 +288,10 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
                 Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
             });
+            Threading.InvokeOnUI(() =>
+                {
+                    this.CurrentChannelClients.Add(new ClientViewModel(e.ClientID, e.ClientName));
+                });
         }
 
         /// <summary>
@@ -285,6 +306,13 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
                 Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
             });
+            Threading.InvokeOnUI(() =>
+            {
+                var client = this.CurrentChannelClients.FirstOrDefault(c => c.ID == e.ClientID);
+                if (client != null)
+                    this.CurrentChannelClients.Remove(client);
+            });
+
         }
 
         /// <summary>
@@ -325,7 +353,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                     else
                     {
                         // No parent
-                        this.Channels.Add(newChannel);
+                        this.Channels.Insert(0, newChannel);
                     }
 
                     this.OnPropertyChanged(() => this.AreChannelsLoaded);

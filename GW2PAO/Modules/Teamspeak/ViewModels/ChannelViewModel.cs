@@ -4,6 +4,7 @@ using GW2PAO.TS3.Services.Interfaces;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace GW2PAO.Modules.Teamspeak.ViewModels
 {
@@ -66,6 +67,14 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
             set { this.SetProperty(ref this.clientsCount, value); }
         }
 
+        /// Collection of WvW objectives for the configured map
+        /// </summary>
+        public AutoRefreshCollectionViewSource ChannelsSource
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// Collection of sub channels for this channel
         /// </summary>
@@ -89,6 +98,11 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
             this.ClientsCount = channelData.ClientsCount;
             this.teamspeakService = teamspeakService;
             this.Subchannels = new ObservableCollection<ChannelViewModel>();
+
+            var subChannelsSource = new AutoRefreshCollectionViewSource();
+            subChannelsSource.Source = this.Subchannels;
+            this.ChannelsSource = subChannelsSource;
+            this.ChannelsSource.SortDescriptions.Add(new SortDescription("OrderIndex", ListSortDirection.Ascending));
         }
 
         /// <summary>

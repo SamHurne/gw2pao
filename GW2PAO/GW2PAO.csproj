@@ -226,6 +226,7 @@
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
     <Compile Include="Modules\Teamspeak\ViewModels\ChatMsgViewModel.cs" />
+    <Compile Include="Modules\Teamspeak\ViewModels\ClientViewModel.cs" />
     <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />

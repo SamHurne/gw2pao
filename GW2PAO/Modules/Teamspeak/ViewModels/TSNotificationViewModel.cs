@@ -76,7 +76,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 TSNotificationViewModel other = obj as TSNotificationViewModel;
 
                 return (other.ClientID == this.ClientID)
-                    && (other.User == this.User)
                     && (other.NotificationType == this.NotificationType);
             }
             else

@@ -22,19 +22,19 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:SortedCollectionConverter x:Key="CollectionSorter" />
 
-        <core:AutoRefreshCollectionViewSource Source="{Binding Channels}" x:Key="ChannelsCollection">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="OrderIndex" />
-            </CollectionViewSource.SortDescriptions>
-        </core:AutoRefreshCollectionViewSource>
-
         <ScaleTransform x:Key="Transform" ScaleY="-1" />
         
         <core:AutoRefreshCollectionViewSource Source="{Binding Notifications}" x:Key="NotificationsCollection" />
         <core:AutoRefreshCollectionViewSource Source="{Binding ChatMessages}" x:Key="ChatMsgsCollection" />
 
+        <core:AutoRefreshCollectionViewSource Source="{Binding CurrentChannelClients}" x:Key="ChannelClients">
+            <core:AutoRefreshCollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" Direction="Ascending" />
+            </core:AutoRefreshCollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
+
         <TreeView x:Key="ChannelTreeView"
-                  ItemsSource="{Binding Channels}">
+                  ItemsSource="{Binding ChannelsSource.View}">
             <TreeView.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="PaleGoldenrod" />
@@ -42,7 +42,8 @@
                 </Style>
             </TreeView.Resources>
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type vm:ChannelViewModel}" ItemsSource="{Binding Subchannels}">
+                <HierarchicalDataTemplate DataType="{x:Type vm:ChannelViewModel}"
+                                          ItemsSource="{Binding ChannelsSource.View}">
                     <StackPanel Orientation="Horizontal"
                                 MouseLeftButtonDown="Channel_MouseLeftButtonDown">
                         <TextBlock Margin="2,0,2,0"
@@ -196,9 +197,9 @@
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=NotificationsContainer, Path=Visibility}" Value="Visible" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -227,7 +228,11 @@
         <Grid Name="ChannelName"
                 Grid.Row="1" Margin="3"
                 Visibility="{Binding UserData.ShowChannelName, Converter={StaticResource BoolToVisibility}}">
-            <TextBox Grid.Row="0"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
                      Name="ChannelTextBox"
                      Text="{Binding ClientChannelName}"
                      IsReadOnly="True"
@@ -243,10 +248,14 @@
                 <Border MinWidth="{Binding ElementName=ChannelTextBox, Path=ActualWidth}"
                         Opacity="{Binding ElementName=ChannelName, Path=Opacity}"
                         HorizontalAlignment="Left"
-                        MinHeight="75">
+                        MinHeight="75"
+                        BorderThickness="1,0,1,1">
                     <Border.Background>
                         <SolidColorBrush Color="Black" Opacity="0.8" />
                     </Border.Background>
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="PaleGoldenrod" Opacity="0.25" />
+                    </Border.BorderBrush>
                     <ContentControl Margin="5">
                         <ContentControl.Style>
                             <Style TargetType="ContentControl">
@@ -261,6 +270,40 @@
                     </ContentControl>
                 </Border>
             </Popup>
+
+            <Button Name="PeopleIcon"
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Content="{StaticResource PeopleIcon}"
+                    Click="PeopleIcon_Click"/>
+            <Popup Name="ClientListPopup"
+                   AllowsTransparency="True"
+                   StaysOpen="False" PopupAnimation="Slide"
+                   PlacementTarget="{Binding ElementName=PeopleIcon}"
+                   SnapsToDevicePixels="True" UseLayoutRounding="True"
+                   HorizontalAlignment="Left"
+                   Placement="Bottom">
+                <Border MinWidth="50"
+                        MinHeight="50"
+                        BorderThickness="1"
+                        Padding="3">
+                    <Border.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.8" />
+                    </Border.Background>
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="PaleGoldenrod" Opacity="0.25" />
+                    </Border.BorderBrush>
+                    <ItemsControl ItemsSource="{Binding Source={StaticResource ChannelClients}}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="PaleGoldenrod"
+                                           FontFamily="Candara"
+                                           Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+            </Popup>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Opacity" Value="1" />
@@ -269,9 +312,9 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -297,16 +340,30 @@
             </Grid.Style>
         </Grid>
 
-        <ItemsControl Name="NotificationsContainer" Grid.Row="2"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Name="NotificationsContainer" Grid.Row="2"
+              Background="#01000000">
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding Source={StaticResource NotificationsCollection}}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <view:TSNotificationView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeftScrollViewer}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+            </ScrollViewer>
+        </Grid>
 
         <GridSplitter Grid.Row="3"
                       Height="2"
@@ -320,9 +377,9 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -429,9 +486,9 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -489,9 +546,9 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -529,9 +586,9 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MessageEntryBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
