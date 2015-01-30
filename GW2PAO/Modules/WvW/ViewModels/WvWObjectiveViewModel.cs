@@ -270,6 +270,11 @@ namespace GW2PAO.Modules.WvW.ViewModels
         public DelegateCommand CopyRITextCommand { get { return new DelegateCommand(this.CopyRIText); } }
 
         /// <summary>
+        /// Command to copy the information about the event to the clipboard
+        /// </summary>
+        public DelegateCommand CopyGeneralDataCommand { get { return new DelegateCommand(this.CopyGeneralData); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="objective">The objective details</param>
@@ -478,6 +483,34 @@ namespace GW2PAO.Modules.WvW.ViewModels
             {
                 System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI is NOT active", name, this.Location, this.Type));
             }
+        }
+
+        /// <summary>
+        /// Copies general data about an objective to the clipboard for pasting into the in-game chat
+        /// </summary>
+        private void CopyGeneralData()
+        {
+            logger.Debug("Copying RI text of \"{0}\"", this.Name);
+
+            string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
+
+            if (this.IsRIActive)
+            {
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - Owned By {3} - RI: {4}",
+                    name,
+                    this.Location, this.Type,
+                    this.WorldOwnerName,
+                    this.TimerValue.ToString("mm\\:ss")));
+            }
+            else
+            {
+                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - Owned By {3} - RI is NOT active",
+                    name, 
+                    this.Location, this.Type,
+                    this.WorldOwnerName));
+            }
+
+            logger.Debug("Copying RI text of \"{0}\"", this.Name);
         }
     }
 }

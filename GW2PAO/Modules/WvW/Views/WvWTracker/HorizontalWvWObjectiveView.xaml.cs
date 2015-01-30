@@ -24,5 +24,13 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         {
             InitializeComponent();
         }
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                ((GW2PAO.Modules.WvW.ViewModels.WvWObjectiveViewModel)this.DataContext).CopyGeneralDataCommand.Execute(null);
+            }
+        }
     }
 }

@@ -11,7 +11,8 @@
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
              TextOptions.TextFormattingMode="Display"
-             ToolTipService.InitialShowDelay="0">
+             ToolTipService.InitialShowDelay="0"
+             MouseDown="UserControl_MouseDown">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
