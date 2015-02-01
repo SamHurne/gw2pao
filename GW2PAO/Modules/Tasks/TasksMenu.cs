@@ -26,7 +26,7 @@ namespace GW2PAO.Modules.Tasks
         /// </summary>
         public string Header
         {
-            get { return "Task Tracker"; } // TODO: Resource String
+            get { return Properties.Resources.TaskTracker; }
         }
 
         /// <summary>

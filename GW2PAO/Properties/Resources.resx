@@ -798,4 +798,34 @@
   <data name="AutoOpenCloseWvW" xml:space="preserve">
     <value>Automatically open and close tracker when entering/exiting WvW</value>
   </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Add New Task</value>
+  </data>
+  <data name="CanComplete" xml:space="preserve">
+    <value>Can Complete</value>
+  </data>
+  <data name="CompletionOptions" xml:space="preserve">
+    <value>Completion Options</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export...</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import...</value>
+  </data>
+  <data name="IncludeLocation" xml:space="preserve">
+    <value>Include Location</value>
+  </data>
+  <data name="LocationOptions" xml:space="preserve">
+    <value>Location Options</value>
+  </data>
+  <data name="ResetDaily" xml:space="preserve">
+    <value>Reset Daily</value>
+  </data>
+  <data name="TaskTracker" xml:space="preserve">
+    <value>Tasks Tracker</value>
+  </data>
 </root>

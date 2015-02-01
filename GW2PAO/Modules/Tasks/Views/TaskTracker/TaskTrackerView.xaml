@@ -52,10 +52,10 @@
                         MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
-                            <MenuItem Header="Add New Task" Command="{Binding AddNewTaskCommand}" /> <!-- TODO: Resource String -->
+                            <MenuItem Header="{x:Static resx:Resources.AddNewTask}" Command="{Binding AddNewTaskCommand}" />
                             <Separator />
-                            <MenuItem Header="Import..." Command="{Binding ImportTasksCommand}" /> <!-- TODO: Resource String -->
-                            <MenuItem Header="Export..." Command="{Binding ExportTasksCommand}" /> <!-- TODO: Resource String -->
+                            <MenuItem Header="{x:Static resx:Resources.Import}" Command="{Binding ImportTasksCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.Export}" Command="{Binding ExportTasksCommand}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -99,7 +99,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
                                         Fill="PaleGoldenrod" FontFamily="Candara" FontSize="14"
-                                        Text="Task Tracker" /> <!--TODO: Resource String-->
+                                        Text="{x:Static resx:Resources.TaskTracker}" />
 
                 <Button Name="CollapseExpandButton"
                         Grid.Column="2"

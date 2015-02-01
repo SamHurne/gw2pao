@@ -88,6 +88,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Task.
+        /// </summary>
+        public static string AddNewTask {
+            get {
+                return ResourceManager.GetString("AddNewTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjusted.
         /// </summary>
         public static string Adjusted {
@@ -286,6 +295,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can Complete.
+        /// </summary>
+        public static string CanComplete {
+            get {
+                return ResourceManager.GetString("CanComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cardinal Directions.
         /// </summary>
         public static string CardinalDirections {
@@ -336,6 +354,15 @@ namespace GW2PAO.Properties {
         public static string Commerce {
             get {
                 return ResourceManager.GetString("Commerce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completion Options.
+        /// </summary>
+        public static string CompletionOptions {
+            get {
+                return ResourceManager.GetString("CompletionOptions", resourceCulture);
             }
         }
         
@@ -444,6 +471,15 @@ namespace GW2PAO.Properties {
         public static string CurrentZone {
             get {
                 return ResourceManager.GetString("CurrentZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
@@ -628,6 +664,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export....
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feet.
         /// </summary>
         public static string Feet {
@@ -736,6 +781,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import....
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include Location.
+        /// </summary>
+        public static string IncludeLocation {
+            get {
+                return ResourceManager.GetString("IncludeLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input. Try again..
         /// </summary>
         public static string InvalidHotkey {
@@ -831,6 +894,15 @@ namespace GW2PAO.Properties {
         public static string Location {
             get {
                 return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location Options.
+        /// </summary>
+        public static string LocationOptions {
+            get {
+                return ResourceManager.GetString("LocationOptions", resourceCulture);
             }
         }
         
@@ -1141,6 +1213,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset Daily.
+        /// </summary>
+        public static string ResetDaily {
+            get {
+                return ResourceManager.GetString("ResetDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset Hidden Dungeons.
         /// </summary>
         public static string ResetHiddenDungeons {
@@ -1443,6 +1524,15 @@ namespace GW2PAO.Properties {
         public static string TakenFrom {
             get {
                 return ResourceManager.GetString("TakenFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks Tracker.
+        /// </summary>
+        public static string TaskTracker {
+            get {
+                return ResourceManager.GetString("TaskTracker", resourceCulture);
             }
         }
         

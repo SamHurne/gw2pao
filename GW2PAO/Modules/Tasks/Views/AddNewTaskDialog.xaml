@@ -57,7 +57,7 @@
                            Margin="10,0,0,0"
                            VerticalAlignment="Center" HorizontalAlignment="Left"
                            Foreground="DarkGray"
-                           Text="Name">
+                           Text="{x:Static resx:Resources.Name}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -84,7 +84,7 @@
                            Margin="10,8,0,0"
                            VerticalAlignment="Top" HorizontalAlignment="Left"
                            Foreground="DarkGray"
-                           Text="Description">
+                           Text="{x:Static resx:Resources.Description}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -102,27 +102,27 @@
                         Grid.Column="1">
                 <GroupBox>
                     <GroupBox.Header>
-                        <core:OutlinedTextBlock Text="Completion Options" />
+                        <core:OutlinedTextBlock Text="{x:Static resx:Resources.CompletionOptions}" />
                     </GroupBox.Header>
                     <StackPanel>
                         <CheckBox Name="IsCompletableCheckbox"
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="2"
                                   IsChecked="{Binding Task.IsCompletable}">
-                            <core:OutlinedTextBlock Text="Can Complete" />
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CanComplete}" />
                         </CheckBox>
                         <CheckBox Name="ResetDailyCheckbox"
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="2"
                                   IsEnabled="{Binding Task.IsCompletable}"
                                   IsChecked="{Binding Task.IsDailyReset}">
-                            <core:OutlinedTextBlock Text="Reset Daily" />
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.ResetDaily}" />
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox>
                     <GroupBox.Header>
-                        <core:OutlinedTextBlock Text="Location Options" />
+                        <core:OutlinedTextBlock Text="{x:Static resx:Resources.LocationOptions}" />
                     </GroupBox.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -139,7 +139,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="2"
                                   IsChecked="{Binding HasLocation}">
-                            <core:OutlinedTextBlock Text="Use Player Location" />
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.IncludeLocation}" />
                         </CheckBox>
                         <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0"
                                                 Margin="0,10,0,0"
@@ -164,12 +164,12 @@
                         Orientation="Horizontal">
                 <Button Name="OKButton"
                         Width="150"
-                        Content="OK"
+                        Content="{x:Static resx:Resources.OK}"
                         Click="OKButton_Click"/>
                 <Button Name="CancelButton"
                         Width="150"
                         Margin="10,0,0,0"
-                        Content="Cancel"
+                        Content="{x:Static resx:Resources.Cancel}"
                         Click="CancelButton_Click"/>
             </StackPanel>
         </Grid>
