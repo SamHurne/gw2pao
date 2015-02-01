@@ -19,15 +19,40 @@
     
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Delete" Command="{Binding DeleteCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Task.WaypointCode}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <MenuItem Header="{x:Static resx:Resources.Edit}" Command="{Binding EditCommand}" />
+            <MenuItem Header="{x:Static resx:Resources.Delete}" Command="{Binding DeleteCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
     
     <UserControl.ToolTip>
-        <TextBlock Text="{Binding Task.Description}" />
+        <StackPanel>
+            <TextBlock Text="{Binding MapName}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasLocation}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Text="{Binding Task.Description}" />
+        </StackPanel>
     </UserControl.ToolTip>
 
-    <Border Name="TaskMainPanel" CornerRadius="0" Margin="0" Padding="10,0,5,0"
+    <Border Name="TaskMainPanel" CornerRadius="0" Margin="0" Padding="5,0,5,0"
             Background="{StaticResource ItemMouseOverBackground}">
 
         <Border.Style>
@@ -57,32 +82,48 @@
             </Style>
         </Border.Style>
 
-        <Grid Margin="0,5,0,0"
+        <Grid Margin="0,1,0,1"
               VerticalAlignment="Center">
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
+
+            <Image Grid.Column="0" Source="{Binding Task.IconUri}"
+                   Height="25" Width="25"
+                   VerticalAlignment="Center">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Task.IconUri}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+
             <core:OutlinedTextBlock Name="TaskNameTextblock"
-                                    Grid.Column="0"
+                                    Grid.Column="1"
                                     VerticalAlignment="Center"
                                     TextWrapping="Wrap"
+                                    Margin="5,0,0,0"
                                     Text="{Binding Task.Name}" />
 
             <CheckBox Name="IsCompletedCheckbox"
-                      Grid.Column="1"
+                      Grid.Column="2"
                       Margin="5,0,0,0"
                       VerticalAlignment="Center"
                       Style="{StaticResource AlternateCheckboxStyle}"
                       Visibility="{Binding Task.IsCompletable, Converter={StaticResource BoolToVisibilityConverter}}"
                       IsChecked="{Binding Task.IsCompleted}" />
 
-            <Grid Grid.Column="2"
+            <Grid Grid.Column="3"
                         Margin="0,0,0,0"
-                        Visibility="{Binding HasLocation, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding DisplayLocation, Converter={StaticResource BoolToVisibilityConverter}}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Width="35">

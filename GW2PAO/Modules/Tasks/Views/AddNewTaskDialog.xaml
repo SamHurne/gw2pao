@@ -5,8 +5,9 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
         Width="450"
-        Height="257"
+        Height="288"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -25,6 +26,7 @@
                     Data="M 0,200   C 0,100 75,0 200,0   C 300,0 400,75 400,200  L 450,200  L 375,300  L 300,200  L 350,200  C 350,100 275,50 200,50  C 100,50 50,125 50,200 C 50,250 100,350 200,350  L 200,400  C 100,400 0,300 0,200">
             </Path>
         </DockPanel>
+        <auto:IntelliboxAlternateRowColorizer x:Key="IntelliboxRowColorizer" EvenRowBrush="Black" OddRowBrush="Black" />
     </src:OverlayWindow.Resources>
 
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">
@@ -43,40 +45,253 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0"
+                  Margin="5,0,0,0"
                   Grid.Column="0" Grid.ColumnSpan="2">
-                <TextBox Name="TitleTextbox"
-                         Margin="5"
-                         VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                         Text="{Binding Task.Name}"/>
-                <TextBlock IsHitTestVisible="False" 
-                           Margin="10,0,0,0"
-                           VerticalAlignment="Center" HorizontalAlignment="Left"
-                           Foreground="DarkGray"
-                           Text="{x:Static resx:Resources.Name}">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="1">
+                    <Image Name="IconImage"
+                           Height="30" Width="30"
+                           MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{Binding Task.IconUri}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Task.IconUri}" Value="{x:Null}">
+                                        <Setter Property="Source" Value="/Images/Commerce/unknown_icon.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                      Color="White"
+                                                      Opacity="0"
+                                                      BlurRadius="5"/>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=TitleTextbox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
                             </Style.Triggers>
                         </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                    </Border.Style>
+                </Border>
+                <Popup Name="IconPopup"
+                       AllowsTransparency="True"
+                       StaysOpen="False" PopupAnimation="Fade"
+                       PlacementTarget="{Binding ElementName=IconImage}"
+                       SnapsToDevicePixels="True" UseLayoutRounding="True"
+                       HorizontalAlignment="Left"
+                       Placement="Bottom" VerticalOffset="-30">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.Row="0"
+                                   Height="{Binding ElementName=IconImage, Path=Height}"
+                                   HorizontalAlignment="Stretch">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="#01000000" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Border Grid.Row="1"
+                                BorderThickness="1"
+                                Padding="5">
+                            <Border.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.8" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="PaleGoldenrod" Opacity="0.25" />
+                            </Border.BorderBrush>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <RadioButton Name="ItemIconRadioButton"
+                                             Grid.Row="0" Grid.Column="0"
+                                             Margin="5" IsChecked="True">
+                                    <core:OutlinedTextBlock Text="Item Icon" />
+                                </RadioButton>
+                                <Grid Grid.Row="1" Grid.Column="0"
+                                      Visibility="{Binding ElementName=ItemIconRadioButton, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"
+                                      Margin="5,0,5,0">
+                                    <Grid.Resources>
+                                        <Style x:Key="CustomListViewItems" TargetType="{x:Type ListViewItem}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <EventSetter Event="MouseUp" Handler="OnIntelliboxSuggestItem_MouseUp" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border x:Name="Border"
+                                                                Margin="1" Padding="0,2,0,2"
+                                                                SnapsToDevicePixels="true"
+                                                                Background="Transparent" CornerRadius="0">
+                                                            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Border" Property="Background">
+                                                                    <Setter.Value>
+                                                                        <SolidColorBrush Color="PaleGoldenrod" Opacity="0.5" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Border" Property="Background">
+                                                                    <Setter.Value>
+                                                                        <SolidColorBrush Color="PaleGoldenrod" Opacity="0.15" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                        <Style TargetType="{x:Type ListView}">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="Black" Opacity="0.75" />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="ItemContainerStyle" Value="{StaticResource CustomListViewItems}" />
+                                        </Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="Black" Opacity="0.8" />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="Transparent" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Style>
+                                    </Grid.Resources>
+                                    <auto:Intellibox Name="ItemsEntryBox"
+                                                     HideColumnHeaders="True" DisableWhitespaceTrim="True" SelectAllOnFocus="True" 
+                                                     MaxResults="20"
+                                                     WatermarkText="{x:Static resx:Resources.ItemName}"
+                                                     WatermarkForeground="Gray"
+                                                     Height="21" Width="150"
+                                                     MinimumPrefixLength="2"
+                                                     DataProvider="{Binding ItemsProvider}"
+                                                     SelectedItem="{Binding SelectedItem}"
+                                                     DisplayedValueBinding="{Binding Name}"
+                                                     RowColorizer="{StaticResource IntelliboxRowColorizer}">
+                                        <auto:Intellibox.Columns>
+                                            <auto:IntelliboxColumn ForProperty="ID"  Hide="True" />
+                                        </auto:Intellibox.Columns>
+                                    </auto:Intellibox>
+                                </Grid>
+                                <RadioButton Name="CustomIconRadioButton"
+                                             Grid.Row="0" Grid.Column="1"
+                                             Margin="5">
+                                    <core:OutlinedTextBlock Text="Custom Icon" />
+                                </RadioButton>
+                                <Grid Grid.Row="1" Grid.Column="1"
+                                      Visibility="{Binding ElementName=CustomIconRadioButton, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">
+                                    <TextBox Name="IconUrlTextbox"
+                                            Margin="5"
+                                            VerticalAlignment="Center"
+                                             Width="150"
+                                            Text="{Binding Task.IconUri}"/>
+                                    <TextBlock IsHitTestVisible="False" 
+                                               Margin="10,0,0,0"
+                                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                                               Foreground="Gray"
+                                               FontStyle="Italic"
+                                               Text="Url">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=IconUrlTextbox}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Popup>
+                <Grid Grid.Column="1">
+                    <TextBox Name="NameTextbox"
+                             Margin="5"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                             Text="{Binding Task.Name}"/>
+                    <TextBlock IsHitTestVisible="False" 
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Foreground="DarkGray"
+                               Text="{x:Static resx:Resources.Name}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=NameTextbox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
             </Grid>
 
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <TextBox Name="DescriptionTextBox"
                          Margin="5"
-                         Width="200" Height="150"
-                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                         Width="200"
+                         VerticalAlignment="Stretch" HorizontalAlignment="Left"
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          Text="{Binding Task.Description}"/>
@@ -99,7 +314,8 @@
             </Grid>
 
             <StackPanel Grid.Row="1"
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        VerticalAlignment="Stretch">
                 <GroupBox>
                     <GroupBox.Header>
                         <core:OutlinedTextBlock Text="{x:Static resx:Resources.CompletionOptions}" />
@@ -133,6 +349,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <CheckBox Name="UsePlayerLocationCheckbox"
                                   Grid.Row="0" Grid.Column="0"
@@ -142,10 +359,10 @@
                             <core:OutlinedTextBlock Text="{x:Static resx:Resources.IncludeLocation}" />
                         </CheckBox>
                         <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0"
-                                                Margin="0,10,0,0"
+                                                Margin="20,0,0,0"
                                                 Text="{Binding MapName}" />
                         <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0"
-                                                Margin="0,1,0,0"
+                                                Margin="20,1,0,0"
                                                 Text="{Binding Task.Location}" />
                         <Button Grid.Row="1" Grid.RowSpan="2"
                                 Grid.Column="1"
@@ -153,6 +370,29 @@
                                 Width="25" Height="25"
                                 Command="{Binding RefreshLocationCommand}"
                                 Content="{StaticResource RefreshGraphic}"/>
+                        <Grid Grid.Row="3"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              Margin="0,20,0,0">
+                            <TextBox Name="WaypointTextbox"
+                                     VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                     Text="{Binding Task.WaypointCode}"/>
+                            <TextBlock IsHitTestVisible="False"
+                                       Margin="5,0,0,0"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Foreground="DarkGray"
+                                       Text="{x:Static resx:Resources.WaypointCode}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=WaypointTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                     </Grid>
                 </GroupBox>
             </StackPanel>

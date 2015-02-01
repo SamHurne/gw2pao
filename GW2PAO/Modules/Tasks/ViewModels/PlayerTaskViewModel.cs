@@ -37,11 +37,19 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
-        /// True if this task is associated with a location, else false
+        /// True if this task has a location, else false
         /// </summary>
         public bool HasLocation
         {
             get { return this.Task.Location != null; }
+        }
+
+        /// <summary>
+        /// True if this task has a visible location, else false
+        /// </summary>
+        public bool DisplayLocation
+        {
+            get { return this.HasLocation && this.IsPlayerOnMap; }
         }
 
         /// <summary>
@@ -58,7 +66,13 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         public bool IsPlayerOnMap
         {
             get { return this.isPlayerOnMap; }
-            set { SetProperty(ref this.isPlayerOnMap, value); }
+            set
+            {
+                if (SetProperty(ref this.isPlayerOnMap, value))
+                {
+                    this.OnPropertyChanged(() => this.DisplayLocation);
+                }
+            }
         }
 
         /// <summary>

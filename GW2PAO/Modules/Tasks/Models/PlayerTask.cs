@@ -19,6 +19,7 @@ namespace GW2PAO.Modules.Tasks.Models
         private Point location;
         private int mapId;
         private string iconUri;
+        private string waypointCode;
 
         /// <summary>
         /// Name of the task
@@ -92,15 +93,28 @@ namespace GW2PAO.Modules.Tasks.Models
         public string IconUri
         {
             get { return this.iconUri; }
-            set { SetProperty(ref this.iconUri, value); }
+            set
+            {
+                if (value == string.Empty)
+                    value = null;
+
+                SetProperty(ref this.iconUri, value);
+            }
         }
 
         /// <summary>
-        /// Default constructor
+        /// Waypoint code to use for the task, if any
         /// </summary>
-        public PlayerTask()
+        public string WaypointCode
         {
+            get { return this.waypointCode; }
+            set
+            {
+                if (value == string.Empty)
+                    value = null;
 
+                SetProperty(ref this.waypointCode, value);
+            }
         }
     }
 }

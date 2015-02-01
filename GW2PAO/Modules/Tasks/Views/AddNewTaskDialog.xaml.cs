@@ -76,5 +76,16 @@ namespace GW2PAO.Modules.Tasks.Views
         {
             this.Close();
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.IconPopup.IsOpen = true;
+            e.Handled = true;
+        }
+
+        private void OnIntelliboxSuggestItem_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.ItemsEntryBox.ChooseCurrentItem();
+        }
     }
 }

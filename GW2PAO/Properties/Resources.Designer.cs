@@ -475,6 +475,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -570,6 +579,15 @@ namespace GW2PAO.Properties {
         public static string DungeonTimer {
             get {
                 return ResourceManager.GetString("DungeonTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -1785,6 +1803,15 @@ namespace GW2PAO.Properties {
         public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waypoint Code.
+        /// </summary>
+        public static string WaypointCode {
+            get {
+                return ResourceManager.GetString("WaypointCode", resourceCulture);
             }
         }
         

@@ -832,7 +832,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\Tasks\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />
   </ItemGroup>

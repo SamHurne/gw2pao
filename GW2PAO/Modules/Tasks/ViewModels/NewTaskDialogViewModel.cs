@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FeserWard.Controls;
+using GW2PAO.API.Data;
 using GW2PAO.API.Services.Interfaces;
+using GW2PAO.Modules.Commerce.Services;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.Modules.Tasks.Models;
 using Microsoft.Practices.Prism.Commands;
@@ -23,7 +26,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private ItemDBEntry selectedItem;
         private PlayerTask task;
+        private ICommerceService commerceService;
         private IPlayerService playerService;
         private IZoneService zoneService;
         private IPlayerTasksController controller;
@@ -56,6 +61,30 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
+        /// Provider object for finding an item for the user to select (for task icon)
+        /// </summary>
+        public IIntelliboxResultsProvider ItemsProvider
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The item selected by the user (for task icon)
+        /// </summary>
+        public ItemDBEntry SelectedItem
+        {
+            get { return this.selectedItem; }
+            set
+            {
+                if (this.SetProperty(ref this.selectedItem, value))
+                {
+                    this.Task.IconUri = this.commerceService.GetItem(this.selectedItem.ID).Icon.ToString();
+                }
+            }
+        }
+
+        /// <summary>
         /// Command to update the location used for the task
         /// </summary>
         public ICommand RefreshLocationCommand { get; private set; }
@@ -69,11 +98,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// Default constructor
         /// </summary>
         [ImportingConstructor]
-        public NewTaskDialogViewModel(IPlayerService playerService, IZoneService zoneService, IPlayerTasksController controller)
+        public NewTaskDialogViewModel(ICommerceService commerceService, IPlayerService playerService, IZoneService zoneService, IPlayerTasksController controller)
         {
+            this.commerceService = commerceService;
             this.playerService = playerService;
             this.zoneService = zoneService;
             this.controller = controller;
+
+            this.ItemsProvider = new ItemResultsProvider(this.commerceService);
 
             this.Task = new PlayerTask();
             this.Task.MapID = this.playerService.MapId;

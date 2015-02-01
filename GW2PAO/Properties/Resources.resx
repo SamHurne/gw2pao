@@ -828,4 +828,13 @@
   <data name="TaskTracker" xml:space="preserve">
     <value>Tasks Tracker</value>
   </data>
+  <data name="WaypointCode" xml:space="preserve">
+    <value>Waypoint Code</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>
