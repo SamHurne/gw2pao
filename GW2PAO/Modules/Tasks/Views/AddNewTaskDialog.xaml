@@ -1,0 +1,177 @@
+﻿<src:OverlayWindow x:Class="GW2PAO.Modules.Tasks.Views.AddNewTaskDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        xmlns:converters="clr-namespace:GW2PAO.Converters"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        Width="450"
+        Height="257"
+        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="NoResize"
+        Topmost="True"
+        TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <src:OverlayWindow.Resources>
+        <converters:BoolToVisibleHiddenConverter x:Key="BoolToVisibility" />
+        <DockPanel x:Key="RefreshGraphic">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                    StrokeThickness="1"
+                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Data="M 0,200   C 0,100 75,0 200,0   C 300,0 400,75 400,200  L 450,200  L 375,300  L 300,200  L 350,200  C 350,100 275,50 200,50  C 100,50 50,125 50,200 C 50,250 100,350 200,350  L 200,400  C 100,400 0,300 0,200">
+            </Path>
+        </DockPanel>
+    </src:OverlayWindow.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Color="Black" Direction="315" Opacity="0.8"/>
+        </Border.Effect>
+        <Border.Background>
+            <ImageBrush Viewbox="0,0,300,300" ViewboxUnits="Absolute" ImageSource="/Images/Backgrounds/Medium4.png" />
+        </Border.Background>
+
+
+        <Grid Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0" Grid.ColumnSpan="2">
+                <TextBox Name="TitleTextbox"
+                         Margin="5"
+                         VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                         Text="{Binding Task.Name}"/>
+                <TextBlock IsHitTestVisible="False" 
+                           Margin="10,0,0,0"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Foreground="DarkGray"
+                           Text="Name">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=TitleTextbox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="0">
+                <TextBox Name="DescriptionTextBox"
+                         Margin="5"
+                         Width="200" Height="150"
+                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Text="{Binding Task.Description}"/>
+                <TextBlock IsHitTestVisible="False" 
+                           Margin="10,8,0,0"
+                           VerticalAlignment="Top" HorizontalAlignment="Left"
+                           Foreground="DarkGray"
+                           Text="Description">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=DescriptionTextBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1">
+                <GroupBox>
+                    <GroupBox.Header>
+                        <core:OutlinedTextBlock Text="Completion Options" />
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <CheckBox Name="IsCompletableCheckbox"
+                                  Style="{StaticResource AlternateCheckboxStyle}"
+                                  Margin="2"
+                                  IsChecked="{Binding Task.IsCompletable}">
+                            <core:OutlinedTextBlock Text="Can Complete" />
+                        </CheckBox>
+                        <CheckBox Name="ResetDailyCheckbox"
+                                  Style="{StaticResource AlternateCheckboxStyle}"
+                                  Margin="2"
+                                  IsEnabled="{Binding Task.IsCompletable}"
+                                  IsChecked="{Binding Task.IsDailyReset}">
+                            <core:OutlinedTextBlock Text="Reset Daily" />
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <GroupBox.Header>
+                        <core:OutlinedTextBlock Text="Location Options" />
+                    </GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CheckBox Name="UsePlayerLocationCheckbox"
+                                  Grid.Row="0" Grid.Column="0"
+                                  Style="{StaticResource AlternateCheckboxStyle}"
+                                  Margin="2"
+                                  IsChecked="{Binding HasLocation}">
+                            <core:OutlinedTextBlock Text="Use Player Location" />
+                        </CheckBox>
+                        <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0"
+                                                Margin="0,10,0,0"
+                                                Text="{Binding MapName}" />
+                        <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0"
+                                                Margin="0,1,0,0"
+                                                Text="{Binding Task.Location}" />
+                        <Button Grid.Row="1" Grid.RowSpan="2"
+                                Grid.Column="1"
+                                VerticalAlignment="Bottom"
+                                Width="25" Height="25"
+                                Command="{Binding RefreshLocationCommand}"
+                                Content="{StaticResource RefreshGraphic}"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <Button Name="OKButton"
+                        Width="150"
+                        Content="OK"
+                        Click="OKButton_Click"/>
+                <Button Name="CancelButton"
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="Cancel"
+                        Click="CancelButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</src:OverlayWindow>

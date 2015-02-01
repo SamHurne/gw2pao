@@ -706,5 +706,65 @@ namespace GW2PAO.Properties {
                 this["AutoHideTitleBars"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsTaskTrackerOpen {
+            get {
+                return ((bool)(this["IsTaskTrackerOpen"]));
+            }
+            set {
+                this["IsTaskTrackerOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
+        public double TaskTrackerHeight {
+            get {
+                return ((double)(this["TaskTrackerHeight"]));
+            }
+            set {
+                this["TaskTrackerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public double TaskTrackerWidth {
+            get {
+                return ((double)(this["TaskTrackerWidth"]));
+            }
+            set {
+                this["TaskTrackerWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TaskTrackerX {
+            get {
+                return ((double)(this["TaskTrackerX"]));
+            }
+            set {
+                this["TaskTrackerX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double TaskTrackerY {
+            get {
+                return ((double)(this["TaskTrackerY"]));
+            }
+            set {
+                this["TaskTrackerY"] = value;
+            }
+        }
     }
 }

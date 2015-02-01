@@ -225,6 +225,26 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
+    <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksController.cs" />
+    <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksViewController.cs" />
+    <Compile Include="Modules\Tasks\Models\PlayerTask.cs" />
+    <Compile Include="Modules\Tasks\TasksController.cs" />
+    <Compile Include="Modules\Tasks\TasksMenu.cs" />
+    <Compile Include="Modules\Tasks\TasksModule.cs" />
+    <Compile Include="Modules\Tasks\TasksUserData.cs" />
+    <Compile Include="Modules\Tasks\TasksViewController.cs" />
+    <Compile Include="Modules\Tasks\ViewModels\NewTaskDialogViewModel.cs" />
+    <Compile Include="Modules\Tasks\ViewModels\PlayerTaskViewModel.cs" />
+    <Compile Include="Modules\Tasks\ViewModels\TaskTrackerViewModel.cs" />
+    <Compile Include="Modules\Tasks\Views\AddNewTaskDialog.xaml.cs">
+      <DependentUpon>AddNewTaskDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tasks\Views\TaskTracker\TaskTrackerView.xaml.cs">
+      <DependentUpon>TaskTrackerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tasks\Views\TaskTracker\TaskView.xaml.cs">
+      <DependentUpon>TaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Teamspeak\ViewModels\ChatMsgViewModel.cs" />
     <Compile Include="Modules\Teamspeak\ViewModels\ClientViewModel.cs" />
     <Compile Include="Modules\WvW\WvWMapIDs.cs" />
@@ -469,6 +489,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Tasks\Views\AddNewTaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Tasks\Views\TaskTracker\TaskTrackerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Tasks\Views\TaskTracker\TaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

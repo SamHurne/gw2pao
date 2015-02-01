@@ -22,6 +22,7 @@ namespace GW2PAO.Infrastructure
         public static readonly CompositeCommand TogglePriceTrackerCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleWvWTrackerCommmand = new CompositeCommand();
         public static readonly CompositeCommand ToggleZoneAssistantCommand = new CompositeCommand();
+        public static readonly CompositeCommand ToggleTaskTrackerCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleTeamspeakOverlayCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleWebBrowserCommand = new CompositeCommand();
 

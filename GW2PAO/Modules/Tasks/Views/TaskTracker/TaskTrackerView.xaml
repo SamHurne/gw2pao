@@ -1,0 +1,225 @@
+﻿<src:OverlayWindow x:Class="GW2PAO.Modules.Tasks.Views.TaskTracker.TaskTrackerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:GW2PAO.Views"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
+        xmlns:view="clr-namespace:GW2PAO.Modules.Tasks.Views.TaskTracker"
+        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        Top="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerY}"
+        Left="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerX}"
+        Width="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerWidth}"
+        MinWidth="150" MaxWidth="350"
+        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        ResizeMode="CanResizeWithGrip"
+        Topmost="True"
+        Closed="Window_Closed"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display">
+
+    <!--See code-behind for ViewModel details-->
+    <Grid Name="MainPanel">
+        <Grid.Background>
+            <SolidColorBrush Color="#01000000" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitleBar"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
+                Grid.Row="0">
+            <Grid Margin="5,0,0,0"
+                  Height="30">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Name="TitleImage"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Height="30" Width="30"
+                        Source="/Images/Title/zone.png"
+                        MouseDown="TitleImage_MouseDown">
+                    <Image.ContextMenu>
+                        <ContextMenu Name="MainMenu">
+                            <MenuItem Header="Add New Task" Command="{Binding AddNewTaskCommand}" /> <!-- TODO: Resource String -->
+                            <Separator />
+                            <MenuItem Header="Import..." Command="{Binding ImportTasksCommand}" /> <!-- TODO: Resource String -->
+                            <MenuItem Header="Export..." Command="{Binding ExportTasksCommand}" /> <!-- TODO: Resource String -->
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                Color="White"
+                                                Opacity="0"
+                                                BlurRadius="7"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:00.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:0.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                        HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="14"
+                                        Text="Task Tracker" /> <!--TODO: Resource String-->
+
+                <Button Name="CollapseExpandButton"
+                        Grid.Column="2"
+                        Margin="3"
+                        Click="CollapseExpandButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=TasksContainer}" Value="Collapsed">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Name="CloseWindowButton"
+                        Grid.Column="3"
+                        Margin="3,3,5,3"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource CloseGraphic}"
+                        Click="CloseWindowButton_Click" />
+            </Grid>
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
+                    <Setter Property="Opacity" Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=TasksContainer, Path=Visibility}" Value="Visible" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+
+        <ItemsControl Name="TasksContainer"
+                      Grid.Row="1"
+                      ItemsSource="{Binding PlayerTasks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <view:TaskView DataContext="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl" BasedOn="{StaticResource VirtualizingItemsControlStyle}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+        </ItemsControl>
+
+        <Grid Name="ResizeHeight" Grid.Row="2">
+            <Rectangle VerticalAlignment="Bottom"
+                       HorizontalAlignment="Stretch"
+                       Height="1" Fill="{StaticResource TitleBarBorderBrush}" />
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity" Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
+    </Grid>
+</src:OverlayWindow>
+
