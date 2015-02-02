@@ -37,16 +37,22 @@ namespace GW2PAO.Modules.Tasks.Interfaces
         void Shutdown();
 
         /// <summary>
-        /// Adds a new task to the collection of player tasks
+        /// Adds/updates a task in the collection of player tasks
         /// </summary>
         /// <param name="task">The task to add</param>
-        void AddTask(PlayerTask task);
+        void AddOrUpdateTask(PlayerTask task);
 
         /// <summary>
         /// Deletes a task from the collection of player tasks
         /// </summary>
         /// <param name="task">The task to delete</param>
         void DeleteTask(PlayerTask task);
+
+        /// <summary>
+        /// Loads all tasks from the given path
+        /// </summary>
+        /// <param name="path">The path to import from</param>
+        void LoadTasksFile(string path);
 
         /// <summary>
         /// Exports all tasks to the given path

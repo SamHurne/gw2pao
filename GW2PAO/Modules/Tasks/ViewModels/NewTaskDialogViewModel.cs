@@ -136,7 +136,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                 this.Task.Location = null;
             }
 
-            this.controller.AddTask(this.Task);
+            this.controller.AddOrUpdateTask(this.Task);
         }
     }
 }

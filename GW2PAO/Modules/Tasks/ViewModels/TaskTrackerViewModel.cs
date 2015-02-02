@@ -58,9 +58,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         public ICommand AddNewTaskCommand { get; private set; }
 
         /// <summary>
-        /// Command to delete a task from the task list
+        /// Command to delete all tasks from the task list
         /// </summary>
-        public ICommand DeleteTaskCommand { get; private set; }
+        public ICommand DeleteAllCommand { get; private set; }
+
+        /// <summary>
+        /// Command to load tasks from a file
+        /// </summary>
+        public ICommand LoadTasksCommand { get; private set; }
 
         /// <summary>
         /// Command to import all tasks from a file
@@ -85,7 +90,8 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.container = container;
 
             this.AddNewTaskCommand = new DelegateCommand(this.AddNewTask);
-            this.DeleteTaskCommand = new DelegateCommand<PlayerTask>(this.DeleteTask);
+            this.DeleteAllCommand = new DelegateCommand(this.DeleteAllTasks);
+            this.LoadTasksCommand = new DelegateCommand(this.LoadTasks);
             this.ImportTasksCommand = new DelegateCommand(this.ImportTasks);
             this.ExportTasksCommand = new DelegateCommand(this.ExportTasks);
         }
@@ -102,12 +108,33 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
-        /// Deletes a task from the collection of tasks
+        /// Deletes all tasks from the collection of tasks
         /// </summary>
-        private void DeleteTask(PlayerTask taskToDelete)
+        private void DeleteAllTasks()
         {
-            logger.Info("Deleting task {0}", taskToDelete);
-            this.controller.DeleteTask(taskToDelete);
+            logger.Info("Deleting all tasks");
+            var tasksToDelete = new List<PlayerTaskViewModel>(this.PlayerTasks);
+            foreach (var pt in tasksToDelete)
+            {
+                this.controller.DeleteTask(pt.Task);
+            }
+        }
+
+        /// <summary>
+        /// Imports a file containing tasks
+        /// </summary>
+        private void LoadTasks()
+        {
+            logger.Info("Loading tasks");
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.Filter = "Player Task Files (*.xml)|*.xml";
+            openFileDialog.Multiselect = false;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                this.controller.LoadTasksFile(openFileDialog.FileName);
+            }
         }
 
         /// <summary>

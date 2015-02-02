@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using GW2PAO.API.Util;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.Modules.Tasks.Models;
 using GW2PAO.Modules.Tasks.ViewModels;
+using GW2PAO.Modules.Tasks.Views;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -39,6 +41,11 @@ namespace GW2PAO.Modules.Tasks
         /// Service responsible for Player information
         /// </summary>
         private IPlayerService playerService;
+
+        /// <summary>
+        /// The MEF composition container
+        /// </summary>
+        private CompositionContainer container;
 
         /// <summary>
         /// Timer for the periodic refresh thread
@@ -88,11 +95,12 @@ namespace GW2PAO.Modules.Tasks
         /// <param name="playerService">The player service</param>
         /// <param name="userData">The loaded user data</param>
         [ImportingConstructor]
-        public TasksController(IZoneService zoneService, IPlayerService playerService, TasksUserData userData)
+        public TasksController(IZoneService zoneService, IPlayerService playerService, TasksUserData userData, CompositionContainer container)
         {
             logger.Debug("Initializing Player Tasks Controller");
             this.zoneService = zoneService;
             this.playerService = playerService;
+            this.container = container;
             this.isStopped = false;
 
             this.UserData = userData;
@@ -101,7 +109,7 @@ namespace GW2PAO.Modules.Tasks
             // Initialize all loaded tasks
             logger.Info("Initializing all loaded player tasks");
             foreach (var task in this.UserData.Tasks)
-                this.PlayerTasks.Add(new PlayerTaskViewModel(task, zoneService, this));
+                this.PlayerTasks.Add(new PlayerTaskViewModel(task, zoneService, this, this.container));
 
             // Initialize refresh timers
             this.refreshTimer = new Timer(this.Refresh);
@@ -171,15 +179,31 @@ namespace GW2PAO.Modules.Tasks
         /// Adds a new task to the collection of player tasks
         /// </summary>
         /// <param name="task">The task to add</param>
-        public void AddTask(PlayerTask task)
+        public void AddOrUpdateTask(PlayerTask task)
         {
             // Lock so the refresh thread doesn't use the collection while we are modifying it
             lock (this.refreshLock)
             {
                 Threading.InvokeOnUI(() =>
                     {
-                        this.UserData.Tasks.Add(task);
-                        this.PlayerTasks.Add(new PlayerTaskViewModel(task, zoneService, this));
+                        var existingTask = this.PlayerTasks.FirstOrDefault(t => t.Task.ID == task.ID);
+                        if (existingTask == null)
+                        {
+                            this.UserData.Tasks.Add(task);
+                            this.PlayerTasks.Add(new PlayerTaskViewModel(task, zoneService, this, this.container));
+                        }
+                        else
+                        {
+                            existingTask.Task.Name = task.Name;
+                            existingTask.Task.Description = task.Description;
+                            existingTask.Task.IsCompletable = task.IsCompletable;
+                            existingTask.Task.IsCompleted = task.IsCompleted;
+                            existingTask.Task.IsDailyReset = task.IsDailyReset;
+                            existingTask.Task.Location = task.Location;
+                            existingTask.Task.MapID = task.MapID;
+                            existingTask.Task.IconUri = task.IconUri;
+                            existingTask.Task.WaypointCode = task.WaypointCode;
+                        }
                     });
             }
         }
@@ -202,6 +226,43 @@ namespace GW2PAO.Modules.Tasks
                         this.UserData.Tasks.Remove(task);
                     }
                 });
+            }
+        }
+
+        /// <summary>
+        /// Loads all tasks from the given path
+        /// </summary>
+        /// <param name="path">The path to import from</param>
+        public void LoadTasksFile(string path)
+        {
+            logger.Info("Loading tasks file from {0}", path);
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(ObservableCollection<PlayerTask>));
+            object loadedTasks = null;
+
+            try
+            {
+                using (TextReader reader = new StreamReader(path))
+                {
+                    loadedTasks = deserializer.Deserialize(reader);
+                }
+
+                Threading.InvokeOnUI(() =>
+                {
+                    this.PlayerTasks.Clear();
+                    foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
+                    {
+                        this.UserData.Tasks.Add(task);
+                        this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
+                    }
+                });
+
+                logger.Info("Successfully loaded tasks from {0}", path);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Unable to load tasks!");
+                logger.Error(ex);
             }
         }
 
@@ -244,7 +305,7 @@ namespace GW2PAO.Modules.Tasks
                         foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                         {
                             this.UserData.Tasks.Add(task);
-                            this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this));
+                            this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                         }
                     });
 

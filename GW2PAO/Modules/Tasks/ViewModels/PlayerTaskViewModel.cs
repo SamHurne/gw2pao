@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ using System.Windows.Input;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.Modules.Tasks.Models;
+using GW2PAO.Modules.Tasks.Views;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -23,6 +26,8 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private PlayerTask task;
         private IZoneService zoneService;
         private IPlayerTasksController controller;
+        private CompositionContainer container;
+        private string mapName;
         private bool isPlayerOnMap;
         private double distanceFromPlayer;
         private double directionFromPlayer;
@@ -57,7 +62,8 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         public string MapName
         {
-            get { return this.zoneService.GetZoneName(this.Task.MapID); }
+            get { return this.mapName;}
+            private set { SetProperty(ref this.mapName, value); }
         }
 
         /// <summary>
@@ -102,6 +108,16 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
+        /// Command to edit the task
+        /// </summary>
+        public ICommand CopyWaypointCommand { get; private set; }
+
+        /// <summary>
+        /// Command to edit the task
+        /// </summary>
+        public ICommand EditCommand { get; private set; }
+
+        /// <summary>
         /// Command to delete the task entirely
         /// </summary>
         public ICommand DeleteCommand { get; private set;}
@@ -111,12 +127,56 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         /// <param name="task">The task that this view model wraps</param>
         /// <param name="zoneService">Service that provides zone information, such as map name</param>
-        public PlayerTaskViewModel(PlayerTask task, IZoneService zoneService, IPlayerTasksController controller)
+        public PlayerTaskViewModel(PlayerTask task, IZoneService zoneService, IPlayerTasksController controller, CompositionContainer container)
         {
             this.Task = task;
             this.zoneService = zoneService;
             this.controller = controller;
+            this.container = container;
+
+            this.Task.PropertyChanged += (o, e) =>
+                {
+                    if (e.PropertyName == "MapID")
+                        this.RefreshMapName();
+                };
+            this.RefreshMapName();
+
+            this.CopyWaypointCommand = new DelegateCommand(this.CopyWaypoint);
+            this.EditCommand = new DelegateCommand(this.Edit);
             this.DeleteCommand = new DelegateCommand(this.Delete);
+        }
+
+        /// <summary>
+        /// Updates the map name property
+        /// </summary>
+        private void RefreshMapName()
+        {
+            if (this.Task.MapID != -1)
+                this.MapName = this.zoneService.GetZoneName(this.Task.MapID);
+            else
+                this.MapName = string.Empty;
+        }
+
+        /// <summary>
+        /// Copies the waypoint for this task
+        /// </summary>
+        private void CopyWaypoint()
+        {
+            logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.task.Name, this.Task.WaypointCode);
+            System.Windows.Clipboard.SetText(this.Task.WaypointCode);
+        }
+
+        /// <summary>
+        /// Edits the task
+        /// </summary>
+        private void Edit()
+        {
+            logger.Info("Displaying edit task dialog");
+            AddNewTaskDialog dialog = new AddNewTaskDialog();
+            this.container.ComposeParts(dialog);
+            dialog.TaskData.Task = new PlayerTask(this.Task);
+            dialog.TaskData.HasLocation = this.Task.Location != null;
+            dialog.Show();
         }
 
         /// <summary>

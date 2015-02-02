@@ -484,6 +484,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete All.
+        /// </summary>
+        public static string DeleteAll {
+            get {
+                return ResourceManager.GetString("DeleteAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -894,6 +903,15 @@ namespace GW2PAO.Properties {
         public static string ListingFee {
             get {
                 return ResourceManager.GetString("ListingFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load....
+        /// </summary>
+        public static string Load {
+            get {
+                return ResourceManager.GetString("Load", resourceCulture);
             }
         }
         

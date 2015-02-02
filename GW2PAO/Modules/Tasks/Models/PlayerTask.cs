@@ -11,6 +11,7 @@ namespace GW2PAO.Modules.Tasks.Models
     [Serializable]
     public class PlayerTask : BindableBase
     {
+        private Guid id;
         private string name;
         private string description;
         private bool isCompletable;
@@ -20,6 +21,15 @@ namespace GW2PAO.Modules.Tasks.Models
         private int mapId;
         private string iconUri;
         private string waypointCode;
+
+        /// <summary>
+        /// Unique ID of the player task
+        /// </summary>
+        public Guid ID
+        {
+            get { return this.id; }
+            set { SetProperty(ref this.id, value); }
+        }
 
         /// <summary>
         /// Name of the task
@@ -115,6 +125,32 @@ namespace GW2PAO.Modules.Tasks.Models
 
                 SetProperty(ref this.waypointCode, value);
             }
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public PlayerTask()
+        {
+            this.ID = Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// Constructs a new player task object using the data from the given task
+        /// </summary>
+        /// <param name="other">The other task to construct from</param>
+        public PlayerTask(PlayerTask other)
+        {
+            this.ID = other.ID;
+            this.Name = other.Name;
+            this.Description = other.Description;
+            this.IsCompletable = other.IsCompletable;
+            this.IsCompleted = other.IsCompleted;
+            this.IsDailyReset = other.IsDailyReset;
+            this.Location = other.Location;
+            this.MapID = other.MapID;
+            this.IconUri = other.IconUri;
+            this.WaypointCode = other.WaypointCode;
         }
     }
 }

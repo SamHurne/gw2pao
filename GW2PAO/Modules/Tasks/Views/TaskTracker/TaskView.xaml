@@ -34,7 +34,7 @@
             <MenuItem Header="{x:Static resx:Resources.Delete}" Command="{Binding DeleteCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
-    
+
     <UserControl.ToolTip>
         <StackPanel>
             <TextBlock Text="{Binding MapName}">
@@ -48,7 +48,20 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Text="{Binding Task.Description}" />
+            <TextBlock Text="{Binding Task.Description}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Task.Description}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Task.Description}" Value="">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </StackPanel>
     </UserControl.ToolTip>
 
@@ -92,14 +105,16 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Source="{Binding Task.IconUri}"
+            <Image Grid.Column="0"
                    Height="25" Width="25"
                    VerticalAlignment="Center">
                 <Image.Style>
                     <Style TargetType="Image">
+                        <Setter Property="Source" Value="{Binding Task.IconUri}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Task.IconUri}" Value="{x:Null}">
                                 <Setter Property="Visibility" Value="Collapsed" />
+                                <Setter Property="Source" Value="/Images/Commerce/unknown_icon.png" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
