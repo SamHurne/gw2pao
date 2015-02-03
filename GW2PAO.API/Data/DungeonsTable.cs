@@ -193,7 +193,11 @@ namespace GW2PAO.API.Data
                                 ID = TwilightArborPathID.Story,
                                 InstanceMapID = 68,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(68.70, -0.59, 45.21),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 20
                             },
                             new DungeonPath()
                             {
@@ -201,7 +205,11 @@ namespace GW2PAO.API.Data
                                 ID = TwilightArborPathID.P1,
                                 InstanceMapID = 67,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(65.51, 1.04, 45.51),
+                                IdentifyingPoints = new List<Point> { new Point(42.90, -176.14, 32.26) },
+                                CompletionPrereqPoints = new List<Point> { new Point(274.22, 18.34, 38.24), new Point(320.97, 96.49, 33.44), new Point(156.58, 38.84, 38.13) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -209,7 +217,11 @@ namespace GW2PAO.API.Data
                                 ID = TwilightArborPathID.P2,
                                 InstanceMapID = 67,
                                 PathDisplayText = "P2",
-                                GoldReward = 2.05
+                                GoldReward = 2.05,
+                                EndPoint = new Point(-201.52, 249.99, 20.56),
+                                IdentifyingPoints = new List<Point> { new Point(-31.42, -262.85, -0.54) },
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 50
                             },
                             new DungeonPath()
                             {
@@ -217,7 +229,11 @@ namespace GW2PAO.API.Data
                                 ID = TwilightArborPathID.P3,
                                 InstanceMapID = 67,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(57.02, -0.15, 45.16),
+                                IdentifyingPoints = new List<Point> { new Point(-55.25, -137.32, 2.77) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-105.83, 36.87, 4.51), new Point(136.93, 224.23, 62.63), new Point(158.22, 46.20, 36.09) },
+                                PointDetectionRadius = 35
                             }
                         }
             });
@@ -237,7 +253,11 @@ namespace GW2PAO.API.Data
                                 ID = SorrowsEmbracePathID.Story,
                                 InstanceMapID = 63,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(127.33, -278.88, 93.87),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 50
                             },
                             new DungeonPath()
                             {
@@ -245,7 +265,11 @@ namespace GW2PAO.API.Data
                                 ID = SorrowsEmbracePathID.P1,
                                 InstanceMapID = 64,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(351.03, -132.45, 143.36),
+                                IdentifyingPoints = new List<Point> { new Point(-127.39, -66.08, 162.89) },
+                                CompletionPrereqPoints = new List<Point> { new Point(140.32, -93.57, 146.54), new Point(314.68, -66.11, 145.38) },
+                                PointDetectionRadius = 40
                             },
                             new DungeonPath()
                             {
@@ -253,7 +277,11 @@ namespace GW2PAO.API.Data
                                 ID = SorrowsEmbracePathID.P2,
                                 InstanceMapID = 64,
                                 PathDisplayText = "P2",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(144.48, 41.61, 143.45),
+                                IdentifyingPoints = new List<Point> { new Point(-284.01, 127.53, 208.49), new Point(-148.10, 133.50, 215.23), new Point(-98.59, 144.75, 210.99) },
+                                CompletionPrereqPoints = new List<Point> { new Point(52.09, 252.63, 158.12), new Point(-93.22, 215.05, 211.13), new Point(126.65, 177.83, 169.37) },
+                                PointDetectionRadius = 40
                             },
                             new DungeonPath()
                             {
@@ -261,7 +289,11 @@ namespace GW2PAO.API.Data
                                 ID = SorrowsEmbracePathID.P3,
                                 InstanceMapID = 64,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-273.58, -276.91, 200.99),
+                                IdentifyingPoints = new List<Point> { new Point(-212.97, 42.87, 208.36) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-255.91, -133.49, 168.24), new Point(-299.31, -199.87, 173.39) },
+                                PointDetectionRadius = 50
                             }
                         }
             });
@@ -281,7 +313,11 @@ namespace GW2PAO.API.Data
                                 ID = CitadelOfFlamePathID.Story,
                                 InstanceMapID = 66,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(76.62, 69.63, 146.58),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 25
                             },
                             new DungeonPath()
                             {
@@ -289,7 +325,11 @@ namespace GW2PAO.API.Data
                                 ID = CitadelOfFlamePathID.P1,
                                 InstanceMapID = 69,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(42.12, 302.69, 121.63),
+                                IdentifyingPoints = new List<Point> { new Point(-185.25, 37.26, 75.86) },
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -297,7 +337,11 @@ namespace GW2PAO.API.Data
                                 ID = CitadelOfFlamePathID.P2,
                                 InstanceMapID = 69,
                                 PathDisplayText = "P2",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(328.02, -17.45, 101.33),
+                                IdentifyingPoints = new List<Point> { new Point(-9.03, -147.03, 73.00) },
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -305,7 +349,11 @@ namespace GW2PAO.API.Data
                                 ID = CitadelOfFlamePathID.P3,
                                 InstanceMapID = 69,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(255.89, 278.00, 128.17),
+                                IdentifyingPoints = new List<Point> { new Point(-25.65, -79.68, 8.89) },
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 35
                             }
                         }
             });
