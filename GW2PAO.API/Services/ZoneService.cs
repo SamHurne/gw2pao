@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2NET;
+using GW2NET.Common;
 using GW2NET.Maps;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
@@ -26,6 +27,20 @@ namespace GW2PAO.API.Services
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Static collection of zone/map names
+        /// </summary>
+        private static IDictionaryRange<int, MapName> MapNamesCache;
+
+        /// <summary>
+        /// Static constructor, initializes the MapNames static property
+        /// </summary>
+        static ZoneService()
+        {
+            logger.Debug("Initializing cache of map names");
+            MapNamesCache = GW2.V1.MapNames.ForCurrentUICulture().FindAll();
+        }
 
         /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
@@ -164,11 +179,18 @@ namespace GW2PAO.API.Services
         {
             try
             {
-                var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
-                if (map != null)
-                    return map.MapName;
+                if (MapNamesCache.ContainsKey(mapId))
+                {
+                    return MapNamesCache[mapId].Name;
+                }
                 else
-                    return "Unknown";
+                {
+                    var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
+                    if (map != null)
+                        return map.MapName;
+                    else
+                        return "Unknown";
+                }
             }
             catch (Exception ex)
             {
