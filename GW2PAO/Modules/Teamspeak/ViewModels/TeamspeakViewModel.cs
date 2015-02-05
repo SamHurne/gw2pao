@@ -273,7 +273,10 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_TextMessageReceived(object sender, TS3.Data.TextMessageEventArgs e)
         {
-            this.ChatMessages.Insert(0, new ChatMsgViewModel(DateTime.Now, e.ClientName, e.Message));
+            Threading.BeginInvokeOnUI(() =>
+                {
+                    this.ChatMessages.Insert(0, new ChatMsgViewModel(DateTime.Now, e.ClientName, e.Message));
+                });
         }
 
         /// <summary>

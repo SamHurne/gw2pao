@@ -102,10 +102,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\ITeamspeakService.cs" />
     <Compile Include="Services\TeamspeakService.cs" />
+    <Compile Include="Util\DecodeUtility.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

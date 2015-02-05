@@ -21,6 +21,8 @@ using GW2PAO.TS3.Data;
 using NLog;
 using System.ComponentModel.Composition;
 using TS3QueryLib.Core.Common.Entities;
+using System.Threading;
+using GW2PAO.TS3.Util;
 
 namespace GW2PAO.TS3.Services
 {
@@ -74,7 +76,7 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Timer used for polling the server, keeping the connection open
         /// </summary>
-        private Timer pollTimer;
+        private System.Timers.Timer pollTimer;
 
         /// <summary>
         /// Locking object for the poll timer
@@ -144,7 +146,7 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         public TeamspeakService()
         {
-            this.pollTimer = new Timer(5000);
+            this.pollTimer = new System.Timers.Timer(5000);
             this.pollTimer.AutoReset = true;
             this.pollTimer.Elapsed += (o, e) => this.Poll();
             logger.Trace("New Teamspeak Service constructed");
@@ -160,8 +162,6 @@ namespace GW2PAO.TS3.Services
                 return;
 
             this.ConnectionState = ConnectionState.Connecting;
-
-            // Start a new thread for running the 
 
             this.CommandQueryDispatcher = new AsyncTcpDispatcher(TeamspeakService.Host, TeamspeakService.Port);
             this.CommandQueryDispatcher.ReadyForSendingCommands += CommandQueryDispatcher_ReadyForSendingCommands;
@@ -216,7 +216,7 @@ namespace GW2PAO.TS3.Services
             {
                 logger.Info("Sending text message: {0}", msg);
                 var command = new Command("sendtextmessage targetmode=2");
-                command.AddParameter("msg", this.EncodeString(msg));
+                command.AddParameter("msg", DecodeUtility.EncodeString(msg));
                 logger.Info("Command: {0}", command.ToString());
                 this.CommandQueryRunner.SendCommand(command);
             }
@@ -267,8 +267,8 @@ namespace GW2PAO.TS3.Services
             if (this.currentClientID != 0 || this.currentChannelID != 0)
             {
                 // Determine the current server and channel information
-                this.UpdateServerInfo();
-                this.UpdateChannelInfo();
+                this.RequestCurrentServerInfo();
+                this.RequestCurrentChannelInfo();
             }
 
             // Do all of this on a seperate thread so we don't hold up the UI
@@ -347,249 +347,48 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void EventQueryDispatcher_NotificationReceived(object sender, EventArgs<string> e)
         {
-            logger.Trace("Notification: {0}", e.Value.Trim());
-
-            if (e.Value.StartsWith(Notifications.TextMessage))
-            {
-                // Recieved a chat message
-                this.HandleTextMessage(e.Value);
-            }
-            else if (e.Value.StartsWith(Notifications.ConnectStatusChange))
-            {
-                // Connection status just changed, if it's "connected", we need to rebuild our client list, so clear it out
-                var connectStatusProperties = e.Value.Split(' ');
-                var status = connectStatusProperties.First(id => id.StartsWith("status")).Substring("status".Length + 1);
-                if (status == "connected")
+            // Handle the notification on a background task
+            Task.Factory.StartNew(() =>
                 {
-                    // Send a stop for everyone, to make sure clients don't get stuck as "talking"
-                    foreach (var client in this.clients.Values)
-                        this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
-                    this.clients.Clear();
+                    logger.Trace("Notification: {0}", e.Value.Trim());
 
-                    // Reset our channel list
-                    foreach (var channel in this.channels.Values)
+                    var notification = e.Value.Trim().Split(' ')[0].ToLower();
+                    switch (notification)
                     {
-                        this.RaiseChannelRemoved(new ChannelEventArgs(channel));
+                        case Notifications.TextMessage:
+                            this.HandleTextMessage(e.Value);
+                            break;
+                        case Notifications.ConnectStatusChange:
+                            this.HandleConnectionStatusChange(e.Value);
+                            break;
+                        case Notifications.ClientMoved:
+                            this.HandleClientMoved(e.Value);
+                            break;
+                        case Notifications.ClientEnterView:
+                            this.HandleClientEnteredView(e.Value);
+                            break;
+                        case Notifications.ClientLeftView:
+                            this.HandleClientExitedView(e.Value);
+                            break;
+                        case Notifications.ClientUpdated:
+                            this.HandleClientUpdated(e.Value);
+                            break;
+                        case Notifications.ChannelCreated:
+                            this.HandleChannelCreated(e.Value);
+                            break;
+                        case Notifications.ChannelDeleted:
+                            this.HandleChannelDeleted(e.Value);
+                            break;
+                        case Notifications.ChannelEdited:
+                            this.HandleChannelEdited(e.Value);
+                            break;
+                        case Notifications.ChannelMoved:
+                            this.HandleChannelMoved(e.Value);
+                            break;
+                        default:
+                            break;
                     }
-                    this.channels.Clear();
-
-                    // Reset our local clients
-                    foreach (var client in this.localClients.Values)
-                    {
-                        this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
-                    }
-                    this.localClients.Clear();
-
-                    Task.Factory.StartNew(() =>
-                    {
-                        // Also figure out our new server, client, and channel
-                        System.Threading.Thread.Sleep(250);
-                        var whoami = this.CommandQueryRunner.SendWhoAmI();
-                        this.currentClientID = whoami.ClientId;
-                        this.currentChannelID = whoami.ChannelId;
-                        logger.Trace("New Client ID: {0}", this.currentClientID);
-                        logger.Trace("New Channel ID: {0}", this.currentChannelID);
-
-                        // Request the client list for the current channel
-                        string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
-                        this.AddClients(result);
-
-                        this.UpdateServerInfo();
-                        this.UpdateChannelInfo();
-
-                        this.InitializeChannelList();
-                    });
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ClientMoved))
-            {
-                // Client moved channel
-                if (this.currentClientID == this.ParseUintProperty(e.Value, Properties.ClientID))
-                {
-                    // The current user moved channel, so update our current channel
-                    uint prevChannelId = this.currentChannelID;
-                    uint channelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
-                    this.currentChannelID = channelId;
-                    logger.Trace("New Channel ID: {0}", this.currentChannelID);
-                    this.UpdateChannelInfo();
-
-                    foreach (var client in this.localClients.Values)
-                    {
-                        this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
-                    }
-                    this.localClients.Clear();
-
-                    // Also raise channel updated for the channel that lost the client and the channel that gained the client
-                    if (this.channels.ContainsKey(prevChannelId))
-                    {
-                        this.channels[prevChannelId].ClientsCount--;
-                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
-                    }
-
-                    if (this.channels.ContainsKey(this.currentChannelID))
-                    {
-                        this.channels[this.currentChannelID].ClientsCount++;
-                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[this.currentChannelID]));
-                    }
-
-                    // Request the client list for the current channel
-                    Task.Factory.StartNew(() =>
-                        {
-                            string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
-                            this.AddClients(result);
-                        });
-                }
-                else
-                {
-                    // Someone else moved - raise the client entered/exited based on what channel they moved to
-                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
-                    uint newChannelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
-                    uint prevChannelId = 0;
-
-                    if (this.clients.ContainsKey(clientId))
-                    {
-                        prevChannelId = this.clients[clientId].ChannelID;
-
-                        if (this.localClients.ContainsKey(clientId))
-                        {
-                            // Someone left the channel
-                            Client throwAway;
-                            this.localClients.TryRemove(clientId, out throwAway);
-                            this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-                        }
-                        else
-                        {
-                            // Someone joined the channel
-                            this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
-                            this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-                        }
-
-                        this.clients[clientId].ChannelID = newChannelId;
-                    }
-
-                    // Also raise channel updated for the channel that lost the client and the channel that gained the client
-                    if (this.channels.ContainsKey(prevChannelId))
-                    {
-                        this.channels[prevChannelId].ClientsCount--;
-                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
-                    }
-
-                    if (this.channels.ContainsKey(newChannelId))
-                    {
-                        this.channels[newChannelId].ClientsCount++;
-                        this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[newChannelId]));
-                    }
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ClientEnterView))
-            {
-                // Someone joined the server
-                this.AddClients(e.Value);
-
-                // If they joined the current channel, raise the client entered channel event
-                uint channelId = this.ParseUintProperty(e.Value, Properties.ChannelID, Properties.TargetChannelID);
-                if (channelId == this.currentChannelID)
-                {
-                    // Someone joined the channel
-                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
-                    this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
-                    this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ClientLeftView))
-            {
-                // Someone left the server
-                var clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
-                Client client;
-                if (this.clients.TryRemove(clientId, out client))
-                {
-                    if (client.ChannelID == this.currentChannelID)
-                    {
-                        // They were in our channel, so raise the client left channel event
-                        Client throwAway;
-                        this.localClients.TryRemove(clientId, out throwAway);
-                        this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, client.Name));
-                    }
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ClientUpdated))
-            {
-                // Someone changed their nickname
-                if (e.Value.Contains(Properties.ClientNickname))
-                {
-                    uint clientId = this.ParseUintProperty(e.Value, Properties.ClientID);
-                    if (this.clients.ContainsKey(clientId))
-                    {
-                        string clientNickname = this.ParseStringProperty(e.Value, true, Properties.ClientNickname);
-                        this.clients[clientId].Name = clientNickname;
-                    }
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ChannelCreated))
-            {
-                // Add the channel to our list of channels, raise channel list updated event
-                var channelInfo = this.ProcessChannelInformation(e.Value);
-
-                if (!this.channels.ContainsKey(channelInfo.ID))
-                {
-                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
-                    {
-                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
-                    }
-                }
-                else
-                {
-                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ChannelDeleted))
-            {
-                // Remove the channel from our list of channels, raise channel list updated event
-                var channelInfo = this.ProcessChannelInformation(e.Value);
-
-                Channel removed;
-                if (this.channels.TryRemove(channelInfo.ID, out removed))
-                {
-                    this.RaiseChannelRemoved(new ChannelEventArgs(removed));
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ChannelEdited))
-            {
-                // Update the channel in our list of channels, raise channel list updated event
-                var channelInfo = this.ProcessChannelInformation(e.Value);
-
-                if (!this.channels.ContainsKey(channelInfo.ID))
-                {
-                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
-                    {
-                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
-                    }
-                }
-                else
-                {
-                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
-                }
-            }
-            else if (e.Value.StartsWith(Notifications.ChannelMoved))
-            {
-                // Update the channel in our list of channels, raise channel list updated event
-                var channelInfo = this.ProcessChannelInformation(e.Value);
-
-                if (!this.channels.ContainsKey(channelInfo.ID))
-                {
-                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
-                    {
-                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
-                    }
-                }
-                else
-                {
-                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
-                }
-            }
+                });
         }
 
         /// <summary>
@@ -621,6 +420,294 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
+        /// Parses and handles a text message notification string
+        /// </summary>
+        /// <param name="notificationString">The text message notification string to parse</param>
+        private void HandleTextMessage(string notificationString)
+        {
+            var notificationProperties = notificationString.Split(' ');
+            uint clientId = uint.Parse(notificationProperties.First(id => id.StartsWith(Properties.InvokerID)).Substring(Properties.InvokerID.Length + 1));
+            string clientNickname = DecodeUtility.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.InvokerName)).Substring(Properties.InvokerName.Length + 1));
+            string message = DecodeUtility.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.Message)).Substring(Properties.Message.Length + 1));
+
+            // Raise the text message received event
+            logger.Trace("Text message received From {0} ({1}): {2}", clientId, clientNickname, message);
+            this.RaiseTextMessageReceived(new Data.TextMessageEventArgs(clientId, clientNickname, message));
+        }
+
+        /// <summary>
+        /// Handles the ConnectionStatusChanged TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleConnectionStatusChange(string notificationString)
+        {
+            // Connection status just changed, if it's "connected", we need to rebuild our client list, so clear it out
+            var connectStatusProperties = notificationString.Split(' ');
+            var status = connectStatusProperties.First(id => id.StartsWith("status")).Substring("status".Length + 1);
+            if (status == "connected")
+            {
+                // Send a stop for everyone, to make sure clients don't get stuck as "talking"
+                foreach (var client in this.clients.Values)
+                    this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
+                this.clients.Clear();
+
+                // Reset our channel list
+                foreach (var channel in this.channels.Values)
+                {
+                    this.RaiseChannelRemoved(new ChannelEventArgs(channel));
+                }
+                this.channels.Clear();
+
+                // Reset our local clients
+                foreach (var client in this.localClients.Values)
+                {
+                    this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                }
+                this.localClients.Clear();
+
+                var whoami = this.CommandQueryRunner.SendWhoAmI();
+                this.currentClientID = whoami.ClientId;
+                this.currentChannelID = whoami.ChannelId;
+                logger.Trace("New Client ID: {0}", this.currentClientID);
+                logger.Trace("New Channel ID: {0}", this.currentChannelID);
+
+                this.RequestCurrentServerInfo();
+                this.RequestCurrentChannelInfo();
+                this.RequestClientList();
+                this.InitializeChannelList();
+            }
+        }
+
+        /// <summary>
+        /// Handles the ClientMoved TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleClientMoved(string notificationString)
+        {
+            // Client moved channel
+            if (this.currentClientID == DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID))
+            {
+                // The current user moved channel, so update our current channel
+                uint prevChannelId = this.currentChannelID;
+                uint channelId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ChannelID, Properties.TargetChannelID);
+                this.currentChannelID = channelId;
+                logger.Trace("New Channel ID: {0}", this.currentChannelID);
+                this.RequestCurrentChannelInfo();
+
+                foreach (var client in this.localClients.Values)
+                {
+                    this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                }
+                this.localClients.Clear();
+
+                // Also raise channel updated for the channel that lost the client and the channel that gained the client
+                if (this.channels.ContainsKey(prevChannelId))
+                {
+                    this.channels[prevChannelId].ClientsCount--;
+                    this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
+                }
+
+                if (this.channels.ContainsKey(this.currentChannelID))
+                {
+                    this.channels[this.currentChannelID].ClientsCount++;
+                    this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[this.currentChannelID]));
+                }
+
+                // Request the client list for the current channel
+                Task.Factory.StartNew(() =>
+                {
+                    string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
+                    this.AddClients(result);
+                });
+            }
+            else
+            {
+                // Someone else moved - raise the client entered/exited based on what channel they moved to
+                uint clientId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID);
+                uint newChannelId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ChannelID, Properties.TargetChannelID);
+                uint prevChannelId = 0;
+
+                if (this.clients.ContainsKey(clientId))
+                {
+                    prevChannelId = this.clients[clientId].ChannelID;
+
+                    if (this.localClients.ContainsKey(clientId))
+                    {
+                        // Someone left the channel
+                        Client throwAway;
+                        this.localClients.TryRemove(clientId, out throwAway);
+                        this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                    }
+                    else
+                    {
+                        // Someone joined the channel
+                        this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
+                        this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+                    }
+
+                    this.clients[clientId].ChannelID = newChannelId;
+                }
+
+                // Also raise channel updated for the channel that lost the client and the channel that gained the client
+                if (this.channels.ContainsKey(prevChannelId))
+                {
+                    this.channels[prevChannelId].ClientsCount--;
+                    this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[prevChannelId]));
+                }
+
+                if (this.channels.ContainsKey(newChannelId))
+                {
+                    this.channels[newChannelId].ClientsCount++;
+                    this.RaiseChannelUpdated(new ChannelEventArgs(this.channels[newChannelId]));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the ClientEnteredView TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleClientEnteredView(string notificationString)
+        {
+            // Someone joined the server
+            this.AddClients(notificationString);
+
+            // If they joined the current channel, raise the client entered channel event
+            uint channelId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ChannelID, Properties.TargetChannelID);
+            if (channelId == this.currentChannelID)
+            {
+                // Someone joined the channel
+                uint clientId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID);
+                this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
+                this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
+            }
+        }
+
+        /// <summary>
+        /// Handles the ClientExitedView TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleClientExitedView(string notificationString)
+        {
+            // Someone left the server
+            var clientId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID);
+            Client client;
+            if (this.clients.TryRemove(clientId, out client))
+            {
+                if (client.ChannelID == this.currentChannelID)
+                {
+                    // They were in our channel, so raise the client left channel event
+                    Client throwAway;
+                    this.localClients.TryRemove(clientId, out throwAway);
+                    this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, client.Name));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the ClientUpdated TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleClientUpdated(string notificationString)
+        {
+            // Someone changed their nickname
+            if (notificationString.Contains(Properties.ClientNickname))
+            {
+                uint clientId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID);
+                if (this.clients.ContainsKey(clientId))
+                {
+                    string clientNickname = DecodeUtility.DecodeStringProperty(notificationString, true, Properties.ClientNickname);
+                    this.clients[clientId].Name = clientNickname;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the ChannelCreated TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleChannelCreated(string notificationString)
+        {
+            // Add the channel to our list of channels, raise channel list updated event
+            var channelInfo = Channel.FromChannelString(notificationString);
+
+            if (!this.channels.ContainsKey(channelInfo.ID))
+            {
+                if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                {
+                    this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                }
+            }
+            else
+            {
+                this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+            }
+        }
+
+        /// <summary>
+        /// Handles the ChannelDeleted TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleChannelDeleted(string notificationString)
+        {
+            // Remove the channel from our list of channels, raise channel list updated event
+            var channelInfo = Channel.FromChannelString(notificationString);
+
+            Channel removed;
+            if (this.channels.TryRemove(channelInfo.ID, out removed))
+            {
+                this.RaiseChannelRemoved(new ChannelEventArgs(removed));
+            }
+        }
+
+        /// <summary>
+        /// Handles the ChannelEdited TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleChannelEdited(string notificationString)
+        {
+            // Update the channel in our list of channels, raise channel list updated event
+            var channelInfo = Channel.FromChannelString(notificationString);
+
+            if (!this.channels.ContainsKey(channelInfo.ID))
+            {
+                if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                {
+                    this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                }
+            }
+            else
+            {
+                this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+            }
+        }
+
+        /// <summary>
+        /// Handles the ChannelMoved TS notification
+        /// </summary>
+        /// <param name="notificationString">The notification string</param>
+        private void HandleChannelMoved(string notificationString)
+        {
+            // Update the channel in our list of channels, raise channel list updated event
+            var channelInfo = Channel.FromChannelString(notificationString);
+
+            if (!this.channels.ContainsKey(channelInfo.ID))
+            {
+                if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                {
+                    this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                }
+            }
+            else
+            {
+                this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+            }
+        }
+
+        /// <summary>
         /// Parses and handles a "clientlist" response and updates the dictionary of client ID/nicknames
         /// </summary>
         /// <param name="clientList">The client list response</param>
@@ -631,13 +718,13 @@ namespace GW2PAO.TS3.Services
             {
                 if (clientString.Contains(Properties.ClientID) && clientString.Contains(Properties.ClientNickname))
                 {
-                    uint clientId = this.ParseUintProperty(clientString, Properties.ClientID);
+                    uint clientId = DecodeUtility.DecodeUIntProperty(clientString, Properties.ClientID);
 
-                    string clientNickname = this.ParseStringProperty(clientString, true, Properties.ClientNickname);
+                    string clientNickname = DecodeUtility.DecodeStringProperty(clientString, true, Properties.ClientNickname);
 
                     uint channelId = 0;
                     if (clientString.Contains(Properties.ChannelID) || clientString.Contains(Properties.TargetChannelID))
-                        channelId = this.ParseUintProperty(clientString, Properties.ChannelID, Properties.TargetChannelID);
+                        channelId = DecodeUtility.DecodeUIntProperty(clientString, Properties.ChannelID, Properties.TargetChannelID);
 
                     var client = new Client(clientId, clientNickname, channelId);
                     this.clients.AddOrUpdate(clientId, client, (key, oldValue) => client);
@@ -652,30 +739,14 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
-        /// Parses and handles a text message notification string
-        /// </summary>
-        /// <param name="notificationString">The text message notification string to parse</param>
-        private void HandleTextMessage(string notificationString)
-        {
-            var notificationProperties = notificationString.Split(' ');
-            uint clientId = uint.Parse(notificationProperties.First(id => id.StartsWith(Properties.InvokerID)).Substring(Properties.InvokerID.Length + 1));
-            string clientNickname = this.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.InvokerName)).Substring(Properties.InvokerName.Length + 1));
-            string message = this.DecodeString(notificationProperties.First(id => id.StartsWith(Properties.Message)).Substring(Properties.Message.Length + 1));
-
-            // Raise the text message received event
-            logger.Trace("Text message received From {0} ({1}): {2}", clientId, clientNickname, message);
-            this.RaiseTextMessageReceived(new Data.TextMessageEventArgs(clientId, clientNickname, this.DecodeString(message)));
-        }
-
-        /// <summary>
         /// Sends a request for the current server information and raises the server connected event
         /// </summary>
-        private void UpdateServerInfo()
+        private void RequestCurrentServerInfo()
         {
             // Determine the current server information
             string result = this.CommandQueryRunner.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
-            string serverName = this.ParseStringProperty(result, true, Properties.ServerName);
-            string serverAddress = this.ParseStringProperty(result, false, Properties.ServerIP);
+            string serverName = DecodeUtility.DecodeStringProperty(result, true, Properties.ServerName);
+            string serverAddress = DecodeUtility.DecodeStringProperty(result, false, Properties.ServerIP);
 
             logger.Info("New Server Information: name={0} address={1}", serverName, serverAddress);
             this.RaiseNewServerInfo(new NewServerInfoEventArgs(serverName, serverAddress));
@@ -684,17 +755,26 @@ namespace GW2PAO.TS3.Services
         /// <summary>
         /// Sends a request for the current channel and raises the channel switched event
         /// </summary>
-        private void UpdateChannelInfo()
+        private void RequestCurrentChannelInfo()
         {
             var command = new Command(string.Format("channelvariable {0}={1} {2} {3}", Properties.ChannelID, this.currentChannelID, Properties.ChannelName, Properties.ChannelDescription));
             string result = this.CommandQueryRunner.SendCommand(command);
 
             // Parse the channel info
-            string channelName = this.ParseStringProperty(result, true, Properties.ChannelName);
-            string channelDescription = this.ParseStringProperty(result, true, Properties.ChannelDescription);
+            string channelName = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelName);
+            string channelDescription = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelDescription);
 
             logger.Info("New Channel Information: name={0} description={1}", channelName, channelDescription);
             this.RaiseClientChannelChanged(new ChannelEventArgs(new Channel(this.currentChannelID, channelName) { Description = channelDescription }));
+        }
+
+        /// <summary>
+        /// Updates the client list for the current channel
+        /// </summary>
+        private void RequestClientList()
+        {
+            string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
+            this.AddClients(result);
         }
 
         /// <summary>
@@ -709,7 +789,7 @@ namespace GW2PAO.TS3.Services
                 var channelStrings = result.Split('|');
                 foreach (var channelString in channelStrings)
                 {
-                    var channelInfo = this.ProcessChannelInformation(channelString);
+                    var channelInfo = Channel.FromChannelString(channelString);
 
                     if (!this.channels.ContainsKey(channelInfo.ID))
                     {
@@ -727,44 +807,7 @@ namespace GW2PAO.TS3.Services
             }
         }
 
-        /// <summary>
-        /// Parses a string for channel information and returns the resulting channel object
-        /// </summary>
-        /// <param name="channelString">The string to parse</param>
-        /// <returns>The resulting channel object</returns>
-        private Channel ProcessChannelInformation(string channelString)
-        {
-            var parts = channelString.Split(' ', '\n', '\r');
-
-            uint id = this.ParseUintProperty(channelString, Properties.ChannelID);
-
-            uint parentId = 0;
-            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ParentChannelID)) != null)
-                parentId = this.ParseUintProperty(channelString, Properties.ParentChannelID);
-
-            uint order = 0;
-            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelOrder)) != null)
-                order = this.ParseUintProperty(channelString, Properties.ChannelOrder);
-
-            string name = string.Empty;
-            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelName)) != null)
-                name = this.ParseStringProperty(channelString, true, Properties.ChannelName);
-
-            uint clientsCount = 0;
-            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelClientsCount)) != null)
-                clientsCount = this.ParseUintProperty(channelString, Properties.ChannelClientsCount);
-
-            bool isSpacer = SpacerInfo.Parse(name) != null;
-
-            Channel channelInfo = new Channel(id, name, isSpacer)
-            {
-                ParentID = parentId,
-                Order = order,
-                ClientsCount = clientsCount
-            };
-
-            return channelInfo;
-        }
+        #region Raise Event Helpers
 
         /// <summary>
         /// Raises the TalkStatusChanged event
@@ -856,111 +899,37 @@ namespace GW2PAO.TS3.Services
                 this.ClientExitedChannel(this, args);
         }
 
+        #endregion
+
         /// <summary>
         /// Method used to poll the server, keeping the connection open
         /// </summary>
         private void Poll()
         {
-            lock (this.pollLock)
+            // Do a non-blocking lock
+            if (Monitor.TryEnter(this.pollLock))
             {
-                if (this.CommandQueryRunner != null && !this.CommandQueryRunner.IsDisposed)
+                try
                 {
-                    var whoami = this.CommandQueryRunner.SendWhoAmI();
-                    this.currentClientID = whoami.ClientId;
-                    this.currentChannelID = whoami.ChannelId;
-                }
+                    if (this.CommandQueryRunner != null && !this.CommandQueryRunner.IsDisposed)
+                    {
+                        var whoami = this.CommandQueryRunner.SendWhoAmI();
+                        this.currentClientID = whoami.ClientId;
+                        this.currentChannelID = whoami.ChannelId;
+                    }
 
-                if (this.EventQueryRunner != null && !this.EventQueryRunner.IsDisposed)
+                    if (this.EventQueryRunner != null && !this.EventQueryRunner.IsDisposed)
+                    {
+                        var whoami = this.EventQueryRunner.SendWhoAmI();
+                        this.currentClientID = whoami.ClientId;
+                        this.currentChannelID = whoami.ChannelId;
+                    }
+                }
+                finally
                 {
-                    var whoami = this.EventQueryRunner.SendWhoAmI();
-                    this.currentClientID = whoami.ClientId;
-                    this.currentChannelID = whoami.ChannelId;
+                    Monitor.Exit(this.pollLock);
                 }
             }
-        }
-
-        /// <summary>
-        /// Parses a uint property out of the given input string
-        /// </summary>
-        /// <param name="input">the input string to parse</param>
-        /// <param name="propertyName">the full list of possible property names to parse the value of. the first one that works is used.</param>
-        /// <returns>The parsed value of the property.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
-        private uint ParseUintProperty(string input, params string[] propertyNames)
-        {
-            var properties = input.Split(' ', '\n', '\r');
-
-            foreach (var propertyName in propertyNames)
-            {
-                string value = properties.FirstOrDefault(id => id.StartsWith(propertyName));
-                if (value != null)
-                {
-                    value = value.Substring(propertyName.Length + 1);
-                    return uint.Parse(value);
-                }
-            }
-
-#if DEBUG
-            throw new InvalidOperationException("Invalid propertyNames for given input string");
-#else
-            return 0;
-#endif
-        }
-
-        /// <summary>
-        /// Parses a uint property out of the given input string
-        /// </summary>
-        /// <param name="input">the input string to parse</param>
-        /// <param name="decodeValue">True to decode the string, else false to return it as-is</param>
-        /// <param name="propertyName">the full list of possible property names to parse the value of. the first one that works is used.</param>
-        /// <returns>The parsed value of the property.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
-        private string ParseStringProperty(string input, bool decodeValue, params string[] propertyNames)
-        {
-            var properties = input.Split(' ', '\n', '\r');
-
-            foreach (var propertyName in propertyNames)
-            {
-                string value = properties.FirstOrDefault(id => id.StartsWith(propertyName));
-                if (value != null)
-                {
-                    if (value.Length > propertyName.Length)
-                        value = value.Substring(propertyName.Length + 1);
-                    else
-                        value = string.Empty;
-
-                    if (decodeValue)
-                        return this.DecodeString(value);
-                    else
-                        return value;
-                }
-            }
-
-#if DEBUG
-            throw new InvalidOperationException("Invalid propertyNames for given input string");
-#else
-            return string.Empty;
-#endif
-        }
-
-        /// <summary>
-        /// Parses out all special characters (such as /s) from the input string
-        /// </summary>
-        /// <param name="input">String to clean up</param>
-        /// <returns>The normal string representation of the input</returns>
-        private string DecodeString(string input)
-        {
-            return Ts3Util.DecodeString(input);
-        }
-
-        /// <summary>
-        /// Encodes special characters (such as ' ') using the input string
-        /// </summary>
-        /// <param name="input">String to encode</param>
-        /// <returns>The encoded string representation of the input</returns>
-        private string EncodeString(string input)
-        {
-            return Ts3Util.EncodeString(input);
         }
     }
 }
