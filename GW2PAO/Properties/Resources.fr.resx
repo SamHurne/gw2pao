@@ -789,4 +789,49 @@
     <value>Inconnu</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
   </data>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Ajout d'une nouvelle tâche</value>
+  </data>
+  <data name="CanComplete" xml:space="preserve">
+    <value>Peut Achever</value>
+  </data>
+  <data name="CompletionOptions" xml:space="preserve">
+    <value>Option d'achèvement</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Supprimer tout</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editer</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export...</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import...</value>
+  </data>
+  <data name="IncludeLocation" xml:space="preserve">
+    <value>Inclure la position</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Chargement...</value>
+  </data>
+  <data name="LocationOptions" xml:space="preserve">
+    <value>Options de position</value>
+  </data>
+  <data name="ResetDaily" xml:space="preserve">
+    <value>Remise à zéro quotidienne</value>
+  </data>
+  <data name="TaskTracker" xml:space="preserve">
+    <value>Suivi des tâches</value>
+  </data>
+  <data name="WaypointCode" xml:space="preserve">
+    <value>Code de TP</value>
+  </data>
 </root>
