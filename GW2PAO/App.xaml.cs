@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -93,16 +95,15 @@ namespace GW2PAO
             // Set up language information
             if (string.IsNullOrWhiteSpace(GW2PAO.Properties.Settings.Default.Language))
             {
-                GW2PAO.Properties.Settings.Default.Language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                var lang = LanguageExtensions.FromTwoLetterISOLanguageName(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+                GW2PAO.Properties.Settings.Default.Language = lang.ToTwoLetterISOLanguageName();
                 GW2PAO.Properties.Settings.Default.Save();
             }
-            else
-            {
-                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(GW2PAO.Properties.Settings.Default.Language);
-            }
-            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
-            //CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en");
-            ////////////////////////////////////////// DEBUG ///////////////////////////////////////////////////////
+
+            // Note: this conversion, while it may seem redundant, ensures that we use only use a known language
+            // If the CurrentUICulture is something other than the supported languages, this call defaults it to english.
+            var savedLang = LanguageExtensions.FromTwoLetterISOLanguageName(GW2PAO.Properties.Settings.Default.Language);
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(savedLang.ToTwoLetterISOLanguageName());
         }
 
         private void DoShutdown()
@@ -118,6 +119,49 @@ namespace GW2PAO
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             logger.Fatal((Exception)e.ExceptionObject);
+
+            // Show a message to the user to allow them to send an error report
+            var selection = MessageBox.Show(
+                "A fatal error has occurred. Would you like to send an anonymous error report?",
+                "GW2 Personal Assistant Overlay",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Error);
+
+            if (selection == MessageBoxResult.Yes)
+            {
+                var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                byte[] logData = null;
+                if (File.Exists("Logs\\logfile.log"))
+                    logData = File.ReadAllBytes("Logs\\logfile.log");
+
+                string body = "Fatal exception:\r\n\r\n" + e.ExceptionObject.ToString();
+
+                if (logData == null)
+                {
+                    MailUtility.Email(
+                        MailUtility.MAIL_USER,
+                        body,
+                        "Crash Report",
+                        MailUtility.MAIL_USER,
+                        executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
+                        MailUtility.MAIL_USER,
+                        MailUtility.MAIL_PASS);
+                }
+                else
+                {
+                    MailUtility.Email(
+                        MailUtility.MAIL_USER,
+                        body,
+                        "Crash Report",
+                        MailUtility.MAIL_USER,
+                        executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
+                        MailUtility.MAIL_USER,
+                        MailUtility.MAIL_PASS,
+                        new MailAttachment(logData, "crashlog.txt"));
+                }
+            }
+
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
