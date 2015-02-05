@@ -174,12 +174,11 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <view:DungeonView DataContext="{Binding}"
-                                        Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"
-                                        Width="{Binding ElementName=DungeonsContainer, Path=ActualWidth}"/>
+                                      Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.Style>
-                <Style TargetType="ItemsControl">
+                <Style TargetType="ItemsControl" BasedOn="{StaticResource VirtualizingItemsControlStyle}">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="False">
                             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
