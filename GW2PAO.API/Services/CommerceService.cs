@@ -57,6 +57,7 @@ namespace GW2PAO.API.Services
         {
             try
             {
+                logger.Info("Loading items database file");
                 var newItemsDb = this.ItemsDatabaseBuilder.LoadFromFile(CultureInfo.CurrentUICulture);
                 this.ItemsDB.Clear();
                 foreach (var item in newItemsDb)

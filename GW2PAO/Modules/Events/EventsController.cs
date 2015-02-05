@@ -111,9 +111,6 @@ namespace GW2PAO.Modules.Events
             this.playerService = playerService;
             this.isStopped = false;
 
-            // Make sure the events service has loaded the appropriate table
-            this.eventsService.LoadTable(userData.UseAdjustedTimeTable);
-
             this.userData = userData;
 
             // Initialize the refresh timer
