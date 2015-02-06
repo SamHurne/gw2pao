@@ -70,21 +70,18 @@ namespace GW2PAO.Modules.ZoneCompletion
         /// </summary>
         public void Initialize()
         {
-            Task.Factory.StartNew(() =>
-                {
-                    logger.Debug("Initializing Zone Completion Module");
+            logger.Debug("Initializing Zone Completion Module");
 
-                    this.zoneCompletionController = this.Container.GetExportedValue<IZoneCompletionController>();
-                    this.viewController = this.Container.GetExportedValue<IZoneCompletionViewController>();
+            this.zoneCompletionController = this.Container.GetExportedValue<IZoneCompletionController>();
+            this.viewController = this.Container.GetExportedValue<IZoneCompletionViewController>();
 
-                    // Register for shutdown
-                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+            // Register for shutdown
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-                    // Initialize the view controller
-                    this.viewController.Initialize();
+            // Initialize the view controller
+            this.viewController.Initialize();
 
-                    logger.Debug("Zone Completion Module initialized");
-                });
+            logger.Debug("Zone Completion Module initialized");
         }
 
         /// <summary>

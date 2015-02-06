@@ -65,20 +65,17 @@ namespace GW2PAO.Modules.Teamspeak
         /// </summary>
         public void Initialize()
         {
-            Task.Factory.StartNew(() =>
-                {
-                    logger.Debug("Initializing Teamspeak Module");
+            logger.Debug("Initializing Teamspeak Module");
 
-                    this.viewController = this.Container.GetExportedValue<ITeamspeakViewController>();
+            this.viewController = this.Container.GetExportedValue<ITeamspeakViewController>();
 
-                    // Register for shutdown
-                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+            // Register for shutdown
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-                    // Initialize the view controller
-                    this.viewController.Initialize();
+            // Initialize the view controller
+            this.viewController.Initialize();
 
-                    logger.Debug("Teamspeak Module initialized");
-                });
+            logger.Debug("Teamspeak Module initialized");
         }
 
         /// <summary>

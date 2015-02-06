@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2NET;
 using GW2NET.Common;
@@ -31,15 +33,40 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// Static collection of zone/map names
         /// </summary>
-        private static IDictionaryRange<int, MapName> MapNamesCache;
+        private ConcurrentDictionary<int, MapName> MapNamesCache;
+
+        private readonly object initLock = new object();
 
         /// <summary>
         /// Static constructor, initializes the MapNames static property
         /// </summary>
-        static ZoneService()
+        public ZoneService()
         {
-            logger.Debug("Initializing cache of map names");
-            MapNamesCache = GW2.V1.MapNames.ForCurrentUICulture().FindAll();
+            this.MapNamesCache = new ConcurrentDictionary<int, MapName>();
+        }
+
+        /// <summary>
+        /// Initializes the zone service
+        /// </summary>
+        public void Initialize()
+        {
+            if (Monitor.TryEnter(this.initLock))
+            {
+                try
+                {
+                    if (this.MapNamesCache.IsEmpty)
+                    {
+                        foreach (var mapName in GW2.V1.MapNames.ForCurrentUICulture().FindAll())
+                        {
+                            this.MapNamesCache.TryAdd(mapName.Key, mapName.Value);
+                        }
+                    }
+                }
+                finally
+                {
+                    Monitor.Exit(this.initLock);
+                }
+            }
         }
 
         /// <summary>

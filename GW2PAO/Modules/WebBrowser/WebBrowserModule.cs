@@ -39,30 +39,27 @@ namespace GW2PAO.Modules.WebBrowser
         /// </summary>
         public void Initialize()
         {
-            Task.Factory.StartNew(() =>
-                {
-                    logger.Debug("Initializing Web Browser Module");
+            logger.Debug("Initializing Web Browser Module");
 
-                    this.webBrowserController = this.Container.GetExportedValue<IWebBrowserController>();
+            this.webBrowserController = this.Container.GetExportedValue<IWebBrowserController>();
 
-                    // Register for shutdown
-                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+            // Register for shutdown
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 #if NO_BROWSER
-                    logger.Debug("Web Browser Module initialization skipped");
+            logger.Debug("Web Browser Module initialization skipped");
 #else
-                    // Initialize the WebCore for the web browser
-                    logger.Debug("Initializing Awesomium WebCore");
-                    if (!WebCore.IsInitialized)
-                    {
-                        WebCore.Initialize(new WebConfig()
-                        {
-                            HomeURL = "http://wiki.guildwars2.com/".ToUri(),
-                        });
-                    }
-
-                    logger.Debug("Web Browser Module initialized");
-#endif
+            // Initialize the WebCore for the web browser
+            logger.Debug("Initializing Awesomium WebCore");
+            if (!WebCore.IsInitialized)
+            {
+                WebCore.Initialize(new WebConfig()
+                {
+                    HomeURL = "http://wiki.guildwars2.com/".ToUri(),
                 });
+            }
+
+            logger.Debug("Web Browser Module initialized");
+#endif
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.Modules.Tasks.Models;
 using GW2PAO.Modules.Tasks.Views;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -139,7 +140,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                     if (e.PropertyName == "MapID")
                         this.RefreshMapName();
                 };
-            this.RefreshMapName();
+            System.Threading.Tasks.Task.Factory.StartNew(this.RefreshMapName);
 
             this.CopyWaypointCommand = new DelegateCommand(this.CopyWaypoint);
             this.EditCommand = new DelegateCommand(this.Edit);
@@ -151,10 +152,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         private void RefreshMapName()
         {
-            if (this.Task.MapID != -1)
-                this.MapName = this.zoneService.GetZoneName(this.Task.MapID);
-            else
-                this.MapName = string.Empty;
+            var name = this.zoneService.GetZoneName(this.Task.MapID);
+            Threading.BeginInvokeOnUI(() =>
+                {
+                    if (this.Task.MapID != -1)
+                        this.MapName = name;
+                    else
+                        this.MapName = string.Empty;
+                });
         }
 
         /// <summary>

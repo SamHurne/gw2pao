@@ -120,11 +120,14 @@ namespace GW2PAO.Modules.Events
             // Initialize the start call count to 0
             this.startCallCount = 0;
 
+            // Set up handling of the event settings UseAdjustedTable property changed so that we can load the correct table when it changes
+            this.UserData.PropertyChanged += UserData_PropertyChanged;
+
             // Initialize the WorldEvents collection
             this.InitializeWorldEvents();
 
-            // Set up handling of the event settings UseAdjustedTable property changed so that we can load the correct table when it changes
-            this.UserData.PropertyChanged += UserData_PropertyChanged;
+            // Do this on a background thread since it takes awhile
+            Task.Factory.StartNew(this.InitializeWorldEventZoneNames);
 
             logger.Info("Event Tracker Controller initialized");
         }
@@ -140,6 +143,8 @@ namespace GW2PAO.Modules.Events
                 // Start the timer if this is the first time that Start() has been called
                 if (this.startCallCount == 0)
                 {
+                    
+
                     this.isStopped = false;
                     logger.Debug("Starting refresh timers");
                     this.RefreshEvents();
@@ -202,9 +207,6 @@ namespace GW2PAO.Modules.Events
                         logger.Debug("Loading localized name for {0}", worldEvent.ID);
                         worldEvent.Name = this.eventsService.GetLocalizedName(worldEvent.ID);
 
-                        logger.Debug("Loading localized zone location for {0}", worldEvent.ID);
-                        worldEvent.MapName = this.zoneService.GetZoneName(worldEvent.MapID);
-
                         logger.Debug("Initializing view model for {0}", worldEvent.ID);
                         this.WorldEvents.Add(new EventViewModel(worldEvent, this.userData, this.EventNotifications));
 
@@ -222,6 +224,20 @@ namespace GW2PAO.Modules.Events
                             ens.EventName = worldEvent.Name;
                         }
                     }
+                });
+            }
+        }
+
+        private void InitializeWorldEventZoneNames()
+        {
+            this.zoneService.Initialize();
+            foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+            {
+                logger.Debug("Loading localized zone location for {0}", worldEvent.ID);
+                var name = this.zoneService.GetZoneName(worldEvent.MapID);
+                Threading.BeginInvokeOnUI(() =>
+                {
+                    worldEvent.MapName = name;
                 });
             }
         }

@@ -140,6 +140,12 @@ namespace GW2PAO.Modules.Dungeons
             // Initialize the dungeons
             this.InitializeDungeons();
 
+            // This takes a while, so do it on a background thread
+            Task.Factory.StartNew(() =>
+                {
+                    this.InitializeDungeonZoneNames();
+                });
+
             logger.Info("Dungeons Controller initialized");
         }
 
@@ -206,39 +212,52 @@ namespace GW2PAO.Modules.Dungeons
         {
             logger.Debug("Initializing dungeons");
             this.dungeonsService.LoadTable();
-            foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
-            {
-                logger.Debug("Initializing localized strings for {0}", dungeon.ID);
-                dungeon.Name = this.dungeonsService.GetLocalizedName(dungeon.ID);
-                dungeon.MapName = this.zoneService.GetZoneName(dungeon.WorldMapID);
-
-                foreach (var path in dungeon.Paths)
+            Threading.InvokeOnUI(() =>
                 {
-                    path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
-                }
-
-                Threading.InvokeOnUI(() =>
-                {
-                    logger.Debug("Initializing view model for {0}", dungeon.Name);
-                    this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userData));
-                });
-
-                logger.Debug("Initializing path times for {0}", dungeon.Name);
-                foreach (var dung in this.Dungeons)
-                {
-                    foreach (var path in dung.Paths)
+                    foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
                     {
-                        var existingPathTimeData = this.UserData.BestPathTimes.FirstOrDefault(pt => pt.PathID == path.PathId);
-                        if (existingPathTimeData == null)
+                        logger.Debug("Initializing localized strings for {0}", dungeon.ID);
+                        dungeon.Name = this.dungeonsService.GetLocalizedName(dungeon.ID);
+
+                        foreach (var path in dungeon.Paths)
                         {
-                            this.UserData.BestPathTimes.Add(new Data.PathTime(path));
+                            path.Nickname = this.dungeonsService.GetLocalizedName(path.ID);
                         }
-                        else
+
+                        logger.Debug("Initializing view model for {0}", dungeon.Name);
+                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userData));
+
+                        logger.Debug("Initializing path times for {0}", dungeon.Name);
+                        foreach (var dung in this.Dungeons)
                         {
-                            existingPathTimeData.PathData = path;
+                            foreach (var path in dung.Paths)
+                            {
+                                var existingPathTimeData = this.UserData.BestPathTimes.FirstOrDefault(pt => pt.PathID == path.PathId);
+                                if (existingPathTimeData == null)
+                                {
+                                    this.UserData.BestPathTimes.Add(new Data.PathTime(path));
+                                }
+                                else
+                                {
+                                    existingPathTimeData.PathData = path;
+                                }
+                            }
                         }
                     }
-                }
+                });
+        }
+
+        private void InitializeDungeonZoneNames()
+        {
+            logger.Debug("Initializing zone names for dungeons");
+            this.zoneService.Initialize();
+            foreach (var dungeon in this.dungeonsService.DungeonsTable.Dungeons)
+            {
+                var name = this.zoneService.GetZoneName(dungeon.WorldMapID);
+                Threading.BeginInvokeOnUI(() =>
+                {
+                    dungeon.MapName = name;
+                });
             }
         }
 

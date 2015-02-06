@@ -98,8 +98,6 @@ namespace GW2PAO.Modules.Commerce
             this.ItemPrices = new ObservableCollection<ItemPriceViewModel>();
             this.PriceNotifications = new ObservableCollection<PriceNotificationViewModel>();
 
-            this.InitializeItemPrices();
-
             // Initialize the refresh timer
             this.refreshTimer = new Timer(this.Refresh);
             this.RefreshInterval = 30000; // 30 seconds... really only need to do this once a minute, but twice a minute isn't terrible
@@ -121,6 +119,8 @@ namespace GW2PAO.Modules.Commerce
                 // Start the timer if this is the first time that Start() has been called
                 if (this.startCallCount == 0)
                 {
+                    this.InitializeItemPrices();
+
                     logger.Debug("Starting refresh timers");
                     this.isStopped = false;
                     this.Refresh();

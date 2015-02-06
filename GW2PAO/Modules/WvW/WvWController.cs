@@ -192,9 +192,6 @@ namespace GW2PAO.Modules.WvW
             this.timerCount = 0;
             this.isStopped = false;
 
-            // Make sure the WvW Service has loaded the world names
-            this.wvwService.LoadData();
-
             // Initialize the refresh timer
             this.objectivesRefreshTimer = new Timer(this.Refresh);
             this.ObjectivesRefreshInterval = 500;
@@ -217,6 +214,9 @@ namespace GW2PAO.Modules.WvW
                 // Start the timer if this is the first time that Start() has been called
                 if (this.startCallCount == 0)
                 {
+                    // Make sure the WvW Service has loaded the world names
+                    this.wvwService.LoadData();
+
                     this.isStopped = false;
 
                     // Initialize Teams and Objectives

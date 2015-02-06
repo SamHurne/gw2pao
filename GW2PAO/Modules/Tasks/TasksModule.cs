@@ -69,24 +69,21 @@ namespace GW2PAO.Modules.Tasks
         /// </summary>
         public void Initialize()
         {
-            Task.Factory.StartNew(() =>
-            {
-                logger.Debug("Initializing Player Tasks Module");
+            logger.Debug("Initializing Player Tasks Module");
 
-                this.playerTasksController = this.Container.GetExportedValue<IPlayerTasksController>();
-                this.viewController = this.Container.GetExportedValue<IPlayerTasksViewController>();
+            this.playerTasksController = this.Container.GetExportedValue<IPlayerTasksController>();
+            this.viewController = this.Container.GetExportedValue<IPlayerTasksViewController>();
 
-                // Register for shutdown
-                Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+            // Register for shutdown
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-                // Initialize the view controller
-                this.viewController.Initialize();
+            // Initialize the view controller
+            this.viewController.Initialize();
 
-                // Start the controller
-                this.playerTasksController.Start();
+            // Start the controller
+            this.playerTasksController.Start();
 
-                logger.Debug("Player Tasks Module initialized");
-            });
+            logger.Debug("Player Tasks Module initialized");
         }
 
         /// <summary>

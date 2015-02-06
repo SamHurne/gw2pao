@@ -12,6 +12,11 @@ namespace GW2PAO.API.Services.Interfaces
     public interface IZoneService
     {
         /// <summary>
+        /// Initializes the zone service
+        /// </summary>
+        void Initialize();
+
+        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>

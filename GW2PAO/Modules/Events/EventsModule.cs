@@ -67,24 +67,21 @@ namespace GW2PAO.Modules.Events
         /// </summary>
         public void Initialize()
         {
-            Task.Factory.StartNew(() =>
-                {
-                    logger.Debug("Initializing Events Module");
+            logger.Debug("Initializing Events Module");
 
-                    this.eventsController = this.container.GetExportedValue<IEventsController>();
-                    this.viewController = this.container.GetExportedValue<IEventsViewController>();
+            this.eventsController = this.container.GetExportedValue<IEventsController>();
+            this.viewController = this.container.GetExportedValue<IEventsViewController>();
 
-                    // Register for shutdown
-                    Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
+            // Register for shutdown
+            Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
-                    // Get the events controller started
-                    this.eventsController.Start();
+            // Get the events controller started
+            this.eventsController.Start();
 
-                    // Initialize the view controller
-                    this.viewController.Initialize();
+            // Initialize the view controller
+            this.viewController.Initialize();
 
-                    logger.Debug("Events Module initialized");
-                });
+            logger.Debug("Events Module initialized");
         }
 
         /// <summary>
