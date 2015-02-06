@@ -248,7 +248,6 @@
     <Compile Include="Modules\Teamspeak\ViewModels\ChatMsgViewModel.cs" />
     <Compile Include="Modules\Teamspeak\ViewModels\ClientViewModel.cs" />
     <Compile Include="Modules\WvW\WvWMapIDs.cs" />
-    <Compile Include="Utility\GameTypeMonitor.cs" />
     <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />
     <Compile Include="Modules\Commerce\CommerceModule.cs" />
@@ -332,7 +331,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utility\Interfaces\IProcessMonitor.cs" />
     <Compile Include="Utility\MailUtility.cs" />
     <Compile Include="Utility\ProcessMonitor.cs" />
     <Compile Include="Utility\ResizeSnapHelper.cs" />

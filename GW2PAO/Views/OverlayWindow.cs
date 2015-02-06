@@ -9,8 +9,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
-using GW2PAO.Utility.Interfaces;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace GW2PAO.Views
 {
@@ -22,9 +23,9 @@ namespace GW2PAO.Views
         public static Window OwnerWindow { get; set; }
 
         /// <summary>
-        /// Process Monitor object that monitors the focus/lost focus state of the GW2 process
+        /// The event aggregator for all overlay windows
         /// </summary>
-        public static IProcessMonitor ProcessMonitor { get; set; }
+        public static EventAggregator EventAggregator { get; set; }
 
         /// <summary>
         /// Set to true to never allow click-through, else false
@@ -95,10 +96,7 @@ namespace GW2PAO.Views
             this.IsClosed = false;
             this.Closed += (o, e) => this.IsClosed = true;
 
-            if (ProcessMonitor != null)
-            {
-                ProcessMonitor.GW2Focused += (o, e) => Threading.BeginInvokeOnUI(() => User32.SetTopMost(this, true));
-            }
+            OverlayWindow.EventAggregator.GetEvent<GW2ProcessFocused>().Subscribe(o => Threading.BeginInvokeOnUI(() => User32.SetTopMost(this, true)));
         }
 
         /// <summary>

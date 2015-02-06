@@ -60,6 +60,7 @@ namespace GW2PAO.Views
             this.Loaded += ShellView_Loaded;
 
             Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.CleanupTrayIcon));
+            Commands.CleanupTrayIcon.RegisterCommand(new DelegateCommand(this.CleanupTrayIcon));
 
             this.eventAggregator.GetEvent<InsufficientPrivilegesEvent>().Subscribe((o) =>
                 {

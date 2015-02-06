@@ -11,8 +11,8 @@ namespace GW2PAO.Utility
 {
     public class MailUtility
     {
-        public const string MAIL_USER = "[REMOVED]";
-        public const string MAIL_PASS = "[REMOVED]";
+        public const string MAIL_USER = "gw2pao@gmail.com";
+        public const string MAIL_PASS = "xyx$2jnTD6y39gxK";
 
         /// <summary>
         /// Sends an e-mail

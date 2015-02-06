@@ -36,7 +36,7 @@ namespace GW2PAO.ViewModels
 
         private HotkeySettingsViewModel hotkeySettingsVm;
         private ISettingsViewController settingsViewController;
-        private GameTypeMonitor gameTypeMonitor;
+        private ProcessMonitor processMonitor;
 
         /// <summary>
         /// MEF container
@@ -76,7 +76,7 @@ namespace GW2PAO.ViewModels
             HotkeySettingsViewModel hotkeySettingsVm,
             CompositionContainer container,
             EventAggregator eventAggregator,
-            GameTypeMonitor gameTypeMonitor)
+            ProcessMonitor processMonitor)
         {
             this.MainMenu = new ObservableCollection<IMenuItem>();
             this.container = container;
@@ -90,14 +90,14 @@ namespace GW2PAO.ViewModels
             this.settingsViewController.Initialize();
 
             // Initialize the process monitor
-            GW2PAO.Views.OverlayWindow.ProcessMonitor = new ProcessMonitor(systemService, eventAggregator);
+            GW2PAO.Views.OverlayWindow.EventAggregator = eventAggregator;
 
             // Initialize shutdown handling
             Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
 
             // Start the game type monitor to monitor for player entering PvE/WvW
-            this.gameTypeMonitor = gameTypeMonitor;
-            this.gameTypeMonitor.Start();
+            this.processMonitor = processMonitor;
+            this.processMonitor.Start();
         }
 
         /// <summary>
@@ -140,7 +140,8 @@ namespace GW2PAO.ViewModels
         /// </summary>
         private void Shutdown()
         {
-            this.gameTypeMonitor.Stop();
+            this.processMonitor.Stop();
+            this.processMonitor.Dispose();
             this.hotkeySettingsVm.SaveHotkeys();
             this.settingsViewController.Shutdown();
         }

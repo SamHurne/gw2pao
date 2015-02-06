@@ -60,10 +60,15 @@ namespace GW2PAO.Utility
         {
             var http = new HttpClient();
             var request = http.GetStringAsync(new Uri("https://raw.githubusercontent.com/SamHurne/gw2pao/master/latest_version.txt"));
-            request.Wait(); // Should be pretty quick
-
-            string versionString = request.Result;
-            return new Version(versionString);;
+            if (request.Wait(500)) // Should be pretty quick
+            {
+                string versionString = request.Result;
+                return new Version(versionString);
+            }
+            else
+            {
+                return new Version();
+            }
         }
     }
 }

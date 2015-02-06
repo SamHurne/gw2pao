@@ -19,5 +19,7 @@ namespace GW2PAO.Infrastructure
         public static readonly CompositeCommand OpenDungeonSettingsCommand = new CompositeCommand();
         public static readonly CompositeCommand OpenCommerceSettingsCommand = new CompositeCommand();
         public static readonly CompositeCommand OpenWvWSettingsCommand = new CompositeCommand();
+
+        public static readonly CompositeCommand CleanupTrayIcon = new CompositeCommand();
     }
 }

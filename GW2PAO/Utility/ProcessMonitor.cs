@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Infrastructure;
-using GW2PAO.Utility.Interfaces;
+using GW2PAO.Modules.WvW;
 using Microsoft.Practices.Prism.PubSubEvents;
 using NLog;
 
@@ -16,7 +16,8 @@ namespace GW2PAO.Utility
     /// <summary>
     /// Helper class that monitors the GW2 Process and raises events based on it's state
     /// </summary>
-    public class ProcessMonitor : IProcessMonitor
+    [Export]
+    public class ProcessMonitor : IDisposable
     {
         /// <summary>
         /// Default logger
@@ -30,6 +31,7 @@ namespace GW2PAO.Utility
 
         private bool disposed;
         private ISystemService systemService;
+        private IPlayerService playerService;
         private bool isAdminRightsErrorShown;
         private EventAggregator eventAggregator;
 
@@ -39,31 +41,55 @@ namespace GW2PAO.Utility
         private Timer refreshTimer;
 
         /// <summary>
+        /// True if GW2 is running, else false
+        /// </summary>
+        private bool isGw2Running;
+
+        /// <summary>
         /// True if GW2 has focus, else false
         /// </summary>
         private bool doesGw2HaveFocus;
 
         /// <summary>
-        /// Raised when the GW2 Process gains focus
+        /// The current map ID for the player
         /// </summary>
-        public event EventHandler GW2Focused;
-
-        /// <summary>
-        /// Raised when the GW2 Process loses focus
-        /// </summary>
-        public event EventHandler GW2LostFocus;
+        private int currentMapId;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="systemService"></param>
-        public ProcessMonitor(ISystemService systemService, EventAggregator eventAggregator)
+        [ImportingConstructor]
+        public ProcessMonitor(ISystemService systemService, IPlayerService playerService, EventAggregator eventAggregator)
         {
             this.systemService = systemService;
+            this.playerService = playerService;
+            this.isGw2Running = false;
             this.doesGw2HaveFocus = false;
+            this.currentMapId = -1;
             this.isAdminRightsErrorShown = false;
             this.eventAggregator = eventAggregator;
+            
+        }
+
+        /// <summary>
+        /// Starts the game type monitor
+        /// </summary>
+        public void Start()
+        {
             this.refreshTimer = new Timer(this.Refresh, null, REFRESH_INTERVAL, REFRESH_INTERVAL);
+        }
+
+        /// <summary>
+        /// Stops the game type monitor
+        /// </summary>
+        public void Stop()
+        {
+            if (this.refreshTimer == null)
+            {
+                this.refreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                this.refreshTimer = null;
+            }
         }
 
         /// <summary>
@@ -73,24 +99,57 @@ namespace GW2PAO.Utility
         {
             try
             {
-                var newFocusState = this.systemService.Gw2HasFocus;
-                if (this.doesGw2HaveFocus != newFocusState)
+                var newGW2RunningState = this.systemService.IsGw2Running;
+                if (this.isGw2Running != newGW2RunningState)
                 {
-                    // Focus state changed
+                    if (newGW2RunningState) // Game just started
+                        this.eventAggregator.GetEvent<GW2ProcessStarted>().Publish(null);
+                    else // Game just closed
+                        this.eventAggregator.GetEvent<GW2ProcessClosed>().Publish(null);
+                }
+                this.isGw2Running = newGW2RunningState;
 
-                    if (newFocusState)
+                if (this.isGw2Running)
+                {
+                    var newFocusState = this.systemService.Gw2HasFocus;
+                    if (this.doesGw2HaveFocus != newFocusState)
                     {
-                        this.RaiseGW2Focused();
+                        if (newFocusState) // Game gained focus
+                            this.eventAggregator.GetEvent<GW2ProcessFocused>().Publish(null);
+                        else // Game lost focus
+                            this.eventAggregator.GetEvent<GW2ProcessLostFocus>().Publish(null);
+                    }
+                    this.doesGw2HaveFocus = newFocusState;
+
+                    // No exception thrown, reset bool that keeps track of admin error
+                    isAdminRightsErrorShown = false;
+
+                    if (this.playerService.HasValidMapId)
+                    {
+                        if (this.currentMapId != this.playerService.MapId)
+                        {
+                            var newMap = this.playerService.MapId;
+
+                            // Map changed
+                            if (this.IsWvWMap(newMap) && !this.IsWvWMap(this.currentMapId))
+                            {
+                                // Player just entered WvW
+                                this.eventAggregator.GetEvent<PlayerEnteredWvW>().Publish(null);
+                            }
+                            else if (!this.IsWvWMap(newMap) && this.IsWvWMap(this.currentMapId))
+                            {
+                                // Player just exited WvW
+                                this.eventAggregator.GetEvent<PlayerEnteredPvE>().Publish(null);
+                            }
+
+                            this.currentMapId = this.playerService.MapId;
+                        }
                     }
                     else
                     {
-                        this.RaiseGW2LostFocus();
+                        this.currentMapId = -1;
                     }
-                    this.doesGw2HaveFocus = newFocusState;
                 }
-
-                // No exception thrown, reset bool that keeps track of admin error
-                isAdminRightsErrorShown = false;
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -109,21 +168,16 @@ namespace GW2PAO.Utility
         }
 
         /// <summary>
-        /// Raises the GW2Focused event
+        /// Determines if the given map ID is for one of the WvW maps
         /// </summary>
-        private void RaiseGW2Focused()
+        /// <param name="mapId">The map ID to check</param>
+        /// <returns>True if the given map ID is one of the WvW maps, else false</returns>
+        private bool IsWvWMap(int mapId)
         {
-            if (this.GW2Focused != null)
-                this.GW2Focused(this, new EventArgs());
-        }
-
-        /// <summary>
-        /// Raises the GW2LostFocus event
-        /// </summary>
-        private void RaiseGW2LostFocus()
-        {
-            if (this.GW2LostFocus != null)
-                this.GW2LostFocus(this, new EventArgs());
+            return mapId == WvWMapIDs.EternalBattlegrounds
+                || mapId == WvWMapIDs.RedBorderlands
+                || mapId == WvWMapIDs.GreenBorderlands
+                || mapId == WvWMapIDs.BlueBorderlands;
         }
 
         #region IDisposable Implementation

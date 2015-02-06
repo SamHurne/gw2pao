@@ -12,7 +12,6 @@ using System.Windows;
 using Awesomium.Core;
 using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
-using GW2PAO.Utility.Interfaces;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Practices.Prism.Commands;
 using NLog;
@@ -121,8 +120,6 @@ namespace GW2PAO
         private void DoShutdown()
         {
             logger.Info("Program shutting down");
-            if (GW2PAO.Views.OverlayWindow.ProcessMonitor != null)
-                GW2PAO.Views.OverlayWindow.ProcessMonitor.Dispose();
         }
 
         /// <summary>
@@ -130,50 +127,62 @@ namespace GW2PAO
         /// </summary>
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            logger.Fatal((Exception)e.ExceptionObject);
-
-            // Show a message to the user to allow them to send an error report
-            var selection = MessageBox.Show(
-                "A fatal error has occurred. Would you like to send an anonymous error report?",
-                "GW2 Personal Assistant Overlay",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Error);
-
-            if (selection == MessageBoxResult.Yes)
+            try
             {
-                var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-                byte[] logData = null;
-                if (File.Exists("Logs\\logfile.log"))
-                    logData = File.ReadAllBytes("Logs\\logfile.log");
+                logger.Fatal((Exception)e.ExceptionObject);
 
-                string body = "Fatal exception:\r\n\r\n" + e.ExceptionObject.ToString();
+                // Cleanup the tray icon even if we crash
+                Commands.CleanupTrayIcon.Execute(null);
 
-                if (logData == null)
+#if !DEBUG
+                // Show a message to the user to allow them to send an error report
+                var selection = MessageBox.Show(
+                    "A fatal error has occurred. Would you like to send an anonymous error report?",
+                    "GW2 Personal Assistant Overlay",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Error);
+
+                if (selection == MessageBoxResult.Yes)
                 {
-                    MailUtility.Email(
-                        MailUtility.MAIL_USER,
-                        body,
-                        "Crash Report",
-                        MailUtility.MAIL_USER,
-                        executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
-                        MailUtility.MAIL_USER,
-                        MailUtility.MAIL_PASS);
+                    var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    byte[] logData = null;
+                    if (File.Exists("Logs\\logfile.log"))
+                        logData = File.ReadAllBytes("Logs\\logfile.log");
+
+                    string body = "Fatal exception:\r\n\r\n" + e.ExceptionObject.ToString();
+
+                    if (logData == null)
+                    {
+                        MailUtility.Email(
+                            MailUtility.MAIL_USER,
+                            body,
+                            "Crash Report",
+                            MailUtility.MAIL_USER,
+                            executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
+                            MailUtility.MAIL_USER,
+                            MailUtility.MAIL_PASS);
+                    }
+                    else
+                    {
+                        MailUtility.Email(
+                            MailUtility.MAIL_USER,
+                            body,
+                            "Crash Report",
+                            MailUtility.MAIL_USER,
+                            executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
+                            MailUtility.MAIL_USER,
+                            MailUtility.MAIL_PASS,
+                            new MailAttachment(logData, "crashlog.txt"));
+                    }
                 }
-                else
-                {
-                    MailUtility.Email(
-                        MailUtility.MAIL_USER,
-                        body,
-                        "Crash Report",
-                        MailUtility.MAIL_USER,
-                        executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version,
-                        MailUtility.MAIL_USER,
-                        MailUtility.MAIL_PASS,
-                        new MailAttachment(logData, "crashlog.txt"));
-                }
+
+                Process.GetCurrentProcess().Kill();
+#endif
             }
-
-            Process.GetCurrentProcess().Kill();
+            catch
+            {
+                // Swallow
+            }
         }
     }
 }
