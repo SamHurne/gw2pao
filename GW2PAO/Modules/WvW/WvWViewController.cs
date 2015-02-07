@@ -53,6 +53,11 @@ namespace GW2PAO.Modules.WvW
         private WvWNotificationWindow wvwNotificationsView;
 
         /// <summary>
+        /// True if the player is in WvW, else false
+        /// </summary>
+        private bool isPlayerInWvW;
+
+        /// <summary>
         /// Displays all previously-opened windows and other windows
         /// that must be shown at startup
         /// </summary>
@@ -63,28 +68,9 @@ namespace GW2PAO.Modules.WvW
             logger.Debug("Registering hotkey commands");
             HotkeyCommands.ToggleWvWTrackerCommmand.RegisterCommand(new DelegateCommand(this.ToggleWvWTracker));
 
-            eventAggregator.GetEvent<PlayerEnteredPvE>().Subscribe(o =>
-                {
-                    if (this.userData.AutoOpenCloseTracker)
-                    {
-                        Threading.InvokeOnUI(() =>
-                            {
-                                if (this.wvwTrackerView != null && this.wvwTrackerView.IsVisible)
-                                    this.wvwTrackerView.Close();
-                            });
-                    }
-                });
-
-            eventAggregator.GetEvent<PlayerEnteredWvW>().Subscribe(o =>
-                {
-                    if (this.userData.AutoOpenCloseTracker)
-                    {
-                         Threading.InvokeOnUI(() =>
-                            {
-                                this.DisplayWvWTracker();
-                            });
-                    }
-                });
+            eventAggregator.GetEvent<PlayerEnteredWvW>().Subscribe(o => this.OnPlayerEnteredWvW());
+            eventAggregator.GetEvent<PlayerEnteredPvE>().Subscribe(o => this.OnPlayerExitedWvW());
+            eventAggregator.GetEvent<GW2ProcessClosed>().Subscribe(o => this.OnPlayerExitedWvW());
 
             Threading.BeginInvokeOnUI(() =>
             {
@@ -176,6 +162,37 @@ namespace GW2PAO.Modules.WvW
             {
                 this.wvwTrackerView.Close();
             }
+        }
+
+        /// <summary>
+        /// Performs actions required when the player enters WvW
+        /// </summary>
+        private void OnPlayerEnteredWvW()
+        {
+            this.isPlayerInWvW = true;
+            if (this.userData.AutoOpenCloseTracker)
+            {
+                Threading.InvokeOnUI(() =>
+                {
+                    this.DisplayWvWTracker();
+                });
+            }
+        }
+
+        /// <summary>
+        /// Performs actions required when the player exits WvW
+        /// </summary>
+        private void OnPlayerExitedWvW()
+        {
+            if (this.userData.AutoOpenCloseTracker && this.isPlayerInWvW)
+            {
+                Threading.InvokeOnUI(() =>
+                {
+                    if (this.wvwTrackerView != null && this.wvwTrackerView.IsVisible)
+                        this.wvwTrackerView.Close();
+                });
+            }
+            this.isPlayerInWvW = false;
         }
     }
 }
