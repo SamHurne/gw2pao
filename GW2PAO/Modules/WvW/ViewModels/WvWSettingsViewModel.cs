@@ -48,12 +48,15 @@ namespace GW2PAO.Modules.WvW.ViewModels
             this.UserData = userData;
             this.PossibleWorlds = new ObservableCollection<World>();
 
-            if (wvwService.Worlds == null)
-                wvwService.LoadData();
-            foreach (var world in wvwService.Worlds.OrderBy(wld => wld.Name))
-            {
-                this.PossibleWorlds.Add(world);
-            }
+            Task.Factory.StartNew(() =>
+                {
+                    if (wvwService.Worlds == null || wvwService.Worlds.Count == 0)
+                        wvwService.LoadData();
+                    foreach (var world in wvwService.Worlds.OrderBy(wld => wld.Name))
+                    {
+                        this.PossibleWorlds.Add(world);
+                    }
+                });
         }
     }
 }
