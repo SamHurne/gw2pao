@@ -247,6 +247,8 @@
     </Compile>
     <Compile Include="Modules\Teamspeak\ViewModels\ChatMsgViewModel.cs" />
     <Compile Include="Modules\Teamspeak\ViewModels\ClientViewModel.cs" />
+    <Compile Include="Modules\WebBrowser\Models\Bookmark.cs" />
+    <Compile Include="Modules\WebBrowser\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Modules\WvW\WvWMapIDs.cs" />
     <Compile Include="Utility\Language.cs" />
     <Compile Include="Modules\Commerce\CommerceMenu.cs" />

@@ -1,7 +1,8 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Modules.WebBrowser.Views.BrowserView"
-        x:Name="webWindow"
+        x:Name="WebWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:awe="http://schemas.awesomium.com/winfx"
         xmlns:data="http://schemas.awesomium.com/winfx/data"
@@ -18,8 +19,10 @@
     <src:OverlayWindow.Resources>
         <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
             <awecore:WebPreferences  ShrinkStandaloneImagesToFit="False" SmoothScrolling="True"
-                                        AllowInsecureContent="False"
-                                        CustomCSS="
+                                     AllowInsecureContent="False" WebSecurity="True"
+                                     CanScriptsOpenWindows="False"
+                                     ProxyConfig="auto"
+                                     CustomCSS="
                                         ::-webkit-scrollbar              { background-color: #000000; }
                                         ::-webkit-scrollbar-button       { background-color: #000000; }
                                         ::-webkit-scrollbar-track        { background-color: #000000 }
@@ -35,10 +38,10 @@
         <DockPanel x:Key="BackGraphic">
             <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                     Stretch="Uniform"
-                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Stroke="Black"
                     StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                     StrokeThickness="1"
-                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Fill="Black"
                     Data="M 0,40 L 20,20 20,32 60,32 60,48 20,48 20,60 0,40">
             </Path>
         </DockPanel>
@@ -49,7 +52,7 @@
                     Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
                     StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                     StrokeThickness="1"
-                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Fill="Black"
                     Data="M 60,20 L 40,40 40,28 0,28 0,12 40,12 40,0 60,20">
             </Path>
         </DockPanel>
@@ -57,13 +60,38 @@
         <DockPanel x:Key="ReloadGraphic">
             <Path HorizontalAlignment="Center" VerticalAlignment="Center"
                     Stretch="Uniform"
-                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Stroke="Black"
                     StrokeStartLineCap="Round" StrokeEndLineCap="Round"
                     StrokeThickness="1"
-                    Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                    Fill="Black"
                     Data="M 0,200   C 0,100 75,0 200,0   C 300,0 400,75 400,200  L 450,200  L 375,300  L 300,200  L 350,200  C 350,100 275,50 200,50  C 100,50 50,125 50,200 C 50,250 100,350 200,350  L 200,400  C 100,400 0,300 0,200">
             </Path>
         </DockPanel>
+
+
+
+        <Viewbox x:Key="BookmarkedGraphic" Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Stroke="Black" Fill="LightGoldenrodYellow" Opacity="0.75">
+                    <Path.Data>
+                        <PathGeometry Figures="M9.362 9.158c0 0-3.16 0.35-5.268 0.584c-0.19 0.023-0.358 0.15-0.421 0.343s0 0.394 0.14 0.521    c1.566 1.429 3.919 3.569 3.919 3.569c-0.002 0-0.646 3.113-1.074 5.19c-0.036 0.188 0.032 0.387 0.196 0.506    c0.163 0.119 0.373 0.121 0.538 0.028c1.844-1.048 4.606-2.624 4.606-2.624s2.763 1.576 4.604 2.625    c0.168 0.092 0.378 0.09 0.541-0.029c0.164-0.119 0.232-0.318 0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14 3.919-3.566c0.14-0.131 0.202-0.332 0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375 0.122-0.453 0.294C10.671 6.26 9.362 9.158 9.362 9.158z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Viewbox>
+
+        <Viewbox x:Key="NotBookmarkedGraphic" Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Stroke="LightGoldenrodYellow" Fill="#01000000" Opacity="0.75">
+                    <Path.Data>
+                        <PathGeometry Figures="M9.362 9.158c0 0-3.16 0.35-5.268 0.584c-0.19 0.023-0.358 0.15-0.421 0.343s0 0.394 0.14 0.521    c1.566 1.429 3.919 3.569 3.919 3.569c-0.002 0-0.646 3.113-1.074 5.19c-0.036 0.188 0.032 0.387 0.196 0.506    c0.163 0.119 0.373 0.121 0.538 0.028c1.844-1.048 4.606-2.624 4.606-2.624s2.763 1.576 4.604 2.625    c0.168 0.092 0.378 0.09 0.541-0.029c0.164-0.119 0.232-0.318 0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14 3.919-3.566c0.14-0.131 0.202-0.332 0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375 0.122-0.453 0.294C10.671 6.26 9.362 9.158 9.362 9.158z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Viewbox>
+
+
+
     </src:OverlayWindow.Resources>
 
     <awe:WebDialogsLayer>
@@ -91,6 +119,7 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Image Name="TitleImage"
@@ -102,10 +131,21 @@
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">
-                                <!--Should probably do this in a better way... but this will work for now-->
-                                <MenuItem Name="WikiLink" Header="GW2 Wiki" Click="BookmarkLink_Click" />
-                                <MenuItem Name="DulfyLink" Header="Dulfy" Click="BookmarkLink_Click" />
-                                <MenuItem Name="SpidyLink" Header="GW2 Spidy" Click="BookmarkLink_Click" />
+                                <MenuItem Header="Bookmarks" ItemsSource="{Binding Bookmarks}">
+                                    <MenuItem.ItemTemplate>
+                                        <DataTemplate DataType="MenuItem">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </MenuItem.ItemTemplate>
+                                    <MenuItem.ItemContainerStyle>
+                                        <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                            <Setter Property="Command" Value="{Binding Path=DataContext.GoToBookmarkCommand,
+                                                                                RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                AncestorType={x:Type ContextMenu}}}" />
+                                            <Setter Property="CommandParameter" Value="{Binding}" />
+                                        </Style>
+                                    </MenuItem.ItemContainerStyle>
+                                </MenuItem>
                                 <Separator />
                                 <MenuItem Header="Close" Click="CloseWindowButton_Click" />
                             </ContextMenu>
@@ -151,7 +191,6 @@
                             Margin="35,5,2,5"
                             Width="20" Height="20"
                             HorizontalAlignment="Right"
-                            Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource BackGraphic}"
                             Command="{x:Static NavigationCommands.BrowseBack}" 
                             CommandTarget="{Binding ElementName=webControl}"/>
@@ -160,7 +199,6 @@
                             Margin="2,5,2,5"
                             Width="20" Height="20"
                             HorizontalAlignment="Left"
-                            Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource ForwardGraphic}"
                             Command="{x:Static NavigationCommands.BrowseForward}" 
                             CommandTarget="{Binding ElementName=webControl}"/>
@@ -169,7 +207,6 @@
                             Margin="5,5,5,5"
                             Width="20" Height="20"
                             HorizontalAlignment="Left"
-                            Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource ReloadGraphic}"
                             Command="{x:Static NavigationCommands.Refresh}" 
                             CommandParameter="False"
@@ -177,6 +214,7 @@
 
                     <!-- URL Text Box-->
                     <TextBox Grid.Column="4" Grid.Row="0"
+                             Name="UrlTextbox"
                              Margin="5" Padding="3,0"
                              VerticalContentAlignment="Center"
                              TextWrapping="NoWrap"
@@ -189,9 +227,83 @@
                             </LinearGradientBrush>
                         </TextBox.Background>
                     </TextBox>
-                    
+
+                    <Grid Name="BookmarkIcon" Grid.Column="5" Grid.Row="0"
+                          MouseLeftButtonDown="BookmarkIcon_MouseLeftButtonDown">
+                        <ContentControl>
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="Content" Value="{StaticResource NotBookmarkedGraphic}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSourceBookmarked}" Value="True">
+                                            <Setter Property="Content" Value="{StaticResource BookmarkedGraphic}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                        <Popup Name="BookmarkPopup"
+                               AllowsTransparency="True"
+                               StaysOpen="False" PopupAnimation="Fade"
+                               PlacementTarget="{Binding ElementName=BookmarkIcon}"
+                               SnapsToDevicePixels="True" UseLayoutRounding="True"
+                               HorizontalAlignment="Left"
+                               Placement="Bottom" VerticalOffset="-30">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Rectangle Grid.Row="0"
+                                           Height="{Binding ElementName=BookmarkIcon, Path=ActualHeight}"
+                                           HorizontalAlignment="Stretch">
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="#01000000" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Border Grid.Row="1"
+                                        BorderThickness="1"
+                                        Padding="5">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" />
+                                    </Border.Effect>
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Black" Opacity="0.25" />
+                                    </Border.Background>
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="PaleGoldenrod" Opacity="0.1" />
+                                    </Border.BorderBrush>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0"
+                                                 Width="150"
+                                                 Name="BookmarkNameTextbox"/>
+                                        <Button Grid.Column="1"
+                                                Name="AddBookmarkButton"
+                                                Margin="5,0,0,0"
+                                                Content="{x:Static resx:Resources.OK}"
+                                                Click="AddBookmarkButton_Click">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=BookmarkNameTextbox, Path=Text}" Value="">
+                                                            <Setter Property="IsEnabled" Value="False" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+
                     <!-- Opacity Slider -->
-                    <Slider Grid.Column="5" Grid.Row="0"
+                    <Slider Grid.Column="6" Grid.Row="0"
                             MinWidth="100"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -200,7 +312,7 @@
 
                     <!-- Minimize and Close Buttons -->
                     <Button Name="CollapseExpandButton"
-                            Grid.Column="6" Grid.Row="0"
+                            Grid.Column="7" Grid.Row="0"
                             Margin="3"
                             Click="CollapseExpandButton_Click">
                         <Button.Style>
@@ -218,20 +330,19 @@
                     </Button>
 
                     <Button Name="CloseWindowButton"
-                            Grid.Column="7" Grid.Row="0"
+                            Grid.Column="8" Grid.Row="0"
                             Margin="3,3,5,3"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
                             Click="CloseWindowButton_Click" />
-
                 </Grid>
             </Border>
 
             <awe:WebControl x:Name="webControl" 
                             Grid.Row="1" 
-                            NativeView="{Binding NativeView, ElementName=webWindow}"
+                            NativeView="{Binding NativeView, ElementName=WebWindow}"
                             WebSession="{Binding Source={StaticResource webSession}}"
-                            Source="{Binding Source, ElementName=webWindow}"
+                            AddressChanged="webControl_AddressChanged"
                             Opacity="0.90"/>
         </Grid>
     </awe:WebDialogsLayer>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Awesomium.Core;
 using Awesomium.Windows.Controls;
+using GW2PAO.Modules.WebBrowser.ViewModels;
 using GW2PAO.PresentationCore;
 using GW2PAO.Views;
 using NLog;
@@ -27,7 +29,6 @@ namespace GW2PAO.Modules.WebBrowser.Views
         private static readonly DependencyPropertyKey NativeViewPropertyKey = DependencyProperty.RegisterReadOnly("NativeView", typeof(IntPtr), typeof(BrowserView), new FrameworkPropertyMetadata(IntPtr.Zero));
         private static readonly DependencyPropertyKey IsRegularWindowPropertyKey = DependencyProperty.RegisterReadOnly("IsRegularWindow", typeof(bool), typeof(BrowserView), new FrameworkPropertyMetadata(true));
 
-        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(Uri), typeof(BrowserView), new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty NativeViewProperty = NativeViewPropertyKey.DependencyProperty;
         public static readonly DependencyProperty IsRegularWindowProperty = IsRegularWindowPropertyKey.DependencyProperty;
 
@@ -40,15 +41,6 @@ namespace GW2PAO.Modules.WebBrowser.Views
         /// True if the user is resizing the window, else false
         /// </summary>
         private bool resizeInProcess = false;
-
-        /// <summary>
-        /// The current URL that the window is displaying
-        /// </summary>
-        public Uri Source
-        {
-            get { return (Uri)GetValue(SourceProperty); }
-            set { SetValue(SourceProperty, value); }
-        }
 
         /// <summary>
         /// The native view pointer
@@ -74,10 +66,21 @@ namespace GW2PAO.Modules.WebBrowser.Views
         private double beforeCollapseHeight;
 
         /// <summary>
+        /// The browser view's viewmodel
+        /// </summary>
+        public BrowserViewModel ViewModel
+        {
+            get { return this.DataContext as BrowserViewModel; }
+            private set { this.DataContext = value; }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
-        public BrowserView()
+        public BrowserView(BrowserViewModel viewModel)
         {
+            this.ViewModel = viewModel;
+            this.ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             InitializeComponent();
 
             this.Loaded += (o, e) => this.MinHeight = this.TitleBar.ActualHeight;
@@ -85,8 +88,7 @@ namespace GW2PAO.Modules.WebBrowser.Views
             webControl.ShowCreatedWebView += webControl_ShowCreatedWebView;
             this.Closed += BrowserView_Closed;
 
-            this.Source = WebCore.Configuration.HomeURL;
-
+            this.webControl.Source = this.ViewModel.Source;
             this.beforeCollapseHeight = this.Height;
         }
 
@@ -94,8 +96,9 @@ namespace GW2PAO.Modules.WebBrowser.Views
         /// Constructor with an input native view
         /// </summary>
         /// <param name="nativeView"></param>
-        public BrowserView(IntPtr nativeView)
+        public BrowserView(BrowserViewModel viewModel, IntPtr nativeView)
         {
+            this.ViewModel = viewModel;
             InitializeComponent();
 
             // Always handle ShowCreatedWebView. This is fired for
@@ -120,8 +123,9 @@ namespace GW2PAO.Modules.WebBrowser.Views
         /// Constructor with an input url
         /// </summary>
         /// <param name="url"></param>
-        public BrowserView(Uri url)
+        public BrowserView(BrowserViewModel viewModel, Uri url)
         {
+            this.ViewModel = viewModel;
             InitializeComponent();
 
             // Always handle ShowCreatedWebView. This is fired for
@@ -132,7 +136,7 @@ namespace GW2PAO.Modules.WebBrowser.Views
             // fired when the page calls 'window.close'.
             webControl.WindowClose += webControl_WindowClose;
             // Tell the WebControl to load a specified target URL.
-            this.Source = url;
+            this.webControl.Source = url;
 
             this.Loaded += (o, e) => this.MinHeight = this.TitleBar.ActualHeight;
 
@@ -145,6 +149,12 @@ namespace GW2PAO.Modules.WebBrowser.Views
 
             // Destroy the WebControl and its underlying view.
             webControl.Dispose();
+        }
+
+        void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Source")
+                this.webControl.Source = this.ViewModel.Source;
         }
 
         private void webControl_ShowCreatedWebView(object sender, ShowCreatedWebViewEventArgs e)
@@ -181,7 +191,7 @@ namespace GW2PAO.Modules.WebBrowser.Views
                 // the parent window through 'window.opener'; the parent window 
                 // can manipulate the child through the 'window' object returned 
                 // from the 'window.open' call).
-                newWindow = new BrowserView(e.NewViewInstance);
+                newWindow = new BrowserView(new BrowserViewModel(), e.NewViewInstance);
                 // Do not show in the taskbar.
                 newWindow.ShowInTaskbar = false;
                 // Set a border-style to indicate a popup.
@@ -225,7 +235,7 @@ namespace GW2PAO.Modules.WebBrowser.Views
                 // We will open a normal window but we will still wrap 
                 // the new native child view, maintaining its relationship 
                 // with the parent window.
-                newWindow = new BrowserView(e.NewViewInstance);
+                newWindow = new BrowserView(new BrowserViewModel(), e.NewViewInstance);
                 // Show the window.
                 newWindow.Show();
             }
@@ -257,7 +267,7 @@ namespace GW2PAO.Modules.WebBrowser.Views
                 // URL (if any), is already queued on created child views. 
                 // We must not interrupt this navigation as we would still be 
                 // breaking the parent-child relationship.
-                newWindow = new BrowserView(e.TargetURL);
+                newWindow = new BrowserView(new BrowserViewModel(), e.TargetURL);
                 // Show the window.
                 newWindow.Show();
             }
@@ -382,20 +392,29 @@ namespace GW2PAO.Modules.WebBrowser.Views
             }
         }
 
-        private void BookmarkLink_Click(object sender, RoutedEventArgs e)
+        private void BookmarkIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender == this.WikiLink)
+            if (this.ViewModel.IsSourceBookmarked)
             {
-                this.webControl.Source = new Uri("http://wiki.guildwars2.com/");
+                this.ViewModel.DeleteBookmarkCommand.Execute(null);
             }
-            else if (sender == this.DulfyLink)
+            else
             {
-                this.webControl.Source = new Uri("http://dulfy.net/");
+                this.BookmarkPopup.IsOpen = true;
+                e.Handled = true;
             }
-            else if (sender == this.SpidyLink)
-            {
-                this.webControl.Source = new Uri("http://www.gw2spidy.com/");
-            }
+        }
+
+        private void AddBookmarkButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.AddBookmarkCommand.Execute(this.BookmarkNameTextbox.Text);
+            this.BookmarkPopup.IsOpen = false;
+            e.Handled = true;
+        }
+
+        private void webControl_AddressChanged(object sender, UrlEventArgs e)
+        {
+            this.ViewModel.ActualSource = e.Url;
         }
     }
 }
