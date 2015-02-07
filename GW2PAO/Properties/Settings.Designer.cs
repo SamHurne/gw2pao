@@ -766,5 +766,17 @@ namespace GW2PAO.Properties {
                 this["TaskTrackerY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoHideOverlayIconWhenGw2NotRunning {
+            get {
+                return ((bool)(this["AutoHideOverlayIconWhenGw2NotRunning"]));
+            }
+            set {
+                this["AutoHideOverlayIconWhenGw2NotRunning"] = value;
+            }
+        }
     }
 }

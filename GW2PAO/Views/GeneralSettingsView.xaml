@@ -30,6 +30,11 @@
                   Margin="5">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.OverlayMenuIcon}" />
         </CheckBox>
+        <CheckBox IsChecked="{Binding AutoHideOverlayMenuIconWhenGw2NotRunning}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideOverlayIconWhenGW2NotRunning}" />
+        </CheckBox>
         <CheckBox IsChecked="{Binding CheckForUpdates}"
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="5">

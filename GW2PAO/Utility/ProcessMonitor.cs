@@ -43,7 +43,7 @@ namespace GW2PAO.Utility
         /// <summary>
         /// True if GW2 is running, else false
         /// </summary>
-        private bool isGw2Running;
+        public bool IsGw2Running { get; private set; }
 
         /// <summary>
         /// True if GW2 has focus, else false
@@ -64,7 +64,7 @@ namespace GW2PAO.Utility
         {
             this.systemService = systemService;
             this.playerService = playerService;
-            this.isGw2Running = false;
+            this.IsGw2Running = false;
             this.doesGw2HaveFocus = false;
             this.currentMapId = -1;
             this.isAdminRightsErrorShown = false;
@@ -100,16 +100,16 @@ namespace GW2PAO.Utility
             try
             {
                 var newGW2RunningState = this.systemService.IsGw2Running;
-                if (this.isGw2Running != newGW2RunningState)
+                if (this.IsGw2Running != newGW2RunningState)
                 {
                     if (newGW2RunningState) // Game just started
                         this.eventAggregator.GetEvent<GW2ProcessStarted>().Publish(null);
                     else // Game just closed
                         this.eventAggregator.GetEvent<GW2ProcessClosed>().Publish(null);
                 }
-                this.isGw2Running = newGW2RunningState;
+                this.IsGw2Running = newGW2RunningState;
 
-                if (this.isGw2Running)
+                if (this.IsGw2Running)
                 {
                     var newFocusState = this.systemService.Gw2HasFocus;
                     if (this.doesGw2HaveFocus != newFocusState)

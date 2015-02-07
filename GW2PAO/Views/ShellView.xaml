@@ -52,8 +52,7 @@
 
     </src:OverlayWindow.Resources>
 
-    <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center"
-          Visibility="{Binding Source={x:Static resx:Settings.Default}, Path=IsOverlayIconVisible, Converter={StaticResource BoolToVisibility}}">
+    <Grid Name="MainGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
 
         <!-- Tray Icon -->
         <tb:TaskbarIcon Name="TrayIcon"
@@ -155,6 +154,9 @@
                             </Setter.Value>
                         </Setter>
                     </Trigger>
+                    <DataTrigger Binding="{Binding IsOverlayMenuIconVisible}" Value="False">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
                 </Style.Triggers>
             </Style>
         </Grid.Style>

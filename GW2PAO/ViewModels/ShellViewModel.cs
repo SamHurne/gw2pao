@@ -53,15 +53,11 @@ namespace GW2PAO.ViewModels
         /// </summary>
         public bool IsOverlayMenuIconVisible
         {
-            get { return Settings.Default.IsOverlayIconVisible; }
-            set
+            get
             {
-                if (Settings.Default.IsOverlayIconVisible != value)
-                {
-                    Settings.Default.IsOverlayIconVisible = value;
-                    Settings.Default.Save();
-                    this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible);
-                }
+                return Settings.Default.IsOverlayIconVisible
+                    && (!Settings.Default.AutoHideOverlayIconWhenGw2NotRunning
+                        || (Settings.Default.AutoHideOverlayIconWhenGw2NotRunning && processMonitor.IsGw2Running));
             }
         }
 
@@ -98,6 +94,10 @@ namespace GW2PAO.ViewModels
             // Start the game type monitor to monitor for player entering PvE/WvW
             this.processMonitor = processMonitor;
             this.processMonitor.Start();
+
+            Properties.Settings.Default.PropertyChanged += (o, e) => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible);
+            eventAggregator.GetEvent<GW2ProcessStarted>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
+            eventAggregator.GetEvent<GW2ProcessClosed>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
         }
 
         /// <summary>

@@ -151,6 +151,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Hide Overlay Menu Icon when GW2 is not running.
+        /// </summary>
+        public static string AutoHideOverlayIconWhenGW2NotRunning {
+            get {
+                return ResourceManager.GetString("AutoHideOverlayIconWhenGW2NotRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic Unlock.
         /// </summary>
         public static string AutomaticUnlock {

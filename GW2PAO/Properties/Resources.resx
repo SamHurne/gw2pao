@@ -843,4 +843,7 @@
   <data name="Load" xml:space="preserve">
     <value>Load...</value>
   </data>
+  <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
+    <value>Auto-Hide Overlay Menu Icon when GW2 is not running</value>
+  </data>
 </root>

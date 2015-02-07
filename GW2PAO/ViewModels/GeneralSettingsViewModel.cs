@@ -100,6 +100,23 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// True if the overlay menu icon is hidden when GW2 is not running, else false
+        /// </summary>
+        public bool AutoHideOverlayMenuIconWhenGw2NotRunning
+        {
+            get { return Settings.Default.AutoHideOverlayIconWhenGw2NotRunning; }
+            set
+            {
+                if (Settings.Default.AutoHideOverlayIconWhenGw2NotRunning != value)
+                {
+                    Settings.Default.AutoHideOverlayIconWhenGw2NotRunning = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged(() => this.AutoHideOverlayMenuIconWhenGw2NotRunning);
+                }
+            }
+        }
+
+        /// <summary>
         /// True if borders and title bars should automatically fade out, else fase
         /// </summary>
         public bool AutoFadeBorders
