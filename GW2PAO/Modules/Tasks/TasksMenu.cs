@@ -13,7 +13,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace GW2PAO.Modules.Tasks
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 8)]
+    [ExportMetadata("Order", 5)]
     public class TasksMenu : IMenuItem
     {
         /// <summary>

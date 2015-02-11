@@ -13,7 +13,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace GW2PAO.Modules.ZoneCompletion
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 2)]
+    [ExportMetadata("Order", 6)]
     public class ZoneCompletionMenu : IMenuItem
     {
         /// <summary>

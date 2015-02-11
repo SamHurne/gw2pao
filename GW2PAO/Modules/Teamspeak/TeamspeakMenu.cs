@@ -16,7 +16,7 @@ using Microsoft.Practices.Prism.Modularity;
 namespace GW2PAO.Modules.Teamspeak
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 6)]
+    [ExportMetadata("Order", 7)]
     public class TeamspeakMenu : IMenuItem
     {
         public ObservableCollection<IMenuItem> SubMenuItems { get; private set; }

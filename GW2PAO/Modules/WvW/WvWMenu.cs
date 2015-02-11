@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GW2PAO.API.Services.Interfaces;
+using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Modules.WvW.Interfaces;
@@ -14,7 +15,7 @@ using GW2PAO.Modules.WvW.Interfaces;
 namespace GW2PAO.Modules.WvW
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 4)]
+    [ExportMetadata("Order", 2)]
     public class WvWMenu : IMenuItem
     {
         /// <summary>
@@ -70,6 +71,7 @@ namespace GW2PAO.Modules.WvW
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
 
             // WvW Tracker
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenWvWSettingsCommand.Execute(null)));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenWvWTracker, viewFactory.DisplayWvWTracker, viewFactory.CanDisplayWvWTracker));
         }
     }

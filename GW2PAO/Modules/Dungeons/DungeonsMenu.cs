@@ -14,7 +14,7 @@ using Microsoft.Practices.Prism.Commands;
 namespace GW2PAO.Modules.Dungeons
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 3)]
+    [ExportMetadata("Order", 4)]
     public class DungeonsMenu : IMenuItem
     {
         /// <summary>

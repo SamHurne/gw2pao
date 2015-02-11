@@ -15,7 +15,7 @@ using NLog;
 namespace GW2PAO.Modules.Commerce
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 5)]
+    [ExportMetadata("Order", 3)]
     public class CommerceMenu : IMenuItem
     {
         /// <summary>
