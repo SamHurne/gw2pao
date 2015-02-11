@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Utility;
 
 namespace GW2PAO.Modules.ZoneCompletion.ViewModels
 {
@@ -89,49 +90,53 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         {
             get
             {
-                var characterItems = this.userData.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
-                if (characterItems != null)
-                {
-                    return characterItems.ZoneItems.Contains(this.ItemModel);
-                }
-                else
-                {
-                    return false;
-                }
+                bool isUnlocked = false;
+                Threading.InvokeOnUI(() => // UnlockZoneItems should only ever be accessed from the UI thread
+                    {
+                        var characterItems = this.userData.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
+                        if (characterItems != null)
+                            isUnlocked = characterItems.ZoneItems.Contains(this.ItemModel);
+                        else
+                            isUnlocked = false;
+                    });
+                return isUnlocked;
             }
             set
             {
-                var characterItems = this.userData.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
-                if (value) // Add to UnlockedZoneItems
-                {
-                    if (characterItems != null)
+                Threading.InvokeOnUI(() => // UnlockZoneItems should only ever be accessed from the UI thread
                     {
-                        // Already saved stuff for this character, add to collection for character
-                        if (!characterItems.ZoneItems.Contains(this.ItemModel))
+                        var characterItems = this.userData.UnlockedZoneItems.FirstOrDefault(czi => czi.Character == this.playerService.CharacterName);
+                        if (value) // Add to UnlockedZoneItems
                         {
-                            characterItems.ZoneItems.Add(this.ItemModel);
-                            this.OnPropertyChanged(() => this.IsUnlocked);
+                            if (characterItems != null)
+                            {
+                                // Already saved stuff for this character, add to collection for character
+                                if (!characterItems.ZoneItems.Contains(this.ItemModel))
+                                {
+                                    characterItems.ZoneItems.Add(this.ItemModel);
+                                    this.OnPropertyChanged(() => this.IsUnlocked);
+                                }
+                            }
+                            else
+                            {
+                                // Nothing saved yet for this character, add character then add zone item
+                                characterItems = new CharacterZoneItems() { Character = this.playerService.CharacterName };
+                                characterItems.ZoneItems.Add(this.ItemModel);
+                                this.userData.UnlockedZoneItems.Add(characterItems);
+                                this.OnPropertyChanged(() => this.IsUnlocked);
+                            }
                         }
-                    }
-                    else
-                    {
-                        // Nothing saved yet for this character, add character then add zone item
-                        characterItems = new CharacterZoneItems() { Character = this.playerService.CharacterName };
-                        characterItems.ZoneItems.Add(this.ItemModel);
-                        this.userData.UnlockedZoneItems.Add(characterItems);
-                        this.OnPropertyChanged(() => this.IsUnlocked);
-                    }
-                }
-                else  // Remove from UnlockedZoneItems
-                {
-                    if (characterItems != null)
-                    {
-                        if (characterItems.ZoneItems.Remove(this.ItemModel))
+                        else  // Remove from UnlockedZoneItems
                         {
-                            this.OnPropertyChanged(() => this.IsUnlocked);
+                            if (characterItems != null)
+                            {
+                                if (characterItems.ZoneItems.Remove(this.ItemModel))
+                                {
+                                    this.OnPropertyChanged(() => this.IsUnlocked);
+                                }
+                            }
                         }
-                    }
-                }
+                    });
             }
         }
 

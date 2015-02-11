@@ -323,14 +323,14 @@ namespace GW2PAO.Modules.ZoneCompletion
                                         if (this.UserData.AutoUnlockWaypoints
                                             && ftDistance >= 0 && ftDistance < 75)
                                         {
-                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                            Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                         }
                                         break;
                                     case API.Data.Enums.ZoneItemType.PointOfInterest:
                                         if (this.UserData.AutoUnlockPois
                                             && ftDistance >= 0 && ftDistance < 75)
                                         {
-                                            Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                            Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                         }
                                         break;
                                     case API.Data.Enums.ZoneItemType.Vista:
@@ -340,7 +340,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                                             if (this.distanceCounters[item.ItemId] > 4)
                                             {
                                                 this.distanceCounters[item.ItemId] = 0;
-                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                                Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
@@ -359,7 +359,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                                             if (this.distanceCounters[item.ItemId] > 90)
                                             {
                                                 this.distanceCounters[item.ItemId] = 0;
-                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                                Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
@@ -378,7 +378,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                                             if (this.distanceCounters[item.ItemId] > 15)
                                             {
                                                 this.distanceCounters[item.ItemId] = 0;
-                                                Threading.BeginInvokeOnUI(() => item.IsUnlocked = true);
+                                                Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
