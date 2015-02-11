@@ -49,7 +49,7 @@ namespace GW2PAO.API.Services
                     throw new ObjectDisposedException(this.ToString());
 
                 var data = this.mumbleLink.Read();
-                if (data != null)
+                if (data != null && data.Identity != null)
                     return data.Identity.Name;
                 else
                     return null;
@@ -67,7 +67,7 @@ namespace GW2PAO.API.Services
                     throw new ObjectDisposedException(this.ToString());
 
                 var data = this.mumbleLink.Read();
-                if (data != null)
+                if (data != null && data.Identity != null)
                     return data.Identity.Commander;
                 else
                     return false;
@@ -114,7 +114,7 @@ namespace GW2PAO.API.Services
                     throw new ObjectDisposedException(this.ToString());
 
                 var data = this.mumbleLink.Read();
-                if (data != null)
+                if (data != null && data.Identity != null)
                     return data.Identity.WorldId;
                 else
                     return 0;
