@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GW2PAO.API.Constants;
 using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Properties;
@@ -44,7 +45,8 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// </summary>
         public ObservableCollection<DungeonViewModel> Dungeons
         {
-            get { return this.controller.Dungeons; }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -75,6 +77,14 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
             this.controller = controller;
             this.ResetAllBestTimesCommand = new DelegateCommand(this.ResetAllBestTimes);
             this.ResetBestTimeCommand = new DelegateCommand<PathViewModel>(this.ResetBestTime);
+
+            this.Dungeons = new ObservableCollection<DungeonViewModel>();
+            foreach (var dungeon in this.controller.Dungeons)
+            {
+                // Exclude fractals
+                if (dungeon.DungeonId != DungeonID.FractalsOfTheMists)
+                    this.Dungeons.Add(dungeon);
+            }
         }
 
         /// <summary>
