@@ -14,7 +14,7 @@
             <Setter Property="Margin" Value="5,1,1,1" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="30,10,0,0" HorizontalAlignment="Left">
+    <StackPanel Margin="30,10,0,0" HorizontalAlignment="Stretch">
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAllWindows}"
                                  Hotkey="{Binding ToggleAllWindowsHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleEventsTracker}"
@@ -31,6 +31,8 @@
                                  Hotkey="{Binding ToggleZoneAssistantHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleTeamspeakOverlay}"
                                  Hotkey="{Binding ToggleTeamspeakTrackerHotkey}"/>
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleTasksTracker}"
+                                 Hotkey="{Binding ToggleTaskTrackerHotkey}"/>
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWebBrowser}"
                                  Hotkey="{Binding ToggleWebBrowserHotkey}"/>
 

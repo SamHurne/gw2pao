@@ -202,7 +202,7 @@ namespace GW2PAO.Infrastructure
             {
                 logger.Trace("Unregistering hotkey {0}", this.id);
                 HotkeyManager.Current.Remove(this.id);
-                this.IsEnabled = false;
+                this.isEnabled = false;
             }
         }
 

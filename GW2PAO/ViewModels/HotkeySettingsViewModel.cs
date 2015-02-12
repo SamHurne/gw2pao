@@ -41,6 +41,7 @@ namespace GW2PAO.ViewModels
         private Hotkey togglePriceTrackerHotkey;
         private Hotkey toggleWvWTrackerHotkey;
         private Hotkey toggleZoneAssistantHotkey;
+        private Hotkey toggleTaskTrackerHotkey;
         private Hotkey toggleTeamspeakTrackerHotkey;
         private Hotkey toggleWebBrowserHotkey;
 
@@ -152,6 +153,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Hotkey to toggle the task tracker on/off
+        /// </summary>
+        public Hotkey ToggleTaskTrackerHotkey
+        {
+            get { return this.toggleTaskTrackerHotkey; }
+            set { this.SetProperty(ref this.toggleTaskTrackerHotkey, value); }
+        }
+
+        /// <summary>
         /// Hotkey to toggle the teamspeak overlay on/off
         /// </summary>
         public Hotkey ToggleTeamspeakTrackerHotkey
@@ -181,6 +191,7 @@ namespace GW2PAO.ViewModels
             this.TogglePriceTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleWvWTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleZoneAssistantHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleTaskTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleTeamspeakTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
             this.ToggleWebBrowserHotkey = new Hotkey(Key.None, false, true, false, false);
             this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
@@ -231,6 +242,9 @@ namespace GW2PAO.ViewModels
                         if (loadedHotkeys.ToggleZoneAssistantHotkey != null)
                             this.ToggleZoneAssistantHotkey = loadedHotkeys.ToggleZoneAssistantHotkey;
 
+                        if (loadedHotkeys.ToggleTaskTrackerHotkey != null)
+                            this.ToggleTaskTrackerHotkey = loadedHotkeys.ToggleTaskTrackerHotkey;
+
                         if (loadedHotkeys.ToggleTeamspeakTrackerHotkey != null)
                             this.ToggleTeamspeakTrackerHotkey = loadedHotkeys.ToggleTeamspeakTrackerHotkey;
 
@@ -266,6 +280,7 @@ namespace GW2PAO.ViewModels
             this.TogglePriceTrackerHotkey.Refresh();
             this.ToggleWvWTrackerHotkey.Refresh();
             this.ToggleZoneAssistantHotkey.Refresh();
+            this.ToggleTaskTrackerHotkey.Refresh();
             this.ToggleTeamspeakTrackerHotkey.Refresh();
             this.ToggleWebBrowserHotkey.Refresh();
         }
@@ -299,6 +314,7 @@ namespace GW2PAO.ViewModels
                 this.TogglePriceTrackerHotkey.Pressed += OnPressed;
                 this.ToggleWvWTrackerHotkey.Pressed += OnPressed;
                 this.ToggleZoneAssistantHotkey.Pressed += OnPressed;
+                this.ToggleTaskTrackerHotkey.Pressed += OnPressed;
                 this.ToggleTeamspeakTrackerHotkey.Pressed += OnPressed;
                 this.ToggleWebBrowserHotkey.Pressed += OnPressed;
             }
@@ -323,6 +339,7 @@ namespace GW2PAO.ViewModels
                 this.TogglePriceTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleWvWTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleZoneAssistantHotkey.Pressed -= OnPressed;
+                this.ToggleTaskTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleTeamspeakTrackerHotkey.Pressed -= OnPressed;
                 this.ToggleWebBrowserHotkey.Pressed -= OnPressed;
             }
@@ -361,6 +378,8 @@ namespace GW2PAO.ViewModels
                     HotkeyCommands.ToggleZoneAssistantCommand.Execute(null);
                 else if (hotkey == this.ToggleTeamspeakTrackerHotkey)
                     HotkeyCommands.ToggleTeamspeakOverlayCommand.Execute(null);
+                else if (hotkey == this.ToggleTaskTrackerHotkey)
+                    HotkeyCommands.ToggleTaskTrackerCommand.Execute(null);
                 else if (hotkey == this.ToggleWebBrowserHotkey)
                     HotkeyCommands.ToggleWebBrowserCommand.Execute(null);
             }
