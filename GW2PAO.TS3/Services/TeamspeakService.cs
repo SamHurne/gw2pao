@@ -538,7 +538,7 @@ namespace GW2PAO.TS3.Services
                         this.localClients.TryRemove(clientId, out throwAway);
                         this.RaiseClientExitedChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
                     }
-                    else
+                    else if (newChannelId == this.currentChannelID)
                     {
                         // Someone joined the channel
                         this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
@@ -546,6 +546,10 @@ namespace GW2PAO.TS3.Services
                     }
 
                     this.clients[clientId].ChannelID = newChannelId;
+                }
+                else
+                {
+                    this.AddClients(notificationString);
                 }
 
                 // Also raise channel updated for the channel that lost the client and the channel that gained the client
@@ -571,16 +575,6 @@ namespace GW2PAO.TS3.Services
         {
             // Someone joined the server
             this.AddClients(notificationString);
-
-            // If they joined the current channel, raise the client entered channel event
-            uint channelId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ChannelID, Properties.TargetChannelID);
-            if (channelId == this.currentChannelID)
-            {
-                // Someone joined the channel
-                uint clientId = DecodeUtility.DecodeUIntProperty(notificationString, Properties.ClientID);
-                this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
-                this.RaiseClientEnteredChannel(new Data.ClientEventArgs(clientId, this.clients[clientId].Name));
-            }
         }
 
         /// <summary>
@@ -729,6 +723,7 @@ namespace GW2PAO.TS3.Services
                     var client = new Client(clientId, clientNickname, channelId);
                     this.clients.AddOrUpdate(clientId, client, (key, oldValue) => client);
 
+                    // If they joined the current channel, raise the client entered channel event
                     if (client.ChannelID == this.CurrentChannelID)
                     {
                         this.localClients.AddOrUpdate(clientId, this.clients[clientId], (key, oldValue) => this.clients[clientId]);
