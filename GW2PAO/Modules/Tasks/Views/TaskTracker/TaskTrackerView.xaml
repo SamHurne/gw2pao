@@ -59,6 +59,16 @@
                             <MenuItem Header="{x:Static resx:Resources.Import}" Command="{Binding ImportTasksCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.Export}" Command="{Binding ExportTasksCommand}" />
                             <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.SortBy}">
+                                <MenuItem Header="{x:Static resx:Resources.Name}" IsCheckable="True" IsChecked="{Binding SortByName}" />
+                                <MenuItem Header="{x:Static resx:Resources.Distance}" IsCheckable="True" IsChecked="{Binding SortByDistance}" />
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
+                                <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
+                                <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
+                            </MenuItem>
+                            <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
@@ -165,7 +175,7 @@
 
         <ItemsControl Name="TasksContainer"
                       Grid.Row="1"
-                      ItemsSource="{Binding PlayerTasks}">
+                      ItemsSource="{Binding PlayerTasks.View}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <view:TaskView DataContext="{Binding}"/>

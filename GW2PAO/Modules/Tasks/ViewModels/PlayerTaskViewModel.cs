@@ -34,6 +34,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private double directionFromPlayer;
 
         /// <summary>
+        /// The player task's name
+        /// </summary>
+        public string Name
+        {
+            get { return this.Task.Name; }
+        }
+
+        /// <summary>
         /// The actual player task
         /// </summary>
         public PlayerTask Task
@@ -87,7 +95,17 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         public double DistanceFromPlayer
         {
-            get { return this.distanceFromPlayer; }
+            get
+            {
+                if (this.HasLocation && this.IsPlayerOnMap)
+                {
+                    return this.distanceFromPlayer;
+                }
+                else
+                {
+                    return double.MaxValue;
+                }
+            }
             set { SetProperty(ref this.distanceFromPlayer, value); }
         }
 

@@ -29,8 +29,12 @@ namespace GW2PAO.Modules.Tasks
         /// </summary>
         public const string Filename = "TasksUserData.xml";
 
+        public const string TASK_TRACKER_SORT_NAME = "Name";
+        public const string TASK_TRACKER_SORT_DISTANCE = "DistanceFromPlayer";
+
         private Units distanceUnits;
         private DateTime lastCompletionDateTime;
+        private string taskTrackerSortProperty;
         private ObservableCollection<PlayerTask> tasks = new ObservableCollection<PlayerTask>();
 
         /// <summary>
@@ -49,6 +53,15 @@ namespace GW2PAO.Modules.Tasks
         {
             get { return this.lastCompletionDateTime; }
             set { SetProperty(ref this.lastCompletionDateTime, value); }
+        }
+
+        /// <summary>
+        /// The property name to use when sorting items in the Task Tracker
+        /// </summary>
+        public string TaskTrackerSortProperty
+        {
+            get { return this.taskTrackerSortProperty; }
+            set { this.SetProperty(ref taskTrackerSortProperty, value); }
         }
 
         /// <summary>
