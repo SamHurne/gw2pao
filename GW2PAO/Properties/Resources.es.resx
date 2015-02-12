@@ -539,7 +539,7 @@
     <comment>Price Tracker title (like Dungeons Tracker, but for tracking item prices)</comment>
   </data>
   <data name="Profit" xml:space="preserve">
-    <value>Beneficio:</value>
+    <value>Beneficio</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Cantidad</value>

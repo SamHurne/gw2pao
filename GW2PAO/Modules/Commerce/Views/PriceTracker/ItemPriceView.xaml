@@ -121,7 +121,7 @@
     
     <UserControl.ToolTip>
         <StackPanel Orientation="Horizontal">
-            <core:OutlinedTextBlock Text="{x:Static resx:Resources.Profit}" FontSize="12"/>
+            <core:OutlinedTextBlock Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}" FontSize="12"/>
             <view:ReadonlyPriceView Margin="5,0,0,0"
                                     Price="{Binding CurrentProfit}"
                                     TextFill="White" />

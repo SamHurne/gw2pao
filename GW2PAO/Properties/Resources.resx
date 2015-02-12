@@ -258,7 +258,7 @@
     <value>Price Notifications</value>
   </data>
   <data name="Profit" xml:space="preserve">
-    <value>Profit:</value>
+    <value>Profit</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
@@ -845,5 +845,14 @@
   </data>
   <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
     <value>Auto-Hide Overlay Menu Icon when GW2 is not running</value>
+  </data>
+  <data name="ToggleTasksTracker" xml:space="preserve">
+    <value>Toggle Tasks Tracker</value>
+  </data>
+  <data name="CustomIcon" xml:space="preserve">
+    <value>Custom Icon</value>
+  </data>
+  <data name="ItemIcon" xml:space="preserve">
+    <value>Item Icon</value>
   </data>
 </root>

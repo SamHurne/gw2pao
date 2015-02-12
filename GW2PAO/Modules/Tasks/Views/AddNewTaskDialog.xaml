@@ -148,7 +148,7 @@
                                 <RadioButton Name="ItemIconRadioButton"
                                              Grid.Row="0" Grid.Column="0"
                                              Margin="5" IsChecked="True">
-                                    <core:OutlinedTextBlock Text="Item Icon" />
+                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.ItemIcon}" />
                                 </RadioButton>
                                 <Grid Grid.Row="1" Grid.Column="0"
                                       Visibility="{Binding ElementName=ItemIconRadioButton, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"
@@ -231,7 +231,7 @@
                                 <RadioButton Name="CustomIconRadioButton"
                                              Grid.Row="0" Grid.Column="1"
                                              Margin="5">
-                                    <core:OutlinedTextBlock Text="Custom Icon" />
+                                    <core:OutlinedTextBlock Text="{x:Static resx:Resources.CustomIcon}" />
                                 </RadioButton>
                                 <Grid Grid.Row="1" Grid.Column="1"
                                       Visibility="{Binding ElementName=CustomIconRadioButton, Path=IsChecked, Converter={StaticResource BoolToVisibility}}">

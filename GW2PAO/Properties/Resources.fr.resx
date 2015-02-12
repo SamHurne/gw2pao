@@ -423,7 +423,7 @@
     <comment>Price Tracker title (like Dungeons Tracker, but for tracking item prices)</comment>
   </data>
   <data name="Profit" xml:space="preserve">
-    <value>Profit:</value>
+    <value>Profit</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantité</value>
@@ -833,5 +833,14 @@
   </data>
   <data name="WaypointCode" xml:space="preserve">
     <value>Code de TP</value>
+  </data>
+  <data name="CustomIcon" xml:space="preserve">
+    <value>Icône personnalisée</value>
+  </data>
+  <data name="ItemIcon" xml:space="preserve">
+    <value>Icône de l'objet</value>
+  </data>
+  <data name="ToggleTasksTracker" xml:space="preserve">
+    <value>Montrer/Masquer le Suivi des tâches</value>
   </data>
 </root>

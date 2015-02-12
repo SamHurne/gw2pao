@@ -343,7 +343,7 @@
                         Margin="5"
                         ToolTipService.ShowDuration="30000">
 
-                <core:OutlinedTextBlock Text="{x:Static resx:Resources.Profit}" FontSize="15"/>
+                <core:OutlinedTextBlock Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}" FontSize="15"/>
                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0" VerticalAlignment="Bottom">
                     <core:OutlinedTextBlock Text="-" FontSize="14" Visibility="{Binding Profit.IsNegative, Converter={StaticResource BoolToVisibility}}" />
                     <core:OutlinedTextBlock Text="{Binding Profit.Gold}" FontSize="14" />

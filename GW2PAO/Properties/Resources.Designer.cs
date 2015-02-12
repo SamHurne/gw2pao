@@ -484,6 +484,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Icon.
+        /// </summary>
+        public static string CustomIcon {
+            get {
+                return ResourceManager.GetString("CustomIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -862,6 +871,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Item Icon.
+        /// </summary>
+        public static string ItemIcon {
+            get {
+                return ResourceManager.GetString("ItemIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Item Name.
         /// </summary>
         public static string ItemName {
@@ -1168,7 +1186,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profit:.
+        ///   Looks up a localized string similar to Profit.
         /// </summary>
         public static string Profit {
             get {
@@ -1695,6 +1713,15 @@ namespace GW2PAO.Properties {
         public static string TogglePriceTracker {
             get {
                 return ResourceManager.GetString("TogglePriceTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Tasks Tracker.
+        /// </summary>
+        public static string ToggleTasksTracker {
+            get {
+                return ResourceManager.GetString("ToggleTasksTracker", resourceCulture);
             }
         }
         
