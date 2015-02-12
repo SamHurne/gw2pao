@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Infrastructure.Interfaces;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace GW2PAO.Modules.WvW.ViewModels
@@ -54,7 +55,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
                         wvwService.LoadData();
                     foreach (var world in wvwService.Worlds.OrderBy(wld => wld.Name))
                     {
-                        this.PossibleWorlds.Add(world);
+                        Threading.BeginInvokeOnUI(() => this.PossibleWorlds.Add(world));
                     }
                 });
         }
