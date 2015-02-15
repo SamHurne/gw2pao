@@ -373,7 +373,11 @@ namespace GW2PAO.API.Data
                                 ID = HonorOfTheWavesPathID.Story,
                                 InstanceMapID = 70,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(106.65, 25.35, 5.11),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point> { new Point(-158.16, 7.04, 54.48), new Point(-56.92, 77.66, 55.01), new Point(-166.32, 235.24, 40.23) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -381,7 +385,11 @@ namespace GW2PAO.API.Data
                                 ID = HonorOfTheWavesPathID.P1,
                                 InstanceMapID = 71,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-67.77, -68.20, 18.95),
+                                IdentifyingPoints = new List<Point> { new Point(-119.83, 159.85, 38.57) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-119.83, 159.85, 38.57), new Point(-15.81, 174.86, 35.39) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -389,7 +397,11 @@ namespace GW2PAO.API.Data
                                 ID = HonorOfTheWavesPathID.P2,
                                 InstanceMapID = 71,
                                 PathDisplayText = "P2",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-158.60, 141.23, -36.51),
+                                IdentifyingPoints = new List<Point> { new Point(-10.70, 4.73, 55.70) },
+                                CompletionPrereqPoints = new List<Point> { new Point(10.92, -32.10, 59.07), new Point(131.86, 99.55, 42.87), new Point(20.38, 17.66, 7.87) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -397,7 +409,11 @@ namespace GW2PAO.API.Data
                                 ID = HonorOfTheWavesPathID.P3,
                                 InstanceMapID = 71,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-100.96, 11.86, -18.29),
+                                IdentifyingPoints = new List<Point> { new Point(-199.69, 197.26, 43.96) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-199.69, 197.26, 43.96), new Point(-168.98, 232.75, 40.52) },
+                                PointDetectionRadius = 35
                             }
                         }
             });
@@ -417,7 +433,11 @@ namespace GW2PAO.API.Data
                                 ID = CrucibleOfEternityPathID.Story,
                                 InstanceMapID = 81,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(34.60, 37.36, 115.80),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -425,7 +445,11 @@ namespace GW2PAO.API.Data
                                 ID = CrucibleOfEternityPathID.P1,
                                 InstanceMapID = 82,
                                 PathDisplayText = "P1",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(131.17, 126.65, 188.48),
+                                IdentifyingPoints = new List<Point> { new Point(170.98, -94.73, 176.74) },
+                                CompletionPrereqPoints = new List<Point> { new Point(170.98, -94.73, 176.74), new Point(238.30, 181.81, 191.84) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -433,7 +457,11 @@ namespace GW2PAO.API.Data
                                 ID = CrucibleOfEternityPathID.P2,
                                 InstanceMapID = 82,
                                 PathDisplayText = "P2",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-74.92, 357.91, 224.40),
+                                IdentifyingPoints = new List<Point> { new Point(37.20, 355.87, 226.81) },
+                                CompletionPrereqPoints = new List<Point> { new Point(37.20, 355.87, 226.81), new Point(-70.33, 341.65, 226.94) },
+                                PointDetectionRadius = 35
                             },
                             new DungeonPath()
                             {
@@ -441,7 +469,11 @@ namespace GW2PAO.API.Data
                                 ID = CrucibleOfEternityPathID.P3,
                                 InstanceMapID = 82,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(96.01, -17.57, 237.59),
+                                IdentifyingPoints = new List<Point> { new Point(11.66, 295.33, 222.84) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-139.68, 230.29, 228.39), new Point(-138.14, 149.17, 212.75) },
+                                PointDetectionRadius = 35
                             }
                         }
             });
