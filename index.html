@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,8 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name=”description” content="A full-featured, stand-alone guild wars 2 informational overlay.">
     <meta name="author" content="Samuel Hurne">
+    <meta property="og:title" content="GW2 Personal Assistant Overlay" />
+    <meta property="og:url" content="http://samhurne.github.io/gw2pao/" />
+    <meta property="og:description" content="A full-featured, stand-alone guild wars 2 informational overlay." />
 
     <title>GW2 PAO</title>
     
@@ -25,9 +28,7 @@
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5415e65878b7015d"></script>
+
 
     <!-- Google Analytics -->
     <script>
@@ -107,9 +108,6 @@
                         <a class="page-scroll" href="#download">Download</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#screenshots">Screenshots</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#faq">FAQ</a>
                     </li>
                     <li>
@@ -132,6 +130,9 @@
                         <br><br>
                         <h1 class="brand-heading">GW2 Personal Assistant Overlay</h1>
                         <p class="intro-text">A stand-alone Guild Wars 2 informational overlay.</p>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_sharing_toolbox"></div>
+                        <br><br>
                         <a href="#about" class="btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -143,53 +144,178 @@
 
     <!-- About Section -->
     <section id="about" class="container about-section text-center">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <h2>About</h2>
-                <p>The GW2 Personal Assistant Overlay is an 'overlay' utility that sits on top of Guild Wars 2 as you play, providing various information such as time until world events, zone completion information, and WvW objectives status.</p>
-                <div class="feature">
-                    <h3>World Events Tracker</h3>
-                    <p>The Events Tracker overlay tracks active and inactive world events, and allows a user to keep track of which events have already been completed for the day.</p>
+        <!-- Page Features -->
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/evt_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>World Events Tracker</h3>
+                        <p>Tracks active and inactive world events, and allows a user to keep track of which events have already been completed for the day.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
                 </div>
-                <div class="feature">
-                    <h3>World Event Notifications</h3>
-                    <p>Event Notifications are notification pop-ups that appear when a world event is about to start.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/evt_notify.png" alt="">
+                    <div class="caption">
+                        <h3>World Event Notifications</h3>
+                        <p>Pop-ups that appear when a world event is about to start.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
                 </div>
-                <div class="feature">
-                    <h3>Zone Completion Assistant</h3>
-                    <p>The Zone Completion Assistant displays real-time distance and direction information for zone completion points/locations and provides several options for keeping track of unlocked locations.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/wvw_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>WvW Tracker</h3>
+                        <p>Displays all objectives in the player's WvW map, including owner, distance to the objective, and RI timer value.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
                 </div>
-                <div class="feature">
-                    <h3>Dungeon Tracker</h3>
-                    <p>The Dungeon Tracker is a simple overlay tool that allows a user to keep track of what dungeon paths have been completed for the day, and provides some basic information about each dungeon and dungeon path.</p>
-                </div>
-                <div class="feature">
-                    <h3>WvW Tracker</h3>
-                    <p>The WvW Tracker overlay displays all objectives in the current player's WvW map, and includes information such as current owner, estimated time-distance to the objective, and the current RI timer value.</p>
-                </div>
-                <div class="feature">
-                    <h3>WvW Notifications</h3>
-                    <p>WvW Notifications are notification pop-ups that appear when an objective (keep/tower/camp, etc) has been captured in one of the WvW maps.</p>
-                </div>
-                <div class="feature">
-                    <h3>Trading Post Calculator</h3>
-                    <p>The Trading Post Calculator is a simple tool that allows a user to calculate profit, taxes, and break-even prices for buying/selling items on the in-game Trading Post.</p>
-                </div>
-                <div class="feature">
-                    <h3>Trading Post Price Notifications</h3>
-                    <p>Price Notifications are notifications that appear when an item has reached a certain highest Buy Order or lowest Sale Listing in the Trading Post. Want to know when the price of Dawn has dropped below a certain value, or when Copper Ore's Buy Orders reach a specific price? This tool will notify you of the change in price.</p>
-                </div>
-                <div class="feature">
-                    <h3>Teamspeak Overlay</h3>
-                    <p>The Teamspeak Overlay is a basic overlay window that uses the ClientQuery plugin of Teamspeak and allows a user to see when someone talks, sends a chat, or enters/exits the current channel. The tool also allows the user to change channel and send chat messages themselves.</p>
-                </div>
-                <div class="feature">
-                    <h3>Web Browser</h3>
-                    <p>For all needs not provided by the other overlay windows, the Web Browser allows a user to look up guides, videos, or anything else.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/wvw_notify.png" alt="">
+                    <div class="caption">
+                        <h3>WvW Notifications</h3>
+                        <p>Pop-ups that appear when an objective has been captured in one of the WvW maps.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        <!-- /.row -->
+
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/zone_assist.png" alt="">
+                    <div class="caption">
+                        <h3>Zone Completion Assistant</h3>
+                        <p>Displays real-time distance and direction information for zone completion locations with several options for keeping track of unlocked locations.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/dun_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>Dungeon Tracker</h3>
+                        <p>Keeps track of what dungeon paths have been completed for the day, and provides information about each dungeon and path.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/tp_notify.png" alt="">
+                    <div class="caption">
+                        <h3>Trading Post Price Notifications</h3>
+                        <p>Pop-ups that appear when an item has reached a certain highest Buy Order or lowest Sale Listing in the Trading Post.</p>
+                        <!--<p>
+                    <a href="#" class="btn btn-default">More Info</a>
+                </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/tp_calc.png" alt="">
+                    <div class="caption">
+                        <h3>Trading Post Calculator</h3>
+                        <p>Calculates profit, taxes, and break-even prices for buying/selling items on the in-game Trading Post.</p>
+                        <!--<p>
+                    <a href="#" class="btn btn-default">More Info</a>
+                </p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/ts_overlay.png" alt="">
+                    <div class="caption">
+                        <h3>Teamspeak Overlay</h3>
+                        <p>Shows when someone talks, sends a chat, or enters/exits the active channel. Provides channel switching and messaging.</p>
+                        <!--<p>
+                    <a href="#" class="btn btn-default">More Info</a>
+                </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="/img/features/web_browser.png" alt="">
+                    <div class="caption">
+                        <h3>Web Browser</h3>
+                        <p>Provides a way to look up guides, videos, or any other useful website.</p>
+                        <!--<p>
+                            <a href="#" class="btn btn-default">More Info</a>
+                        </p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.row -->
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
+                    <div class="caption">
+                        <h3>Dungeon Timer</h3>
+                        <!--<p>Coming soon!</p>-->
+                        <!--<p>
+                    <a href="#" class="btn btn-default">More Info</a>
+                </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
+                    <div class="caption">
+                        <h3>Trading Post Price Tracker</h3>
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+                        <!--<p>
+                    <a href="#" class="btn btn-default">More Info</a>
+                </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
+                    <div class="caption">
+                        <h3>Custom Tasks Tracker</h3>
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+                        <!--<p>
+                        <a href="#" class="btn btn-default">More Info</a>
+                    </p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
 
     <!-- Download Section -->
     <section id="download" class="text-center">
@@ -232,40 +358,7 @@
             </div>
         </div>
     </section>
-    
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="screenshots-section text-center">
-        <h2>Screenshots</h2>
-        <!--  Carousel - consult the Twitter Bootstrap docs at 
-              http://twitter.github.com/bootstrap/javascript.html#carousel -->
-        <div id="this-carousel-id" class="carousel slide col-lg-8 col-lg-offset-2"><!-- class of slide for animation -->
-          <div class="carousel-inner">
-            <div class="item active"><!-- class of active since it's the first item -->
-              <img src="img/screenshots/screen1.jpg" alt="" />
-            </div>
-            <div class="item">
-              <img src="img/screenshots/screen2.jpg" alt="" />
-            </div>
-            <div class="item">
-              <img src="img/screenshots/screen3.jpg" alt="" />
-            </div>
-            <div class="item">
-              <img src="img/screenshots/screen4.jpg" alt="" />
-            </div>
-            <div class="item">
-              <img src="img/screenshots/screen5.jpg" alt="" />
-            </div>
-            <div class="item">
-              <img src="img/screenshots/all.jpg" alt="" />
-            </div>
-          </div><!-- /.carousel-inner -->
-          <!--  Next and Previous controls below
-                href values must reference the id for this carousel -->
-            <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
-        </div><!-- /.carousel -->
-    </section>
-    
+
     <!-- FAQ Section -->
     <section id="faq" class="container faq-section text-center">
         <div class="row">
@@ -314,12 +407,12 @@
                     <a href="https://github.com/SamHurne/gw2pao" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i><span class="network-name">GitHub</span></a>
                 </li>
             </ul>
-            <!-- Go to www.addthis.com/dashboard to customize your tools -->
-            <div class="addthis_sharing_toolbox"></div>
-            <br>
             <span>© 2012 ArenaNet, Inc. All rights reserved. NCsoft, the interlocking NC logo, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Eye of the North, Guild Wars 2, and all associated logos and designs are trademarks or registered trademarks of NCsoft Corporation. All other trademarks are the property of their respective owners.</span>
         </div>
     </footer>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5415e65878b7015d" async="async"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
