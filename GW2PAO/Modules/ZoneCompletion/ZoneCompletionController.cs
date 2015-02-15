@@ -191,16 +191,19 @@ namespace GW2PAO.Modules.ZoneCompletion
             // Stop the refresh timer if all calls to Start() have had a matching call to Stop()
             if (this.startCallCount == 0)
             {
-                logger.Debug("Stopping refresh timers");
-                this.isStopped = true;
-                lock (zoneRefreshTimerLock)
+                Task.Factory.StartNew(() =>
                 {
-                    this.zoneRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
-                }
-                lock (locationsRefreshTimerLock)
-                {
-                    this.itemLocationsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
-                }
+                    logger.Debug("Stopping refresh timers");
+                    this.isStopped = true;
+                    lock (zoneRefreshTimerLock)
+                    {
+                        this.zoneRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                    }
+                    lock (locationsRefreshTimerLock)
+                    {
+                        this.itemLocationsRefreshTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                    }
+                });
             }
         }
 
