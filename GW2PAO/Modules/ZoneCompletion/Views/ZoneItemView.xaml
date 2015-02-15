@@ -112,10 +112,6 @@
                         Margin="5,0,0,0"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left">
-                <core:OutlinedTextBlock Name="EventName"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,3,0"
-                                    Text="{Binding Source={x:Static resx:Resources.Distance}, StringFormat={}{0}:}" />
 
                 <core:OutlinedTextBlock VerticalAlignment="Center">
                     <core:OutlinedTextBlock.Style>
