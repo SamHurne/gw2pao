@@ -68,7 +68,7 @@ namespace GW2PAO.API.Data
                     ID = DungeonID.AscalonianCatacombs,
                     WorldMapID = 19,
                     MinimumLevel = 30,
-                    WaypointCode = "[TBD]",
+                    WaypointCode = "[&BIYBAAA=]",
                     WikiUrl = "http://wiki.guildwars2.com/wiki/Ascalonian_Catacombs",
                     Paths = new List<DungeonPath>() 
                         { 
@@ -124,7 +124,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.CaudecusManor,
                 WorldMapID = 15,
                 MinimumLevel = 40,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BPoAAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Caudecus%27s_Manor",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -183,7 +183,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.TwilightArbor,
                 WorldMapID = 34,
                 MinimumLevel = 50,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BEEFAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Twilight_Arbor",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -243,7 +243,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.SorrowsEmbrace,
                 WorldMapID = 26,
                 MinimumLevel = 60,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BD8FAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Sorrow%27s_Embrace",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -303,7 +303,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.CitadelOfFlame,
                 WorldMapID = 22,
                 MinimumLevel = 70,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BEAFAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Citadel_of_Flame",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -363,7 +363,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.HonorOfTheWaves,
                 WorldMapID = 30,
                 MinimumLevel = 76,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BEMFAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Honor_of_the_Waves",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -423,7 +423,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.CrucibleOfEternity,
                 WorldMapID = 39,
                 MinimumLevel = 78,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BEIFAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/Crucible_of_Eternity",
                 Paths = new List<DungeonPath>() 
                         { 
@@ -483,7 +483,7 @@ namespace GW2PAO.API.Data
                 ID = DungeonID.RuinedCityOfArah,
                 WorldMapID = 62,
                 MinimumLevel = 80,
-                WaypointCode = "[TBD]",
+                WaypointCode = "[&BCADAAA=]",
                 WikiUrl = "http://wiki.guildwars2.com/wiki/The_Ruined_City_of_Arah",
                 Paths = new List<DungeonPath>() 
                         { 
