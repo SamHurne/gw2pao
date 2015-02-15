@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <converters:ObjectiveTypeImageSrcConverter x:Key="ObjTypeConverter" />
         <converters:WvWMapConverter x:Key="MapConverter" />
+        <converters:WvWMapToBackgroundConverter x:Key="MapToBackgroundConverter" />
         <converters:WorldColorConverter x:Key="WorldColorConverter" />
         <converters:EventStateConverter x:Key="StateConverter" />
         <converters:TimespanConverter x:Key="TimeConverter" />
@@ -52,27 +53,12 @@
                 Padding="5">
 
             <Border.Background>
-                <VisualBrush>
+                <VisualBrush Viewport="0,0,215,84" ViewportUnits="Absolute" Opacity="0.75">
                     <VisualBrush.Visual>
                         <Grid>
-                            <Rectangle>
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#5024313D" Offset="0"/>
-                                        <GradientStop Color="#B024313D" Offset="0.5"/>
-                                        <GradientStop Color="#FF574111" Offset="1.3"/>
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Image Source="../../../../Images/background1.png" Opacity="0.1"
-                               Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
-                               SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Image.OpacityMask>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#5024313D" Offset="0"/>
-                                        <GradientStop Color="#FF24313D" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Image.OpacityMask>
+                            <Image Source="{Binding Map, Converter={StaticResource MapToBackgroundConverter}}"
+                                   Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   SnapsToDevicePixels="True" UseLayoutRounding="True">
                             </Image>
                         </Grid>
                     </VisualBrush.Visual>
@@ -129,7 +115,7 @@
                     <!-- Close button -->
                     <Button Grid.Row="0" Grid.Column="1"
                             HorizontalAlignment="Right" VerticalAlignment="Top"
-                            Width="16" Height="17" Padding="0"
+                            Width="13" Height="13" Padding="0"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
                             Command="{Binding CloseNotificationCommand}"/>

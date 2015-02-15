@@ -213,6 +213,7 @@
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
+    <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
     <Compile Include="Infrastructure\Hotkey.cs" />
@@ -815,6 +816,9 @@
     <Resource Include="Images\Backgrounds\Medium4.png" />
     <Resource Include="Images\Misc\treasure_15px.png" />
     <Resource Include="Images\Misc\treasure_gray_15px.png" />
+    <Resource Include="Images\Backgrounds\Small1_b.png" />
+    <Resource Include="Images\Backgrounds\Small1_g.png" />
+    <Resource Include="Images\Backgrounds\Small1_r.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
