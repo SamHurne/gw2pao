@@ -298,11 +298,14 @@ namespace GW2PAO.Modules.Dungeons
 
                     // Determine if the current map is a dungeon map
                     var dungeonVm = this.GetDungeonViewModel(this.currentMapId);
-                    Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentDungeon = dungeonVm);
+                    
+                    if (this.DungeonTimerData.CurrentDungeon != dungeonVm)
+                        Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentDungeon = dungeonVm);
+
                     if (this.DungeonTimerData.CurrentDungeon != null)
                     {
                         // Yes, this is a dungeon map
-                        logger.Trace("Dungeon map detected: {0}", dungeonVm.DungeonName);
+                        //logger.Trace("Dungeon map detected: {0}", dungeonVm.DungeonName);
 
                         // If map just changed, we just entered the dungeon, so start the timer if auto-start is turned on
                         if (mapChanged && this.UserData.AutoStartDungeonTimer)

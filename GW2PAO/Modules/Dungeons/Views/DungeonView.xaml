@@ -43,9 +43,123 @@
                             Storyboard.TargetProperty="(Effect).Opacity"
                             Duration="00:00:00"/>
         </Storyboard>
-        
-        <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
+
         <Geometry x:Key="PathCheckboxGeometry">M 0 6 L 5 12 L 12 0 L 12 0</Geometry>
+        
+        <DataTemplate x:Key="PathDataTemplate">
+            <CheckBox Grid.Row="1" Grid.Column="1"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           IsChecked="{Binding IsCompleted}"
+                           Margin="5,0,5,0">
+                <CheckBox.Style>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type CheckBox}">
+                                    <Grid>
+                                        <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                                            FontSize="13" FontFamily="Gisha"
+                                                                            Text="{Binding DisplayName}">
+                                            <core:OutlinedTextBlock.Style>
+                                                <Style TargetType="{x:Type core:OutlinedTextBlock}">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect Color="Gold" BlurRadius="10" Direction="0" ShadowDepth="0" Opacity="0" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Trigger.EnterActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation To="1"
+                                                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                 Duration="00:00:00.1"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </Trigger.EnterActions>
+                                                            <Trigger.ExitActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation To="0"
+                                                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                 Duration="00:00:0.1"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </Trigger.ExitActions>
+                                                        </Trigger>
+                                                        <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                                            <DataTrigger.EnterActions>
+                                                                <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                                            </DataTrigger.EnterActions>
+                                                            <DataTrigger.ExitActions>
+                                                                <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                                            </DataTrigger.ExitActions>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </core:OutlinedTextBlock.Style>
+                                        </core:OutlinedTextBlock>
+                                        <Grid x:Name="CompletedCheckmark" Visibility="Hidden" Opacity="0.75">
+                                            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                              Width="13" Height="13" SnapsToDevicePixels="False"
+                                                              Stroke="Black" StrokeThickness="4" StrokeLineJoin="Round"
+                                                              Data="{StaticResource PathCheckboxGeometry}" />
+                                            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                              Width="13" Height="13" SnapsToDevicePixels="False"
+                                                              Stroke="Orange" StrokeThickness="2" StrokeLineJoin="Round"
+                                                              Data="{StaticResource PathCheckboxGeometry}" />
+                                        </Grid>
+                                    </Grid>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="CompletedCheckmark" Property="Visibility" Value="Visible" />
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter TargetName="CompletedCheckmark" Property="Visibility" Value="Hidden" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </CheckBox.Style>
+                <CheckBox.ToolTip>
+                    <StackPanel Orientation="Vertical">
+                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                            FontSize="12" FontFamily="Gisha"
+                                                            Text="{Binding NickName}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                                FontSize="12" FontFamily="Gisha"
+                                                                Text="{x:Static resx:Resources.Reward}"
+                                                                Margin="0,0,5,0"/>
+
+                            <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                                FontSize="12" FontFamily="Gisha"
+                                                                Margin="0,0,2,0"
+                                                                Text="{Binding RewardGold}"/>
+                            <Image Source="../../../Images/Commerce/gold_coin.png"
+                                               Height="12" Width="12"
+                                               Margin="0,0,5,0"/>
+
+                            <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                                FontSize="12" FontFamily="Gisha"
+                                                                Margin="0,0,2,0"
+                                                                Text="{Binding RewardSilver}"/>
+                            <Image Source="../../../Images/Commerce/silver_coin.png"
+                                               Height="12" Width="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </CheckBox.ToolTip>
+            </CheckBox>
+        </DataTemplate>
+
+        <core:AutoRefreshCollectionViewSource Source="{Binding Paths}" x:Key="PathsCollection" />
+        
     </UserControl.Resources>
 
     <UserControl.ContextMenu>
@@ -127,125 +241,13 @@
                           Padding="0,0,3,0"
                           ItemsSource="{Binding Source={StaticResource PathsCollection}}"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                          ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ItemTemplate="{StaticResource PathDataTemplate}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox Grid.Row="1" Grid.Column="1"
-                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                           IsChecked="{Binding IsCompleted}"
-                           Margin="5,0,5,0">
-                            <CheckBox.Style>
-                                <Style TargetType="CheckBox">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                <Grid>
-                                                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                                            FontSize="13" FontFamily="Gisha"
-                                                                            Text="{Binding DisplayName}">
-                                                        <core:OutlinedTextBlock.Style>
-                                                            <Style TargetType="{x:Type core:OutlinedTextBlock}">
-                                                                <Setter Property="Effect">
-                                                                    <Setter.Value>
-                                                                        <DropShadowEffect Color="Gold" BlurRadius="10" Direction="0" ShadowDepth="0" Opacity="0" />
-                                                                    </Setter.Value>
-                                                                </Setter>
-                                                                <Style.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Trigger.EnterActions>
-                                                                            <BeginStoryboard>
-                                                                                <Storyboard>
-                                                                                    <DoubleAnimation To="1"
-                                                                                                 Storyboard.TargetProperty="(Effect).Opacity"
-                                                                                                 Duration="00:00:00.1"/>
-                                                                                </Storyboard>
-                                                                            </BeginStoryboard>
-                                                                        </Trigger.EnterActions>
-                                                                        <Trigger.ExitActions>
-                                                                            <BeginStoryboard>
-                                                                                <Storyboard>
-                                                                                    <DoubleAnimation To="0"
-                                                                                                 Storyboard.TargetProperty="(Effect).Opacity"
-                                                                                                 Duration="00:00:0.1"/>
-                                                                                </Storyboard>
-                                                                            </BeginStoryboard>
-                                                                        </Trigger.ExitActions>
-                                                                    </Trigger>
-                                                                    <DataTrigger Binding="{Binding IsActive}" Value="True">
-                                                                        <DataTrigger.EnterActions>
-                                                                            <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
-                                                                        </DataTrigger.EnterActions>
-                                                                        <DataTrigger.ExitActions>
-                                                                            <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
-                                                                        </DataTrigger.ExitActions>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </core:OutlinedTextBlock.Style>
-                                                    </core:OutlinedTextBlock>
-                                                    <Grid x:Name="CompletedCheckmark" Visibility="Hidden" Opacity="0.75">
-                                                        <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                              Width="13" Height="13" SnapsToDevicePixels="False"
-                                                              Stroke="Black" StrokeThickness="4" StrokeLineJoin="Round"
-                                                              Data="{StaticResource PathCheckboxGeometry}" />
-                                                        <Path HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                              Width="13" Height="13" SnapsToDevicePixels="False"
-                                                              Stroke="Orange" StrokeThickness="2" StrokeLineJoin="Round"
-                                                              Data="{StaticResource PathCheckboxGeometry}" />
-                                                    </Grid>
-                                                </Grid>
-
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsChecked" Value="True">
-                                                        <Setter TargetName="CompletedCheckmark" Property="Visibility" Value="Visible" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsChecked" Value="False">
-                                                        <Setter TargetName="CompletedCheckmark" Property="Visibility" Value="Hidden" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </CheckBox.Style>
-                            <CheckBox.ToolTip>
-                                <StackPanel Orientation="Vertical">
-                                    <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                            FontSize="12" FontFamily="Gisha"
-                                                            Text="{Binding NickName}"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                                FontSize="12" FontFamily="Gisha"
-                                                                Text="{x:Static resx:Resources.Reward}"
-                                                                Margin="0,0,5,0"/>
-
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                                FontSize="12" FontFamily="Gisha"
-                                                                Margin="0,0,2,0"
-                                                                Text="{Binding RewardGold}"/>
-                                        <Image Source="../../../Images/Commerce/gold_coin.png"
-                                               Height="12" Width="12"
-                                               Margin="0,0,5,0"/>
-
-                                        <core:OutlinedTextBlock Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                                FontSize="12" FontFamily="Gisha"
-                                                                Margin="0,0,2,0"
-                                                                Text="{Binding RewardSilver}"/>
-                                        <Image Source="../../../Images/Commerce/silver_coin.png"
-                                               Height="12" Width="12"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </CheckBox.ToolTip>
-                        </CheckBox>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
             
         </Grid>
