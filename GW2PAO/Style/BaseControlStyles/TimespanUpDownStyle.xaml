@@ -3,11 +3,11 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
 
-    <SolidColorBrush x:Key="TimeSpanBackgroundBrush" Color="#70000000" Opacity="0.5" />
-    <SolidColorBrush x:Key="TimeSpanBorderBrush" Color="#FFEEE8AA" Opacity="0.5" />
+    <SolidColorBrush x:Key="TimeSpanBackgroundBrush" Color="#60000000" />
+    <SolidColorBrush x:Key="TimeSpanBorderBrush" Color="#CC000000" />
 
     <SolidColorBrush x:Key="TimeSpanDisabledBackgroundBrush" Color="#20000000" />
-    <SolidColorBrush x:Key="TimeSpanDisabledBorderBrush" Color="#20EEE8AA" />
+    <SolidColorBrush x:Key="TimeSpanDisabledBorderBrush" Color="#20000000" />
 
     <SolidColorBrush x:Key="TimespanTextBrush" Color="#FFEEE8AA" />
     <SolidColorBrush x:Key="TimespanCaretBrush" Color="#FFEEE8AA" />

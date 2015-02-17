@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#FFEEE8AA" Opacity="0.25" />
-    <SolidColorBrush x:Key="ComboBoxNormalBackgroundBrush" Color="Black" Opacity="0.9" />
+    <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="ComboBoxNormalBackgroundBrush" Color="Black" Opacity="0.85" />
     <SolidColorBrush x:Key="ComboBoxDisabledForegroundBrush" Color="White" Opacity="0.5" />
     <SolidColorBrush x:Key="ComboBoxDisabledBackgroundBrush" Color="Black" Opacity="0.1" />
-    <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="White" Opacity="0.1" />
+    <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="Black" Opacity="0.1" />
 
     <SolidColorBrush x:Key="ComboBoxButtonBackground" Color="#FFEEE8AA" Opacity="0.5" />
-    <SolidColorBrush x:Key="ComboBoxButtonBackgroundMouseOver" Color="#FFEEE8AA" Opacity="0.5" />
-    <SolidColorBrush x:Key="ComboBoxButtonBorderMouseOver" Color="#FFEEE8AA" Opacity="0.25" />
+    <SolidColorBrush x:Key="ComboBoxButtonBackgroundMouseOver" Color="#FFEEE8AA" Opacity="0.55" />
+    <SolidColorBrush x:Key="ComboBoxButtonBorderMouseOver" Color="#FF000000"/>
 
     <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
         <Grid>

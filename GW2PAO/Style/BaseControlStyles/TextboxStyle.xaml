@@ -1,15 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="TextBoxBackgroundColor">#70000000</Color>
-    <Color x:Key="TextBoxBorderColor">#FFEEE8AA</Color>
+    <Color x:Key="TextBoxBackgroundColor">#60000000</Color>
+    <Color x:Key="TextBoxBorderColor">#FF000000</Color>
     <Color x:Key="TextBoxDisabledBackgroundColor">#70000000</Color>
-    <Color x:Key="TextBoxDisabledBorderColor">#20EEE8AA</Color>
+    <Color x:Key="TextBoxDisabledBorderColor">#20000000</Color>
     <Color x:Key="TextBoxTextColor">#FFEEE8AA</Color>
     <Color x:Key="TextBoxCaretColor">#FFEEE8AA</Color>
     <Color x:Key="TextBoxHighlightColor">#40EEE8AA</Color>
 
-    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#50EEE8AA" />
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#CC000000" />
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
