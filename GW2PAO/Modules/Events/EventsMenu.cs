@@ -69,9 +69,9 @@ namespace GW2PAO.Modules.Events
         public EventsMenu(IEventsViewController viewFactory, EventsUserData userData)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
-            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenEventSettingsCommand.Execute(null)));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenEventsTracker, viewFactory.DisplayEventsTracker, viewFactory.CanDisplayEventsTracker));
             this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EventNotifications, false, () => userData.AreEventNotificationsEnabled, userData));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenEventSettingsCommand.Execute(null)));
         }
     }
 }
