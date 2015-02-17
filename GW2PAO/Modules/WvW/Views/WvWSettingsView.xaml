@@ -30,7 +30,12 @@
                       Height="21"
                       Width="150"/>
         </Grid>
-        <GroupBox>
+        <CheckBox Name="NotificationsCheckbox"
+                  Margin="2,5,2,5"
+                  IsChecked="{Binding UserData.AreNotificationsEnabled}">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
+        </CheckBox>
+        <GroupBox IsEnabled="{Binding ElementName=NotificationsCheckbox, Path=IsChecked}">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
             </GroupBox.Header>
@@ -121,7 +126,6 @@
                   IsChecked="{Binding UserData.AutoOpenCloseTracker}">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoOpenCloseWvW}" />
         </CheckBox>
-
 
     </StackPanel>
 </UserControl>

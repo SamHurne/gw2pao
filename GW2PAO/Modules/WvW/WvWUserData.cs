@@ -36,6 +36,7 @@ namespace GW2PAO.Modules.WvW
         private World worldSelection;
         private bool isTrackerHorizontal;
         private bool areTimeDistancesShown;
+        private bool areNotificationsEnabled;
         private bool areBlueBorderlandsNotificationsEnabled;
         private bool areGreenBorderlandsNotificationsEnabled;
         private bool areRedBorderlandsNotificationsEnabled;
@@ -92,6 +93,15 @@ namespace GW2PAO.Modules.WvW
         {
             get { return this.areTimeDistancesShown; }
             set { this.SetProperty(ref this.areTimeDistancesShown, value); }
+        }
+
+        /// <summary>
+        /// True if notifications are enabled (in general), else false
+        /// </summary>
+        public bool AreNotificationsEnabled
+        {
+            get { return this.areNotificationsEnabled; }
+            set { SetProperty(ref this.areNotificationsEnabled, value); }
         }
 
         /// <summary>
@@ -341,6 +351,7 @@ namespace GW2PAO.Modules.WvW
             this.WorldSelection = new World() { ID = 1019, Name = "Blackgate" };
             this.IsTrackerHorizontal = false;
             this.AreTimeDistancesShown = true;
+            this.AreNotificationsEnabled = false;
             this.AreBlueBorderlandsNotificationsEnabled = false;
             this.AreGreenBorderlandsNotificationsEnabled = false;
             this.AreRedBorderlandsNotificationsEnabled = false;

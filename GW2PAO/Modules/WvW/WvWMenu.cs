@@ -71,8 +71,9 @@ namespace GW2PAO.Modules.WvW
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
 
             // WvW Tracker
-            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenWvWSettingsCommand.Execute(null)));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenWvWTracker, viewFactory.DisplayWvWTracker, viewFactory.CanDisplayWvWTracker));
+            this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.WvWNotifications, false, () => userData.AreNotificationsEnabled, userData));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenWvWSettingsCommand.Execute(null)));
         }
     }
 }

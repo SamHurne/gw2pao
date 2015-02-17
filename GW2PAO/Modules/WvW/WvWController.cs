@@ -637,73 +637,76 @@ namespace GW2PAO.Modules.WvW
         {
             bool canShow = false;
 
-            var homeTeam = this.Worlds.First(t => t.WorldId == this.UserData.WorldSelection.ID);
+            if (this.UserData.AreNotificationsEnabled)
+            {
+                var homeTeam = this.Worlds.First(t => t.WorldId == this.UserData.WorldSelection.ID);
 
-            if (this.UserData.NotifyWhenHomeTakesObjective
-                && objectiveData.WorldOwner == homeTeam.Color)
-            {
-                canShow = true;
-            }
-            else if (this.UserData.NotifyWhenHomeLosesObjective
-                && objectiveData.PrevWorldOwner == homeTeam.Color)
-            {
-                canShow = true;
-            }
-            else if (this.UserData.NotifyWhenOtherTakesOtherObjective
-                && objectiveData.PrevWorldOwner != homeTeam.Color
-                && objectiveData.WorldOwner != homeTeam.Color)
-            {
-                canShow = true;
-            }
-
-            if (canShow)
-            {
-                switch (objectiveData.Map)
+                if (this.UserData.NotifyWhenHomeTakesObjective
+                    && objectiveData.WorldOwner == homeTeam.Color)
                 {
-                    case WvWMap.BlueBorderlands:
-                        canShow = this.UserData.AreBlueBorderlandsNotificationsEnabled;
-                        break;
-                    case WvWMap.GreenBorderlands:
-                        canShow = this.UserData.AreGreenBorderlandsNotificationsEnabled;
-                        break;
-                    case WvWMap.RedBorderlands:
-                        canShow = this.UserData.AreRedBorderlandsNotificationsEnabled;
-                        break;
-                    case WvWMap.EternalBattlegrounds:
-                        canShow = this.UserData.AreEternalBattlegroundsNotificationsEnabled;
-                        break;
-                    default:
-                        canShow = false;
-                        break;
+                    canShow = true;
                 }
-            }
-
-            if (canShow)
-            {
-                switch (objectiveData.Type)
+                else if (this.UserData.NotifyWhenHomeLosesObjective
+                    && objectiveData.PrevWorldOwner == homeTeam.Color)
                 {
-                    case ObjectiveType.Castle:
-                        canShow = this.UserData.AreCastleNotificationsEnabled;
-                        break;
-                    case ObjectiveType.Keep:
-                        canShow = this.UserData.AreKeepNotificationsEnabled;
-                        break;
-                    case ObjectiveType.Tower:
-                        canShow = this.UserData.AreTowerNotificationsEnabled;
-                        break;
-                    case ObjectiveType.Camp:
-                        canShow = this.UserData.AreCampNotificationsEnabled;
-                        break;
-                    case ObjectiveType.BattlesHollow:
-                    case ObjectiveType.BauersEstate:
-                    case ObjectiveType.CarversAscent:
-                    case ObjectiveType.OrchardOverlook:
-                    case ObjectiveType.TempleofLostPrayers:
-                        canShow = this.UserData.AreBloodlustNotificationsEnabled;
-                        break;
-                    default:
-                        canShow = false;
-                        break;
+                    canShow = true;
+                }
+                else if (this.UserData.NotifyWhenOtherTakesOtherObjective
+                    && objectiveData.PrevWorldOwner != homeTeam.Color
+                    && objectiveData.WorldOwner != homeTeam.Color)
+                {
+                    canShow = true;
+                }
+
+                if (canShow)
+                {
+                    switch (objectiveData.Map)
+                    {
+                        case WvWMap.BlueBorderlands:
+                            canShow = this.UserData.AreBlueBorderlandsNotificationsEnabled;
+                            break;
+                        case WvWMap.GreenBorderlands:
+                            canShow = this.UserData.AreGreenBorderlandsNotificationsEnabled;
+                            break;
+                        case WvWMap.RedBorderlands:
+                            canShow = this.UserData.AreRedBorderlandsNotificationsEnabled;
+                            break;
+                        case WvWMap.EternalBattlegrounds:
+                            canShow = this.UserData.AreEternalBattlegroundsNotificationsEnabled;
+                            break;
+                        default:
+                            canShow = false;
+                            break;
+                    }
+                }
+
+                if (canShow)
+                {
+                    switch (objectiveData.Type)
+                    {
+                        case ObjectiveType.Castle:
+                            canShow = this.UserData.AreCastleNotificationsEnabled;
+                            break;
+                        case ObjectiveType.Keep:
+                            canShow = this.UserData.AreKeepNotificationsEnabled;
+                            break;
+                        case ObjectiveType.Tower:
+                            canShow = this.UserData.AreTowerNotificationsEnabled;
+                            break;
+                        case ObjectiveType.Camp:
+                            canShow = this.UserData.AreCampNotificationsEnabled;
+                            break;
+                        case ObjectiveType.BattlesHollow:
+                        case ObjectiveType.BauersEstate:
+                        case ObjectiveType.CarversAscent:
+                        case ObjectiveType.OrchardOverlook:
+                        case ObjectiveType.TempleofLostPrayers:
+                            canShow = this.UserData.AreBloodlustNotificationsEnabled;
+                            break;
+                        default:
+                            canShow = false;
+                            break;
+                    }
                 }
             }
 
