@@ -11,7 +11,6 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
     public class TSNotificationViewModel : BindableBase
     {
         private string user;
-        private string message;
         private bool isVisible;
 
         /// <summary>

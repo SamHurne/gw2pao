@@ -20,5 +20,20 @@ namespace GW2PAO.API.Data.Entities
             return other.ID == this.ID
                 && other.Name == this.Name;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                hash = hash * 23 + this.ID.GetHashCode();
+                if (this.Name != null)
+                {
+                    hash = hash * 23 + this.Name.GetHashCode();
+                }
+                return hash;
+            }
+        }
     }
 }
