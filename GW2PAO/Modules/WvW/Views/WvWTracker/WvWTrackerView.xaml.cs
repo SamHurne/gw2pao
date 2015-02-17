@@ -163,7 +163,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
             }
             else
             {
-                this.ResizeHelper.SnappingHeightOffset = 6;
+                this.ResizeHelper.SnappingHeightOffset = 8;
                 this.ResizeHelper.SnappingIncrementHeight = (int)this.vertical_objHeight;
                 this.ResizeHelper.SnappingWidthOffset = 0;
                 this.ResizeHelper.SnappingIncrementWidth = 1;
