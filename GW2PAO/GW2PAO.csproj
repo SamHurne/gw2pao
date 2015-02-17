@@ -146,12 +146,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHotkey">
-      <HintPath>..\packages\NHotkey.1.2.1\lib\net20\NHotkey.dll</HintPath>
-    </Reference>
-    <Reference Include="NHotkey.Wpf">
-      <HintPath>..\packages\NHotkey.Wpf.1.2.1\lib\net35\NHotkey.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -216,8 +210,11 @@
     <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
     <Compile Include="Infrastructure\Commands.cs" />
-    <Compile Include="Infrastructure\Hotkey.cs" />
     <Compile Include="Infrastructure\HotkeyCommands.cs" />
+    <Compile Include="Infrastructure\Hotkeys\GlobalHotkeyManager.cs" />
+    <Compile Include="Infrastructure\Hotkeys\Hotkey.cs" />
+    <Compile Include="Infrastructure\Hotkeys\Interfaces\IHotkeyManager.cs" />
+    <Compile Include="Infrastructure\Hotkeys\KeyModifier.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
     <Compile Include="Modules\Dungeons\Data\PathTime.cs" />

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GW2PAO.Infrastructure.Hotkeys.Interfaces;
 using GW2PAO.ViewModels;
 
 namespace GW2PAO.Views

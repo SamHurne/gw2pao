@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GW2PAO.Infrastructure;
+using GW2PAO.Infrastructure.Hotkeys;
+using GW2PAO.Infrastructure.Hotkeys.Interfaces;
 
 namespace GW2PAO.Views
 {
@@ -57,6 +59,21 @@ namespace GW2PAO.Views
             set { SetValue(HotkeyProperty, value); }
         }
 
+        /// <summary>
+        /// Dependency property for HotkeyManager
+        /// </summary>
+        public static readonly DependencyProperty HotkeyManagerProperty =
+            DependencyProperty.Register("HotkeyManager",
+            typeof(IHotkeyManager),
+            typeof(HotkeyUserControl),
+            new FrameworkPropertyMetadata(null));
+
+        public IHotkeyManager HotkeyManager
+        {
+            get { return (IHotkeyManager)GetValue(HotkeyManagerProperty); }
+            set { SetValue(HotkeyManagerProperty, value); }
+        }
+
         public HotkeyUserControl()
         {
             InitializeComponent();
@@ -66,7 +83,7 @@ namespace GW2PAO.Views
 
         private void EntryBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (this.Hotkey != null)
+            if (this.HotkeyManager != null)
             {
                 if (e.Key != Key.LeftShift
                     && e.Key != Key.RightShift
@@ -78,25 +95,28 @@ namespace GW2PAO.Views
                     && e.Key != Key.RWin
                     && e.Key != Key.Escape)
                 {
-
                     // Before we go and apply the hotkey, first try it and make sure it will work
                     this.WarningTextBlock.Visibility = Visibility.Hidden;
 
-                    bool shift = e.KeyboardDevice.IsKeyDown(Key.LeftShift) || e.KeyboardDevice.IsKeyDown(Key.RightShift);
-                    bool control = e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) || e.KeyboardDevice.IsKeyDown(Key.RightCtrl);
-                    bool alt = e.KeyboardDevice.IsKeyDown(Key.LeftAlt) || e.KeyboardDevice.IsKeyDown(Key.RightAlt);
-                    bool windows = e.KeyboardDevice.IsKeyDown(Key.LWin) || e.KeyboardDevice.IsKeyDown(Key.RWin);
-                    if (Hotkey.CanSet(e.Key, shift, control, alt, windows))
+                    var modifiers = KeyModifier.None;
+                    if (e.KeyboardDevice.IsKeyDown(Key.LeftShift) || e.KeyboardDevice.IsKeyDown(Key.RightShift))
+                        modifiers |= KeyModifier.Shift;
+                    if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) || e.KeyboardDevice.IsKeyDown(Key.RightCtrl))
+                        modifiers |= KeyModifier.Ctrl;
+                    if (e.KeyboardDevice.IsKeyDown(Key.LeftAlt) || e.KeyboardDevice.IsKeyDown(Key.RightAlt))
+                        modifiers |= KeyModifier.Alt;
+                    if (e.KeyboardDevice.IsKeyDown(Key.LWin) || e.KeyboardDevice.IsKeyDown(Key.RWin))
+                        modifiers |= KeyModifier.Win;
+
+                    var newHotkey = new Hotkey(e.Key, modifiers);
+
+                    if (this.HotkeyManager.CanRegister(newHotkey))
                     {
                         // Valid, go ahead and set it
+                        this.HotkeyManager.Unregister(this.Hotkey);
                         this.Hotkey.Key = e.Key;
-                        this.Hotkey.Shift = shift;
-                        this.Hotkey.Control = control;
-                        this.Hotkey.Alt = alt;
-                        this.Hotkey.Windows = windows;
-
-                        if (this.Hotkey.IsEnabled)
-                            this.Hotkey.Refresh();
+                        this.Hotkey.KeyModifiers = modifiers;
+                        this.HotkeyManager.Register(this.Hotkey);
                     }
                     else
                     {
@@ -117,21 +137,21 @@ namespace GW2PAO.Views
 
         private void EntryBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (this.Hotkey != null)
+            if (this.HotkeyManager != null)
             {
                 if (e.Key == Key.Back || e.Key == Key.Delete)
                 {
+                    this.HotkeyManager.Unregister(this.Hotkey);
                     this.Hotkey.Key = Key.None;
-                    this.Hotkey.Shift = false;
-                    this.Hotkey.Control = false;
-                    this.Hotkey.Alt = false;
-                    this.Hotkey.Windows = false;
-                    if (this.Hotkey.IsEnabled)
-                        this.Hotkey.Refresh();
+                    this.Hotkey.KeyModifiers = KeyModifier.None;
                 }
             }
 
             this.EntryBox.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+
+            // Remove focus
+            this.HiddenBox.Focus();
+
             e.Handled = true;
         }
 

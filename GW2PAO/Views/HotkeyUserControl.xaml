@@ -15,17 +15,13 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <CheckBox Name="EnabledCheckbox"
-                  Grid.Column="0"
-                  VerticalAlignment="Center"
-                  IsChecked="{Binding Hotkey.IsEnabled}"
-                  Style="{StaticResource AlternateCheckboxStyle}">
-            <core:OutlinedTextBlock Text="{Binding Path=Label, StringFormat={}{0}:}" />
-        </CheckBox>
+        <core:OutlinedTextBlock Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Text="{Binding Path=Label, StringFormat={}{0}:}" />
         <TextBox Name="EntryBox"
                  Grid.Column="1"
                  Margin="5,0,0,0"
-                 Width="150"
+                 Width="125"
                  Text="{Binding Hotkey, Mode=OneWay}"
                  TextAlignment="Center"
                  GotFocus="EntryBox_GotFocus"
@@ -33,10 +29,10 @@
                  KeyDown="EntryBox_KeyDown"
                  KeyUp="EntryBox_KeyUp"/>
         <core:OutlinedTextBlock Grid.Column="2"
-                                Margin="5,0,0,0"
+                                Margin="5,0,15,0"
                                 VerticalAlignment="Center"
                                 Name="WarningTextBlock"
-                                Fill="Orange"
+                                Fill="#FFFFCC"
                                 Text="{x:Static resx:Resources.InvalidHotkey}">
             <core:OutlinedTextBlock.Style>
                 <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">

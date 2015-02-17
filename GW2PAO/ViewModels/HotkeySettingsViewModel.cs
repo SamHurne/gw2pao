@@ -10,11 +10,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using GW2PAO.Infrastructure;
+using GW2PAO.Infrastructure.Hotkeys;
+using GW2PAO.Infrastructure.Hotkeys.Interfaces;
 using GW2PAO.Infrastructure.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Newtonsoft.Json;
-using NHotkey.Wpf;
 using NLog;
 
 namespace GW2PAO.ViewModels
@@ -26,9 +27,6 @@ namespace GW2PAO.ViewModels
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        [XmlIgnore]
-        private bool isPaused;
 
         private Hotkey toggleAllWindowsHotkey;
         private Hotkey toggleInteractiveWindowsHotkey;
@@ -48,9 +46,20 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// Header for the settings
         /// </summary>
+        [JsonIgnore, XmlIgnore]
         public string SettingsHeader
         {
             get { return Properties.Resources.Hotkeys; }
+        }
+
+        /// <summary>
+        /// The global hotkey manager
+        /// </summary>
+        [JsonIgnore, XmlIgnore]
+        public IHotkeyManager GlobalHotkeyManager
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -180,25 +189,35 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="globalHotkeyManager">The global hotkey manager</param>
+        [ImportingConstructor]
+        public HotkeySettingsViewModel(IHotkeyManager globalHotkeyManager)
+        {
+            this.GlobalHotkeyManager = globalHotkeyManager;
+        }
+
+        /// <summary>
         /// Initializes all hotkeys
         /// </summary>
         public void InitializeHotkeys()
         {
             // Initialize as blank at first
-            this.ToggleEventTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleDungeonsTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleDungeonTimerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.TogglePriceTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleWvWTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleZoneAssistantHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleTaskTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleTeamspeakTrackerHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleWebBrowserHotkey = new Hotkey(Key.None, false, true, false, false);
-            this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleAllWindowsHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleAutoFadeBordersHotkey = new Hotkey(Key.None, false, false, false, false);
-            this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, false, false, false, false);
+            this.ToggleEventTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleDungeonsTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleDungeonTimerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.TogglePriceTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleWvWTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleZoneAssistantHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleTaskTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleTeamspeakTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleWebBrowserHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleInteractiveWindowsHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleAllWindowsHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleAutoFadeBordersHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, KeyModifier.None);
 
             // Try to load the hotkeys from user settings
             if (!string.IsNullOrEmpty(Properties.Settings.Default.Hotkeys))
@@ -263,26 +282,56 @@ namespace GW2PAO.ViewModels
             }
 
             // Register for the pause/resume commands
-            this.isPaused = true; // We are "paused" until we initialize for the first time
-            HotkeyCommands.PauseHotkeys.RegisterCommand(new DelegateCommand(this.UnregisterOnPressedHandlers));
-            HotkeyCommands.ResumeHotkeys.RegisterCommand(new DelegateCommand(this.RegisterOnPressedHandlers));
+            HotkeyCommands.PauseHotkeys.RegisterCommand(new DelegateCommand(this.GlobalHotkeyManager.PauseHotkeys));
+            HotkeyCommands.ResumeHotkeys.RegisterCommand(new DelegateCommand(this.GlobalHotkeyManager.ResumeHotkeys));
 
             // Wire the hotkeys up
-            this.RegisterOnPressedHandlers();
-            this.ToggleAllWindowsHotkey.Refresh();
-            this.ToggleInteractiveWindowsHotkey.Refresh();
-            this.ToggleNotificationWindowBordersHotkey.Refresh();
-            this.ToggleAutoFadeBordersHotkey.Refresh();
-            this.ToggleOverlayMenuIconHotkey.Refresh();
-            this.ToggleEventTrackerHotkey.Refresh();
-            this.ToggleDungeonsTrackerHotkey.Refresh();
-            this.ToggleDungeonTimerHotkey.Refresh();
-            this.TogglePriceTrackerHotkey.Refresh();
-            this.ToggleWvWTrackerHotkey.Refresh();
-            this.ToggleZoneAssistantHotkey.Refresh();
-            this.ToggleTaskTrackerHotkey.Refresh();
-            this.ToggleTeamspeakTrackerHotkey.Refresh();
-            this.ToggleWebBrowserHotkey.Refresh();
+            this.ToggleAllWindowsHotkey.Pressed += (o, e) => HotkeyCommands.ToggleAllWindowsCommand.Execute(null);
+            this.ToggleInteractiveWindowsHotkey.Pressed += (o, e) => HotkeyCommands.ToggleInteractiveWindowsCommand.Execute(null);
+            this.ToggleNotificationWindowBordersHotkey.Pressed += (o, e) => HotkeyCommands.ToggleNotificationWindowBordersCommand.Execute(null);
+            this.ToggleAutoFadeBordersHotkey.Pressed += (o, e) => HotkeyCommands.ToggleAutoFadeBordersCommand.Execute(null);
+            this.ToggleOverlayMenuIconHotkey.Pressed += (o, e) => HotkeyCommands.ToggleOverlayMenuIconCommand.Execute(null);
+            this.ToggleEventTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleEventTrackerCommand.Execute(null);
+            this.ToggleDungeonsTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleDungeonsTrackerCommand.Execute(null);
+            this.ToggleDungeonTimerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleDungeonTimerCommand.Execute(null);
+            this.TogglePriceTrackerHotkey.Pressed += (o, e) => HotkeyCommands.TogglePriceTrackerCommand.Execute(null);
+            this.ToggleWvWTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWvWTrackerCommmand.Execute(null);
+            this.ToggleZoneAssistantHotkey.Pressed += (o, e) => HotkeyCommands.ToggleZoneAssistantCommand.Execute(null);
+            this.ToggleTaskTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleTaskTrackerCommand.Execute(null);
+            this.ToggleTeamspeakTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleTeamspeakOverlayCommand.Execute(null);
+            this.ToggleWebBrowserHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWebBrowserCommand.Execute(null);
+
+            // Register all hotkeys that are enabled
+            if (this.ToggleAllWindowsHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleAllWindowsHotkey);
+            if (this.ToggleInteractiveWindowsHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleInteractiveWindowsHotkey);
+            if (this.ToggleNotificationWindowBordersHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleNotificationWindowBordersHotkey);
+            if (this.ToggleAutoFadeBordersHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleAutoFadeBordersHotkey);
+            if (this.ToggleOverlayMenuIconHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleOverlayMenuIconHotkey);
+            if (this.ToggleEventTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleEventTrackerHotkey);
+            if (this.ToggleDungeonsTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleDungeonsTrackerHotkey);
+            if (this.ToggleDungeonTimerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleDungeonTimerHotkey);
+            if (this.TogglePriceTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.TogglePriceTrackerHotkey);
+            if (this.ToggleWvWTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleWvWTrackerHotkey);
+            if (this.ToggleZoneAssistantHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleZoneAssistantHotkey);
+            if (this.ToggleZoneAssistantHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleZoneAssistantHotkey);
+            if (this.ToggleTaskTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleTaskTrackerHotkey);
+            if (this.ToggleTeamspeakTrackerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleTeamspeakTrackerHotkey);
+            if (this.ToggleWebBrowserHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleWebBrowserHotkey);
         }
 
         /// <summary>
@@ -293,96 +342,6 @@ namespace GW2PAO.ViewModels
             string hotkeyData = JsonConvert.SerializeObject(this);
             Properties.Settings.Default.Hotkeys = hotkeyData;
             Properties.Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// Registers OnPressed handlers for all hotkeys
-        /// </summary>
-        private void RegisterOnPressedHandlers()
-        {
-            if (this.isPaused)
-            {
-                this.isPaused = false;
-                this.ToggleAllWindowsHotkey.Pressed += OnPressed;
-                this.ToggleInteractiveWindowsHotkey.Pressed += OnPressed;
-                this.ToggleNotificationWindowBordersHotkey.Pressed += OnPressed;
-                this.ToggleAutoFadeBordersHotkey.Pressed += OnPressed;
-                this.ToggleOverlayMenuIconHotkey.Pressed += OnPressed;
-                this.ToggleEventTrackerHotkey.Pressed += OnPressed;
-                this.ToggleDungeonsTrackerHotkey.Pressed += OnPressed;
-                this.ToggleDungeonTimerHotkey.Pressed += OnPressed;
-                this.TogglePriceTrackerHotkey.Pressed += OnPressed;
-                this.ToggleWvWTrackerHotkey.Pressed += OnPressed;
-                this.ToggleZoneAssistantHotkey.Pressed += OnPressed;
-                this.ToggleTaskTrackerHotkey.Pressed += OnPressed;
-                this.ToggleTeamspeakTrackerHotkey.Pressed += OnPressed;
-                this.ToggleWebBrowserHotkey.Pressed += OnPressed;
-            }
-        }
-
-        /// <summary>
-        /// Unregisters OnPressed handlers for all hotkeys
-        /// </summary>
-        private void UnregisterOnPressedHandlers()
-        {
-            if (!this.isPaused)
-            {
-                this.isPaused = true;
-                this.ToggleAllWindowsHotkey.Pressed -= OnPressed;
-                this.ToggleInteractiveWindowsHotkey.Pressed -= OnPressed;
-                this.ToggleNotificationWindowBordersHotkey.Pressed -= OnPressed;
-                this.ToggleAutoFadeBordersHotkey.Pressed -= OnPressed;
-                this.ToggleOverlayMenuIconHotkey.Pressed -= OnPressed;
-                this.ToggleEventTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleDungeonsTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleDungeonTimerHotkey.Pressed -= OnPressed;
-                this.TogglePriceTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleWvWTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleZoneAssistantHotkey.Pressed -= OnPressed;
-                this.ToggleTaskTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleTeamspeakTrackerHotkey.Pressed -= OnPressed;
-                this.ToggleWebBrowserHotkey.Pressed -= OnPressed;
-            }
-        }
-
-        /// <summary>
-        /// Handles an OnPressed event for a hotkey
-        /// </summary>
-        /// <param name="sender">The hotkey that sent the Pressed event</param>
-        private void OnPressed(object sender, EventArgs e)
-        {
-            var hotkey = sender as Hotkey;
-            if (hotkey != null)
-            {
-                if (hotkey == this.ToggleAllWindowsHotkey)
-                    HotkeyCommands.ToggleAllWindowsCommand.Execute(null);
-                else if (hotkey == this.ToggleInteractiveWindowsHotkey)
-                    HotkeyCommands.ToggleInteractiveWindowsCommand.Execute(null);
-                else if (hotkey == this.ToggleNotificationWindowBordersHotkey)
-                    HotkeyCommands.ToggleNotificationWindowBordersCommand.Execute(null);
-                else if (hotkey == this.ToggleAutoFadeBordersHotkey)
-                    HotkeyCommands.ToggleAutoFadeBordersCommand.Execute(null);
-                else if (hotkey == this.ToggleOverlayMenuIconHotkey)
-                    HotkeyCommands.ToggleOverlayMenuIconCommand.Execute(null);
-                else if (hotkey == this.ToggleEventTrackerHotkey)
-                    HotkeyCommands.ToggleEventTrackerCommand.Execute(null);
-                else if (hotkey == this.ToggleDungeonsTrackerHotkey)
-                    HotkeyCommands.ToggleDungeonsTrackerCommand.Execute(null);
-                else if (hotkey == this.ToggleDungeonTimerHotkey)
-                    HotkeyCommands.ToggleDungeonTimerCommand.Execute(null);
-                else if (hotkey == this.TogglePriceTrackerHotkey)
-                    HotkeyCommands.TogglePriceTrackerCommand.Execute(null);
-                else if (hotkey == this.ToggleWvWTrackerHotkey)
-                    HotkeyCommands.ToggleWvWTrackerCommmand.Execute(null);
-                else if (hotkey == this.ToggleZoneAssistantHotkey)
-                    HotkeyCommands.ToggleZoneAssistantCommand.Execute(null);
-                else if (hotkey == this.ToggleTeamspeakTrackerHotkey)
-                    HotkeyCommands.ToggleTeamspeakOverlayCommand.Execute(null);
-                else if (hotkey == this.ToggleTaskTrackerHotkey)
-                    HotkeyCommands.ToggleTaskTrackerCommand.Execute(null);
-                else if (hotkey == this.ToggleWebBrowserHotkey)
-                    HotkeyCommands.ToggleWebBrowserCommand.Execute(null);
-            }
         }
     }
 }
