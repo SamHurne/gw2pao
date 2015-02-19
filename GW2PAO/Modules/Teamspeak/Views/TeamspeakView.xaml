@@ -237,6 +237,11 @@
                      Text="{Binding ClientChannelName}"
                      IsReadOnly="True"
                      PreviewMouseDown="ChannelTextBox_PreviewMouseDown">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Setter Property="BorderBrush" Value="#70EEE8AA" />
+                    </Style>
+                </TextBox.Style>
             </TextBox>
             <Popup Name="ChannelListPopup"
                    AllowsTransparency="True"
@@ -532,7 +537,13 @@
             <TextBox Name="MessageEntryBox" Grid.Column="0"
                      Margin="3"
                      Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"
-                     KeyDown="MessageEntryBox_KeyDown"/>
+                     KeyDown="MessageEntryBox_KeyDown">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Setter Property="BorderBrush" Value="#70EEE8AA" />
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
             <Button Name="MessageSendBox" Grid.Column="1"
                     Margin="3"
                     Command="{Binding SendMessageCommand}">
