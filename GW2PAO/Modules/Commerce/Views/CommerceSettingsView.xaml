@@ -46,17 +46,17 @@
     <StackPanel Orientation="Vertical"
                 Margin="20,10,10,0">
         <!-- Tracked Items Configuration -->
-        <GroupBox Height="301" Width="539">
+        <GroupBox Height="300">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.TrackedItems}" />
             </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="ItemListColumn" Width="200" />
+                    <ColumnDefinition x:Name="ItemListColumn" Width="150" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <ListView x:Name='ItemsListView'
@@ -65,7 +65,7 @@
                           ButtonBase.Click="ListViewColumnHeader_Click">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="191"
+                            <GridViewColumn Width="141"
                                             Header="{x:Static resx:Resources.Item}"
                                             DisplayMemberBinding="{Binding ItemName}"/>
                         </GridView>
@@ -105,6 +105,7 @@
                                     Margin="0,5,0,0"
                                     Height="16"
                                     Content="{StaticResource CloseGraphic}"
+                                    ToolTip="{x:Static resx:Resources.Delete}"
                                     Command="{Binding RemoveCommand}"/>
                         </Grid>
 
