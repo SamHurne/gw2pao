@@ -216,7 +216,7 @@ namespace GW2PAO.TS3.Services
             {
                 logger.Info("Sending text message: {0}", msg);
                 var command = new Command("sendtextmessage targetmode=2");
-                command.AddParameter("msg", DecodeUtility.EncodeString(msg));
+                command.AddParameter("msg", msg);
                 logger.Info("Command: {0}", command.ToString());
                 this.CommandQueryRunner.SendCommand(command);
             }
