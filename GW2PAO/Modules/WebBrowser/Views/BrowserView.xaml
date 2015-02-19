@@ -226,6 +226,11 @@
                                 <GradientStop Color="#00000000" Offset="1"/>
                             </LinearGradientBrush>
                         </TextBox.Background>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                <Setter Property="BorderBrush" Value="#70EEE8AA" />
+                            </Style>
+                        </TextBox.Style>
                     </TextBox>
 
                     <Grid Name="BookmarkIcon" Grid.Column="5" Grid.Row="0"
