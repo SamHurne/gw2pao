@@ -10,6 +10,7 @@ using GW2PAO.Modules.WebBrowser;
 using GW2PAO.Modules.WebBrowser.Interfaces;
 using GW2PAO.Modules.WebBrowser.ViewModels;
 using GW2PAO.Modules.WebBrowser.Views;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 
 namespace GW2PAO.Modules.WebBrowser
@@ -60,7 +61,7 @@ namespace GW2PAO.Modules.WebBrowser
 #if !NO_BROWSER
             if (this.browser != null && this.browser.IsVisible)
             {
-                this.browser.Close();
+                Threading.InvokeOnUI(() => this.browser.Close());
             }
 #endif
         }
