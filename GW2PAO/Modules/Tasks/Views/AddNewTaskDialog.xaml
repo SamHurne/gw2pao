@@ -121,7 +121,8 @@
                         </Grid.RowDefinitions>
                         <Rectangle Grid.Row="0"
                                    Height="{Binding ElementName=IconImage, Path=Height}"
-                                   HorizontalAlignment="Stretch">
+                                   Width="{Binding ElementName=IconImage, Path=Width}"
+                                   HorizontalAlignment="Left">
                             <Rectangle.Fill>
                                 <SolidColorBrush Color="#01000000" />
                             </Rectangle.Fill>
@@ -130,10 +131,10 @@
                                 BorderThickness="1"
                                 Padding="5">
                             <Border.Background>
-                                <SolidColorBrush Color="Black" Opacity="0.8" />
+                                <SolidColorBrush Color="#FF473F31" Opacity="0.85" />
                             </Border.Background>
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="PaleGoldenrod" Opacity="0.25" />
+                                <SolidColorBrush Color="Black" Opacity="0.85" />
                             </Border.BorderBrush>
                             <Grid>
                                 <Grid.ColumnDefinitions>
