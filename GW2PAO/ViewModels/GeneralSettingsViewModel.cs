@@ -153,12 +153,13 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// The currently selected language
         /// </summary>
-        public Language CurrentLanguage
+        public string CurrentLanguage
         {
-            get { return this.currentLanguage; }
+            get { return this.currentLanguage.ToFullName(); }
             set
             {
-                if (this.SetProperty(ref this.currentLanguage, value))
+                var lang = LanguageExtensions.FromFullName(value);
+                if (this.SetProperty(ref this.currentLanguage, lang))
                 {
                     this.ApplyLanguageCommand.RaiseCanExecuteChanged();
                 }
@@ -168,11 +169,11 @@ namespace GW2PAO.ViewModels
         /// <summary>
         /// Full collection of possible languages
         /// </summary>
-        public ICollection<Language> PossibleLanguages
+        public ICollection<string> PossibleLanguages
         {
             get
             {
-                return Enum.GetValues(typeof(Language)).Cast<Language>().ToList();
+                return Enum.GetValues(typeof(Language)).Cast<Language>().Select(l => l.ToFullName()).ToList();
             }
         }
 
@@ -191,7 +192,7 @@ namespace GW2PAO.ViewModels
         public GeneralSettingsViewModel()
         {
             this.ApplyLanguageCommand = new DelegateCommand(this.ApplyLanguage, this.CanApplyLanguage);
-            this.CurrentLanguage = LanguageExtensions.FromTwoLetterISOLanguageName(Settings.Default.Language);
+            this.currentLanguage = LanguageExtensions.FromTwoLetterISOLanguageName(Settings.Default.Language);
         }
 
         /// <summary>
@@ -210,7 +211,7 @@ namespace GW2PAO.ViewModels
         /// </summary>
         private void ApplyLanguage()
         {
-            Settings.Default.Language = this.CurrentLanguage.ToTwoLetterISOLanguageName();
+            Settings.Default.Language = this.currentLanguage.ToTwoLetterISOLanguageName();
             Settings.Default.Save();
             this.ApplyLanguageCommand.RaiseCanExecuteChanged();
 
@@ -223,7 +224,7 @@ namespace GW2PAO.ViewModels
         /// </summary>
         private bool CanApplyLanguage()
         {
-            return LanguageExtensions.FromTwoLetterISOLanguageName(Settings.Default.Language) != this.CurrentLanguage;
+            return LanguageExtensions.FromTwoLetterISOLanguageName(Settings.Default.Language) != this.currentLanguage;
         }
     }
 }

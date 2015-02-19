@@ -16,6 +16,40 @@ namespace GW2PAO.Utility
 
     public static class LanguageExtensions
     {
+        public static string ToFullName(this Language lang)
+        {
+            switch (lang)
+            {
+                case Language.English:
+                    return "English";
+                case Language.Spanish:
+                    return "Español";
+                case Language.French:
+                    return "Français";
+                case Language.German:
+                    return "Deutsch";
+                default:
+                    return "???";
+            }
+        }
+
+        public static Language FromFullName(string lang)
+        {
+            switch (lang)
+            {
+                case "English":
+                    return Language.English;
+                case "Español":
+                    return Language.Spanish;
+                case "Français":
+                    return Language.French;
+                case "Deutsch":
+                    return Language.German;
+                default:
+                    return Language.English;
+            }
+        }
+
         public static string ToTwoLetterISOLanguageName(this Language lang)
         {
             switch (lang)
