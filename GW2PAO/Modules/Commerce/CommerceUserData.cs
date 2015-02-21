@@ -42,6 +42,7 @@ namespace GW2PAO.Modules.Commerce
         private bool areSellListingPriceNotificationsEnabled;
         private int maxHistoricalDataPoints;
         private string priceTrackerSortProperty;
+        private uint notificationDuration;
         private ObservableCollection<PriceWatch> priceWatches = new ObservableCollection<PriceWatch>();
 
         /// <summary>
@@ -90,6 +91,15 @@ namespace GW2PAO.Modules.Commerce
         }
 
         /// <summary>
+        /// The amount of time to display notifications, in seconds
+        /// </summary>
+        public uint NotificationDuration
+        {
+            get { return this.notificationDuration; }
+            set { SetProperty(ref this.notificationDuration, value); }
+        }
+
+        /// <summary>
         /// Collection of price watches for the price watch notifications
         /// </summary>
         public ObservableCollection<PriceWatch> PriceWatches { get { return this.priceWatches; } }
@@ -104,6 +114,7 @@ namespace GW2PAO.Modules.Commerce
             this.AreBuyOrderPriceNotificationsEnabled = true;
             this.AreSellListingPriceNotificationsEnabled = true;
             this.MaxHistoricalDataPoints = 600; // 600 data points = 10 hours of data
+            this.NotificationDuration = 20;
         }
 
         /// <summary>

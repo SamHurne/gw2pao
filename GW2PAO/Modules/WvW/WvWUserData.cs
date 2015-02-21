@@ -66,6 +66,7 @@ namespace GW2PAO.Modules.WvW
         private WvWMap mapOverride;
         private Units distanceUnits;
         private bool autoOpenCloseTracker;
+        private uint notificationDuration;
         private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
 
         /// <summary>
@@ -339,6 +340,15 @@ namespace GW2PAO.Modules.WvW
         }
 
         /// <summary>
+        /// The amount of time to display notifications, in seconds
+        /// </summary>
+        public uint NotificationDuration
+        {
+            get { return this.notificationDuration; }
+            set { SetProperty(ref this.notificationDuration, value); }
+        }
+
+        /// <summary>
         /// Collection of user-configured Hidden Objectives
         /// </summary>
         public ObservableCollection<int> HiddenObjectives { get { return this.hiddenObjectives; } }
@@ -365,6 +375,7 @@ namespace GW2PAO.Modules.WvW
             this.AreBlueObjectivesShown = true;
             this.AreNeutralObjectivesShown = true;
             this.AreBloodlustObjectivesShown = true;
+            this.NotificationDuration = 10;
         }
 
         /// <summary>

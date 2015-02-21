@@ -316,43 +316,37 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         private void DisplayNotification(PriceNotificationViewModel priceNotification)
         {
-            
-            Task.Factory.StartNew(() =>
+            const int SLEEP_TIME = 250;
+
+            if (!this.PriceNotifications.Contains(priceNotification))
             {
-                logger.Debug("Adding notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-                Threading.InvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
-
-                // TODO: Consider making these stay open forever, until the user closes it
-                // For 20 seconds, loop and sleep, with checks to see if notifications have been disabled
-                //for (int i = 0; i < 40; i++)
-                //{
-                //    System.Threading.Thread.Sleep(500);
-                //    if (!this.CanShowNotification(priceNotification.PriceWatch, priceNotification.NotificationType))
-                //    {
-                //        logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-                //        Threading.InvokeOnUI(() => 
-                //            {
-                //                priceNotification.IsRemovingNotification = true;
-                //                this.PriceNotifications.Remove(priceNotification);
-                //                priceNotification.IsRemovingNotification = false;
-                //            });
-                //        return;
-                //    }
-                //}
-                System.Threading.Thread.Sleep(20000);
-
-                logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-
-                // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
-                // This makes it so that the notifications can fade out before they are removed from the notification window
-                Threading.InvokeOnUI(() => priceNotification.IsRemovingNotification = true);
-                System.Threading.Thread.Sleep(250);
-                Threading.InvokeOnUI(() =>
+                Task.Factory.StartNew(() =>
                 {
-                    this.PriceNotifications.Remove(priceNotification);
-                    priceNotification.IsRemovingNotification = false;
-                });
-            }, TaskCreationOptions.LongRunning);
+                    logger.Debug("Adding notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+                    Threading.InvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
+
+                    if (this.UserData.NotificationDuration > 0)
+                    {
+                        // For X seconds, loop and sleep
+                        for (int i = 0; i < (this.UserData.NotificationDuration * 1000 / SLEEP_TIME); i++)
+                        {
+                            System.Threading.Thread.Sleep(SLEEP_TIME);
+                        }
+
+                        logger.Debug("Removing notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+
+                        // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+                        // This makes it so that the notifications can fade out before they are removed from the notification window
+                        Threading.InvokeOnUI(() => priceNotification.IsRemovingNotification = true);
+                        System.Threading.Thread.Sleep(SLEEP_TIME);
+                        Threading.InvokeOnUI(() =>
+                        {
+                            this.PriceNotifications.Remove(priceNotification);
+                            priceNotification.IsRemovingNotification = false;
+                        });
+                    }
+                }, TaskCreationOptions.LongRunning);
+            }
         }
 
         /// <summary>

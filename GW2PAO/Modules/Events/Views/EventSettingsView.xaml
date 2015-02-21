@@ -52,10 +52,27 @@
                 </CheckBox>
             </StackPanel>
         </GroupBox>
-        <CheckBox Name="NotificationsEnabledCheckbox"
-                  IsChecked="{Binding UserData.AreEventNotificationsEnabled}">
-            <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotifications}" />
-        </CheckBox>
+        <Grid Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <CheckBox Name="NotificationsEnabledCheckbox"
+                      Margin="3"
+                      Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                      IsChecked="{Binding UserData.AreEventNotificationsEnabled}">
+                <core:OutlinedTextBlock VerticalAlignment="Center"
+                                        Text="{x:Static resx:Resources.EventNotifications}" />
+            </CheckBox>
+            <core:OutlinedTextBlock Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Source={x:Static resx:Resources.NotificationsDuration}, StringFormat={}{0}:}" />
+            <TextBox Margin="5"
+                     Grid.Column="2"
+                     Height="10" Width="35"
+                     Text="{Binding UserData.NotificationDuration, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
         <GroupBox Margin="0,5,5,10">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotificationSettings}" />

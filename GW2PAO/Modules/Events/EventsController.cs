@@ -343,36 +343,44 @@ namespace GW2PAO.Modules.Events
         /// </summary>
         private void DisplayEventNotification(EventViewModel eventData)
         {
+            const int SLEEP_TIME = 250;
+
             if (this.UserData.AreEventNotificationsEnabled)
             {
-                Task.Factory.StartNew(() =>
+                if (!this.EventNotifications.Contains(eventData))
                 {
-                    logger.Debug("Adding notification for \"{0}\"", eventData.EventName);
-                    Threading.InvokeOnUI(() => this.EventNotifications.Add(eventData));
-
-                    // For 10 seconds, loop and sleep, with checks to see if notifications have been disabled
-                    for (int i = 0; i < 40; i++)
+                    Task.Factory.StartNew(() =>
                     {
-                        System.Threading.Thread.Sleep(250);
-                        if (!this.UserData.AreEventNotificationsEnabled)
+                        logger.Debug("Adding notification for \"{0}\"", eventData.EventName);
+                        Threading.InvokeOnUI(() => this.EventNotifications.Add(eventData));
+
+                        if (this.UserData.NotificationDuration > 0)
                         {
+                            // For X seconds, loop and sleep, with checks to see if notifications have been disabled
+                            for (int i = 0; i < (this.UserData.NotificationDuration * 1000 / SLEEP_TIME); i++)
+                            {
+                                System.Threading.Thread.Sleep(SLEEP_TIME);
+                                if (!this.UserData.AreEventNotificationsEnabled)
+                                {
+                                    logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
+                                    Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+                                }
+                            }
+
                             logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-                            Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+
+                            // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+                            // This makes it so that the notifications can fade out before they are removed from the notification window
+                            Threading.InvokeOnUI(() => eventData.IsRemovingNotification = true);
+                            System.Threading.Thread.Sleep(SLEEP_TIME);
+                            Threading.InvokeOnUI(() =>
+                            {
+                                this.EventNotifications.Remove(eventData);
+                                eventData.IsRemovingNotification = false;
+                            });
                         }
-                    }
-
-                    logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-
-                    // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
-                    // This makes it so that the notifications can fade out before they are removed from the notification window
-                    Threading.InvokeOnUI(() => eventData.IsRemovingNotification = true);
-                    System.Threading.Thread.Sleep(250);
-                    Threading.InvokeOnUI(() =>
-                    {
-                        this.EventNotifications.Remove(eventData);
-                        eventData.IsRemovingNotification = false;
-                    });
-                }, TaskCreationOptions.LongRunning);
+                    }, TaskCreationOptions.LongRunning);
+                }
             }
         }
 

@@ -840,4 +840,8 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Zona Finalización Asistente</value>
   </data>
+  <data name="NotificationsDuration" xml:space="preserve">
+    <value>Notificaciones Duración (seg)</value>
+    <comment>Amount of time that notifications stay open</comment>
+  </data>
 </root>

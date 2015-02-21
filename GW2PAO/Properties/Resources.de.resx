@@ -573,4 +573,8 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Zonen-Komplettierungs-Assistent</value>
   </data>
+  <data name="NotificationsDuration" xml:space="preserve">
+    <value>Benachrichtigungen Dauer (sek)</value>
+    <comment>Amount of time that notifications stay open</comment>
+  </data>
 </root>

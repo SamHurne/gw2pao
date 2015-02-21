@@ -1042,6 +1042,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications Duration (sec).
+        /// </summary>
+        public static string NotificationsDuration {
+            get {
+                return ResourceManager.GetString("NotificationsDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some features cannot be started because GW2 is running as administrator..
         /// </summary>
         public static string NotRunningAsAdmin {

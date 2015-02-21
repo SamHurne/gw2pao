@@ -36,6 +36,7 @@ namespace GW2PAO.Modules.Events
         private bool areEventNotificationsEnabled;
         private bool useAdjustedTimeTable;
         private bool autoDetectCompletion;
+        private uint notificationDuration;
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
@@ -75,6 +76,15 @@ namespace GW2PAO.Modules.Events
         {
             get { return this.autoDetectCompletion; }
             set { SetProperty(ref this.autoDetectCompletion, value); }
+        }
+
+        /// <summary>
+        /// The amount of time to display notifications, in seconds
+        /// </summary>
+        public uint NotificationDuration
+        {
+            get { return this.notificationDuration; }
+            set { SetProperty(ref this.notificationDuration, value); }
         }
 
         /// <summary>
@@ -127,6 +137,7 @@ namespace GW2PAO.Modules.Events
             this.AreEventNotificationsEnabled = true;
             this.UseAdjustedTimeTable = true;
             this.AutoDetectCompletion = true;
+            this.NotificationDuration = 10;
             this.LastResetDateTime = DateTime.UtcNow;
         }
 

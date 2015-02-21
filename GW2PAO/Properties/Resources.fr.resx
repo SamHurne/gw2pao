@@ -843,4 +843,8 @@
   <data name="ToggleTasksTracker" xml:space="preserve">
     <value>Montrer/Masquer le Suivi des tâches</value>
   </data>
+  <data name="NotificationsDuration" xml:space="preserve">
+    <value>Durée de Notification (sec)</value>
+    <comment>Amount of time that notifications stay open</comment>
+  </data>
 </root>

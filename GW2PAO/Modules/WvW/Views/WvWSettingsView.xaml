@@ -30,11 +30,27 @@
                       Height="21"
                       Width="150"/>
         </Grid>
-        <CheckBox Name="NotificationsCheckbox"
-                  Margin="2,5,2,5"
-                  IsChecked="{Binding UserData.AreNotificationsEnabled}">
-            <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
-        </CheckBox>
+        <Grid Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <CheckBox Name="NotificationsCheckbox"
+                      Margin="2,5,2,5"
+                      Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                      IsChecked="{Binding UserData.AreNotificationsEnabled}">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
+            </CheckBox>
+            <core:OutlinedTextBlock Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Source={x:Static resx:Resources.NotificationsDuration}, StringFormat={}{0}:}" />
+            <TextBox Margin="5"
+                     Grid.Column="2"
+                     Height="10" Width="35"
+                     Text="{Binding UserData.NotificationDuration, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
         <GroupBox IsEnabled="{Binding ElementName=NotificationsCheckbox, Path=IsChecked}">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />

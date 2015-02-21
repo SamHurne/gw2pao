@@ -855,4 +855,8 @@
   <data name="ItemIcon" xml:space="preserve">
     <value>Item Icon</value>
   </data>
+  <data name="NotificationsDuration" xml:space="preserve">
+    <value>Notifications Duration (sec)</value>
+    <comment>Amount of time that notifications stay open</comment>
+  </data>
 </root>

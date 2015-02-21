@@ -359,15 +359,24 @@
                                         Text="{x:Static resx:Resources.SellListingPriceNotifications}"/>
             </CheckBox>
             
-            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                     Text="{x:Static resx:Resources.RedisplayNotificationsIntervalMinutes}"/>
-            <TextBox Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
-                     Margin="3,0,0,0"
+            <TextBox Grid.Column="2" Grid.Row="0"
+                     Margin="3,0,0,1"
                      VerticalAlignment="Center"
-                     Height="10" Width="25"
+                     Height="10" Width="35"
                      Text="{Binding UserData.ResetPriceNotificationsInterval, UpdateSourceTrigger=PropertyChanged}" />
+
+            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Source={x:Static resx:Resources.NotificationsDuration}, StringFormat={}{0}:}" />
+            <TextBox Grid.Column="2" Grid.Row="1"
+                     Margin="3,1,0,0"
+                     Height="10" Width="35"
+                     Text="{Binding UserData.NotificationDuration, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         
         <!--Items Database Rebuild Button-->
