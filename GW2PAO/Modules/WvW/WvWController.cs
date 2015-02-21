@@ -482,58 +482,64 @@ namespace GW2PAO.Modules.WvW
             {
                 foreach (var objective in this.AllObjectives)
                 {
-                    var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-
-                    // Refresh owner information
-                    if (objective.WorldOwner != latestData.WorldOwner)
+                    var latestData = latestObjectivesData.FirstOrDefault(obj => obj.ID == objective.ID);
+                    if (latestData != null)
                     {
-                        Threading.InvokeOnUI(() =>
+                        // Refresh owner information
+                        if (objective.WorldOwner != latestData.WorldOwner)
                         {
-                            objective.PrevWorldOwner = objective.WorldOwner;
-                            objective.WorldOwner = latestData.WorldOwner;
-
-                            logger.Info("{0} - {1}: {2} -> {3}", objective.Map, objective.Name, objective.PrevWorldOwnerName, objective.WorldOwnerName);
-
-                            // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
-                            if (objective.Type != ObjectiveType.TempleofLostPrayers
-                                && objective.Type != ObjectiveType.BattlesHollow
-                                && objective.Type != ObjectiveType.BauersEstate
-                                && objective.Type != ObjectiveType.OrchardOverlook
-                                && objective.Type != ObjectiveType.CarversAscent)
+                            Threading.InvokeOnUI(() =>
                             {
-                                objective.FlipTime = DateTime.UtcNow;
-                                objective.IsRIActive = true;
-                            }
-                        });
+                                objective.PrevWorldOwner = objective.WorldOwner;
+                                objective.WorldOwner = latestData.WorldOwner;
 
-                        if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
-                        {
-                            // Owner just changed, raise a notification!
-                            this.DisplayNotification(objective);
+                                logger.Info("{0} - {1}: {2} -> {3}", objective.Map, objective.Name, objective.PrevWorldOwnerName, objective.WorldOwnerName);
+
+                                // Bloodlust objectives don't get RI, so don't bother with a flip time or RI flag
+                                if (objective.Type != ObjectiveType.TempleofLostPrayers
+                                    && objective.Type != ObjectiveType.BattlesHollow
+                                    && objective.Type != ObjectiveType.BauersEstate
+                                    && objective.Type != ObjectiveType.OrchardOverlook
+                                    && objective.Type != ObjectiveType.CarversAscent)
+                                {
+                                    objective.FlipTime = DateTime.UtcNow;
+                                    objective.IsRIActive = true;
+                                }
+                            });
+
+                            if (objective.WorldOwner != WorldColor.None) // Don't show a notification if the new owner is "none"
+                            {
+                                // Owner just changed, raise a notification!
+                                this.DisplayNotification(objective);
+                            }
                         }
-                    }
 
-                    // Refresh guild information
-                    if (latestData.GuildOwner.HasValue)
-                    {
-                        if (!objective.GuildClaimer.ID.HasValue
-                            || objective.GuildClaimer.ID.Value != latestData.GuildOwner.Value)
+                        // Refresh guild information
+                        if (latestData.GuildOwner.HasValue)
                         {
-                            // Guild claimer has changed
-                            objective.GuildClaimer.ID = latestData.GuildOwner.Value;
-                            var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
-                            if (guildInfo != null)
+                            if (!objective.GuildClaimer.ID.HasValue
+                                || objective.GuildClaimer.ID.Value != latestData.GuildOwner.Value)
                             {
-                                objective.GuildClaimer.Name = guildInfo.Name;
-                                objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                // Guild claimer has changed
+                                objective.GuildClaimer.ID = latestData.GuildOwner.Value;
+                                var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
+                                if (guildInfo != null)
+                                {
+                                    objective.GuildClaimer.Name = guildInfo.Name;
+                                    objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                }
                             }
+                        }
+                        else
+                        {
+                            objective.GuildClaimer.ID = null;
+                            objective.GuildClaimer.Name = string.Empty;
+                            objective.GuildClaimer.Tag = string.Empty;
                         }
                     }
                     else
                     {
-                        objective.GuildClaimer.ID = null;
-                        objective.GuildClaimer.Name = string.Empty;
-                        objective.GuildClaimer.Tag = string.Empty;
+                        logger.Warn("Unable to retrieve latest data for {0} ({1})", objective.ID, objective.Name);
                     }
                 }
             }
