@@ -493,7 +493,11 @@ namespace GW2PAO.API.Data
                                 ID = RuinedCityOfArahPathID.Story,
                                 InstanceMapID = 111,
                                 PathDisplayText = "S",
-                                GoldReward = 0.5
+                                GoldReward = 0.5,
+                                EndPoint = new Point(232.46, 380.78, 267.93),
+                                IdentifyingPoints = new List<Point>(),
+                                CompletionPrereqPoints = new List<Point>(),
+                                PointDetectionRadius = 50
                             },
                             new DungeonPath()
                             {
@@ -501,7 +505,11 @@ namespace GW2PAO.API.Data
                                 ID = RuinedCityOfArahPathID.P1,
                                 InstanceMapID = 112,
                                 PathDisplayText = "P1",
-                                GoldReward = 3.05
+                                GoldReward = 3.05,
+                                EndPoint = new Point(-326.06, -433.39, 77.44),
+                                IdentifyingPoints = new List<Point> { new Point(-403.28, 125.72, 3.90) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-458.61, 498.61, 4.52), new Point(-217.27, 206.56, 16.10), new Point(21.30, 25.55, 0.46) },
+                                PointDetectionRadius = 40
                             },
                             new DungeonPath()
                             {
@@ -509,7 +517,11 @@ namespace GW2PAO.API.Data
                                 ID = RuinedCityOfArahPathID.P2,
                                 InstanceMapID = 112,
                                 PathDisplayText = "P2",
-                                GoldReward = 3.05
+                                GoldReward = 3.05,
+                                EndPoint = new Point(-22.21, 384.75, 16.64),
+                                IdentifyingPoints = new List<Point> { new Point(-245.42, 86.82, -0.18) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-161.97, 568.74, 3.23), new Point(-0.02, 30.27, 0.49), new Point(406.77, 463.74, 1.15) },
+                                PointDetectionRadius = 40
                             },
                             new DungeonPath()
                             {
@@ -517,7 +529,11 @@ namespace GW2PAO.API.Data
                                 ID = RuinedCityOfArahPathID.P3,
                                 InstanceMapID = 112,
                                 PathDisplayText = "P3",
-                                GoldReward = 1.05
+                                GoldReward = 1.05,
+                                EndPoint = new Point(-292.70, 347.14, 33.38),
+                                IdentifyingPoints = new List<Point> { new Point(-400.14, -37.66, -0.18) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-529.60, -107.58, 4.31), new Point(-388.37, -146.76, 4.29), new Point(3.30, 31.31, 0.49) },
+                                PointDetectionRadius = 40
                             },
                             new DungeonPath()
                             {
@@ -525,7 +541,11 @@ namespace GW2PAO.API.Data
                                 ID = RuinedCityOfArahPathID.P4,
                                 InstanceMapID = 112,
                                 PathDisplayText = "P4",
-                                GoldReward = 3.05
+                                GoldReward = 3.05,
+                                EndPoint = new Point(34.37, -536.42, 1.25),
+                                IdentifyingPoints = new List<Point> { new Point(-266.70, 27.39, 1.62) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-168.28, -158.47, -0.12), new Point(-313.91, -119.35, 6.16), new Point(434.52, -122.77, 18.49) },
+                                PointDetectionRadius = 40
                             }
                         }
             });
