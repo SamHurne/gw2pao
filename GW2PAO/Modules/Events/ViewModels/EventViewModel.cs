@@ -104,12 +104,14 @@ namespace GW2PAO.Modules.Events.ViewModels
                     logger.Debug("Adding \"{0}\" to EventsWithTreasureObtained", this.EventName);
                     this.userData.EventsWithTreasureObtained.Add(this.EventModel.ID);
                     this.OnPropertyChanged(() => this.IsTreasureObtained);
+                    this.RefreshVisibility();
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from EventsWithTreasureObtained", this.EventName);
                     if (this.userData.EventsWithTreasureObtained.Remove(this.EventModel.ID))
                         this.OnPropertyChanged(() => this.IsTreasureObtained);
+                    this.RefreshVisibility();
                 }
             }
         }
@@ -195,6 +197,11 @@ namespace GW2PAO.Modules.Events.ViewModels
             }
             else if (!this.userData.AreInactiveEventsVisible
                     && this.State == EventState.Inactive)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.userData.AreCompletedEventsVisible
+                    && this.IsTreasureObtained)
             {
                 this.IsVisible = false;
             }

@@ -859,4 +859,7 @@
     <value>Notifications Duration (sec)</value>
     <comment>Amount of time that notifications stay open</comment>
   </data>
+  <data name="ShowCompletedEvents" xml:space="preserve">
+    <value>Show Completed Events</value>
+  </data>
 </root>

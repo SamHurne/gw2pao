@@ -32,6 +32,7 @@ namespace GW2PAO.Modules.Events
         /// </summary>
         public const string Filename = "EventsUserData.xml";
 
+        private bool areCompletedEventsVisible;
         private bool areInactiveEventsVisible;
         private bool areEventNotificationsEnabled;
         private bool useAdjustedTimeTable;
@@ -41,6 +42,15 @@ namespace GW2PAO.Modules.Events
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
         private ObservableCollection<EventNotificationSettings> notificationSettings = new ObservableCollection<EventNotificationSettings>();
+
+        /// <summary>
+        /// True if completed events are visible, else false
+        /// </summary>
+        public bool AreCompletedEventsVisible
+        {
+            get { return this.areCompletedEventsVisible; }
+            set { SetProperty(ref this.areCompletedEventsVisible, value); }
+        }
 
         /// <summary>
         /// True if inactive events are visible, else false
@@ -133,6 +143,7 @@ namespace GW2PAO.Modules.Events
         /// </summary>
         public EventsUserData()
         {
+            this.AreCompletedEventsVisible = true;
             this.AreInactiveEventsVisible = true;
             this.AreEventNotificationsEnabled = true;
             this.UseAdjustedTimeTable = true;
