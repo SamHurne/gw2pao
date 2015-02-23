@@ -241,11 +241,14 @@
                 </Border>
                 
                 <!-- Add Item Box -->
-                <StackPanel Orientation="Horizontal"
-                            Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
                     <!-- Item's Name/Item Selection -->
-                    <Grid>
+                    <Grid Grid.Column="0">
                         <Grid.Resources>
 
                             <Style x:Key="CustomListViewItems" TargetType="{x:Type ListViewItem}">
@@ -313,7 +316,7 @@
                                          MaxResults="20"
                                          WatermarkText="{x:Static resx:Resources.ItemName}"
                                          WatermarkForeground="Gray"
-                                         Height="21" Width="200"
+                                         Height="21"
                                          MinimumPrefixLength="2"
                                          DataProvider="{Binding MonitoredItemsConfigViewModel.ItemsProvider}"
                                          SelectedItem="{Binding MonitoredItemsConfigViewModel.SelectedItem}"
@@ -325,11 +328,12 @@
                         </auto:Intellibox>
                     </Grid>
 
-                    <Button Margin="5"
+                    <Button Grid.Column="1"
+                            Margin="5"
                             Width="50" HorizontalAlignment="Left"
                             Content="{x:Static resx:Resources.Add}"
                             Command="{Binding MonitoredItemsConfigViewModel.AddCommand}"/>
-                </StackPanel>
+                </Grid>
             </Grid>
         </GroupBox>
 
@@ -380,7 +384,8 @@
         </Grid>
         
         <!--Items Database Rebuild Button-->
-        <Button MaxWidth="250"
+        <Button MinWidth="250"
+                MaxWidth="400"
                 Margin="5"
                 Command="{Binding RebuildNamesDatabaseCommand}">
             <TextBlock Text="{x:Static resx:Resources.RebuildItemNamesDatabase}" />
