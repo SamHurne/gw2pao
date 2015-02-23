@@ -135,7 +135,7 @@
     <value>Ajustado</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>GW2 Asistente Personal Overlay</value>
+    <value>GW2 Personal Assistant Overlay</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Aplicar</value>
@@ -493,7 +493,7 @@
     <comment>World vs World Objective Type</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OKAY</value>
+    <value>OK</value>
   </data>
   <data name="OpenEventsTracker" xml:space="preserve">
     <value>Eventos Abiertos Rastreador</value>
