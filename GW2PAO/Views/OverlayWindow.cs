@@ -89,7 +89,6 @@ namespace GW2PAO.Views
         /// </summary>
         public OverlayWindow()
         {
-            this.Owner = OwnerWindow;
             this.Loaded += OverlayWindowBase_Loaded;
             this.ResizeHelper = new ResizeSnapHelper(this);
 
@@ -104,6 +103,9 @@ namespace GW2PAO.Views
         /// </summary>
         private void OverlayWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
+            if (OwnerWindow != null && OwnerWindow != this && OwnerWindow.IsLoaded)
+                this.Owner = OwnerWindow;
+
             // Set up the click through binding
             if (!this.NeverClickThrough)
             {
