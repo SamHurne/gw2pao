@@ -847,4 +847,10 @@
     <value>Durée de Notification (sec)</value>
     <comment>Amount of time that notifications stay open</comment>
   </data>
+  <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
+    <value>Masquer automatiquement l'icône de l'overlay quand GW2 ne s'éxécute pas</value>
+  </data>
+  <data name="AutoOpenCloseWvW" xml:space="preserve">
+    <value>Afficher/Masquer automatiquement les objectifs en entrant/quittant le McM</value>
+  </data>
 </root>

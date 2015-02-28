@@ -6,7 +6,6 @@
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:views="clr-namespace:GW2PAO.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
@@ -14,7 +13,9 @@
             <Setter Property="Margin" Value="5,1,1,1" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="30,10,0,0" HorizontalAlignment="Stretch">
+    <StackPanel Margin="30,10,0,0"
+                Width="600"
+                HorizontalAlignment="Stretch">
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAllWindows}"
                                  Hotkey="{Binding ToggleAllWindowsHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}"/>

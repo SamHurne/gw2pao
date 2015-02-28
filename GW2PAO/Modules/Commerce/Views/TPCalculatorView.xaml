@@ -319,10 +319,14 @@
             </StackPanel>
 
             <!--Quantity-->
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal"
-                        Margin="5">
-                <StackPanel Orientation="Vertical">
+            <Grid Grid.Row="2"
+                  Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="0">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.Quantity}" FontSize="14"/>
                     <TextBox Margin="0,5,0,0" Width="50" HorizontalAlignment="Left" 
                                 FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
@@ -331,11 +335,14 @@
                         </TextBox.Text>
                     </TextBox>
                 </StackPanel>
-                <Button Margin="85,0,0,0" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                <Button Grid.Column="1" Margin="0,0,10,0"
+                        MinWidth="50"
+                        MaxWidth="150"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
                         Command="{Binding ResetCommand}">
                     <TextBlock Text="{x:Static resx:Resources.Reset}" />
                 </Button>
-            </StackPanel>
+            </Grid>
 
             <!--Profit-->
             <StackPanel Grid.Row="3"

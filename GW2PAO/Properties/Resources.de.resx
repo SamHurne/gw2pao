@@ -577,4 +577,10 @@
     <value>Benachrichtigungen Dauer (sek)</value>
     <comment>Amount of time that notifications stay open</comment>
   </data>
+  <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
+    <value>Auto-Ausblenden Overlay Menu Icon, wenn GW2 nicht läuft</value>
+  </data>
+  <data name="AutoOpenCloseWvW" xml:space="preserve">
+    <value>Automatisch öffnen und schließen tracker beim Betreten / Verlassen WvW</value>
+  </data>
 </root>

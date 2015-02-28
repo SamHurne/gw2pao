@@ -862,4 +862,7 @@
   <data name="ShowCompletedEvents" xml:space="preserve">
     <value>Show Completed Events</value>
   </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>No Results Found</value>
+  </data>
 </root>
