@@ -266,7 +266,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(351.03, -132.45, 143.36),
+                                EndPoint = new Point(351.03, -105, 143.36),
                                 IdentifyingPoints = new List<Point> { new Point(-127.39, -66.08, 162.89) },
                                 CompletionPrereqPoints = new List<Point> { new Point(140.32, -93.57, 146.54), new Point(314.68, -66.11, 145.38) },
                                 PointDetectionRadius = 40
