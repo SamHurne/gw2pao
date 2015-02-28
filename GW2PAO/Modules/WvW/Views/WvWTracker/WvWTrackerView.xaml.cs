@@ -177,41 +177,42 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         private void RefreshWindowHeights(bool resetHeight)
         {
             var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
-
-            if (objsCount == 0)
-                objsCount = 6; // Assume at least 6
-
-            if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
+            // Don't do anything if no objectives are loaded - this occurs when first opening the WvW tracker
+            // and we don't want to override the player's saved height/widths
+            if (objsCount > 0)
             {
-                // Expanded
-                if (this.ViewModel.IsHorizontalOrientation)
+                if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
                 {
-                    // Horizontal Orientation
-                    this.MinHeight = HORIZONTAL_MIN_HEIGHT;
-                    this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
+                    // Expanded
+                    if (this.ViewModel.IsHorizontalOrientation)
+                    {
+                        // Horizontal Orientation
+                        this.MinHeight = HORIZONTAL_MIN_HEIGHT;
+                        this.MaxHeight = HORIZONTAL_MAX_HEIGHT;
 
-                    if (resetHeight)
-                        this.Height = this.MaxHeight;
+                        if (resetHeight)
+                            this.Height = this.MaxHeight;
+                    }
+                    else
+                    {
+                        // Vertical Orientation
+                        this.MinHeight = VERTICAL_MIN_HEIGHT;
+                        this.MaxHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * objsCount) + 5;
+
+                        if (resetHeight)
+                            this.Height = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
+                    }
                 }
                 else
                 {
-                    // Vertical Orientation
-                    this.MinHeight = VERTICAL_MIN_HEIGHT;
-                    this.MaxHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * objsCount) + 5;
-
+                    // Collapsed, don't touch the height unless we are resetting it
                     if (resetHeight)
-                        this.Height = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
-                }
-            }
-            else
-            {
-                // Collapsed, don't touch the height unless we are resetting it
-                if (resetHeight)
-                {
-                    if (this.ViewModel.IsHorizontalOrientation)
-                        this.beforeCollapseHeight = HORIZONTAL_MAX_HEIGHT;
-                    else
-                        this.beforeCollapseHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
+                    {
+                        if (this.ViewModel.IsHorizontalOrientation)
+                            this.beforeCollapseHeight = HORIZONTAL_MAX_HEIGHT;
+                        else
+                            this.beforeCollapseHeight = this.TitleBar.ActualHeight + (this.vertical_objHeight * 5);
+                    }
                 }
             }
         }
@@ -223,27 +224,28 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         private void RefreshWindowWidths(bool resetWidth)
         {
             var objsCount = ((ListCollectionView)this.ObjectivesContainer.ItemsSource).Count;
-            
-            if (objsCount == 0)
-                objsCount = 6; // Assume at least 6
-
-            if (this.ViewModel.IsHorizontalOrientation)
+            // Don't do anything if no objectives are loaded - this occurs when first opening the WvW tracker
+            // and we don't want to override the player's saved height/widths
+            if (objsCount > 0)
             {
-                // Horizontal Orientation
-                this.MinWidth = HORIZONTAL_MIN_WIDTH;
-                this.MaxWidth = this.horizontal_objWidth * objsCount;
+                if (this.ViewModel.IsHorizontalOrientation)
+                {
+                    // Horizontal Orientation
+                    this.MinWidth = HORIZONTAL_MIN_WIDTH;
+                    this.MaxWidth = this.horizontal_objWidth * objsCount;
 
-                if (resetWidth)
-                    this.Width = this.horizontal_objWidth * 5;
-            }
-            else
-            {
-                // Vertical Orientation
-                this.MinWidth = VERTICAL_MIN_WIDTH;
-                this.MaxWidth = VERTICAL_MAX_WIDTH;
+                    if (resetWidth)
+                        this.Width = this.horizontal_objWidth * 5;
+                }
+                else
+                {
+                    // Vertical Orientation
+                    this.MinWidth = VERTICAL_MIN_WIDTH;
+                    this.MaxWidth = VERTICAL_MAX_WIDTH;
 
-                if (resetWidth)
-                    this.Width = VERTICAL_DEF_WIDTH;
+                    if (resetWidth)
+                        this.Width = VERTICAL_DEF_WIDTH;
+                }
             }
         }
 
