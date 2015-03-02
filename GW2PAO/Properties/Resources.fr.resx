@@ -651,7 +651,7 @@
     <comment>Set a setting or action</comment>
   </data>
   <data name="AutoComplete" xml:space="preserve">
-    <value>Détection Automatique d'achèvement de Donjon</value>
+    <value>Détection Automatique d'achèvement</value>
   </data>
   <data name="AutoHideBorder" xml:space="preserve">
     <value>Masquer automatiquement les Bordures</value>
