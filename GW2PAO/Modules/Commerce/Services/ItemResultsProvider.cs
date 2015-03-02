@@ -40,10 +40,10 @@ namespace GW2PAO.Modules.Commerce.Services
             var allItems = this.commerceService.ItemsDB.Values;
 
             // First, filter by all items that contain the given searchTerm
-            var matches = allItems.Where(item => item.Name.Contains(searchTerm));
+            var matches = allItems.Where(item => item.Name.ToLower().Contains(searchTerm.ToLower()));
 
             // Then, pull out any items where the name is an exact match
-            var exactMatches = matches.Where(item => item.Name.Equals(searchTerm));
+            var exactMatches = matches.Where(item => item.Name.ToLower().Equals(searchTerm.ToLower()));
 
             if (exactMatches.Count() >= maxResults)
             {
@@ -51,7 +51,7 @@ namespace GW2PAO.Modules.Commerce.Services
             }
             else
             {
-                var nonExactMatches = matches.Where(item => !item.Name.Equals(searchTerm));
+                var nonExactMatches = matches.Where(item => !item.Name.ToLower().Equals(searchTerm.ToLower()));
                 var sortedNonExact = matches.OrderBy(item => item.Name.Length);
 
                 return exactMatches.Concat(sortedNonExact).Take(maxResults);
