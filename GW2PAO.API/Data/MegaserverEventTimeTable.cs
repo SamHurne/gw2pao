@@ -104,7 +104,7 @@ namespace GW2PAO.API.Data
                     MapID = 873,
                     WaypointCode = "[&BNcGAAA=]",
                     CompletionLocations = new List<Point>() { new Point(605.74, 313.42, 2.24), new Point(490.17, 121.94, 28.21), new Point(92.86, -5.77, 43.5), new Point(20.34, -311.43, 21.48) },
-                    CompletionRadius = 0
+                    CompletionRadius = 75
                 };
             var evolvedJungleWurm = new WorldEvent()
                 {
