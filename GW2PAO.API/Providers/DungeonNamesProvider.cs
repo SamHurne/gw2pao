@@ -225,7 +225,6 @@ namespace GW2PAO.API.Providers
                 }},
             };
 
-            // TODO: Spanish Path Names
             List<DungeonName> spanish = new List<DungeonName>()
             {
                 new DungeonName { ID = DungeonID.AscalonianCatacombs, Name = "Catacumbas Ascalonianas", PathNames = new List<PathName>()
@@ -295,7 +294,6 @@ namespace GW2PAO.API.Providers
                 }},
             };
 
-            // TODO: French Path Names
             List<DungeonName> french = new List<DungeonName>()
             {
                 new DungeonName { ID = DungeonID.AscalonianCatacombs, Name = "Catacombes d'Ascalon", PathNames = new List<PathName>()
@@ -365,7 +363,6 @@ namespace GW2PAO.API.Providers
                 }},
             };
 
-            // TODO: German Path Names
             List<DungeonName> german = new List<DungeonName>()
             {
                 new DungeonName { ID = DungeonID.AscalonianCatacombs, Name = "Katakomben von Ascalon", PathNames = new List<PathName>()
