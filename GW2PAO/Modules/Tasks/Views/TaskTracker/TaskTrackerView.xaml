@@ -53,7 +53,6 @@
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
                             <MenuItem Header="{x:Static resx:Resources.AddNewTask}" Command="{Binding AddNewTaskCommand}" />
-                            <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Load}" Command="{Binding LoadTasksCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.Import}" Command="{Binding ImportTasksCommand}" />
@@ -68,6 +67,8 @@
                                 <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
                                 <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
                             </MenuItem>
+                            <Separator />
+                            <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
