@@ -1,8 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +11,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gw2pao">
     <meta name="twitter:title" content="GW2 Personal Assistant Overlay">
-    <meta name="twitter:description" content="A full-featured, stand-alone uild wars 2 informational overlay.">
+    <meta name="twitter:description" content="A full-featured, stand-alone guild wars 2 informational overlay.">
     <meta name="twitter:creator" content="@gw2pao">
 
     <!-- Open Graph data -->
@@ -60,17 +58,17 @@
         
         function refreshDownloadCounts() {
 
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/276006?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453581?callback=?', function( response ) {
                 var data = response.data;
                 $("#installerDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/276007?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453579?callback=?', function( response ) {
                 var data = response.data;
                 $("#allFeaturesDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/276008?callback=?', function( response ) {
+            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453580?callback=?', function( response ) {
                 var data = response.data;
                 $("#noBrowserDownloadCount").text(data.download_count);
             });
@@ -176,9 +174,6 @@
                     <div class="caption">
                         <h3>World Events Tracker</h3>
                         <p>Tracks active and inactive world events, and allows a user to keep track of which events have already been completed for the day.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
@@ -188,9 +183,6 @@
                     <div class="caption">
                         <h3>World Event Notifications</h3>
                         <p>Pop-ups that appear when a world event is about to start.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
@@ -200,9 +192,6 @@
                     <div class="caption">
                         <h3>WvW Tracker</h3>
                         <p>Displays all objectives in the player's WvW map, including owner, distance to the objective, and RI timer value.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
@@ -212,9 +201,6 @@
                     <div class="caption">
                         <h3>WvW Notifications</h3>
                         <p>Pop-ups that appear when an objective has been captured in one of the WvW maps.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
@@ -228,33 +214,26 @@
                     <div class="caption">
                         <h3>Zone Completion Assistant</h3>
                         <p>Displays real-time distance and direction information for zone completion locations with several options for keeping track of unlocked locations.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="img/features/dun_tracker.png" alt="">
-                    <div class="caption">
-                        <h3>Dungeon Tracker</h3>
-                        <p>Keeps track of what dungeon paths have been completed for the day, and provides information about each dungeon and path.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
                     <img src="img/features/tp_notify.png" alt="">
                     <div class="caption">
                         <h3>Trading Post Price Notifications</h3>
                         <p>Pop-ups that appear when an item has reached a certain highest Buy Order or lowest Sale Listing in the Trading Post.</p>
-                        <!--<p>
-                    <a href="#" class="btn btn-default">More Info</a>
-                </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="img/features/tp_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>Trading Post Price Tracker</h3>
+                        <p class="newfeature">New</p>
+                        <p>Displays up-to-date highest Buy Order and lowest Sale Listing prices for any number of items.</p>
                     </div>
                 </div>
             </div>
@@ -264,9 +243,6 @@
                     <div class="caption">
                         <h3>Trading Post Calculator</h3>
                         <p>Calculates profit, taxes, and break-even prices for buying/selling items on the in-game Trading Post.</p>
-                        <!--<p>
-                    <a href="#" class="btn btn-default">More Info</a>
-                </p>-->
                     </div>
                 </div>
             </div>
@@ -274,27 +250,41 @@
         <!-- /.row -->
 
         <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="img/features/dun_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>Dungeon Tracker</h3>
+                        <p>Keeps track of what dungeon paths have been completed for the day, and provides information about each dungeon and path.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="img/features/dun_timer.png" alt="">
+                    <div class="caption">
+                        <h3>Dungeon Timer</h3>
+                        <p class="newfeature">New</p>
+                        <p>A timer that automatically starts & stops when completing dungeon paths.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="img/features/task_tracker.png" alt="">
+                    <div class="caption">
+                        <h3>Custom Tasks Tracker</h3>
+                        <p class="newfeature">New</p>
+                        <p>Displays a customizable list of player tasks that are daily reset and/or location-based.</p>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
                     <img src="img/features/ts_overlay.png" alt="">
                     <div class="caption">
                         <h3>Teamspeak Overlay</h3>
                         <p>Shows when someone talks, sends a chat, or enters/exits the active channel. Provides channel switching and messaging.</p>
-                        <!--<p>
-                    <a href="#" class="btn btn-default">More Info</a>
-                </p>-->
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="img/features/web_browser.png" alt="">
-                    <div class="caption">
-                        <h3>Web Browser</h3>
-                        <p>Provides a way to look up guides, videos, or any other useful website.</p>
-                        <!--<p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>-->
                     </div>
                 </div>
             </div>
@@ -304,37 +294,10 @@
         <div class="row text-center">
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
+                    <img src="img/features/web_browser.png" alt="">
                     <div class="caption">
-                        <h3>Dungeon Timer</h3>
-                        <!--<p>Coming soon!</p>-->
-                        <!--<p>
-                    <a href="#" class="btn btn-default">More Info</a>
-                </p>-->
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
-                    <div class="caption">
-                        <h3>Trading Post Price Tracker</h3>
-                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-                        <!--<p>
-                    <a href="#" class="btn btn-default">More Info</a>
-                </p>-->
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500/000000&text=Coming Soon" alt="">
-                    <div class="caption">
-                        <h3>Custom Tasks Tracker</h3>
-                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-                        <!--<p>
-                        <a href="#" class="btn btn-default">More Info</a>
-                    </p>-->
+                        <h3>Web Browser</h3>
+                        <p>Provides a way to look up guides, videos, or any other useful website.</p>
                     </div>
                 </div>
             </div>
@@ -353,21 +316,21 @@
                     <p>To install, either download and run the installer, or just download the zip,
                     <br>
                     extract to any location, and run GW2PAO.exe</p>
-                    <h4>Latest Version: <b>2.2</b></h4>
+                    <h4>Latest Version: <b>3.0</b></h4>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v2.2/GW2PAO_Setup_2.2.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_Setup_3.0.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
                     <br>
                     <span class="smalltext"><span id="installerDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v2.2/GW2PAO_2.2.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_3.0.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="allFeaturesDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v2.2/GW2PAO_2.2_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_3.0_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
                     <br><br><br>
-                    <a href="https://github.com/SamHurne/gw2pao/archive/v2.2.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/v3.0.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
                     <br><br>
                     <h4>Requirements:</h4>
                     <p>
@@ -376,8 +339,6 @@
                     <a href="http://www.microsoft.com/en-us/download/details.aspx?id=30653">.Net 4.5 or Higher</a>
                     </p>
                     <p>For a full list of releases with release notes, go to the <a href="https://github.com/SamHurne/gw2pao/releases">Releases page on GitHub</a>.</p>
-                    
-                    
                 </div>
             </div>
         </div>
