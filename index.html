@@ -58,17 +58,17 @@
         
         function refreshDownloadCounts() {
 
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453581?callback=?', function( response ) {
+            JSONP('https://api.github.com/repos/SamHurne/gw2pao/releases/assets/459024?callback=?', function (response) {
                 var data = response.data;
                 $("#installerDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453579?callback=?', function( response ) {
+            JSONP('https://api.github.com/repos/SamHurne/gw2pao/releases/assets/459022?callback=?', function (response) {
                 var data = response.data;
                 $("#allFeaturesDownloadCount").text(data.download_count);
             });
             
-            JSONP( 'https://api.github.com/repos/SamHurne/gw2pao/releases/assets/453580?callback=?', function( response ) {
+            JSONP('https://api.github.com/repos/SamHurne/gw2pao/releases/assets/459023?callback=?', function (response) {
                 var data = response.data;
                 $("#noBrowserDownloadCount").text(data.download_count);
             });
@@ -316,21 +316,21 @@
                     <p>To install, either download and run the installer, or just download the zip,
                     <br>
                     extract to any location, and run GW2PAO.exe</p>
-                    <h4>Latest Version: <b>3.0</b></h4>
+                    <h4>Latest Version: <b>3.1</b></h4>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_Setup_3.0.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_Setup_3.1.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
                     <br>
                     <span class="smalltext"><span id="installerDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_3.0.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_3.1.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="allFeaturesDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.0/GW2PAO_3.0_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_3.1_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
                     <br><br><br>
-                    <a href="https://github.com/SamHurne/gw2pao/archive/v3.0.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/v3.1.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
                     <br><br>
                     <h4>Requirements:</h4>
                     <p>
