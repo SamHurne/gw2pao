@@ -252,6 +252,7 @@ namespace GW2PAO.Modules.Tasks
                     this.PlayerTasks.Clear();
                     foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                     {
+                        task.IsCompleted = false;
                         this.UserData.Tasks.Add(task);
                         this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                     }
@@ -304,6 +305,7 @@ namespace GW2PAO.Modules.Tasks
                     {
                         foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                         {
+                            task.IsCompleted = false;
                             this.UserData.Tasks.Add(task);
                             this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                         }
