@@ -186,7 +186,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private void CopyWaypoint()
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.task.Name, this.Task.WaypointCode);
-            System.Windows.Clipboard.SetText(this.Task.WaypointCode);
+            System.Windows.Clipboard.SetDataObject(this.Task.WaypointCode);
         }
 
         /// <summary>

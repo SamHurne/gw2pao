@@ -296,7 +296,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
         private void CopyChatCode()
         {
             logger.Debug("Copying chat code of \"{0}\" as \"{1}\"", this.ItemName, this.ItemModel.ChatCode);
-            System.Windows.Clipboard.SetText(this.ItemModel.ChatCode);
+            System.Windows.Clipboard.SetDataObject(this.ItemModel.ChatCode);
         }
     }
 }

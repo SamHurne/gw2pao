@@ -218,7 +218,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         private void CopyWaypointCode()
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.EventName, this.EventModel.WaypointCode);
-            System.Windows.Clipboard.SetText(this.EventModel.WaypointCode);
+            System.Windows.Clipboard.SetDataObject(this.EventModel.WaypointCode);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace GW2PAO.Modules.Events.ViewModels
             }
 
             logger.Debug("Copying \"{0}\" to clipboard", fullText);
-            System.Windows.Clipboard.SetText(fullText);
+            System.Windows.Clipboard.SetDataObject(fullText);
         }
 
     }

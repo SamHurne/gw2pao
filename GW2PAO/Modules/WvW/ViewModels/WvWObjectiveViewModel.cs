@@ -389,7 +389,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         private void CopyChatCode()
         {
             logger.Debug("Copying chat code of \"{0}\" as \"{1}\"", this.Name, this.ModelData.ChatCode);
-            System.Windows.Clipboard.SetText(this.ModelData.ChatCode);
+            System.Windows.Clipboard.SetDataObject(this.ModelData.ChatCode);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         {
             logger.Debug("Copying under attack text of \"{0}\"", this.Name);
             string name = this.CanCopyChatCode() ? this.ModelData.ChatCode : this.Name;
-            System.Windows.Clipboard.SetText(string.Format("{0} is under attack!! ({1} {2})", name, this.Location, this.Type));
+            System.Windows.Clipboard.SetDataObject(string.Format("{0} is under attack!! ({1} {2})", name, this.Location, this.Type));
         }
 
         /// <summary>
@@ -415,11 +415,11 @@ namespace GW2PAO.Modules.WvW.ViewModels
                 && this.Type != ObjectiveType.OrchardOverlook
                 && this.Type != ObjectiveType.TempleofLostPrayers)
             {
-                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0} ({1} {2})", name, this.Location, this.Type));
+                System.Windows.Clipboard.SetDataObject(string.Format("Enemy headed to {0} ({1} {2})", name, this.Location, this.Type));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("Enemy headed to {0}", name));
+                System.Windows.Clipboard.SetDataObject(string.Format("Enemy headed to {0}", name));
             }
         }
 
@@ -458,11 +458,11 @@ namespace GW2PAO.Modules.WvW.ViewModels
                 && this.Type != ObjectiveType.OrchardOverlook
                 && this.Type != ObjectiveType.TempleofLostPrayers)
             {
-                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} ({1} {2}) - Estimated Distance: {3}{4}", name, this.Location, this.Type, distance, distanceUnits));
+                System.Windows.Clipboard.SetDataObject(string.Format("I'm headed to {0} ({1} {2}) - Estimated Distance: {3}{4}", name, this.Location, this.Type, distance, distanceUnits));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("I'm headed to {0} - Estimated Distance: {1}{2}", name, distance, distanceUnits));
+                System.Windows.Clipboard.SetDataObject(string.Format("I'm headed to {0} - Estimated Distance: {1}{2}", name, distance, distanceUnits));
             }
         }
 
@@ -477,11 +477,11 @@ namespace GW2PAO.Modules.WvW.ViewModels
 
             if (this.IsRIActive)
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI: {3}", name, this.Location, this.Type, this.TimerValue.ToString("mm\\:ss")));
+                System.Windows.Clipboard.SetDataObject(string.Format("{0} ({1} {2}) - RI: {3}", name, this.Location, this.Type, this.TimerValue.ToString("mm\\:ss")));
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - RI is NOT active", name, this.Location, this.Type));
+                System.Windows.Clipboard.SetDataObject(string.Format("{0} ({1} {2}) - RI is NOT active", name, this.Location, this.Type));
             }
         }
 
@@ -496,7 +496,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
 
             if (this.IsRIActive)
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - Owned By {3} - RI: {4}",
+                System.Windows.Clipboard.SetDataObject(string.Format("{0} ({1} {2}) - Owned By {3} - RI: {4}",
                     name,
                     this.Location, this.Type,
                     this.WorldOwnerName,
@@ -504,7 +504,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
             }
             else
             {
-                System.Windows.Clipboard.SetText(string.Format("{0} ({1} {2}) - Owned By {3} - RI is NOT active",
+                System.Windows.Clipboard.SetDataObject(string.Format("{0} ({1} {2}) - Owned By {3} - RI is NOT active",
                     name, 
                     this.Location, this.Type,
                     this.WorldOwnerName));

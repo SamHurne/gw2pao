@@ -139,7 +139,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         private void CopyWaypointCode()
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.DungeonName, this.DungeonModel.WaypointCode);
-            System.Windows.Clipboard.SetText(this.DungeonModel.WaypointCode);
+            System.Windows.Clipboard.SetDataObject(this.DungeonModel.WaypointCode);
         }
 
         /// <summary>

@@ -278,7 +278,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         private void CopyNameToClipboard()
         {
             logger.Debug("Copying name of \"{0}\" ", this.ItemName);
-            System.Windows.Clipboard.SetText(this.ItemName);
+            System.Windows.Clipboard.SetDataObject(this.ItemName);
         }
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         private void CopyChatcodeToClipboard()
         {
             logger.Debug("Copying chatcode of \"{0}\" as \"{1}\" ", this.ItemName, this.ItemData.ChatCode);
-            System.Windows.Clipboard.SetText(this.ItemData.ChatCode);
+            System.Windows.Clipboard.SetDataObject(this.ItemData.ChatCode);
         }
     }
 }
