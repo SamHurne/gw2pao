@@ -427,20 +427,32 @@ namespace GW2PAO.Modules.WvW
 
                     // Refresh state of all objectives
                     var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
-                    Threading.InvokeOnUI(() =>
+                    while (latestObjectivesData.Count() != this.AllObjectives.Count
+                        && !this.isStopped)
                     {
-                        foreach (var objective in this.AllObjectives)
+                        // We were unable to pull data for all objectives - this can happen if we are
+                        // in the middle of a reset. As such, loop until we actually get a full set
+                        logger.Warn("Unable to retrieve data for all objectives! Trying again...");
+                        latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                    }
+
+                    if (latestObjectivesData.Count() >= this.AllObjectives.Count)
+                    {
+                        Threading.InvokeOnUI(() =>
                         {
-                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                            objective.ModelData.MatchId = this.matchID;
-                            objective.PrevWorldOwner = latestData.WorldOwner;
-                            objective.WorldOwner = latestData.WorldOwner;
-                            objective.FlipTime = DateTime.UtcNow;
-                            objective.DistanceFromPlayer = 0;
-                            objective.TimerValue = TimeSpan.Zero;
-                            objective.IsRIActive = false;
-                        }
-                    });
+                            foreach (var objective in this.AllObjectives)
+                            {
+                                var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+                                objective.ModelData.MatchId = this.matchID;
+                                objective.PrevWorldOwner = latestData.WorldOwner;
+                                objective.WorldOwner = latestData.WorldOwner;
+                                objective.FlipTime = DateTime.UtcNow;
+                                objective.DistanceFromPlayer = 0;
+                                objective.TimerValue = TimeSpan.Zero;
+                                objective.IsRIActive = false;
+                            }
+                        });
+                    }
                 }
             }
         }
