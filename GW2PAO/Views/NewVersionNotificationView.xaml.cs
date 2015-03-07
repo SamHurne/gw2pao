@@ -55,6 +55,7 @@ namespace GW2PAO.Views
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            e.Handled = true;
         }
     }
 }

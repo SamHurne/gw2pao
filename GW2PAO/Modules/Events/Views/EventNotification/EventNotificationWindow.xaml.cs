@@ -57,6 +57,7 @@ namespace GW2PAO.Modules.Events.Views.EventNotification
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            e.Handled = true;
             Properties.Settings.Default.EventNotificationX = this.Left;
             Properties.Settings.Default.EventNotificationY = this.Top;
             Properties.Settings.Default.Save();

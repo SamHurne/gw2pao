@@ -153,6 +153,7 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -95,6 +95,7 @@ namespace GW2PAO.Views
                 if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
                 {
                     this.DragMove();
+                    e.Handled = true;
                 }
                 else
                 {

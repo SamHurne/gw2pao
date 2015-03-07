@@ -110,6 +110,7 @@ namespace GW2PAO.Modules.Tasks.Views.TaskTracker
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

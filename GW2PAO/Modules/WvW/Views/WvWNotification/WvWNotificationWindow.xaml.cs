@@ -57,6 +57,7 @@ namespace GW2PAO.Modules.WvW.Views.WvWNotification
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            e.Handled = true;
             Properties.Settings.Default.WvWNotificationX = this.Left;
             Properties.Settings.Default.WvWNotificationY = this.Top;
             Properties.Settings.Default.Save();

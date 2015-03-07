@@ -304,8 +304,8 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
                 this.UpdateLayout();
             }
 
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-                this.DragMove();
+            this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

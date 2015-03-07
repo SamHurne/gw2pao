@@ -100,6 +100,7 @@ namespace GW2PAO.Modules.Teamspeak.Views
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -148,6 +148,7 @@ namespace GW2PAO.Modules.Dungeons.Views
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

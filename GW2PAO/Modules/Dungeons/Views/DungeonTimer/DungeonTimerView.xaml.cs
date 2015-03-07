@@ -60,6 +60,7 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleImage_MouseDown(object sender, MouseButtonEventArgs e)

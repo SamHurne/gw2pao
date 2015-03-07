@@ -56,6 +56,7 @@ namespace GW2PAO.Modules.Commerce.Views.PriceNotification
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            e.Handled = true;
             Properties.Settings.Default.PriceNotificationX = this.Left;
             Properties.Settings.Default.PriceNotificationY = this.Top;
             Properties.Settings.Default.Save();

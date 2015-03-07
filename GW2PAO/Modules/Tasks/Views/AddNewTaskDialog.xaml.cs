@@ -64,6 +64,7 @@ namespace GW2PAO.Modules.Tasks.Views
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+            e.Handled = true;
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)

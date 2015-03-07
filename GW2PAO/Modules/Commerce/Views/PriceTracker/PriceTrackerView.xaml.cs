@@ -130,6 +130,7 @@ namespace GW2PAO.Modules.Commerce.Views.PriceTracker
             }
 
             this.DragMove();
+            e.Handled = true;
         }
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
