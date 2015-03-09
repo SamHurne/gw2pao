@@ -142,13 +142,18 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Width="35">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid Name="DirectionGrid"
-                      Height="15" Width="13">
+                      Height="15" Width="13"
+                      Grid.Row="0">
                     <Path Stretch="Uniform"
                           Stroke="Black" Fill="Goldenrod"
                           StrokeThickness="1"
                           StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                          RenderTransformOrigin="0.5,1.0">
+                          RenderTransformOrigin="0.5,0.5">
                         <Path.Data>
                             <PathGeometry FillRule="Nonzero">
                                 <PathGeometry.Figures>
@@ -164,13 +169,13 @@
                         <Path.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="{Binding DirectionFromPlayer}" />
-                                <TranslateTransform Y="-7" />
                             </TransformGroup>
                         </Path.RenderTransform>
                     </Path>
                 </Grid>
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Grid.Row="1"
                             Opacity="0.75">
                     <core:OutlinedTextBlock Name="DistanceTextblock"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
