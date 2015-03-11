@@ -147,7 +147,7 @@ namespace GW2PAO.API.Data
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
                                 EndPoint = new Point(-195.62,193.663,2.571),
-                                IdentifyingPoints = new List<Point> { new Point(126.991, 9.363, 30.898) },
+                                IdentifyingPoints = new List<Point> { new Point(165.67, 82.66, 30.90) },
                                 CompletionPrereqPoints = new List<Point> { new Point(70.671, 77.091, 22.536), new Point(-41.897, 119.5, 20.746), new Point(55.904, 188.298, 26.573) },
                                 PointDetectionRadius = 30
                             },
@@ -279,7 +279,7 @@ namespace GW2PAO.API.Data
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
                                 EndPoint = new Point(144.48, 41.61, 143.45),
-                                IdentifyingPoints = new List<Point> { new Point(-284.01, 127.53, 208.49), new Point(-148.10, 133.50, 215.23), new Point(-98.59, 144.75, 210.99) },
+                                IdentifyingPoints = new List<Point> { new Point(-85.47, 157.55, 211.13) },
                                 CompletionPrereqPoints = new List<Point> { new Point(52.09, 252.63, 158.12), new Point(-93.22, 215.05, 211.13), new Point(126.65, 177.83, 169.37) },
                                 PointDetectionRadius = 40
                             },
@@ -290,7 +290,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-273.58, -276.91, 200.99),
+                                EndPoint = new Point(-196.31, 28.09, 208.49),
                                 IdentifyingPoints = new List<Point> { new Point(-212.97, 42.87, 208.36) },
                                 CompletionPrereqPoints = new List<Point> { new Point(-255.91, -133.49, 168.24), new Point(-299.31, -199.87, 173.39) },
                                 PointDetectionRadius = 50
@@ -458,10 +458,10 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-74.92, 357.91, 224.40),
-                                IdentifyingPoints = new List<Point> { new Point(37.20, 355.87, 226.81) },
-                                CompletionPrereqPoints = new List<Point> { new Point(37.20, 355.87, 226.81), new Point(-70.33, 341.65, 226.94) },
-                                PointDetectionRadius = 35
+                                EndPoint = new Point(-64.27, 356.45, 226.15),
+                                IdentifyingPoints = new List<Point> { new Point(21.56, 379.84, 225.42) },
+                                CompletionPrereqPoints = new List<Point> { new Point(21.56, 379.84, 225.42) },
+                                PointDetectionRadius = 50
                             },
                             new DungeonPath()
                             {
@@ -470,10 +470,10 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(96.01, -17.57, 237.59),
-                                IdentifyingPoints = new List<Point> { new Point(11.66, 295.33, 222.84) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-139.68, 230.29, 228.39), new Point(-138.14, 149.17, 212.75) },
-                                PointDetectionRadius = 35
+                                EndPoint = new Point(76.29, 1.29, 233.99),
+                                IdentifyingPoints = new List<Point> { new Point(-137.85, 280.19, 228.39) },
+                                CompletionPrereqPoints = new List<Point> { new Point(-139.41, 152.06, 212.75) },
+                                PointDetectionRadius = 50
                             }
                         }
             });
