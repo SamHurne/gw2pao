@@ -215,7 +215,7 @@ namespace GW2PAO.API.Data
                 evolvedJungleWurm.Duration = new EventTimespan(0, 15, 0);
                 evolvedJungleWurm.WarmupDuration = new EventTimespan(0, 10, 0);
 
-                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(16, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) };
+                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 8, 0), new EventTimespan(4, 8, 0), new EventTimespan(7, 8, 0), new EventTimespan(10, 8, 0), new EventTimespan(13, 8, 0), new EventTimespan(16, 8, 0), new EventTimespan(19, 8, 0), new EventTimespan(22, 8, 0) };
                 shatterer.Duration = new EventTimespan(0, 7, 0);
                 shatterer.WarmupDuration = new EventTimespan(0, 6, 0);
 
@@ -271,7 +271,7 @@ namespace GW2PAO.API.Data
                 evolvedJungleWurm.Duration = new EventTimespan(0, 15, 0);
                 evolvedJungleWurm.WarmupDuration = new EventTimespan(0, 0, 0);
 
-                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) };
+                shatterer.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 0, 0), new EventTimespan(4, 0, 0), new EventTimespan(7, 0, 0), new EventTimespan(10, 0, 0), new EventTimespan(13, 0, 0), new EventTimespan(16, 0, 0), new EventTimespan(19, 0, 0), new EventTimespan(22, 0, 0) };
                 shatterer.Duration = new EventTimespan(0, 7, 0);
                 shatterer.WarmupDuration = new EventTimespan(0, 0, 0);
 
