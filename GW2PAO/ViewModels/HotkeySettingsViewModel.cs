@@ -238,7 +238,7 @@ namespace GW2PAO.ViewModels
                             this.ToggleNotificationWindowBordersHotkey = loadedHotkeys.ToggleNotificationWindowBordersHotkey;
 
                         if (loadedHotkeys.ToggleAutoFadeBordersHotkey != null)
-                            this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleAutoFadeBordersHotkey;
+                            this.ToggleAutoFadeBordersHotkey = loadedHotkeys.ToggleAutoFadeBordersHotkey;
 
                         if (loadedHotkeys.ToggleOverlayMenuIconHotkey != null)
                             this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleOverlayMenuIconHotkey;
