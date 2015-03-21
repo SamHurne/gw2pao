@@ -20,21 +20,58 @@ namespace GW2PAO.API.Data.Entities
 
     public class DungeonPath
     {
+        /// <summary>
+        /// Unique ID for the dungeon path
+        /// </summary>
         public Guid ID { get; set; }
-        public int PathNumber { get; set; }
-        public int InstanceMapID { get; set; }
-        public string PathDisplayText { get; set; }
-        public string Nickname { get; set; }
-        public double GoldReward { get; set; }
-        public Point EndPoint { get; set; }
-        public List<Point> IdentifyingPoints { get; set; }
-        public List<Point> CompletionPrereqPoints { get; set; }
-        public double PointDetectionRadius { get; set; }
 
+        /// <summary>
+        /// Number of the dungeon path (1, 2, 3, 4, etc)
+        /// </summary>
+        public int PathNumber { get; set; }
+
+        /// <summary>
+        /// Map ID for the instance used by the dungeon path
+        /// </summary>
+        public int InstanceMapID { get; set; }
+
+        /// <summary>
+        /// Text displayed in the tracker for the dungeon path (ex: "P1")
+        /// </summary>
+        public string PathDisplayText { get; set; }
+
+        /// <summary>
+        /// Nickname for the dungeon path (ex: "Aetherpath")
+        /// </summary>
+        public string Nickname { get; set; }
+
+        /// <summary>
+        /// Amount of gold rewarded for completing the dungeon path
+        /// </summary>
+        public double GoldReward { get; set; }
+
+        /// <summary>
+        /// Collection of points that identify the path. These are ORed in order
+        /// to detect which path the user is completing
+        /// </summary>
+        public List<DetectionPoint> IdentifyingPoints { get; set; }
+
+        /// <summary>
+        /// Endpoint of the dungeon path
+        /// </summary>
+        public DetectionPoint EndPoint { get; set; }
+
+        /// <summary>
+        /// Number of cutscenes shown while at the endpoint
+        /// </summary>
+        public int EndCutsceneCount { get; set; }
+
+        /// <summary>
+        /// Constructs a new DungeonPath object
+        /// </summary>
         public DungeonPath()
         {
-            this.IdentifyingPoints = new List<Point>();
-            this.CompletionPrereqPoints = new List<Point>();
+            this.IdentifyingPoints = new List<DetectionPoint>();
         }
     }
 }

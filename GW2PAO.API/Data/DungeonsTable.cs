@@ -79,9 +79,8 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 33,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(99.5, -62.5, 43.5),
-                                PointDetectionRadius = 40,
-                                CompletionPrereqPoints = new List<Point> { new Point(-16.8, -96.9, 51.5), new Point(330.1, 83.8, 31.9), new Point(341.5, -47.5, 19.8) }
+                                EndPoint = new DetectionPoint(99.5, -62.5, 43.5, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -90,9 +89,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.55,
-                                EndPoint = new Point(-316, 193, 0),
-                                IdentifyingPoints = new List<Point> { new Point(99, -222, 15), new Point(-87, 98, 54) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(99, -222, 15, 50), new DetectionPoint(-87, 98, 54, 50) },
+                                EndPoint = new DetectionPoint(-322.01, 195.11, 0.87, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -101,9 +100,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.55,
-                                EndPoint = new Point(106, 148, 67),
-                                IdentifyingPoints = new List<Point> { new Point(315, -185, 0) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(315, -185, 0, 50) },
+                                EndPoint = new DetectionPoint(106, 148, 67, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -112,9 +111,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.55,
-                                EndPoint = new Point(-317, 193, 0),
-                                IdentifyingPoints = new List<Point> { new Point(328, -60, 19.4) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(328, -60, 19.4, 50) },
+                                EndPoint = new DetectionPoint(-317, 193, 0, 75),
+                                EndCutsceneCount = 1
                             }
                         }
                 });
@@ -135,9 +134,8 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 75,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(252.10, 163.32, 37.48),
-                                CompletionPrereqPoints = new List<Point> { new Point(162.28, 84.15, 30.90), new Point(139.54, 232.16, 30.81), new Point(236.73, 259.42, 40.62) },
-                                PointDetectionRadius = 50
+                                EndPoint = new DetectionPoint(252.10, 163.32, 37.48, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -146,10 +144,16 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-195.62,193.663,2.571),
-                                IdentifyingPoints = new List<Point> { new Point(165.67, 82.66, 30.90) },
-                                CompletionPrereqPoints = new List<Point> { new Point(70.671, 77.091, 22.536), new Point(-41.897, 119.5, 20.746), new Point(55.904, 188.298, 26.573) },
-                                PointDetectionRadius = 30
+                                IdentifyingPoints = new List<DetectionPoint>
+                                { 
+                                    new DetectionPoint(46.98, -175.10, 32.73, 35.00),
+                                    new DetectionPoint(85.36, -167.39, 41.69, 35.00),
+                                    new DetectionPoint(180.20, -92.77, 52.83, 35.00),
+                                    new DetectionPoint(278.67, 23.54, 36.29, 35.00),
+                                    new DetectionPoint(324.11, 94.78, 33.74, 35.00)
+                                },
+                                EndPoint = new DetectionPoint(-195.62, 193.663, 2.571, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -158,10 +162,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(252.08, 268.50, 41.53),
-                                IdentifyingPoints = new List<Point> { new Point(46.79, 58.08, 40.08) },
-                                CompletionPrereqPoints = new List<Point> { new Point(46.79, 58.08, 40.08), new Point(261.97, -8.27, 41.18) },
-                                PointDetectionRadius = 30
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(46.79, 58.08, 40.08, 30) },
+                                EndPoint = new DetectionPoint(252.08, 268.50, 41.53, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -170,10 +173,18 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-215.50, 233.00, 0.49),
-                                IdentifyingPoints = new List<Point> { new Point(17.30, 30.58, 16.18) },
-                                CompletionPrereqPoints = new List<Point> { new Point(94.86, 127.90, 22.54), new Point(136.28, 239.42, 30.61) },
-                                PointDetectionRadius = 30
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-82.80, -131.07, 0.15, 35.00),
+                                    new DetectionPoint(-159.74, -82.39, -2.09, 35.00),
+                                    new DetectionPoint(-142.74, -12.14, -0.55, 35.00),
+                                    new DetectionPoint(-211.30, 4.69, 2.46, 35.00),
+                                    new DetectionPoint(-153.19, 54.23, 4.79, 50.00),
+                                    new DetectionPoint(-115.55, 200.58, 53.89, 35.00),
+                                    new DetectionPoint(3.71, 106.29, 65.88, 35.00)
+                                },
+                                EndPoint = new DetectionPoint(-215.50, 233.00, 0.49, 75),
+                                EndCutsceneCount = 1
                             }
                         }
             });
@@ -194,10 +205,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 68,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(68.70, -0.59, 45.21),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 20
+                                IdentifyingPoints = new List<DetectionPoint>() {},
+                                EndPoint = new DetectionPoint(68.70, -0.59, 45.21, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -206,10 +216,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(65.51, 1.04, 45.51),
-                                IdentifyingPoints = new List<Point> { new Point(42.90, -176.14, 32.26) },
-                                CompletionPrereqPoints = new List<Point> { new Point(274.22, 18.34, 38.24), new Point(320.97, 96.49, 33.44), new Point(156.58, 38.84, 38.13) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(42.90, -176.14, 32.26, 35) },
+                                EndPoint = new DetectionPoint(65.51, 1.04, 45.51, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -218,10 +227,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "P2",
                                 GoldReward = 2.05,
-                                EndPoint = new Point(-201.52, 249.99, 20.56),
-                                IdentifyingPoints = new List<Point> { new Point(-31.42, -262.85, -0.54) },
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-31.42, -262.85, -0.54, 35) },
+                                EndPoint = new DetectionPoint(-201.52, 249.99, 20.56, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -230,10 +238,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(57.02, -0.15, 45.16),
-                                IdentifyingPoints = new List<Point> { new Point(-55.25, -137.32, 2.77) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-105.83, 36.87, 4.51), new Point(136.93, 224.23, 62.63), new Point(158.22, 46.20, 36.09) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-55.25, -137.32, 2.77, 35) },
+                                EndPoint = new DetectionPoint(57.02, -0.15, 45.16, 75),
+                                EndCutsceneCount = 2
                             }
                         }
             });
@@ -254,10 +261,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 63,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(127.33, -278.88, 93.87),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint>() { },
+                                EndPoint = new DetectionPoint(127.33, -278.88, 93.87, 100),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -266,10 +272,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(351.03, -105, 143.36),
-                                IdentifyingPoints = new List<Point> { new Point(-127.39, -66.08, 162.89) },
-                                CompletionPrereqPoints = new List<Point> { new Point(140.32, -93.57, 146.54), new Point(314.68, -66.11, 145.38) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-127.39, -66.08, 162.89, 35) },
+                                EndPoint = new DetectionPoint(351.03, -105, 143.36, 100),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -278,10 +283,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(144.48, 41.61, 143.45),
-                                IdentifyingPoints = new List<Point> { new Point(-85.47, 157.55, 211.13) },
-                                CompletionPrereqPoints = new List<Point> { new Point(52.09, 252.63, 158.12), new Point(-93.22, 215.05, 211.13), new Point(126.65, 177.83, 169.37) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-85.47, 157.55, 211.13, 35) },
+                                EndPoint = new DetectionPoint(144.48, 41.61, 143.45, 100),  // TODO: Retest this
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -290,10 +294,15 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-196.31, 28.09, 208.49),
-                                IdentifyingPoints = new List<Point> { new Point(-212.97, 42.87, 208.36) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-255.91, -133.49, 168.24), new Point(-299.31, -199.87, 173.39) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-244.83, 19.78, 204.50, 35.00),
+                                    new DetectionPoint(-258.47, -135.50, 168.38, 35.00),
+                                    new DetectionPoint(-242.73, -197.97, 165.74, 35.00),
+                                    new DetectionPoint(-242.24, -252.07, 199.46, 35.00)
+                                },
+                                EndPoint = new DetectionPoint(-242.24, -252.07, 199.46, 100), // TODO: Retest this
+                                EndCutsceneCount = 1
                             }
                         }
             });
@@ -314,10 +323,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 66,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(76.62, 69.63, 146.58),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 25
+                                IdentifyingPoints = new List<DetectionPoint>() { },
+                                EndPoint = new DetectionPoint(76.62, 69.63, 146.58, 100),
+                                EndCutsceneCount = 3
                             },
                             new DungeonPath()
                             {
@@ -326,10 +334,16 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(42.12, 302.69, 121.63),
-                                IdentifyingPoints = new List<Point> { new Point(-185.25, 37.26, 75.86) },
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint>
+                                { 
+                                    new DetectionPoint(-227.21, 42.86, 72.88, 35.00),
+                                    new DetectionPoint(-292.84, 61.11, 63.66, 35.00),
+                                    new DetectionPoint(-260.00, 119.42, 76.65, 35.00),
+                                    new DetectionPoint(-124.13, 264.86, 110.43, 35.00),
+                                    new DetectionPoint(-21.09, 187.31, 108.72, 35.00)
+                                },
+                                EndPoint = new DetectionPoint(50.80, 301.16, 121.76, 175.00),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -338,10 +352,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(328.02, -17.45, 101.33),
-                                IdentifyingPoints = new List<Point> { new Point(-9.03, -147.03, 73.00) },
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-9.03, -147.03, 73.00, 35) },
+                                EndPoint = new DetectionPoint(328.02, -17.45, 101.33, 100),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -350,10 +363,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(255.89, 278.00, 128.17),
-                                IdentifyingPoints = new List<Point> { new Point(-25.65, -79.68, 8.89) },
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-25.65, -79.68, 8.89, 35) },
+                                EndPoint = new DetectionPoint(255.89, 278.00, 128.17, 100),
+                                EndCutsceneCount = 2
                             }
                         }
             });
@@ -374,10 +386,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 70,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(106.65, 25.35, 5.11),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point> { new Point(-158.16, 7.04, 54.48), new Point(-56.92, 77.66, 55.01), new Point(-166.32, 235.24, 40.23) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint>() { },
+                                EndPoint = new DetectionPoint(106.65, 25.35, 5.11, 75),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -386,10 +397,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-67.77, -68.20, 18.95),
-                                IdentifyingPoints = new List<Point> { new Point(-119.83, 159.85, 38.57) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-119.83, 159.85, 38.57), new Point(-15.81, 174.86, 35.39) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-119.83, 159.85, 38.57, 35) },
+                                EndPoint = new DetectionPoint(-67.77, -68.20, 18.95, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -398,10 +408,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-158.60, 141.23, -36.51),
-                                IdentifyingPoints = new List<Point> { new Point(-10.70, 4.73, 55.70) },
-                                CompletionPrereqPoints = new List<Point> { new Point(10.92, -32.10, 59.07), new Point(131.86, 99.55, 42.87), new Point(20.38, 17.66, 7.87) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-10.70, 4.73, 55.70, 35) },
+                                EndPoint = new DetectionPoint(-158.60, 141.23, -36.51, 75),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -410,10 +419,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-100.96, 11.86, -18.29),
-                                IdentifyingPoints = new List<Point> { new Point(-199.69, 197.26, 43.96) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-199.69, 197.26, 43.96), new Point(-168.98, 232.75, 40.52) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-199.69, 197.26, 43.96, 35) },
+                                EndPoint = new DetectionPoint(-100.96, 11.86, -18.29, 75),
+                                EndCutsceneCount = 2
                             }
                         }
             });
@@ -434,10 +442,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 81,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(34.60, 37.36, 115.80),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint>() { },
+                                EndPoint = new DetectionPoint(34.60, 37.36, 115.80, 50),
+                                EndCutsceneCount = 3
                             },
                             new DungeonPath()
                             {
@@ -446,10 +453,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P1",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(131.17, 126.65, 188.48),
-                                IdentifyingPoints = new List<Point> { new Point(170.98, -94.73, 176.74) },
-                                CompletionPrereqPoints = new List<Point> { new Point(170.98, -94.73, 176.74), new Point(238.30, 181.81, 191.84) },
-                                PointDetectionRadius = 35
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(170.98, -94.73, 176.74, 35) },
+                                EndPoint = new DetectionPoint(131.17, 126.65, 188.48, 50),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -458,10 +464,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P2",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-64.27, 356.45, 226.15),
-                                IdentifyingPoints = new List<Point> { new Point(21.56, 379.84, 225.42) },
-                                CompletionPrereqPoints = new List<Point> { new Point(21.56, 379.84, 225.42) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(21.56, 379.84, 225.42, 35) },
+                                EndPoint = new DetectionPoint(-64.27, 356.45, 226.15, 40),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -470,10 +475,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(76.29, 1.29, 233.99),
-                                IdentifyingPoints = new List<Point> { new Point(-137.85, 280.19, 228.39) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-139.41, 152.06, 212.75) },
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-137.85, 280.19, 228.39, 35) },
+                                EndPoint = new DetectionPoint(76.29, 1.29, 233.99, 50),
+                                EndCutsceneCount = 1
                             }
                         }
             });
@@ -494,10 +498,9 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 111,
                                 PathDisplayText = "S",
                                 GoldReward = 0.5,
-                                EndPoint = new Point(232.46, 380.78, 267.93),
-                                IdentifyingPoints = new List<Point>(),
-                                CompletionPrereqPoints = new List<Point>(),
-                                PointDetectionRadius = 50
+                                IdentifyingPoints = new List<DetectionPoint>() {},
+                                EndPoint = new DetectionPoint(232.46, 380.78, 267.93, 100),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -506,10 +509,13 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P1",
                                 GoldReward = 3.05,
-                                EndPoint = new Point(-326.06, -433.39, 77.44),
-                                IdentifyingPoints = new List<Point> { new Point(-403.28, 125.72, 3.90) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-458.61, 498.61, 4.52), new Point(-217.27, 206.56, 16.10), new Point(21.30, 25.55, 0.46) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-403.28, 125.72, 3.90, 35),
+                                    new DetectionPoint(-326.06, -433.39, 77.44, 50)
+                                },
+                                EndPoint = new DetectionPoint(-326.06, -433.39, 77.44, 100),
+                                EndCutsceneCount = 1
                             },
                             new DungeonPath()
                             {
@@ -518,10 +524,15 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P2",
                                 GoldReward = 3.05,
-                                EndPoint = new Point(-22.21, 384.75, 16.64),
-                                IdentifyingPoints = new List<Point> { new Point(-245.42, 86.82, -0.18) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-161.97, 568.74, 3.23), new Point(-0.02, 30.27, 0.49), new Point(406.77, 463.74, 1.15) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-233.35, 113.28, -0.30, 35.00),
+                                    new DetectionPoint(-191.52, 182.03, -0.38, 35.00),
+                                    new DetectionPoint(-166.94, 241.10, -0.09, 35.00),
+                                    new DetectionPoint(-22.21, 384.75, 16.64, 50)
+                                },
+                                EndPoint = new DetectionPoint(-22.21, 384.75, 16.64, 100),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -530,10 +541,13 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P3",
                                 GoldReward = 1.05,
-                                EndPoint = new Point(-292.70, 347.14, 33.38),
-                                IdentifyingPoints = new List<Point> { new Point(-400.14, -37.66, -0.18) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-529.60, -107.58, 4.31), new Point(-388.37, -146.76, 4.29), new Point(3.30, 31.31, 0.49) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-400.14, -37.66, -0.18, 35),
+                                    new DetectionPoint(-292.70, 347.14, 33.38, 50)
+                                },
+                                EndPoint = new DetectionPoint(-292.70, 347.14, 33.38, 100),
+                                EndCutsceneCount = 2
                             },
                             new DungeonPath()
                             {
@@ -542,10 +556,14 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P4",
                                 GoldReward = 3.05,
-                                EndPoint = new Point(34.37, -536.42, 1.25),
-                                IdentifyingPoints = new List<Point> { new Point(-266.70, 27.39, 1.62) },
-                                CompletionPrereqPoints = new List<Point> { new Point(-168.28, -158.47, -0.12), new Point(-313.91, -119.35, 6.16), new Point(434.52, -122.77, 18.49) },
-                                PointDetectionRadius = 40
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-209.09, -49.55, 0.45, 35.00),
+                                    new DetectionPoint(-169.50, -157.64, -0.15, 35.00),
+                                    new DetectionPoint(34.37, -536.42, 1.25, 35)
+                                },
+                                EndPoint = new DetectionPoint(34.37, -536.42, 1.25, 100),
+                                EndCutsceneCount = 2
                             }
                         }
             });

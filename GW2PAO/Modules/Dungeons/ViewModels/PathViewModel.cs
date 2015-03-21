@@ -90,34 +90,25 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// <summary>
         /// The in-game end location for the path
         /// </summary>
-        public Point EndPoint
+        public DetectionPoint EndPoint
         {
             get { return this.PathModel.EndPoint; }
         }
 
         /// <summary>
-        /// The radius to use when detected if the player is near a point
-        /// </summary>
-        public double PointDetectionRadius
-        {
-            get { return this.PathModel.PointDetectionRadius; }
-        }
-
-        /// <summary>
-        /// Collection of pre-requisite points and their status for this path
-        /// </summary>
-        public ConcurrentDictionary<Point, bool> CompletionPrerequisitePoints
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// Collection of in-game points that identify this path
         /// </summary>
-        public List<Point> IdentifyingPoints
+        public List<DetectionPoint> IdentifyingPoints
         {
             get { return this.PathModel.IdentifyingPoints; }
+        }
+
+        /// <summary>
+        /// Number of cutscenes shown while at the endpoint
+        /// </summary>
+        public int EndCutsceneCount
+        {
+            get { return this.PathModel.EndCutsceneCount; }
         }
 
         /// <summary>
@@ -137,12 +128,6 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         {
             this.PathModel = path;
             this.userData = userData;
-
-            this.CompletionPrerequisitePoints = new ConcurrentDictionary<Point, bool>();
-            foreach (var preReq in path.CompletionPrereqPoints)
-            {
-                this.CompletionPrerequisitePoints.TryAdd(preReq, false);
-            }
         }
     }
 }

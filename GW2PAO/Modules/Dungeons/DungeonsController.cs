@@ -82,6 +82,22 @@ namespace GW2PAO.Modules.Dungeons
         private long previousPlayerTick;
 
         /// <summary>
+        /// Position of the player before the tick stopped
+        /// Used to determine if the player entered a cutscene
+        /// </summary>
+        private Point playerPosBeforeTickStopped;
+
+        /// <summary>
+        /// True if the UI Tick from the Player Service has stopped, else false
+        /// </summary>
+        private bool tickStopped;
+
+        /// <summary>
+        /// The amount of "cutscenes" the player has entered while at the end of a dungeon path
+        /// </summary>
+        private int playerCutsceneCount;
+
+        /// <summary>
         /// The interval by which to refresh the dungeon reset state (in ms)
         /// </summary>
         public int RefreshInterval { get; set; }
@@ -126,6 +142,7 @@ namespace GW2PAO.Modules.Dungeons
             this.browserController = browserController;
             this.userData = userData;
             this.isStopped = false;
+            this.tickStopped = false;
 
             // Initialize the dungeon timer view model
             this.DungeonTimerData = new DungeonTimerViewModel(userData);
@@ -310,6 +327,7 @@ namespace GW2PAO.Modules.Dungeons
                         // If map just changed, we just entered the dungeon, so start the timer if auto-start is turned on
                         if (mapChanged && this.UserData.AutoStartDungeonTimer)
                         {
+                            this.playerCutsceneCount = 0;
                             Threading.InvokeOnUI(() => 
                                 {
                                     logger.Info("Starting dungeon timer");
@@ -325,7 +343,8 @@ namespace GW2PAO.Modules.Dungeons
                         if (this.DungeonTimerData.CurrentPath != null)
                         {
                             // Current path is known
-                            this.RefreshPrereqPointsState(this.DungeonTimerData.CurrentPath);
+                            // Keep track of the total number of cutscenes for completion purposes
+                            this.UpdateCutsceneCount();
                             this.CheckForPathEnd();
                         }
 
@@ -370,7 +389,9 @@ namespace GW2PAO.Modules.Dungeons
                 bool isInRange = false;
                 foreach (var point in path.PathModel.IdentifyingPoints)
                 {
-                    isInRange |= CalcUtil.IsInRadius(point, this.playerService.PlayerPosition, path.PathModel.PointDetectionRadius);
+                    isInRange |= CalcUtil.IsInRadius(point, this.playerService.PlayerPosition, point.Radius);
+                    if (isInRange)
+                        break;
                 }
                 return isInRange;
             }
@@ -385,13 +406,12 @@ namespace GW2PAO.Modules.Dungeons
         /// Determines if the player is positioned near a given point
         /// </summary>
         /// <param name="point">The point to test</param>
-        /// <param name="detectionRadius">Radius to use during detection</param>
-        /// <returns>True if the player has reached the end of the given path, else false</returns>
-        private bool IsPlayerNear(Point point, double detectionRadius)
+        /// <returns>True if the player is near the given point, else false</returns>
+        private bool IsPlayerNear(DetectionPoint point)
         {
             if (point != null)
             {
-                return CalcUtil.IsInRadius(point, this.playerService.PlayerPosition, detectionRadius);
+                return CalcUtil.IsInRadius(point, this.playerService.PlayerPosition, point.Radius);
             }
             else
             {
@@ -437,30 +457,39 @@ namespace GW2PAO.Modules.Dungeons
         }
 
         /// <summary>
-        /// Refreshes the pre-requisite points state of all pre-req points for the given dungeon path
+        /// Updates the count of cutscenes the player has entered, which is then used for determining
+        /// if the player has finished a dungeon
         /// </summary>
-        /// <param name="dungeonPath">The dungeon path to refres</param>
-        private void RefreshPrereqPointsState(PathViewModel dungeonPath)
+        private void UpdateCutsceneCount()
         {
-            // The current path is known, so monitor the player position to mark any pre-requisite points as met
-            foreach (var preReq in dungeonPath.CompletionPrerequisitePoints.Keys)
+            if (this.playerService.Tick == this.previousPlayerTick)
             {
-                if (this.IsPlayerNear(preReq, this.DungeonTimerData.CurrentPath.PointDetectionRadius))
+                if (!this.tickStopped)
                 {
-                    this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints[preReq] = true;
+                    // The mumble tick is not updating, so we either entered a cutscene or a loading screen
+                    this.tickStopped = true;
+                    this.playerPosBeforeTickStopped = this.playerService.PlayerPosition;
+
+                    // Increment the counter used for determining how many cutscenes the user has viewed while at the endpoint
+                    if (this.DungeonTimerData.CurrentPath != null && this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint))
+                    {
+                        this.playerCutsceneCount++;
+                        logger.Info("Dungeon endpoint cutscene detected - count = {0}", this.playerCutsceneCount);
+                    }
                 }
             }
-        }
-
-        /// <summary>
-        /// Resets the pre-requisite points state of all pre-req points for the given dungeon path
-        /// </summary>
-        /// <param name="dungeonPath">The dungeon path to update</param>
-        private void ResetPrereqPointsState(PathViewModel dungeonPath)
-        {
-            foreach (var preReq in dungeonPath.CompletionPrerequisitePoints.Keys)
+            else
             {
-                this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints[preReq] = false;
+                // Tick was previously stopped - if the player position has significantly moved,
+                // that means they waypointed instead of entering a cutscene
+                if (this.tickStopped
+                    && this.playerCutsceneCount > 0
+                    && !CalcUtil.IsInRadius(this.playerPosBeforeTickStopped, this.playerService.PlayerPosition, 10))
+                {
+                    this.playerCutsceneCount--;
+                    logger.Info("False cutscene detected - count = {0}", this.playerCutsceneCount);
+                }
+                this.tickStopped = false;
             }
         }
 
@@ -469,34 +498,31 @@ namespace GW2PAO.Modules.Dungeons
         /// </summary>
         private void CheckForPathEnd()
         {
-            if (this.playerService.Tick == this.previousPlayerTick)
+            if (this.playerCutsceneCount >= this.DungeonTimerData.CurrentPath.EndCutsceneCount
+                && this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint))
             {
-                // The mumble tick is not updating, so we are either in a cutscene or in a loading screen
+                // The player has entered the final end cutscene
                 // In this situation, we automatically stop the timer, save the best time, and mark the dungeon as completed
-                if (this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint, this.DungeonTimerData.CurrentPath.PointDetectionRadius)
-                    && this.DungeonTimerData.CurrentPath.CompletionPrerequisitePoints.Values.All(preReqMet => preReqMet == true))
+                if (this.DungeonTimerData.IsTimerRunning && this.UserData.AutoStopDungeonTimer)
                 {
-                    if (this.DungeonTimerData.IsTimerRunning && this.UserData.AutoStopDungeonTimer)
-                    {
-                        // Stop the timer and save it's value as the best time if it's the best time
-                        this.DungeonTimerData.PauseTimer();
+                    // Stop the timer and save it's value as the best time if it's the best time
+                    this.DungeonTimerData.PauseTimer();
 
-                        var bestPathTime = this.DungeonTimerData.CurrentPath.BestTime;
-                        if (bestPathTime.Time == TimeSpan.Zero
-                            || this.DungeonTimerData.TimerValue.CompareTo(bestPathTime.Time) < 0)
-                        {
-                            logger.Info("New best time for {0} ({1}) detected: {2}", bestPathTime.PathID, bestPathTime.PathData.DisplayName, this.DungeonTimerData.TimerValue);
-                            bestPathTime.Time = this.DungeonTimerData.TimerValue;
-                            bestPathTime.Timestamp = DateTime.Now;
-                        }
-                    }
-
-                    if (!this.DungeonTimerData.CurrentPath.IsCompleted
-                        && this.UserData.AutoCompleteDungeons)
+                    var bestPathTime = this.DungeonTimerData.CurrentPath.BestTime;
+                    if (bestPathTime.Time == TimeSpan.Zero
+                        || this.DungeonTimerData.TimerValue.CompareTo(bestPathTime.Time) < 0)
                     {
-                        logger.Trace("End of path reached, marking as completed");
-                        this.DungeonTimerData.CurrentPath.IsCompleted = true;
+                        logger.Info("New best time for {0} ({1}) detected: {2}", bestPathTime.PathID, bestPathTime.PathData.DisplayName, this.DungeonTimerData.TimerValue);
+                        bestPathTime.Time = this.DungeonTimerData.TimerValue;
+                        bestPathTime.Timestamp = DateTime.Now;
                     }
+                }
+
+                if (!this.DungeonTimerData.CurrentPath.IsCompleted
+                    && this.UserData.AutoCompleteDungeons)
+                {
+                    logger.Trace("End of path reached, marking as completed");
+                    this.DungeonTimerData.CurrentPath.IsCompleted = true;
                 }
             }
         }
