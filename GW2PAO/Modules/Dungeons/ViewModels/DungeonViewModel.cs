@@ -30,11 +30,6 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         private bool isActiveDungeon;
 
         /// <summary>
-        /// The browser controller used for displaying the dungeon's wiki page
-        /// </summary>
-        private IWebBrowserController browserController;
-
-        /// <summary>
         /// The primary model object containing the dungeon information
         /// </summary>
         public GW2PAO.API.Data.Entities.Dungeon DungeonModel { get; private set; }
@@ -68,11 +63,6 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// Command to copy the nearest waypoint's chat code to the clipboard
         /// </summary>
         public DelegateCommand CopyWaypointCommand { get { return new DelegateCommand(this.CopyWaypointCode); } }
-
-        /// <summary>
-        /// Command to open the wiki page for this dungeon
-        /// </summary>
-        public DelegateCommand OpenWikiPageCommand { get { return new DelegateCommand(this.OpenWikiPage); } }
 
         /// <summary>
         /// Visibility of the dungeon
@@ -109,14 +99,13 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         public DungeonViewModel(GW2PAO.API.Data.Entities.Dungeon dungeon, IWebBrowserController browserController, DungeonsUserData userData)
         {
             this.DungeonModel = dungeon;
-            this.browserController = browserController;
             this.userData = userData;
 
             // Initialize the path view models
             this.Paths = new ObservableCollection<PathViewModel>();
             foreach (var path in this.DungeonModel.Paths)
             {
-                this.Paths.Add(new PathViewModel(path, this.userData));
+                this.Paths.Add(new PathViewModel(path, browserController, this.userData));
             }
 
             this.RefreshVisibility();
@@ -140,14 +129,6 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.DungeonName, this.DungeonModel.WaypointCode);
             System.Windows.Clipboard.SetDataObject(this.DungeonModel.WaypointCode);
-        }
-
-        /// <summary>
-        /// Opens the wiki page for this dungeon
-        /// </summary>
-        private void OpenWikiPage()
-        {
-            this.browserController.GoToUrl(this.DungeonModel.WikiUrl);
         }
 
         /// <summary>

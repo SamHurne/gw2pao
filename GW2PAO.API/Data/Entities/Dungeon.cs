@@ -14,7 +14,6 @@ namespace GW2PAO.API.Data.Entities
         public string MapName { get; set; }
         public int MinimumLevel { get; set; }
         public string WaypointCode { get; set; }
-        public string WikiUrl { get; set; }
         public List<DungeonPath> Paths { get; set; }
     }
 
@@ -60,6 +59,11 @@ namespace GW2PAO.API.Data.Entities
         /// Endpoint of the dungeon path
         /// </summary>
         public DetectionPoint EndPoint { get; set; }
+
+        /// <summary>
+        /// Url of the guide for the dungeon path
+        /// </summary>
+        public string GuideUrl { get; set; }
 
         /// <summary>
         /// Number of cutscenes shown while at the endpoint

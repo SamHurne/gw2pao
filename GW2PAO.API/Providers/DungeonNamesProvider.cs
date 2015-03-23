@@ -176,8 +176,8 @@ namespace GW2PAO.API.Providers
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Story" },
                     new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Aetherpath" },
-                    new PathName() { ID = TwilightArborPathID.P3, Name = "Vevina (Forward)" }
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Sorrow's Embrace", PathNames = new List<PathName>()
                 {
@@ -245,8 +245,8 @@ namespace GW2PAO.API.Providers
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Relato" },
                     new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Aetherpath" },
-                    new PathName() { ID = TwilightArborPathID.P3, Name = "Vevina (Forward)" }
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Abrazo del Pesar", PathNames = new List<PathName>()
                 {
@@ -314,8 +314,8 @@ namespace GW2PAO.API.Providers
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Histoire" },
                     new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Aetherpath" },
-                    new PathName() { ID = TwilightArborPathID.P3, Name = "Vevina (Forward)" }
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Etreinte des Lamentations", PathNames = new List<PathName>()
                 {
@@ -383,8 +383,8 @@ namespace GW2PAO.API.Providers
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Geschichte" },
                     new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Aetherpath" },
-                    new PathName() { ID = TwilightArborPathID.P3, Name = "Vevina (Forward)" }
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Umarmung der Betrübnis", PathNames = new List<PathName>()
                 {

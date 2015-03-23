@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using GW2PAO.Modules.Dungeons.Data;
+using GW2PAO.Modules.WebBrowser.Interfaces;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -24,6 +25,11 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
 
         private DungeonsUserData userData;
         private bool isActivePath;
+
+        /// <summary>
+        /// The browser controller used for displaying the dungeon's wiki page
+        /// </summary>
+        private IWebBrowserController browserController;
 
         /// <summary>
         /// The primary model object containing the path's information
@@ -120,14 +126,28 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         }
 
         /// <summary>
+        /// Command to open the guide for this dungeon
+        /// </summary>
+        public DelegateCommand OpenGuideCommand { get { return new DelegateCommand(this.OpenGuide); } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="path"></param>
         /// <param name="userData"></param>
-        public PathViewModel(DungeonPath path, DungeonsUserData userData)
+        public PathViewModel(DungeonPath path, IWebBrowserController browserController, DungeonsUserData userData)
         {
             this.PathModel = path;
             this.userData = userData;
+            this.browserController = browserController;
+        }
+
+        /// <summary>
+        /// Opens the wiki page for this dungeon
+        /// </summary>
+        private void OpenGuide()
+        {
+            this.browserController.GoToUrl(this.PathModel.GuideUrl);
         }
     }
 }

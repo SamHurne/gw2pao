@@ -51,6 +51,11 @@
                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
                            IsChecked="{Binding IsCompleted}"
                            Margin="5,0,5,0">
+                <CheckBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{x:Static resx:Resources.OpenGuide}" Command="{Binding OpenGuideCommand}" />
+                    </ContextMenu>
+                </CheckBox.ContextMenu>
                 <CheckBox.Style>
                     <Style TargetType="CheckBox">
                         <Setter Property="Template">
@@ -169,7 +174,6 @@
             <MenuItem Header="{Binding MinimumLevel}" IsEnabled="False" />
             <MenuItem Header="{Binding ZoneName}" IsEnabled="False" />
             <MenuItem Header="{x:Static resx:Resources.CopyWaypointCode}" Command="{Binding CopyWaypointCommand}" />
-            <MenuItem Header="{x:Static resx:Resources.OpenWikiPage}" Command="{Binding OpenWikiPageCommand}" />
         </ContextMenu>
     </UserControl.ContextMenu>
 
