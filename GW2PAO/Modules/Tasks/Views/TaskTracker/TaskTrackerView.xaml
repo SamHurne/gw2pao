@@ -18,6 +18,10 @@
         SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display">
 
+    <src:OverlayWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </src:OverlayWindow.Resources>
+
     <!--See code-behind for ViewModel details-->
     <Grid Name="MainPanel">
         <Grid.Background>
@@ -52,23 +56,26 @@
                         MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
+                            <MenuItem Header="{x:Static resx:Resources.File}">
+                                <MenuItem Header="{x:Static resx:Resources.Load}" Command="{Binding LoadTasksCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.Import}" Command="{Binding ImportTasksCommand}" />
+                                <MenuItem Header="{x:Static resx:Resources.Export}" Command="{Binding ExportTasksCommand}" />
+                                <Separator />
+                                <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
+                            </MenuItem>
                             <MenuItem Header="{x:Static resx:Resources.AddNewTask}" Command="{Binding AddNewTaskCommand}" />
-                            <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.Load}" Command="{Binding LoadTasksCommand}" />
-                            <MenuItem Header="{x:Static resx:Resources.Import}" Command="{Binding ImportTasksCommand}" />
-                            <MenuItem Header="{x:Static resx:Resources.Export}" Command="{Binding ExportTasksCommand}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.SortBy}">
                                 <MenuItem Header="{x:Static resx:Resources.Name}" IsCheckable="True" IsChecked="{Binding SortByName}" />
                                 <MenuItem Header="{x:Static resx:Resources.Distance}" IsCheckable="True" IsChecked="{Binding SortByDistance}" />
                             </MenuItem>
-                            <Separator />
                             <MenuItem Header="{x:Static resx:Resources.DistanceUnits}">
                                 <MenuItem Header="{x:Static resx:Resources.Feet}" IsCheckable="True" IsChecked="{Binding IsFeetSelected}" />
                                 <MenuItem Header="{x:Static resx:Resources.Meters}" IsCheckable="True" IsChecked="{Binding IsMetersSelected}" />
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowCompletedTasks}" IsCheckable="True" IsChecked="{Binding UserData.ShowCompletedTasks}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowTasksNotOnMap}" IsCheckable="True" IsChecked="{Binding UserData.ShowTasksNotOnMap}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
@@ -179,7 +186,7 @@
                       ItemsSource="{Binding PlayerTasks.View}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <view:TaskView DataContext="{Binding}"/>
+                    <view:TaskView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.Style>

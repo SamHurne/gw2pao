@@ -32,6 +32,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private bool isPlayerOnMap;
         private double distanceFromPlayer;
         private double directionFromPlayer;
+        private bool isVisible;
 
         /// <summary>
         /// The player task's name
@@ -86,6 +87,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                 if (SetProperty(ref this.isPlayerOnMap, value))
                 {
                     this.OnPropertyChanged(() => this.DisplayLocation);
+                    this.RefreshVisibility();
                 }
             }
         }
@@ -116,6 +118,18 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             get { return this.directionFromPlayer; }
             set { SetProperty(ref this.directionFromPlayer, value); }
+        }
+
+        /// <summary>
+        /// Visibility of the task
+        /// Visibility is based on multiple properties, including:
+        ///     - IsCompleted and whether or not completed tasks are shown
+        ///     - IsPlayerOnMap and whether or not tasks are shown based on map
+        /// </summary>
+        public bool IsVisible
+        {
+            get { return this.isVisible; }
+            set { SetProperty(ref this.isVisible, value); }
         }
 
         /// <summary>
@@ -163,6 +177,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.CopyWaypointCommand = new DelegateCommand(this.CopyWaypoint);
             this.EditCommand = new DelegateCommand(this.Edit);
             this.DeleteCommand = new DelegateCommand(this.Delete);
+            this.UserData.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.Task.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.RefreshVisibility();
         }
 
         /// <summary>
@@ -208,6 +225,27 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private void Delete()
         {
             this.controller.DeleteTask(this.Task);
+        }
+
+        /// <summary>
+        /// Refreshes the visibility of the event
+        /// </summary>
+        private void RefreshVisibility()
+        {
+            logger.Trace("Refreshing visibility of \"{0}\"", this.Task.Name);
+            if (!this.UserData.ShowCompletedTasks && this.Task.IsCompleted)
+            {
+                this.IsVisible = false;
+            }
+            else if (!this.UserData.ShowTasksNotOnMap && this.HasLocation && !this.IsPlayerOnMap)
+            {
+                this.IsVisible = false;
+            }
+            else
+            {
+                this.IsVisible = true;
+            }
+            logger.Trace("IsVisible = {0}", this.IsVisible);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace GW2PAO.Modules.Tasks.Models
         private string description;
         private bool isCompletable;
         private bool isCompleted;
+        private bool autoComplete;
         private bool isDailyReset;
         private Point location;
         private int mapId;
@@ -87,6 +88,16 @@ namespace GW2PAO.Modules.Tasks.Models
         }
 
         /// <summary>
+        /// True if the task should automatically be marked as completed
+        /// (based on location), else false
+        /// </summary>
+        public bool AutoComplete
+        {
+            get { return this.autoComplete; }
+            set { SetProperty(ref this.autoComplete, value); }
+        }
+
+        /// <summary>
         /// The map ID of the task, if any
         /// -1 if no location exists
         /// </summary>
@@ -146,6 +157,7 @@ namespace GW2PAO.Modules.Tasks.Models
             this.Description = other.Description;
             this.IsCompletable = other.IsCompletable;
             this.IsCompleted = other.IsCompleted;
+            this.AutoComplete = other.AutoComplete;
             this.IsDailyReset = other.IsDailyReset;
             this.Location = other.Location;
             this.MapID = other.MapID;

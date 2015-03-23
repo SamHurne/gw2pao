@@ -6,8 +6,8 @@
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
-        Width="450"
-        Height="288"
+        Width="475"
+        Height="305"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -334,6 +334,25 @@
                                   IsEnabled="{Binding Task.IsCompletable}"
                                   IsChecked="{Binding Task.IsDailyReset}">
                             <core:OutlinedTextBlock Text="{x:Static resx:Resources.ResetDaily}" />
+                        </CheckBox>
+                        <CheckBox Name="AutoCompleteCheckbox"
+                                  Margin="2"
+                                  IsChecked="{Binding Task.AutoComplete}">
+                            <CheckBox.Style>
+                                <Style TargetType="CheckBox" BasedOn="{StaticResource AlternateCheckboxStyle}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Task.IsCompletable}" Value="True" />
+                                                <Condition Binding="{Binding HasLocation}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </CheckBox.Style>
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoCompleteTasks}" />
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>

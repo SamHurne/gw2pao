@@ -35,6 +35,8 @@ namespace GW2PAO.Modules.Tasks
         private Units distanceUnits;
         private DateTime lastCompletionDateTime;
         private string taskTrackerSortProperty;
+        private bool showCompletedTasks;
+        private bool showTasksNotOnMap;
         private ObservableCollection<PlayerTask> tasks = new ObservableCollection<PlayerTask>();
 
         /// <summary>
@@ -65,6 +67,24 @@ namespace GW2PAO.Modules.Tasks
         }
 
         /// <summary>
+        /// True if completed tasks are shown in the list, else false
+        /// </summary>
+        public bool ShowCompletedTasks
+        {
+            get { return this.showCompletedTasks; }
+            set { SetProperty(ref this.showCompletedTasks, value); }
+        }
+
+        /// <summary>
+        /// True if tasks not on the player's map are shown in the list, else false
+        /// </summary>
+        public bool ShowTasksNotOnMap
+        {
+            get { return this.showTasksNotOnMap; }
+            set { SetProperty(ref this.showTasksNotOnMap, value); }
+        }
+
+        /// <summary>
         /// Collection of user-configured Tasks
         /// </summary>
         public ObservableCollection<PlayerTask> Tasks { get { return this.tasks; } }
@@ -74,6 +94,8 @@ namespace GW2PAO.Modules.Tasks
         /// </summary>
         public TasksUserData()
         {
+            this.ShowCompletedTasks = true;
+            this.ShowTasksNotOnMap = true;
         }
 
         /// <summary>

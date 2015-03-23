@@ -199,6 +199,7 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.IsCompletable = task.IsCompletable;
                             existingTask.Task.IsCompleted = task.IsCompleted;
                             existingTask.Task.IsDailyReset = task.IsDailyReset;
+                            existingTask.Task.AutoComplete = task.AutoComplete;
                             existingTask.Task.Location = task.Location;
                             existingTask.Task.MapID = task.MapID;
                             existingTask.Task.IconUri = task.IconUri;
@@ -379,6 +380,7 @@ namespace GW2PAO.Modules.Tasks
                 {
                     var taskMapPosition = CalcUtil.ConvertToMapPosition(ptask.Task.Location);
 
+                    // Update distances and angles
                     var newDistance = Math.Round(CalcUtil.CalculateDistance(playerMapPosition, taskMapPosition, this.UserData.DistanceUnits));
                     var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerMapPosition, taskMapPosition),
                                                            CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionMapPosition));
@@ -389,8 +391,19 @@ namespace GW2PAO.Modules.Tasks
                             ptask.DistanceFromPlayer = newDistance;
                             ptask.DirectionFromPlayer = newAngle;
                         });
+
+                    // Check for auto-completion detection
+                    if (ptask.Task.AutoComplete
+                        && CalcUtil.CalculateDistance(playerMapPosition, taskMapPosition, API.Data.Enums.Units.Feet) < 10)
+                    {
+                        Threading.BeginInvokeOnUI(() =>
+                        {
+                            ptask.Task.IsCompleted = true;
+                        });
+                    }
                 }
 
+                // Player is not on the map
                 foreach (var ptask in this.PlayerTasks.Where(pt => pt.Task.MapID != this.CurrentMapID))
                 {
                     Threading.BeginInvokeOnUI(() =>
