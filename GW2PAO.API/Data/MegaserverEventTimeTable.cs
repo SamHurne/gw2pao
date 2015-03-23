@@ -243,9 +243,9 @@ namespace GW2PAO.API.Data
                 shadowBehemoth.Duration = new EventTimespan(0, 9, 0);
                 shadowBehemoth.WarmupDuration = new EventTimespan(0, 1, 0);
 
-                fireElemental.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 54, 0), new EventTimespan(2, 54, 0), new EventTimespan(4, 54, 0), new EventTimespan(6, 54, 0), new EventTimespan(8, 54, 0), new EventTimespan(10, 54, 0), new EventTimespan(12, 54, 0), new EventTimespan(14, 54, 0), new EventTimespan(16, 54, 0), new EventTimespan(18, 54, 0), new EventTimespan(20, 54, 0), new EventTimespan(22, 54, 0) };
+                fireElemental.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 57, 0), new EventTimespan(2, 57, 0), new EventTimespan(4, 57, 0), new EventTimespan(6, 57, 0), new EventTimespan(8, 57, 0), new EventTimespan(10, 57, 0), new EventTimespan(12, 57, 0), new EventTimespan(14, 57, 0), new EventTimespan(16, 57, 0), new EventTimespan(18, 57, 0), new EventTimespan(20, 57, 0), new EventTimespan(22, 57, 0) };
                 fireElemental.Duration = new EventTimespan(0, 3, 0);
-                fireElemental.WarmupDuration = new EventTimespan(0, 9, 0);
+                fireElemental.WarmupDuration = new EventTimespan(0, 12, 0);
 
                 frozenMaw.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 17, 0), new EventTimespan(2, 17, 0), new EventTimespan(4, 17, 0), new EventTimespan(6, 17, 0), new EventTimespan(8, 17, 0), new EventTimespan(10, 17, 0), new EventTimespan(12, 17, 0), new EventTimespan(14, 17, 0), new EventTimespan(16, 17, 0), new EventTimespan(18, 17, 0), new EventTimespan(20, 17, 0), new EventTimespan(22, 17, 0) };
                 frozenMaw.Duration = new EventTimespan(0, 3, 30);
