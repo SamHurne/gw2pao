@@ -133,6 +133,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Complete Based on Location.
+        /// </summary>
+        public static string AutoCompleteTasks {
+            get {
+                return ResourceManager.GetString("AutoCompleteTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-Fade Window Borders.
         /// </summary>
         public static string AutoFadeBorders {
@@ -457,6 +466,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost of 100 Gems.
+        /// </summary>
+        public static string CostOfGems {
+            get {
+                return ResourceManager.GetString("CostOfGems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Highest Buy Order:.
         /// </summary>
         public static string CurrentHighestBuyOrder {
@@ -723,6 +741,24 @@ namespace GW2PAO.Properties {
         public static string Feet {
             get {
                 return ResourceManager.GetString("Feet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gems To Gold Exchange.
+        /// </summary>
+        public static string GemsToGoldExchange {
+            get {
+                return ResourceManager.GetString("GemsToGoldExchange", resourceCulture);
             }
         }
         
@@ -1101,6 +1137,15 @@ namespace GW2PAO.Properties {
         public static string OpenEventsTracker {
             get {
                 return ResourceManager.GetString("OpenEventsTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Guide.
+        /// </summary>
+        public static string OpenGuide {
+            get {
+                return ResourceManager.GetString("OpenGuide", resourceCulture);
             }
         }
         
@@ -1510,11 +1555,29 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Completed Tasks.
+        /// </summary>
+        public static string ShowCompletedTasks {
+            get {
+                return ResourceManager.GetString("ShowCompletedTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Distances.
         /// </summary>
         public static string ShowDistances {
             get {
                 return ResourceManager.GetString("ShowDistances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Gold-to-Gems Exchange.
+        /// </summary>
+        public static string ShowGoldToGemsExchange {
+            get {
+                return ResourceManager.GetString("ShowGoldToGemsExchange", resourceCulture);
             }
         }
         
@@ -1542,6 +1605,15 @@ namespace GW2PAO.Properties {
         public static string ShowNotificationBorders {
             get {
                 return ResourceManager.GetString("ShowNotificationBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Tasks not on Current Map.
+        /// </summary>
+        public static string ShowTasksNotOnMap {
+            get {
+                return ResourceManager.GetString("ShowTasksNotOnMap", resourceCulture);
             }
         }
         
@@ -1852,6 +1924,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value of 100 Gems.
+        /// </summary>
+        public static string ValueOfGems {
+            get {
+                return ResourceManager.GetString("ValueOfGems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version:.
         /// </summary>
         public static string Version {
@@ -1979,11 +2060,92 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enemy headed to {0}.
+        /// </summary>
+        public static string WvWEnemyHeadedAltClipboardText {
+            get {
+                return ResourceManager.GetString("WvWEnemyHeadedAltClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enemy headed to {0} ({1} {2}).
+        /// </summary>
+        public static string WvWEnemyHeadedClipboardText {
+            get {
+                return ResourceManager.GetString("WvWEnemyHeadedClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} {2}) - Owned By {3} - RI: {4}.
+        /// </summary>
+        public static string WvWGeneralClipboardText {
+            get {
+                return ResourceManager.GetString("WvWGeneralClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} {2}) - Owned By {3} - RI is NOT active.
+        /// </summary>
+        public static string WvWGeneralNoRIClipboardText {
+            get {
+                return ResourceManager.GetString("WvWGeneralNoRIClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} {2}) - RI is NOT active.
+        /// </summary>
+        public static string WvWNoRIClipboardText {
+            get {
+                return ResourceManager.GetString("WvWNoRIClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WvW Notifications.
         /// </summary>
         public static string WvWNotifications {
             get {
                 return ResourceManager.GetString("WvWNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m headed to {0} - Estimated Distance: {1}{2}.
+        /// </summary>
+        public static string WvWPlayerHeadedAltClipboardText {
+            get {
+                return ResourceManager.GetString("WvWPlayerHeadedAltClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m headed to {0} ({1} {2}) - Estimated Distance: {3}{4}.
+        /// </summary>
+        public static string WvWPlayerHeadedClipboardText {
+            get {
+                return ResourceManager.GetString("WvWPlayerHeadedClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} {2}) - RI: {3}.
+        /// </summary>
+        public static string WvWRIClipboardText {
+            get {
+                return ResourceManager.GetString("WvWRIClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is under attack!! ({1} {2}).
+        /// </summary>
+        public static string WvWUnderAttackClipboardText {
+            get {
+                return ResourceManager.GetString("WvWUnderAttackClipboardText", resourceCulture);
             }
         }
         

@@ -853,4 +853,70 @@
   <data name="AutoOpenCloseWvW" xml:space="preserve">
     <value>Afficher/Masquer automatiquement les objectifs en entrant/quittant le McM</value>
   </data>
+  <data name="AutoCompleteTasks" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CostOfGems" xml:space="preserve">
+    <value>Coût d'achat pour 100 Gemmes</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="GemsToGoldExchange" xml:space="preserve">
+    <value>Conversion Gemmes vers Or</value>
+  </data>
+  <data name="GoldToGemsExchange" xml:space="preserve">
+    <value>Conversion Or vers Gemmes</value>
+  </data>
+  <data name="OpenGuide" xml:space="preserve">
+    <value>Ouvrir le guide</value>
+  </data>
+  <data name="ShowCompletedTasks" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ShowGoldToGemsExchange" xml:space="preserve">
+    <value>Montrer le change Gemmes/Or</value>
+  </data>
+  <data name="ShowTasksNotOnMap" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ValueOfGems" xml:space="preserve">
+    <value>Revente de 100 Gemmes</value>
+  </data>
+  <data name="WvWEnemyHeadedAltClipboardText" xml:space="preserve">
+    <value>L'ennemi avance vers {0}</value>
+    <comment>Example: Enemy headed to Garrison</comment>
+  </data>
+  <data name="WvWEnemyHeadedClipboardText" xml:space="preserve">
+    <value>L'ennemi avance vers {0} ({1} {2})</value>
+    <comment>Example: Enemy headed to Garrison (C Keep)</comment>
+  </data>
+  <data name="WvWGeneralClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Détenu par {3} - Buff: {4}</value>
+    <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI: 3:14</comment>
+  </data>
+  <data name="WvWGeneralNoRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Détenu par {3} - Buff Terminé</value>
+    <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI is NOT active</comment>
+  </data>
+  <data name="WvWNoRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Buff terminé</value>
+    <comment>Example: Garrison (C Keep) - RI is NOT active</comment>
+  </data>
+  <data name="WvWPlayerHeadedAltClipboardText" xml:space="preserve">
+    <value>J'avance vers {0}  - Distance Estimatée: {1}{2}</value>
+    <comment>Example: I'm headed to Garrison - Estimated Distance: 314m</comment>
+  </data>
+  <data name="WvWPlayerHeadedClipboardText" xml:space="preserve">
+    <value>J'avance vers {0} ({1} {2}) - Distance Estimatée: {3}{4}</value>
+    <comment>Example: I'm headed to Garrison (C Keep) - Estimated Distance: 314m</comment>
+  </data>
+  <data name="WvWRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Buff: {3}</value>
+    <comment>Example: Garrison (C Keep) - RI: 3:14</comment>
+  </data>
+  <data name="WvWUnderAttackClipboardText" xml:space="preserve">
+    <value>{0} est attaqué!! ({1} {2})</value>
+    <comment>Example: Garrison is under attack!! (C Keep)</comment>
+  </data>
 </root>
