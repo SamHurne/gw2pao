@@ -284,17 +284,20 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_ClientEnteredChannel(object sender, TS3.Data.ClientEventArgs e)
         {
-            Task.Factory.StartNew(() =>
+            if (this.UserData.ShowEnterExitChannelNotifications)
             {
-                var notification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.UserEntered);
-                Threading.InvokeOnUI(() => this.Notifications.Add(notification));
-                Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
-                Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
-            });
-            Threading.InvokeOnUI(() =>
+                Task.Factory.StartNew(() =>
                 {
-                    this.CurrentChannelClients.Add(new ClientViewModel(e.ClientID, e.ClientName));
+                    var notification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.UserEntered);
+                    Threading.InvokeOnUI(() => this.Notifications.Add(notification));
+                    Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
+                    Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
                 });
+                Threading.InvokeOnUI(() =>
+                    {
+                        this.CurrentChannelClients.Add(new ClientViewModel(e.ClientID, e.ClientName));
+                    });
+            }
         }
 
         /// <summary>
@@ -302,20 +305,22 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_ClientExitedChannel(object sender, TS3.Data.ClientEventArgs e)
         {
-            Task.Factory.StartNew(() =>
+            if (this.UserData.ShowEnterExitChannelNotifications)
             {
-                var notification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.UserExited);
-                Threading.InvokeOnUI(() => this.Notifications.Add(notification));
-                Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
-                Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
-            });
-            Threading.InvokeOnUI(() =>
-            {
-                var client = this.CurrentChannelClients.FirstOrDefault(c => c.ID == e.ClientID);
-                if (client != null)
-                    this.CurrentChannelClients.Remove(client);
-            });
-
+                Task.Factory.StartNew(() =>
+                {
+                    var notification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.UserExited);
+                    Threading.InvokeOnUI(() => this.Notifications.Add(notification));
+                    Thread.Sleep(5000); // Let channel notifications stay for 5 seconds
+                    Threading.InvokeOnUI(() => this.Notifications.Remove(notification));
+                });
+                Threading.InvokeOnUI(() =>
+                {
+                    var client = this.CurrentChannelClients.FirstOrDefault(c => c.ID == e.ClientID);
+                    if (client != null)
+                        this.CurrentChannelClients.Remove(client);
+                });
+            }
         }
 
         /// <summary>

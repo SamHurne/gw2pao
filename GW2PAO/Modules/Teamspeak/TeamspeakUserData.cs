@@ -31,6 +31,7 @@ namespace GW2PAO.Modules.Teamspeak
 
         private bool showChatEntryBox;
         private bool showChannelName;
+        private bool showEnterExitChannelNotifications;
 
         /// <summary>
         /// True to show the chat entry box, else false
@@ -51,12 +52,22 @@ namespace GW2PAO.Modules.Teamspeak
         }
 
         /// <summary>
+        /// True if client entered/exited notifications are shown, else false
+        /// </summary>
+        public bool ShowEnterExitChannelNotifications
+        {
+            get { return this.showEnterExitChannelNotifications; }
+            set { SetProperty(ref this.showEnterExitChannelNotifications, value); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public TeamspeakUserData()
         {
             this.ShowChatEntryBox = true;
             this.ShowChannelName = true;
+            this.ShowEnterExitChannelNotifications = true;
         }
 
         /// <summary>

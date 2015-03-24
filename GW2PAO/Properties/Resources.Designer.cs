@@ -1573,6 +1573,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Enter/Exit Channel Notifications.
+        /// </summary>
+        public static string ShowEnterExitChannelNotifications {
+            get {
+                return ResourceManager.GetString("ShowEnterExitChannelNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Gold-to-Gems Exchange.
         /// </summary>
         public static string ShowGoldToGemsExchange {

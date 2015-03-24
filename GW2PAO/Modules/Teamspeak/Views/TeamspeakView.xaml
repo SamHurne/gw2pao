@@ -99,6 +99,7 @@
                         <ContextMenu Name="MainMenu">
                             <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChannelName}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChatEntryBox}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowEnterExitChannelNotifications}" IsCheckable="True" IsChecked="{Binding UserData.ShowEnterExitChannelNotifications}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>

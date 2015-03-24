@@ -928,4 +928,8 @@
   <data name="OpenGuide" xml:space="preserve">
     <value>Open Guide</value>
   </data>
+  <data name="ShowEnterExitChannelNotifications" xml:space="preserve">
+    <value>Show Enter/Exit Channel Notifications</value>
+    <comment>For the Teamspeak Overlay</comment>
+  </data>
 </root>
