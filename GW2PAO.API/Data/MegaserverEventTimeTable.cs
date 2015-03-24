@@ -231,9 +231,9 @@ namespace GW2PAO.API.Data
                 inquestGolemMarkII.Duration = new EventTimespan(0, 6, 0);
                 inquestGolemMarkII.WarmupDuration = new EventTimespan(0, 2, 0);
 
-                taidhaCovington.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(6, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(12, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(18, 15, 0), new EventTimespan(21, 15, 0) };
-                taidhaCovington.Duration = new EventTimespan(0, 4, 0);
-                taidhaCovington.WarmupDuration = new EventTimespan(0, 15, 0);
+                taidhaCovington.ActiveTimes = new List<EventTimespan>() { new EventTimespan(0, 10, 0), new EventTimespan(3, 10, 0), new EventTimespan(6, 10, 0), new EventTimespan(9, 10, 0), new EventTimespan(12, 10, 0), new EventTimespan(15, 10, 0), new EventTimespan(18, 10, 0), new EventTimespan(21, 10, 0) };
+                taidhaCovington.Duration = new EventTimespan(0, 10, 0);
+                taidhaCovington.WarmupDuration = new EventTimespan(0, 10, 0);
 
                 jungleWurm.ActiveTimes = new List<EventTimespan>() { new EventTimespan(1, 15, 0), new EventTimespan(3, 15, 0), new EventTimespan(5, 15, 0), new EventTimespan(7, 15, 0), new EventTimespan(9, 15, 0), new EventTimespan(11, 15, 0), new EventTimespan(13, 15, 0), new EventTimespan(15, 15, 0), new EventTimespan(17, 15, 0), new EventTimespan(19, 15, 0), new EventTimespan(21, 15, 0), new EventTimespan(23, 15, 0) };
                 jungleWurm.Duration = new EventTimespan(0, 5, 0);
