@@ -118,24 +118,7 @@ namespace GW2PAO.API.Providers
                 lang = "en"; // Default to english if not supported
 
             var filename = this.GetFilePath(lang);
-
-            List<ObjectiveNames> loadedData = null;
-            if (File.Exists(filename))
-            {
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<ObjectiveNames>));
-                TextReader reader = new StreamReader(filename);
-                try
-                {
-                    object obj = deserializer.Deserialize(reader);
-                    loadedData = (List<ObjectiveNames>)obj;
-                }
-                finally
-                {
-                    reader.Close();
-                }
-            }
-
-            return loadedData;
+            return Serialization.DeserializeFromXml<List<ObjectiveNames>>(filename);
         }
 
         /// <summary>
@@ -488,10 +471,10 @@ namespace GW2PAO.API.Providers
                 new ObjectiveNames() { ID = (int)WvWObjectiveID.GB_Temple, Cardinal = "", Full = "Tempel der Verlorenen Gebete", Short = "Tempel" }
             };
 
-            Serializer.SerializeToXml(english, this.GetFilePath("en"));
-            Serializer.SerializeToXml(spanish, this.GetFilePath("es"));
-            Serializer.SerializeToXml(french, this.GetFilePath("fr"));
-            Serializer.SerializeToXml(german, this.GetFilePath("de"));
+            Serialization.SerializeToXml(english, this.GetFilePath("en"));
+            Serialization.SerializeToXml(spanish, this.GetFilePath("es"));
+            Serialization.SerializeToXml(french, this.GetFilePath("fr"));
+            Serialization.SerializeToXml(german, this.GetFilePath("de"));
         }
 
         /// <summary>

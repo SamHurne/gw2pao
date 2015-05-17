@@ -149,14 +149,17 @@ namespace GW2PAO.API.Data
                                 GuideUrl = "http://gw2dungeons.net/CM1",
                                 GoldReward = 1.05,
                                 IdentifyingPoints = new List<DetectionPoint>
-                                { 
-                                    new DetectionPoint(46.98, -175.10, 32.73, 35.00),
-                                    new DetectionPoint(85.36, -167.39, 41.69, 35.00),
-                                    new DetectionPoint(180.20, -92.77, 52.83, 35.00),
-                                    new DetectionPoint(278.67, 23.54, 36.29, 35.00),
-                                    new DetectionPoint(324.11, 94.78, 33.74, 35.00)
+                                {
+                                    new DetectionPoint(127.11, 87.91, 22.54, 5.00),
+                                    new DetectionPoint(148.50, 88.26, 22.54, 5.00),
+                                    new DetectionPoint(151.55, 65.30, 22.54, 5.00),
+                                    new DetectionPoint(124.51, 21.21, 22.54, 5.00),
+                                    new DetectionPoint(135.41, 40.18, 22.54, 5.00),
+                                    new DetectionPoint(105.46, 91.48, 22.54, 5.00),
+                                    new DetectionPoint(95.84, 127.75, 22.54, 5.00),
+                                    new DetectionPoint(135.57, 102.49, 22.54, 5.00)
                                 },
-                                EndPoint = new DetectionPoint(-195.62, 193.663, 2.571, 75),
+                                EndPoint = new DetectionPoint(-195.62, 193.663, 2.571, 100),
                                 EndCutsceneCount = 2
                             },
                             new DungeonPath()
@@ -167,8 +170,11 @@ namespace GW2PAO.API.Data
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/CM2",
                                 GoldReward = 1.05,
-                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(46.79, 58.08, 40.08, 30) },
-                                EndPoint = new DetectionPoint(252.08, 268.50, 41.53, 75),
+                                IdentifyingPoints = new List<DetectionPoint> 
+                                { 
+                                    new DetectionPoint(46.79, 58.08, 40.08, 30)
+                                },
+                                EndPoint = new DetectionPoint(252.08, 268.50, 41.53, 100),
                                 EndCutsceneCount = 1
                             },
                             new DungeonPath()
@@ -180,16 +186,12 @@ namespace GW2PAO.API.Data
                                 GuideUrl = "http://gw2dungeons.net/CM3",
                                 GoldReward = 1.05,
                                 IdentifyingPoints = new List<DetectionPoint>
-                                {
-                                    new DetectionPoint(-82.80, -131.07, 0.15, 35.00),
-                                    new DetectionPoint(-159.74, -82.39, -2.09, 35.00),
-                                    new DetectionPoint(-142.74, -12.14, -0.55, 35.00),
-                                    new DetectionPoint(-211.30, 4.69, 2.46, 35.00),
-                                    new DetectionPoint(-153.19, 54.23, 4.79, 50.00),
-                                    new DetectionPoint(-115.55, 200.58, 53.89, 35.00),
-                                    new DetectionPoint(3.71, 106.29, 65.88, 35.00)
+                                { 
+                                    new DetectionPoint(15.41, 26.50, 16.28, 10.00),
+                                    new DetectionPoint(19.70, 47.41, 16.33, 10.00),
+                                    new DetectionPoint(5.45, 43.40, 15.59, 10.00)
                                 },
-                                EndPoint = new DetectionPoint(-215.50, 233.00, 0.49, 75),
+                                EndPoint = new DetectionPoint(-215.50, 233.00, 0.49, 100),
                                 EndCutsceneCount = 1
                             }
                         }
@@ -220,20 +222,8 @@ namespace GW2PAO.API.Data
                                 PathNumber = 1,
                                 ID = TwilightArborPathID.P1,
                                 InstanceMapID = 67,
-                                PathDisplayText = "P1",
+                                PathDisplayText = "F",
                                 GuideUrl = "http://gw2dungeons.net/TAF",
-                                GoldReward = 1.05,
-                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(42.90, -176.14, 32.26, 35) },
-                                EndPoint = new DetectionPoint(65.51, 1.04, 45.51, 75),
-                                EndCutsceneCount = 2
-                            },
-                            new DungeonPath()
-                            {
-                                PathNumber = 2,
-                                ID = TwilightArborPathID.P2,
-                                InstanceMapID = 67,
-                                PathDisplayText = "P2",
-                                GuideUrl = "http://gw2dungeons.net/TAU",
                                 GoldReward = 1.05,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-55.25, -137.32, 2.77, 35) },
                                 EndPoint = new DetectionPoint(57.02, -0.15, 45.16, 75),
@@ -241,10 +231,22 @@ namespace GW2PAO.API.Data
                             },
                             new DungeonPath()
                             {
+                                PathNumber = 2,
+                                ID = TwilightArborPathID.P2,
+                                InstanceMapID = 67,
+                                PathDisplayText = "U",
+                                GuideUrl = "http://gw2dungeons.net/TAU",
+                                GoldReward = 1.05,
+                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(42.90, -176.14, 32.26, 35) },
+                                EndPoint = new DetectionPoint(65.51, 1.04, 45.51, 75),
+                                EndCutsceneCount = 2
+                            },
+                            new DungeonPath()
+                            {
                                 PathNumber = 3,
                                 ID = TwilightArborPathID.P3,
                                 InstanceMapID = 67,
-                                PathDisplayText = "P3",
+                                PathDisplayText = "AE",
                                 GuideUrl = "http://gw2dungeons.net/TAAE",
                                 GoldReward = 2.05,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-31.42, -262.85, -0.54, 35) },

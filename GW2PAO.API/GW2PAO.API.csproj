@@ -158,7 +158,7 @@
     <Compile Include="Services\ZoneService.cs" />
     <Compile Include="Utility\CalcUtil.cs" />
     <Compile Include="Utility\MapsHelper.cs" />
-    <Compile Include="Utility\Serializer.cs" />
+    <Compile Include="Utility\Serialization.cs" />
     <Compile Include="Providers\TimeProvider.cs" />
   </ItemGroup>
   <ItemGroup>

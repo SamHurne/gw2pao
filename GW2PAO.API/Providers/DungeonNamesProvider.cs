@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using GW2PAO.API.Constants;
 using GW2PAO.API.Util;
 using NLog;
@@ -130,24 +126,7 @@ namespace GW2PAO.API.Providers
                 lang = "en"; // Default to english if not supported
 
             var filename = this.GetFilePath(lang);
-
-            List<DungeonName> loadedData = null;
-            if (File.Exists(filename))
-            {
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<DungeonName>));
-                TextReader reader = new StreamReader(filename);
-                try
-                {
-                    object obj = deserializer.Deserialize(reader);
-                    loadedData = (List<DungeonName>)obj;
-                }
-                finally
-                {
-                    reader.Close();
-                }
-            }
-
-            return loadedData;
+            return Serialization.DeserializeFromXml<List<DungeonName>>(filename);
         }
 
         /// <summary>
@@ -175,8 +154,8 @@ namespace GW2PAO.API.Providers
                 new DungeonName { ID = DungeonID.TwilightArbor, Name = "Twilight Arbor", PathNames = new List<PathName>()
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Story" },
-                    new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P1, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Leurent (Up)" },
                     new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Sorrow's Embrace", PathNames = new List<PathName>()
@@ -244,8 +223,8 @@ namespace GW2PAO.API.Providers
                 new DungeonName { ID = DungeonID.TwilightArbor, Name = "La Pérgola del Crepúsculo", PathNames = new List<PathName>()
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Relato" },
-                    new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P1, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Leurent (Up)" },
                     new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Abrazo del Pesar", PathNames = new List<PathName>()
@@ -313,8 +292,8 @@ namespace GW2PAO.API.Providers
                 new DungeonName { ID = DungeonID.TwilightArbor, Name = "Tonnelle du crépuscule", PathNames = new List<PathName>()
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Histoire" },
-                    new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P1, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Leurent (Up)" },
                     new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Etreinte des Lamentations", PathNames = new List<PathName>()
@@ -382,8 +361,8 @@ namespace GW2PAO.API.Providers
                 new DungeonName { ID = DungeonID.TwilightArbor, Name = "Zwielichtgarten", PathNames = new List<PathName>()
                 {
                     new PathName() { ID = TwilightArborPathID.Story, Name = "Geschichte" },
-                    new PathName() { ID = TwilightArborPathID.P1, Name = "Leurent (Up)" },
-                    new PathName() { ID = TwilightArborPathID.P2, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P1, Name = "Vevina (Forward)" },
+                    new PathName() { ID = TwilightArborPathID.P2, Name = "Leurent (Up)" },
                     new PathName() { ID = TwilightArborPathID.P3, Name = "Aetherpath" }
                 }},
                 new DungeonName { ID = DungeonID.SorrowsEmbrace, Name = "Umarmung der Betrübnis", PathNames = new List<PathName>()
@@ -432,10 +411,10 @@ namespace GW2PAO.API.Providers
                 }},
             };
 
-            Serializer.SerializeToXml(english, this.GetFilePath("en"));
-            Serializer.SerializeToXml(spanish, this.GetFilePath("es"));
-            Serializer.SerializeToXml(french, this.GetFilePath("fr"));
-            Serializer.SerializeToXml(german, this.GetFilePath("de"));
+            Serialization.SerializeToXml(english, this.GetFilePath("en"));
+            Serialization.SerializeToXml(spanish, this.GetFilePath("es"));
+            Serialization.SerializeToXml(french, this.GetFilePath("fr"));
+            Serialization.SerializeToXml(german, this.GetFilePath("de"));
         }
 
         /// <summary>

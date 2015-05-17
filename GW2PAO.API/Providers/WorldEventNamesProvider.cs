@@ -101,24 +101,7 @@ namespace GW2PAO.API.Providers
                 lang = "en"; // Default to english if not supported
 
             var filename = this.GetFilePath(lang);
-
-            List<EventName> loadedData = null;
-            if (File.Exists(filename))
-            {
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<EventName>));
-                TextReader reader = new StreamReader(filename);
-                try
-                {
-                    object obj = deserializer.Deserialize(reader);
-                    loadedData = (List<EventName>)obj;
-                }
-                finally
-                {
-                    reader.Close();
-                }
-            }
-
-            return loadedData;
+            return Serialization.DeserializeFromXml<List<EventName>>(filename);
         }
 
         /// <summary>
@@ -199,10 +182,10 @@ namespace GW2PAO.API.Providers
                 new EventName() { ID = WorldEventID.FrozenMaw, Name = "Schamanenoberhaupt der Svanir" }
             };
 
-            Serializer.SerializeToXml(english, this.GetFilePath("en"));
-            Serializer.SerializeToXml(spanish, this.GetFilePath("es"));
-            Serializer.SerializeToXml(french, this.GetFilePath("fr"));
-            Serializer.SerializeToXml(german, this.GetFilePath("de"));
+            Serialization.SerializeToXml(english, this.GetFilePath("en"));
+            Serialization.SerializeToXml(spanish, this.GetFilePath("es"));
+            Serialization.SerializeToXml(french, this.GetFilePath("fr"));
+            Serialization.SerializeToXml(german, this.GetFilePath("de"));
         }
 
         /// <summary>
