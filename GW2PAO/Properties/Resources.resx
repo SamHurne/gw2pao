@@ -932,4 +932,8 @@
     <value>Show Enter/Exit Channel Notifications</value>
     <comment>For the Teamspeak Overlay</comment>
   </data>
+  <data name="SetActivePath" xml:space="preserve">
+    <value>Set as Active Path</value>
+    <comment>Used to override the currently detected dungeon path</comment>
+  </data>
 </root>

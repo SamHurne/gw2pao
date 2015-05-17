@@ -53,6 +53,7 @@
                            Margin="5,0,5,0">
                 <CheckBox.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="{x:Static resx:Resources.SetActivePath}" Command="{Binding SetAsActivePathCommand}" />
                         <MenuItem Header="{x:Static resx:Resources.OpenGuide}" Command="{Binding OpenGuideCommand}" />
                     </ContextMenu>
                 </CheckBox.ContextMenu>
@@ -61,11 +62,11 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                                    <Grid>
+                                    <Grid Width="15">
                                         <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                                            Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                                                            FontSize="13" FontFamily="Gisha"
-                                                                            Text="{Binding DisplayName}">
+                                                                Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
+                                                                FontSize="13" FontFamily="Gisha"
+                                                                Text="{Binding DisplayName}">
                                             <core:OutlinedTextBlock.Style>
                                                 <Style TargetType="{x:Type core:OutlinedTextBlock}">
                                                     <Setter Property="Effect">

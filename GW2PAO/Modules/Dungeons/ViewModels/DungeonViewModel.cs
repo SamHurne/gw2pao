@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.Modules.Dungeons.Data;
+using GW2PAO.Modules.Dungeons.Interfaces;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -94,9 +95,10 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// Default constructor
         /// </summary>
         /// <param name="dungeon">The dungeon information</param>
-        /// <param name="browser">The browser object for displaying wiki information</param>
+        /// <param name="dungeonsController">The dungeons controller</param>
+        /// <param name="browserController">The browser controller object for displaying wiki information</param>
         /// <param name="userData">The dungeon user settings</param>
-        public DungeonViewModel(GW2PAO.API.Data.Entities.Dungeon dungeon, IWebBrowserController browserController, DungeonsUserData userData)
+        public DungeonViewModel(GW2PAO.API.Data.Entities.Dungeon dungeon, IDungeonsController dungeonsController, IWebBrowserController browserController, DungeonsUserData userData)
         {
             this.DungeonModel = dungeon;
             this.userData = userData;
@@ -105,7 +107,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
             this.Paths = new ObservableCollection<PathViewModel>();
             foreach (var path in this.DungeonModel.Paths)
             {
-                this.Paths.Add(new PathViewModel(path, browserController, this.userData));
+                this.Paths.Add(new PathViewModel(path, dungeonsController, browserController, this.userData));
             }
 
             this.RefreshVisibility();

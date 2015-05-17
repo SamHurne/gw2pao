@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using GW2PAO.Modules.Dungeons.Data;
+using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Modules.WebBrowser.Interfaces;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
@@ -25,6 +26,11 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
 
         private DungeonsUserData userData;
         private bool isActivePath;
+
+        /// <summary>
+        /// The dungeons controller
+        /// </summary>
+        private IDungeonsController dungeonController;
 
         /// <summary>
         /// The browser controller used for displaying the dungeon's wiki page
@@ -128,18 +134,27 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// <summary>
         /// Command to open the guide for this dungeon
         /// </summary>
-        public DelegateCommand OpenGuideCommand { get { return new DelegateCommand(this.OpenGuide); } }
+        public DelegateCommand OpenGuideCommand { get; private set; }
+
+        /// <summary>
+        /// Command to set this path as the active path
+        /// </summary>
+        public DelegateCommand SetAsActivePathCommand { get; private set; }
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="path"></param>
         /// <param name="userData"></param>
-        public PathViewModel(DungeonPath path, IWebBrowserController browserController, DungeonsUserData userData)
+        public PathViewModel(DungeonPath path, IDungeonsController dungeonController, IWebBrowserController browserController, DungeonsUserData userData)
         {
             this.PathModel = path;
             this.userData = userData;
+            this.dungeonController = dungeonController;
             this.browserController = browserController;
+
+            this.OpenGuideCommand = new DelegateCommand(this.OpenGuide);
+            this.SetAsActivePathCommand = new DelegateCommand(this.SetAsActivePath);
         }
 
         /// <summary>
@@ -148,6 +163,14 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         private void OpenGuide()
         {
             this.browserController.GoToUrl(this.PathModel.GuideUrl);
+        }
+
+        /// <summary>
+        /// Sets this path as the active dungeon path in the tracker and timer
+        /// </summary>
+        private void SetAsActivePath()
+        {
+            this.dungeonController.SetActivePath(this.PathId);
         }
     }
 }

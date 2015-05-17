@@ -223,6 +223,23 @@ namespace GW2PAO.Modules.Dungeons
         }
 
         /// <summary>
+        /// Sets the active path as the path with the given ID
+        /// </summary>
+        /// <param name="pathId">The ID of the path to set as the active path</param>
+        public void SetActivePath(Guid pathId)
+        {
+            if (this.DungeonTimerData.CurrentDungeon != null)
+            {
+                var path = this.DungeonTimerData.CurrentDungeon.Paths.FirstOrDefault(p => p.PathId == pathId);
+                if (path != null)
+                {
+                    logger.Trace("Setting active dungeon path: {0}", path.DisplayName);
+                    Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentPath = path);
+                }
+            }
+        }
+
+        /// <summary>
         /// Initializes the collection of dungeons
         /// </summary>
         private void InitializeDungeons()
@@ -242,7 +259,7 @@ namespace GW2PAO.Modules.Dungeons
                         }
 
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
-                        this.Dungeons.Add(new DungeonViewModel(dungeon, this.browserController, this.userData));
+                        this.Dungeons.Add(new DungeonViewModel(dungeon, this, this.browserController, this.userData));
 
                         logger.Debug("Initializing path times for {0}", dungeon.Name);
                         foreach (var dung in this.Dungeons)
@@ -264,6 +281,9 @@ namespace GW2PAO.Modules.Dungeons
                 });
         }
 
+        /// <summary>
+        /// Initializes localized map names for each dungeon
+        /// </summary>
         private void InitializeDungeonZoneNames()
         {
             logger.Debug("Initializing zone names for dungeons");

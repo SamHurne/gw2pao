@@ -1492,6 +1492,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set as Active Path.
+        /// </summary>
+        public static string SetActivePath {
+            get {
+                return ResourceManager.GetString("SetActivePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {

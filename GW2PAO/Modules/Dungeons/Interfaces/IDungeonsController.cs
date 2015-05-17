@@ -41,5 +41,11 @@ namespace GW2PAO.Modules.Dungeons.Interfaces
         /// Forces a shutdown of the controller, including all running timers/threads
         /// </summary>
         void Shutdown();
+
+        /// <summary>
+        /// Sets the active path as the path with the given ID
+        /// </summary>
+        /// <param name="pathId">The ID of the path to set as the active path</param>
+        void SetActivePath(Guid pathId);
     }
 }
