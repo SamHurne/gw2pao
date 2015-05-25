@@ -79,12 +79,11 @@
       <HintPath>..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GW2NET.MumbleLink, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\net40\GW2NET.MumbleLink.dll</HintPath>
+    <Reference Include="GW2NET.MumbleLink">
+      <HintPath>..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.MumbleLink.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
