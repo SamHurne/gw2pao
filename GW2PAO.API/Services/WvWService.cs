@@ -24,7 +24,7 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// The GW2.NET API service objective
         /// </summary>
-        private IMatchRepository matchService = GW2.V1.WvW.Matches;
+        private IMatchRepository matchService = GW2.V1.WorldVersusWorld.Matches;
 
         /// <summary>
         /// String provider that provides objective names
