@@ -70,13 +70,13 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2NET, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2NET.dll</HintPath>
+    <Reference Include="GW2NET, Version=0.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GW2NET.Core, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2NET.Core.dll</HintPath>
+    <Reference Include="GW2NET.Core, Version=0.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="GW2NET.MumbleLink, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -53,11 +53,13 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2NET">
-      <HintPath>..\..\packages\GW2.NET.0.9.12.1\net40\GW2NET.dll</HintPath>
+    <Reference Include="GW2NET, Version=0.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GW2NET.Core">
-      <HintPath>..\..\packages\GW2.NET.0.9.12.1\net40\GW2NET.Core.dll</HintPath>
+    <Reference Include="GW2NET.Core, Version=0.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GW2.NET.0.9.12.3\lib\net40\GW2NET.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
