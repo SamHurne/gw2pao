@@ -307,7 +307,7 @@ namespace GW2PAO.API.Services
         public PlayerService()
         {
             logger.Info("Creating PlayerService");
-            this.mumbleLink = new MumbleLinkFile();
+            this.mumbleLink = MumbleLinkFile.CreateOrOpen();
         }
 
         /// <summary>

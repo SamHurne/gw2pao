@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GW2PAO.API</RootNamespace>
     <AssemblyName>GW2PAO.API</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,25 +71,141 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GW2NET, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2NET.dll</HintPath>
+    <Reference Include="GW2NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.1.0.1\lib\portable-net45+win+wpa81\GW2NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GW2NET.Core, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\GW2NET.Core.dll</HintPath>
+    <Reference Include="GW2NET.Compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.Compression.1.0.1\lib\portable-net45+win+wpa81\GW2NET.Compression.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="GW2NET.MumbleLink, Version=0.9.12.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\GW2.NET.0.9.12.3\net40\GW2NET.MumbleLink.dll</HintPath>
+    <Reference Include="GW2NET.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.Core.1.0.1\lib\portable-net45+win+wpa81\GW2NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.MumbleLink, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.MumbleLink.1.0.1\lib\net452\GW2NET.MumbleLink.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.Newtonsoft, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.Newtonsoft.1.0.1\lib\portable-net45+win+wpa81\GW2NET.Newtonsoft.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Builds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Builds.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Builds.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Colors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Colors.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Colors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Continents, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Continents.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Continents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Events.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Events.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Files, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Files.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Files.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Floors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Floors.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Floors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Guilds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Guilds.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Guilds.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Items, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Items.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Items.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Maps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Maps.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Maps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Recipes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Recipes.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Recipes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Skins, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Skins.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Skins.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.Worlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.Worlds.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.Worlds.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.WorldVersusWorld.Matches, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.WorldVersusWorld.Matches.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.WorldVersusWorld.Matches.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V1.WorldVersusWorld.Objectives, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V1.WorldVersusWorld.Objectives.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V1.WorldVersusWorld.Objectives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Builds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Builds.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Builds.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Colors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Colors.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Colors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Commerce.Exchange, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Commerce.Exchange.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Commerce.Exchange.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Commerce.Listings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Commerce.Listings.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Commerce.Listings.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Commerce.Prices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Commerce.Prices.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Commerce.Prices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Continents, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Continents.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Continents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Files, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Files.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Files.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Items, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Items.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Items.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Maps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Maps.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Maps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Quaggans, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Quaggans.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Quaggans.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Recipes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Recipes.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Recipes.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Skins, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Skins.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Skins.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GW2NET.V2.Worlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GW2NET.V2.Worlds.1.0.1\lib\portable-net45+win+wpa81\GW2NET.V2.Worlds.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
