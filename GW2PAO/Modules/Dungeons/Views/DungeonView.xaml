@@ -18,29 +18,30 @@
 
     <UserControl.Resources>
         <Storyboard x:Key="IsActiveEnterAction">
-            <DoubleAnimation To="1"
-                            Storyboard.TargetProperty="(Effect).Opacity"
-                            Duration="00:00:00.5"/>
-            <DoubleAnimation To="0.25"
-                            Storyboard.TargetProperty="(Effect).Opacity"
+            <ColorAnimation To="#FFB042"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
+                            FillBehavior="HoldEnd"
+                            Duration="0:0:00.5"/>
+            <ColorAnimation To="White"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                             Duration="00:00:00.5"
                             BeginTime="00:00:0.5"/>
-            <DoubleAnimation To="1"
-                            Storyboard.TargetProperty="(Effect).Opacity"
+            <ColorAnimation To="#FFB042"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                             Duration="00:00:00.5"
                             BeginTime="00:00:01"/>
-            <DoubleAnimation To="0.25"
-                            Storyboard.TargetProperty="(Effect).Opacity"
+            <ColorAnimation To="White"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                             Duration="00:00:00.5"
                             BeginTime="00:00:01.5"/>
-            <DoubleAnimation To="1"
-                            Storyboard.TargetProperty="(Effect).Opacity"
+            <ColorAnimation To="#FFB042"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                             Duration="00:00:00.5"
                             BeginTime="00:00:02"/>
         </Storyboard>
         <Storyboard x:Key="IsActiveExitAction">
-            <DoubleAnimation To="0"
-                            Storyboard.TargetProperty="(Effect).Opacity"
+            <ColorAnimation To="White"
+                            Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"
                             Duration="00:00:00"/>
         </Storyboard>
 
@@ -64,7 +65,31 @@
                 <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
                                         FontSize="13" FontFamily="Gisha"
-                                        Text="{Binding DisplayName}" />
+                                        Text="{Binding DisplayName}">
+                    <core:OutlinedTextBlock.Style>
+                        <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                            <Setter Property="Fill" Value="White" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </core:OutlinedTextBlock.Style>
+                </core:OutlinedTextBlock>
                 <ContentControl x:Name="CompletedCheckmark"
                                 Visibility="Visible" Opacity="0.75"
                                 Content="{StaticResource PathCheckboxCheckmark}" />
@@ -92,14 +117,6 @@
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
                             </Trigger>
-                            <DataTrigger Binding="{Binding IsActive}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
@@ -208,12 +225,31 @@
                                     Text="{Binding DungeonName}">
                 <core:OutlinedTextBlock.Style>
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
-                        <Setter Property="Effect">
+                        <!--<Setter Property="Effect">
                             <Setter.Value>
                                 <DropShadowEffect Color="Gold" BlurRadius="10" Direction="0" ShadowDepth="0" Opacity="0" />
                             </Setter.Value>
                         </Setter>
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>-->
+                        <Setter Property="Fill" Value="White" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding IsActive}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
