@@ -80,10 +80,10 @@ namespace GW2PAO.API.Services
             try
             {
                 // Get the continents (used later in determining the location of items)
-                var continents = GW2.V1.Continents.ForCurrentUICulture().FindAll();
+                var continents = GW2.V2.Continents.ForCurrentUICulture().FindAll();
 
                 // Get the current map info
-                var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
+                var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
                 if (map != null)
                 {
                     // Find the map's continent
@@ -212,7 +212,7 @@ namespace GW2PAO.API.Services
                 }
                 else
                 {
-                    var map = GW2.V1.Maps.ForCurrentUICulture().Find(mapId);
+                    var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
                     if (map != null)
                         return map.MapName;
                     else
