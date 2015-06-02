@@ -150,14 +150,7 @@ namespace GW2PAO.API.Data
                                 GoldReward = 1.05,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
-                                    new DetectionPoint(127.11, 87.91, 22.54, 5.00),
-                                    new DetectionPoint(148.50, 88.26, 22.54, 5.00),
-                                    new DetectionPoint(151.55, 65.30, 22.54, 5.00),
-                                    new DetectionPoint(124.51, 21.21, 22.54, 5.00),
-                                    new DetectionPoint(135.41, 40.18, 22.54, 5.00),
-                                    new DetectionPoint(105.46, 91.48, 22.54, 5.00),
-                                    new DetectionPoint(95.84, 127.75, 22.54, 5.00),
-                                    new DetectionPoint(135.57, 102.49, 22.54, 5.00)
+                                    new DetectionPoint(-5.07, 111.11, 20.61, 7.50)
                                 },
                                 EndPoint = new DetectionPoint(-195.62, 193.663, 2.571, 100),
                                 EndCutsceneCount = 2
@@ -172,7 +165,9 @@ namespace GW2PAO.API.Data
                                 GoldReward = 1.05,
                                 IdentifyingPoints = new List<DetectionPoint> 
                                 { 
-                                    new DetectionPoint(46.79, 58.08, 40.08, 30)
+                                    new DetectionPoint(88.20, 96.87, 40.08, 5.00),
+                                    new DetectionPoint(79.27, 107.09, 40.12, 5.00),
+                                    new DetectionPoint(71.72, 92.99, 40.08, 5.00)
                                 },
                                 EndPoint = new DetectionPoint(252.08, 268.50, 41.53, 100),
                                 EndCutsceneCount = 1
@@ -189,7 +184,8 @@ namespace GW2PAO.API.Data
                                 { 
                                     new DetectionPoint(15.41, 26.50, 16.28, 10.00),
                                     new DetectionPoint(19.70, 47.41, 16.33, 10.00),
-                                    new DetectionPoint(5.45, 43.40, 15.59, 10.00)
+                                    new DetectionPoint(5.45, 43.40, 15.59, 10.00),
+                                    new DetectionPoint(6.04, 44.93, 15.46, 10.00)
                                 },
                                 EndPoint = new DetectionPoint(-215.50, 233.00, 0.49, 100),
                                 EndCutsceneCount = 1
@@ -415,7 +411,12 @@ namespace GW2PAO.API.Data
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/HotW1",
                                 GoldReward = 1.05,
-                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-119.83, 159.85, 38.57, 35) },
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-86.37, 160.04, 37.12, 15.00),
+                                    new DetectionPoint(-57.64, 164.10, 35.52, 15.00),
+                                    new DetectionPoint(-18.60, 168.97, 33.49, 15.00)
+                                },
                                 EndPoint = new DetectionPoint(-67.77, -68.20, 18.95, 75),
                                 EndCutsceneCount = 2
                             },
@@ -439,9 +440,14 @@ namespace GW2PAO.API.Data
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/HotW3",
                                 GoldReward = 1.05,
-                                IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-199.69, 197.26, 43.96, 35) },
+                                IdentifyingPoints = new List<DetectionPoint>
+                                {
+                                    new DetectionPoint(-198.64, 197.05, 44.08, 20.00),
+                                    new DetectionPoint(-181.32, 218.19, 41.89, 20.00),
+                                    new DetectionPoint(-169.31, 231.86, 40.57, 20.00)
+                                },
                                 EndPoint = new DetectionPoint(-100.96, 11.86, -18.29, 75),
-                                EndCutsceneCount = 2
+                                EndCutsceneCount = 1
                             }
                         }
             });
