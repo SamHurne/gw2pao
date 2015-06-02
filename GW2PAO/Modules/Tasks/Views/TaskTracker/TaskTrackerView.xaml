@@ -20,6 +20,31 @@
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+        <DockPanel x:Key="AddGraphic" x:Shared="false">
+            <Path HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Stretch="Uniform"
+                      Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                      StrokeThickness="2">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathGeometry.Figures>
+                            <PathFigure StartPoint="5,0">
+                                <LineSegment Point="5,10"/>
+                            </PathFigure>
+                            <PathFigure StartPoint="0,5">
+                                <LineSegment Point="10,5"/>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+                <Path.Effect>
+                    <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="15"/>
+                </Path.Effect>
+            </Path>
+        </DockPanel>
+
     </src:OverlayWindow.Resources>
 
     <!--See code-behind for ViewModel details-->
@@ -44,6 +69,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -121,8 +147,15 @@
                                         Fill="PaleGoldenrod" FontFamily="Candara" FontSize="14"
                                         Text="{x:Static resx:Resources.TaskTracker}" />
 
-                <Button Name="CollapseExpandButton"
+                <Button Name="AddTaskButton"
                         Grid.Column="2"
+                        Margin="3"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource AddGraphic}"
+                        Command="{Binding AddNewTaskCommand}" />
+
+                <Button Name="CollapseExpandButton"
+                        Grid.Column="3"
                         Margin="3"
                         Click="CollapseExpandButton_Click">
                     <Button.Style>
@@ -140,7 +173,7 @@
                 </Button>
 
                 <Button Name="CloseWindowButton"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Margin="3,3,5,3"
                         Style="{StaticResource TitleBarButtonStyle}"
                         Content="{StaticResource CloseGraphic}"
