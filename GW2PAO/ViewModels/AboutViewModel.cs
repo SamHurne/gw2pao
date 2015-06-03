@@ -69,8 +69,22 @@ namespace GW2PAO.ViewModels
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             this.Version = fvi.ProductVersion;
-            this.OpenSourceLicense = File.ReadAllText("LICENSE.txt", Encoding.Default);
-            this.ArenaNetCopyright = File.ReadAllText("AnetCopyright.txt", Encoding.Default);
+
+            using (Stream stream = assembly.GetManifestResourceStream("GW2PAO.LICENSE.txt"))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    this.OpenSourceLicense = reader.ReadToEnd();
+                }
+            }
+
+            using (Stream stream = assembly.GetManifestResourceStream("GW2PAO.AnetCopyright.txt"))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    this.ArenaNetCopyright = reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>

@@ -831,6 +831,13 @@
     <Resource Include="Images\Backgrounds\Small1_b.png" />
     <Resource Include="Images\Backgrounds\Small1_g.png" />
     <Resource Include="Images\Backgrounds\Small1_r.png" />
+    <EmbeddedResource Include="..\AnetCopyright.txt">
+      <Link>AnetCopyright.txt</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\LICENSE.txt">
+      <Link>LICENSE.txt</Link>
+    </EmbeddedResource>
+    <Resource Include="Images\appicon.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
