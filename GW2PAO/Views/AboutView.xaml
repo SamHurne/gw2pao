@@ -60,7 +60,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="95" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
@@ -85,7 +85,7 @@
 
                     <TextBlock Grid.Row="1" Grid.Column="1"
                            FontSize="11" Foreground="White"
-                           Text="Shawni Roux [FR], Vacendak.5962 [DE]" />
+                           Text="Shawni Roux [FR], Vacendak.5962 [DE], Kenya Kendra [ES]" />
 
                     <TextBlock Grid.Row="1" Grid.Column="2"
                                HorizontalAlignment="Right"
