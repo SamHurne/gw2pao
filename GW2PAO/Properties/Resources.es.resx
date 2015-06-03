@@ -121,18 +121,12 @@
     <value>Acerca de</value>
   </data>
   <data name="ActiveIn" xml:space="preserve">
-    <value>Activo en</value>
+    <value>activo en</value>
     <comment>Used to communicate when an in-game event will be active - example: "active in 08:00:01"</comment>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Añadir</value>
     <comment>Add, as in mathematics addition</comment>
-  </data>
-  <data name="Added 2014-12-21" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Added 2014-12-30" xml:space="preserve">
-    <value />
   </data>
   <data name="AddNewTask" xml:space="preserve">
     <value>Añadir nueva tarea</value>
@@ -149,6 +143,9 @@
   </data>
   <data name="AutoComplete" xml:space="preserve">
     <value>Autocompletar</value>
+  </data>
+  <data name="AutoCompleteTasks" xml:space="preserve">
+    <value>Completar automáticamente Basado en Ubicación</value>
   </data>
   <data name="AutoFadeBorders" xml:space="preserve">
     <value>Atenuar bordes de ventana</value>
@@ -193,14 +190,14 @@
     <comment>An order placed to buy an item</comment>
   </data>
   <data name="BuyOrderLowerLimit" xml:space="preserve">
-    <value>Límite inferior de orden de compra</value>
+    <value>Límite inferior de orden de compra:</value>
     <comment>Lower limit for a buy order</comment>
   </data>
   <data name="BuyOrderPriceNotifications" xml:space="preserve">
     <value>Notificación de precios de orden de compra</value>
   </data>
   <data name="BuyOrderUpperLimit" xml:space="preserve">
-    <value>Límite superior de orden de compra</value>
+    <value>Límite superior de orden de compra:</value>
     <comment>Upper/higher limit for a buy order</comment>
   </data>
   <data name="BuyPrice" xml:space="preserve">
@@ -272,6 +269,9 @@
   <data name="Cost" xml:space="preserve">
     <value>Precio:</value>
   </data>
+  <data name="CostOfGems" xml:space="preserve">
+    <value>Costo de 100 Gemas</value>
+  </data>
   <data name="CurrentHighestBuyOrder" xml:space="preserve">
     <value>Orden de compra más alta:</value>
     <comment>The currently highest buy order</comment>
@@ -308,7 +308,7 @@
     <value>Desactivar todo</value>
   </data>
   <data name="Distance" xml:space="preserve">
-    <value>Distancia</value>
+    <value>Distancia:</value>
   </data>
   <data name="DistanceUnits" xml:space="preserve">
     <value>Unidades de distancia</value>
@@ -376,6 +376,12 @@
     <value>Pies</value>
     <comment>Feet as in "ft"</comment>
   </data>
+  <data name="File" xml:space="preserve">
+    <value>Expediente</value>
+  </data>
+  <data name="GemsToGoldExchange" xml:space="preserve">
+    <value>Gemas para Gold Exchange</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
     <comment>General Settings Header</comment>
@@ -386,6 +392,9 @@
   </data>
   <data name="Global" xml:space="preserve">
     <value>Global</value>
+  </data>
+  <data name="GoldToGemsExchange" xml:space="preserve">
+    <value>Oro para Gems Cambio</value>
   </data>
   <data name="GoToDownloadPage" xml:space="preserve">
     <value>Ir a la página de descarga</value>
@@ -519,6 +528,9 @@
   <data name="OpenEventsTracker" xml:space="preserve">
     <value>Abrir monitor de eventos</value>
     <comment>Performs an action - Opens the events tracker</comment>
+  </data>
+  <data name="OpenGuide" xml:space="preserve">
+    <value>Guía abierto</value>
   </data>
   <data name="OpenWikiPage" xml:space="preserve">
     <value>Abrir página de la Wiki</value>
@@ -656,6 +668,10 @@
     <value>Servidor:</value>
     <comment>Teamspeak server name</comment>
   </data>
+  <data name="SetActivePath" xml:space="preserve">
+    <value>Establecer como Sendero Activo</value>
+    <comment>Used to override the currently detected dungeon path</comment>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
@@ -679,8 +695,18 @@
   <data name="ShowCompletedEvents" xml:space="preserve">
     <value>Mostrar eventos completados</value>
   </data>
+  <data name="ShowCompletedTasks" xml:space="preserve">
+    <value>Mostrar completadas Tareas</value>
+  </data>
   <data name="ShowDistances" xml:space="preserve">
     <value>Mostrar distancias</value>
+  </data>
+  <data name="ShowEnterExitChannelNotifications" xml:space="preserve">
+    <value>Mostrar Enter / Exit Channel Notificaciones</value>
+    <comment>For the Teamspeak Overlay</comment>
+  </data>
+  <data name="ShowGoldToGemsExchange" xml:space="preserve">
+    <value>Mostrar Oro-to-Gems Cambio</value>
   </data>
   <data name="ShowInactiveEvents" xml:space="preserve">
     <value>Mostrar eventos inactivos</value>
@@ -692,6 +718,9 @@
   <data name="ShowNotificationBorders" xml:space="preserve">
     <value>Mostrar bordes de ventana</value>
     <comment>Show window borders for notification windows</comment>
+  </data>
+  <data name="ShowTasksNotOnMap" xml:space="preserve">
+    <value>Mostrar no Tareas en mapa actual</value>
   </data>
   <data name="ShowUnlockedZonePoints" xml:space="preserve">
     <value>Mostrar puntos desbloqueados</value>
@@ -823,6 +852,9 @@
   <data name="UsePlayersMap" xml:space="preserve">
     <value>Usar el mapa actual</value>
   </data>
+  <data name="ValueOfGems" xml:space="preserve">
+    <value>Valor de 100 Gemas</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Versión</value>
     <comment>Shown in New Version Available popup</comment>
@@ -866,9 +898,45 @@
   <data name="WorldvsWorld" xml:space="preserve">
     <value>Mundo vs Mundo</value>
   </data>
+  <data name="WvWEnemyHeadedAltClipboardText" xml:space="preserve">
+    <value>Enemigo dirigió a {0}</value>
+    <comment>Example: Enemy headed to Garrison</comment>
+  </data>
+  <data name="WvWEnemyHeadedClipboardText" xml:space="preserve">
+    <value>Enemigo dirigido a {0} ({1} {2})</value>
+    <comment>Example: Enemy headed to Garrison (C Keep)</comment>
+  </data>
+  <data name="WvWGeneralClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Poseído por {3} - RI: {4}</value>
+    <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI: 3:14</comment>
+  </data>
+  <data name="WvWGeneralNoRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - Propiedad de {3} - RI NO está activo</value>
+    <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI is NOT active</comment>
+  </data>
+  <data name="WvWNoRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - RI NO está activo</value>
+    <comment>Example: Garrison (C Keep) - RI is NOT active</comment>
+  </data>
   <data name="WvWNotifications" xml:space="preserve">
     <value>Notificaciones de MvM</value>
     <comment>World vs World Notifications</comment>
+  </data>
+  <data name="WvWPlayerHeadedAltClipboardText" xml:space="preserve">
+    <value>Me dirijo a {0} - Distancia estimada: {1} {2}</value>
+    <comment>Example: I'm headed to Garrison - Estimated Distance: 314m</comment>
+  </data>
+  <data name="WvWPlayerHeadedClipboardText" xml:space="preserve">
+    <value>Me dirijo a {0} ({1} {2}) - Distancia estimada: {3} {4}</value>
+    <comment>Example: I'm headed to Garrison (C Keep) - Estimated Distance: 314m</comment>
+  </data>
+  <data name="WvWRIClipboardText" xml:space="preserve">
+    <value>{0} ({1} {2}) - RI: {3}</value>
+    <comment>Example: Garrison (C Keep) - RI: 3:14</comment>
+  </data>
+  <data name="WvWUnderAttackClipboardText" xml:space="preserve">
+    <value>{0} está bajo ataque !! ({1} {2})</value>
+    <comment>Example: Garrison is under attack!! (C Keep)</comment>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Asistente de exploración de mapa</value>
