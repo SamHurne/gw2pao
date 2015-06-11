@@ -33,7 +33,7 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
 </head>
@@ -325,12 +325,19 @@
                 <li>
                     <a href="https://github.com/SamHurne/gw2pao" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i><span class="network-name">GitHub</span></a>
                 </li>
+                <li>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="EFWJGP4HXUXKQ">
+                        <button type="submit" class="btn btn-default btn-lg"><i class="fa fa-paypal fa-fw"></i><span class="network-name">Donate</span></button>
+                    </form>
+                </li>   
             </ul>
             <span>© 2012 ArenaNet, Inc. All rights reserved. NCsoft, the interlocking NC logo, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Eye of the North, Guild Wars 2, and all associated logos and designs are trademarks or registered trademarks of NCsoft Corporation. All other trademarks are the property of their respective owners.</span>
         </div>
     </footer>
 
-    <!--------------------- Scripts --------------------->
+    <!--  Scripts -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
