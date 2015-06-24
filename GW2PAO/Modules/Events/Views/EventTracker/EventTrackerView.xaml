@@ -74,6 +74,7 @@
                             <MenuItem Header="{x:Static resx:Resources.ResetHiddenEvents}" Command="{Binding ResetHiddenEventsCommand}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowInactiveEvents}" IsCheckable="True" IsChecked="{Binding UserData.AreInactiveEventsVisible}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowCompletedEvents}" IsCheckable="True" IsChecked="{Binding UserData.AreCompletedEventsVisible}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowWaypointCopyButtons}" IsCheckable="True" IsChecked="{Binding UserData.ShowWaypointCopyButtons}" />
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Settings}" Command="{Binding SettingsCommand}" />
                             <Separator />

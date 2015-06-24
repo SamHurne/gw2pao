@@ -18,6 +18,7 @@
         <converters:EventStateConverter x:Key="StateConverter" />
         <converters:TimespanConverter x:Key="TimeConverter" />
         <converters:TreasureCheckboxConverter x:Key="TreasureConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisiblityConverter" />
     </UserControl.Resources>
 
     <UserControl.ContextMenu>
@@ -119,6 +120,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <core:OutlinedTextBlock Name="EventName"
@@ -128,7 +130,16 @@
                                     FontSize="13"
                                     Text="{Binding EventName}" />
 
-            <CheckBox Name="ChestIcon" Grid.Column="1"
+            <Button Grid.Column="1"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Height="16"
+                    Margin="0,0,10,0"
+                    Command="{Binding CopyWaypointCommand}"
+                    Visibility="{Binding UserData.ShowWaypointCopyButtons, Converter={StaticResource BoolToVisiblityConverter}}"
+                    Style="{StaticResource WaypointButtonStyle}" />
+
+
+            <CheckBox Name="ChestIcon" Grid.Column="2"
                       VerticalAlignment="Center" HorizontalAlignment="Center"
                       Margin="0,0,10,0"
                       IsChecked="{Binding IsTreasureObtained}">
@@ -178,7 +189,7 @@
             </CheckBox>
 
             <core:OutlinedTextBlock Name="TimerValue"
-                                    Grid.Row="0" Grid.Column="2"
+                                    Grid.Row="0" Grid.Column="3"
                                     VerticalAlignment="Center" HorizontalAlignment="Center"
                                     Fill="{Binding State, Converter={StaticResource StateConverter}}"
                                     FontSize="13"

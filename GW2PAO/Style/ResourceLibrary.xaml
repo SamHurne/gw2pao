@@ -23,6 +23,7 @@
         <ResourceDictionary Source="NamedStyles/ScrollingItemsControlStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/TitleBarStyle.xaml" />
         <ResourceDictionary Source="NamedStyles/VirtualizingItemsControlStyle.xaml" />
+        <ResourceDictionary Source="NamedStyles/WaypointButtonStyle.xaml" />
         
         <!--XAML Images-->
         <ResourceDictionary Source="Images/Spinners.xaml" />

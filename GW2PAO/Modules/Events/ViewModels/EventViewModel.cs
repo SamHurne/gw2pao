@@ -27,7 +27,11 @@ namespace GW2PAO.Modules.Events.ViewModels
         private bool isNotificationShown;
         private bool isRemovingNotification;
         private ICollection<EventViewModel> displayedNotifications;
-        private EventsUserData userData;
+
+        /// <summary>
+        /// The general events-related user settings/data
+        /// </summary>
+        public EventsUserData UserData { get; private set; }
 
         /// <summary>
         /// The primary model object containing the event information
@@ -96,20 +100,20 @@ namespace GW2PAO.Modules.Events.ViewModels
         /// </summary>
         public bool IsTreasureObtained
         {
-            get { return this.userData.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
+            get { return this.UserData.EventsWithTreasureObtained.Contains(this.EventModel.ID); }
             set
             {
-                if (value && !this.userData.EventsWithTreasureObtained.Contains(this.EventModel.ID))
+                if (value && !this.UserData.EventsWithTreasureObtained.Contains(this.EventModel.ID))
                 {
                     logger.Debug("Adding \"{0}\" to EventsWithTreasureObtained", this.EventName);
-                    this.userData.EventsWithTreasureObtained.Add(this.EventModel.ID);
+                    this.UserData.EventsWithTreasureObtained.Add(this.EventModel.ID);
                     this.OnPropertyChanged(() => this.IsTreasureObtained);
                     this.RefreshVisibility();
                 }
                 else
                 {
                     logger.Debug("Removing \"{0}\" from EventsWithTreasureObtained", this.EventName);
-                    if (this.userData.EventsWithTreasureObtained.Remove(this.EventModel.ID))
+                    if (this.UserData.EventsWithTreasureObtained.Remove(this.EventModel.ID))
                         this.OnPropertyChanged(() => this.IsTreasureObtained);
                     this.RefreshVisibility();
                 }
@@ -164,7 +168,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         public EventViewModel(WorldEvent eventData, EventsUserData userData, ICollection<EventViewModel> displayedNotificationsCollection)
         {
             this.EventModel = eventData;
-            this.userData = userData;
+            this.UserData = userData;
             this.displayedNotifications = displayedNotificationsCollection;
             this.IsVisible = true;
             this.IsNotificationShown = false;
@@ -172,8 +176,8 @@ namespace GW2PAO.Modules.Events.ViewModels
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;
-            this.userData.PropertyChanged += (o, e) => this.RefreshVisibility();
-            this.userData.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
+            this.UserData.PropertyChanged += (o, e) => this.RefreshVisibility();
+            this.UserData.HiddenEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
         }
 
         /// <summary>
@@ -182,7 +186,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         private void AddToHiddenEvents()
         {
             logger.Debug("Adding \"{0}\" to hidden events", this.EventName);
-            this.userData.HiddenEvents.Add(this.EventModel.ID);
+            this.UserData.HiddenEvents.Add(this.EventModel.ID);
         }
 
         /// <summary>
@@ -191,16 +195,16 @@ namespace GW2PAO.Modules.Events.ViewModels
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.EventName);
-            if (this.userData.HiddenEvents.Any(id => id == this.EventId))
+            if (this.UserData.HiddenEvents.Any(id => id == this.EventId))
             {
                 this.IsVisible = false;
             }
-            else if (!this.userData.AreInactiveEventsVisible
+            else if (!this.UserData.AreInactiveEventsVisible
                     && this.State == EventState.Inactive)
             {
                 this.IsVisible = false;
             }
-            else if (!this.userData.AreCompletedEventsVisible
+            else if (!this.UserData.AreCompletedEventsVisible
                     && this.IsTreasureObtained)
             {
                 this.IsVisible = false;

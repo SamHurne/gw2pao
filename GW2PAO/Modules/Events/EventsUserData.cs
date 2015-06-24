@@ -34,6 +34,7 @@ namespace GW2PAO.Modules.Events
 
         private bool areCompletedEventsVisible;
         private bool areInactiveEventsVisible;
+        private bool showWaypointCopyButtons;
         private bool areEventNotificationsEnabled;
         private bool useAdjustedTimeTable;
         private bool autoDetectCompletion;
@@ -59,6 +60,15 @@ namespace GW2PAO.Modules.Events
         {
             get { return this.areInactiveEventsVisible; }
             set { SetProperty(ref this.areInactiveEventsVisible, value); }
+        }
+
+        /// <summary>
+        /// True if the waypoint-code copy buttons are visible in the events tracker, else false
+        /// </summary>
+        public bool ShowWaypointCopyButtons
+        {
+            get { return this.showWaypointCopyButtons; }
+            set { SetProperty(ref this.showWaypointCopyButtons, value); }
         }
 
         /// <summary>
@@ -145,6 +155,7 @@ namespace GW2PAO.Modules.Events
         {
             this.AreCompletedEventsVisible = true;
             this.AreInactiveEventsVisible = true;
+            this.ShowWaypointCopyButtons = true;
             this.AreEventNotificationsEnabled = true;
             this.UseAdjustedTimeTable = true;
             this.AutoDetectCompletion = true;
