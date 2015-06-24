@@ -41,6 +41,9 @@ namespace GW2PAO
                 Application.Current.Shutdown();
             }
 
+            // Software only mode provides improved performance when using transparent windows
+            System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+
             base.OnStartup(e);
 
             this.InitializeSettings();
