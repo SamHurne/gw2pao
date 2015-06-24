@@ -12,7 +12,7 @@ namespace GW2PAO.API.Data.Enums
         Waypoint,
         Vista,
         HeartQuest,
-        SkillChallenge,
+        HeroPoint,
         Dungeon
     }
 }

@@ -34,6 +34,8 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>1649f440</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -232,6 +234,7 @@
     <Compile Include="Infrastructure\Hotkeys\KeyModifier.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Modules\Dungeons\Data\PathCompletionData.cs" />
     <Compile Include="Modules\Dungeons\Data\PathTime.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\DungeonTimer\DungeonTimerViewModel.cs" />
     <Compile Include="Modules\Dungeons\Views\DungeonTimer\DungeonTimerView.xaml.cs">
@@ -838,6 +841,8 @@
       <Link>LICENSE.txt</Link>
     </EmbeddedResource>
     <Resource Include="Images\appicon.png" />
+    <Resource Include="Images\Zone\heropoint.png" />
+    <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -968,7 +973,9 @@ del xinput9_1_0.dll</PostBuildEvent>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.1.28.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -374,7 +374,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                                             this.distanceCounters[item.ItemId] = 0;
                                         }
                                         break;
-                                    case API.Data.Enums.ZoneItemType.SkillChallenge:
+                                    case API.Data.Enums.ZoneItemType.HeroPoint:
                                         if (this.UserData.AutoUnlockSkillChallenges
                                             && ftDistance >= 0 && ftDistance < 25)
                                         {

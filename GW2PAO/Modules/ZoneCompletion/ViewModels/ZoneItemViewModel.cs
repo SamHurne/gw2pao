@@ -265,7 +265,7 @@ namespace GW2PAO.Modules.ZoneCompletion.ViewModels
                     case ZoneItemType.PointOfInterest:
                         this.IsVisible = this.userData.ArePoisVisible;
                         break;
-                    case ZoneItemType.SkillChallenge:
+                    case ZoneItemType.HeroPoint:
                         this.IsVisible = this.userData.AreSkillChallengesVisible;
                         break;
                     case ZoneItemType.Vista:

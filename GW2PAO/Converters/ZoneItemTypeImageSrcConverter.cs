@@ -36,8 +36,8 @@ namespace GW2PAO.Converters
                 case ZoneItemType.PointOfInterest:
                     imagePath += "poi.png";
                     break;
-                case ZoneItemType.SkillChallenge:
-                    imagePath += "skillpoints.png";
+                case ZoneItemType.HeroPoint:
+                    imagePath += "heropoint.png";
                     break;
                 case ZoneItemType.Vista:
                     imagePath += "vistas.png";

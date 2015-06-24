@@ -178,7 +178,7 @@ namespace GW2PAO.API.Services
                                             zoneItem.Location = new Point(location.X, location.Y);
                                             zoneItem.MapId = mapId;
                                             zoneItem.MapName = map.MapName;
-                                            zoneItem.Type = Data.Enums.ZoneItemType.SkillChallenge;
+                                            zoneItem.Type = Data.Enums.ZoneItemType.HeroPoint;
 
                                             zoneItems.Add(zoneItem);
                                         }
