@@ -66,8 +66,15 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="141"
-                                            Header="{x:Static resx:Resources.Item}"
-                                            DisplayMemberBinding="{Binding ItemName}"/>
+                                            Header="{x:Static resx:Resources.Item}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="1">
+                                            <core:OutlinedTextBlock Text="{Binding ItemName}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -936,4 +936,25 @@
     <value>Set as Active Path</value>
     <comment>Used to override the currently detected dungeon path</comment>
   </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Paths</value>
+  </data>
+  <data name="BestTime" xml:space="preserve">
+    <value>Best Time</value>
+  </data>
+  <data name="CompletionTime" xml:space="preserve">
+    <value>Completion Time</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DungeonCompletion" xml:space="preserve">
+    <value>Dungeon Completion</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="AverageTime" xml:space="preserve">
+    <value>Average Time</value>
+  </data>
 </root>

@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Data.UserData;
+using GW2PAO.Modules.Dungeons.Data;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Modules.Dungeons.ViewModels;
 using GW2PAO.Modules.Dungeons.ViewModels.DungeonTimer;
@@ -93,6 +94,11 @@ namespace GW2PAO.Modules.Dungeons
         private bool tickStopped;
 
         /// <summary>
+        /// True if the active dungeon path completion time has been saved, else false
+        /// </summary>
+        private bool currentRunTimeSaved;
+
+        /// <summary>
         /// The amount of "cutscenes" the player has entered while at the end of a dungeon path
         /// </summary>
         private int playerCutsceneCount;
@@ -143,6 +149,7 @@ namespace GW2PAO.Modules.Dungeons
             this.userData = userData;
             this.isStopped = false;
             this.tickStopped = false;
+            this.currentRunTimeSaved = false;
 
             // Initialize the dungeon timer view model
             this.DungeonTimerData = new DungeonTimerViewModel(userData);
@@ -260,21 +267,21 @@ namespace GW2PAO.Modules.Dungeons
 
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
                         this.Dungeons.Add(new DungeonViewModel(dungeon, this, this.browserController, this.userData));
+                    }
 
-                        logger.Debug("Initializing path times for {0}", dungeon.Name);
-                        foreach (var dung in this.Dungeons)
+                    foreach (var dungeon in this.Dungeons)
+                    {
+                        logger.Debug("Initializing path completion data for {0}", dungeon.DungeonName);
+                        foreach (var path in dungeon.Paths)
                         {
-                            foreach (var path in dung.Paths)
+                            var existingPathCompletionData = this.UserData.PathCompletionData.FirstOrDefault(pt => pt.PathID == path.PathId);
+                            if (existingPathCompletionData != null)
                             {
-                                var existingPathTimeData = this.UserData.BestPathTimes.FirstOrDefault(pt => pt.PathID == path.PathId);
-                                if (existingPathTimeData == null)
-                                {
-                                    this.UserData.BestPathTimes.Add(new Data.PathTime(path));
-                                }
-                                else
-                                {
-                                    existingPathTimeData.PathData = path;
-                                }
+                                existingPathCompletionData.PathData = path;
+                            }
+                            else
+                            {
+                                this.UserData.PathCompletionData.Add(new PathCompletionData(path));
                             }
                         }
                     }
@@ -328,6 +335,7 @@ namespace GW2PAO.Modules.Dungeons
                         // Reset current dungeon/path information
                         this.DungeonTimerData.CurrentDungeon = null;
                         this.DungeonTimerData.CurrentPath = null;
+                        this.currentRunTimeSaved = false;
 
                         if (this.UserData.AutoStopDungeonTimer)
                             this.DungeonTimerData.PauseTimer();
@@ -522,20 +530,26 @@ namespace GW2PAO.Modules.Dungeons
                 && this.IsPlayerNear(this.DungeonTimerData.CurrentPath.EndPoint))
             {
                 // The player has entered the final end cutscene
-                // In this situation, we automatically stop the timer, save the best time, and mark the dungeon as completed
+                // In this situation, we automatically stop the timer, save the time, and mark the dungeon as completed
                 if (this.DungeonTimerData.IsTimerRunning && this.UserData.AutoStopDungeonTimer)
                 {
-                    // Stop the timer and save it's value as the best time if it's the best time
+                    // Stop the timer and save it's value
                     this.DungeonTimerData.PauseTimer();
+                }
 
-                    var bestPathTime = this.DungeonTimerData.CurrentPath.BestTime;
-                    if (bestPathTime.Time == TimeSpan.Zero
-                        || this.DungeonTimerData.TimerValue.CompareTo(bestPathTime.Time) < 0)
-                    {
-                        logger.Info("New best time for {0} ({1}) detected: {2}", bestPathTime.PathID, bestPathTime.PathData.DisplayName, this.DungeonTimerData.TimerValue);
-                        bestPathTime.Time = this.DungeonTimerData.TimerValue;
-                        bestPathTime.Timestamp = DateTime.Now;
-                    }
+                if (!this.currentRunTimeSaved)
+                {
+                    logger.Info("New time for {0} ({1}) detected: {2}",
+                            this.DungeonTimerData.CurrentPath.PathId,
+                            this.DungeonTimerData.CurrentPath.DisplayName,
+                            this.DungeonTimerData.TimerValue);
+
+                    PathTime newTime = new PathTime();
+                    newTime.Time = this.DungeonTimerData.TimerValue;
+                    newTime.Timestamp = DateTime.Now;
+                    Threading.InvokeOnUI(() => this.DungeonTimerData.CurrentPath.CompletionTimes.Add(newTime));
+
+                    this.currentRunTimeSaved = true;
                 }
 
                 if (!this.DungeonTimerData.CurrentPath.IsCompleted

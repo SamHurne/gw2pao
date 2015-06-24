@@ -31,7 +31,7 @@ namespace GW2PAO.Modules.Dungeons
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenDungeons = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> completedPaths = new ObservableCollection<Guid>();
-        private ObservableCollection<PathTime> bestPathTimes = new ObservableCollection<PathTime>();
+        private ObservableCollection<PathCompletionData> pathCompletionData = new ObservableCollection<PathCompletionData>();
 
         /// <summary>
         /// True if the dungeon timer should automatically start, else false
@@ -75,14 +75,14 @@ namespace GW2PAO.Modules.Dungeons
         public ObservableCollection<Guid> HiddenDungeons { get { return this.hiddenDungeons; } }
 
         /// <summary>
-        /// Collection of user-configured completed dungeon paths
+        /// Collection of user-configured completed dungeon paths (completed for the current day)
         /// </summary>
         public ObservableCollection<Guid> CompletedPaths { get { return this.completedPaths; } }
 
         /// <summary>
-        /// Collection of best dungeon path completion times
+        /// Collection of dungeon path completion data
         /// </summary>
-        public ObservableCollection<PathTime> BestPathTimes { get { return this.bestPathTimes; } }
+        public ObservableCollection<PathCompletionData> PathCompletionData { get { return this.pathCompletionData; } }
 
         /// <summary>
         /// Default constructor
@@ -105,18 +105,19 @@ namespace GW2PAO.Modules.Dungeons
             this.PropertyChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
             this.HiddenDungeons.CollectionChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
             this.CompletedPaths.CollectionChanged += (o, e) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
-            this.BestPathTimes.CollectionChanged += (o, e) =>
+            this.PathCompletionData.CollectionChanged += (o, e) =>
                 {
                     DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
                     if (e.Action == NotifyCollectionChangedAction.Add)
                     {
-                        foreach (PathTime pt in e.NewItems)
+                        foreach (PathCompletionData pt in e.NewItems)
                         {
                             pt.PropertyChanged += (obj, arg) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
+                            pt.CompletionTimes.CollectionChanged += (obj, arg) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
                         }
                     }
                 };
-            foreach (PathTime pt in this.BestPathTimes)
+            foreach (PathCompletionData pt in this.PathCompletionData)
             {
                 pt.PropertyChanged += (obj, arg) => DungeonsUserData.SaveData(this, DungeonsUserData.Filename);
             }

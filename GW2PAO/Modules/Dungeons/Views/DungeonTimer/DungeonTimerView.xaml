@@ -274,11 +274,11 @@
                                 VerticalAlignment="Top" HorizontalAlignment="Center"
                                 Margin="5"
                                 FontSize="13" Fill="Gray" Opacity="0.5"
-                                Text="{Binding CurrentPath.BestTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}">
+                                Text="{Binding CurrentPath.BestCompletionTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}">
             <core:OutlinedTextBlock.Style>
                 <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding CurrentPath.BestTime}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding CurrentPath.BestCompletionTime}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </Style.Triggers>

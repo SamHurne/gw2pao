@@ -14,6 +14,9 @@ using System.Collections.Concurrent;
 using GW2PAO.Modules.Dungeons.Data;
 using GW2PAO.Modules.Dungeons.Interfaces;
 using GW2PAO.Modules.WebBrowser.Interfaces;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Collections;
 
 namespace GW2PAO.Modules.Dungeons.ViewModels
 {
@@ -126,9 +129,57 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// <summary>
         /// Best completion time for this path
         /// </summary>
-        public PathTime BestTime
+        public PathTime BestCompletionTime
         {
-            get { return this.userData.BestPathTimes.FirstOrDefault(pt => pt.PathID == this.PathId); }
+            get
+            {
+                var pathCompletionData = this.userData.PathCompletionData.FirstOrDefault(pt => pt.PathID == this.PathId);
+                if (pathCompletionData != null)
+                {
+                    return pathCompletionData.CompletionTimes.OrderBy((pt) => pt.Time).FirstOrDefault();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Average completion time for this path
+        /// </summary>
+        public TimeSpan AverageCompletionTime
+        {
+            get
+            {
+                var pathCompletionData = this.userData.PathCompletionData.FirstOrDefault(pt => pt.PathID == this.PathId);
+                if (pathCompletionData != null)
+                {
+                    double totalMs = 0;
+                    foreach (var pt in pathCompletionData.CompletionTimes)
+                        totalMs += pt.Time.TotalMilliseconds;
+
+                    totalMs /= pathCompletionData.CompletionTimes.Count;
+
+                    if (!double.IsNaN(totalMs))
+                    {
+                        return TimeSpan.FromMilliseconds(totalMs);
+                    }
+                }
+                return TimeSpan.Zero;
+            }
+        }
+
+        /// <summary>
+        /// Full collection of completion times for this path
+        /// </summary>
+        public ObservableCollection<PathTime> CompletionTimes
+        {
+            get
+            {
+                var pathCompletionData = this.userData.PathCompletionData.FirstOrDefault(pt => pt.PathID == this.PathId);
+                return pathCompletionData.CompletionTimes;
+            }
         }
 
         /// <summary>
@@ -140,6 +191,15 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// Command to set this path as the active path
         /// </summary>
         public DelegateCommand SetAsActivePathCommand { get; private set; }
+
+        /// <summary>
+        /// Command to reset a path's best completion time
+        /// </summary>
+        public ICommand RemoveTimesCommand
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Default constructor
@@ -155,6 +215,12 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
 
             this.OpenGuideCommand = new DelegateCommand(this.OpenGuide);
             this.SetAsActivePathCommand = new DelegateCommand(this.SetAsActivePath);
+            this.RemoveTimesCommand = new DelegateCommand<object>(this.RemoveCompletionTimes);
+            this.CompletionTimes.CollectionChanged += (o, e) =>
+                {
+                    this.OnPropertyChanged(() => this.BestCompletionTime);
+                    this.OnPropertyChanged(() => this.AverageCompletionTime);
+                };
         }
 
         /// <summary>
@@ -171,6 +237,21 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         private void SetAsActivePath()
         {
             this.dungeonController.SetActivePath(this.PathId);
+        }
+
+        /// <summary>
+        /// Removes the given path time objects from this path's collection of completion times
+        /// </summary>
+        /// <param name="completionTimes">The PathTime objects to remove</param>
+        private void RemoveCompletionTimes(object completionTimes)
+        {
+            IList times = (IList)completionTimes;
+            var completionTimesToRemove = new List<PathTime>(times.Cast<PathTime>());
+
+            foreach (var time in completionTimesToRemove)
+            {
+                this.CompletionTimes.Remove(time);
+            }
         }
     }
 }

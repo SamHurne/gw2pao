@@ -52,16 +52,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         /// <summary>
         /// Command to reset all best path completion times
         /// </summary>
-        public ICommand ResetAllBestTimesCommand
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Command to reset a path's best completion time
-        /// </summary>
-        public ICommand ResetBestTimeCommand
+        public ICommand ResetAllTimesCommand
         {
             get;
             private set;
@@ -75,8 +66,7 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         {
             this.UserData = userData;
             this.controller = controller;
-            this.ResetAllBestTimesCommand = new DelegateCommand(this.ResetAllBestTimes);
-            this.ResetBestTimeCommand = new DelegateCommand<PathViewModel>(this.ResetBestTime);
+            this.ResetAllTimesCommand = new DelegateCommand(this.ResetAllBestTimes);
 
             this.Dungeons = new ObservableCollection<DungeonViewModel>();
             foreach (var dungeon in this.controller.Dungeons)
@@ -88,23 +78,15 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
         }
 
         /// <summary>
-        /// Resets all best times for all dungeons
+        /// Resets all completion times for all dungeons
+        /// TODO: Do we really want to keep this? Maybe provide a confirm dialog before doing this
         /// </summary>
         private void ResetAllBestTimes()
         {
-            foreach (var bestTime in this.UserData.BestPathTimes)
+            foreach (var pcd in this.UserData.PathCompletionData)
             {
-                bestTime.Time = TimeSpan.Zero;
+                pcd.CompletionTimes.Clear();
             }
-        }
-
-        /// <summary>
-        /// Resets a single path's best completion time
-        /// </summary>
-        /// <param name="path">The path to reset</param>
-        private void ResetBestTime(PathViewModel path)
-        {
-            path.BestTime.Time = TimeSpan.Zero;
         }
     }
 }

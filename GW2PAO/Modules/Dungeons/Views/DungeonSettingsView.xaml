@@ -7,7 +7,7 @@
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="300"
+             d:DesignHeight="450"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
@@ -45,65 +45,178 @@
         </GroupBox>
         <GroupBox Margin="0,5,5,5">
             <GroupBox.Header>
-                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BestTimes}"/>
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.DungeonCompletion}"/>
             </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Button Content="{x:Static resx:Resources.ResetAll}"
-                        HorizontalAlignment="Left"
-                        Command="{Binding ResetAllBestTimesCommand}"
-                        Width="100"/>
-                <ItemsControl ItemsSource="{Binding Dungeons}"
-                              Name="BestTimesItemsControl"
-                              Grid.Row="1">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="5,5,20,5" MinWidth="135">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <core:OutlinedTextBlock Grid.Row="0"
-                                                        Text="{Binding DungeonName}"
-                                                        FontSize="13"/>
-                                <ItemsControl Grid.Row="1" ItemsSource="{Binding Paths}">
-                                    <ItemsControl.ItemTemplate>
+                <Grid Grid.Row="0" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="DungeonListColumn" Width="175" />
+                        <ColumnDefinition x:Name="DungeonPathColumn" Width="75" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView x:Name='DungeonsListView'
+                              Grid.Column="0" Grid.Row="0"
+                              ItemsSource="{Binding Dungeons}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="166"
+                                                Header="{x:Static resx:Resources.Dungeons}">
+                                    <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid Margin="15,2,2,2">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <core:OutlinedTextBlock Grid.Column="0"
-                                                                        VerticalAlignment="Center"
-                                                                        Text="{Binding DisplayName, StringFormat={}{0}:}"/>
-                                                <core:OutlinedTextBlock Grid.Column="1"
-                                                                        VerticalAlignment="Center"
-                                                                        Margin="5,0,5,0"
-                                                                        Text="{Binding BestTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
-                                                <Button Grid.Column="2" 
-                                                        VerticalAlignment="Center"
-                                                        Margin="5,0,5,0"
-                                                        Command="{Binding DataContext.ResetBestTimeCommand, ElementName=BestTimesItemsControl}"
-                                                        CommandParameter="{Binding}"
-                                                        Content="{x:Static resx:Resources.Reset}" />
+                                            <Grid Margin="1">
+                                                <core:OutlinedTextBlock Text="{Binding DungeonName}" />
                                             </Grid>
                                         </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView x:Name='DungeonPathsListView'
+                              Margin="5,0,0,0"
+                              Grid.Column="1" Grid.Row="0"
+                              DataContext="{Binding SelectedItem, ElementName=DungeonsListView}"
+                              ItemsSource="{Binding Paths}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="61"
+                                                Header="{x:Static resx:Resources.DungeonPaths}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="1">
+                                                <core:OutlinedTextBlock Text="{Binding DisplayName}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Border Margin="5,0,0,0"
+                            Grid.Column="2" Grid.Row="0"
+                            BorderBrush="Black" BorderThickness="1"
+                            DataContext="{Binding SelectedItem, ElementName=DungeonPathsListView}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="180" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0"
+                                                    Margin="5,5,2,2"
+                                                    Text="{Binding Source={x:Static resx:Resources.BestTime}, StringFormat={}{0}:}" />
+                            <core:OutlinedTextBlock Grid.Row="0" Grid.Column="1"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="5,5,2,2"
+                                                    Text="{Binding BestCompletionTime.Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
+                            <core:OutlinedTextBlock Grid.Row="0" Grid.Column="2"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="5,5,2,2"
+                                                    Text="{Binding BestCompletionTime.Timestamp, StringFormat=g}" />
+
+                            <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0"
+                                                    Margin="5,2,2,2"
+                                                    Text="{Binding Source={x:Static resx:Resources.AverageTime}, StringFormat={}{0}:}" />
+                            <core:OutlinedTextBlock Grid.Row="1" Grid.Column="1"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="5,2,2,2"
+                                                    Text="{Binding AverageCompletionTime, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}">
+                                <core:OutlinedTextBlock.Style>
+                                    <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding AverageCompletionTime}" Value="0">
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </core:OutlinedTextBlock.Style>
+                            </core:OutlinedTextBlock>
+
+                            <ListView x:Name='PathDataListView'
+                                        Grid.Row="2"
+                                        Grid.Column="0" Grid.ColumnSpan="3"
+                                        HorizontalAlignment="Center"
+                                        Margin="5,10,5,0"
+                                        SelectionMode="Extended"
+                                        ItemsSource="{Binding CompletionTimes}"
+                                        Style="{StaticResource ListViewAlternate}"
+                                        ButtonBase.Click="ListViewColumnHeader_Click">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource GridViewColumnHeaderAlternate}" />
+                                </ListView.Resources>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="75">
+                                            <GridViewColumn.Header>
+                                                <TextBlock Text="{x:Static resx:Resources.Date}" Tag="Timestamp" />
+                                            </GridViewColumn.Header>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="1">
+                                                        <core:OutlinedTextBlock Text="{Binding Timestamp, StringFormat=d}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="150">
+                                            <GridViewColumn.Header>
+                                                <TextBlock Text="{x:Static resx:Resources.CompletionTime}" Tag="Time" />
+                                            </GridViewColumn.Header>
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="1">
+                                                        <core:OutlinedTextBlock Text="{Binding Time, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                            <Button Grid.Row="3" Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5"
+                                    Content="Remove"
+                                    HorizontalAlignment="Right"
+                                    Command="{Binding RemoveTimesCommand}"
+                                    CommandParameter="{Binding ElementName=PathDataListView, Path=SelectedItems}"
+                                    MinWidth="75"/>
+
+                            <Grid.Style>
+                                <Style TargetType="Grid" >
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Hidden" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Button Grid.Row="1"
+                        Margin="0,10,0,0"
+                        Content="{x:Static resx:Resources.ResetAll}"
+                        HorizontalAlignment="Left"
+                        Command="{Binding ResetAllTimesCommand}"
+                        Width="100"/>
             </Grid>
         </GroupBox>
     </StackPanel>

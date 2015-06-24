@@ -205,6 +205,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average Time.
+        /// </summary>
+        public static string AverageTime {
+            get {
+                return ResourceManager.GetString("AverageTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Best Time.
+        /// </summary>
+        public static string BestTime {
+            get {
+                return ResourceManager.GetString("BestTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Best Times.
         /// </summary>
         public static string BestTimes {
@@ -385,6 +403,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completion Time.
+        /// </summary>
+        public static string CompletionTime {
+            get {
+                return ResourceManager.GetString("CompletionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure.
         /// </summary>
         public static string Configure {
@@ -511,6 +538,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -597,6 +633,24 @@ namespace GW2PAO.Properties {
         public static string DontShowAgain {
             get {
                 return ResourceManager.GetString("DontShowAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dungeon Completion.
+        /// </summary>
+        public static string DungeonCompletion {
+            get {
+                return ResourceManager.GetString("DungeonCompletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paths.
+        /// </summary>
+        public static string DungeonPaths {
+            get {
+                return ResourceManager.GetString("DungeonPaths", resourceCulture);
             }
         }
         
@@ -1308,6 +1362,15 @@ namespace GW2PAO.Properties {
         public static string RedObjectives {
             get {
                 return ResourceManager.GetString("RedObjectives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         

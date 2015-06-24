@@ -15,17 +15,7 @@ namespace GW2PAO.Modules.Dungeons.Data
     /// </summary>
     public class PathTime : BindableBase
     {
-        private Guid pathID;
         private DateTime timestamp;
-
-        /// <summary>
-        /// ID that this path corresponds to
-        /// </summary>
-        public Guid PathID
-        {
-            get { return this.pathID; }
-            set { this.SetProperty(ref this.pathID, value); }
-        }
 
         /// <summary>
         /// The actual path time
@@ -47,16 +37,6 @@ namespace GW2PAO.Modules.Dungeons.Data
         }
 
         /// <summary>
-        /// Detailed information for the dungeon path
-        /// </summary>
-        [XmlIgnore]
-        public PathViewModel PathData
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Serializable version of PathTime
         /// </summary>
         public SerializableTimespan SavedTime
@@ -70,18 +50,6 @@ namespace GW2PAO.Modules.Dungeons.Data
         /// </summary>
         public PathTime()
         {
-            this.SavedTime = new SerializableTimespan();
-        }
-
-        /// <summary>
-        /// Parameterizes constructor
-        /// </summary>
-        /// <param name="pathId">The Path ID</param>
-        /// <param name="pathName">The Path Name</param>
-        public PathTime(PathViewModel pathData)
-        {
-            this.PathID = pathData.PathId;
-            this.PathData = pathData;
             this.SavedTime = new SerializableTimespan();
         }
     }

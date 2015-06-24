@@ -6,9 +6,9 @@
     <SolidColorBrush x:Key="ListViewBorder" Color="Black" Opacity="1" />
 
     <Color x:Key="ListViewHeaderBorderBrush">#7F000000</Color>
-    <Color x:Key="ListViewHeaderBackground">#3FEEE8AA</Color>
-    <Color x:Key="ListViewHeaderMouseOverBackground">#7FEEE8AA</Color>
-    <Color x:Key="ListViewHeaderPressedBackground">#BBEEE8AA</Color>
+    <Color x:Key="ListViewHeaderBackground">#70FFFFCC</Color>
+    <Color x:Key="ListViewHeaderMouseOverBackground">#A0FFFFCC</Color>
+    <Color x:Key="ListViewHeaderPressedBackground">#E0FFFFCC</Color>
 
     <SolidColorBrush x:Key="ListItemForeground" Color="White" Opacity="0.9" />
     <SolidColorBrush x:Key="ListItemBackground" Color="White" Opacity="0" />
@@ -122,13 +122,16 @@
                         <Border x:Name="HeaderBorder"
                                 BorderThickness="0,0,0,1"
                                 Margin="-2,0,-5,0"
-                                Padding="0,0,0,0">
+                                Padding="1">
                             <Border.Background>
                                 <SolidColorBrush Color="{StaticResource ListViewHeaderBackground}" />
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{StaticResource ListViewHeaderBorderBrush}" />
                             </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Direction="0" BlurRadius="5" ShadowDepth="0" Color="Black" />
+                            </Border.Effect>
                             <ContentPresenter x:Name="HeaderContent"
                                               Margin="0,0,0,1"
                                               RecognizesAccessKey="True"
@@ -231,6 +234,116 @@
                 <Setter Property="Background" Value="{StaticResource ListItemSelectedBackground}" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GridViewColumnHeaderAlternate" TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewColumnHeader">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="HeaderBorder">
+                                            <EasingColorKeyFrame KeyTime="0" 
+                                                                 Value="{StaticResource ListViewHeaderMouseOverBackground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="HeaderBorder">
+                                            <EasingColorKeyFrame KeyTime="0" 
+                                                                 Value="{StaticResource ListViewHeaderPressedBackground}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border x:Name="HeaderBorder"
+                                BorderThickness="0,0,0,1"
+                                Margin="1,0,1,0"
+                                Padding="1">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource ListViewHeaderBackground}" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{StaticResource ListViewHeaderBorderBrush}" />
+                            </Border.BorderBrush>
+                            <Border.Effect>
+                                <DropShadowEffect Direction="0" BlurRadius="5" ShadowDepth="0" Color="Black" />
+                            </Border.Effect>
+                            <ContentPresenter x:Name="HeaderContent"
+                                              Margin="0,0,0,1"
+                                              RecognizesAccessKey="True"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <!--<Thumb x:Name="PART_HeaderGripper"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,-9,0"
+                               Style="{StaticResource GridViewColumnHeaderGripper}" />-->
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Role" Value="Floating">
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Canvas Name="PART_FloatingHeaderCanvas">
+                                <Rectangle Fill="#60000000"
+                                           Width="{TemplateBinding ActualWidth}"
+                                           Height="{TemplateBinding ActualHeight}" />
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Role" Value="Padding">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Border Name="HeaderBorder" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ListViewAlternate" TargetType="ListView">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <Border Name="Border"
+                            BorderThickness="0"
+                            Background="{StaticResource ListViewBackground}"
+                            BorderBrush="{StaticResource ListViewBorder}">
+                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
