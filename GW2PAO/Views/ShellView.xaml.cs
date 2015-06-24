@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GW2PAO.Infrastructure;
+using GW2PAO.Properties;
 using GW2PAO.Utility;
 using GW2PAO.ViewModels;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -28,6 +30,7 @@ namespace GW2PAO.Views
     public partial class ShellView : OverlayWindow
     {
         private EventAggregator eventAggregator;
+        private ProcessMonitor processMonitor;
 
         /// <summary>
         /// This window can never have click-through
@@ -41,13 +44,37 @@ namespace GW2PAO.Views
         }
 
         [ImportingConstructor]
-        public ShellView(ShellViewModel vm, EventAggregator eventAggregator)
+        public ShellView(ShellViewModel vm, EventAggregator eventAggregator, ProcessMonitor processMonitor)
         {
             this.DataContext = vm;
             this.eventAggregator = eventAggregator;
+            this.processMonitor = processMonitor;
 
             // Register all windows show/hide hotkey
             HotkeyCommands.ToggleAllWindowsCommand.RegisterCommand(new DelegateCommand(this.ToggleVisibility));
+
+            // Register for events that could make us show/hide all windows
+            Properties.Settings.Default.PropertyChanged += this.OnSettingsPropertyChanged;
+            this.eventAggregator.GetEvent<GW2ProcessStarted>().Subscribe(o => 
+                {
+                    if (Settings.Default.AutoHideAllWindowsWhenGw2NotRunning)
+                        this.SetAllOverlayWindowsVisibility(Visibility.Visible);
+                });
+            this.eventAggregator.GetEvent<GW2ProcessClosed>().Subscribe(o =>
+                {
+                    if (Settings.Default.AutoHideAllWindowsWhenGw2NotRunning)
+                        this.SetAllOverlayWindowsVisibility(Visibility.Hidden);
+                });
+            this.eventAggregator.GetEvent<GW2ProcessFocused>().Subscribe(o =>
+                {
+                    if (Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus)
+                        this.SetAllOverlayWindowsVisibility(Visibility.Visible);
+                });
+            this.eventAggregator.GetEvent<GW2ProcessLostFocus>().Subscribe(o =>
+                {
+                    if (Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus)
+                        this.SetAllOverlayWindowsVisibility(Visibility.Hidden);
+                });
 
             // All overlay windows created will be children of this window
             OverlayWindow.OwnerWindow = this;
@@ -127,7 +154,7 @@ namespace GW2PAO.Views
             this.NowRunningPopup.IsOpen = false;
         }
 
-        private void ShellView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ShellView_Closing(object sender, CancelEventArgs e)
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
@@ -137,18 +164,53 @@ namespace GW2PAO.Views
             }
         }
 
+        private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == ReflectionUtility.GetPropertyName(() => Settings.Default.AutoHideAllWindowsWhenGw2NotRunning))
+            {
+                if (this.processMonitor.IsGw2Running)
+                    this.SetAllOverlayWindowsVisibility(Visibility.Visible);
+                else
+                    this.SetAllOverlayWindowsVisibility(Visibility.Hidden);
+            }
+            else if (e.PropertyName == ReflectionUtility.GetPropertyName(() => Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus))
+            {
+                if (this.processMonitor.DoesGw2HaveFocus)
+                    this.SetAllOverlayWindowsVisibility(Visibility.Hidden);
+                else
+                    this.SetAllOverlayWindowsVisibility(Visibility.Hidden);
+            }
+        }
+
         private void ToggleVisibility()
         {
-            foreach (Window window in this.OwnedWindows)
-            {
-                if (window != null)
+            Threading.InvokeOnUI(() =>
                 {
-                    if (window.IsVisible)
-                        window.Hide();
-                    else
-                        window.Show();
-                }
-            }
+                    foreach (Window window in this.OwnedWindows)
+                    {
+                        if (window != null)
+                        {
+                            if (window.IsVisible)
+                                window.Hide();
+                            else
+                                window.Show();
+                        }
+                    }
+                });
+        }
+
+        private void SetAllOverlayWindowsVisibility(Visibility visibility)
+        {
+            Threading.InvokeOnUI(() =>
+                {
+                    foreach (Window window in this.OwnedWindows)
+                    {
+                        if (window is OverlayWindow && ((OverlayWindow)window).SupportsAutoHide)
+                        {
+                            window.Visibility = visibility;
+                        }
+                    }
+                });
         }
     }
 }

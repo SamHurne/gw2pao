@@ -957,4 +957,16 @@
   <data name="AverageTime" xml:space="preserve">
     <value>Average Time</value>
   </data>
+  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
+    <value>Auto-Hide All Windows when GW2 is not running</value>
+  </data>
+  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
+    <value>Auto-Hide All Windows when GW2 loses focus</value>
+  </data>
+  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
+    <value>Auto-Hide Overlay Menu Icon when GW2 loses focus</value>
+  </data>
+  <data name="ShowWaypointCopyButtons" xml:space="preserve">
+    <value>Show Waypoint-Code Copy Buttons</value>
+  </data>
 </root>

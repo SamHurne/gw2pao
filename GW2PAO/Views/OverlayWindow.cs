@@ -80,6 +80,12 @@ namespace GW2PAO.Views
         }
 
         /// <summary>
+        /// Set to true to allow auto-hiding this window, else false
+        /// Defaults to True
+        /// </summary>
+        public virtual bool SupportsAutoHide { get { return true; } }
+
+        /// <summary>
         /// Helper for snapping any resizing
         /// </summary>
         protected ResizeSnapHelper ResizeHelper;

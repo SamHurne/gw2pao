@@ -778,5 +778,41 @@ namespace GW2PAO.Properties {
                 this["AutoHideOverlayIconWhenGw2NotRunning"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoHideAllWindowsWhenGw2NotRunning {
+            get {
+                return ((bool)(this["AutoHideAllWindowsWhenGw2NotRunning"]));
+            }
+            set {
+                this["AutoHideAllWindowsWhenGw2NotRunning"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoHideOverlayIconWhenGw2LosesFocus {
+            get {
+                return ((bool)(this["AutoHideOverlayIconWhenGw2LosesFocus"]));
+            }
+            set {
+                this["AutoHideOverlayIconWhenGw2LosesFocus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoHideAllWindowsWhenGw2LosesFocus {
+            get {
+                return ((bool)(this["AutoHideAllWindowsWhenGw2LosesFocus"]));
+            }
+            set {
+                this["AutoHideAllWindowsWhenGw2LosesFocus"] = value;
+            }
+        }
     }
 }

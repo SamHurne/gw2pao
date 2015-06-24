@@ -93,6 +93,21 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// True if the current application (GW2 PAO) Process is the focused process, else false
+        /// </summary>
+        public bool MyAppHasFocus
+        {
+            get
+            {
+                var fgWindow = GetForegroundWindow();
+                uint activePID;
+                GetWindowThreadProcessId(fgWindow, out activePID);
+
+                return activePID == Process.GetCurrentProcess().Id;
+            }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public SystemService()

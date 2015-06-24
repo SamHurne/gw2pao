@@ -17,6 +17,7 @@ namespace GW2PAO.Utility
     /// Helper class that monitors the GW2 Process and raises events based on it's state
     /// </summary>
     [Export]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class ProcessMonitor : IDisposable
     {
         /// <summary>
@@ -48,7 +49,7 @@ namespace GW2PAO.Utility
         /// <summary>
         /// True if GW2 has focus, else false
         /// </summary>
-        private bool doesGw2HaveFocus;
+        public bool DoesGw2HaveFocus { get; private set; }
 
         /// <summary>
         /// The current map ID for the player
@@ -65,7 +66,7 @@ namespace GW2PAO.Utility
             this.systemService = systemService;
             this.playerService = playerService;
             this.IsGw2Running = false;
-            this.doesGw2HaveFocus = false;
+            this.DoesGw2HaveFocus = false;
             this.currentMapId = -1;
             this.isAdminRightsErrorShown = false;
             this.eventAggregator = eventAggregator;
@@ -102,24 +103,42 @@ namespace GW2PAO.Utility
                 var newGW2RunningState = this.systemService.IsGw2Running;
                 if (this.IsGw2Running != newGW2RunningState)
                 {
-                    if (newGW2RunningState) // Game just started
+                    if (newGW2RunningState)
+                    {
+                        // Game just started
                         this.eventAggregator.GetEvent<GW2ProcessStarted>().Publish(null);
-                    else // Game just closed
+                    }
+                    else
+                    {
+                        // Game just closed
                         this.eventAggregator.GetEvent<GW2ProcessClosed>().Publish(null);
+
+                        if (this.DoesGw2HaveFocus)
+                        {
+                            this.eventAggregator.GetEvent<GW2ProcessLostFocus>().Publish(null);
+                            this.DoesGw2HaveFocus = false;
+                        }
+                    }
                 }
                 this.IsGw2Running = newGW2RunningState;
 
                 if (this.IsGw2Running)
                 {
-                    var newFocusState = this.systemService.Gw2HasFocus;
-                    if (this.doesGw2HaveFocus != newFocusState)
+                    var newFocusState = this.systemService.Gw2HasFocus || this.systemService.MyAppHasFocus;
+                    if (this.DoesGw2HaveFocus != newFocusState)
                     {
-                        if (newFocusState) // Game gained focus
+                        if (newFocusState)
+                        {
+                            // Game gained focus
                             this.eventAggregator.GetEvent<GW2ProcessFocused>().Publish(null);
-                        else // Game lost focus
+                        }
+                        else
+                        {
+                            // Game lost focus
                             this.eventAggregator.GetEvent<GW2ProcessLostFocus>().Publish(null);
+                        }
                     }
-                    this.doesGw2HaveFocus = newFocusState;
+                    this.DoesGw2HaveFocus = newFocusState;
 
                     // No exception thrown, reset bool that keeps track of admin error
                     isAdminRightsErrorShown = false;

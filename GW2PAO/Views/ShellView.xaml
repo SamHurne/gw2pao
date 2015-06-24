@@ -12,6 +12,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
+        ShowInTaskbar="False"
         Closing="ShellView_Closing">
 
     <src:OverlayWindow.Resources>

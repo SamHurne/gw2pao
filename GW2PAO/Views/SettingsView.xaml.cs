@@ -50,6 +50,8 @@ namespace GW2PAO.Views
             }
         }
 
+        public override bool SupportsAutoHide { get { return false; } }
+
         public SettingsView()
         {
             InitializeComponent();

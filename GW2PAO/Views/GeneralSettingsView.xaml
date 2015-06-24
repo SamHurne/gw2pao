@@ -35,6 +35,21 @@
                   Margin="5">
             <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideOverlayIconWhenGW2NotRunning}" />
         </CheckBox>
+        <CheckBox IsChecked="{Binding AutoHideOverlayMenuIconWhenGw2LosesFocus}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideOverlayIconGW2LoseFocus}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding AutoAllWindowsWhenGw2NotRunning}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideAllWindowsGW2Closed}" />
+        </CheckBox>
+        <CheckBox IsChecked="{Binding AutoHideAllWindowsWhenGw2LosesFocus}"
+                  Style="{StaticResource AlternateCheckboxStyle}"
+                  Margin="5">
+            <core:OutlinedTextBlock Text="{x:Static resx:Resources.AutoHideAllWindowsGW2LoseFocus}" />
+        </CheckBox>
         <CheckBox IsChecked="{Binding CheckForUpdates}"
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="5">

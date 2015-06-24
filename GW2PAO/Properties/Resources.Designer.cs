@@ -151,11 +151,38 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Hide All Windows when GW2 is not running.
+        /// </summary>
+        public static string AutoHideAllWindowsGW2Closed {
+            get {
+                return ResourceManager.GetString("AutoHideAllWindowsGW2Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Hide All Windows when GW2 loses focus.
+        /// </summary>
+        public static string AutoHideAllWindowsGW2LoseFocus {
+            get {
+                return ResourceManager.GetString("AutoHideAllWindowsGW2LoseFocus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-Hide Border.
         /// </summary>
         public static string AutoHideBorder {
             get {
                 return ResourceManager.GetString("AutoHideBorder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Hide Overlay Menu Icon when GW2 loses focus.
+        /// </summary>
+        public static string AutoHideOverlayIconGW2LoseFocus {
+            get {
+                return ResourceManager.GetString("AutoHideOverlayIconGW2LoseFocus", resourceCulture);
             }
         }
         
@@ -1704,6 +1731,15 @@ namespace GW2PAO.Properties {
         public static string ShowUnlockedZonePoints {
             get {
                 return ResourceManager.GetString("ShowUnlockedZonePoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Waypoint-Code Copy Buttons.
+        /// </summary>
+        public static string ShowWaypointCopyButtons {
+            get {
+                return ResourceManager.GetString("ShowWaypointCopyButtons", resourceCulture);
             }
         }
         

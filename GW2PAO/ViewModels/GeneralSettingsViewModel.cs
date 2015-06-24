@@ -117,6 +117,57 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// True if all windows are hidden when GW2 is not running, else false
+        /// </summary>
+        public bool AutoAllWindowsWhenGw2NotRunning
+        {
+            get { return Settings.Default.AutoHideAllWindowsWhenGw2NotRunning; }
+            set
+            {
+                if (Settings.Default.AutoHideAllWindowsWhenGw2NotRunning != value)
+                {
+                    Settings.Default.AutoHideAllWindowsWhenGw2NotRunning = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged(() => this.AutoAllWindowsWhenGw2NotRunning);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the overlay menu icon is hidden when GW2 loses focus, else false
+        /// </summary>
+        public bool AutoHideOverlayMenuIconWhenGw2LosesFocus
+        {
+            get { return Settings.Default.AutoHideOverlayIconWhenGw2LosesFocus; }
+            set
+            {
+                if (Settings.Default.AutoHideOverlayIconWhenGw2LosesFocus != value)
+                {
+                    Settings.Default.AutoHideOverlayIconWhenGw2LosesFocus = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged(() => this.AutoHideOverlayMenuIconWhenGw2LosesFocus);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if all windows is hidden when GW2 loses focus, else false
+        /// </summary>
+        public bool AutoHideAllWindowsWhenGw2LosesFocus
+        {
+            get { return Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus; }
+            set
+            {
+                if (Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus != value)
+                {
+                    Settings.Default.AutoHideAllWindowsWhenGw2LosesFocus = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged(() => this.AutoHideAllWindowsWhenGw2LosesFocus);
+                }
+            }
+        }
+
+        /// <summary>
         /// True if borders and title bars should automatically fade out, else fase
         /// </summary>
         public bool AutoFadeBorders

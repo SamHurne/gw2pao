@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace GW2PAO.ViewModels
             get
             {
                 return Settings.Default.IsOverlayIconVisible
-                    && (!Settings.Default.AutoHideOverlayIconWhenGw2NotRunning
-                        || (Settings.Default.AutoHideOverlayIconWhenGw2NotRunning && processMonitor.IsGw2Running));
+                    && (!Settings.Default.AutoHideOverlayIconWhenGw2NotRunning || (Settings.Default.AutoHideOverlayIconWhenGw2NotRunning && processMonitor.IsGw2Running))
+                    && (!Settings.Default.AutoHideOverlayIconWhenGw2LosesFocus || (Settings.Default.AutoHideOverlayIconWhenGw2LosesFocus && processMonitor.DoesGw2HaveFocus));
             }
         }
 
@@ -98,6 +99,8 @@ namespace GW2PAO.ViewModels
             Properties.Settings.Default.PropertyChanged += (o, e) => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible);
             eventAggregator.GetEvent<GW2ProcessStarted>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
             eventAggregator.GetEvent<GW2ProcessClosed>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
+            eventAggregator.GetEvent<GW2ProcessFocused>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
+            eventAggregator.GetEvent<GW2ProcessLostFocus>().Subscribe(o => this.OnPropertyChanged(() => this.IsOverlayMenuIconVisible));
         }
 
         /// <summary>
@@ -120,6 +123,9 @@ namespace GW2PAO.ViewModels
 
             // About
             this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.About, () => new GW2PAO.Views.AboutView().Show()));
+
+            // Help
+            this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.Help, () => Process.Start("https://github.com/SamHurne/gw2pao/wiki")));
             
             // Exit
             this.MainMenu.Add(new MenuItem(GW2PAO.Properties.Resources.Exit, () => 

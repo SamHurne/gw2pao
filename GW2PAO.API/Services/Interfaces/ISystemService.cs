@@ -36,5 +36,10 @@ namespace GW2PAO.API.Services.Interfaces
         /// True if the GW2 Process is the focused process, else false
         /// </summary>
         bool Gw2HasFocus { get; }
+
+        /// <summary>
+        /// True if the current application (GW2 PAO) Process is the focused process, else false
+        /// </summary>
+        bool MyAppHasFocus { get; }
     }
 }
