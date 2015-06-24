@@ -225,21 +225,6 @@
                                     Text="{Binding DungeonName}">
                 <core:OutlinedTextBlock.Style>
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
-                        <!--<Setter Property="Effect">
-                            <Setter.Value>
-                                <DropShadowEffect Color="Gold" BlurRadius="10" Direction="0" ShadowDepth="0" Opacity="0" />
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsActive}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource IsActiveEnterAction}" />
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard Storyboard="{StaticResource IsActiveExitAction}" />
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>-->
                         <Setter Property="Fill" Value="White" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsActive}" Value="True">

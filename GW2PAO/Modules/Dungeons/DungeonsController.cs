@@ -268,23 +268,6 @@ namespace GW2PAO.Modules.Dungeons
                         logger.Debug("Initializing view model for {0}", dungeon.Name);
                         this.Dungeons.Add(new DungeonViewModel(dungeon, this, this.browserController, this.userData));
                     }
-
-                    foreach (var dungeon in this.Dungeons)
-                    {
-                        logger.Debug("Initializing path completion data for {0}", dungeon.DungeonName);
-                        foreach (var path in dungeon.Paths)
-                        {
-                            var existingPathCompletionData = this.UserData.PathCompletionData.FirstOrDefault(pt => pt.PathID == path.PathId);
-                            if (existingPathCompletionData != null)
-                            {
-                                existingPathCompletionData.PathData = path;
-                            }
-                            else
-                            {
-                                this.UserData.PathCompletionData.Add(new PathCompletionData(path));
-                            }
-                        }
-                    }
                 });
         }
 

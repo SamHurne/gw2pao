@@ -216,6 +216,18 @@ namespace GW2PAO.Modules.Dungeons.ViewModels
             this.OpenGuideCommand = new DelegateCommand(this.OpenGuide);
             this.SetAsActivePathCommand = new DelegateCommand(this.SetAsActivePath);
             this.RemoveTimesCommand = new DelegateCommand<object>(this.RemoveCompletionTimes);
+
+            // Initialize the path completion data in the UserData object
+            var existingPathCompletionData = this.userData.PathCompletionData.FirstOrDefault(pt => pt.PathID == this.PathId);
+            if (existingPathCompletionData != null)
+            {
+                existingPathCompletionData.PathData = this;
+            }
+            else
+            {
+                this.userData.PathCompletionData.Add(new PathCompletionData(this));
+            }
+
             this.CompletionTimes.CollectionChanged += (o, e) =>
                 {
                     this.OnPropertyChanged(() => this.BestCompletionTime);
