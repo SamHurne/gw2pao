@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
-             TextOptions.TextFormattingMode="Display">
+             TextOptions.TextFormattingMode="Display"
+             VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="TextBoxBorder" Color="#FFEEE8AA" Opacity="0.5" />
@@ -23,7 +24,8 @@
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Gold, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/gold_coin.png"
-               Height="14" Width="14"
+               Height="19" Width="19"
+               VerticalAlignment="Center"
                Margin="1,0,5,0"/>
 
         <!-- Silver -->
@@ -33,7 +35,8 @@
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Silver, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/silver_coin.png"
-               Height="14" Width="14"
+               Height="19" Width="19"
+               VerticalAlignment="Center"
                Margin="1,0,5,0"/>
 
         <!-- Copper -->
@@ -43,7 +46,8 @@
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Copper, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/copper_coin.png"
-               Height="14" Width="14"
+               Height="19" Width="19"
+               VerticalAlignment="Center"
                Margin="1,0,0,0"/>
 
     </StackPanel>

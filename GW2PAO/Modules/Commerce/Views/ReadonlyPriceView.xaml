@@ -8,14 +8,16 @@
              mc:Ignorable="d" 
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
-             TextOptions.TextFormattingMode="Display">
+             TextOptions.TextFormattingMode="Display"
+             VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
 
     <StackPanel Name="LayoutRoot"
-        Orientation="Horizontal" VerticalAlignment="Bottom">
+                Orientation="Horizontal"
+                VerticalAlignment="Bottom">
         <core:OutlinedTextBlock Text="-" 
                                 Fill="{Binding TextFill}"
                                 Visibility="{Binding Price.IsNegative, Converter={StaticResource BoolToVisibility}}" />
@@ -23,8 +25,8 @@
                                 Fill="{Binding TextFill}"
                                 TextAlignment="Right" />
         <Image Source="../../../Images/Commerce/gold_coin.png"
-               Height="11" Width="11"
-               Margin="1,0,5,0"/>
+               Height="14" Width="14"
+               Margin="1,0,4,0"/>
         <core:OutlinedTextBlock Text="{Binding Price.Silver}"
                                 Fill="{Binding TextFill}"
                                 TextAlignment="Right">
@@ -44,8 +46,8 @@
             </core:OutlinedTextBlock.Style>
         </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/silver_coin.png"
-               Height="11" Width="11"
-               Margin="1,0,5,0"/>
+               Height="14" Width="14"
+               Margin="1,0,4,0"/>
         <core:OutlinedTextBlock Text="{Binding Price.Copper}"
                                 Fill="{Binding TextFill}"
                                 TextAlignment="Right">
@@ -65,7 +67,7 @@
             </core:OutlinedTextBlock.Style>
         </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/copper_coin.png"
-               Height="11" Width="11"
+               Height="14" Width="14"
                Margin="1,0,0,0"/>
     </StackPanel>
 </UserControl>

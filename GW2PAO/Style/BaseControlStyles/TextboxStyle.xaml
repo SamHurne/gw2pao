@@ -7,7 +7,7 @@
     <Color x:Key="TextBoxDisabledBorderColor">#20000000</Color>
     <Color x:Key="TextBoxTextColor">#FFEEE8AA</Color>
     <Color x:Key="TextBoxCaretColor">#FFEEE8AA</Color>
-    <Color x:Key="TextBoxHighlightColor">#40EEE8AA</Color>
+    <Color x:Key="TextBoxHighlightColor">#75EEE8AA</Color>
 
     <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#CC000000" />
 
