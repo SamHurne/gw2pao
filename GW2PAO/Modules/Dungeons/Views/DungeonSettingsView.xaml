@@ -193,7 +193,7 @@
                             <Button Grid.Row="3" Grid.Column="0"
                                     Grid.ColumnSpan="3"
                                     Margin="5"
-                                    Content="Remove"
+                                    Content="{x:Static resx:Resources.Remove}"
                                     HorizontalAlignment="Right"
                                     Command="{Binding RemoveTimesCommand}"
                                     CommandParameter="{Binding ElementName=PathDataListView, Path=SelectedItems}"
