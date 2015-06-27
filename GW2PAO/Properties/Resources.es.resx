@@ -971,4 +971,7 @@
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Mostrar Waypoint-Código Copiar Botones</value>
   </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Caminos</value>
+  </data>
 </root>

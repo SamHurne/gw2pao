@@ -962,4 +962,7 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Montrer les boutons "Copier le point de passage"</value>
   </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Chemins</value>
+  </data>
 </root>

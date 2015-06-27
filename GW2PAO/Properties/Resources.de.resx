@@ -960,4 +960,7 @@
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Waypoint-Kodex Copy Buttons anzeigen</value>
   </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Paths</value>
+  </data>
 </root>
