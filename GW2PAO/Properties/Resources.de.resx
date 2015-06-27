@@ -930,4 +930,34 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Zonen-Komplettierungs-Assistent</value>
   </data>
+  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
+    <value>Auto-Ausblenden Alle Windows bei GW2 nicht läuft</value>
+  </data>
+  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
+    <value>Auto-Ausblenden Alle Windows bei GW2 Fokus verliert</value>
+  </data>
+  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
+    <value>Auto-Ausblenden Overlay Menu Icon, wenn GW2 Fokus verliert</value>
+  </data>
+  <data name="AverageTime" xml:space="preserve">
+    <value>Durchschnittliche Zeit</value>
+  </data>
+  <data name="BestTime" xml:space="preserve">
+    <value>Bestzeit</value>
+  </data>
+  <data name="CompletionTime" xml:space="preserve">
+    <value>Fertigstellungszeit</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="DungeonCompletion" xml:space="preserve">
+    <value>Dungeon Fertigstellung</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="ShowWaypointCopyButtons" xml:space="preserve">
+    <value>Waypoint-Kodex Copy Buttons anzeigen</value>
+  </data>
 </root>

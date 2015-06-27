@@ -932,4 +932,34 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Assistant d'exploration</value>
   </data>
+  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
+    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas lancé</value>
+  </data>
+  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
+    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas au 1er plan</value>
+  </data>
+  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
+    <value>Masquer auto. l'icône de l'overlay quand GW2 n'est pas au 1er plan</value>
+  </data>
+  <data name="AverageTime" xml:space="preserve">
+    <value>Temps moyen</value>
+  </data>
+  <data name="BestTime" xml:space="preserve">
+    <value>Meilleur Temps</value>
+  </data>
+  <data name="CompletionTime" xml:space="preserve">
+    <value>Temps de réalisation</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DungeonCompletion" xml:space="preserve">
+    <value>Achèvement de donjon</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ShowWaypointCopyButtons" xml:space="preserve">
+    <value>Montrer les boutons "Copier le point de passage"</value>
+  </data>
 </root>
