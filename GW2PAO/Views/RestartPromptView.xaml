@@ -36,13 +36,13 @@
                                     Text="{x:Static resx:Resources.RestartApplicationInstruction}" />
             <Button Name="OKButton"
                     Grid.Column="0" Grid.Row="1"
-                    Width="50" Margin="5,5,5,0"
+                    Width="80" Margin="5,5,5,0"
                     HorizontalAlignment="Right"
                     Command="{Binding RestartApplicationCommand}"
                     Content="{x:Static resx:Resources.OK}" />
             <Button Name="LaterButton"
                     Grid.Column="1" Grid.Row="1"
-                    Width="50" Margin="5,5,5,0"
+                    Width="80" Margin="5,5,5,0"
                     HorizontalAlignment="Left"
                     Click="LaterButton_Click"
                     Content="{x:Static resx:Resources.Later}" />
