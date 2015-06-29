@@ -965,4 +965,7 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   <data name="DungeonPaths" xml:space="preserve">
     <value>Chemins</value>
   </data>
+  <data name="HeroChallenges" xml:space="preserve">
+    <value>Défis de héros</value>
+  </data>
 </root>

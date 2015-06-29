@@ -916,6 +916,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hero Challenges.
+        /// </summary>
+        public static string HeroChallenges {
+            get {
+                return ResourceManager.GetString("HeroChallenges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string Hide {

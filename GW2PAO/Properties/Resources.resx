@@ -969,4 +969,7 @@
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Show Waypoint-Code Copy Buttons</value>
   </data>
+  <data name="HeroChallenges" xml:space="preserve">
+    <value>Hero Challenges</value>
+  </data>
 </root>

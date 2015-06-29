@@ -963,4 +963,7 @@
   <data name="DungeonPaths" xml:space="preserve">
     <value>Paths</value>
   </data>
+  <data name="HeroChallenges" xml:space="preserve">
+    <value>Heldenherausforderungen</value>
+  </data>
 </root>

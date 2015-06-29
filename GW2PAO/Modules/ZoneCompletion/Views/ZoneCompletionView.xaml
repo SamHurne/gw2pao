@@ -91,7 +91,7 @@
                                 <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockPois}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockVistas}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockHeartQuests}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.HeroChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AutoUnlockSkillChallenges}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.ShowUnlockedZonePoints}" IsCheckable="True" IsChecked="{Binding UserData.ShowUnlockedPoints}" />
@@ -103,7 +103,7 @@
                                 <MenuItem Header="{x:Static resx:Resources.POIs}" IsCheckable="True" IsChecked="{Binding UserData.ArePoisVisible}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.HeartQuests}" IsCheckable="True" IsChecked="{Binding UserData.AreHeartsVisible}" StaysOpenOnClick="True" />
                                 <MenuItem Header="{x:Static resx:Resources.Vistas}" IsCheckable="True" IsChecked="{Binding UserData.AreVistasVisible}" StaysOpenOnClick="True" />
-                                <MenuItem Header="{x:Static resx:Resources.SkillChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
+                                <MenuItem Header="{x:Static resx:Resources.HeroChallenges}" IsCheckable="True" IsChecked="{Binding UserData.AreSkillChallengesVisible}" StaysOpenOnClick="True" />
                             </MenuItem>
                             <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
