@@ -247,9 +247,9 @@ namespace GW2PAO.Modules.ZoneCompletion
                         this.CharacterName = this.playerService.CharacterName;
 
                         var zoneItems = this.zoneService.GetZoneItems(this.playerService.MapId);
-                        Threading.InvokeOnUI(() =>
+                        lock (zoneItemsLock)
                         {
-                            lock (zoneItemsLock)
+                            Threading.InvokeOnUI(() =>
                             {
                                 this.ZoneItems.Clear();
                                 this.distanceCounters.Clear();
@@ -262,8 +262,8 @@ namespace GW2PAO.Modules.ZoneCompletion
                                         this.distanceCounters.Add(item.ID, 0);
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
 
                         // Update the current zone name
                         var newZoneName = this.zoneService.GetZoneName(this.CurrentMapID);
