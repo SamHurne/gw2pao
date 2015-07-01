@@ -36,6 +36,33 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-54842713-1', 'auto');
+        ga('send', 'pageview');
+
+        $('#installerDownloadLink').on('click', function () {
+            ga('send', 'event', 'download', 'click', 'installer');
+        });
+        $('#fullFeaturesDownloadLink').on('click', function () {
+            ga('send', 'event', 'download', 'click', 'zip-full');
+        });
+        $('#noBrowserDownloadLink').on('click', function () {
+            ga('send', 'event', 'download', 'click', 'zip-nobrowser');
+        });
+        $('#sourceCodeLink').on('click', function () {
+            ga('send', 'event', 'download', 'click', 'source');
+        });
+    </script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -252,27 +279,27 @@
                     <p>To install, either download and run the installer, or just download the zip,
                     <br>
                     extract to any location, and run GW2PAO.exe</p>
-                    <h4>Latest Version: <b>3.1</b></h4>
+                    <h4>Latest Version: <b>3.2</b></h4>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_Setup_3.1.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.2/GW2PAO_Setup_3.2.exe" id="installerDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Installer</span></a>
                     <br>
                     <span class="smalltext"><span id="installerDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_3.1.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.2/GW2PAO_3.2.zip" id="fullFeaturesDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO Full Feature (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="fullFeaturesDownloadCount">??</span> Downloads</span>
                     <br>
-                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.1/GW2PAO_3.1_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/releases/download/v3.2/GW2PAO_3.2_NoBrowser.zip" id="noBrowserDownloadLink" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>GW2 PAO No Browser (Zip)</span></a>
                     <br>
                     <span class="smalltext"><span id="noBrowserDownloadCount" class="smalltext">??</span> Downloads</span>
                     <br><br><br>
-                    <a href="https://github.com/SamHurne/gw2pao/archive/v3.1.zip" class="btn btn-default btn-lg"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
+                    <a href="https://github.com/SamHurne/gw2pao/archive/v3.2.zip" class="btn btn-default btn-lg" id="sourceCodeLink"><i class="fa fa-download fa-fw"></i><span>Source Code</span></a>
                     <br><br>
                     <h4>Requirements:</h4>
                     <p>
                     <i class="fa fa-windows fa-fw"></i> Windows 7 or Higher
                     <br>
-                    <a href="http://www.microsoft.com/en-us/download/details.aspx?id=30653">.Net 4.5 or Higher</a>
+                    <a href="https://www.microsoft.com/en-us/download/details.aspx?id=42643">.Net 4.5.2 or Higher</a>
                     </p>
                     <p>For a full list of releases with release notes, check out the <a href="https://github.com/SamHurne/gw2pao/releases">Releases page on GitHub</a>.</p>
                     <span class="smalltext"><span id="totalDownloadCounts">??</span> All-Time Downloads</span>
@@ -339,23 +366,6 @@
             <span>© 2012 ArenaNet, Inc. All rights reserved. NCsoft, the interlocking NC logo, ArenaNet, Arena.net, Guild Wars, Guild Wars Factions, Factions, Guild Wars Nightfall, Nightfall, Guild Wars: Eye of the North, Eye of the North, Guild Wars 2, and all associated logos and designs are trademarks or registered trademarks of NCsoft Corporation. All other trademarks are the property of their respective owners.</span>
         </div>
     </footer>
-
-    <!--  Scripts -->
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Google Analytics -->
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-54842713-1', 'auto');
-        ga('send', 'pageview');
-    </script>
 
     <!-- Download Counter -->
     <script>
