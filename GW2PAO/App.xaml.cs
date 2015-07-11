@@ -28,17 +28,13 @@ namespace GW2PAO
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Singleton mutex to prevent multiple instances of the application
-        /// </summary>
-        private static Mutex singleton = new Mutex(true, "GW2 Personal Assistant Overlay");
-
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (!singleton.WaitOne(TimeSpan.Zero, true))
+            if (Process.GetProcessesByName("GW2PAO").Count() > 1)
             {
-                // An instance of the application is already running
+                // Application is already running
                 Application.Current.Shutdown();
+                return;
             }
 
             // Software only mode provides improved performance when using transparent windows
