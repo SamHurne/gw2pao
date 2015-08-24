@@ -188,6 +188,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GW2PAO.API\GW2PAO.API.csproj">
+      <Project>{65064198-8a49-4693-bee2-ff6376f24188}</Project>
+      <Name>GW2PAO.API</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
