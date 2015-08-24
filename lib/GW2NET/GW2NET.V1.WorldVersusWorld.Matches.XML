@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V1.WorldVersusWorld.Matches</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForBlueBorderlands">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.BlueBorderlands"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForBlueBorderlands.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.BlueBorderlands"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.CompetitiveMap"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.converterForMapBonus">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.converterForObjective">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.converterForScoreboard">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.typeConverters">
+            <summary>Infrastructure. Holds a reference to type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract,GW2NET.WorldVersusWorld.CompetitiveMap}},GW2NET.Common.IConverter{System.Int32[],GW2NET.WorldVersusWorld.Scoreboard},GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.ObjectiveDataContract,GW2NET.WorldVersusWorld.Objective},GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.MapBonusDataContract,GW2NET.WorldVersusWorld.MapBonus})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap"/> class.</summary>
+            <param name="typeConverters">The type converters</param>
+            <param name="converterForScoreboard">The converter for <see cref="T:GW2NET.WorldVersusWorld.Scoreboard"/>.</param>
+            <param name="converterForObjective">The converter for <see cref="T:GW2NET.WorldVersusWorld.Objective"/>.</param>
+            <param name="converterForMapBonus">The converter for <see cref="T:GW2NET.WorldVersusWorld.MapBonus"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.CompetitiveMap"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForCompetitiveMap.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForEternalBattlegrounds">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.EternalBattlegrounds"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForEternalBattlegrounds.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.EternalBattlegrounds"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForGreenBorderlands">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.GreenBorderlands"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForGreenBorderlands.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.GreenBorderlands"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MapBonusDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.MapBonus"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus.converterForTeamColor">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.WorldVersusWorld.TeamColor})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus"/> class.</summary>
+            <param name="converterForTeamColor">The converter for <see cref="T:GW2NET.WorldVersusWorld.TeamColor"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMapBonus.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.MapBonusDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MapBonusDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.MapBonus"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MatchDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.Match"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch.converterForCompetitiveMap">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch.converterForScoreboard">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch.#ctor(GW2NET.Common.IConverter{System.Int32[],GW2NET.WorldVersusWorld.Scoreboard},GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract,GW2NET.WorldVersusWorld.CompetitiveMap})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch"/> class.</summary>
+            <param name="converterForScoreboard">The scoreboard converter.</param>
+            <param name="converterForCompetitiveMap">The competitive map data contract converter.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatch.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.MatchDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MatchDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.Match"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatchup">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MatchupDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.Matchup"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForMatchup.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.MatchupDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.MatchupDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.Matchup"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.ObjectiveDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.Objective"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective.converterForTeamColor">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.WorldVersusWorld.TeamColor})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective"/> class.</summary>
+            <param name="converterForTeamColor">The converter for <see cref="T:GW2NET.WorldVersusWorld.TeamColor"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForObjective.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.ObjectiveDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.ObjectiveDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.Objective"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForRedBorderlands">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.RedBorderlands"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForRedBorderlands.Convert(GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.Json.CompetitiveMapDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.RedBorderlands"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForScoreboard">
+            <summary>Converts objects of type <see cref="T:int[]"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.Scoreboard"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForScoreboard.Convert(System.Int32[])">
+            <summary>Converts the given object of type <see cref="T:int[]"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.Scoreboard"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForTeamColor">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.TeamColor"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.Converters.ConverterForTeamColor.Convert(System.String)">
+            <summary>Converts the given object of type <see cref="T:System.String"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.TeamColor"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.MatchDetailsRequest">
+            <summary>Represents a request for details regarding the specified match, including the total score and further details for each map.</summary>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Matches.MatchDetailsRequest.MatchId">
+            <summary>Gets or sets the match identifier.</summary>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Matches.MatchDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchDetailsRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.MatchDiscoveryRequest">
+            <summary>Represents a request for a list of the currently running World versus World matches, with the participating worlds included in the result.</summary>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Matches.MatchDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchDiscoveryRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchDiscoveryRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository">
+            <summary>Represents a repository that retrieves data from the /v1/wvw/matches.json and /v1/wvw/match_details.json interfaces.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.converterForMatch">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.converterForMatchup">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.MatchupDataContract,GW2NET.WorldVersusWorld.Matchup},GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Matches.Json.MatchDataContract,GW2NET.WorldVersusWorld.Match})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForMatchup">The converter <see cref="T:GW2NET.WorldVersusWorld.Matchup"/>.</param>
+            <param name="converterForMatch">The converter <see cref="T:GW2NET.WorldVersusWorld.Match"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IDiscoverable{GW2NET#WorldVersusWorld#Matchup}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IDiscoverable{GW2NET#WorldVersusWorld#Matchup}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IDiscoverable{GW2NET#WorldVersusWorld#Matchup}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#Find(GW2NET.WorldVersusWorld.Matchup)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAll(System.Collections.Generic.ICollection{GW2NET.WorldVersusWorld.Matchup})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAllAsync(System.Collections.Generic.ICollection{GW2NET.WorldVersusWorld.Matchup})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAllAsync(System.Collections.Generic.ICollection{GW2NET.WorldVersusWorld.Matchup},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAsync(GW2NET.WorldVersusWorld.Matchup)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IRepository{GW2NET#WorldVersusWorld#Matchup,GW2NET#WorldVersusWorld#Match}#FindAsync(GW2NET.WorldVersusWorld.Matchup,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Matches.MatchRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#Match}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

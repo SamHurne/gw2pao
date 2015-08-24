@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Commerce.Listings</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Commerce.Listings.ConverterForListing">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Commerce.Listings.ListingDataContract"/> to objects of type <see cref="T:GW2NET.Commerce.Listing"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ConverterForListing.converterForOfferCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ConverterForListing.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Listings.ConverterForListing"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ConverterForListing.#ctor(GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V2.Commerce.Listings.ListingOfferDataContract},System.Collections.Generic.ICollection{GW2NET.Commerce.Offer}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Listings.ConverterForListing"/> class.</summary>
+            <param name="converterForOfferCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ConverterForListing.Convert(GW2NET.V2.Commerce.Listings.ListingDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V2.Commerce.Listings.ListingDataContract"/> to an object of type <see cref="T:GW2NET.Commerce.Listing"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ConverterForOffer">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Commerce.Listings.ListingOfferDataContract"/> to objects of type <see cref="T:GW2NET.Commerce.Offer"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ConverterForOffer.Convert(GW2NET.V2.Commerce.Listings.ListingOfferDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V2.Commerce.Listings.ListingOfferDataContract"/> to an object of type <see cref="T:GW2NET.Commerce.Offer"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ListingBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/commerce/listings interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Listings.ListingBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ListingDetailsRequest">
+            <summary>Represents a details request that targets the /v2/commerce/listings interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Listings.ListingDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ListingDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/commerce/listings interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Listings.ListingDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ListingPageRequest">
+            <summary>Represents a page request that targets the /v2/commerce/listings interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Listings.ListingPageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Listings.ListingRepository">
+            <summary>Represents a repository that retrieves data from the /v2/commerce/listings interface. See the remarks section for important limitations regarding this implementation.</summary>
+            <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet">
+                <item>
+                    <term><see cref="P:GW2NET.Commerce.Listing.Item"/>:</term>
+                    <description>Always <c>null</c>. Use the value of <see cref="P:GW2NET.Commerce.Listing.ItemId"/> to retrieve the <see cref="T:GW2NET.Items.Item"/>.</description>
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ListingRepository.converterForBulkResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ListingRepository.converterForIdentifiersResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ListingRepository.converterForPageResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ListingRepository.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Listings.ListingRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Listings.ListingRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V2.Commerce.Listings.ListingDataContract,GW2NET.Commerce.Listing})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Listings.ListingRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForListing">The converter for <see cref="T:GW2NET.Commerce.Listing"/>.</param>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Commerce#Listing}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Listings.ListingRepository.GW2NET#Common#IPaginator{GW2NET#Commerce#Listing}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Colors</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Colors.ColorPaletteBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/colors interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPaletteBulkRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPaletteBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPaletteBulkRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorPalettePageRequest">
+            <summary>Represents a page request that targets the /v2/colors interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPalettePageRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPalettePageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPalettePageRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorConverter">
+            <summary>Converts objects of type <see cref="T:int[]"/> to objects of type <see cref="T:GW2NET.Colors.Color"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorConverter.Convert(System.Int32[])">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorModelConverter">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Colors.ColorModelDataContract"/> to objects of type <see cref="T:GW2NET.Colors.ColorModel"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorModelConverter.converterForColor">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorModelConverter.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorModelConverter"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorModelConverter.#ctor(GW2NET.Common.IConverter{System.Int32[],GW2NET.Colors.Color})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorModelConverter"/> class.</summary>
+            <param name="converterForColor">The converter for <see cref="T:GW2NET.Colors.Color"/>.</param>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorModelConverter.Convert(GW2NET.V2.Colors.ColorModelDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorPaletteDetailRequest">
+            <summary>Represents a details request that targets the /v2/colors interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPaletteDetailRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorPaletteDetailRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPaletteDetailRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/colors interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorRepository">
+            <summary>Represents a repository that retrieves data from the /v2/colors interface.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepository.converterForIdentifiersResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepository.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepository.converterForBulkResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepository.converterForPageResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.Int32},System.Collections.Generic.ICollection{System.Int32}},GW2NET.Common.IConverter{GW2NET.V2.Colors.ColorPaletteDataContract,GW2NET.Colors.ColorPalette})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="identifierConverter">The identifier converter.</param>
+            <param name="colorPaletteConverter">The color palette converter.</param>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#ILocalizable#Culture">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IPaginator{GW2NET#Colors#ColorPalette}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Colors#ColorPalette}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorRepositoryFactory">
+            <summary>Provides methods and properties for creating a color repository.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorRequest">
+            <summary>Represents a request for information regarding colors in the game, targeting the v2/color endpoint.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Colors.ColorRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorRequest.GetPathSegments">
+            <summary>The get path segments.</summary>
+            <returns>The <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Colors.ColorPaletteConverter">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Colors.ColorModelDataContract"/> to objects of type <see cref="T:GW2NET.Colors.ColorPalette"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorPaletteConverter.colorConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Colors.ColorPaletteConverter.colorModelConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPaletteConverter.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorPaletteConverter"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPaletteConverter.#ctor(GW2NET.Common.IConverter{System.Int32[],GW2NET.Colors.Color},GW2NET.Common.IConverter{GW2NET.V2.Colors.ColorModelDataContract,GW2NET.Colors.ColorModel})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Colors.ColorPaletteConverter"/> class.</summary>
+            <param name="colorConverter">The converter for <see cref="T:GW2NET.Colors.Color"/>.</param>
+            <param name="colorModelConverter">The converter for <see cref="T:GW2NET.Colors.ColorModel"/>.</param>
+        </member>
+        <member name="M:GW2NET.V2.Colors.ColorPaletteConverter.Convert(GW2NET.V2.Colors.ColorPaletteDataContract)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

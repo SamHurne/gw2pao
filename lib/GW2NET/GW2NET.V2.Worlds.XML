@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Worlds</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Worlds.ConverterForWorld">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Worlds.WorldDataContract"/> to objects of type <see cref="T:GW2NET.Worlds.World"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.ConverterForWorld.Convert(GW2NET.V2.Worlds.WorldDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/worlds interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldBulkRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldBulkRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldDetailsRequest">
+            <summary>Represents a details request that targets the /v2/worlds interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldDetailsRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/worlds interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldPageRequest">
+            <summary>Represents a page request that targets the /v2/worlds interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldPageRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldPageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldPageRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldRepository">
+            <summary>Represents a repository that retrieves data from the /v2/worlds interface.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepository.converterForBulkResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepository.converterForIdentifiersResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepository.converterForPageResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepository.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Worlds.WorldRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V2.Worlds.WorldDataContract,GW2NET.Worlds.World})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Worlds.WorldRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForWorld">The converter for <see cref="T:GW2NET.Worlds.World"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> or <paramref name="converterForWorld"/> is a null reference.</exception>
+        </member>
+        <member name="P:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#ILocalizable#Culture">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Worlds#World}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepository.GW2NET#Common#IPaginator{GW2NET#Worlds#World}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Worlds.WorldRepositoryFactory">
+            <summary>Provides methods for creating repository objects.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Worlds.WorldRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Worlds.WorldRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Worlds.WorldRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+    </members>
+</doc>

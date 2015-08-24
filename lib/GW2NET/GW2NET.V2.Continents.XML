@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Continents</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Continents.ContinentBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/continents interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentBulkRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentBulkRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentConverter">
+            <summary>Converts a <see cref="T:GW2NET.V2.Continents.ContinentDataContract"/> into the corresponding <see cref="T:GW2NET.Maps.Continent"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentConverter.Convert(GW2NET.V2.Continents.ContinentDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentDataContract">
+            <summary>Represents the continent data from the GW2 api.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.Dimensions">
+            <summary>
+            Gets or sets the dimensions.
+            </summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.MinimumZoom">
+            <summary>
+            Gets or sets the minimum zoom.
+            </summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.MaximumZoom">
+            <summary>
+            Gets or sets the maximum zoom.
+            </summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDataContract.Floors">
+            <summary>
+            Gets or sets the floors.
+            </summary>
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentDetailsRequest">
+            <summary>Represents a details request that targets the /v2/continents interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDetailsRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/continents interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentPageRequest">
+            <summary>Represents a page request that targets the /v2/continents interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentPageRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentPageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentRepository">
+            <summary>Represents a repository that retrieves data from the /v2/continents interface.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepository.identifiersConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepository.pageResponseConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepository.responseConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepository.bulkResponseConverter">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Continents.ContinentRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.Int32},System.Collections.Generic.ICollection{System.Int32}},GW2NET.Common.IConverter{GW2NET.V2.Continents.ContinentDataContract,GW2NET.Maps.Continent})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Continents.ContinentRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="identifiersConverter">The identifiers converter.</param>
+            <param name="continentConverter">The continent converter.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> or <paramref name="identifiersConverter"/> or <paramref name="continentConverter"/> is a null reference.</exception>
+        </member>
+        <member name="P:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#ILocalizable#Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IPaginator{GW2NET#Maps#Continent}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Maps#Continent}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Continents.ContinentRepositoryFactory">
+            <summary>Provides methods for creating a continent repository.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Continents.ContinentRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Continents.ContinentRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Continents.ContinentRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="culture"/> is a null reference.</exception>
+            <returns>A repository.</returns>
+        </member>
+    </members>
+</doc>

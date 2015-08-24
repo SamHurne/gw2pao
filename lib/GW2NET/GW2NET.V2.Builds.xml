@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Builds</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Builds.Converters.ConverterForBuild">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Builds.Json.BuildDataContract"/> to objects of type <see cref="T:GW2NET.Builds.Build"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Builds.Converters.ConverterForBuild.Convert(GW2NET.V2.Builds.Json.BuildDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Builds.BuildRequest">
+            <summary>Represents a request for the current build identifier of the game against the v2/builds endpoint.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Builds.BuildRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Builds.BuildService">
+            <summary>Represents a service that retrieves data from the /v1/build.json interface.</summary>
+            <remarks>See <a href="http://wiki.guildwars2.com/wiki/API:2/build">wiki</a> for more information.</remarks>
+        </member>
+        <member name="F:GW2NET.V2.Builds.BuildService.serviceClient">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Builds.BuildService.converterForBuild">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.#ctor(GW2NET.Common.IServiceClient)">
+            <summary> Initializes a new instance of the <see cref="T:GW2NET.V2.Builds.BuildService"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V2.Builds.Json.BuildDataContract,GW2NET.Builds.Build})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Builds.BuildService"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForBuild">The converter for <see cref="T:GW2NET.Builds.Build"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> or <paramref name="converterForBuild"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.GetBuild">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.GetBuildAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.GetBuildAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Builds.BuildService.ConvertAsyncResponse(System.Threading.Tasks.Task{GW2NET.Common.IResponse{GW2NET.V2.Builds.Json.BuildDataContract}})">
+            <summary>Converts an asynchronous response for for further processing.</summary>
+            <param name="task">The task to convert.</param>
+            <returns>The <see cref="T:GW2NET.Builds.Build"/>.</returns>
+        </member>
+    </members>
+</doc>

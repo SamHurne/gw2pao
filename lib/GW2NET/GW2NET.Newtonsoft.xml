@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.Newtonsoft</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.Common.Serializers.JsonSerializer`1">
+            <summary>Provides methods for serializing JSON objects.</summary>
+            <typeparam name="T">The type that is being serialized.</typeparam>
+        </member>
+        <member name="F:GW2NET.Common.Serializers.JsonSerializer`1.jsonSerializer">
+            <summary>Infrastructure. Holds a reference to the Json.NET serializer.</summary>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializer`1.#ctor(Newtonsoft.Json.JsonSerializer)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.Common.Serializers.JsonSerializer`1"/> class.</summary>
+            <param name="jsonSerializer">The Json.NET serializer.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <see cref="F:GW2NET.Common.Serializers.JsonSerializer`1.jsonSerializer"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializer`1.Deserialize(System.IO.Stream)">
+            <summary>Converts the input stream to the specified type.</summary>
+            <param name="stream">The input stream.</param>
+            <exception cref="T:GW2NET.Common.SerializationException">A serialization error occurred.</exception>
+            <returns>An instance of the specified type.</returns>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializer`1.Serialize(`0,System.IO.Stream)">
+            <summary>Converts the specified value to an output stream.</summary>
+            <param name="value">An instance of the specified type.</param>
+            <param name="stream">The output stream.</param>
+            <exception cref="T:GW2NET.Common.SerializationException">A serialization error occurred.</exception>
+        </member>
+        <member name="T:GW2NET.Common.Serializers.JsonSerializerFactory">
+            <summary>Provides factory methods for the JSON.NET serialization engine.</summary>
+        </member>
+        <member name="F:GW2NET.Common.Serializers.JsonSerializerFactory.jsonSerializerSettings">
+            <summary>Backing field.</summary>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializerFactory.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.Common.Serializers.JsonSerializerFactory"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializerFactory.#ctor(Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.Common.Serializers.JsonSerializerFactory"/> class.</summary>
+            <param name="jsonSerializerSettings">The settings to be applied to the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.</param>
+        </member>
+        <member name="M:GW2NET.Common.Serializers.JsonSerializerFactory.GetSerializer``1">
+            <summary>Gets a serializer for the specified type.</summary>
+            <typeparam name="T">The serialization type.</typeparam>
+            <returns>The <see cref="T:GW2NET.Common.Serializers.ISerializer`1"/>.</returns>
+        </member>
+    </members>
+</doc>

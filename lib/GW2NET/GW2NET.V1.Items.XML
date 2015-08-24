@@ -1,0 +1,1155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V1.Items</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForAccessory">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.TrinketDataContract"/> to objects of type <see cref="T:GW2NET.Items.Accessory"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForAccessory.Convert(GW2NET.V1.Items.Json.TrinketDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForAlcohol">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.Alcohol"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForAlcohol.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForAmulet">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.TrinketDataContract"/> to objects of type <see cref="T:GW2NET.Items.Amulet"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForAmulet.Convert(GW2NET.V1.Items.Json.TrinketDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForAppearanceChanger">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.AppearanceChanger"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForAppearanceChanger.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForArmor">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Armor"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForArmor.converterForInfixUpgrade">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForArmor.converterForInfusionSlotCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForArmor.converterForWeightClass">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForArmor.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForArmor.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForArmor"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForArmor.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ArmorDataContract,GW2NET.Items.Armor}},GW2NET.Common.IConverter{System.String,GW2NET.Items.WeightClass},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V1.Items.Json.InfusionSlotDataContract},System.Collections.Generic.ICollection{GW2NET.Items.InfusionSlot}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.InfixUpgradeDataContract,GW2NET.Items.InfixUpgrade})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForArmor"/> class.</summary>
+            <param name="typeConverters">The type Converters.</param>
+            <param name="converterForWeightClass">The converter for <see cref="T:GW2NET.Items.WeightClass"/>.</param>
+            <param name="converterForInfusionSlotCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForInfixUpgrade">The converter for <see cref="T:GW2NET.Items.InfixUpgrade"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForArmor.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForArmor.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForAxe">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Axe"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForAxe.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForBackpack">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Backpack"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForBackpack.converterForInfixUpgrade">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForBackpack.converterForInfusionSlotCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBackpack.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForBackpack"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBackpack.#ctor(GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V1.Items.Json.InfusionSlotDataContract},System.Collections.Generic.ICollection{GW2NET.Items.InfusionSlot}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.InfixUpgradeDataContract,GW2NET.Items.InfixUpgrade})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForBackpack"/> class.</summary>
+            <param name="converterForInfusionSlotCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForInfixUpgrade">The converter for <see cref="T:GW2NET.Items.InfixUpgrade"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBackpack.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForBag">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Bag"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBag.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForBagSlotUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.BagSlotUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBagSlotUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForBankTabUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.BankTabUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBankTabUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForBoots">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Boots"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForBoots.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCoat">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Coat"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCoat.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCollectibleCapacityUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.CollectibleCapacityUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCollectibleCapacityUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCombatAttribute">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.CombatAttribute"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForCombatAttribute.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCombatAttribute.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForCombatAttribute"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCombatAttribute.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.AttributeDataContract,GW2NET.Items.CombatAttribute}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForCombatAttribute"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCombatAttribute.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCombatAttribute.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCombatBuff">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.CombatBuffDataContract"/> to objects of type <see cref="T:GW2NET.Items.CombatBuff"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCombatBuff.Convert(GW2NET.V1.Items.Json.CombatBuffDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForConditionDamageModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.ConditionDamageModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForConditionDamageModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForConsumable">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Consumable"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForConsumable.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForConsumable.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForConsumable"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForConsumable.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ConsumableDataContract,GW2NET.Items.Consumable}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForConsumable"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForConsumable.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForConsumable.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForContainer">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Container"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForContainer.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContainer.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForContainer"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContainer.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ContainerDataContract,GW2NET.Items.Container}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForContainer"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContainer.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContainer.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForContainerKey">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GizmoDataContract"/> to objects of type <see cref="T:GW2NET.Items.ContainerKey"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContainerKey.Convert(GW2NET.V1.Items.Json.GizmoDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForContentUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.ContentUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContentUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForContractNpc">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.ContractNpc"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForContractNpc.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCraftingMaterial">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.CraftingMaterial"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCraftingMaterial.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForCraftingRecipeUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.CraftingRecipeUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForCraftingRecipeUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDagger">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Dagger"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDagger.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDamageType">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.DamageType"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDamageType.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDefaultContainer">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ContainerDataContract"/> to objects of type <see cref="T:GW2NET.Items.DefaultContainer"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDefaultContainer.Convert(GW2NET.V1.Items.Json.ContainerDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDefaultGizmo">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GizmoDataContract"/> to objects of type <see cref="T:GW2NET.Items.DefaultGizmo"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDefaultGizmo.Convert(GW2NET.V1.Items.Json.GizmoDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDefaultUpgradeComponent">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.UpgradeComponentDataContract"/> to objects of type <see cref="T:GW2NET.Items.DefaultUpgradeComponent"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDefaultUpgradeComponent.Convert(GW2NET.V1.Items.Json.UpgradeComponentDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForDyeUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.DyeUnlocker"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForDyeUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForFerocityModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.FerocityModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForFerocityModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForFocus">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Focus"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForFocus.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForFood">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.Food"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForFood.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForForagingTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GatheringToolDataContract"/> to objects of type <see cref="T:GW2NET.Items.ForagingTool"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForForagingTool.Convert(GW2NET.V1.Items.Json.GatheringToolDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGameType">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.GameTypes"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGameType.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Items.GameTypes"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection.converterForGameType">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Items.GameTypes})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection"/> class.</summary>
+            <param name="converterForGameType">The converter for <see cref="T:GW2NET.Items.GameTypes"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGameTypeCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGatheringTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.GatheringTool"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForGatheringTool.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGatheringTool.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGatheringTool"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGatheringTool.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.GatheringToolDataContract,GW2NET.Items.GatheringTool}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGatheringTool"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGatheringTool.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGatheringTool.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGem">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.UpgradeComponentDataContract"/> to objects of type <see cref="T:GW2NET.Items.Gem"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGem.Convert(GW2NET.V1.Items.Json.UpgradeComponentDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGenericConsumable">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.GenericConsumable"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGenericConsumable.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGiftBox">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ContainerDataContract"/> to objects of type <see cref="T:GW2NET.Items.GiftBox"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGiftBox.Convert(GW2NET.V1.Items.Json.ContainerDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGizmo">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Gizmo"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForGizmo.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGizmo.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGizmo"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGizmo.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.GizmoDataContract,GW2NET.Items.Gizmo}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForGizmo"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGizmo.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGizmo.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGloves">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Gloves"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGloves.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForGreatSword">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.GreatSword"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForGreatSword.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHalloweenConsumable">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.HalloweenConsumable"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHalloweenConsumable.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHammer">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Hammer"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHammer.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHarpoon">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Harpoon"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHarpoon.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHealingModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.HealingModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHealingModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHelm">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Helm"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHelm.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForHelmAquatic">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.HelmAquatic"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForHelmAquatic.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForImmediateConsumable">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.ImmediateConsumable"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForImmediateConsumable.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.InfixUpgradeDataContract"/> to objects of type <see cref="T:GW2NET.Items.InfixUpgrade"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade.converterForCombatAttributeCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade.converterForCombatBuff">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade.#ctor(GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V1.Items.Json.AttributeDataContract},System.Collections.Generic.ICollection{GW2NET.Items.CombatAttribute}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.CombatBuffDataContract,GW2NET.Items.CombatBuff})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade"/> class.</summary>
+            <param name="converterForCombatAttributeCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForCombatBuff">The converter for <see cref="T:GW2NET.Items.CombatBuff"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfixUpgrade.Convert(GW2NET.V1.Items.Json.InfixUpgradeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlot">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.InfusionSlotDataContract"/> to objects of type <see cref="T:GW2NET.Items.InfusionSlot"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForInfusionSlot.converterForInfusionSlotFlagCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlot.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlot"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlot.#ctor(GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.InfusionSlotFlags})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlot"/> class.</summary>
+            <param name="converterForInfusionSlotFlagCollection">The converter for <see cref="T:GW2NET.Items.InfusionSlotFlags"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlot.Convert(GW2NET.V1.Items.Json.InfusionSlotDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlag">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.InfusionSlotFlags"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlag.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Items.InfusionSlotFlags"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection.converterForInfusionSlotFlag">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Items.InfusionSlotFlags})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection"/> class.</summary>
+            <param name="converterForInfusionSlotFlag">The converter for <see cref="T:GW2NET.Items.InfusionSlotFlags"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForInfusionSlotFlagCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItem">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Item"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItem.converterForGameTypes">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItem.converterForItemFlags">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItem.converterForItemRarity">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItem.converterForItemRestrictions">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItem.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItem.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItem"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItem.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ItemDataContract,GW2NET.Items.Item}},GW2NET.Common.IConverter{System.String,GW2NET.Items.ItemRarity},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.GameTypes},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.ItemFlags},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.ItemRestrictions})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItem"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+            <param name="converterForItemRarity">The converter for <see cref="T:GW2NET.Items.ItemRarity"/>.</param>
+            <param name="converterForGameTypes">The converter for <see cref="T:GW2NET.Items.GameTypes"/>.</param>
+            <param name="converterForItemFlags">The converter for <see cref="T:GW2NET.Items.ItemFlags"/>.</param>
+            <param name="converterForItemRestrictions">The converter for <see cref="T:GW2NET.Items.ItemRestrictions"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItem.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItem.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemCollection">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemCollectionDataContract"/> to objects of type <see cref="T:ICollection{int}"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItemCollection.converterForCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemCollection.#ctor(GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.Int32},System.Collections.Generic.ICollection{System.Int32}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemCollection"/> class.</summary>
+            <param name="converterForCollection">The converter for <see cref="T:ICollection{int}"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemCollection.Convert(GW2NET.V1.Items.Json.ItemCollectionDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemFlag">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.ItemFlags"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemFlag.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Items.ItemFlags"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection.converterForItemFlag">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Items.ItemFlags})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection"/> class.</summary>
+            <param name="converterForItemFlag">The converter for <see cref="T:GW2NET.Items.ItemFlags"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemFlagCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemRarity">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.ItemRarity"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemRarity.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemRestriction">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.ItemRestrictions"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemRestriction.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Items.ItemRestrictions"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection.converterForItemRestriction">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Items.ItemRestrictions})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection"/> class.</summary>
+            <param name="converterForItemRestriction">The converter for <see cref="T:GW2NET.Items.ItemRestrictions"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForItemRestrictionCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForLargeBundle">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.LargeBundle"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForLargeBundle.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForLeggings">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Leggings"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForLeggings.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForLoggingTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GatheringToolDataContract"/> to objects of type <see cref="T:GW2NET.Items.LoggingTool"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForLoggingTool.Convert(GW2NET.V1.Items.Json.GatheringToolDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForLongBow">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.LongBow"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForLongBow.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForMace">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Mace"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForMace.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForMiniature">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Miniature"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForMiniature.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForMiningTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GatheringToolDataContract"/> to objects of type <see cref="T:GW2NET.Items.MiningTool"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForMiningTool.Convert(GW2NET.V1.Items.Json.GatheringToolDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForOpenUiContainer">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ContainerDataContract"/> to objects of type <see cref="T:GW2NET.Items.OpenUiContainer"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForOpenUiContainer.Convert(GW2NET.V1.Items.Json.ContainerDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForPistol">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Pistol"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForPistol.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForPowerModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.PowerModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForPowerModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForPrecisionModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.PrecisionModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForPrecisionModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForRentableContractNpc">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GizmoDataContract"/> to objects of type <see cref="T:GW2NET.Items.RentableContractNpc"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForRentableContractNpc.Convert(GW2NET.V1.Items.Json.GizmoDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForRifle">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Rifle"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForRifle.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForRing">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.TrinketDataContract"/> to objects of type <see cref="T:GW2NET.Items.Ring"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForRing.Convert(GW2NET.V1.Items.Json.TrinketDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForRune">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.UpgradeComponentDataContract"/> to objects of type <see cref="T:GW2NET.Items.Rune"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForRune.Convert(GW2NET.V1.Items.Json.UpgradeComponentDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForSalvageTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ToolDataContract"/> to objects of type <see cref="T:GW2NET.Items.Tool"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForSalvageTool.Convert(GW2NET.V1.Items.Json.ToolDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForScepter">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Scepter"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForScepter.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForShield">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Shield"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForShield.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForShortBow">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.ShortBow"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForShortBow.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForShoulders">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ArmorDataContract"/> to objects of type <see cref="T:GW2NET.Items.Shoulders"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForShoulders.Convert(GW2NET.V1.Items.Json.ArmorDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForSigil">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.UpgradeComponentDataContract"/> to objects of type <see cref="T:GW2NET.Items.Sigil"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForSigil.Convert(GW2NET.V1.Items.Json.UpgradeComponentDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForSmallBundle">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.SmallBundle"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForSmallBundle.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForSpearGun">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.SpearGun"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForSpearGun.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForStaff">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Staff"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForStaff.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForSword">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Sword"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForSword.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTool">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Tool"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForTool.typeConverters">
+            <summary>Infrastructure. Holds a reference to type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTool.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForTool"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTool.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ToolDataContract,GW2NET.Items.Tool}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForTool"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTool.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTool.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTorch">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Torch"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTorch.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForToughnessModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.ToughnessModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForToughnessModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForToy">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Toy"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForToy.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTraitGuide">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.TraitGuide"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTraitGuide.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTransmutation">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.Transmutation"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTransmutation.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTrident">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.Trident"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrident.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTrinket">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Trinket"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForTrinket.converterForInfixUpgrade">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForTrinket.converterForInfusionSlotCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForTrinket.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrinket.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForTrinket"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrinket.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.TrinketDataContract,GW2NET.Items.Trinket}},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V1.Items.Json.InfusionSlotDataContract},System.Collections.Generic.ICollection{GW2NET.Items.InfusionSlot}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.InfixUpgradeDataContract,GW2NET.Items.InfixUpgrade})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForTrinket"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+            <param name="converterForInfusionSlotCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForInfixUpgrade">The converter for <see cref="T:GW2NET.Items.InfixUpgrade"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrinket.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrinket.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTrophy">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Trophy"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTrophy.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForTwoHandedToy">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.TwoHandedToy"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForTwoHandedToy.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUnlimitedConsumable">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.GizmoDataContract"/> to objects of type <see cref="T:GW2NET.Items.UnlimitedConsumable"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnlimitedConsumable.Convert(GW2NET.V1.Items.Json.GizmoDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUnlocker">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.Unlocker"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUnlocker.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnlocker.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUnlocker"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnlocker.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ConsumableDataContract,GW2NET.Items.Unlocker}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUnlocker"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnlocker.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnlocker.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUnTransmutation">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.UnTransmutation"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUnTransmutation.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.UpgradeComponent"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.converterForInfixUpgrade">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.converterForInfusionSlotFlagCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.converterForUpgradeComponentFlagCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.UpgradeComponentDataContract,GW2NET.Items.UpgradeComponent}},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.UpgradeComponentFlags},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Items.InfusionSlotFlags},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.InfixUpgradeDataContract,GW2NET.Items.InfixUpgrade})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+            <param name="converterForUpgradeComponentFlagCollection">The converter for <see cref="T:GW2NET.Items.UpgradeComponentFlags"/>.</param>
+            <param name="converterForInfusionSlotFlagCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForInfixUpgrade">The converter for <see cref="T:GW2NET.Items.InfixUpgrade"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponent.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlag">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.UpgradeComponentFlags"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlag.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Items.UpgradeComponentFlags"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection.converterForUpgradeComponentFlag">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Items.UpgradeComponentFlags})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection"/> class.</summary>
+            <param name="converterForUpgradeComponentFlag">The converter for <see cref="T:GW2NET.Items.UpgradeComponentFlags"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeComponentFlagCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUpgradeRemoval">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.UpgradeRemoval"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUpgradeRemoval.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForUtility">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ConsumableDataContract"/> to objects of type <see cref="T:GW2NET.Items.Utility"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForUtility.Convert(GW2NET.V1.Items.Json.ConsumableDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForVitalityModifier">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.AttributeDataContract"/> to objects of type <see cref="T:GW2NET.Items.VitalityModifier"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForVitalityModifier.Convert(GW2NET.V1.Items.Json.AttributeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForWarHorn">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.WeaponDataContract"/> to objects of type <see cref="T:GW2NET.Items.WarHorn"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWarHorn.Convert(GW2NET.V1.Items.Json.WeaponDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForWeapon">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.Items.Json.ItemDataContract"/> to objects of type <see cref="T:GW2NET.Items.Weapon"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForWeapon.converterForDamageType">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForWeapon.converterForInfixUpgrade">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForWeapon.converterForInfusionSlotCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.Converters.ConverterForWeapon.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWeapon.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForWeapon"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWeapon.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.WeaponDataContract,GW2NET.Items.Weapon}},GW2NET.Common.IConverter{System.String,GW2NET.Items.DamageType},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V1.Items.Json.InfusionSlotDataContract},System.Collections.Generic.ICollection{GW2NET.Items.InfusionSlot}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.InfixUpgradeDataContract,GW2NET.Items.InfixUpgrade})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.Converters.ConverterForWeapon"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+            <param name="converterForDamageType">The converter for <see cref="T:GW2NET.Items.DamageType"/>.</param>
+            <param name="converterForInfusionSlotCollection">The converter for <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <param name="converterForInfixUpgrade">The converter for <see cref="T:GW2NET.Items.InfixUpgrade"/>.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWeapon.Convert(GW2NET.V1.Items.Json.ItemDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWeapon.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.Converters.ConverterForWeightClass">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Items.WeightClass"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.Converters.ConverterForWeightClass.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.ItemDetailsRequest">
+            <summary>Represents a request for details regarding a specific item.</summary>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemDetailsRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemDetailsRequest.ItemId">
+            <summary>Gets or sets the item identifier.</summary>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemDetailsRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.ItemDiscoveryRequest">
+            <summary>Represents a request for a list of all discovered items.</summary>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemDiscoveryRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemDiscoveryRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+        <member name="T:GW2NET.V1.Items.ItemRepository">
+            <summary>Represents a repository that retrieves data from the /v1/items.json and /v1/item_details.json interfaces. See the remarks section for important limitations regarding this implementation.</summary>
+            <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet">
+                <item>
+                    <description><see cref="T:GW2NET.Items.Item"/>: <see cref="P:GW2NET.Items.Item.BuildId"/> is always <c>0</c>. Retrieve the build number from the build service.</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.ISkinnable"/>: <see cref="P:GW2NET.Items.ISkinnable.DefaultSkin"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.ISkinnable.DefaultSkinId"/> to retrieve the skin (applies to <see cref="T:GW2NET.Items.Armor"/>, <see cref="T:GW2NET.Items.Backpack"/>, <see cref="T:GW2NET.Items.GatheringTool"/> and <see cref="T:GW2NET.Items.Weapon"/>).</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.IUpgradable"/>: <see cref="P:GW2NET.Items.IUpgradable.SuffixItem"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.IUpgradable.SuffixItemId"/> to retrieve the suffix item (applies to <see cref="T:GW2NET.Items.Armor"/>, <see cref="T:GW2NET.Items.Backpack"/>, <see cref="T:GW2NET.Items.Trinket"/> and <see cref="T:GW2NET.Items.Weapon"/>).</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.IUpgradable"/>: <see cref="P:GW2NET.Items.IUpgradable.SecondarySuffixItem"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.IUpgradable.SecondarySuffixItemId"/> to retrieve the secondary suffix item (applies to <see cref="T:GW2NET.Items.Armor"/>, <see cref="T:GW2NET.Items.Backpack"/>, <see cref="T:GW2NET.Items.Trinket"/> and <see cref="T:GW2NET.Items.Weapon"/>).</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.InfusionSlot"/>: <see cref="P:GW2NET.Items.InfusionSlot.Item"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.InfusionSlot.ItemId"/> to retrieve the infusion item.</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.DyeUnlocker"/>: <see cref="P:GW2NET.Items.DyeUnlocker.Color"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.DyeUnlocker.ColorId"/> to retrieve the color.</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.CraftingRecipeUnlocker"/>: <see cref="P:GW2NET.Items.CraftingRecipeUnlocker.Recipe"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.CraftingRecipeUnlocker.RecipeId"/> to retrieve the recipe.</description>
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:GW2NET.V1.Items.ItemRepository.converterForItem">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.ItemRepository.converterForItemCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.ItemRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.ItemRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ItemCollectionDataContract,System.Collections.Generic.ICollection{System.Int32}},GW2NET.Common.IConverter{GW2NET.V1.Items.Json.ItemDataContract,GW2NET.Items.Item})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.ItemRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForItemCollection">The converter for <see cref="T:ICollection{int}"/>.</param>
+            <param name="converterForItem">The converter for <see cref="T:GW2NET.Items.Item"/>.</param>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemRepository.GW2NET#Common#ILocalizable#Culture">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Items#Item}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepository.GW2NET#Common#IPaginator{GW2NET#Items#Item}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.Items.ItemRepositoryFactory">
+            <summary>Provides methods for creating repository objects.</summary>
+        </member>
+        <member name="F:GW2NET.V1.Items.ItemRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.Items.ItemRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemRepositoryFactory.Item(System.String)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="language">The two-letter language code.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="language"/> is a null reference.</exception>
+            <returns>A repository.</returns>
+        </member>
+        <member name="P:GW2NET.V1.Items.ItemRepositoryFactory.Item(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="culture"/> is a null reference.</exception>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepositoryFactory.ForCurrentCulture">
+            <summary>Creates an instance for the current system language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.Items.ItemRepositoryFactory.ForCurrentUICulture">
+            <summary>Creates an instance for the current UI language.</summary>
+            <returns>A repository.</returns>
+        </member>
+    </members>
+</doc>

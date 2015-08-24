@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V1.WorldVersusWorld.Objectives</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Objectives.Converters.ConverterForObjectiveName">
+            <summary>Converts objects of type <see cref="T:GW2NET.V1.WorldVersusWorld.Objectives.Json.ObjectiveNameDataContract"/> to objects of type <see cref="T:GW2NET.WorldVersusWorld.ObjectiveName"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.Converters.ConverterForObjectiveName.Convert(GW2NET.V1.WorldVersusWorld.Objectives.Json.ObjectiveNameDataContract)">
+            <summary>Converts the given object of type <see cref="T:GW2NET.V1.WorldVersusWorld.Objectives.Json.ObjectiveNameDataContract"/> to an object of type <see cref="T:GW2NET.WorldVersusWorld.ObjectiveName"/>.</summary>
+            <param name="value">The value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository">
+            <summary>Represents a repository that retrieves data from the /v1/wvw/objective_names.json interface.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.converterForObjectiveName">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{GW2NET.V1.WorldVersusWorld.Objectives.Json.ObjectiveNameDataContract,GW2NET.WorldVersusWorld.ObjectiveName})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForObjectiveName">The converter <see cref="T:GW2NET.WorldVersusWorld.ObjectiveName"/>.</param>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#ILocalizable#Culture">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#WorldVersusWorld#ObjectiveName}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepository.GW2NET#Common#IPaginator{GW2NET#WorldVersusWorld#ObjectiveName}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory">
+            <summary>Provides methods for creating repository objects.</summary>
+        </member>
+        <member name="F:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.Item(System.String)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="language">The two-letter language code.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.Item(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.ForCurrentCulture">
+            <summary>Creates an instance for the current system language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRepositoryFactory.ForCurrentUICulture">
+            <summary>Creates an instance for the current UI language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="T:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRequest">
+            <summary>Represents a request for a list of objectives and their localized name.</summary>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="M:GW2NET.V1.WorldVersusWorld.Objectives.ObjectiveNameRequest.GetPathSegments">
+            <summary>Gets additional path segments for the targeted resource.</summary>
+            <returns>A collection of path segments.</returns>
+        </member>
+    </members>
+</doc>

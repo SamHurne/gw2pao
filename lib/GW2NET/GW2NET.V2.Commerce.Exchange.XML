@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Commerce.Exchange</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Commerce.Exchange.ConverterForGemQuotation">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Commerce.Exchange.GemQuotationDataContract"/> to objects of type <see cref="T:GW2NET.Commerce.GemQuotation"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ConverterForGemQuotation.Convert(GW2NET.V2.Commerce.Exchange.GemQuotationDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Exchange.ExchangeBroker">
+            <summary>Represents a broker that retrieves data from the /v2/commerce/exchange interface.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Exchange.ExchangeBroker.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Exchange.ExchangeBroker.identifier">
+            <summary>The identifier for the broker.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Exchange.ExchangeBroker.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBroker.#ctor(GW2NET.Common.IServiceClient,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Exchange.ExchangeBroker"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="identifier">The identifier for the broker (either 'gems' or 'coins').</param>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBroker.#ctor(GW2NET.Common.IServiceClient,System.String,GW2NET.Common.IConverter{GW2NET.V2.Commerce.Exchange.GemQuotationDataContract,GW2NET.Commerce.GemQuotation})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Exchange.ExchangeBroker"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="identifier">The identifier for the broker (either 'gems' or 'coins').</param>
+            <param name="converterForGemQuotation">The converter <see cref="T:GW2NET.Commerce.GemQuotation"/>.</param>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBroker.GW2NET#Common#IBroker{GW2NET#Commerce#GemQuotation}#GetQuotation(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBroker.GW2NET#Common#IBroker{GW2NET#Commerce#GemQuotation}#GetQuotationAsync(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBroker.GW2NET#Common#IBroker{GW2NET#Commerce#GemQuotation}#GetQuotationAsync(System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory">
+            <summary>Provides methods for creating broker objects.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory.Item(System.String)">
+            <summary>Creates an instance for the given currency.</summary>
+            <param name="identifier">The identifier (either 'gems' or 'coins').</param>
+            <returns>A broker.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeBrokerFactory.ForCurrency(System.String)">
+            <summary>Creates an instance for the given currency.</summary>
+            <param name="identifier">The identifier (either 'gems' or 'coins').</param>
+            <returns>A broker.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Exchange.ExchangeDetailsRequest">
+            <summary>Represents a details request that targets the /v2/commerce/exchange interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Exchange.ExchangeDetailsRequest.Quantity">
+            <summary>Gets or sets the quantity.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Exchange.ExchangeDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Commerce.Exchange.ExchangeDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Commerce.Exchange.ExchangeDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/commerce/exchange interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Commerce.Exchange.ExchangeDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+    </members>
+</doc>

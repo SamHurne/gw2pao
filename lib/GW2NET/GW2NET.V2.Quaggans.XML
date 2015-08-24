@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Quaggans</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Quaggans.ConverterForQuaggan">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Quaggans.QuagganDataContract"/> to objects of type <see cref="T:GW2NET.Quaggans.Quaggan"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.ConverterForQuaggan.Convert(GW2NET.V2.Quaggans.QuagganDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Quaggans.QuagganBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/quaggans interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Quaggans.QuagganBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Quaggans.QuagganDetailsRequest">
+            <summary>Represents a details request that targets the /v2/quaggans interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Quaggans.QuagganDetailsRequest.Identifier">
+            <summary>Gets or sets the resource identifier.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Quaggans.QuagganDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Quaggans.QuagganDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/quaggans interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Quaggans.QuagganDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Quaggans.QuagganPageRequest">
+            <summary>Represents a page request that targets the /v2/quaggans interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Quaggans.QuagganPageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Quaggans.QuagganRepository">
+            <summary>Represents a repository that retrieves data from the /v2/quaggans interface.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Quaggans.QuagganRepository.converterForBulkResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Quaggans.QuagganRepository.converterForIdentifiersResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Quaggans.QuagganRepository.converterForPageResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Quaggans.QuagganRepository.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Quaggans.QuagganRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Quaggans.QuagganRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},System.Collections.Generic.ICollection{System.String}},GW2NET.Common.IConverter{GW2NET.V2.Quaggans.QuagganDataContract,GW2NET.Quaggans.Quaggan})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Quaggans.QuagganRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForIdentifiers">The converter for <see cref="T:ICollection{string}"/>.</param>
+            <param name="converterForQuaggan">The converter for <see cref="T:GW2NET.Quaggans.Quaggan"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> or <paramref name="converterForIdentifiers"/> or <paramref name="converterForQuaggan"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IDiscoverable{System#String}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IDiscoverable{System#String}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IDiscoverable{System#String}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#Find(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAll(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAllAsync(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAllAsync(System.Collections.Generic.ICollection{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IRepository{System#String,GW2NET#Quaggans#Quaggan}#FindAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Quaggans.QuagganRepository.GW2NET#Common#IPaginator{GW2NET#Quaggans#Quaggan}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

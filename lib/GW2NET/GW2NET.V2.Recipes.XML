@@ -1,0 +1,295 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GW2NET.V2.Recipes</name>
+    </assembly>
+    <members>
+        <member name="T:GW2NET.V2.Recipes.ConverterForCraftingDiscipline">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Recipes.CraftingDisciplines"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForCraftingDiscipline.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Recipes.CraftingDisciplines"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection.converterForCraftingDiscipline">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Recipes.CraftingDisciplines})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection"/> class.</summary>
+            <param name="converterForCraftingDiscipline">The converter for <see cref="T:GW2NET.Recipes.CraftingDisciplines"/></param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="converterForCraftingDiscipline"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForCraftingDisciplineCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.ConverterForItemStack">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Recipes.IngredientDataContract"/> to objects of type <see cref="T:GW2NET.Items.ItemStack"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForItemStack.Convert(GW2NET.V2.Recipes.IngredientDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.ConverterForRecipe">
+            <summary>Converts objects of type <see cref="T:GW2NET.V2.Recipes.RecipeDataContract"/> to objects of type <see cref="T:GW2NET.Recipes.Recipe"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForRecipe.converterForCraftingDisciplineCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForRecipe.converterForItemStackCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForRecipe.converterForRecipeFlagCollection">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForRecipe.typeConverters">
+            <summary>Infrastructure. Holds a reference to a collection of type converters.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipe.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForRecipe"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipe.#ctor(System.Collections.Generic.IDictionary{System.String,GW2NET.Common.IConverter{GW2NET.V2.Recipes.RecipeDataContract,GW2NET.Recipes.Recipe}},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Recipes.CraftingDisciplines},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.String},GW2NET.Recipes.RecipeFlags},GW2NET.Common.IConverter{System.Collections.Generic.ICollection{GW2NET.V2.Recipes.IngredientDataContract},System.Collections.Generic.ICollection{GW2NET.Items.ItemStack}})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForRecipe"/> class.</summary>
+            <param name="typeConverters">The type converters.</param>
+            <param name="converterForCraftingDisciplineCollection">The converter for <see cref="T:GW2NET.Recipes.CraftingDisciplines"/>.</param>
+            <param name="converterForRecipeFlagCollection">The converter for <see cref="T:GW2NET.Recipes.RecipeFlags"/>.</param>
+            <param name="converterForItemStackCollection">The converter for <see cref="T:ICollection{ItemStack}"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="typeConverters"/> or <paramref name="converterForCraftingDisciplineCollection"/> or <paramref name="converterForRecipeFlagCollection"/> or <paramref name="converterForItemStackCollection"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipe.Convert(GW2NET.V2.Recipes.RecipeDataContract)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipe.GetKnownTypeConverters">
+            <summary>Infrastructure. Gets default type converters for all known types.</summary>
+            <returns>The type converters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.ConverterForRecipeFlag">
+            <summary>Converts objects of type <see cref="T:System.String"/> to objects of type <see cref="T:GW2NET.Recipes.RecipeFlags"/>.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipeFlag.Convert(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection">
+            <summary>Converts objects of type <see cref="T:ICollection{string}"/> to objects of type <see cref="T:GW2NET.Recipes.RecipeFlags"/>.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection.converterForRecipeFlag">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection"/> class.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection.#ctor(GW2NET.Common.IConverter{System.String,GW2NET.Recipes.RecipeFlags})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection"/> class.</summary>
+            <param name="converterForRecipeFlag">The converter for <see cref="T:GW2NET.Recipes.RecipeFlags"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="converterForRecipeFlag"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.ConverterForRecipeFlagCollection.Convert(System.Collections.Generic.ICollection{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeBulkRequest">
+            <summary>Represents a bulk request that targets the /v2/recipes interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeBulkRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeBulkRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeBulkRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeDetailsRequest">
+            <summary>Represents a details request that targets the /v2/recipes interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeDetailsRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeDetailsRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeDetailsRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeDiscoveryRequest">
+            <summary>Represents a discovery request that targets the /v2/recipes interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeDiscoveryRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipePageRequest">
+            <summary>Represents a page request that targets the /v2/recipes interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipePageRequest.Culture">
+            <summary>Gets or sets the locale.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipePageRequest.Resource">
+            <summary>Gets the resource path.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipePageRequest.GetParameters">
+            <summary>Gets the request parameters.</summary>
+            <returns>A collection of parameters.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeRepository">
+            <summary>Represents a repository that retrieves data from the /v2/recipes interface. See the remarks section for important limitations regarding this implementation.</summary>
+            <remarks>
+            This implementation does not retrieve associated entities.
+            <list type="bullet">
+                <item>
+                    <description><see cref="T:GW2NET.Recipes.Recipe"/>: <see cref="P:GW2NET.Recipes.Recipe.BuildId"/> is always <c>0</c>. Retrieve the build number from the build service.</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Recipes.Recipe"/>: <see cref="P:GW2NET.Recipes.Recipe.OutputItem"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Recipes.Recipe.OutputItemId"/> to retrieve the output item.</description>
+                </item>
+                <item>
+                    <description><see cref="T:GW2NET.Items.ItemStack"/>: <see cref="P:GW2NET.Items.ItemStack.Item"/> is always <c>null</c>. Use the value of <see cref="P:GW2NET.Items.ItemStack.ItemId"/> to retrieve the ingredient item.</description>
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepository.converterForBulkResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepository.converterForIdentifiersResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepository.converterForPageResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepository.converterForResponse">
+            <summary>Infrastructure. Holds a reference to a type converter.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepository.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.RecipeRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.#ctor(GW2NET.Common.IServiceClient,GW2NET.Common.IConverter{System.Collections.Generic.ICollection{System.Int32},System.Collections.Generic.ICollection{System.Int32}},GW2NET.Common.IConverter{GW2NET.V2.Recipes.RecipeDataContract,GW2NET.Recipes.Recipe})">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.RecipeRepository"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <param name="converterForRecipeCollection">The converter for <see cref="T:ICollection{int}"/>.</param>
+            <param name="converterForRecipe">The converter for <see cref="T:GW2NET.Items.Item"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> or <paramref name="converterForRecipeCollection"/> or <paramref name="converterForRecipe"/> is a null reference.</exception>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#ILocalizable#Culture">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IDiscoverable{System#Int32}#Discover">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IDiscoverable{System#Int32}#DiscoverAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByInput(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByInputAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByInputAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByOutput(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByOutputAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Recipes#IRecipeRepository#DiscoverByOutputAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#Find(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAll">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAll(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAllAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAllAsync(System.Collections.Generic.ICollection{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IRepository{System#Int32,GW2NET#Recipes#Recipe}#FindAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPage(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPage(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPageAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPageAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPageAsync(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepository.GW2NET#Common#IPaginator{GW2NET#Recipes#Recipe}#FindPageAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeRepositoryFactory">
+            <summary>Provides methods for creating repository objects.</summary>
+        </member>
+        <member name="F:GW2NET.V2.Recipes.RecipeRepositoryFactory.serviceClient">
+            <summary>Infrastructure. Holds a reference to the service client.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepositoryFactory.#ctor(GW2NET.Common.IServiceClient)">
+            <summary>Initializes a new instance of the <see cref="T:GW2NET.V2.Recipes.RecipeRepositoryFactory"/> class.</summary>
+            <param name="serviceClient">The service client.</param>
+            <exception cref="T:System.ArgumentNullException">The value of <paramref name="serviceClient"/> is a null reference.</exception>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepositoryFactory.ForDefaultCulture">
+            <summary>Creates an instance for the default language.</summary>
+            <returns>A repository.</returns>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeRepositoryFactory.ForCulture(System.Globalization.CultureInfo)">
+            <summary>Creates an instance for the given language.</summary>
+            <param name="culture">The culture.</param>
+            <returns>A repository.</returns>
+        </member>
+        <member name="T:GW2NET.V2.Recipes.RecipeSearchRequest">
+            <summary>Represents a search request that targets the /v2/recipes/search interface.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeSearchRequest.GW2NET#Common#IRequest#Resource">
+            <inheritdoc />
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeSearchRequest.Input">
+            <summary>Gets or sets the input item identifier.</summary>
+        </member>
+        <member name="P:GW2NET.V2.Recipes.RecipeSearchRequest.Output">
+            <summary>Gets or sets the output item identifier.</summary>
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeSearchRequest.GW2NET#Common#IRequest#GetParameters">
+            <inheritdoc />
+        </member>
+        <member name="M:GW2NET.V2.Recipes.RecipeSearchRequest.GW2NET#Common#IRequest#GetPathSegments">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
