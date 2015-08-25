@@ -48,11 +48,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null && data.Identity != null)
                     return data.Identity.Name;
                 else
-                    return null;
+                    return string.Empty;
             }
         }
 
@@ -66,7 +66,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null && data.Identity != null)
                     return data.Identity.Commander;
                 else
@@ -84,7 +84,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null)
                     return data.Context.MapId;
                 else
@@ -113,7 +113,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null && data.Identity != null)
                     return data.Identity.WorldId;
                 else
@@ -142,7 +142,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null)
                     return data.UiTick;
                 else
@@ -160,7 +160,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
                     return Profession.Unknown;
 
@@ -199,11 +199,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
-                    return null;
-
-                return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
+                    return new Point();
+                else
+                    return new Point(data.AvatarPosition.X, data.AvatarPosition.Z, data.AvatarPosition.Y);
             }
         }
 
@@ -218,11 +218,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
-                    return null;
-
-                return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
+                    return new Point();
+                else
+                    return new Point(data.AvatarFront.X, data.AvatarFront.Z, data.AvatarFront.Y);
             }
         }
 
@@ -237,11 +237,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
-                    return null;
-
-                return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
+                    return new Point();
+                else
+                    return new Point(data.AvatarTop.X, data.AvatarTop.Z, data.AvatarTop.Y);
             }
         }
 
@@ -256,11 +256,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
-                    return null;
-
-                return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
+                    return new Point();
+                else
+                    return new Point(data.CameraPosition.X, data.CameraPosition.Z, data.CameraPosition.Y);
             }
         }
 
@@ -275,11 +275,11 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data == null)
-                    return null;
-
-                return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
+                    return new Point();
+                else
+                    return new Point(data.CameraFront.X, data.CameraFront.Z, data.CameraFront.Y);
             }
         }
 
@@ -293,7 +293,7 @@ namespace GW2PAO.API.Services
                 if (this.disposed)
                     throw new ObjectDisposedException(this.ToString());
 
-                var data = this.mumbleLink.Read();
+                var data = this.ReadAvatarData();
                 if (data != null)
                     return data.Context.ServerAddress;
                 else
@@ -341,6 +341,23 @@ namespace GW2PAO.API.Services
             }
 
             this.disposed = true;
+        }
+
+        /// <summary>
+        /// Reads the mumble link avatar data from the mumble link memory-mapped file,
+        /// and handles any potential exceptions that can occur when reading the data.
+        /// </summary>
+        /// <returns>The data read from the mumble link, or null if reading the data failed</returns>
+        private Avatar ReadAvatarData()
+        {
+            try
+            {
+                return this.mumbleLink.Read();
+            }
+            catch (System.Runtime.Serialization.SerializationException)
+            {
+                return null;
+            }
         }
     }
 }
