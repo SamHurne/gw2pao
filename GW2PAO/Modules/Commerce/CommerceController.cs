@@ -322,8 +322,8 @@ namespace GW2PAO.Modules.Commerce
             {
                 Task.Factory.StartNew(() =>
                 {
-                    logger.Debug("Adding notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
-                    Threading.InvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
+                    logger.Info("Displaying notification for \"{0}\" - {1}", priceNotification.ItemName, priceNotification.NotificationType);
+                    Threading.BeginInvokeOnUI(() => this.PriceNotifications.Add(priceNotification));
 
                     if (this.UserData.NotificationDuration > 0)
                     {
@@ -337,15 +337,15 @@ namespace GW2PAO.Modules.Commerce
 
                         // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
                         // This makes it so that the notifications can fade out before they are removed from the notification window
-                        Threading.InvokeOnUI(() => priceNotification.IsRemovingNotification = true);
+                        Threading.BeginInvokeOnUI(() => priceNotification.IsRemovingNotification = true);
                         System.Threading.Thread.Sleep(SLEEP_TIME);
-                        Threading.InvokeOnUI(() =>
+                        Threading.BeginInvokeOnUI(() =>
                         {
                             this.PriceNotifications.Remove(priceNotification);
                             priceNotification.IsRemovingNotification = false;
                         });
                     }
-                }, TaskCreationOptions.LongRunning);
+                });
             }
         }
 

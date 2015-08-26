@@ -351,8 +351,8 @@ namespace GW2PAO.Modules.Events
                 {
                     Task.Factory.StartNew(() =>
                     {
-                        logger.Debug("Adding notification for \"{0}\"", eventData.EventName);
-                        Threading.InvokeOnUI(() => this.EventNotifications.Add(eventData));
+                        logger.Info("Displaying notification for \"{0}\"", eventData.EventName);
+                        Threading.BeginInvokeOnUI(() => this.EventNotifications.Add(eventData));
 
                         if (this.UserData.NotificationDuration > 0)
                         {
@@ -363,7 +363,7 @@ namespace GW2PAO.Modules.Events
                                 if (!this.UserData.AreEventNotificationsEnabled)
                                 {
                                     logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-                                    Threading.InvokeOnUI(() => this.EventNotifications.Remove(eventData));
+                                    Threading.BeginInvokeOnUI(() => this.EventNotifications.Remove(eventData));
                                 }
                             }
 
@@ -371,15 +371,15 @@ namespace GW2PAO.Modules.Events
 
                             // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
                             // This makes it so that the notifications can fade out before they are removed from the notification window
-                            Threading.InvokeOnUI(() => eventData.IsRemovingNotification = true);
+                            Threading.BeginInvokeOnUI(() => eventData.IsRemovingNotification = true);
                             System.Threading.Thread.Sleep(SLEEP_TIME);
-                            Threading.InvokeOnUI(() =>
+                            Threading.BeginInvokeOnUI(() =>
                             {
                                 this.EventNotifications.Remove(eventData);
                                 eventData.IsRemovingNotification = false;
                             });
                         }
-                    }, TaskCreationOptions.LongRunning);
+                    });
                 }
             }
         }

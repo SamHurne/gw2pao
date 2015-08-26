@@ -621,8 +621,8 @@ namespace GW2PAO.Modules.WvW
                 {
                     Task.Factory.StartNew(() =>
                     {
-                        logger.Debug("Adding notification for \"{0}\" in {1}", objectiveData.Name, objectiveData.Map);
-                        Threading.InvokeOnUI(() => this.WvWNotifications.Add(objectiveData));
+                        logger.Info("Displaying notification for \"{0}\" in {1}", objectiveData.Name, objectiveData.Map);
+                        Threading.BeginInvokeOnUI(() => this.WvWNotifications.Add(objectiveData));
 
                         if (this.UserData.NotificationDuration > 0)
                         {
@@ -633,7 +633,7 @@ namespace GW2PAO.Modules.WvW
                                 if (!this.CanShowNotification(objectiveData))
                                 {
                                     logger.Debug("Removing notification for \"{0}\" in {1}", objectiveData.Name, objectiveData.Map);
-                                    Threading.InvokeOnUI(() => this.WvWNotifications.Remove(objectiveData));
+                                    Threading.BeginInvokeOnUI(() => this.WvWNotifications.Remove(objectiveData));
                                 }
                             }
 
@@ -641,15 +641,15 @@ namespace GW2PAO.Modules.WvW
 
                             // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
                             // This makes it so that the notifications can fade out before they are removed from the notification window
-                            Threading.InvokeOnUI(() => objectiveData.IsRemovingNotification = true);
+                            Threading.BeginInvokeOnUI(() => objectiveData.IsRemovingNotification = true);
                             System.Threading.Thread.Sleep(SLEEP_TIME);
-                            Threading.InvokeOnUI(() =>
+                            Threading.BeginInvokeOnUI(() =>
                             {
                                 this.WvWNotifications.Remove(objectiveData);
                                 objectiveData.IsRemovingNotification = false;
                             });
                         }
-                    }, TaskCreationOptions.LongRunning);
+                    });
                 }
             }
         }
