@@ -18,7 +18,7 @@ namespace GW2PAO.TS3.Util
         /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
         public static uint DecodeUIntProperty(string input, params string[] propertyNames)
         {
-            var properties = input.Split(' ', '\n', '\r');
+            var properties = input.Split(' ', '\n', '\r', '|');
 
             foreach (var propertyName in propertyNames)
             {
@@ -47,7 +47,7 @@ namespace GW2PAO.TS3.Util
         /// <exception cref="InvalidOperationException">Thrown when none of the given property names results in a valid uint value</exception>
         public static string DecodeStringProperty(string input, bool decodeValue, params string[] propertyNames)
         {
-            var properties = input.Split(' ', '\n', '\r');
+            var properties = input.Split(' ', '\n', '\r', '|');
 
             foreach (var propertyName in propertyNames)
             {

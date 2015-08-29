@@ -34,19 +34,12 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private const string Host = "localhost";
-        private const int Port = 25639;
-
-        public AsyncTcpDispatcher CommandQueryDispatcher { get; private set; }
-        public QueryRunner CommandQueryRunner { get; private set; }
-
-        public AsyncTcpDispatcher EventQueryDispatcher { get; private set; }
-        public QueryRunner EventQueryRunner { get; private set; }
+        public TeamspeakConnection TsConnection { get; private set; }
 
         /// <summary>
         /// The current connected state of the service
         /// </summary>
-        public ConnectionState ConnectionState { get; private set; }
+        public ConnectionState ConnectionState { get { return this.TsConnection.ConnectionState; } }
 
         /// <summary>
         /// The current user's client ID
@@ -72,16 +65,6 @@ namespace GW2PAO.TS3.Services
         /// Collection of channels on the current server
         /// </summary>
         private ConcurrentDictionary<uint, Channel> channels = new ConcurrentDictionary<uint, Channel>();
-
-        /// <summary>
-        /// Timer used for polling the server, keeping the connection open
-        /// </summary>
-        private System.Timers.Timer pollTimer;
-
-        /// <summary>
-        /// Locking object for the poll timer
-        /// </summary>
-        private readonly object pollLock = new object();
 
         /// <summary>
         /// Event raised when connecting to teamspeak fails
@@ -146,9 +129,13 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         public TeamspeakService()
         {
-            this.pollTimer = new System.Timers.Timer(5000);
-            this.pollTimer.AutoReset = true;
-            this.pollTimer.Elapsed += (o, e) => this.Poll();
+            // TODO: Dependency injection for the TeamspeakConnection
+            this.TsConnection = new TeamspeakConnection();
+            this.TsConnection.Connected += this.TsConnection_Connected;
+            this.TsConnection.Disconnected += this.TsConnection_Disconnected;
+            this.TsConnection.ConnectionRefused += this.TsConnection_ConnectionRefused;
+            this.TsConnection.NotificationReceived += this.TsConnection_NotificationReceived;
+            this.TsConnection.TalkStatusChanged += this.TsConnection_TalkStatusChanged;
             logger.Trace("New Teamspeak Service constructed");
         }
 
@@ -157,26 +144,8 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         public void Connect()
         {
-            // do not connect when already connected or during connection establishing
-            if (this.CommandQueryRunner != null || this.EventQueryRunner != null)
-                return;
-
-            this.ConnectionState = ConnectionState.Connecting;
-
-            this.CommandQueryDispatcher = new AsyncTcpDispatcher(TeamspeakService.Host, TeamspeakService.Port);
-            this.CommandQueryDispatcher.ReadyForSendingCommands += CommandQueryDispatcher_ReadyForSendingCommands;
-            this.CommandQueryDispatcher.SocketError += QueryDispatcher_SocketError;
-
-            this.EventQueryDispatcher = new AsyncTcpDispatcher(TeamspeakService.Host, TeamspeakService.Port);
-            this.EventQueryDispatcher.BanDetected += QueryDispatcher_BanDetected;
-            this.EventQueryDispatcher.ReadyForSendingCommands += EventQueryDispatcher_ReadyForSendingCommands;
-            this.EventQueryDispatcher.ServerClosedConnection += EventQueryDispatcher_ServerClosedConnection;
-            this.EventQueryDispatcher.SocketError += QueryDispatcher_SocketError;
-            this.EventQueryDispatcher.NotificationReceived += EventQueryDispatcher_NotificationReceived;
-
             logger.Info("Connecting");
-            this.CommandQueryDispatcher.Connect();
-            this.EventQueryDispatcher.Connect();
+            this.TsConnection.Connect();
         }
 
         /// <summary>
@@ -184,26 +153,9 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         public void Disconnect()
         {
-            lock (this.pollLock)
-            {
-                logger.Debug("Disconnecting and cleaning up");
-
-                // Stop the poll timer
-                this.pollTimer.Stop();
-                this.clients.Clear();
-
-                // QueryRunner disposes the Dispatcher too
-                if (this.CommandQueryRunner != null)
-                    this.CommandQueryRunner.Dispose();
-                if (this.EventQueryRunner != null)
-                    this.EventQueryRunner.Dispose();
-
-                this.CommandQueryDispatcher = null;
-                this.CommandQueryRunner = null;
-                this.EventQueryDispatcher = null;
-                this.EventQueryRunner = null;
-                this.ConnectionState = ConnectionState.Disconnected;
-            }
+            logger.Info("Disconnecting and cleaning up");
+            this.TsConnection.Disconnect();
+            this.clients.Clear();
         }
 
         /// <summary>
@@ -212,14 +164,11 @@ namespace GW2PAO.TS3.Services
         /// <param name="msg">The message to send</param>
         public void SendChannelMessage(string msg)
         {
-            if (this.CommandQueryRunner != null)
-            {
-                logger.Info("Sending text message: {0}", msg);
-                var command = new Command("sendtextmessage targetmode=2");
-                command.AddParameter("msg", msg);
-                logger.Info("Command: {0}", command.ToString());
-                this.CommandQueryRunner.SendCommand(command);
-            }
+            logger.Info("Sending text message: {0}", msg);
+            var command = new Command("sendtextmessage targetmode=2");
+            command.AddParameter("msg", msg);
+            logger.Info("Command: {0}", command.ToString());
+            this.TsConnection.SendCommand(command);
         }
 
         /// <summary>
@@ -228,41 +177,30 @@ namespace GW2PAO.TS3.Services
         /// <param name="channelID"></param>
         public void ChangeChannel(uint channelID)
         {
-            if (this.CommandQueryRunner != null)
-            {
-                logger.Info("Moving client to channel {0}", channelID);
-                var command = new Command(string.Format("clientmove cid={0} clid={1}", channelID, this.currentClientID));
-                string restul = this.CommandQueryRunner.SendCommand(command);
-            }
+            logger.Info("Moving client to channel {0}", channelID);
+            var command = new Command(string.Format("clientmove cid={0} clid={1}", channelID, this.currentClientID));
+            this.TsConnection.SendCommand(command);
         }
 
         /// <summary>
-        /// Handler for the BanDetected event
+        /// Handler for the TSConnection's Connected Event
         /// </summary>
-        private void QueryDispatcher_BanDetected(object sender, EventArgs<SimpleResponse> e)
+        private void TsConnection_Connected(object sender, EventArgs e)
         {
-            logger.Warn("Ban detected!");
-            // Force disconnect
-            this.Disconnect();
-        }
-
-        /// <summary>
-        /// Handler for the ReadyForSendingCommands event
-        /// </summary>
-        private void CommandQueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
-        {
-            logger.Info("Command - Ready For Sending Commands");
-            this.ConnectionState = ConnectionState.Connected;
-
-            // you can only run commands on the queryrunner when this event has been raised first!
-            this.CommandQueryRunner = new QueryRunner(this.CommandQueryDispatcher);
-
             // Determine who we are
-            var whoami = this.CommandQueryRunner.SendWhoAmI();
-            this.currentClientID = whoami.ClientId;
-            this.currentChannelID = whoami.ChannelId;
-            logger.Info("Current Client ID: {0}", this.currentClientID);
-            logger.Info("Current Channel ID: {0}", this.currentChannelID);
+            var whoami = this.TsConnection.SendWhoAmI();
+            if (whoami != null)
+            {
+                this.currentClientID = whoami.ClientId;
+                this.currentChannelID = whoami.ChannelId;
+                logger.Info("Current Client ID: {0}", this.currentClientID);
+                logger.Info("Current Channel ID: {0}", this.currentChannelID);
+            }
+            else
+            {
+                this.currentClientID = 0;
+                this.currentChannelID = 0;
+            }
 
             if (this.currentClientID != 0 || this.currentChannelID != 0)
             {
@@ -271,16 +209,11 @@ namespace GW2PAO.TS3.Services
                 this.RequestCurrentChannelInfo();
             }
 
+            // Request the client and channel lists last - these can take a little while...
             // Do all of this on a seperate thread so we don't hold up the UI
             Task.Factory.StartNew(() =>
             {
-                // Send a request for the full list of clients
-                logger.Info("Sending request for client list");
-                string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
-                this.AddClients(result);
-
-                // Request the client and channel lists last - these can take a little while...
-                // TODO: This is kind of horrible, look into a better way to make this work better
+                this.RequestClientList();
                 if (this.currentClientID != 0 || this.currentChannelID != 0)
                 {
                     this.InitializeChannelList();
@@ -289,117 +222,80 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
-        /// Handler for the ReadyForSendingCommands event
+        /// Handler for the TSConnection's Disconnected Event
         /// </summary>
-        private void EventQueryDispatcher_ReadyForSendingCommands(object sender, EventArgs e)
+        private void TsConnection_Disconnected(object sender, EventArgs e)
         {
-            logger.Info("Event - Ready For Sending Commands");
-            this.ConnectionState = ConnectionState.Connected;
-
-            // you can only run commands on the queryrunner when this event has been raised first!
-            this.EventQueryRunner = new QueryRunner(this.EventQueryDispatcher);
-            this.EventQueryRunner.Notifications.TalkStatusChanged += Notifications_TalkStatusChanged;
-
-            Task.Factory.StartNew(() =>
-            {
-                this.EventQueryRunner.RegisterForNotifications(ClientNotifyRegisterEvent.Any);
-
-                // Start a timer to send a message every so often, keeping the connection open
-                logger.Info("Starting poll timer");
-                this.pollTimer.Start();
-            });
+            // TODO: Anything?
+            //throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Handler for the ServerClosedConnection event
+        /// Handler for the TSConnection's ConnectionRefused Event
         /// </summary>
-        private void EventQueryDispatcher_ServerClosedConnection(object sender, EventArgs e)
+        private void TsConnection_ConnectionRefused(object sender, EventArgs e)
         {
-            logger.Info("Server closed connection");
+            this.RaiseConnectionRefused();
         }
 
         /// <summary>
-        /// Handler for the SocketError event
+        /// Handler for the TSConnection's NotificationReceived Event
         /// </summary>
-        private void QueryDispatcher_SocketError(object sender, SocketErrorEventArgs e)
+        private void TsConnection_NotificationReceived(object sender, string notification)
         {
-            logger.Warn("SocketError: {0}", e.SocketError);
+            logger.Trace("Notification: {0}", notification.Trim());
 
-            // Do not handle connection lost errors because they are already handled by QueryDispatcher_ServerClosedConnection
-            if (e.SocketError == SocketError.ConnectionReset)
+            var actualNotification = notification.Trim().Split(' ')[0].ToLower();
+            switch (actualNotification)
             {
-                return;
+                case Notifications.TextMessage:
+                    this.HandleTextMessage(notification);
+                    break;
+                case Notifications.ConnectStatusChange:
+                    this.HandleConnectionStatusChange(notification);
+                    break;
+                case Notifications.ClientMoved:
+                    this.HandleClientMoved(notification);
+                    break;
+                case Notifications.ClientEnterView:
+                    this.HandleClientEnteredView(notification);
+                    break;
+                case Notifications.ClientLeftView:
+                    this.HandleClientExitedView(notification);
+                    break;
+                case Notifications.ClientUpdated:
+                    this.HandleClientUpdated(notification);
+                    break;
+                case Notifications.ChannelCreated:
+                    this.HandleChannelCreated(notification);
+                    break;
+                case Notifications.ChannelDeleted:
+                    this.HandleChannelDeleted(notification);
+                    break;
+                case Notifications.ChannelEdited:
+                    this.HandleChannelEdited(notification);
+                    break;
+                case Notifications.ChannelMoved:
+                    this.HandleChannelMoved(notification);
+                    break;
+                default:
+                    logger.Trace("Unhandled notification!! - Notification: {0}", notification.Trim());
+                    break;
             }
-            else if (e.SocketError == SocketError.AccessDenied
-                    || e.SocketError == SocketError.AddressAlreadyInUse
-                    || e.SocketError == SocketError.ConnectionRefused)
-            {
-                logger.Warn("Connection refused");
-                this.RaiseConnectionRefused();
-            }
-
-            // Force disconnect
-            this.Disconnect();
         }
 
         /// <summary>
-        /// Handler for the NotificationReceived event
+        /// Handler for the TSConnection's TalkStatusChanged Event
         /// </summary>
-        private void EventQueryDispatcher_NotificationReceived(object sender, EventArgs<string> e)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TsConnection_TalkStatusChanged(object sender, TS3QueryLib.Core.Client.Notification.EventArgs.TalkStatusEventArgs e)
         {
-            // Handle the notification on a background task
-            Task.Factory.StartNew(() =>
-                {
-                    logger.Trace("Notification: {0}", e.Value.Trim());
-
-                    var notification = e.Value.Trim().Split(' ')[0].ToLower();
-                    switch (notification)
-                    {
-                        case Notifications.TextMessage:
-                            this.HandleTextMessage(e.Value);
-                            break;
-                        case Notifications.ConnectStatusChange:
-                            this.HandleConnectionStatusChange(e.Value);
-                            break;
-                        case Notifications.ClientMoved:
-                            this.HandleClientMoved(e.Value);
-                            break;
-                        case Notifications.ClientEnterView:
-                            this.HandleClientEnteredView(e.Value);
-                            break;
-                        case Notifications.ClientLeftView:
-                            this.HandleClientExitedView(e.Value);
-                            break;
-                        case Notifications.ClientUpdated:
-                            this.HandleClientUpdated(e.Value);
-                            break;
-                        case Notifications.ChannelCreated:
-                            this.HandleChannelCreated(e.Value);
-                            break;
-                        case Notifications.ChannelDeleted:
-                            this.HandleChannelDeleted(e.Value);
-                            break;
-                        case Notifications.ChannelEdited:
-                            this.HandleChannelEdited(e.Value);
-                            break;
-                        case Notifications.ChannelMoved:
-                            this.HandleChannelMoved(e.Value);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-        }
-
-        /// <summary>
-        /// Handler for the TalkStatusChanged event
-        /// </summary>
-        private void Notifications_TalkStatusChanged(object sender, TS3QueryLib.Core.Client.Notification.EventArgs.TalkStatusEventArgs e)
-        {
-            string name = "Unknown";
-
+            string name;
             if (this.clients.ContainsKey(e.ClientId))
                 name = this.clients[e.ClientId].Name;
+            else
+                name = "UNKNOWN";
 
             logger.Trace("TalkStatusChanged: {0} {1}", name, e.TalkStatus);
 
@@ -437,44 +333,65 @@ namespace GW2PAO.TS3.Services
 
         /// <summary>
         /// Handles the ConnectionStatusChanged TS notification
+        /// This notification is raised when the user disconnects/connects from/to a TS server
+        /// (This is NOT raised when we lose connection to the TS client application)
         /// </summary>
         /// <param name="notificationString">The notification string</param>
         private void HandleConnectionStatusChange(string notificationString)
         {
-            // Connection status just changed, if it's "connected", we need to rebuild our client list, so clear it out
+            // Connection status just changed
             var connectStatusProperties = notificationString.Split(' ');
             var status = connectStatusProperties.First(id => id.StartsWith("status")).Substring("status".Length + 1);
-            if (status == "connected")
+
+            logger.Info("Connection status change detected - \"{0}\"", status);
+
+            if (status == "connection_established")
             {
-                // Send a stop for everyone, to make sure clients don't get stuck as "talking"
-                foreach (var client in this.clients.Values)
-                    this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
-                this.clients.Clear();
-
-                // Reset our channel list
-                foreach (var channel in this.channels.Values)
+                var whoami = this.TsConnection.SendWhoAmI();
+                if (whoami != null)
                 {
-                    this.RaiseChannelRemoved(new ChannelEventArgs(channel));
+                    this.currentClientID = whoami.ClientId;
+                    this.currentChannelID = whoami.ChannelId;
+                    logger.Trace("New Client ID: {0}", this.currentClientID);
+                    logger.Trace("New Channel ID: {0}", this.currentChannelID);
                 }
-                this.channels.Clear();
-
-                // Reset our local clients
-                foreach (var client in this.localClients.Values)
+                else
                 {
-                    this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                    this.currentClientID = 0;
+                    this.currentChannelID = 0;
                 }
-                this.localClients.Clear();
-
-                var whoami = this.CommandQueryRunner.SendWhoAmI();
-                this.currentClientID = whoami.ClientId;
-                this.currentChannelID = whoami.ChannelId;
-                logger.Trace("New Client ID: {0}", this.currentClientID);
-                logger.Trace("New Channel ID: {0}", this.currentChannelID);
 
                 this.RequestCurrentServerInfo();
                 this.RequestCurrentChannelInfo();
                 this.RequestClientList();
                 this.InitializeChannelList();
+            }
+            else if (status == "disconnected")
+            {
+                // Send a stop for everyone, to make sure clients don't get stuck as "talking"
+                logger.Trace("Clearing out list of clients");
+                foreach (var client in this.clients.Values)
+                    this.RaiseTalkStatusChanged(new Data.TalkStatusEventArgs(client.ID, client.Name, TalkStatus.TalkStopped, false));
+                this.clients.Clear();
+                logger.Trace("Client list cleared");
+
+                // Reset our channel list
+                logger.Trace("Resetting channel list");
+                foreach (var channel in this.channels.Values)
+                {
+                    this.RaiseChannelRemoved(new ChannelEventArgs(channel));
+                }
+                this.channels.Clear();
+                logger.Trace("Channel list cleared");
+
+                // Reset our local clients
+                logger.Trace("Resetting local client list");
+                foreach (var client in this.localClients.Values)
+                {
+                    this.RaiseClientExitedChannel(new ClientEventArgs(client.ID, client.Name));
+                }
+                this.localClients.Clear();
+                logger.Trace("Local client list cleared");
             }
         }
 
@@ -516,8 +433,9 @@ namespace GW2PAO.TS3.Services
                 // Request the client list for the current channel
                 Task.Factory.StartNew(() =>
                 {
-                    string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
-                    this.AddClients(result);
+                    string result = this.TsConnection.SendCommand(new Command("clientlist"));
+                    if (!string.IsNullOrEmpty(result))
+                        this.AddClients(result);
                 });
             }
             else
@@ -702,6 +620,34 @@ namespace GW2PAO.TS3.Services
         }
 
         /// <summary>
+        /// Handles the ChannelList TS notification and/or response
+        /// </summary>
+        /// <param name="notificationString">The notification/response string</param>
+        private void HandleChannelList(string channelListString)
+        {
+            var channelStrings = channelListString.Split('|');
+            foreach (var channelString in channelStrings)
+            {
+                logger.Trace("Processing {0}", channelString.Trim());
+                var channelInfo = Channel.FromChannelString(channelString);
+                logger.Trace("Processing channel from channellist - {0} - {1} [{2}]", channelInfo.ID, channelInfo.Name, channelInfo.ClientsCount);
+
+                if (!this.channels.ContainsKey(channelInfo.ID))
+                {
+                    if (this.channels.TryAdd(channelInfo.ID, channelInfo))
+                    {
+                        this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
+                    }
+                }
+                else
+                {
+                    this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
+                    this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
+                }
+            }
+        }
+
+        /// <summary>
         /// Parses and handles a "clientlist" response and updates the dictionary of client ID/nicknames
         /// </summary>
         /// <param name="clientList">The client list response</param>
@@ -739,12 +685,16 @@ namespace GW2PAO.TS3.Services
         private void RequestCurrentServerInfo()
         {
             // Determine the current server information
-            string result = this.CommandQueryRunner.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
-            string serverName = DecodeUtility.DecodeStringProperty(result, true, Properties.ServerName);
-            string serverAddress = DecodeUtility.DecodeStringProperty(result, false, Properties.ServerIP);
+            logger.Info("Requesting current server information");
+            string result = this.TsConnection.SendCommand(new Command("servervariable " + Properties.ServerName + " " + Properties.ServerIP));
+            if (!string.IsNullOrEmpty(result))
+            {
+                string serverName = DecodeUtility.DecodeStringProperty(result, true, Properties.ServerName);
+                string serverAddress = DecodeUtility.DecodeStringProperty(result, false, Properties.ServerIP);
 
-            logger.Info("New Server Information: name={0} address={1}", serverName, serverAddress);
-            this.RaiseNewServerInfo(new NewServerInfoEventArgs(serverName, serverAddress));
+                logger.Info("Server Information: name={0} address={1}", serverName, serverAddress);
+                this.RaiseNewServerInfo(new NewServerInfoEventArgs(serverName, serverAddress));
+            }
         }
 
         /// <summary>
@@ -752,15 +702,18 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void RequestCurrentChannelInfo()
         {
+            logger.Info("Requesting current channel information");
             var command = new Command(string.Format("channelvariable {0}={1} {2} {3}", Properties.ChannelID, this.currentChannelID, Properties.ChannelName, Properties.ChannelDescription));
-            string result = this.CommandQueryRunner.SendCommand(command);
+            string result = this.TsConnection.SendCommand(command);
+            if (!string.IsNullOrEmpty(result))
+            {
+                // Parse the channel info
+                string channelName = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelName);
+                string channelDescription = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelDescription);
 
-            // Parse the channel info
-            string channelName = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelName);
-            string channelDescription = DecodeUtility.DecodeStringProperty(result, true, Properties.ChannelDescription);
-
-            logger.Info("New Channel Information: name={0} description={1}", channelName, channelDescription);
-            this.RaiseClientChannelChanged(new ChannelEventArgs(new Channel(this.currentChannelID, channelName) { Description = channelDescription }));
+                logger.Info("Channel Information: name={0} description={1}", channelName, channelDescription);
+                this.RaiseClientChannelChanged(new ChannelEventArgs(new Channel(this.currentChannelID, channelName) { Description = channelDescription }));
+            }
         }
 
         /// <summary>
@@ -768,8 +721,12 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void RequestClientList()
         {
-            string result = this.CommandQueryRunner.SendCommand(new Command("clientlist"));
-            this.AddClients(result);
+            logger.Info("Requesting client list");
+            string result = this.TsConnection.SendCommand(new Command("clientlist"));
+            if (!string.IsNullOrEmpty(result))
+            {
+                this.AddClients(result);
+            }
         }
 
         /// <summary>
@@ -777,28 +734,12 @@ namespace GW2PAO.TS3.Services
         /// </summary>
         private void InitializeChannelList()
         {
+            logger.Info("Initializing channel list");
             var command = new Command("channellist");
-            string result = this.CommandQueryRunner.SendCommand(command);
-            if (result != null)
+            string result = this.TsConnection.SendCommand(command);
+            if (!string.IsNullOrEmpty(result))
             {
-                var channelStrings = result.Split('|');
-                foreach (var channelString in channelStrings)
-                {
-                    var channelInfo = Channel.FromChannelString(channelString);
-
-                    if (!this.channels.ContainsKey(channelInfo.ID))
-                    {
-                        if (this.channels.TryAdd(channelInfo.ID, channelInfo))
-                        {
-                            this.RaiseChannelAdded(new ChannelEventArgs(channelInfo));
-                        }
-                    }
-                    else
-                    {
-                        this.channels.AddOrUpdate(channelInfo.ID, channelInfo, (key, oldValue) => channelInfo);
-                        this.RaiseChannelUpdated(new ChannelEventArgs(channelInfo));
-                    }
-                }
+                this.HandleChannelList(result);
             }
         }
 
@@ -895,36 +836,5 @@ namespace GW2PAO.TS3.Services
         }
 
         #endregion
-
-        /// <summary>
-        /// Method used to poll the server, keeping the connection open
-        /// </summary>
-        private void Poll()
-        {
-            // Do a non-blocking lock
-            if (Monitor.TryEnter(this.pollLock))
-            {
-                try
-                {
-                    if (this.CommandQueryRunner != null && !this.CommandQueryRunner.IsDisposed)
-                    {
-                        var whoami = this.CommandQueryRunner.SendWhoAmI();
-                        this.currentClientID = whoami.ClientId;
-                        this.currentChannelID = whoami.ChannelId;
-                    }
-
-                    if (this.EventQueryRunner != null && !this.EventQueryRunner.IsDisposed)
-                    {
-                        var whoami = this.EventQueryRunner.SendWhoAmI();
-                        this.currentClientID = whoami.ClientId;
-                        this.currentChannelID = whoami.ChannelId;
-                    }
-                }
-                finally
-                {
-                    Monitor.Exit(this.pollLock);
-                }
-            }
-        }
     }
 }

@@ -96,16 +96,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="{x:Type TreeViewItem}" TargetType="{x:Type TreeViewItem}">
+    <Style x:Key="{x:Type TreeViewItem}" TargetType="TreeViewItem">
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="Transparent" Opacity="0.25" />
+                <SolidColorBrush Color="Transparent" />
             </Setter.Value>
         </Setter>
-        <Setter Property="HorizontalContentAlignment"
-                Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-        <Setter Property="VerticalContentAlignment"
-                Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1,0,0,0" />
         <Setter Property="Foreground">
             <Setter.Value>
@@ -171,8 +169,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="PART_Header"
-                                              ContentSource="Header"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                              ContentSource="Header"/>
                         </Border>
                         <ItemsPresenter x:Name="ItemsHost"
                                         Grid.Row="1"

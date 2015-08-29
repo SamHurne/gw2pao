@@ -166,7 +166,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                 {
                     // Start this on another thread so that we don't hold up anything creating us
                     this.TeamspeakService.Connect();
-                }, null, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext() );
+                }, null, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.FromCurrentSynchronizationContext() );
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
 
                     var newChannel = new ChannelViewModel(e.Channel, this.TeamspeakService);
 
-                    // Check if we have any orphans who is a subchannel of this new channel
+                    // Check if we have any orphans that are a subchannel of this new channel
                     var matchingOrphans = this.orphanChannels.Where(c => c.ParentID == newChannel.ID);
                     foreach (var orphan in matchingOrphans)
                     {

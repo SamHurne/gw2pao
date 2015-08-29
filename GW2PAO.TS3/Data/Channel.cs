@@ -33,8 +33,9 @@ namespace GW2PAO.TS3.Data
             uint id = DecodeUtility.DecodeUIntProperty(channelString, Properties.ChannelID);
 
             uint parentId = 0;
-            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ParentChannelID)) != null)
-                parentId = DecodeUtility.DecodeUIntProperty(channelString, Properties.ParentChannelID);
+            if (parts.FirstOrDefault(part => part.StartsWith(Properties.ParentID)) != null
+                || parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelParentID)) != null)
+                parentId = DecodeUtility.DecodeUIntProperty(channelString, Properties.ParentID, Properties.ChannelParentID);
 
             uint order = 0;
             if (parts.FirstOrDefault(part => part.StartsWith(Properties.ChannelOrder)) != null)
