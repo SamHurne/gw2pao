@@ -53,7 +53,7 @@ namespace GW2PAO.Modules.WvW
         /// <summary>
         /// The current match id monitored by the controller
         /// </summary>
-        private string matchID;
+        public string MatchID { get; private set; }
 
         /// <summary>
         /// The objectives refresh timer object
@@ -358,7 +358,7 @@ namespace GW2PAO.Modules.WvW
                     return; // Immediately return if we are supposed to be stopped
 
                 var matchID = this.wvwService.GetMatchId(this.UserData.WorldSelection.ID);
-                if (this.matchID != matchID)
+                if (this.MatchID != matchID)
                 {
                     this.HandleMatchChange(matchID);
                 }
@@ -367,13 +367,19 @@ namespace GW2PAO.Modules.WvW
                     // Check for new WvW Map
                     this.CheckForMapChange();
 
-                    // Refresh state of all objectives
+                    // Refresh state of all objectives and refresh the match scores
                     // Do this only once every 2 seconds
                     this.timerCount++;
                     if (this.timerCount >= 4) // 500ms * 4 = 2seconds
                     {
                         this.timerCount = 0;
                         this.RefreshObjectives();
+
+                        foreach (var team in this.Worlds)
+                        {
+                            var score = this.wvwService.GetWorldScore(team.WorldId);
+                            Threading.BeginInvokeOnUI(() => team.Score = score);
+                        }
                     }
 
                     this.RefreshTimers();
@@ -392,9 +398,9 @@ namespace GW2PAO.Modules.WvW
         private void HandleMatchChange(string newMatchID)
         {
             logger.Info("Match change detected: new matchID = {0}", newMatchID);
-            this.matchID = newMatchID;
+            this.MatchID = newMatchID;
 
-            if (matchID == null)
+            if (MatchID == null)
             {
                 // Unable to retrieve the current match ID, which means a reset is probably occuring
                 // When this happens, clear out the state of everything
@@ -429,14 +435,14 @@ namespace GW2PAO.Modules.WvW
                     });
 
                     // Refresh state of all objectives
-                    var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                    var latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
                     while (latestObjectivesData.Count() != this.AllObjectives.Count
                         && !this.isStopped)
                     {
                         // We were unable to pull data for all objectives - this can happen if we are
                         // in the middle of a reset. As such, loop until we actually get a full set
                         logger.Warn("Unable to retrieve data for all objectives! Trying again...");
-                        latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+                        latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
                     }
 
                     if (latestObjectivesData.Count() >= this.AllObjectives.Count)
@@ -447,7 +453,7 @@ namespace GW2PAO.Modules.WvW
                             {
                                 objective.RefreshForMatchReset(this.Worlds);
                                 var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                                objective.ModelData.MatchId = this.matchID;
+                                objective.ModelData.MatchId = this.MatchID;
                                 objective.PrevWorldOwner = latestData.WorldOwner;
                                 objective.WorldOwner = latestData.WorldOwner;
                                 objective.FlipTime = DateTime.UtcNow;
@@ -504,7 +510,7 @@ namespace GW2PAO.Modules.WvW
         /// </summary>
         private void RefreshObjectives()
         {
-            var latestObjectivesData = this.wvwService.GetAllObjectives(matchID);
+            var latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
             if (latestObjectivesData.Count() > 0)
             {
                 foreach (var objective in this.AllObjectives)

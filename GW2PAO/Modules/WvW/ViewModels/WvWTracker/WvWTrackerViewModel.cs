@@ -325,6 +325,42 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         }
 
         /// <summary>
+        /// The name of the Red world in the current match
+        /// </summary>
+        public WvWTeamViewModel RedTeam
+        {
+            get
+            {
+                var teams = this.controller.Worlds.Where(w => w.MatchId == this.controller.MatchID);
+                return teams.FirstOrDefault(w => w.Color == WorldColor.Red);
+            }
+        }
+
+        /// <summary>
+        /// The name of the Blue world in the current match
+        /// </summary>
+        public WvWTeamViewModel BlueTeam
+        {
+            get
+            {
+                var teams = this.controller.Worlds.Where(w => w.MatchId == this.controller.MatchID);
+                return teams.FirstOrDefault(w => w.Color == WorldColor.Blue);
+            }
+        }
+
+        /// <summary>
+        /// The name of the Green world in the current match
+        /// </summary>
+        public WvWTeamViewModel GreenTeam
+        {
+            get
+            {
+                var teams = this.controller.Worlds.Where(w => w.MatchId == this.controller.MatchID);
+                return teams.FirstOrDefault(w => w.Color == WorldColor.Green);
+            }
+        }
+
+        /// <summary>
         /// WvW user data
         /// </summary>
         public WvWUserData UserData { get { return this.controller.UserData; } }

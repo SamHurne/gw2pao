@@ -28,6 +28,11 @@ namespace GW2PAO.Modules.WvW.Interfaces
         WvWUserData UserData { get; }
 
         /// <summary>
+        /// The current match id
+        /// </summary>
+        string MatchID { get; }
+
+        /// <summary>
         /// The collection of WvW Teams
         /// </summary>
         ObservableCollection<WvWTeamViewModel> Worlds { get; }

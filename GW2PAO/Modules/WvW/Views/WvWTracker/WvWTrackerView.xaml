@@ -17,11 +17,13 @@
         Closed="Window_Closed"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True"
+        ToolTipService.InitialShowDelay="0"
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:WvWMapConverter x:Key="MapConverter" />
+        <converters:WorldColorConverter x:Key="WorldColorConverter" />
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
@@ -145,10 +147,50 @@
                     </Image.Style>
                 </Image>
 
+
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
                                         Fill="PaleGoldenrod" FontFamily="Candara" FontSize="13"
-                                        Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}" />
+                                        Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}">
+                    <core:OutlinedTextBlock.ToolTip>
+                        <Grid Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <core:OutlinedTextBlock Grid.Column="0" Grid.Row="0"
+                                                    Fill="{Binding RedTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Text="{Binding RedTeam.WorldName}"/>
+                            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="0"
+                                                    Fill="{Binding RedTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding RedTeam.Score}"/>
+
+                            <core:OutlinedTextBlock Grid.Column="0" Grid.Row="1"
+                                                    Fill="{Binding BlueTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Text="{Binding BlueTeam.WorldName}"/>
+                            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="1"
+                                                    Fill="{Binding BlueTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding BlueTeam.Score}"/>
+
+                            <core:OutlinedTextBlock Grid.Column="0" Grid.Row="2"
+                                                    Fill="{Binding GreenTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Text="{Binding GreenTeam.WorldName}"/>
+                            <core:OutlinedTextBlock Grid.Column="1" Grid.Row="2"
+                                                    Fill="{Binding GreenTeam.Color, Converter={StaticResource WorldColorConverter}}"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding GreenTeam.Score}"/>
+                            
+                        </Grid>
+                    </core:OutlinedTextBlock.ToolTip>
+                </core:OutlinedTextBlock>
 
                 <Button Name="CollapseExpandButton"
                         Grid.Column="2"

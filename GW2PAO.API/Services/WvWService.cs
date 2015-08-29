@@ -189,9 +189,9 @@ namespace GW2PAO.API.Services
                     if (wvwMatch.BlueWorldId == worldId)
                         return WorldColor.Blue;
                     else if (wvwMatch.GreenWorldId == worldId)
-                        return WorldColor.Red;
-                    else if (wvwMatch.RedWorldId == worldId)
                         return WorldColor.Green;
+                    else if (wvwMatch.RedWorldId == worldId)
+                        return WorldColor.Red;
                     else
                         return WorldColor.None;
                 }
