@@ -408,6 +408,9 @@ namespace GW2PAO.Modules.WvW
                         objective.DistanceFromPlayer = 0;
                         objective.TimerValue = TimeSpan.Zero;
                         objective.IsRIActive = false;
+                        objective.GuildClaimer.ID = null;
+                        objective.GuildClaimer.Name = string.Empty;
+                        objective.GuildClaimer.Tag = string.Empty;
                     }
                 });
             }
@@ -442,6 +445,7 @@ namespace GW2PAO.Modules.WvW
                         {
                             foreach (var objective in this.AllObjectives)
                             {
+                                objective.RefreshForMatchReset(this.Worlds);
                                 var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
                                 objective.ModelData.MatchId = this.matchID;
                                 objective.PrevWorldOwner = latestData.WorldOwner;
@@ -450,6 +454,17 @@ namespace GW2PAO.Modules.WvW
                                 objective.DistanceFromPlayer = 0;
                                 objective.TimerValue = TimeSpan.Zero;
                                 objective.IsRIActive = false;
+
+                                if (latestData.GuildOwner.HasValue)
+                                {
+                                    objective.GuildClaimer.ID = latestData.GuildOwner.Value;
+                                    var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
+                                    if (guildInfo != null)
+                                    {
+                                        objective.GuildClaimer.Name = guildInfo.Name;
+                                        objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                    }
+                                }
                             }
                         });
                     }

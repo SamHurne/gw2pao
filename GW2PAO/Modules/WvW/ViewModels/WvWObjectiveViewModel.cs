@@ -20,7 +20,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private IEnumerable<WvWTeamViewModel> wvwTeams;
+        private ICollection<WvWTeamViewModel> wvwTeams;
         private ICollection<WvWObjectiveViewModel> displayedNotificationsCollection;
         private WorldColor prevWorldOwner;
         private DateTime flipTime;
@@ -77,15 +77,17 @@ namespace GW2PAO.Modules.WvW.ViewModels
                 if (this.WorldOwner != WorldColor.None)
                 {
                     // Find the team
-                    var team = this.wvwTeams.First(wrld => wrld.MatchId == this.ModelData.MatchId
-                                                         && wrld.Color == this.WorldOwner);
-                    // Return the world name
-                    return team.WorldName;
+                    var team = this.wvwTeams.FirstOrDefault(wrld => wrld.MatchId == this.ModelData.MatchId
+                                                                 && wrld.Color == this.WorldOwner);
+                    if (team != null)
+                    {
+                        // Return the world name
+                        return team.WorldName;
+                    }
                 }
-                else
-                {
-                    return "N/A";
-                }
+
+                // else
+                return "N/A";
             }
         }
 
@@ -115,15 +117,17 @@ namespace GW2PAO.Modules.WvW.ViewModels
                 if (this.PrevWorldOwner != WorldColor.None)
                 {
                     // Find the team
-                    var team = this.wvwTeams.First(wrld => wrld.MatchId == this.ModelData.MatchId
-                                                         && wrld.Color == this.PrevWorldOwner);
-                    // Return the world name
-                    return team.WorldName;
+                    var team = this.wvwTeams.FirstOrDefault(wrld => wrld.MatchId == this.ModelData.MatchId
+                                                                 && wrld.Color == this.PrevWorldOwner);
+                    if (team != null)
+                    {
+                        // Return the world name
+                        return team.WorldName;
+                    }
                 }
-                else
-                {
-                    return "N/A";
-                }
+
+                // else
+                return "N/A";
             }
         }
 
@@ -280,7 +284,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         /// </summary>
         /// <param name="objective">The objective details</param>
         /// <param name="wvwTeams">Collection containing all of the WvW Teams</param>
-        public WvWObjectiveViewModel(WvWObjective objective, WvWUserData userData, IEnumerable<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
+        public WvWObjectiveViewModel(WvWObjective objective, WvWUserData userData, ICollection<WvWTeamViewModel> wvwTeams, ICollection<WvWObjectiveViewModel> displayedNotificationsCollection)
         {
             this.ModelData = objective;
             this.userData = userData;
@@ -299,6 +303,18 @@ namespace GW2PAO.Modules.WvW.ViewModels
             this.userData.PropertyChanged += (o, e) => this.RefreshVisibility();
             this.userData.HiddenObjectives.CollectionChanged += (o, e) => this.RefreshVisibility();
             this.RefreshVisibility();
+        }
+
+        /// <summary>
+        /// Refreshes the objective information for a new WvW matchup
+        /// </summary>
+        /// <param name="wvwTeams">The new collection of WvW teams</param>
+        public void RefreshForMatchReset(ICollection<WvWTeamViewModel> wvwTeams)
+        {
+            this.wvwTeams = wvwTeams;
+
+            // Just raise property changed that all properties have changed
+            this.OnPropertyChanged(null);
         }
 
         /// <summary>
