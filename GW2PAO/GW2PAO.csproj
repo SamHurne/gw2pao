@@ -844,9 +844,6 @@
     <Resource Include="Images\appicon.png" />
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
-    <Resource Include="Images\redsplash.png" />
-    <Resource Include="Images\bluesplash.png" />
-    <Resource Include="Images\greensplash.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
