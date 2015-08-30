@@ -972,4 +972,13 @@
   <data name="HeroChallenges" xml:space="preserve">
     <value>Hero Challenges</value>
   </data>
+  <data name="BasedOnBuyOrder" xml:space="preserve">
+    <value>Based on Buy Order Price</value>
+  </data>
+  <data name="BasedOnSellListing" xml:space="preserve">
+    <value>Based on Sell Listing Price</value>
+  </data>
+  <data name="EctoSalvageHelper" xml:space="preserve">
+    <value>Ectoplasm Salvage Helper</value>
+  </data>
 </root>

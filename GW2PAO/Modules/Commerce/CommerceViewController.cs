@@ -51,6 +51,11 @@ namespace GW2PAO.Modules.Commerce
         private PriceTrackerView priceTrackerView;
 
         /// <summary>
+        /// The price tracker view
+        /// </summary>
+        private EctoSalvageHelperView ectoSalvageView;
+
+        /// <summary>
         /// Displays all previously-opened windows and other windows
         /// that must be shown at startup
         /// </summary>
@@ -198,6 +203,33 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         /// <returns>Always true</returns>
         public bool CanDisplayPriceNotificationsWindow()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Displays the Ecto Salvage Helper window, or, if already displayed, sets
+        /// focus to the window
+        /// </summary>
+        public void DisplayEctoSalvageTracker()
+        {
+            if (this.ectoSalvageView == null || !this.ectoSalvageView.IsVisible)
+            {
+                this.ectoSalvageView = new EctoSalvageHelperView();
+                this.Container.ComposeParts(this.ectoSalvageView);
+                this.ectoSalvageView.Show();
+            }
+            else
+            {
+                this.ectoSalvageView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the price tracker can be displayed
+        /// </summary>
+        /// <returns>Always true</returns>
+        public bool CanDisplayEctoSalvageTracker()
         {
             return true;
         }

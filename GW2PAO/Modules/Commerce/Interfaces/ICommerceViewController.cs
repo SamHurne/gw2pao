@@ -22,5 +22,8 @@ namespace GW2PAO.Modules.Commerce.Interfaces
 
         void DisplayTPCalculator();
         bool CanDisplayTPCalculator();
+
+        void DisplayEctoSalvageTracker();
+        bool CanDisplayEctoSalvageTracker();
     }
 }

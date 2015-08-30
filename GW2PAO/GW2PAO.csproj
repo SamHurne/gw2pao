@@ -230,6 +230,10 @@
     <Compile Include="Infrastructure\Hotkeys\KeyModifier.cs" />
     <Compile Include="Infrastructure\Interfaces\ISettingsViewModel.cs" />
     <Compile Include="Interfaces\ISettingsViewController.cs" />
+    <Compile Include="Modules\Commerce\ViewModels\EctoSalvageHelperViewModel.cs" />
+    <Compile Include="Modules\Commerce\Views\EctoSalvageHelperView.xaml.cs">
+      <DependentUpon>EctoSalvageHelperView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Dungeons\Data\PathCompletionData.cs" />
     <Compile Include="Modules\Dungeons\Data\PathTime.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\DungeonTimer\DungeonTimerViewModel.cs" />
@@ -493,6 +497,10 @@
     <Page Include="Modules\Commerce\Views\CommerceSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Commerce\Views\EctoSalvageHelperView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Dungeons\Views\DungeonSettingsView.xaml">
       <SubType>Designer</SubType>

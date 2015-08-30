@@ -85,6 +85,12 @@ namespace GW2PAO.Modules.Commerce
         public ObservableCollection<PriceNotificationViewModel> PriceNotifications { get; private set; }
 
         /// <summary>
+        /// Data associated with the ectoplasm salvaging threshold tracker
+        /// </summary>
+        [Export]
+        public EctoSalvageHelperViewModel EcoSalvageData { get; private set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="commerceService">The commerce service object</param>
@@ -97,6 +103,7 @@ namespace GW2PAO.Modules.Commerce
             this.UserData = userData;
             this.ItemPrices = new ObservableCollection<ItemPriceViewModel>();
             this.PriceNotifications = new ObservableCollection<PriceNotificationViewModel>();
+            this.EcoSalvageData = new EctoSalvageHelperViewModel(userData);
 
             // Initialize the refresh timer
             this.refreshTimer = new Timer(this.Refresh);
@@ -306,6 +313,15 @@ namespace GW2PAO.Modules.Commerce
                         }
                     }
                 }
+
+
+                // Additionally, update the Ectoplasm Salvage Threshold tracker data
+                var ectoPrices = this.commerceService.GetItemPrices(EctoSalvageHelperViewModel.EctoplasmItemID);
+                Threading.BeginInvokeOnUI(() =>
+                {
+                    this.EcoSalvageData.EctoplasmBuyOrder.Value = ectoPrices.HighestBuyOrder;
+                    this.EcoSalvageData.EctoplasmSellListing.Value = ectoPrices.LowestSellListing;
+                });
 
                 this.refreshTimer.Change(this.RefreshInterval, Timeout.Infinite);
             }

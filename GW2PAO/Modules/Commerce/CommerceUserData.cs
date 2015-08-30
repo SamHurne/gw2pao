@@ -43,6 +43,7 @@ namespace GW2PAO.Modules.Commerce
         private int maxHistoricalDataPoints;
         private string priceTrackerSortProperty;
         private uint notificationDuration;
+        private bool ectoplasmThresholdUsesSellListing;
         private ObservableCollection<PriceWatch> priceWatches = new ObservableCollection<PriceWatch>();
 
         /// <summary>
@@ -100,6 +101,16 @@ namespace GW2PAO.Modules.Commerce
         }
 
         /// <summary>
+        /// True if the Ectoplasm Salvage Threshold should be based off the sell listing,
+        /// else false if it should be based on the buy order price
+        /// </summary>
+        public bool EctoplasmThresholdUsesSellListing
+        {
+            get { return areSellListingPriceNotificationsEnabled; }
+            set { this.SetProperty(ref this.areSellListingPriceNotificationsEnabled, value); }
+        }
+
+        /// <summary>
         /// Collection of price watches for the price watch notifications
         /// </summary>
         public ObservableCollection<PriceWatch> PriceWatches { get { return this.priceWatches; } }
@@ -115,6 +126,7 @@ namespace GW2PAO.Modules.Commerce
             this.AreSellListingPriceNotificationsEnabled = true;
             this.MaxHistoricalDataPoints = 600; // 600 data points = 10 hours of data
             this.NotificationDuration = 20;
+            this.EctoplasmThresholdUsesSellListing = true;
         }
 
         /// <summary>

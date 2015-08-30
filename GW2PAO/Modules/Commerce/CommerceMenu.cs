@@ -85,6 +85,7 @@ namespace GW2PAO.Modules.Commerce
 
             this.SubMenuItems.Add(null); // Null for a seperator
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.TPCalculator, viewFactory.DisplayTPCalculator, viewFactory.CanDisplayTPCalculator));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.EctoSalvageHelper, viewFactory.DisplayEctoSalvageTracker, viewFactory.CanDisplayEctoSalvageTracker));
         }
     }
 }
