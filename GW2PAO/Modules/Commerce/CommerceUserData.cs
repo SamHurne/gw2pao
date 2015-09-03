@@ -106,8 +106,8 @@ namespace GW2PAO.Modules.Commerce
         /// </summary>
         public bool EctoplasmThresholdUsesSellListing
         {
-            get { return areSellListingPriceNotificationsEnabled; }
-            set { this.SetProperty(ref this.areSellListingPriceNotificationsEnabled, value); }
+            get { return this.ectoplasmThresholdUsesSellListing; }
+            set { this.SetProperty(ref this.ectoplasmThresholdUsesSellListing, value); }
         }
 
         /// <summary>
