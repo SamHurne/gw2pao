@@ -145,8 +145,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Item Name -->
-                <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
-                                        Margin="0,3,0,0"
+                <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0"
+                                        Margin="0,1,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Fill="Orange" FontSize="13"
                                         Text="{Binding ItemName}" />
@@ -164,17 +164,17 @@
                             Orientation="Horizontal" VerticalAlignment="Center">
                     <core:OutlinedTextBlock Text="{Binding NotificationType, Converter={StaticResource NotificationTypeConverter}}" FontSize="12"/>
                     <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
-                        <core:OutlinedTextBlock Text="{Binding Price.Gold}" Margin="0,1,0,0" />
+                        <core:OutlinedTextBlock Text="{Binding Price.Gold}" Fill="Gold" Margin="0,1,0,0" />
                         <Image Source="../../../../Images/Commerce/gold_coin.png"
                                Height="16" Width="16"
                                VerticalAlignment="Center"
                                Margin="1,0,5,0"/>
-                        <core:OutlinedTextBlock Text="{Binding Price.Silver}" Margin="0,1,0,0"/>
+                        <core:OutlinedTextBlock Text="{Binding Price.Silver}" Fill="LightGray" Margin="0,1,0,0"/>
                         <Image Source="../../../../Images/Commerce/silver_coin.png"
                                Height="16" Width="16"
                                VerticalAlignment="Center"
                                Margin="1,0,5,0"/>
-                        <core:OutlinedTextBlock Text="{Binding Price.Copper}" Margin="0,1,0,0"/>
+                        <core:OutlinedTextBlock Text="{Binding Price.Copper}" Fill="Peru" Margin="0,1,0,0"/>
                         <Image Source="../../../../Images/Commerce/copper_coin.png"
                                Height="16" Width="16"
                                VerticalAlignment="Center"

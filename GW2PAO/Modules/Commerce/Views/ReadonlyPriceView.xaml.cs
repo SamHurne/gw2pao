@@ -26,20 +26,6 @@ namespace GW2PAO.Modules.Commerce.Views
     public partial class ReadonlyPriceView : UserControl
     {
         /// <summary>
-        /// Gets or sets the Fill used for the text of the control
-        /// </summary>
-        public Brush TextFill
-        {
-            get { return (Brush)GetValue(TextFillProperty); }
-            set { SetValue(TextFillProperty, value); }
-        }
-
-        /// <summary>
-        /// Identified the TextFill dependency property
-        /// </summary>
-        public static readonly DependencyProperty TextFillProperty = DependencyProperty.Register("TextFill", typeof(Brush), typeof(ReadonlyPriceView), new PropertyMetadata(Brushes.White));
-
-        /// <summary>
         /// Gets or sets the Price used display in the control
         /// </summary>
         public Price Price

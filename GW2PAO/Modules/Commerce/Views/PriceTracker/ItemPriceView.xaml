@@ -67,8 +67,7 @@
                             <oxy:TrackerControl.Content>
                                 <StackPanel Margin="5">
                                     <TextBlock Text="{Binding DataPoint.X, Converter={StaticResource DateTimeGraphValConverter}}"/>
-                                    <view:ReadonlyPriceView Price="{Binding DataPoint.Y, Converter={StaticResource DoubleToPrice}}"
-                                                            TextFill="White"/>
+                                    <view:ReadonlyPriceView Price="{Binding DataPoint.Y, Converter={StaticResource DoubleToPrice}}"/>
                                 </StackPanel>
                             </oxy:TrackerControl.Content>
                         </oxy:TrackerControl>
@@ -123,8 +122,7 @@
         <StackPanel Orientation="Horizontal">
             <core:OutlinedTextBlock Margin="0,0,0,1" Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}" FontSize="12"/>
             <view:ReadonlyPriceView Margin="5,0,0,0"
-                                    Price="{Binding CurrentProfit}"
-                                    TextFill="White" />
+                                    Price="{Binding CurrentProfit}"/>
         </StackPanel>
     </UserControl.ToolTip>
 
@@ -195,7 +193,7 @@
                                     HorizontalAlignment="Right"
                                     Margin="5,1,0,0"
                                     Price="{Binding CurrentSellListing}"
-                                    TextFill="White" AlignSilverCopper="True">
+                                    AlignSilverCopper="True">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
                         <Setter Property="Effect">
@@ -227,7 +225,7 @@
                                     HorizontalAlignment="Right"
                                     Margin="5,5,0,0"
                                     Price="{Binding CurrentBuyOrder}"
-                                    TextFill="White" AlignSilverCopper="True">
+                                     AlignSilverCopper="True">
                 <view:ReadonlyPriceView.Style>
                     <Style TargetType="view:ReadonlyPriceView">
                         <Setter Property="Effect">
