@@ -353,6 +353,7 @@
     <Compile Include="Utility\ProcessMonitor.cs" />
     <Compile Include="Utility\ReflectionUtility.cs" />
     <Compile Include="Utility\ResizeSnapHelper.cs" />
+    <Compile Include="Utility\ObservableDictionary.cs" />
     <Compile Include="Utility\SerializableTimespan.cs" />
     <Compile Include="Utility\Threading.cs" />
     <Compile Include="Utility\UpdateChecker.cs" />
