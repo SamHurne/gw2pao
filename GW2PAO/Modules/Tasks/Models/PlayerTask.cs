@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Entities;
 using Microsoft.Practices.Prism.Mvvm;
+using GW2PAO.Utility;
 
 namespace GW2PAO.Modules.Tasks.Models
 {
@@ -15,13 +16,16 @@ namespace GW2PAO.Modules.Tasks.Models
         private string name;
         private string description;
         private bool isCompletable;
-        private bool isCompleted;
+        private bool isAccountCompleted;
+        private bool isCompletedPerCharacter;
         private bool autoComplete;
         private bool isDailyReset;
         private Point location;
         private int mapId;
         private string iconUri;
         private string waypointCode;
+
+        private ObservableDictionary<string, bool> characterCompletions = new ObservableDictionary<string, bool>();
 
         /// <summary>
         /// Unique ID of the player task
@@ -60,12 +64,31 @@ namespace GW2PAO.Modules.Tasks.Models
         }
 
         /// <summary>
-        /// True if the task has a checkbox and is completed, else false
+        /// True if the task is completed account-wide, else false
         /// </summary>
-        public bool IsCompleted
+        public bool IsAccountCompleted
         {
-            get { return this.isCompleted; }
-            set { SetProperty(ref this.isCompleted, value); }
+            get { return this.isAccountCompleted; }
+            set { SetProperty(ref this.isAccountCompleted, value); }
+        }
+
+        /// <summary>
+        /// True if the task is completed on a per-character basis, else false
+        /// </summary>
+        public bool IsCompletedPerCharacter
+        {
+            get { return this.isCompletedPerCharacter; }
+            set { SetProperty(ref this.isCompletedPerCharacter, value); }
+        }
+
+        /// <summary>
+        /// Dictionary containing the character completions, if completed on a per-character basis
+        /// NOTE: The setter is public only for serialization purposes!!!
+        /// </summary>
+        public ObservableDictionary<string, bool> CharacterCompletions
+        {
+            get { return this.characterCompletions; }
+            set { this.characterCompletions = value; }
         }
 
         /// <summary>
@@ -156,13 +179,19 @@ namespace GW2PAO.Modules.Tasks.Models
             this.Name = other.Name;
             this.Description = other.Description;
             this.IsCompletable = other.IsCompletable;
-            this.IsCompleted = other.IsCompleted;
+            this.IsAccountCompleted = other.IsAccountCompleted;
+            this.IsCompletedPerCharacter = other.IsCompletedPerCharacter;
             this.AutoComplete = other.AutoComplete;
             this.IsDailyReset = other.IsDailyReset;
             this.Location = other.Location;
             this.MapID = other.MapID;
             this.IconUri = other.IconUri;
             this.WaypointCode = other.WaypointCode;
+            
+            foreach (var character in other.CharacterCompletions.Keys)
+            {
+                this.CharacterCompletions.Add(character, other.CharacterCompletions[character]);
+            }
         }
     }
 }

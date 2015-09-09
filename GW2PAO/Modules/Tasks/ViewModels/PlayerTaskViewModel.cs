@@ -28,6 +28,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private IZoneService zoneService;
         private IPlayerTasksController controller;
         private CompositionContainer container;
+        private string currentCharacterName;
         private string mapName;
         private bool isPlayerOnMap;
         private double distanceFromPlayer;
@@ -49,6 +50,52 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             get { return this.task; }
             private set { SetProperty(ref this.task, value); }
+        }
+
+        /// <summary>
+        /// True if the task has been completed, else false
+        /// 
+        /// Takes into account whether or not the task is
+        ///  completed on a per-character basis (See TasksController)
+        /// </summary>
+        public bool IsCompleted
+        {
+            get
+            {
+                if (this.Task.IsCompletedPerCharacter)
+                {
+                    if (this.Task.CharacterCompletions.ContainsKey(this.currentCharacterName))
+                        return this.Task.CharacterCompletions[this.currentCharacterName];
+                    else
+                        return false;
+                }
+                else
+                {
+                    return this.Task.IsAccountCompleted;
+                }
+            }
+            set
+            {
+                if (this.Task.IsCompletedPerCharacter)
+                {
+                    if (!this.Task.CharacterCompletions.ContainsKey(this.currentCharacterName)
+                        || this.Task.CharacterCompletions[this.currentCharacterName] != value)
+                    {
+                        logger.Info("{0} task completed for {1} = {2}", this.Name, this.currentCharacterName, value);
+                        this.Task.CharacterCompletions[this.currentCharacterName] = value;
+                        this.OnPropertyChanged(() => this.IsCompleted);
+                    }
+                }
+                else
+                {
+                    if (this.Task.IsAccountCompleted != value)
+                    {
+                        logger.Info("{0} task completed (account-wide) = {1}", this.Name, value);
+                        this.Task.IsAccountCompleted = value;
+                        this.OnPropertyChanged(() => this.IsCompleted);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -166,6 +213,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.zoneService = zoneService;
             this.controller = controller;
             this.container = container;
+            this.currentCharacterName = string.Empty;
 
             this.Task.PropertyChanged += (o, e) =>
                 {
@@ -180,6 +228,17 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.UserData.PropertyChanged += (o, e) => this.RefreshVisibility();
             this.Task.PropertyChanged += (o, e) => this.RefreshVisibility();
             this.RefreshVisibility();
+        }
+
+        /// <summary>
+        /// Method to notify the task that a new character has been detected
+        /// </summary>
+        /// <param name="charName">the new character's name</param>
+        public void OnNewCharacterDetected(string charName)
+        {
+            this.currentCharacterName = charName;
+            if (this.Task.IsCompletedPerCharacter)
+                this.OnPropertyChanged(() => this.IsCompleted);
         }
 
         /// <summary>
@@ -233,7 +292,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private void RefreshVisibility()
         {
             logger.Trace("Refreshing visibility of \"{0}\"", this.Task.Name);
-            if (!this.UserData.ShowCompletedTasks && this.Task.IsCompleted)
+            if (!this.UserData.ShowCompletedTasks && this.IsCompleted)
             {
                 this.IsVisible = false;
             }

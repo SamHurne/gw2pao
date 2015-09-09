@@ -981,4 +981,7 @@
   <data name="EctoSalvageHelper" xml:space="preserve">
     <value>Ectoplasm Salvage Helper</value>
   </data>
+  <data name="CompletedPerChar" xml:space="preserve">
+    <value>Completed Per Character</value>
+  </data>
 </root>

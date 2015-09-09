@@ -113,12 +113,14 @@ namespace GW2PAO.Modules.Tasks
                     foreach (PlayerTask task in e.NewItems)
                     {
                         task.PropertyChanged += (obj, arg) => TasksUserData.SaveData(this, TasksUserData.Filename);
+                        task.CharacterCompletions.CollectionChanged += (obj, arg) => TasksUserData.SaveData(this, TasksUserData.Filename);
                     }
                 }
             };
             foreach (PlayerTask task in this.Tasks)
             {
                 task.PropertyChanged += (obj, arg) => TasksUserData.SaveData(this, TasksUserData.Filename);
+                task.CharacterCompletions.CollectionChanged += (obj, arg) => TasksUserData.SaveData(this, TasksUserData.Filename);
             }
         }
     }

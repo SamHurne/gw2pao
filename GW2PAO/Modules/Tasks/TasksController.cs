@@ -69,6 +69,11 @@ namespace GW2PAO.Modules.Tasks
         private readonly object refreshLock = new object();
 
         /// <summary>
+        /// The current player's character name
+        /// </summary>
+        public string CharacterName { get; private set; }
+
+        /// <summary>
         /// The collection of player tasks
         /// </summary>
         public ObservableCollection<PlayerTaskViewModel> PlayerTasks { get; private set; }
@@ -103,13 +108,18 @@ namespace GW2PAO.Modules.Tasks
             this.container = container;
             this.isStopped = false;
 
+            this.CharacterName = this.playerService.CharacterName;
             this.UserData = userData;
             this.PlayerTasks = new ObservableCollection<PlayerTaskViewModel>();
 
             // Initialize all loaded tasks
             logger.Info("Initializing all loaded player tasks");
             foreach (var task in this.UserData.Tasks)
-                this.PlayerTasks.Add(new PlayerTaskViewModel(task, zoneService, this, this.container));
+            {
+                var taskVm = new PlayerTaskViewModel(task, zoneService, this, this.container);
+                taskVm.OnNewCharacterDetected(this.CharacterName);
+                this.PlayerTasks.Add(taskVm);
+            }
 
             // Initialize refresh timers
             this.refreshTimer = new Timer(this.Refresh);
@@ -197,13 +207,18 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.Name = task.Name;
                             existingTask.Task.Description = task.Description;
                             existingTask.Task.IsCompletable = task.IsCompletable;
-                            existingTask.Task.IsCompleted = task.IsCompleted;
+                            existingTask.Task.IsAccountCompleted = task.IsAccountCompleted;
+                            existingTask.Task.IsCompletedPerCharacter = task.IsCompletedPerCharacter;
                             existingTask.Task.IsDailyReset = task.IsDailyReset;
                             existingTask.Task.AutoComplete = task.AutoComplete;
                             existingTask.Task.Location = task.Location;
                             existingTask.Task.MapID = task.MapID;
                             existingTask.Task.IconUri = task.IconUri;
                             existingTask.Task.WaypointCode = task.WaypointCode;
+                            foreach (var character in task.CharacterCompletions.Keys)
+                            {
+                                existingTask.Task.CharacterCompletions.Add(character, task.CharacterCompletions[character]);
+                            }
                         }
                     });
             }
@@ -253,7 +268,7 @@ namespace GW2PAO.Modules.Tasks
                     this.PlayerTasks.Clear();
                     foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                     {
-                        task.IsCompleted = false;
+                        task.IsAccountCompleted = false;
                         this.UserData.Tasks.Add(task);
                         this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                     }
@@ -306,7 +321,7 @@ namespace GW2PAO.Modules.Tasks
                     {
                         foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                         {
-                            task.IsCompleted = false;
+                            task.IsAccountCompleted = false;
                             this.UserData.Tasks.Add(task);
                             this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                         }
@@ -338,6 +353,19 @@ namespace GW2PAO.Modules.Tasks
                     this.UserData.LastResetDateTime = DateTime.UtcNow.Date;
                 }
 
+                // Check for a new character
+                if (this.CharacterName != this.playerService.CharacterName)
+                {
+                    this.CharacterName = this.playerService.CharacterName;
+                    Threading.BeginInvokeOnUI(() =>
+                    {
+                        foreach (var pt in this.PlayerTasks)
+                        {
+                            pt.OnNewCharacterDetected(this.CharacterName);
+                        }
+                    });
+                }
+
                 // Refresh task distances/angles
                 if (this.playerService.HasValidMapId)
                 {
@@ -357,7 +385,12 @@ namespace GW2PAO.Modules.Tasks
             foreach (var pt in this.PlayerTasks)
             {
                 if (pt.Task.IsCompletable && pt.Task.IsDailyReset)
-                    pt.Task.IsCompleted = false;
+                {
+                    Threading.BeginInvokeOnUI(() => pt.IsCompleted = false);
+                    pt.Task.IsAccountCompleted = false;
+                    foreach (var charCompletion in pt.Task.CharacterCompletions.Keys)
+                        pt.Task.CharacterCompletions[charCompletion] = false;
+                }
             }
         }
 
@@ -375,8 +408,7 @@ namespace GW2PAO.Modules.Tasks
                 var playerMapPosition = CalcUtil.ConvertToMapPosition(playerPos);
                 var cameraDirectionMapPosition = CalcUtil.ConvertToMapPosition(cameraDir);
 
-                foreach (var ptask in this.PlayerTasks.Where(pt => pt.Task.Location != null
-                                                                   && pt.Task.MapID == this.CurrentMapID))
+                foreach (var ptask in this.PlayerTasks.Where(pt => pt.Task.Location != null && pt.Task.MapID == this.CurrentMapID))
                 {
                     var taskMapPosition = CalcUtil.ConvertToMapPosition(ptask.Task.Location);
 
@@ -393,12 +425,11 @@ namespace GW2PAO.Modules.Tasks
                         });
 
                     // Check for auto-completion detection
-                    if (ptask.Task.AutoComplete
-                        && CalcUtil.CalculateDistance(playerMapPosition, taskMapPosition, API.Data.Enums.Units.Feet) < 10)
+                    if (ptask.Task.AutoComplete && CalcUtil.CalculateDistance(playerMapPosition, taskMapPosition, API.Data.Enums.Units.Feet) < 10)
                     {
                         Threading.BeginInvokeOnUI(() =>
                         {
-                            ptask.Task.IsCompleted = true;
+                            ptask.IsCompleted = true;
                         });
                     }
                 }

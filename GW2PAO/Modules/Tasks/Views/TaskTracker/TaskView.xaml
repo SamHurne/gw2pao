@@ -134,7 +134,7 @@
                       VerticalAlignment="Center"
                       Style="{StaticResource AlternateCheckboxStyle}"
                       Visibility="{Binding Task.IsCompletable, Converter={StaticResource BoolToVisibilityConverter}}"
-                      IsChecked="{Binding Task.IsCompleted}" />
+                      IsChecked="{Binding IsCompleted}" />
 
             <Grid Grid.Column="3"
                         Margin="0,0,0,0"

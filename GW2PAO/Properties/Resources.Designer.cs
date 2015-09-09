@@ -439,6 +439,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed Per Character.
+        /// </summary>
+        public static string CompletedPerChar {
+            get {
+                return ResourceManager.GetString("CompletedPerChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completion Options.
         /// </summary>
         public static string CompletionOptions {
