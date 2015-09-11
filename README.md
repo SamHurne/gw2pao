@@ -2,6 +2,8 @@ Guild Wars 2 Personal Assistant Overlay
 ======
 A stand-alone .NET/WPF informational overlay utility package for Guild Wars 2.
 
+GitHub Pages Site: http://samhurne.github.io/gw2pao/
+
 # Features
 ### Events Tracker
 The Events Tracker utility tracks active and inactive world events and helps users keep track of which events have been completed for the day.
@@ -43,5 +45,5 @@ The Teamspeak Overlay is an overlay that uses the ClientQuery plugin of Teamspea
 For all needs not provided by the other overlay windows, the Web Browser allows a user to look up guides, videos, or anything else.
 
 
-For detailed usage of each tool, check out the [wiki](https://github.com/SamHurne/gw2pao/wiki).
-For more information, visit the [GitHub Pages Site](http://samhurne.github.io/gw2pao/)
+
+For detailed usage of each tool and more information, check out the [wiki](https://github.com/SamHurne/gw2pao/wiki).
