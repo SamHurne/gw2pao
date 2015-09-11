@@ -776,6 +776,7 @@
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <Resource Include="Images\Misc\copy.png" />
     <Resource Include="Images\Commerce\unknown_icon.png" />
     <Resource Include="Images\OverlayMenuIcon_Color.png" />

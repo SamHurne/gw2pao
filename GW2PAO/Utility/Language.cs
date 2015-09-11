@@ -11,7 +11,8 @@ namespace GW2PAO.Utility
         English,
         Spanish,
         French,
-        German
+        German,
+        Russian
     }
 
     public static class LanguageExtensions
@@ -28,6 +29,8 @@ namespace GW2PAO.Utility
                     return "Français";
                 case Language.German:
                     return "Deutsch";
+                case Language.Russian:
+                    return "Pу́сский";
                 default:
                     return "???";
             }
@@ -45,6 +48,8 @@ namespace GW2PAO.Utility
                     return Language.French;
                 case "Deutsch":
                     return Language.German;
+                case "Pу́сский":
+                    return Language.Russian;
                 default:
                     return Language.English;
             }
@@ -62,6 +67,8 @@ namespace GW2PAO.Utility
                     return "fr";
                 case Language.German:
                     return "de";
+                case Language.Russian:
+                    return "ru";
                 default:
                     return "en";
             }
@@ -79,6 +86,8 @@ namespace GW2PAO.Utility
                     return Language.French;
                 case "de":
                     return Language.German;
+                case "ru":
+                    return Language.Russian;
                 default:
                     return Language.English;
             }
