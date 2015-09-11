@@ -60,7 +60,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="95" />
+                        <ColumnDefinition Width="87" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
@@ -83,18 +83,9 @@
                            FontSize="11" Foreground="White"
                            Text="{x:Static resx:Resources.TranslationsBy}" />
 
-                    <TextBlock Grid.Row="1" Grid.Column="1"
+                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                            FontSize="11" Foreground="White"
-                           Text="Shawni Roux [FR], Vacendak.5962 [DE], Kenya Kendra [ES]" />
-
-                    <TextBlock Grid.Row="1" Grid.Column="2"
-                               HorizontalAlignment="Right"
-                               Margin="0,00,0,0"
-                               FontSize="11">
-                        <Hyperlink Foreground="White" Command="{Binding HelpCommand}">
-                            <TextBlock Text="{x:Static resx:Resources.Help}"/>
-                        </Hyperlink>
-                    </TextBlock>
+                           Text="Shawni Roux [FR], Vacendak.5962 [DE], Kenya Kendra [ES], CkauNui.8943 [RU]" />
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
                                 Orientation="Horizontal">
@@ -108,7 +99,7 @@
 
                     <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
                             Margin="0,10,0,5"
-                            BorderBrush="Gray" BorderThickness="0,1,0,0">
+                            BorderBrush="Gray" BorderThickness="0,2,0,0">
                         <TextBlock 
                                    FontSize="11" Foreground="White"
                                    TextWrapping="Wrap"
@@ -117,7 +108,7 @@
 
                     <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
                             Margin="0,5,0,5"
-                            BorderBrush="Gray" BorderThickness="0,1,0,0">
+                            BorderBrush="Gray" BorderThickness="0,2,0,0">
                         <TextBlock 
                                    FontSize="11" Foreground="White"
                                    TextWrapping="Wrap"
