@@ -977,4 +977,17 @@
   <data name="HeroChallenges" xml:space="preserve">
     <value>Desafíos de héroe</value>
   </data>
+  <data name="BasedOnBuyOrder" xml:space="preserve">
+    <value>En base a la Orden de Compra Precio</value>
+  </data>
+  <data name="BasedOnSellListing" xml:space="preserve">
+    <value>Basado en Venta Precio de listado</value>
+  </data>
+  <data name="CompletedPerChar" xml:space="preserve">
+    <value>Completado por carácter</value>
+    <comment>for the tasks tracker</comment>
+  </data>
+  <data name="EctoSalvageHelper" xml:space="preserve">
+    <value>Ectoplasma Salvamento Ayudante</value>
+  </data>
 </root>

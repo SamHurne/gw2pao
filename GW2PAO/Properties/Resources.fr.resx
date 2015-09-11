@@ -968,4 +968,17 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   <data name="HeroChallenges" xml:space="preserve">
     <value>Défis de héros</value>
   </data>
+  <data name="BasedOnBuyOrder" xml:space="preserve">
+    <value>Basé sur le prix d'achat max.</value>
+  </data>
+  <data name="BasedOnSellListing" xml:space="preserve">
+    <value>Basé sur le prix de vente mini.</value>
+  </data>
+  <data name="CompletedPerChar" xml:space="preserve">
+    <value>Validé par le personnage</value>
+    <comment>for the tasks tracker</comment>
+  </data>
+  <data name="EctoSalvageHelper" xml:space="preserve">
+    <value>Assistant de recyclage d'ecto</value>
+  </data>
 </root>
