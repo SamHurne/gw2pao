@@ -74,6 +74,9 @@ namespace GW2PAO.Modules.Commerce
                 if (Properties.Settings.Default.IsPriceTrackerOpen && this.CanDisplayPriceTracker())
                     this.DisplayPriceTracker();
 
+                if (Properties.Settings.Default.IsEctoHelperOpen && this.CanDisplayEctoSalvageTracker())
+                    this.DisplayEctoSalvageTracker();
+
                 if (this.CanDisplayPriceNotificationsWindow())
                     this.DisplayPriceNotificationsWindow();
             });
@@ -96,6 +99,12 @@ namespace GW2PAO.Modules.Commerce
             {
                 Properties.Settings.Default.IsPriceTrackerOpen = this.priceTrackerView.IsVisible;
                 Threading.InvokeOnUI(() => this.priceTrackerView.Close());
+            }
+
+            if (this.ectoSalvageView != null)
+            {
+                Properties.Settings.Default.IsEctoHelperOpen = this.ectoSalvageView.IsVisible;
+                Threading.InvokeOnUI(() => this.ectoSalvageView.Close());
             }
 
             Properties.Settings.Default.Save();

@@ -838,5 +838,17 @@ namespace GW2PAO.Properties {
                 this["EctoHelperY"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsEctoHelperOpen {
+            get {
+                return ((bool)(this["IsEctoHelperOpen"]));
+            }
+            set {
+                this["IsEctoHelperOpen"] = value;
+            }
+        }
     }
 }
