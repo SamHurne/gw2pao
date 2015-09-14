@@ -181,10 +181,10 @@
     <value>Среднее время</value>
   </data>
   <data name="BasedOnBuyOrder" xml:space="preserve">
-    <value>На основании ордера на покупку Цена</value>
+    <value>Основан на Buy Order цене</value>
   </data>
   <data name="BasedOnSellListing" xml:space="preserve">
-    <value>На основании Sell Listing Цена</value>
+    <value>Основан на Sell Listing цене</value>
   </data>
   <data name="BestTime" xml:space="preserve">
     <value>Лучшее время</value>
@@ -252,7 +252,7 @@
     <value>Торговля</value>
   </data>
   <data name="CompletedPerChar" xml:space="preserve">
-    <value>Завершен на символ</value>
+    <value>Для каждого персонажа</value>
     <comment>for the tasks tracker</comment>
   </data>
   <data name="CompletionOptions" xml:space="preserve">
@@ -269,7 +269,7 @@
     <comment>Used to copy &amp; paste a special chat code into the in-game chat</comment>
   </data>
   <data name="CopyEnemyHeadedTowards" xml:space="preserve">
-    <value>Copy Enemy Headed Towards Text</value>
+    <value>Копировать Enemy Headed Towards Text</value>
     <comment>Copy text meant to notify others than enemy players are headed towards an objective</comment>
   </data>
   <data name="CopyName" xml:space="preserve">
@@ -277,15 +277,15 @@
     <comment>Copy the Name of something</comment>
   </data>
   <data name="CopyPlayerHeadedTowards" xml:space="preserve">
-    <value>Copy Player Headed Towards Text</value>
+    <value>Копировать Player Headed Towards Text</value>
     <comment>Copy text meant to notify others that players are headed towards an objective</comment>
   </data>
   <data name="CopyRITimer" xml:space="preserve">
-    <value>Copy RI Timer Text</value>
+    <value>Копировать RI Timer Text</value>
     <comment>Copy text including the Righteous Indignation timer value of an objective</comment>
   </data>
   <data name="CopyUnderAttack" xml:space="preserve">
-    <value>Copy Under Attack Text</value>
+    <value>Копировать Under Attack Text</value>
     <comment>Copy text meant to notify others that an objective is under attack</comment>
   </data>
   <data name="CopyWaypointCode" xml:space="preserve">
@@ -365,7 +365,7 @@
     <value>Данж таймер</value>
   </data>
   <data name="EctoSalvageHelper" xml:space="preserve">
-    <value>Эктоплазма Поврежденный помощник</value>
+    <value>Ectoplasm Salvage Helper</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
@@ -506,7 +506,7 @@
     <value>Взнос:</value>
   </data>
   <data name="Load" xml:space="preserve">
-    <value>Загрузить</value>
+    <value>Загрузить...</value>
   </data>
   <data name="LocatedInX" xml:space="preserve">
     <value>Находится в {0}</value>
@@ -658,7 +658,7 @@
     <comment>Forces events hidden from view to be shown again</comment>
   </data>
   <data name="ResetHiddenObjectives" xml:space="preserve">
-    <value>Сбросить скрытые Objectives</value>
+    <value>Сбросить скрытые Объекты</value>
   </data>
   <data name="ResetHiddenPoints" xml:space="preserve">
     <value>Сбросить скрытые точки</value>
