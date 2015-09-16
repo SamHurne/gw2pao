@@ -74,7 +74,12 @@ namespace GW2PAO.Modules.WvW
         /// Timer counter used for reducing the amount of requests performed
         /// See RefreshObjectives() for more details
         /// </summary>
-        private int timerCount;
+        private int objectivesRefreshCounter;
+
+        /// <summary>
+        /// Timer counter used for determining when to request new world scores
+        /// </summary>
+        private int scoresRefreshCounter;
 
         /// <summary>
         /// User data for WvW
@@ -189,7 +194,8 @@ namespace GW2PAO.Modules.WvW
             this.guildService = guildService;
             this.currentMap = hasMap;
             this.userData = userData;
-            this.timerCount = 0;
+            this.objectivesRefreshCounter = 0;
+            this.scoresRefreshCounter = 0;
             this.isStopped = false;
 
             // Initialize the refresh timer
@@ -369,17 +375,25 @@ namespace GW2PAO.Modules.WvW
 
                     // Refresh state of all objectives and refresh the match scores
                     // Do this only once every 2 seconds
-                    this.timerCount++;
-                    if (this.timerCount >= 4) // 500ms * 4 = 2seconds
+                    this.objectivesRefreshCounter++;
+                    if (this.objectivesRefreshCounter >= 4) // 500ms * 4 = 2seconds
                     {
-                        this.timerCount = 0;
+                        this.objectivesRefreshCounter = 0;
                         this.RefreshObjectives();
+                    }
 
-                        foreach (var team in this.Worlds)
+                    this.scoresRefreshCounter++;
+                    if (this.scoresRefreshCounter >= 60) // 500ms * 20 = 30seconds
+                    {
+                        this.scoresRefreshCounter = 0;
+                        Task.Factory.StartNew(() =>
                         {
-                            var score = this.wvwService.GetWorldScore(team.WorldId);
-                            Threading.BeginInvokeOnUI(() => team.Score = score);
-                        }
+                            foreach (var team in this.Worlds)
+                            {
+                                var score = this.wvwService.GetWorldScore(team.WorldId);
+                                Threading.BeginInvokeOnUI(() => team.Score = score);
+                            }
+                        });
                     }
 
                     this.RefreshTimers();
