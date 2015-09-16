@@ -297,6 +297,10 @@ namespace GW2PAO.Modules.WvW
                         team.Color = teamColors[team.WorldId];
                     Threading.InvokeOnUI(() => this.Worlds.Add(team));
                 }
+
+                // Launch a task to refresh world score
+                // Do this with a background task so we don't slow down initialization (this is not critical)
+                Task.Factory.StartNew(this.RefreshWorldScores);
             }
         }
 
@@ -386,14 +390,7 @@ namespace GW2PAO.Modules.WvW
                     if (this.scoresRefreshCounter >= 60) // 500ms * 20 = 30seconds
                     {
                         this.scoresRefreshCounter = 0;
-                        Task.Factory.StartNew(() =>
-                        {
-                            foreach (var team in this.Worlds)
-                            {
-                                var score = this.wvwService.GetWorldScore(team.WorldId);
-                                Threading.BeginInvokeOnUI(() => team.Score = score);
-                            }
-                        });
+                        Task.Factory.StartNew(this.RefreshWorldScores);
                     }
 
                     this.RefreshTimers();
@@ -610,6 +607,18 @@ namespace GW2PAO.Modules.WvW
                 {
                     Threading.InvokeOnUI(() => objective.IsRIActive = false);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the score of all worlds
+        /// </summary>
+        private void RefreshWorldScores()
+        {
+            foreach (var team in this.Worlds)
+            {
+                var score = this.wvwService.GetWorldScore(team.WorldId);
+                Threading.BeginInvokeOnUI(() => team.Score = score);
             }
         }
 
