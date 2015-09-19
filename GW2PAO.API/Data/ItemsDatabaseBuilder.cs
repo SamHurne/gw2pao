@@ -80,7 +80,7 @@ namespace GW2PAO.API.Data
                             }
                             else if (task.IsFaulted)
                             {
-                                logger.Warn("Failed to retrieve items page " + i + " of " + ctx.PageCount + ".");
+                                logger.ErrorException("One or more errors occurred when retrieving item names.", task.Exception);
                             }
                             else
                             {
