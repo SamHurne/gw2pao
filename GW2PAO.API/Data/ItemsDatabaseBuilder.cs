@@ -54,12 +54,6 @@ namespace GW2PAO.API.Data
         /// <returns>Returns the total amount of requests that will be performed</returns>
         public int RebuildItemDatabase(CultureInfo culture, Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
         {
-            var parallelOptions = new ParallelOptions
-            {
-                CancellationToken = cancelToken,
-                MaxDegreeOfParallelism = Environment.ProcessorCount
-            };
-
             var itemService = GW2.V2.Items.ForCulture(culture);
             int requestSize = 200;
             IPageContext ctx = itemService.FindPage(0, requestSize);
