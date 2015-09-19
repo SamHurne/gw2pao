@@ -57,30 +57,51 @@ namespace GW2PAO.API.Data
             int requestSize = 200; // maybe tweak this
             int totalRequests = (itemIds.Count / requestSize) + 1;
 
+            // Start up a task that will kick off the requests and wait for their completion
             Task.Factory.StartNew(() =>
             {
-                Dictionary<int, ItemDBEntry> itemsDb = new Dictionary<int, ItemDBEntry>();
-
-                for (int i = 0; i < totalRequests; i++)
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                System.Collections.Concurrent.ConcurrentDictionary<int, ItemDBEntry> itemsDb = new System.Collections.Concurrent.ConcurrentDictionary<int, ItemDBEntry>();
+                var parallelOptions = new ParallelOptions()
                 {
-                    if (cancelToken.IsCancellationRequested)
-                    {
-                        return;
-                    }
+                    CancellationToken = cancelToken
+                };
 
-                    var items = itemService.FindPage(i, requestSize);
-                    foreach (var item in items)
+                try
+                {
+                    Parallel.For(0, totalRequests, parallelOptions, (i) =>
                     {
-                        var entry = new ItemDBEntry(item.ItemId, item.Name, (ItemRarity)item.Rarity, item.Level);
-                        itemsDb.Add(item.ItemId, entry);
-                    }
-                    incrementProgressAction.Invoke();
+                        var items = itemService.FindPage(i, requestSize);
+                        foreach (var item in items)
+                        {
+                            if (cancelToken.IsCancellationRequested)
+                            {
+                                return;
+                            }
+
+                            var entry = new ItemDBEntry(item.ItemId, item.Name, (ItemRarity)item.Rarity, item.Level);
+                            if (!itemsDb.TryAdd(item.ItemId, entry))
+                            {
+                                logger.Warn("Failed to add {0} to items database", item);
+                            }
+                        }
+                        incrementProgressAction.Invoke();
+                    });
+                }
+                catch (OperationCanceledException)
+                {
+                    // Operation was cancelled, return
+                    return;
                 }
 
                 var dbString = JsonConvert.SerializeObject(itemsDb);
                 File.WriteAllText(this.GetFilePath(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName), dbString);
-
                 rebuildCompleteAction.Invoke();
+
+                sw.Stop();
+                logger.Info("Item rebuild took {0}", sw.Elapsed.ToString());
+
             }, cancelToken);
 
             return totalRequests;
@@ -108,6 +129,11 @@ namespace GW2PAO.API.Data
             this.Name = name;
             this.Rarity = rarity;
             this.Level = level;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} - \"{1}\"", this.ID, this.Name);
         }
     }
 }
