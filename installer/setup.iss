@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "3.3"
+#define MyAppVersion "3.4"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -74,6 +74,7 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\EventNames.xml"; Des
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\GW2PAO.resources.dll"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\ItemDatabase.json"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\WvWObjectiveNames.xml"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\ru\GW2PAO.resources.dll"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 ; No Browser files:
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe.config"; DestDir: "{app}"; Flags: ignoreversion
@@ -116,6 +117,7 @@ Name: "{app}\Locale\de"; Flags: uninsalwaysuninstall; Permissions: users-full
 Name: "{app}\Locale\en"; Flags: uninsalwaysuninstall; Permissions: users-full
 Name: "{app}\Locale\es"; Flags: uninsalwaysuninstall; Permissions: users-full
 Name: "{app}\Locale\fr"; Flags: uninsalwaysuninstall; Permissions: users-full
+Name: "{app}\Locale\ru"; Flags: uninsalwaysuninstall; Permissions: users-full
 
 [Code]
 var
