@@ -44,6 +44,12 @@ namespace GW2PAO.Modules.Commerce.Views
         {
             InitializeComponent();
             this.CenterWindowOnScreen();
+
+            // Register for Closed and ShutdownStarted because Closed is
+            // not raised if the user just exits the application without
+            // closing the window (not sure why this is the case...)
+            this.Closed += OnClosed;
+            this.Dispatcher.ShutdownStarted += OnClosed;
         }
 
         /// <summary>
@@ -59,7 +65,6 @@ namespace GW2PAO.Modules.Commerce.Views
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ((RebuildNamesDatabaseViewModel)this.DataContext).CancelCommand.Execute(null);
             this.Close();
         }
 
@@ -67,6 +72,11 @@ namespace GW2PAO.Modules.Commerce.Views
         {
             this.DragMove();
             e.Handled = true;
+        }
+
+        private void OnClosed(object sender, EventArgs e)
+        {
+            ((RebuildNamesDatabaseViewModel)this.DataContext).CancelCommand.Execute(null);
         }
     }
 }
