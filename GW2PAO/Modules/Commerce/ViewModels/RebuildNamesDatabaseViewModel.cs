@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace GW2PAO.Modules.Commerce.ViewModels
 {
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class RebuildNamesDatabaseViewModel : BindableBase
     {
         /// <summary>
