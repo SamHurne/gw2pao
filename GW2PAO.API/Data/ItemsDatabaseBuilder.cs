@@ -7,12 +7,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2NET;
 using GW2PAO.API.Constants;
-using GW2PAO.API.Data.Enums;
+
 using Newtonsoft.Json;
 using NLog;
 
 namespace GW2PAO.API.Data
 {
+    using System.Net;
+
+    using GW2NET.Common;
+    using GW2NET.Items;
+
+    using ItemRarity = GW2PAO.API.Data.Enums.ItemRarity;
+
     public class ItemsDatabaseBuilder
     {
         /// <summary>
@@ -51,60 +58,61 @@ namespace GW2PAO.API.Data
         public int RebuildItemDatabase(CultureInfo culture, Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
         {
             var itemService = GW2.V2.Items.ForCulture(culture);
-            var itemIds = itemService.Discover();
-
-            // We'll split this up into multiple requests
-            int requestSize = 200; // maybe tweak this
-            int totalRequests = (itemIds.Count / requestSize) + 1;
+            int requestSize = 200;
+            IPageContext ctx = itemService.FindPage(0, requestSize);
 
             // Start up a task that will kick off the requests and wait for their completion
-            Task.Factory.StartNew(() =>
-            {
-                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                sw.Start();
-                System.Collections.Concurrent.ConcurrentDictionary<int, ItemDBEntry> itemsDb = new System.Collections.Concurrent.ConcurrentDictionary<int, ItemDBEntry>();
-                var parallelOptions = new ParallelOptions()
-                {
-                    CancellationToken = cancelToken
-                };
-
-                try
-                {
-                    Parallel.For(0, totalRequests, parallelOptions, (i) =>
+            Task.Factory.StartNew(
+                () =>
                     {
-                        var items = itemService.FindPage(i, requestSize);
-                        foreach (var item in items)
+                        ServicePointManager.DefaultConnectionLimit = ctx.PageCount;
+                        var itemsDb = new Dictionary<int, ItemDBEntry>(capacity: ctx.TotalCount);
+                        var tasks = itemService.FindAllPagesAsync(ctx.PageSize, ctx.PageCount, cancelToken);
+                        var buckets = Interleaved(tasks);
+                        for (int i = 0; i < buckets.Length; i++)
                         {
                             if (cancelToken.IsCancellationRequested)
                             {
                                 return;
                             }
 
-                            var entry = new ItemDBEntry(item.ItemId, item.Name, (ItemRarity)item.Rarity, item.Level);
-                            if (!itemsDb.TryAdd(item.ItemId, entry))
+                            var bucket = buckets[i];
+                            var task = bucket.Result;
+                            if (task.IsCanceled)
                             {
-                                logger.Warn("Failed to add {0} to items database", item);
+                                logger.Info("Rebuilding the item names database was canceled.");
+                            }
+                            else if (task.IsFaulted)
+                            {
+                                logger.Warn("Failed to retrieve items page " + i + " of " + ctx.PageCount + ".");
+                            }
+                            else
+                            {
+                                foreach (var item in task.Result)
+                                {
+                                    itemsDb[item.ItemId] = new ItemDBEntry(
+                                        item.ItemId,
+                                        item.Name,
+                                        (ItemRarity)item.Rarity,
+                                        item.Level);
+                                }
+
+                                incrementProgressAction.Invoke();
                             }
                         }
-                        incrementProgressAction.Invoke();
-                    });
-                }
-                catch (OperationCanceledException)
-                {
-                    // Operation was cancelled, return
-                    return;
-                }
 
-                var dbString = JsonConvert.SerializeObject(itemsDb);
-                File.WriteAllText(this.GetFilePath(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName), dbString);
-                rebuildCompleteAction.Invoke();
+                        var filePath = this.GetFilePath(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
+                        using (var streamWriter = new StreamWriter(filePath))
+                        {
+                            var serializer = new JsonSerializer();
+                            serializer.Serialize(streamWriter, itemsDb);
+                        }
 
-                sw.Stop();
-                logger.Info("Item rebuild took {0}", sw.Elapsed.ToString());
+                        rebuildCompleteAction.Invoke();
+                    },
+                cancelToken);
 
-            }, cancelToken);
-
-            return totalRequests;
+            return ctx.PageCount;
         }
 
         /// <summary>
@@ -113,6 +121,32 @@ namespace GW2PAO.API.Data
         public string GetFilePath(string twoLetterIsoLangId)
         {
             return string.Format("{0}\\{1}\\{2}", Paths.LocalizationFolder, twoLetterIsoLangId, "ItemDatabase.json");
+        }
+
+        // http://blogs.msdn.com/b/pfxteam/archive/2012/08/02/processing-tasks-as-they-complete.aspx
+        private static Task<Task<T>>[] Interleaved<T>(IEnumerable<Task<T>> tasks)
+        {
+            var inputTasks = tasks.ToList();
+
+            var buckets = new TaskCompletionSource<Task<T>>[inputTasks.Count];
+            var results = new Task<Task<T>>[buckets.Length];
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                buckets[i] = new TaskCompletionSource<Task<T>>();
+                results[i] = buckets[i].Task;
+            }
+
+            int nextTaskIndex = -1;
+            Action<Task<T>> continuation = completed =>
+            {
+                var bucket = buckets[Interlocked.Increment(ref nextTaskIndex)];
+                bucket.TrySetResult(completed);
+            };
+
+            foreach (var inputTask in inputTasks)
+                inputTask.ContinueWith(continuation, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+
+            return results;
         }
     }
 
