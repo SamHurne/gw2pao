@@ -18,6 +18,8 @@ using NLog;
 
 namespace GW2PAO
 {
+    using System.Net;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -66,6 +68,9 @@ namespace GW2PAO
 
             GW2PAO.Properties.Settings.Default.FirstTimeRun = false;
             GW2PAO.Properties.Settings.Default.Save();
+
+            // Disable client-side connection throttling
+            ServicePointManager.DefaultConnectionLimit = int.MaxValue;
         }
 
         private void InitializeSettings()

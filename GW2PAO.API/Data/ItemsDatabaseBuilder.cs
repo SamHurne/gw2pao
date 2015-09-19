@@ -6,19 +6,16 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2NET;
+using GW2NET.Common;
+using GW2NET.Items;
 using GW2PAO.API.Constants;
+using ItemRarity = GW2PAO.API.Data.Enums.ItemRarity;
 
 using Newtonsoft.Json;
 using NLog;
 
 namespace GW2PAO.API.Data
 {
-    using System.Net;
-
-    using GW2NET.Common;
-    using GW2NET.Items;
-
-    using ItemRarity = GW2PAO.API.Data.Enums.ItemRarity;
 
     public class ItemsDatabaseBuilder
     {
@@ -57,6 +54,12 @@ namespace GW2PAO.API.Data
         /// <returns>Returns the total amount of requests that will be performed</returns>
         public int RebuildItemDatabase(CultureInfo culture, Action incrementProgressAction, Action rebuildCompleteAction, CancellationToken cancelToken)
         {
+            var parallelOptions = new ParallelOptions
+            {
+                CancellationToken = cancelToken,
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
+
             var itemService = GW2.V2.Items.ForCulture(culture);
             int requestSize = 200;
             IPageContext ctx = itemService.FindPage(0, requestSize);
@@ -65,9 +68,9 @@ namespace GW2PAO.API.Data
             Task.Factory.StartNew(
                 () =>
                     {
-                        ServicePointManager.DefaultConnectionLimit = ctx.PageCount;
                         var itemsDb = new Dictionary<int, ItemDBEntry>(capacity: ctx.TotalCount);
-                        var tasks = itemService.FindAllPagesAsync(ctx.PageSize, ctx.PageCount, cancelToken);
+                        var tasks = new List<Task<ICollectionPage<Item>>>(ctx.PageCount);
+                        tasks.AddRange(itemService.FindAllPagesAsync(ctx.PageSize, ctx.PageCount, cancelToken));
                         var buckets = Interleaved(tasks);
                         for (int i = 0; i < buckets.Length; i++)
                         {
@@ -76,8 +79,7 @@ namespace GW2PAO.API.Data
                                 return;
                             }
 
-                            var bucket = buckets[i];
-                            var task = bucket.Result;
+                            var task = buckets[i].Result;
                             if (task.IsCanceled)
                             {
                                 logger.Info("Rebuilding the item names database was canceled.");
