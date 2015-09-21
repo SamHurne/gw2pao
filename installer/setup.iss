@@ -74,7 +74,7 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\EventNames.xml"; Des
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\GW2PAO.resources.dll"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\ItemDatabase.json"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\WvWObjectiveNames.xml"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
-Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\ru\GW2PAO.resources.dll"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\ru\GW2PAO.resources.dll"; DestDir: "{app}\Locale\ru"; Flags: ignoreversion
 ; No Browser files:
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe.config"; DestDir: "{app}"; Flags: ignoreversion
