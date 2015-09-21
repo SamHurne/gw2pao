@@ -250,18 +250,19 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_TalkStatusChanged(object sender, TS3.Data.TalkStatusEventArgs e)
         {
-            var speachNotification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.Speech);
+            var speechNotification = new TSNotificationViewModel(e.ClientID, e.ClientName, TSNotificationType.Speech);
+            var existingNotification = this.Notifications.FirstOrDefault(notification => notification.Equals(speechNotification));
             switch (e.Status)
             {
                 case TS3.Data.Enums.TalkStatus.TalkStarted:
-                    // Add to our collection of speaking users
-                    Threading.BeginInvokeOnUI(() => this.Notifications.Add(speachNotification));
+                    // Add to our collection of speaking users if it's not already there                  
+                    if (existingNotification == null)
+                        Threading.BeginInvokeOnUI(() => this.Notifications.Add(speechNotification));
                     break;
                 case TS3.Data.Enums.TalkStatus.TalkStopped:
                     // Remove from our collection of speaking users
-                    var vm = this.Notifications.FirstOrDefault(notification => notification.Equals(speachNotification));
-                    if (vm != null)
-                        Threading.BeginInvokeOnUI(() => this.Notifications.Remove(vm));
+                    if (existingNotification != null)
+                        Threading.BeginInvokeOnUI(() => this.Notifications.Remove(existingNotification));
                     break;
                 default:
                     break;
