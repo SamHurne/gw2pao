@@ -45,17 +45,22 @@ namespace GW2PAO.Views
         private void Link_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.viewModel.OpenDownloadPageCommad.Execute(null);
+            e.Handled = true;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            e.Handled = true;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
-            e.Handled = true;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+                e.Handled = true;
+            }
         }
     }
 }

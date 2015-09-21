@@ -11,6 +11,8 @@
         ResizeMode="NoResize"
         Topmost="True"
         TextOptions.TextFormattingMode="Display"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="3" Margin="10">
