@@ -49,19 +49,6 @@
 
         ga('create', 'UA-54842713-1', 'auto');
         ga('send', 'pageview');
-
-        $('#installerDownloadLink').on('click', function () {
-            ga('send', 'event', 'download', 'click', 'installer');
-        });
-        $('#fullFeaturesDownloadLink').on('click', function () {
-            ga('send', 'event', 'download', 'click', 'zip-full');
-        });
-        $('#noBrowserDownloadLink').on('click', function () {
-            ga('send', 'event', 'download', 'click', 'zip-nobrowser');
-        });
-        $('#sourceCodeLink').on('click', function () {
-            ga('send', 'event', 'download', 'click', 'source');
-        });
     </script>
 </head>
 
@@ -367,9 +354,22 @@
         </div>
     </footer>
 
-    <!-- Download Counter -->
+    <!-- Download Events and Counters -->
     <script>
         $(function () {
+            $('#installerDownloadLink').click(function () {
+                ga('send', 'event', 'download', 'click', 'installer');
+            });
+            $('#fullFeaturesDownloadLink').click(function () {
+                ga('send', 'event', 'download', 'click', 'zip-full');
+            });
+            $('#noBrowserDownloadLink').click(function () {
+                ga('send', 'event', 'download', 'click', 'zip-nobrowser');
+            });
+            $('#sourceCodeLink').click(function () {
+                ga('send', 'event', 'download', 'click', 'source');
+            });
+            
             refreshDownloadCounts();
         });
 
