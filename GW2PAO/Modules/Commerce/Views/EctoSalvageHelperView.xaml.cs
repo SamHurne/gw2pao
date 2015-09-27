@@ -55,7 +55,7 @@ namespace GW2PAO.Modules.Commerce.Views
             // Set the window size and location
             this.Closing += TPCalculatorView_Closing;
             this.Left = Properties.Settings.Default.EctoHelperX;
-            this.Top = Properties.Settings.Default.TPCalculatorY;
+            this.Top = Properties.Settings.Default.EctoHelperY;
         }
 
         private void TPCalculatorView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
