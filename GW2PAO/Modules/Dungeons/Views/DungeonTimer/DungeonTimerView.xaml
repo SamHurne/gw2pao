@@ -156,7 +156,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
                                         Text="{x:Static resx:Resources.DungeonTimer}" />
 
                 <Button Name="CollapseExpandButton"
@@ -293,6 +293,7 @@
             <core:OutlinedTextBlock FontSize="75"
                                     StrokeThickness="5"
                                     Fill="White"
+                                    FontFamily="./Style/Fonts/#Menomonia"
                                     Text="{Binding TimerValue, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
         </Viewbox>
     </Grid>

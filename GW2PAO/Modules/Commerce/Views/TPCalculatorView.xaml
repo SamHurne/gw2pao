@@ -110,7 +110,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
                                         Text="{x:Static resx:Resources.TPCalculator}" />
 
                 <Button Name="CollapseExpandButton"
@@ -198,6 +198,7 @@
                 </core:OutlinedTextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBox Width="50"
+                             VerticalContentAlignment="Bottom"
                              FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
                         <TextBox.Text>
                             <Binding Path="BuyPrice.Gold" UpdateSourceTrigger="PropertyChanged" />
@@ -358,25 +359,51 @@
                            VerticalAlignment="Bottom"/>
                 </StackPanel>
                 <StackPanel.ToolTip>
-                    <ToolTip >
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Margin="0,0,0,1" Text="{x:Static resx:Resources.Revenue}" FontSize="12"/>
-                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding Revenue}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Margin="0,0,0,1" Text="{x:Static resx:Resources.Cost}" FontSize="12"/>
-                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding Cost}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <core:OutlinedTextBlock Margin="0,0,0,1" Text="{x:Static resx:Resources.ListingFee}" FontSize="12"/>
-                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding ListingFee}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <core:OutlinedTextBlock Margin="0,0,0,1" Text="{x:Static resx:Resources.SaleFee}" FontSize="12"/>
-                                <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding SaleFee}" />
-                            </StackPanel>
-                        </StackPanel>
+                    <ToolTip>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,0,0,1"
+                                                    Text="{x:Static resx:Resources.Revenue}"/>
+                            <view:ReadonlyPriceView Grid.Row="0" Grid.Column="1"
+                                                    Margin="3,0,0,0"
+                                                    Price="{Binding Revenue}" />
+
+                            <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,0,0,1"
+                                                    Text="{x:Static resx:Resources.Cost}"/>
+                            <view:ReadonlyPriceView Grid.Row="1" Grid.Column="1"
+                                                    Margin="3,0,0,0"
+                                                    Price="{Binding Cost}" />
+
+                            <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,0,0,1"
+                                                    Text="{x:Static resx:Resources.ListingFee}"/>
+                            <view:ReadonlyPriceView Grid.Row="2" Grid.Column="1"
+                                                    Margin="3,0,0,0"
+                                                    Price="{Binding ListingFee}" />
+
+                            <core:OutlinedTextBlock Grid.Row="3" Grid.Column="0"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,0,0,1"
+                                                    Text="{x:Static resx:Resources.SaleFee}"/>
+                            <view:ReadonlyPriceView Grid.Row="3" Grid.Column="1"
+                                                    Margin="3,0,0,0"
+                                                    Price="{Binding SaleFee}" />
+                        </Grid>
                     </ToolTip>
                 </StackPanel.ToolTip>
                 <StackPanel.Style>

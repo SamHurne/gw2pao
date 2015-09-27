@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
-    <StackPanel Margin="30,10,0,0">
+    <StackPanel Margin="15,10,0,0">
         <CheckBox IsChecked="{Binding AreNotificationWindowBordersVisible}"
                   Style="{StaticResource AlternateCheckboxStyle}"
                   Margin="5">

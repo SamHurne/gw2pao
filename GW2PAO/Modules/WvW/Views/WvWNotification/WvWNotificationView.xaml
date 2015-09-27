@@ -75,7 +75,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -114,7 +114,7 @@
 
                     <!-- Close button -->
                     <Button Grid.Row="0" Grid.Column="1"
-                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
                             Width="13" Height="13" Padding="0"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Content="{StaticResource CloseGraphic}"
@@ -123,20 +123,29 @@
                     <!-- Objective Name -->
                     <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                                             VerticalAlignment="Bottom"
-                                            Fill="Orange" FontSize="13"
+                                            FontFamily="/Style/Fonts/#Menomonia"
+                                            Fill="Orange" FontSize="14"
                                             Text="{Binding Name}" />
 
                     <!-- Map -->
                     <core:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                            FontSize="12" Text="{Binding Map, Converter={StaticResource MapConverter}}" />
+                                            Margin="0,-3,0,0"
+                                            FontSize="12"
+                                            Text="{Binding Map, Converter={StaticResource MapConverter}}" />
                     
                     <!-- Previous Owner Information -->
                     <core:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                        Margin="3,0,0,0" FontSize="11" Text="{Binding PrevWorldOwnerName, StringFormat={x:Static resx:Resources.TakenFrom}}" />
+                                            Margin="4,-2,0,0"
+                                            Opacity="0.75"
+                                            FontSize="11"
+                                            Text="{Binding PrevWorldOwnerName, StringFormat={x:Static resx:Resources.TakenFrom}}" />
 
                     <!-- Owner information -->
                     <core:OutlinedTextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                        Margin="3,0,0,0" FontSize="11" Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.TakenBy}}" />
+                                            Margin="4,-3,0,0"
+                                            Opacity="0.75"
+                                            FontSize="11"
+                                            Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.TakenBy}}" />
 
                 </Grid>
             </Grid>

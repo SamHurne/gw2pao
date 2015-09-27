@@ -6,8 +6,8 @@
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:auto="clr-namespace:FeserWard.Controls;assembly=IntelliBox"
-        Width="475"
-        Height="322"
+        Width="485"
+        SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -290,14 +290,14 @@
             <Grid Grid.Row="1"
                   Grid.Column="0">
                 <TextBox Name="DescriptionTextBox"
-                         Margin="5"
+                         Margin="5,11,5,1"
                          Width="200"
                          VerticalAlignment="Stretch" HorizontalAlignment="Left"
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          Text="{Binding Task.Description}"/>
                 <TextBlock IsHitTestVisible="False" 
-                           Margin="10,8,0,0"
+                           Margin="10,13,0,0"
                            VerticalAlignment="Top" HorizontalAlignment="Left"
                            Foreground="DarkGray"
                            Text="{x:Static resx:Resources.Description}">
@@ -317,7 +317,7 @@
             <StackPanel Grid.Row="1"
                         Grid.Column="1"
                         VerticalAlignment="Stretch">
-                <GroupBox>
+                <GroupBox Padding="1">
                     <GroupBox.Header>
                         <core:OutlinedTextBlock Text="{x:Static resx:Resources.CompletionOptions}" />
                     </GroupBox.Header>
@@ -374,7 +374,7 @@
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox>
+                <GroupBox Padding="1">
                     <GroupBox.Header>
                         <core:OutlinedTextBlock Text="{x:Static resx:Resources.LocationOptions}" />
                     </GroupBox.Header>

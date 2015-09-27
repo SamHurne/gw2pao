@@ -144,7 +144,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="14"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
                                         Text="{x:Static resx:Resources.TaskTracker}" />
 
                 <Button Name="AddTaskButton"

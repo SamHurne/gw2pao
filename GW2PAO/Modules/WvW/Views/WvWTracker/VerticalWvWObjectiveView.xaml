@@ -51,9 +51,9 @@
 
     <UserControl.ToolTip>
         <StackPanel Orientation="Vertical">
-            <core:OutlinedTextBlock Fill="Orange" FontSize="12" Text="{Binding Name}"/>
-            <core:OutlinedTextBlock Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.OwnedBy}}"/>
-            <StackPanel Orientation="Horizontal">
+            <core:OutlinedTextBlock Margin="0" Fill="Orange" FontSize="12" Text="{Binding Name}"/>
+            <core:OutlinedTextBlock Margin="0,-3,0,0" Text="{Binding WorldOwnerName, StringFormat={x:Static resx:Resources.OwnedBy}}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,-3,0,0">
                 <core:OutlinedTextBlock Margin="0,0,5,0" Text="{x:Static resx:Resources.ClaimedBy}" />
                 <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Name}"/>
                 <core:OutlinedTextBlock Margin="0,0,2,0" Text="{Binding GuildClaimer.Tag}"/>
@@ -70,7 +70,7 @@
                     </Style>
                 </StackPanel.Style>
             </StackPanel>
-            <core:OutlinedTextBlock Text="{Binding Points, StringFormat={x:Static resx:Resources.Points}}"/>
+            <core:OutlinedTextBlock Margin="0,-3,0,0" Text="{Binding Points, StringFormat={x:Static resx:Resources.Points}}"/>
         </StackPanel>
     </UserControl.ToolTip>
 
@@ -151,7 +151,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="15" />
+                <RowDefinition Height="16" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -172,6 +172,7 @@
 
             <!--Objective Name/Location (e.g. N, NW, SW, etc or the objective's short name) -->
             <core:OutlinedTextBlock Grid.Row="1"
+                                    FontSize="11"
                                     VerticalAlignment="Center" HorizontalAlignment="Center">
                 <core:OutlinedTextBlock.Style>
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
@@ -187,15 +188,16 @@
 
             <StackPanel Orientation="Vertical" Grid.Row="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
-                        Margin="0,5,0,0">
+                        Margin="0,2,0,0">
 
                 <!--Distance-->
                 <StackPanel Orientation="Horizontal" Grid.Row="2"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Visibility="{Binding UserData.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}"
-                            Margin="0,0,0,5">
+                            Margin="0,0,0,2">
 
-                    <core:OutlinedTextBlock Fill="White">
+                    <core:OutlinedTextBlock Fill="White"
+                                            FontSize="11">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
@@ -208,7 +210,8 @@
                         </core:OutlinedTextBlock.Style>
                     </core:OutlinedTextBlock>
 
-                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            FontSize="11">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value=" ft"/>
@@ -227,6 +230,7 @@
 
                 <!--RI Timer Value (if any), will hide/show based with trigger-->
                 <core:OutlinedTextBlock Name="TimerValueTextBlock" Grid.Row="3"
+                                        FontSize="11"
                                         VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Fill="#FF5E5E"
                                         Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"

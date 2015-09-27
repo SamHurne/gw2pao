@@ -19,13 +19,15 @@
                 Orientation="Horizontal"
                 VerticalAlignment="Bottom">
         <core:OutlinedTextBlock Text="-" 
-                                Fill="{Binding TextFill}"
+                                Fill="White"
                                 Visibility="{Binding Price.IsNegative, Converter={StaticResource BoolToVisibility}}" />
         <core:OutlinedTextBlock Text="{Binding Price.Gold}"
+                                Margin="2,0,0,0"
                                 Fill="Gold"
                                 TextAlignment="Right" />
         <Image Source="../../../Images/Commerce/gold_coin.png"
                Height="14" Width="14"
+               VerticalAlignment="Center"
                Margin="1,0,4,0"/>
         <core:OutlinedTextBlock Text="{Binding Price.Silver}"
                                 Fill="LightGray"
@@ -47,6 +49,7 @@
         </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/silver_coin.png"
                Height="14" Width="14"
+               VerticalAlignment="Center"
                Margin="1,0,4,0"/>
         <core:OutlinedTextBlock Text="{Binding Price.Copper}"
                                 Fill="Peru"
@@ -68,6 +71,7 @@
         </core:OutlinedTextBlock>
         <Image Source="../../../Images/Commerce/copper_coin.png"
                Height="14" Width="14"
+               VerticalAlignment="Center"
                Margin="1,0,0,0"/>
     </StackPanel>
 </UserControl>

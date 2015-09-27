@@ -74,7 +74,7 @@ namespace GW2PAO.Modules.Commerce.Views.PriceTracker
         private void PriceTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
             // Set up resize snapping
-            this.ResizeHelper.SnappingHeightOffset = -8;
+            this.ResizeHelper.SnappingHeightOffset = -12;
             this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
             this.ResizeHelper.SnappingIncrementHeight = (int)this.priceHeight;
 

@@ -110,7 +110,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
                                         Text="{x:Static resx:Resources.PriceTracker}" />
 
                 <Button Name="CollapseExpandButton"

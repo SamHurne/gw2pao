@@ -44,9 +44,9 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical"
-                Margin="20,10,10,0">
+                Margin="15,5,10,0">
         <!-- Tracked Items Configuration -->
-        <GroupBox Height="300">
+        <GroupBox Height="330">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.TrackedItems}" />
             </GroupBox.Header>
@@ -110,9 +110,7 @@
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Right"
                                     Margin="0,5,0,0"
-                                    Height="16"
-                                    Content="{StaticResource CloseGraphic}"
-                                    ToolTip="{x:Static resx:Resources.Delete}"
+                                    Content="{x:Static resx:Resources.Remove}"
                                     Command="{Binding RemoveCommand}"/>
                         </Grid>
 

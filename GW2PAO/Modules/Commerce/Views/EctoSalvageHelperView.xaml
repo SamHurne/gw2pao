@@ -94,7 +94,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="12"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="12"
                                         Text="{x:Static resx:Resources.EctoSalvageHelper}" />
 
                 <Button Name="CollapseExpandButton"
@@ -167,21 +167,21 @@
                                         FontSize="16"/>
                 <Image Source="/Images/Commerce/gold_coin.png"
                            Height="19" Width="19"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            Margin="1,0,5,0"/>
                 <core:OutlinedTextBlock Text="{Binding SalvageThreshold.Silver}"
                                         Fill="LightGray"
                                         FontSize="16"/>
                 <Image Source="/Images/Commerce/silver_coin.png"
                            Height="19" Width="19"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            Margin="1,0,5,0"/>
                 <core:OutlinedTextBlock Text="{Binding SalvageThreshold.Copper}"
                                         Fill="Peru"
                                         FontSize="16"/>
                 <Image Source="/Images/Commerce/copper_coin.png"
                            Height="19" Width="19"
-                           VerticalAlignment="Top"/>
+                           VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Grid>

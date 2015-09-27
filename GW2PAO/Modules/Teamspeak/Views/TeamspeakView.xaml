@@ -142,7 +142,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="17"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
                                         Text="{x:Static resx:Resources.Teamspeak}">
                     <core:OutlinedTextBlock.ToolTip>
                         <StackPanel Orientation="Vertical">
@@ -237,10 +237,12 @@
                      Name="ChannelTextBox"
                      Text="{Binding ClientChannelName}"
                      IsReadOnly="True"
+                     VerticalContentAlignment="Center"
                      PreviewMouseDown="ChannelTextBox_PreviewMouseDown">
                 <TextBox.Style>
                     <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                         <Setter Property="BorderBrush" Value="#70EEE8AA" />
+                        <Setter Property="TextBlock.LineHeight" Value="16" />
                     </Style>
                 </TextBox.Style>
             </TextBox>

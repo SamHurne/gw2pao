@@ -28,6 +28,8 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusStyle}" />
         <Setter Property="MinHeight" Value="15" />
         <Setter Property="MinWidth" Value="15" />
+        <Setter Property="FontFamily" Value="Trebuchet MS"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{StaticResource ButtonForegroundColor}"/>

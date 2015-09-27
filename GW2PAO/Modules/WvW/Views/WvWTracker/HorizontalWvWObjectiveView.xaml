@@ -178,6 +178,7 @@
 
             <!--Objective Location (e.g. N, NW, SW, etc)-->
             <core:OutlinedTextBlock Grid.Column="1"
+                                    FontSize="11"
                                     VerticalAlignment="Center" HorizontalAlignment="Center">
                 <core:OutlinedTextBlock.Style>
                     <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
@@ -202,7 +203,8 @@
                             Margin="0,0,10,0"
                             Visibility="{Binding UserData.AreTimeDistancesShown, Converter={StaticResource BoolToVisibility}}">
 
-                    <core:OutlinedTextBlock VerticalAlignment="Center">
+                    <core:OutlinedTextBlock VerticalAlignment="Center"
+                                            FontSize="11">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value="{Binding DistanceFromPlayer}"/>
@@ -215,7 +217,8 @@
                         </core:OutlinedTextBlock.Style>
                     </core:OutlinedTextBlock>
 
-                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            FontSize="11">
                         <core:OutlinedTextBlock.Style>
                             <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
                                 <Setter Property="Text" Value=" ft"/>
@@ -234,6 +237,7 @@
 
                 <!--RI Timer Value (if any)-->
                 <core:OutlinedTextBlock Name="TimerValueTextBlock"
+                                        FontSize="11"
                                         Fill="#FF5E5E"
                                         Visibility="{Binding IsRIActive, Converter={StaticResource BoolToVisibility}}"
                                         Text="{Binding TimerValue, Converter={StaticResource TimeConverter}, ConverterParameter=true}" />

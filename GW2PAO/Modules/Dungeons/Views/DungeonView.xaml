@@ -62,9 +62,9 @@
 
         <ControlTemplate x:Key="PathCheckboxTemplate" TargetType="{x:Type CheckBox}">
             <Grid>
-                <core:OutlinedTextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                                        Fill="White" Stroke="Black" StrokeThickness="4" StrokeOpacity="0.75"
-                                        FontSize="13" FontFamily="Gisha"
+                <core:OutlinedTextBlock VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        FontSize="13"
                                         Text="{Binding DisplayName}">
                     <core:OutlinedTextBlock.Style>
                         <Style TargetType="core:OutlinedTextBlock" BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
@@ -153,11 +153,13 @@
                             <core:OutlinedTextBlock Text="{x:Static resx:Resources.Reward}"
                                                     Margin="0,0,5,0"/>
                             <core:OutlinedTextBlock Margin="0,0,2,0"
+                                                    Fill="Gold"
                                                     Text="{Binding RewardGold}"/>
                             <Image Source="/Images/Commerce/gold_coin.png"
                                    Height="12" Width="12"
                                    Margin="0,0,5,0"/>
                             <core:OutlinedTextBlock Margin="0,0,2,0"
+                                                    Fill="LightGray"
                                                     Text="{Binding RewardSilver}"/>
                             <Image Source="/Images/Commerce/silver_coin.png"
                                    Height="12" Width="12"/>

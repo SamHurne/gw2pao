@@ -30,6 +30,11 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{StaticResource TimespanTextBrush}" />
         <Setter Property="ShowButtonSpinner" Value="False" />
+        <Setter Property="FontFamily" Value="Trebuchet MS"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextBlock.LineHeight" Value="14" />
+        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
+        <Setter Property="Padding" Value="2,4,2,2" />
     </Style>
 
 </ResourceDictionary>

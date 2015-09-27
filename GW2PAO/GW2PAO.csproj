@@ -777,6 +777,8 @@
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <Resource Include="Style\Fonts\menomonia-italic.ttf" />
+    <Resource Include="Style\Fonts\menomonia.ttf" />
     <Resource Include="Images\Misc\copy.png" />
     <Resource Include="Images\Commerce\unknown_icon.png" />
     <Resource Include="Images\OverlayMenuIcon_Color.png" />

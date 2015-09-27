@@ -110,6 +110,10 @@
                 <SolidColorBrush Color="{StaticResource TreeViewForegroundColor}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FontFamily" Value="Trebuchet MS"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextBlock.LineHeight" Value="14" />
+        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
         <Setter Property="Template">
             <Setter.Value>

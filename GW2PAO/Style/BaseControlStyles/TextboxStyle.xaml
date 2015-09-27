@@ -39,12 +39,16 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrush}" />
+        <Setter Property="FontFamily" Value="Trebuchet MS"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextBlock.LineHeight" Value="14" />
+        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border Name="Border"
                             CornerRadius="0"
-                            Padding="2"
+                            Padding="2,3,2,1"
                             BorderThickness="1"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}">
@@ -68,7 +72,8 @@
                                 <VisualState x:Name="MouseOver" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                        <ScrollViewer Margin="0"
+                                      x:Name="PART_ContentHost" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

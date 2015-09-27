@@ -218,7 +218,7 @@
                              Margin="5" Padding="3,0"
                              VerticalContentAlignment="Center"
                              TextWrapping="NoWrap"
-                             FontFamily="Candara" FontSize="14"
+                             FontFamily="Candara" FontSize="12"
                              Text="{data:SourceBinding webControl}">
                         <TextBox.Background>
                             <LinearGradientBrush>

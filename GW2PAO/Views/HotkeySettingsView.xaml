@@ -13,7 +13,7 @@
             <Setter Property="Margin" Value="5,1,1,1" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="30,10,0,0"
+    <StackPanel Margin="15,10,0,0"
                 Width="600"
                 HorizontalAlignment="Stretch">
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAllWindows}"

@@ -10,6 +10,7 @@
              xmlns:vm="clr-namespace:GW2PAO.Modules.Commerce.ViewModels.PriceNotification"
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
+             UseLayoutRounding="True"
              Height="60" Width="250">
 
     <UserControl.Resources>
@@ -46,7 +47,7 @@
             BorderThickness="2"
             CornerRadius="0"
             Margin="5"
-            Padding="5">
+            Padding="5,2,5,2">
 
         <Border.Background>
             <VisualBrush Viewport="0,0,250,50" ViewportUnits="Absolute" Opacity="0.75">
@@ -90,7 +91,7 @@
                                 <Setter Property="Content">
                                     <Setter.Value>
                                         <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3"
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,1"
                                                         Visibility="{Binding PriceWatch.Data.IsBuyOrderUpperLimitEnabled, Converter={StaticResource BoolToVisibility}}">
                                                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyOrderUpperLimit}" FontSize="12"/>
                                                 <view:ReadonlyPriceView Margin="5,0,0,0" Price="{Binding PriceWatch.Data.BuyOrderUpperLimit}" />
@@ -135,8 +136,8 @@
                     Margin="5,0,0,0">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="18" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                     
                 <Grid.ColumnDefinitions>
@@ -147,13 +148,14 @@
                 <!-- Item Name -->
                 <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0"
                                         Margin="0,1,0,0"
+                                        FontFamily="./Style/Fonts/#Menomonia"
                                         HorizontalAlignment="Left" VerticalAlignment="Center"
-                                        Fill="Orange" FontSize="13"
+                                        Fill="Orange" FontSize="14"
                                         Text="{Binding ItemName}" />
 
                 <!-- Close button -->
                 <Button Grid.Row="0" Grid.Column="1"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
                         Width="15" Height="15" Padding="0"
                         Style="{StaticResource TitleBarButtonStyle}"
                         Content="{StaticResource CloseGraphic}"
@@ -186,7 +188,7 @@
                         Grid.Row="1" Grid.Column="1"
                         Height="12" Width="12"
                         Margin="1"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
                         Source="../../../../Images/Misc/copy.png"
                         MouseDown="CopyIcon_MouseDown">
                     <Image.ContextMenu>

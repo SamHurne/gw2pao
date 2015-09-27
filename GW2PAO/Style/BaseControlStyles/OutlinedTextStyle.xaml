@@ -5,11 +5,13 @@
     <Style TargetType="core:OutlinedTextBlock">
         <Setter Property="Fill" Value="White" />
         <Setter Property="Stroke" Value="Black" />
-        <Setter Property="StrokeThickness" Value="4" />
-        <Setter Property="StrokeOpacity" Value="0.75" />
-        <Setter Property="FontFamily" Value="Gisha" />
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="StrokeThickness" Value="3" />
+        <Setter Property="StrokeOpacity" Value="0.65" />
+        <Setter Property="FontFamily" Value="Trebuchet MS" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextBlock.LineHeight" Value="14" />
+        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
     </Style>
 
 </ResourceDictionary>

@@ -12,7 +12,7 @@
             <Setter Property="Margin" Value="2" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="20,10,0,0">
+    <StackPanel Margin="15,10,0,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -28,7 +28,7 @@
                       HorizontalAlignment="Left"
                       Margin="5"
                       Height="21"
-                      Width="150"/>
+                      Width="170"/>
         </Grid>
         <Grid Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
@@ -45,13 +45,14 @@
             <core:OutlinedTextBlock Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Text="{Binding Source={x:Static resx:Resources.NotificationsDuration}, StringFormat={}{0}:}" />
-            <TextBox Margin="5"
+            <TextBox Margin="5,5,15,5"
                      Grid.Column="2"
                      Height="10" Width="35"
                      Text="{Binding UserData.NotificationDuration, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <GroupBox IsEnabled="{Binding ElementName=NotificationsCheckbox, Path=IsChecked}">
+        <GroupBox IsEnabled="{Binding ElementName=NotificationsCheckbox, Path=IsChecked}"
+                  Margin="0,0,10,0">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.WvWNotifications}" />
             </GroupBox.Header>

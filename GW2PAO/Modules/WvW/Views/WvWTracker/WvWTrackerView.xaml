@@ -150,7 +150,7 @@
 
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                        Fill="PaleGoldenrod" FontFamily="Candara" FontSize="13"
+                                        Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="12"
                                         Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}">
                     <core:OutlinedTextBlock.ToolTip>
                         <Grid Margin="2">
@@ -173,19 +173,21 @@
                                                     Text="{Binding RedTeam.Score}"/>
 
                             <core:OutlinedTextBlock Grid.Column="0" Grid.Row="1"
+                                                    Margin="0,-3,0,0"
                                                     Fill="{Binding BlueTeam.Color, Converter={StaticResource WorldColorConverter}}"
                                                     Text="{Binding BlueTeam.WorldName}"/>
                             <core:OutlinedTextBlock Grid.Column="1" Grid.Row="1"
                                                     Fill="{Binding BlueTeam.Color, Converter={StaticResource WorldColorConverter}}"
-                                                    Margin="5,0,0,0"
+                                                    Margin="5,-3,0,0"
                                                     Text="{Binding BlueTeam.Score}"/>
 
                             <core:OutlinedTextBlock Grid.Column="0" Grid.Row="2"
+                                                    Margin="0,-3,0,0"
                                                     Fill="{Binding GreenTeam.Color, Converter={StaticResource WorldColorConverter}}"
                                                     Text="{Binding GreenTeam.WorldName}"/>
                             <core:OutlinedTextBlock Grid.Column="1" Grid.Row="2"
                                                     Fill="{Binding GreenTeam.Color, Converter={StaticResource WorldColorConverter}}"
-                                                    Margin="5,0,0,0"
+                                                    Margin="5,-3,0,0"
                                                     Text="{Binding GreenTeam.Score}"/>
                             
                         </Grid>

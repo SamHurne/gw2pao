@@ -15,7 +15,7 @@
             <Setter Property="Margin" Value="2" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Margin="20,10,0,0">
+    <StackPanel Margin="15,10,0,0">
         <GroupBox Margin="0,5,5,5"
                   MinWidth="200"
                   HorizontalAlignment="Left">
@@ -73,7 +73,7 @@
                      Height="10" Width="35"
                      Text="{Binding UserData.NotificationDuration, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
-        <GroupBox Margin="0,5,5,10">
+        <GroupBox Margin="0,0,5,10">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.EventNotificationSettings}" />
             </GroupBox.Header>
@@ -85,7 +85,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="3,3,10,3" MinWidth="215">
+                        <Grid Margin="3,3,10,3" MinWidth="235">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -97,7 +97,7 @@
                             </CheckBox>
                             <xctk:TimeSpanUpDown Grid.Column="1"
                                                  HorizontalAlignment="Right"
-                                                 Width="75"
+                                                 Width="65"
                                                  Value="{Binding NotificationInterval}"
                                                  Maximum="{Binding MaxNotificationInterval}"
                                                  Minimum="{Binding MinNotificationInterval}"

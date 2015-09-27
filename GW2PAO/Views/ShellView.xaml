@@ -74,7 +74,7 @@
                HorizontalOffset="24">
             <Grid>
                 <Path Stretch="Fill" Stroke="Black" StrokeThickness="2" StrokeLineJoin="Round"
-                      Margin="0" Data="M0,0 L50,30 275,30 275,100 25,100 25,50 z">
+                      Margin="0" Data="M0,0 L50,30 275,30 275,110 25,110 25,50 z">
                     <!--Data="M130,154 L427.5,154  427.5,240.5  299.5,240.5  287.5,245.5  275.5,240.5  130,240.5 z">-->
                     <Path.Effect>
                         <DropShadowEffect BlurRadius="12" Color="Black" Direction="315" Opacity="0.8"/>
