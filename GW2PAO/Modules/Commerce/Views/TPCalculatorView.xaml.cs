@@ -116,5 +116,31 @@ namespace GW2PAO.Modules.Commerce.Views
         {
             ((TextBox)sender).SelectAll();
         }
+
+        private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var tb = (TextBox)sender;
+
+            if (tb.IsMouseOver)
+            {
+                int currentVal;
+                if (int.TryParse(tb.Text, out currentVal))
+                {
+                    if (e.Delta > 0)
+                    {
+                        // Increment
+                        tb.Text = (currentVal + 1).ToString();
+                    }
+                    else
+                    {
+                        if (currentVal > 0)
+                        {
+                            // Decrement
+                            tb.Text = (currentVal - 1).ToString();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

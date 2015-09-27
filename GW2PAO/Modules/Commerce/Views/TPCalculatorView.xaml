@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:GW2PAO.Modules.Commerce.ViewModels"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        Width="231" SizeToContent="Height"
+        Width="204"
+        SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -17,20 +18,8 @@
         TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
+        <SolidColorBrush x:Key="TextBoxBorder" Color="#FFEEE8AA" Opacity="0.5" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-        
-        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="BorderBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#202020" Opacity="0.85" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="Black" Opacity="0.4" />
-                </Setter.Value>
-            </Setter>
-        </Style>
     </src:OverlayWindow.Resources>
 
     <src:OverlayWindow.DataContext>
@@ -196,36 +185,8 @@
                         </Style>
                     </core:OutlinedTextBlock.Style>
                 </core:OutlinedTextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <TextBox Width="50"
-                             VerticalContentAlignment="Bottom"
-                             FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="BuyPrice.Gold" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/gold_coin.png"
-                           Height="20" Width="20"
-                           Margin="1,0,5,0"/>
-                    <TextBox Width="50"
-                                FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="BuyPrice.Silver" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/silver_coin.png"
-                           Height="20" Width="20"
-                           Margin="1,0,5,0"/>
-                    <TextBox Width="50"
-                             FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="BuyPrice.Copper" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/copper_coin.png"
-                           Height="20" Width="20"
-                           Margin="1,0,0,0"/>
-                </StackPanel>
+                <view:PriceView Margin="2"
+                                DataContext="{Binding BuyPrice}"/>
             </StackPanel>
 
             <!--Sell Price-->
@@ -276,35 +237,8 @@
                         </Style>
                     </core:OutlinedTextBlock.Style>
                 </core:OutlinedTextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <TextBox Width="50"
-                                FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="SellPrice.Gold" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/gold_coin.png"
-                            Height="20" Width="20"
-                            Margin="1,0,5,0"/>
-                    <TextBox Width="50"
-                                FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="SellPrice.Silver" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/silver_coin.png"
-                            Height="20" Width="20"
-                            Margin="1,0,5,0"/>
-                    <TextBox Width="50"
-                                FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="SellPrice.Copper" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
-                    <Image Source="../../../Images/Commerce/copper_coin.png"
-                            Height="20" Width="20"
-                            Margin="1,0,0,0"/>
-                </StackPanel>
+                <view:PriceView Margin="2"
+                                DataContext="{Binding SellPrice}"/>
             </StackPanel>
 
             <!--Quantity-->
@@ -317,12 +251,15 @@
                 <StackPanel Orientation="Vertical"
                             Grid.Column="0">
                     <core:OutlinedTextBlock Text="{x:Static resx:Resources.Quantity}" FontSize="14"/>
-                    <TextBox Margin="0,5,0,0" Width="50" HorizontalAlignment="Left" 
-                                FlowDirection="RightToLeft" GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture">
-                        <TextBox.Text>
-                            <Binding Path="Quantity" UpdateSourceTrigger="PropertyChanged" />
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Width="65" Height="21"
+                             Margin="2,5,0,0" 
+                             HorizontalAlignment="Left"
+                             BorderBrush="{StaticResource TextBoxBorder}"
+                             FlowDirection="RightToLeft"
+                             MouseWheel="TextBox_MouseWheel"
+                             Padding="0,1,0,0"
+                             GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
+                             Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <Button Grid.Column="1" Margin="0,0,10,0"
                         MinWidth="50"

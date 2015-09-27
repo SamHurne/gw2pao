@@ -18,37 +18,40 @@
     <StackPanel Orientation="Horizontal">
 
         <!-- Gold -->
-        <TextBox Width="35" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
+        <TextBox Width="40" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
                  FlowDirection="RightToLeft"
                  MouseWheel="TextBox_MouseWheel"
+                 Padding="0,1,0,0"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Gold, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/gold_coin.png"
                Height="19" Width="19"
                VerticalAlignment="Center"
-               Margin="1,0,5,0"/>
+               Margin="1,1,5,0"/>
 
         <!-- Silver -->
-        <TextBox Width="35" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
+        <TextBox Width="40" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
                  FlowDirection="RightToLeft"
                  MouseWheel="TextBox_MouseWheel"
+                 Padding="0,1,0,0"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Silver, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/silver_coin.png"
                Height="19" Width="19"
                VerticalAlignment="Center"
-               Margin="1,0,5,0"/>
+               Margin="1,1,5,0"/>
 
         <!-- Copper -->
-        <TextBox Width="35" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
+        <TextBox Width="40" Height="21" BorderBrush="{StaticResource TextBoxBorder}"
                  FlowDirection="RightToLeft"
                  MouseWheel="TextBox_MouseWheel"
+                 Padding="0,1,0,0"
                  GotKeyboardFocus="TextBox_GotKeyboardFocus" GotMouseCapture="TextBox_GotMouseCapture"
                  Text="{Binding Copper, UpdateSourceTrigger=PropertyChanged}" />
         <Image Source="../../../Images/Commerce/copper_coin.png"
                Height="19" Width="19"
                VerticalAlignment="Center"
-               Margin="1,0,0,0"/>
+               Margin="1,1,0,0"/>
 
     </StackPanel>
 </UserControl>
