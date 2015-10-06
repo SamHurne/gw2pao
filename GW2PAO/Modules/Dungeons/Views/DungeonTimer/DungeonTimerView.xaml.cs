@@ -108,7 +108,14 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.DungeonTimerHeight = this.Height;
+                if (this.CurrentTimePanel.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.DungeonTimerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.DungeonTimerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.DungeonTimerWidth = this.Width;
                 Properties.Settings.Default.DungeonTimerX = this.Left;
                 Properties.Settings.Default.DungeonTimerY = this.Top;

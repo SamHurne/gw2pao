@@ -75,7 +75,14 @@ namespace GW2PAO.Modules.Teamspeak.Views
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.TeamspeakHeight = this.Height;
+                if (this.NotificationsContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.TeamspeakHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.TeamspeakHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.TeamspeakWidth = this.Width;
                 Properties.Settings.Default.TeamspeakX = this.Left;
                 Properties.Settings.Default.TeamspeakY = this.Top;

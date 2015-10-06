@@ -282,7 +282,14 @@ namespace GW2PAO.Modules.WvW.Views.WvWTracker
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.WvWTrackerHeight = this.Height;
+                if (this.ObjectivesContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.WvWTrackerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.WvWTrackerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.WvWTrackerWidth = this.Width;
                 Properties.Settings.Default.WvWTrackerX = this.Left;
                 Properties.Settings.Default.WvWTrackerY = this.Top;

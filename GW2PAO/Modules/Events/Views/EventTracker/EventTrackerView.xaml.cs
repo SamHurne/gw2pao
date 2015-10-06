@@ -130,7 +130,14 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.EventTrackerHeight = this.Height;
+                if (this.EventsContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.EventTrackerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.EventTrackerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.EventTrackerWidth = this.Width;
                 Properties.Settings.Default.EventTrackerX = this.Left;
                 Properties.Settings.Default.EventTrackerY = this.Top;

@@ -107,7 +107,14 @@ namespace GW2PAO.Modules.Commerce.Views.PriceTracker
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.PriceTrackerHeight = this.Height;
+                if (this.ItemsContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.PriceTrackerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.PriceTrackerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.PriceTrackerWidth = this.Width;
                 Properties.Settings.Default.PriceTrackerX = this.Left;
                 Properties.Settings.Default.PriceTrackerY = this.Top;

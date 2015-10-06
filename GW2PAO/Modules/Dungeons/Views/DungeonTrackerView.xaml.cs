@@ -125,7 +125,14 @@ namespace GW2PAO.Modules.Dungeons.Views
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.DungeonTrackerHeight = this.Height;
+                if (this.DungeonsContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.DungeonTrackerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.DungeonTrackerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.DungeonTrackerWidth = this.Width;
                 Properties.Settings.Default.DungeonTrackerX = this.Left;
                 Properties.Settings.Default.DungeonTrackerY = this.Top;

@@ -76,7 +76,14 @@ namespace GW2PAO.Modules.ZoneCompletion.Views
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.ZoneAssistantHeight = this.Height;
+                if (this.ItemsContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.ZoneAssistantHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.ZoneAssistantHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.ZoneAssistantWidth = this.Width;
                 Properties.Settings.Default.ZoneAssistantX = this.Left;
                 Properties.Settings.Default.ZoneAssistantY = this.Top;

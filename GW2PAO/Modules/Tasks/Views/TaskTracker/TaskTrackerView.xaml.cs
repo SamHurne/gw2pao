@@ -87,7 +87,14 @@ namespace GW2PAO.Modules.Tasks.Views.TaskTracker
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                Properties.Settings.Default.TaskTrackerHeight = this.Height;
+                if (this.TasksContainer.Visibility == System.Windows.Visibility.Visible)
+                {
+                    Properties.Settings.Default.TaskTrackerHeight = this.Height;
+                }
+                else
+                {
+                    Properties.Settings.Default.TaskTrackerHeight = this.beforeCollapseHeight;
+                }
                 Properties.Settings.Default.TaskTrackerWidth = this.Width;
                 Properties.Settings.Default.TaskTrackerX = this.Left;
                 Properties.Settings.Default.TaskTrackerY = this.Top;
