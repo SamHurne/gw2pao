@@ -18,6 +18,7 @@ using GW2PAO.Utility;
 using GW2PAO.ViewModels;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using System.Collections.Concurrent;
 
 namespace GW2PAO.Modules.WvW
 {
@@ -456,6 +457,13 @@ namespace GW2PAO.Modules.WvW
                         latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
                     }
 
+                    ConcurrentDictionary<Guid, API.Data.Entities.Guild> guildDict = new ConcurrentDictionary<Guid, API.Data.Entities.Guild>();
+                    Parallel.ForEach(latestObjectivesData.Where(o => o.GuildOwner.HasValue), (objective) =>
+                    {
+                        var guildInfo = this.guildService.GetGuild(objective.GuildOwner.Value);
+                        guildDict.TryAdd(guildInfo.ID, guildInfo);
+                    });
+
                     if (latestObjectivesData.Count() >= this.AllObjectives.Count)
                     {
                         Threading.InvokeOnUI(() =>
@@ -475,8 +483,9 @@ namespace GW2PAO.Modules.WvW
                                 if (latestData.GuildOwner.HasValue)
                                 {
                                     objective.GuildClaimer.ID = latestData.GuildOwner.Value;
-                                    var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
-                                    if (guildInfo != null)
+                                    API.Data.Entities.Guild guildInfo;
+                                    if (guildDict.TryGetValue(objective.GuildClaimer.ID.Value, out guildInfo)
+                                        && guildInfo != null)
                                     {
                                         objective.GuildClaimer.Name = guildInfo.Name;
                                         objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
@@ -565,20 +574,26 @@ namespace GW2PAO.Modules.WvW
                                 || objective.GuildClaimer.ID.Value != latestData.GuildOwner.Value)
                             {
                                 // Guild claimer has changed
-                                objective.GuildClaimer.ID = latestData.GuildOwner.Value;
+                                Threading.InvokeOnUI(() => objective.GuildClaimer.ID = latestData.GuildOwner.Value);
                                 var guildInfo = this.guildService.GetGuild(latestData.GuildOwner.Value);
                                 if (guildInfo != null)
                                 {
-                                    objective.GuildClaimer.Name = guildInfo.Name;
-                                    objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                    Threading.InvokeOnUI(() =>
+                                    {
+                                        objective.GuildClaimer.Name = guildInfo.Name;
+                                        objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                    });
                                 }
                             }
                         }
                         else
                         {
-                            objective.GuildClaimer.ID = null;
-                            objective.GuildClaimer.Name = string.Empty;
-                            objective.GuildClaimer.Tag = string.Empty;
+                            Threading.InvokeOnUI(() =>
+                            {
+                                objective.GuildClaimer.ID = null;
+                                objective.GuildClaimer.Name = string.Empty;
+                                objective.GuildClaimer.Tag = string.Empty;
+                            });
                         }
                     }
                     else
