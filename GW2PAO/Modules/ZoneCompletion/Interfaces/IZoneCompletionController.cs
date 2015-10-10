@@ -64,6 +64,11 @@ namespace GW2PAO.Modules.ZoneCompletion.Interfaces
         int LocationsRefreshInterval { get; set; }
 
         /// <summary>
+        /// True if a valid map ID is available, else false
+        /// </summary>
+        bool ValidMapID { get; }
+
+        /// <summary>
         /// The ID of the current map/zone
         /// </summary>
         int CurrentMapID { get; }

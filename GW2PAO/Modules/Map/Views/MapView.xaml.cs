@@ -63,8 +63,6 @@ namespace GW2PAO.Modules.Map.Views
         private void EventTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
             // Save the height values for use when collapsing the window
-            this.Height = GW2PAO.Properties.Settings.Default.EventTrackerHeight;
-
             this.Closing += EventTrackerView_Closing;
             this.beforeCollapseHeight = this.Height;
         }
@@ -75,7 +73,7 @@ namespace GW2PAO.Modules.Map.Views
             {
                 if (this.MapContainer.Visibility == System.Windows.Visibility.Visible)
                 {
-                    Properties.Settings.Default.MapViewHeight = this.Height;
+                    Properties.Settings.Default.MapViewHeight = this.ActualHeight;
                 }
                 else
                 {

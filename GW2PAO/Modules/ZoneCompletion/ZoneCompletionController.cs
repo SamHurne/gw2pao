@@ -27,6 +27,8 @@ namespace GW2PAO.Modules.ZoneCompletion
     [Export(typeof(IZoneCompletionController))]
     public class ZoneCompletionController : BindableBase, IZoneCompletionController
     {
+        private bool validMapId;
+        private int currentMapId;
         private API.Data.Entities.Point characterPosition;
         private API.Data.Entities.Point cameraDirection;
         private API.Data.Entities.Continent continent;
@@ -165,9 +167,22 @@ namespace GW2PAO.Modules.ZoneCompletion
         public int LocationsRefreshInterval { get; set; }
 
         /// <summary>
+        /// True if a valid map ID for the player is available, else false
+        /// </summary>
+        public bool ValidMapID
+        {
+            get { return this.validMapId; }
+            set { SetProperty(ref this.validMapId, value); }
+        }
+
+        /// <summary>
         /// The ID of the current map/zone
         /// </summary>
-        public int CurrentMapID { get; private set; }
+        public int CurrentMapID
+        {
+            get { return this.currentMapId; }
+            set { SetProperty(ref this.currentMapId, value); }
+        }
 
         /// <summary>
         /// Default constructor
@@ -282,6 +297,8 @@ namespace GW2PAO.Modules.ZoneCompletion
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped
 
+                Threading.BeginInvokeOnUI(() => this.ValidMapID = this.playerService.HasValidMapId);
+
                 if (this.systemService.IsGw2Running && this.playerService.HasValidMapId)
                 {
                     // Check to see if the MapId or Character Name has changed, if so, we need to clear our zone items and add the new ones
@@ -292,7 +309,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                         this.CurrentMapID = this.playerService.MapId;
                         this.CharacterName = this.playerService.CharacterName;
 
-                        var continent = this.zoneService.GetContinent(this.CurrentMapID);
+                        var continent = this.zoneService.GetContinentByMap(this.CurrentMapID);
                         var map = this.zoneService.GetMap(this.CurrentMapID);
                         Threading.BeginInvokeOnUI(() =>
                         {

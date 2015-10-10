@@ -23,7 +23,7 @@ namespace GW2PAO.Modules.Map.Converters
         /// </param>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length >=2
+            if (values.Length >= 2
                 && values[0] is GW2PAO.API.Data.Entities.Point
                 && values[1] is API.Data.Entities.Continent)
             {
@@ -38,7 +38,7 @@ namespace GW2PAO.Modules.Map.Converters
             }
             else
             {
-                throw new InvalidOperationException("Invalid input to MapCoordToWorldCoordConverter!");
+                return null;
             }
         }
 

@@ -24,43 +24,32 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private const int DEFAULT_CONTINENT_ID = 1;
+
         private MapUserData userData;
         private ZoneCompletionUserData zoneUserData;
         private IZoneCompletionController zoneController;
         private IZoneService zoneService;
         private IPlayerService playerService;
         private int floorId;
+        private Continent continentData;
         private Location mapCenter;
         private Location charLocation;
         private double cameraDirection;
         private MercatorTransform locationTransform = new MercatorTransform();
 
+        private bool displayCharacterPointer;
+        private bool canDisplayCharacterPointer;
+
         private bool snapToCharacter;
 
         /// <summary>
-        /// The ID of the active continent to show on the map
-        /// </summary>
-        public int ContinentId
-        {
-            get
-            {
-                if (this.zoneController.ActiveContinent != null)
-                    return this.zoneController.ActiveContinent.Id;
-                else
-                    return 1;
-            }
-        }
-
-        /// <summary>
-        /// Data for the active continent
-        /// TODO: Do we really want this to be the active continent?
+        /// Data for the displayed continent
         /// </summary>
         public Continent ContinentData
         {
-            get
-            {
-                return this.zoneController.ActiveContinent;
-            }
+            get { return this.continentData; }
+            set { SetProperty(ref this.continentData, value); }
         }
 
         /// <summary>
@@ -85,7 +74,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
-                return string.Format("https://tiles.guildwars2.com/{0}/{1}/{2}.jpg", this.ContinentId, this.FloorId, "{z}/{x}/{y}");
+                return string.Format("https://tiles.guildwars2.com/{0}/{1}/{2}.jpg", this.ContinentData.Id, this.FloorId, "{z}/{x}/{y}");
             }
         }
 
@@ -131,6 +120,39 @@ namespace GW2PAO.Modules.Map.ViewModels
             }
         }
 
+        /// <summary>
+        /// True if the character pointer should be displayed (user-selectable), else false
+        /// </summary>
+        public bool DisplayCharacterPointer
+        {
+            get
+            {
+                if (this.CanDisplayCharacterPointer)
+                    return this.displayCharacterPointer;
+                else
+                    return false;
+            }
+            set
+            {
+                SetProperty(ref this.displayCharacterPointer, value);
+            }
+        }
+
+        /// <summary>
+        /// True if we can display the character pointer, else false
+        /// Can be false if the player is not in-game
+        /// </summary>
+        public bool CanDisplayCharacterPointer
+        {
+            get { return this.canDisplayCharacterPointer; }
+            set
+            {
+                if (SetProperty(ref this.canDisplayCharacterPointer, value))
+                {
+                    this.OnPropertyChanged(() => this.DisplayCharacterPointer);
+                }
+            }
+        }
 
         /// <summary>
         /// Collection of Waypoints for the current continent
@@ -186,7 +208,6 @@ namespace GW2PAO.Modules.Map.ViewModels
             private set;
         }
 
-
         /// <summary>
         /// Constructs a new MapViewModel
         /// </summary>
@@ -201,6 +222,7 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.userData = userData;
             this.FloorId = 1;
             this.SnapToCharacter = false;
+            this.DisplayCharacterPointer = true;
 
             this.Dungeons = new ObservableCollection<ZoneItemViewModel>();
             this.HeartQuests = new ObservableCollection<ZoneItemViewModel>();
@@ -209,6 +231,11 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.Vistas = new ObservableCollection<ZoneItemViewModel>();
             this.Waypoints = new ObservableCollection<ZoneItemViewModel>();
 
+            if (this.playerService.HasValidMapId)
+                this.ContinentData = this.zoneService.GetContinentByMap(this.playerService.MapId);
+            else
+                this.ContinentData = this.zoneService.GetContinent(DEFAULT_CONTINENT_ID);
+
             ((INotifyPropertyChanged)this.zoneController).PropertyChanged += ZoneControllerPropertyChanged;
             this.zoneController.Start();
 
@@ -216,15 +243,24 @@ namespace GW2PAO.Modules.Map.ViewModels
             Task.Factory.StartNew(this.RebuildZoneItemCollections);
         }
 
+        /// <summary>
+        /// Rebuilds each of the zone item collections
+        /// </summary>
         private void RebuildZoneItemCollections()
         {
-            var zoneItems = this.zoneService.GetZoneItemsByContinent(this.ContinentId);
-            foreach (var entity in zoneItems)
+            var zoneItems = this.zoneService.GetZoneItemsByContinent(this.ContinentData.Id);
+            Threading.BeginInvokeOnUI(() =>
             {
-                var vm = new ZoneItemViewModel(entity, this.playerService, this.zoneUserData);
+                this.Dungeons.Clear();
+                this.HeartQuests.Clear();
+                this.HeroPoints.Clear();
+                this.POIs.Clear();
+                this.Vistas.Clear();
+                this.Waypoints.Clear();
 
-                Threading.InvokeOnUI(() =>
+                foreach (var entity in zoneItems)
                 {
+                    var vm = new ZoneItemViewModel(entity, this.playerService, this.zoneUserData);
                     switch (entity.Type)
                     {
                         case API.Data.Enums.ZoneItemType.Dungeon:
@@ -248,8 +284,8 @@ namespace GW2PAO.Modules.Map.ViewModels
                         default:
                             break;
                     }
-                });
-            }
+                }
+            });
         }
 
         /// <summary>
@@ -257,6 +293,10 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == "ActiveMap")
+                this.ContinentData = this.zoneService.GetContinentByMap(this.zoneController.CurrentMapID);
+
+            this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
             this.RefreshCharacterLocation();
             this.RefreshCharacterDirection();
         }

@@ -70,11 +70,44 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// Retrieves the continent information for the given continent ID
+        /// </summary>
+        /// <param name="mapId">The ID of a continent</param>
+        /// <returns>The continent data</returns>
+        public Data.Entities.Continent GetContinent(int continentId)
+        {
+            try
+            {
+                // Get all continents
+                var continent = GW2.V2.Continents.ForCurrentUICulture().Find(continentId);
+                if (continent != null)
+                {
+                    Data.Entities.Continent cont = new Data.Entities.Continent(continentId);
+                    cont.Name = continent.Name;
+                    cont.Height = continent.ContinentDimensions.Height;
+                    cont.Width = continent.ContinentDimensions.Width;
+                    cont.FloorIds = continent.FloorIds;
+                    cont.MaxZoom = continent.MaximumZoom;
+                    cont.MinZoom = continent.MinimumZoom;
+
+                    return cont;
+                }  
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Retrieves the continent information for the given map ID
         /// </summary>
         /// <param name="mapId">The ID of a zone</param>
         /// <returns>The continent data</returns>
-        public Data.Entities.Continent GetContinent(int mapId)
+        public Data.Entities.Continent GetContinentByMap(int mapId)
         {
             try
             {
@@ -100,7 +133,7 @@ namespace GW2PAO.API.Services
 
                         return cont;
                     }
-                }  
+                }
             }
             catch (Exception ex)
             {
