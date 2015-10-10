@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GW2PAO.Data;
 using GW2PAO.Data.UserData;
 using GW2PAO.Modules.ZoneCompletion.ViewModels;
+using GW2PAO.Utility;
 
 namespace GW2PAO.Modules.ZoneCompletion.Interfaces
 {
@@ -26,6 +27,26 @@ namespace GW2PAO.Modules.ZoneCompletion.Interfaces
         /// The current character's name
         /// </summary>
         string CharacterName { get; }
+
+        /// <summary>
+        /// The current character's position
+        /// </summary>
+        API.Data.Entities.Point CharacterPosition { get; }
+
+        /// <summary>
+        /// The current player's camera direction
+        /// </summary>
+        API.Data.Entities.Point CameraDirection { get; }
+
+        /// <summary>
+        /// The active continent that the player is in
+        /// </summary>
+        API.Data.Entities.Continent ActiveContinent { get; }
+
+        /// <summary>
+        /// The active map that the player is in
+        /// </summary>
+        API.Data.Entities.Map ActiveMap { get; }
 
         /// <summary>
         /// The zone completion user data
