@@ -449,7 +449,7 @@ namespace GW2PAO.API.Services
                                             zoneItem.Type = ZoneItemType.Dungeon;
                                         else
                                             zoneItem.Type = ZoneItemType.PointOfInterest;
-
+                                        
                                         if (!pointsOfInterest.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to PointsOfInterest collection", zoneItem);
@@ -478,7 +478,7 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapId = subRegion.Value.MapId;
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = ZoneItemType.HeartQuest;
-
+                                        
                                         if (!tasks.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to Tasks collection", zoneItem);
@@ -508,7 +508,7 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapId = subRegion.Value.MapId;
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = Data.Enums.ZoneItemType.HeroPoint;
-
+                                        
                                         if (!heroPoints.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to HeroPoints collection", zoneItem);
