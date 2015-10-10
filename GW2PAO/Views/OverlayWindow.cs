@@ -124,6 +124,9 @@ namespace GW2PAO.Views
                     };
                 BindingOperations.SetBinding(this, OverlayWindow.IsClickthroughProperty, clickthroughBinding);
             }
+
+            // Disable window activation, which prevents the taskbar from showing
+            Utility.User32.SetNoActivate(this, true);
         }
 
         /// <summary>
