@@ -105,12 +105,28 @@
   <ItemGroup>
     <Reference Include="Awesomium.Core, Version=1.7.5.1, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86" />
     <Reference Include="Awesomium.Windows.Controls, Version=1.7.5.1, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86" />
+    <Reference Include="FileDb, Version=5.0.1.0, Culture=neutral, PublicKeyToken=ba3f58a0e60cd01d, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FileDbCache.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDbCache.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ImageFileCache.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\ImageFileCache.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Intellibox">
       <HintPath>..\lib\Intellibox\Intellibox.dll</HintPath>
+    </Reference>
+    <Reference Include="MapControl.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\MapControl.WPF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -241,6 +257,16 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
+    <Compile Include="Modules\Map\Interfaces\IMapViewController.cs" />
+    <Compile Include="Modules\Map\MapMenu.cs" />
+    <Compile Include="Modules\Map\MapModule.cs" />
+    <Compile Include="Modules\Map\MapUserData.cs" />
+    <Compile Include="Modules\Map\MapViewController.cs" />
+    <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
+    <Compile Include="Modules\Map\Views\Controls\Map.cs" />
+    <Compile Include="Modules\Map\Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksController.cs" />
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksViewController.cs" />
     <Compile Include="Modules\Tasks\Models\PlayerTask.cs" />
@@ -514,6 +540,10 @@
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Map\Views\MapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Tasks\Views\AddNewTaskDialog.xaml">
       <SubType>Designer</SubType>
@@ -879,6 +909,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Tasks\" />
+    <Folder Include="Modules\Map\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />
