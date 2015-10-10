@@ -70,6 +70,93 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// Retrieves the continent information for the given map ID
+        /// </summary>
+        /// <param name="mapId">The ID of a zone</param>
+        /// <returns>The continent data</returns>
+        public Data.Entities.Continent GetContinent(int mapId)
+        {
+            try
+            {
+                // Get all continents
+                var continents = GW2.V2.Continents.ForCurrentUICulture().FindAll();
+
+                // Get the map info
+                var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
+                if (map != null)
+                {
+                    // Find the map's continent
+                    var continent = continents[map.ContinentId];
+
+                    if (continent != null)
+                    {
+                        Data.Entities.Continent cont = new Data.Entities.Continent(map.ContinentId);
+                        cont.Name = continent.Name;
+                        cont.Height = continent.ContinentDimensions.Height;
+                        cont.Width = continent.ContinentDimensions.Width;
+                        cont.FloorIds = continent.FloorIds;
+                        cont.MaxZoom = continent.MaximumZoom;
+                        cont.MinZoom = continent.MinimumZoom;
+
+                        return cont;
+                    }
+                }  
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Retrieves the map information for the given map ID
+        /// </summary>
+        /// <param name="mapId">The ID of a zone</param>
+        /// <returns>The map data</returns>
+        public Data.Entities.Map GetMap(int mapId)
+        {
+            try
+            {
+                // Get the current map info
+                var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
+                if (map != null)
+                {
+                    Data.Entities.Map m = new Data.Entities.Map(mapId);
+
+                    m.MaxLevel = map.MaximumLevel;
+                    m.MinLevel = map.MinimumLevel;
+                    m.DefaultFloor = map.DefaultFloor;
+
+                    m.ContinentId = map.ContinentId;
+                    m.RegionId = map.RegionId;
+                    m.RegionName = map.RegionName;
+
+                    m.MapRectangle.X = map.MapRectangle.X;
+                    m.MapRectangle.Y = map.MapRectangle.Y;
+                    m.MapRectangle.Height = map.MapRectangle.Height;
+                    m.MapRectangle.Width = map.MapRectangle.Width;
+
+                    m.ContinentRectangle.X = map.ContinentRectangle.X;
+                    m.ContinentRectangle.Y = map.ContinentRectangle.Y;
+                    m.ContinentRectangle.Height = map.ContinentRectangle.Height;
+                    m.ContinentRectangle.Width = map.ContinentRectangle.Width;
+
+                    return m;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>

@@ -1,25 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GW2PAO.Modules.Events.ViewModels.EventTracker;
+﻿using GW2PAO.Modules.Map.ViewModels;
 using GW2PAO.Views;
 using GW2PAO.Views.Events.EventTracker;
 using NLog;
-using System.Windows.Controls.Primitives;
-using GW2PAO.Modules.Map.ViewModels;
+using System;
+using System.ComponentModel.Composition;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GW2PAO.Modules.Map.Views
 {
@@ -149,7 +136,7 @@ namespace GW2PAO.Modules.Map.Views
         {
             if (e.ClickCount == 2)
             {
-                this.TestMap.ZoomMap(e.GetPosition(this.TestMap), Math.Floor(this.TestMap.ZoomLevel + 1.5));
+                this.Map.ZoomMap(e.GetPosition(this.Map), Math.Floor(this.Map.ZoomLevel + 1.5));
             }
         }
 
@@ -161,7 +148,7 @@ namespace GW2PAO.Modules.Map.Views
         {
             if (e.ClickCount == 2)
             {
-                this.TestMap.ZoomMap(e.GetPosition(this.TestMap), Math.Ceiling(this.TestMap.ZoomLevel - 1.5));
+                this.Map.ZoomMap(e.GetPosition(this.Map), Math.Ceiling(this.Map.ZoomLevel - 1.5));
             }
         }
 

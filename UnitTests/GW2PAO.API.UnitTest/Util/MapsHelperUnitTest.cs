@@ -4,6 +4,9 @@ using GW2NET.Maps;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Map = GW2NET.Maps.Map;
+using Continent = GW2NET.Maps.Continent;
+using Rectangle = GW2NET.Common.Drawing.Rectangle;
 
 namespace GW2PAO.API.UnitTest.Util
 {

@@ -224,9 +224,12 @@
     <Compile Include="Constants\DungeonID.cs" />
     <Compile Include="Constants\Paths.cs" />
     <Compile Include="Constants\WorldEventID.cs" />
+    <Compile Include="Data\Entities\Continent.cs" />
     <Compile Include="Data\Entities\DetectionPoint.cs" />
     <Compile Include="Data\Entities\Dungeon.cs" />
     <Compile Include="Data\Entities\DynamicEvent.cs" />
+    <Compile Include="Data\Entities\Map.cs" />
+    <Compile Include="Data\Entities\Rectangle.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
     <Compile Include="Data\Enums\ItemFlags.cs" />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GW2NET.Maps;
 using GW2PAO.API.Data;
 using GW2PAO.API.Data.Entities;
+using Map = GW2NET.Maps.Map;
 
 namespace GW2PAO.API.Util
 {

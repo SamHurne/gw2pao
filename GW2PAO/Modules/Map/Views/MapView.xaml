@@ -16,7 +16,8 @@
         Top="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewY}"
         Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
         MinWidth="150"
-        Width="{Binding Source={x:Static resx:Settings.Default}, Path=EventTrackerWidth}"
+        Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
+        Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"           
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -27,6 +28,21 @@
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+        <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
+            <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="map:MapItem">
+                        <Grid>
+                            <Ellipse Fill="Red" Height="6" Width="6" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
@@ -169,21 +185,22 @@
         <Grid Name="MapContainer"
               Grid.Row="1">
 
-            <ctrls:Map x:Name="TestMap"
+            <ctrls:Map x:Name="Map"
                  MinZoomLevel="1" MaxZoomLevel="10"
                  MouseLeftButtonDown="MapMouseLeftButtonDown"
                  MouseRightButtonDown="MapMouseRightButtonDown"
                  MouseLeftButtonUp="TestMap_MouseLeftButtonUp"
                  MouseMove="MapMouseMove"
                  MouseLeave="MapMouseLeave"
-                 ManipulationInertiaStarting="MapManipulationInertiaStarting">
+                 ManipulationInertiaStarting="MapManipulationInertiaStarting"
+                 TargetCenter="{Binding MapCenter}">
                 <ctrls:Map.Style>
                     <Style TargetType="ctrls:Map">
                         <Setter Property="ManipulationMode" Value="All" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding PenEnabled}" Value="True">
+                            <!--<DataTrigger Binding="{Binding PenEnabled}" Value="True">
                                 <Setter Property="ManipulationMode" Value="None" />
-                            </DataTrigger>
+                            </DataTrigger>-->
                         </Style.Triggers>
                     </Style>
                 </ctrls:Map.Style>
@@ -195,6 +212,9 @@
                                    MaxParallelDownloads="20"
                                    UpdateInterval="0:0:0.15"/>
                 </ctrls:Map.TileLayer>
+
+                <map:MapItem Name="CharacterMarker"
+                             Style="{StaticResource CharacterPositionMarkerStyle}" />
 
                 <!--<map:MapItemsControl ItemsSource="{Binding Waypoints}" 
                                  ItemContainerStyle="{StaticResource WaypointItemStyle}"
@@ -214,6 +234,19 @@
                                  IsSynchronizedWithCurrentItem="True"/>-->
             </ctrls:Map>
 
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding SnapToCharacter}">
+                        <core:OutlinedTextBlock Text="[[Snap To Character]]" />
+                    </CheckBox>
+                </StackPanel>
+            </Grid>
+            
         </Grid>
 
         <Grid Name="ResizeGripper" Grid.Row="1">

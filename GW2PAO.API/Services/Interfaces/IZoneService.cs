@@ -17,6 +17,20 @@ namespace GW2PAO.API.Services.Interfaces
         void Initialize();
 
         /// <summary>
+        /// Retrieves the continent information for the given map ID
+        /// </summary>
+        /// <param name="mapId">The ID of a zone</param>
+        /// <returns>The continent data</returns>
+        Data.Entities.Continent GetContinent(int mapId);
+
+        /// <summary>
+        /// Retrieves the map information for the given map ID
+        /// </summary>
+        /// <param name="mapId">The ID of a zone</param>
+        /// <returns>The map data</returns>
+        Data.Entities.Map GetMap(int mapId);
+
+        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>
