@@ -43,6 +43,14 @@ namespace GW2PAO.Views
             }
         }
 
+        protected override bool SetNoFocus
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         [ImportingConstructor]
         public ShellView(ShellViewModel vm, EventAggregator eventAggregator, ProcessMonitor processMonitor)
         {
