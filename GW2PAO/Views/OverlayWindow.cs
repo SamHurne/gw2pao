@@ -33,6 +33,11 @@ namespace GW2PAO.Views
         protected virtual bool NeverClickThrough { get { return false; } }
 
         /// <summary>
+        /// Set to false to not set the "NoFocus" property, else true
+        /// </summary>
+        protected virtual bool SetNoFocus { get { return true; } }
+
+        /// <summary>
         /// Dependency property for IsClickthrough
         /// True if this window has click-through enabled, else false
         /// </summary>
@@ -126,7 +131,8 @@ namespace GW2PAO.Views
             }
 
             // Disable window activation, which prevents the taskbar from showing
-            Utility.User32.SetNoActivate(this, true);
+            if (this.SetNoFocus)
+                Utility.User32.SetNoActivate(this, true);
         }
 
         /// <summary>

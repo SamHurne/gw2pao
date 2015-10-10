@@ -40,6 +40,8 @@ namespace GW2PAO.Modules.Tasks.Views
             }
         }
 
+        protected override bool SetNoFocus { get { return false; } }
+
         /// <summary>
         /// Constructs a new AddNewTaskDialog window
         /// </summary>

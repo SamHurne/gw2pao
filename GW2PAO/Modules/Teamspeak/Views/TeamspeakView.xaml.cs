@@ -28,6 +28,8 @@ namespace GW2PAO.Modules.Teamspeak.Views
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        protected override bool SetNoFocus { get { return false; } }
+
         private const double minHeight = 84;
         private const double maxHeight = 500;
 

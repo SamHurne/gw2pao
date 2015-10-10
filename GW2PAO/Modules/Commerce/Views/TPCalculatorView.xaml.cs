@@ -26,6 +26,8 @@ namespace GW2PAO.Modules.Commerce.Views
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        protected override bool SetNoFocus { get { return false; } }
+
         /// <summary>
         /// Default constructor
         /// </summary>

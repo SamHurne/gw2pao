@@ -32,6 +32,8 @@ namespace GW2PAO.Modules.WebBrowser.Views
         public static readonly DependencyProperty NativeViewProperty = NativeViewPropertyKey.DependencyProperty;
         public static readonly DependencyProperty IsRegularWindowProperty = IsRegularWindowPropertyKey.DependencyProperty;
 
+        protected override bool SetNoFocus { get { return false; } }
+
         /// <summary>
         /// Default logger
         /// </summary>

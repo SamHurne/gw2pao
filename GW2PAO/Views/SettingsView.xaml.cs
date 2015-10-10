@@ -42,13 +42,9 @@ namespace GW2PAO.Views
         [Import]
         public GeneralSettingsView GeneralSettings { get; private set; }
 
-        protected override bool NeverClickThrough
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool NeverClickThrough { get { return true; } }
+
+        protected override bool SetNoFocus { get { return false; } }
 
         public override bool SupportsAutoHide { get { return false; } }
 
