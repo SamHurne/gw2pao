@@ -262,29 +262,34 @@
                 </ctrls:Map.TileLayer>
 
                 <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
-                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                 IsSynchronizedWithCurrentItem="True"
-                                 SelectionMode="Extended"/>
+                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                     IsSynchronizedWithCurrentItem="True"
+                                     SelectionMode="Extended"
+                                     Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}"/>
 
                 <map:MapItemsControl ItemsSource="{Binding POIs}" 
-                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                 IsSynchronizedWithCurrentItem="True"
-                                 SelectionMode="Extended"/>
+                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                     IsSynchronizedWithCurrentItem="True"
+                                     SelectionMode="Extended"
+                                     Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}"/>
 
                 <map:MapItemsControl ItemsSource="{Binding Vistas}" 
-                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                 IsSynchronizedWithCurrentItem="True"
-                                 SelectionMode="Extended"/>
+                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                     IsSynchronizedWithCurrentItem="True"
+                                     SelectionMode="Extended"
+                                     Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}"/>
 
                 <map:MapItemsControl ItemsSource="{Binding HeartQuests}" 
-                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                 IsSynchronizedWithCurrentItem="True"
-                                 SelectionMode="Extended"/>
+                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                     IsSynchronizedWithCurrentItem="True"
+                                     SelectionMode="Extended"
+                                     Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}"/>
 
                 <map:MapItemsControl ItemsSource="{Binding HeroPoints}" 
-                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                 IsSynchronizedWithCurrentItem="True"
-                                 SelectionMode="Extended"/>
+                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                     IsSynchronizedWithCurrentItem="True"
+                                     SelectionMode="Extended"
+                                     Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}"/>
 
                 <map:MapItem Name="CharacterMarker"
                              Style="{StaticResource CharacterPositionMarkerStyle}" />
@@ -304,6 +309,26 @@
                     <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
                               IsChecked="{Binding SnapToCharacter}">
                         <core:OutlinedTextBlock Text="[[Snap To Character]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowWaypoints}">
+                        <core:OutlinedTextBlock Text="[[Waypoints]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowPOIs}">
+                        <core:OutlinedTextBlock Text="[[POIs]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowVistas}">
+                        <core:OutlinedTextBlock Text="[[Vistas]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowHeartQuests}">
+                        <core:OutlinedTextBlock Text="[[Heart Quests]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowHeroPoints}">
+                        <core:OutlinedTextBlock Text="[[Hero Points]]" />
                     </CheckBox>
                 </StackPanel>
             </Grid>
