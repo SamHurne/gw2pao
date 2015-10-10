@@ -33,7 +33,7 @@
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
 
         <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
-            <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation}"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -48,6 +48,16 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding DisplayCharacterPointer}" Value="True" />
+                        <Condition Binding="{Binding CanDisplayCharacterPointer}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible" />
+                </MultiDataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="ZoneItemStyle" TargetType="map:MapItem">
@@ -251,9 +261,6 @@
                                    UpdateInterval="0:0:0.15"/>
                 </ctrls:Map.TileLayer>
 
-                <map:MapItem Name="CharacterMarker"
-                             Style="{StaticResource CharacterPositionMarkerStyle}" />
-
                 <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
@@ -278,6 +285,9 @@
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"/>
+
+                <map:MapItem Name="CharacterMarker"
+                             Style="{StaticResource CharacterPositionMarkerStyle}" />
 
                 <!--<map:MapItemsControl Name="PenLinesControl"
                                  ItemsSource="{Binding PenLines}"
