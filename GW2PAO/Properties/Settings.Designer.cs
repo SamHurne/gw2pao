@@ -850,5 +850,53 @@ namespace GW2PAO.Properties {
                 this["IsEctoHelperOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewX {
+            get {
+                return ((double)(this["MapViewX"]));
+            }
+            set {
+                this["MapViewX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewY {
+            get {
+                return ((double)(this["MapViewY"]));
+            }
+            set {
+                this["MapViewY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double MapViewHeight {
+            get {
+                return ((double)(this["MapViewHeight"]));
+            }
+            set {
+                this["MapViewHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double MapViewWidth {
+            get {
+                return ((double)(this["MapViewWidth"]));
+            }
+            set {
+                this["MapViewWidth"] = value;
+            }
+        }
     }
 }
