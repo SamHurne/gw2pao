@@ -26,6 +26,7 @@
         <ResourceDictionary Source="NamedStyles/WaypointButtonStyle.xaml" />
         
         <!--XAML Images-->
+        <ResourceDictionary Source="Images/CharacterPointer.xaml" />
         <ResourceDictionary Source="Images/Spinners.xaml" />
         <ResourceDictionary Source="Images/TeamspeakIcons.xaml" />
     </ResourceDictionary.MergedDictionaries>

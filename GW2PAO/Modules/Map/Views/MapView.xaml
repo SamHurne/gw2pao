@@ -38,8 +38,12 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <Grid>
-                            <Ellipse Fill="Red" Height="6" Width="6" />
+                        <Grid Height="20" Width="20"
+                              RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter Content="{StaticResource CharacterPointer}" />
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="{Binding CameraDirection}" />
+                            </Grid.RenderTransform>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

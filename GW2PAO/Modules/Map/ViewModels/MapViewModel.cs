@@ -32,6 +32,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private int floorId;
         private Location mapCenter;
         private Location charLocation;
+        private double cameraDirection;
         private MercatorTransform locationTransform = new MercatorTransform();
 
         private bool snapToCharacter;
@@ -107,6 +108,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// Direction of the player's camera, in degrees
+        /// </summary>
+        public double CameraDirection
+        {
+            get { return this.cameraDirection; }
+            set { SetProperty(ref this.cameraDirection, value); }
+        }
+
+        /// <summary>
         /// True if the map should snap to the active character's position, else false
         /// </summary>
         public bool SnapToCharacter
@@ -120,10 +130,6 @@ namespace GW2PAO.Modules.Map.ViewModels
                 }
             }
         }
-
-
-
-
 
 
         /// <summary>
@@ -252,6 +258,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             this.RefreshCharacterLocation();
+            this.RefreshCharacterDirection();
         }
 
         private void RefreshCharacterLocation()
@@ -274,6 +281,16 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (this.SnapToCharacter)
                     this.MapCenter = this.CharacterLocation;
             }
+        }
+
+        private void RefreshCharacterDirection()
+        {
+            var camDir = this.zoneController.CameraDirection;
+
+            var zeroPoint = new API.Data.Entities.Point(0, 0);
+            var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(zeroPoint, camDir),
+                                                   CalcUtil.Vector.CreateVector(zeroPoint, zeroPoint));
+            this.CameraDirection = newAngle;
         }
     }
 }
