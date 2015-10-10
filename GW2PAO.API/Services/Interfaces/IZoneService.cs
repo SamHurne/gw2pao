@@ -38,6 +38,13 @@ namespace GW2PAO.API.Services.Interfaces
         IEnumerable<ZoneItem> GetZoneItems(int mapId);
 
         /// <summary>
+        /// Retrieves a collection of zone items located in the given continent
+        /// </summary>
+        /// <param name="continentId">ID of the continent</param>
+        /// <returns></returns>
+        IEnumerable<ZoneItem> GetZoneItemsByContinent(int continentId);
+
+        /// <summary>
         /// Retrieves the name of the zone using the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve the name for</param>

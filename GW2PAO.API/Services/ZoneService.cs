@@ -192,6 +192,20 @@ namespace GW2PAO.API.Services
                                 if (region.Maps.ContainsKey(mapId))
                                 {
                                     var regionMap = region.Maps[mapId];
+                                    var continentRectangle = new Rectangle()
+                                    {
+                                        X = regionMap.ContinentRectangle.X,
+                                        Y = regionMap.ContinentRectangle.Y,
+                                        Height = regionMap.ContinentRectangle.Height,
+                                        Width = regionMap.ContinentRectangle.Width
+                                    };
+                                    var mapRectangle = new Rectangle()
+                                    {
+                                        X = regionMap.MapRectangle.X,
+                                        Y = regionMap.MapRectangle.Y,
+                                        Height = regionMap.MapRectangle.Height,
+                                        Width = regionMap.MapRectangle.Width
+                                    };
 
                                     // Points of Interest
                                     foreach (var item in regionMap.PointsOfInterest)
@@ -200,11 +214,15 @@ namespace GW2PAO.API.Services
                                         if (!zoneItems.Any(zi => zi.ID == item.PointOfInterestId))
                                         {
                                             // Determine the location
-                                            var location = MapsHelper.ConvertToMapPos(map, new Point(item.Coordinates.X, item.Coordinates.Y));
+                                            var location = MapsHelper.ConvertToMapPos(
+                                                continentRectangle,
+                                                mapRectangle,
+                                                new Point(item.Coordinates.X, item.Coordinates.Y));
 
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = item.PointOfInterestId;
                                             zoneItem.Name = item.Name;
+                                            zoneItem.ContinentLocation = new Point(item.Coordinates.X, item.Coordinates.Y);
                                             zoneItem.Location = new Point(location.X, location.Y);
                                             zoneItem.MapId = mapId;
                                             zoneItem.MapName = map.MapName;
@@ -233,12 +251,16 @@ namespace GW2PAO.API.Services
                                         if (!zoneItems.Any(zi => zi.ID == task.TaskId))
                                         {
                                             // Determine the location
-                                            var location = MapsHelper.ConvertToMapPos(map, new Point(task.Coordinates.X, task.Coordinates.Y));
+                                            var location = MapsHelper.ConvertToMapPos(
+                                                continentRectangle,
+                                                mapRectangle, 
+                                                new Point(task.Coordinates.X, task.Coordinates.Y));
 
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = task.TaskId;
                                             zoneItem.Name = task.Objective;
                                             zoneItem.Level = task.Level;
+                                            zoneItem.ContinentLocation = new Point(task.Coordinates.X, task.Coordinates.Y);
                                             zoneItem.Location = new Point(location.X, location.Y);
                                             zoneItem.MapId = mapId;
                                             zoneItem.MapName = map.MapName;
@@ -252,7 +274,10 @@ namespace GW2PAO.API.Services
                                     foreach (var skillChallenge in regionMap.SkillChallenges)
                                     {
                                         // Determine the location, this serves an internally-used ID for skill challenges
-                                        var location = MapsHelper.ConvertToMapPos(map, new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y));
+                                        var location = MapsHelper.ConvertToMapPos(
+                                                continentRectangle,
+                                                mapRectangle, 
+                                                new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y));
 
                                         // Use a custom-generated ID
                                         int id = (int)(mapId + location.X + location.Y);
@@ -262,6 +287,7 @@ namespace GW2PAO.API.Services
                                         {
                                             ZoneItem zoneItem = new ZoneItem();
                                             zoneItem.ID = id;
+                                            zoneItem.ContinentLocation = new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y);
                                             zoneItem.Location = new Point(location.X, location.Y);
                                             zoneItem.MapId = mapId;
                                             zoneItem.MapName = map.MapName;
@@ -282,6 +308,150 @@ namespace GW2PAO.API.Services
                 logger.Error(ex);
             }
             return zoneItems;
+        }
+
+        /// <summary>
+        /// Retrieves a collection of zone items located in the given continent
+        /// </summary>
+        /// <param name="continentId">ID of the continent</param>
+        /// <returns></returns>
+        public IEnumerable<ZoneItem> GetZoneItemsByContinent(int continentId)
+        {
+            ConcurrentDictionary<int, ZoneItem> zoneItems = new ConcurrentDictionary<int, ZoneItem>();
+            ConcurrentDictionary<int, GW2NET.Maps.Map> maps = new ConcurrentDictionary<int, GW2NET.Maps.Map>();
+            try
+            {
+                // Get the continents (used later in determining the location of items)
+                var continent = GW2.V2.Continents.ForCurrentUICulture().Find(continentId);
+
+                Parallel.ForEach(continent.FloorIds, floorId =>
+                {
+                    var floorService = GW2.V1.Floors.ForCurrentUICulture(continentId);
+
+                    var floor = floorService.Find(floorId);
+                    if (floor != null && floor.Regions != null)
+                    {
+                        foreach (var region in floor.Regions)
+                        {
+                            foreach (var subRegion in region.Value.Maps)
+                            {
+                                var continentRectangle = new Rectangle()
+                                {
+                                    X = subRegion.Value.ContinentRectangle.X,
+                                    Y = subRegion.Value.ContinentRectangle.Y,
+                                    Height = subRegion.Value.ContinentRectangle.Height,
+                                    Width = subRegion.Value.ContinentRectangle.Width
+                                };
+                                var mapRectangle = new Rectangle()
+                                {
+                                    X = subRegion.Value.MapRectangle.X,
+                                    Y = subRegion.Value.MapRectangle.Y,
+                                    Height = subRegion.Value.MapRectangle.Height,
+                                    Width = subRegion.Value.MapRectangle.Width
+                                };
+
+                                // Points of Interest
+                                foreach (var item in subRegion.Value.PointsOfInterest)
+                                {
+                                    // If we haven't already added the item, get it's info and add it
+                                    if (!zoneItems.ContainsKey(item.PointOfInterestId))
+                                    {
+                                        // Determine the location
+                                        var location = MapsHelper.ConvertToMapPos(
+                                            continentRectangle,
+                                            mapRectangle,
+                                            new Point(item.Coordinates.X, item.Coordinates.Y));
+
+                                        ZoneItem zoneItem = new ZoneItem();
+                                        zoneItem.ID = item.PointOfInterestId;
+                                        zoneItem.Name = item.Name;
+                                        zoneItem.ContinentLocation = new Point(item.Coordinates.X, item.Coordinates.Y);
+                                        zoneItem.Location = new Point(location.X, location.Y);
+                                        zoneItem.MapId = subRegion.Value.MapId;
+                                        zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
+                                        var mapChatLink = item.GetMapChatLink();
+                                        if (mapChatLink != null)
+                                            zoneItem.ChatCode = mapChatLink.ToString();
+
+                                        // Translate the item's type
+                                        if (item is GW2NET.Maps.Vista)
+                                            zoneItem.Type = ZoneItemType.Vista;
+                                        else if (item is GW2NET.Maps.Waypoint)
+                                            zoneItem.Type = ZoneItemType.Waypoint;
+                                        else if (item is GW2NET.Maps.Dungeon)
+                                            zoneItem.Type = ZoneItemType.Dungeon;
+                                        else
+                                            zoneItem.Type = ZoneItemType.PointOfInterest;
+
+                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                    }
+                                }
+
+                                // Iterate over every Task in the map (Tasks are the same as HeartQuests)
+                                foreach (var task in subRegion.Value.Tasks)
+                                {
+                                    // If we haven't already added the item, get it's info and add it
+                                    if (!zoneItems.ContainsKey(task.TaskId))
+                                    {
+                                        // Determine the location
+                                        var location = MapsHelper.ConvertToMapPos(
+                                            continentRectangle,
+                                            mapRectangle, 
+                                            new Point(task.Coordinates.X, task.Coordinates.Y));
+
+                                        ZoneItem zoneItem = new ZoneItem();
+                                        zoneItem.ID = task.TaskId;
+                                        zoneItem.Name = task.Objective;
+                                        zoneItem.Level = task.Level;
+                                        zoneItem.ContinentLocation = new Point(task.Coordinates.X, task.Coordinates.Y);
+                                        zoneItem.Location = new Point(location.X, location.Y);
+                                        zoneItem.MapId = subRegion.Value.MapId;
+                                        zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
+                                        zoneItem.Type = ZoneItemType.HeartQuest;
+
+                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                    }
+                                }
+
+                                // Iterate over every skill challenge in the map
+                                foreach (var skillChallenge in subRegion.Value.SkillChallenges)
+                                {
+                                    // Determine the location, this serves an internally-used ID for skill challenges
+                                    var location = MapsHelper.ConvertToMapPos(
+                                            continentRectangle,
+                                            mapRectangle, 
+                                            new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y));
+
+                                    // Use a custom-generated ID
+                                    int id = (int)(subRegion.Value.MapId + location.X + location.Y);
+
+                                    // If we havn't already added the item, get it's info and add it
+                                    if (!zoneItems.ContainsKey(id))
+                                    {
+                                        ZoneItem zoneItem = new ZoneItem();
+                                        zoneItem.ID = id;
+                                        zoneItem.ContinentLocation = new Point(skillChallenge.Coordinates.X, skillChallenge.Coordinates.Y);
+                                        zoneItem.Location = new Point(location.X, location.Y);
+                                        zoneItem.MapId = subRegion.Value.MapId;
+                                        zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
+                                        zoneItem.Type = Data.Enums.ZoneItemType.HeroPoint;
+
+                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    logger.Debug("{0} done", floor.FloorId);
+                });
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
+            }
+            return zoneItems.Values;
         }
 
         /// <summary>

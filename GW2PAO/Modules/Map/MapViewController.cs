@@ -84,11 +84,11 @@ namespace GW2PAO.Modules.Map
             this.Container.ComposeParts(mapView);
             mapView.Show();
             openMapViews.Add(mapView);
-            mapView.Closed += (o, e) =>
-            {
-                if (this.openMapViews.Contains(mapView))
-                    this.openMapViews.Remove(mapView);
-            };
+            //mapView.Closed += (o, e) =>
+            //{
+            //    if (this.openMapViews.Contains(mapView))
+            //        this.openMapViews.Remove(mapView);
+            //};
             //if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
             //{
             //    this.eventTrackerView = new EventTrackerView();

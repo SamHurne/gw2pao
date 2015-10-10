@@ -15,8 +15,15 @@ namespace GW2PAO.API.Data.Entities
         public int MapId { get; set; }
         public string MapName { get; set; }
         public int Level { get; set; }
+        public Point ContinentLocation { get; set; }
         public Point Location { get; set; }
         public string ChatCode { get; set; }
+
+        public ZoneItem()
+        {
+            this.ContinentLocation = new Point();
+            this.Location = new Point();
+        }
 
         public override bool Equals(object obj)
         {
@@ -31,6 +38,9 @@ namespace GW2PAO.API.Data.Entities
                     && (other.MapId == this.MapId)
                     && (other.MapName == this.MapName)
                     && (other.Level == this.Level)
+                    && (other.ContinentLocation.X == this.ContinentLocation.X)
+                    && (other.ContinentLocation.Y == this.ContinentLocation.Y)
+                    && (other.ContinentLocation.Z == this.ContinentLocation.Z)
                     && (other.Location.X == this.Location.X)
                     && (other.Location.Y == this.Location.Y)
                     && (other.Location.Z == this.Location.Z);
@@ -57,6 +67,12 @@ namespace GW2PAO.API.Data.Entities
                 if (this.MapName != null)
                 {
                     hash = hash * 23 + this.MapName.GetHashCode();
+                }
+                if (this.ContinentLocation != null)
+                {
+                    hash = hash * 23 + this.ContinentLocation.X.GetHashCode();
+                    hash = hash * 23 + this.ContinentLocation.Y.GetHashCode();
+                    hash = hash * 23 + this.ContinentLocation.Z.GetHashCode();
                 }
                 if (this.Location != null)
                 {

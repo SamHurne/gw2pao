@@ -7,6 +7,7 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
+        xmlns:lconverters="clr-namespace:GW2PAO.Modules.Map.Converters"
         xmlns:ctrls="clr-namespace:GW2PAO.Modules.Map.Views.Controls"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
@@ -28,6 +29,8 @@
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
+        <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
 
         <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation, UpdateSourceTrigger=PropertyChanged}"/>
@@ -37,6 +40,37 @@
                     <ControlTemplate TargetType="map:MapItem">
                         <Grid>
                             <Ellipse Fill="Red" Height="6" Width="6" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ZoneItemStyle" TargetType="map:MapItem">
+            <Setter Property="map:MapPanel.Location">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource CoordConverter}">
+                        <Binding Path="ItemModel.ContinentLocation"/>
+                        <Binding Path="DataContext.ContinentData" ElementName="MainPanel"/>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="map:MapItem">
+                        <Grid>
+                            <Image MaxHeight="25" MaxWidth="25">
+                                <Image.Source>
+                                    <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
+                                        <Binding Path="ItemType"/>
+                                        <Binding Path="IsUnlocked"/>
+                                    </MultiBinding>
+                                </Image.Source>
+                                <Image.ToolTip>
+                                    <TextBlock Text="{Binding ItemName}" Foreground="White"/>
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -216,19 +250,32 @@
                 <map:MapItem Name="CharacterMarker"
                              Style="{StaticResource CharacterPositionMarkerStyle}" />
 
-                <!--<map:MapItemsControl ItemsSource="{Binding Waypoints}" 
-                                 ItemContainerStyle="{StaticResource WaypointItemStyle}"
+                <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
-                                 Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}"
                                  SelectionMode="Extended"/>
 
                 <map:MapItemsControl ItemsSource="{Binding POIs}" 
-                                 ItemContainerStyle="{StaticResource PoiItemStyle}"
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
-                                 Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}"
                                  SelectionMode="Extended"/>
 
-                <map:MapItemsControl Name="PenLinesControl"
+                <map:MapItemsControl ItemsSource="{Binding Vistas}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"/>
+
+                <map:MapItemsControl ItemsSource="{Binding HeartQuests}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"/>
+
+                <map:MapItemsControl ItemsSource="{Binding HeroPoints}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"/>
+
+                <!--<map:MapItemsControl Name="PenLinesControl"
                                  ItemsSource="{Binding PenLines}"
                                  ItemTemplate="{StaticResource PolylineItemTemplate}"
                                  IsSynchronizedWithCurrentItem="True"/>-->
