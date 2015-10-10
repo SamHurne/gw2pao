@@ -12,7 +12,8 @@
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
              TextOptions.TextFormattingMode="Display"
-             MouseDown="UserControl_MouseDown">
+             MouseDown="UserControl_MouseDown"
+             ToolTipService.InitialShowDelay="0">
 
     <UserControl.Resources>
         <converters:EventStateConverter x:Key="StateConverter" />

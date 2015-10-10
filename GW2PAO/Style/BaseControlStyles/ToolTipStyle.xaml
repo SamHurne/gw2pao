@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">Scroll</PopupAnimation>
+    <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">Fade</PopupAnimation>
 
     <ImageBrush x:Key="TooltipBackground"
-                ImageSource="/Images/Backgrounds/Small1.png" />
+                ImageSource="/Images/Backgrounds/Tooltip1.png"
+                Viewbox="0,0,942,942" ViewboxUnits="Absolute"
+                Viewport="0,0,942,942" ViewportUnits="Absolute"/>
 
 
     <Style TargetType="ToolTip">
@@ -23,10 +25,10 @@
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
                             BorderThickness="2"
-                            CornerRadius="3"
+                            CornerRadius="2"
                             Background="{StaticResource TooltipBackground}">
                         <Border.BorderBrush>
-                            <SolidColorBrush Color="Black" Opacity="1" />
+                            <SolidColorBrush Color="Black" Opacity="0.75" />
                         </Border.BorderBrush>
                         <ContentPresenter Margin="4,5,4,5" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     </Border>

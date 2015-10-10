@@ -856,6 +856,7 @@
     <Resource Include="Images\appicon.png" />
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
+    <Resource Include="Images\Backgrounds\Tooltip1.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

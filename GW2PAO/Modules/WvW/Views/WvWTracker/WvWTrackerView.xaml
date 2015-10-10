@@ -149,7 +149,8 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         HorizontalAlignment="Left" VerticalAlignment="Center" 
                                         Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="12"
-                                        Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}">
+                                        Text="{Binding WvWMapVM.Map, Converter={StaticResource MapConverter}}"
+                                        ToolTipService.InitialShowDelay="0">
                     <core:OutlinedTextBlock.ToolTip>
                         <Grid Margin="2">
                             <Grid.ColumnDefinitions>

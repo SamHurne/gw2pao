@@ -134,7 +134,8 @@
         <DataTemplate x:Key="PathDataTemplate">
             <CheckBox IsChecked="{Binding IsCompleted}"
                       Margin="5,0,5,0"
-                      Width="15">
+                      Width="15"
+                      ToolTipService.InitialShowDelay="0">
                 <CheckBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="{x:Static resx:Resources.SetActivePath}" Command="{Binding SetAsActivePathCommand}" />

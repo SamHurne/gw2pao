@@ -142,7 +142,8 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="17"
-                                        Text="{x:Static resx:Resources.Teamspeak}">
+                                        Text="{x:Static resx:Resources.Teamspeak}"
+                                        ToolTipService.InitialShowDelay="0">
                     <core:OutlinedTextBlock.ToolTip>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">

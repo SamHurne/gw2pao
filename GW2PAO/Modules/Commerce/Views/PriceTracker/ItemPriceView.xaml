@@ -12,7 +12,8 @@
              Height="47"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
-             TextOptions.TextFormattingMode="Display">
+             TextOptions.TextFormattingMode="Display"
+             ToolTipService.InitialShowDelay="0">
     <UserControl.Resources>
         <Storyboard x:Key="OutOfLimitsEnterAction">
             <DoubleAnimation To="1"

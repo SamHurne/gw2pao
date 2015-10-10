@@ -10,7 +10,8 @@
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
              Height="31"
-             TextOptions.TextFormattingMode="Display">
+             TextOptions.TextFormattingMode="Display"
+             ToolTipService.InitialShowDelay="0">
     
     <UserControl.Resources>
         <converters:TimespanConverter x:Key="TimeConverter" />
@@ -35,35 +36,57 @@
         </ContextMenu>
     </UserControl.ContextMenu>
 
-    <UserControl.ToolTip>
-        <StackPanel>
-            <TextBlock Text="{Binding MapName}">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding HasLocation}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <TextBlock Text="{Binding Task.Description}">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Task.Description}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Task.Description}" Value="">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-        </StackPanel>
-    </UserControl.ToolTip>
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <StackPanel>
+                        <TextBlock Text="{Binding MapName}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasLocation}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Task.Description}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Task.Description}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Task.Description}" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding HasLocation}" Value="False" />
+                        <Condition Binding="{Binding Task.Description}" Value="{x:Null}" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="ToolTip" Value="{x:Null}" />
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding HasLocation}" Value="False" />
+                        <Condition Binding="{Binding Task.Description}" Value="" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="ToolTip" Value="{x:Null}" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
 
     <Border Name="TaskMainPanel" CornerRadius="0" Margin="0" Padding="5,0,5,0"
             Background="{StaticResource ItemMouseOverBackground}">

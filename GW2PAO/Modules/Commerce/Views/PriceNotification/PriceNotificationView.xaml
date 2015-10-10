@@ -81,9 +81,10 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
-                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                    Height="40" Width="40"
-                    Source="{Binding PriceWatch.IconUrl}">
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Height="40" Width="40"
+                   Source="{Binding PriceWatch.IconUrl}"
+                   ToolTipService.InitialShowDelay="0">
                 <Image.ToolTip>
                     <ToolTip>
                         <ToolTip.Style>

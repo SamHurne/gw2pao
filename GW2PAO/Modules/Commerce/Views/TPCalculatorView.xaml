@@ -174,7 +174,9 @@
             <StackPanel Grid.Row="0"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyPrice}" FontSize="14" ToolTipService.ShowDuration="30000">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.BuyPrice}" FontSize="14"
+                                        ToolTipService.InitialShowDelay="0"
+                                        ToolTipService.ShowDuration="30000">
                     <core:OutlinedTextBlock.ToolTip>
                         <ToolTip>
                             <StackPanel Orientation="Horizontal">
@@ -226,7 +228,9 @@
             <StackPanel Grid.Row="1"
                         Orientation="Vertical"
                         Margin="5">
-                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellPrice}" FontSize="14" ToolTipService.ShowDuration="30000">
+                <core:OutlinedTextBlock Text="{x:Static resx:Resources.SellPrice}" FontSize="14"
+                                        ToolTipService.InitialShowDelay="0"
+                                        ToolTipService.ShowDuration="30000">
                     <core:OutlinedTextBlock.ToolTip>
                         <ToolTip>
                             <StackPanel Orientation="Horizontal">
@@ -307,6 +311,7 @@
             <StackPanel Grid.Row="3"
                         Orientation="Horizontal"
                         Margin="5"
+                        ToolTipService.InitialShowDelay="0"
                         ToolTipService.ShowDuration="30000">
 
                 <core:OutlinedTextBlock Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}" FontSize="15"
