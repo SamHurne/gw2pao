@@ -41,6 +41,13 @@ namespace GW2PAO.Modules.Map.ViewModels
         private bool displayCharacterPointer;
         private bool canDisplayCharacterPointer;
 
+        private bool showWaypoints;
+        private bool showPOIs;
+        private bool showVistas;
+        private bool showHeartQuests;
+        private bool showHeroPoints;
+        private bool showDungeons;
+
         private bool snapToCharacter;
 
         /// <summary>
@@ -49,7 +56,13 @@ namespace GW2PAO.Modules.Map.ViewModels
         public Continent ContinentData
         {
             get { return this.continentData; }
-            set { SetProperty(ref this.continentData, value); }
+            set
+            {
+                if (SetProperty(ref this.continentData, value))
+                {
+                    this.OnPropertyChanged(() => this.MapTileSourceString);
+                }
+            }
         }
 
         /// <summary>
@@ -164,12 +177,30 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// True if Waypoints should be shown on the map, else false
+        /// </summary>
+        public bool ShowWaypoints
+        {
+            get { return this.showWaypoints; }
+            set { SetProperty(ref this.showWaypoints, value); }
+        }
+
+        /// <summary>
         /// Collection of Points of Interest for the current continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> POIs
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// True if POIs should be shown on the map, else false
+        /// </summary>
+        public bool ShowPOIs
+        {
+            get { return this.showPOIs; }
+            set { SetProperty(ref this.showPOIs, value); }
         }
 
         /// <summary>
@@ -182,12 +213,30 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// True if Vistas should be shown on the map, else false
+        /// </summary>
+        public bool ShowVistas
+        {
+            get { return this.showVistas; }
+            set { SetProperty(ref this.showVistas, value); }
+        }
+
+        /// <summary>
         /// Collection of Heart Quests for the current continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeartQuests
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// True if Heart Quests should be shown on the map, else false
+        /// </summary>
+        public bool ShowHeartQuests
+        {
+            get { return this.showHeartQuests; }
+            set { SetProperty(ref this.showHeartQuests, value); }
         }
 
         /// <summary>
@@ -200,12 +249,30 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// True if Hero Points should be shown on the map, else false
+        /// </summary>
+        public bool ShowHeroPoints
+        {
+            get { return this.showHeroPoints; }
+            set { SetProperty(ref this.showHeroPoints, value); }
+        }
+
+        /// <summary>
         /// Collection of Dungeons for the current continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Dungeons
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// True if Dungeons should be shown on the map, else false
+        /// </summary>
+        public bool ShowDungeons
+        {
+            get { return this.showDungeons; }
+            set { SetProperty(ref this.showDungeons, value); }
         }
 
         /// <summary>
