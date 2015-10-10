@@ -41,6 +41,7 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
         {
             InitializeComponent();
 
+            this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
             this.MinHeight = MIN_HEIGHT;
             this.MinWidth = MIN_WIDTH;
         }
@@ -52,13 +53,6 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // This prevents Aero snapping
-            if (this.ResizeMode != System.Windows.ResizeMode.NoResize)
-            {
-                this.ResizeMode = System.Windows.ResizeMode.NoResize;
-                this.UpdateLayout();
-            }
-
             this.DragMove();
             e.Handled = true;
         }
@@ -72,16 +66,6 @@ namespace GW2PAO.Modules.Dungeons.Views.DungeonTimer
                 contextMenu.PlacementTarget = image;
                 contextMenu.IsOpen = true;
                 e.Handled = true;
-            }
-        }
-
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (this.ResizeMode == System.Windows.ResizeMode.NoResize)
-            {
-                // Restore resize grips (removed on mouse-down to prevent Aero snapping)
-                this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
-                this.UpdateLayout();
             }
         }
 

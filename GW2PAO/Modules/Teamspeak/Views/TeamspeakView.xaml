@@ -13,7 +13,7 @@
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=TeamspeakX}"
         MinWidth="150" MaxWidth="450" Width="{Binding Source={x:Static properties:Settings.Default}, Path=TeamspeakWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         TextOptions.TextFormattingMode="Display">
@@ -77,7 +77,6 @@
 
         <Border Name="TitleBar"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                 Grid.Row="0">
             <Grid Margin="5,0,0,0">
 
@@ -548,7 +547,7 @@
                 </TextBox.Style>
             </TextBox>
             <Button Name="MessageSendBox" Grid.Column="1"
-                    Margin="3"
+                    Margin="3,3,10,3"
                     Command="{Binding SendMessageCommand}">
                 <TextBlock Text="{x:Static resx:Resources.Send}" />
             </Button>
@@ -588,10 +587,9 @@
             </Grid.Style>
         </Grid>
 
-        <Grid Name="ResizeHeight" Grid.Row="5">
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
-                       Height="1" Fill="{StaticResource TitleBarBorderBrush}" />
+        <Grid Name="ResizeGripper" Grid.Row="5">
+            <ResizeGrip HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Opacity" Value="1" />
@@ -600,7 +598,6 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                                 <Condition Binding="{Binding ElementName=ChannelListPopup, Path=IsOpen}" Value="False" />
                                 <Condition Binding="{Binding ElementName=ClientListPopup, Path=IsOpen}" Value="False" />
                             </MultiDataTrigger.Conditions>

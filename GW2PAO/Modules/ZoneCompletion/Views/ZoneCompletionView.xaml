@@ -19,7 +19,7 @@
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=ZoneAssistantX}"
         MinWidth="150" MaxWidth="350" Width="{Binding Source={x:Static properties:Settings.Default}, Path=ZoneAssistantWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         UseLayoutRounding="True"
@@ -46,12 +46,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Border Name="TitleBar"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                 Grid.Row="0">
             <Grid Margin="5,0,0,0"
                   Height="30">
@@ -232,10 +230,9 @@
             </ItemsControl.Style>
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2">
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
-                       Height="1" Fill="{StaticResource TitleBarBorderBrush}" />
+        <Grid Name="ResizeGripper" Grid.Row="1">
+            <ResizeGrip HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" />
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Opacity" Value="1" />
@@ -244,7 +241,6 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>

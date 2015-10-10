@@ -14,7 +14,7 @@
         Height="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerHeight}"
         Width="{Binding Source={x:Static properties:Settings.Default}, Path=DungeonTimerWidth}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         Topmost="True"
         SnapsToDevicePixels="True"
         UseLayoutRounding="True"
@@ -94,8 +94,7 @@
         <Border Name="TitleBar"
                 Grid.Row="0"
                 Grid.Column="0" Grid.ColumnSpan="3"
-                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <Grid Margin="5,0,0,0">
 
                 <Grid.ColumnDefinitions>
@@ -296,5 +295,41 @@
                                     FontFamily="./Style/Fonts/#Menomonia"
                                     Text="{Binding TimerValue, StringFormat=\{0:h\\:mm\\:ss\\.ff\}}" />
         </Viewbox>
+
+        <Grid Name="ResizeGripper" Grid.Row="1" Grid.Column="1">
+            <ResizeGrip HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" />
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity" Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+        </Grid>
     </Grid>
 </src:OverlayWindow>

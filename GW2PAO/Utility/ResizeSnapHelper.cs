@@ -48,6 +48,11 @@ namespace GW2PAO.Utility
         private FrameworkElement horizontalResizeElement { get; set; }
 
         /// <summary>
+        /// The corner-resizing wpf framework element
+        /// </summary>
+        private FrameworkElement cornerResizeElement { get; set; }
+
+        /// <summary>
         /// Sends a message to the win32 message queue
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -62,6 +67,7 @@ namespace GW2PAO.Utility
             public int bottom;
         }
 
+        private const int WM_SYSCOMMAND = 0x0112;
         private const int WM_SIZING = 0x0214;
         private const int WMSZ_BOTTOM = 6;
         private const int WMSZ_BOTTOMLEFT = 7;
@@ -125,10 +131,12 @@ namespace GW2PAO.Utility
         /// </summary>
         /// <param name="verticalResizeElement">The vertical resize framework element, or null if none</param>
         /// <param name="horizontalResizeElement">The horizontal resize framework element, or null if none</param>
-        public void InitializeResizeElements(FrameworkElement verticalResizeElement, FrameworkElement horizontalResizeElement)
+        /// <param name="cornerResizeElement">The bottom-right corner resize framework element, or null if none</param>
+        public void InitializeResizeElements(FrameworkElement verticalResizeElement, FrameworkElement horizontalResizeElement, FrameworkElement cornerResizeElement)
         {
             this.verticalResizeElement = verticalResizeElement;
             this.horizontalResizeElement = horizontalResizeElement;
+            this.cornerResizeElement = cornerResizeElement;
 
             if (this.verticalResizeElement != null)
             {
@@ -140,6 +148,12 @@ namespace GW2PAO.Utility
             {
                 this.horizontalResizeElement.Cursor = Cursors.SizeWE;
                 this.horizontalResizeElement.PreviewMouseLeftButtonDown += ManualResize;
+            }
+
+            if (this.cornerResizeElement != null)
+            {
+                this.cornerResizeElement.Cursor = Cursors.SizeNWSE;
+                this.cornerResizeElement.PreviewMouseLeftButtonDown += ManualResize;
             }
         }
 
@@ -223,7 +237,7 @@ namespace GW2PAO.Utility
         /// <param name="direction">The direction to begin resizing</param>
         private void ResizeWindow(ResizeDirection direction)
         {
-            SendMessage(hwndSource.Handle, 0x112, (IntPtr)direction, IntPtr.Zero);
+            SendMessage(hwndSource.Handle, WM_SYSCOMMAND, (IntPtr)direction, IntPtr.Zero);
         }
 
         /// <summary>
@@ -233,8 +247,10 @@ namespace GW2PAO.Utility
         {
             if (sender == this.verticalResizeElement)
                 ResizeWindow(ResizeDirection.Bottom);
-            else
+            else if (sender == this.horizontalResizeElement)
                 ResizeWindow(ResizeDirection.Right);
+            else if (sender == this.cornerResizeElement)
+                ResizeWindow(ResizeDirection.BottomRight);
         }
     }
 }

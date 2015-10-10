@@ -62,7 +62,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Views
             logger.Debug("New ZoneCompletionView created");
             InitializeComponent();
 
-            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
+            this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
 
             // Save the height values for use when collapsing the window
             this.MinHeight = MINIMUM_HEIGHT;
@@ -99,25 +99,8 @@ namespace GW2PAO.Modules.ZoneCompletion.Views
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // This prevents Aero snapping
-            if (this.ResizeMode != System.Windows.ResizeMode.NoResize)
-            {
-                this.ResizeMode = System.Windows.ResizeMode.NoResize;
-                this.UpdateLayout();
-            }
-
             this.DragMove();
             e.Handled = true;
-        }
-
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (this.ResizeMode == System.Windows.ResizeMode.NoResize)
-            {
-                // Restore resize grips (removed on mouse-down to prevent Aero snapping)
-                this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
-                this.UpdateLayout();
-            }
         }
 
         private void CloseWindowButton_Click(object sender, RoutedEventArgs e)

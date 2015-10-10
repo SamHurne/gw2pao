@@ -18,6 +18,7 @@ using GW2PAO.Modules.Events.ViewModels.EventTracker;
 using GW2PAO.Views;
 using GW2PAO.Views.Events.EventTracker;
 using NLog;
+using System.Windows.Controls.Primitives;
 
 namespace GW2PAO.Modules.Events.Views.EventTracker
 {
@@ -74,7 +75,7 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
 
             this.eventHeight = new WorldEventView().Height;
 
-            this.ResizeHelper.InitializeResizeElements(this.ResizeHeight, null);
+            this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
             this.Loaded += EventTrackerView_Loaded;
         }
 
@@ -152,25 +153,8 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // This prevents Aero snapping
-            if (this.ResizeMode != System.Windows.ResizeMode.NoResize)
-            {
-                this.ResizeMode = System.Windows.ResizeMode.NoResize;
-                this.UpdateLayout();
-            }
-
             this.DragMove();
             e.Handled = true;
-        }
-
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (this.ResizeMode == System.Windows.ResizeMode.NoResize)
-            {
-                // Restore resize grips (removed on mouse-down to prevent Aero snapping)
-                this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
-                this.UpdateLayout();
-            }
         }
 
         private void CloseWindowButton_Click(object sender, RoutedEventArgs e)

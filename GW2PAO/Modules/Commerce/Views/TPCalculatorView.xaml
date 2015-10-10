@@ -6,8 +6,9 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:vm="clr-namespace:GW2PAO.Modules.Commerce.ViewModels"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
+        xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        Width="204"
+        Width="202"
         SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
@@ -36,9 +37,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Name="TitleBar" Style="{StaticResource TitleBarStyle}"
+        <Border Name="TitleBar"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                 Grid.Row="0" BorderThickness="0,0,0,1">
             <Grid Margin="5,0,0,0">
 
@@ -127,6 +127,39 @@
                         Content="{StaticResource CloseGraphic}"
                         Click="CloseWindowButton_Click" />
             </Grid>
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
+                    <Setter Property="Opacity" Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                <Condition Binding="{Binding ElementName=Calculator, Path=Visibility}" Value="Visible" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
         </Border>
 
         <Grid Name="Calculator" Grid.Row="1">

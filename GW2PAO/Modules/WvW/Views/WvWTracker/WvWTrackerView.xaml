@@ -12,7 +12,7 @@
         Top="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerY}"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=WvWTrackerX}"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
         UseLayoutRounding="True"
@@ -34,7 +34,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -42,7 +41,6 @@
 
         <Border Name="TitleBar"
                 MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"
                 Height="32"
                 Grid.Row="0">
             <Grid Margin="5,0,0,0">
@@ -355,70 +353,18 @@
             </ItemsControl.Style>
         </ItemsControl>
 
-        <Grid Name="ResizeHeight" Grid.Row="2">
-            <Rectangle VerticalAlignment="Bottom"
-                       HorizontalAlignment="Stretch"
-                       Height="1" Fill="{StaticResource TitleBarBorderBrush}" />
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Setter Property="Opacity" Value="1" />
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="0"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:00.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.ExitActions>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-        </Grid>
 
-        <Grid Name="ResizeWidth" Grid.Row="0" Grid.RowSpan="3"
-              VerticalAlignment="Top">
-            <Rectangle VerticalAlignment="Stretch"
-                       HorizontalAlignment="Right"
-                       Width="1" Fill="{StaticResource TitleBarBorderBrush}" />
+        <Grid Name="ResizeGripper" Grid.Row="1">
+            <ResizeGrip HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" />
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Height" Value="115" />
-                    <Setter Property="Visibility" Value="Collapsed" />
                     <Setter Property="Opacity" Value="1" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding UserData.IsTrackerHorizontal}" Value="True">
-                            <DataTrigger.Setters>
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger.Setters>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding UserData.AreTimeDistancesShown}" Value="False">
-                            <DataTrigger.Setters>
-                                <Setter Property="Height" Value="90" />
-                            </DataTrigger.Setters>
-                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>

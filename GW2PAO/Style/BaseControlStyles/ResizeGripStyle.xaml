@@ -1,23 +1,52 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- For now all resize grippers are hidden -->
+    <Viewbox x:Key="GripperIcon" Stretch="Uniform" x:Shared="false">
+        <Canvas Name="svg2" Width="128.61356" Height="128.17383">
+            <Canvas Name="layer1">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="-154.16378" Y="-363.63951"/>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4136" Fill="#FF000000" StrokeThickness="1" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                    <Path.Data>
+                        <PathGeometry Figures="M 111.11678 573.5499 C 186.5415 498.12518 261.96623 422.70045 337.39095 347.27573" FillRule="evenodd"/>
+                    </Path.Data>
+                </Path>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4140" Fill="#FFEEE8AA" StrokeThickness="4" Stroke="#FF000000" StrokeMiterLimit="4" StrokeLineJoin="Bevel" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Opacity="1">
+                    <Path.Data>
+                        <PathGeometry Figures="m 154.16378 491.81334 28.28125 0 99.89258 -99.89063 0 -28.2832 -128.17383 128.17383 z" FillRule="evenodd"/>
+                    </Path.Data>
+                </Path>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4307" Fill="#FFEEE8AA" StrokeThickness="4" Stroke="#FF000000" StrokeMiterLimit="4" StrokeLineJoin="Bevel" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Opacity="1">
+                    <Path.Data>
+                        <PathGeometry Figures="m 282.77734 409.19922 -82.61328 82.61328 28.28125 0 54.33203 -54.33008 0 -28.2832 z" FillRule="evenodd"/>
+                    </Path.Data>
+                </Path>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4317" Fill="#FFEEE8AA" StrokeThickness="4" Stroke="#FF000000" StrokeMiterLimit="4" StrokeLineJoin="Bevel" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Opacity="1">
+                    <Path.Data>
+                        <PathGeometry Figures="m 282.66211 455.31445 -36.49805 36.49805 28.28125 0 8.2168 -8.2168 0 -28.28125 z" FillRule="evenodd"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+
     <Style TargetType="{x:Type ResizeGrip}">
-        <Setter Property="Height" Value="2" />
-        <Setter Property="Width" Value="2" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Foreground" Value="Blue"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ResizeGrip}">
-                    <Grid SnapsToDevicePixels="True"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Bottom">
-                        <Rectangle Width="2" Height="2" Fill="Black" Opacity="0.1" />
-                    </Grid>
+                    <Border Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Width="12"
+                            Height="12">
+                        <ContentPresenter Content="{StaticResource GripperIcon}"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Visibility" Value="Visible"/>
     </Style>
 
 </ResourceDictionary>
