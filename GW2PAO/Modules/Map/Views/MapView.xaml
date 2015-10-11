@@ -19,7 +19,7 @@
         MinWidth="150"
         Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
         Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"           
-        WindowStyle="None" AllowsTransparency="true" Background="Transparent"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
         Closed="Window_Closed"
@@ -31,7 +31,8 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
-
+        <lconverters:ZoomToItemSizeConverter x:Key="ZoomToSizeConverter" />
+    
         <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation}"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -73,23 +74,96 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <Grid>
-                            <Image MaxHeight="25" MaxWidth="25">
-                                <Image.Source>
-                                    <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
-                                        <Binding Path="ItemType"/>
-                                        <Binding Path="IsUnlocked"/>
-                                    </MultiBinding>
-                                </Image.Source>
-                                <Image.ToolTip>
-                                    <TextBlock Text="{Binding ItemName}" Foreground="White"/>
-                                </Image.ToolTip>
-                            </Image>
-                        </Grid>
+                        <CheckBox IsChecked="{Binding IsUnlocked}">
+                            <CheckBox.Style>
+                                <Style TargetType="{x:Type CheckBox}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type CheckBox}">
+                                                <!--<Image MaxHeight="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}"
+                                                       MaxWidth="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}">-->
+                                                <Image Height="30"
+                                                       Width="30">
+                                                    <Image.Source>
+                                                        <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
+                                                            <Binding Path="ItemType"/>
+                                                            <Binding Path="IsUnlocked"/>
+                                                        </MultiBinding>
+                                                    </Image.Source>
+                                                </Image>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="0"
+                                              Color="Gold"
+                                              Opacity="0"
+                                              BlurRadius="15"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:00.1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                         Duration="00:00:0.1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </CheckBox.Style>
+                            <CheckBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding CopyChatCodeCommand}" />
+                                </ContextMenu>
+                            </CheckBox.ContextMenu>
+                            <CheckBox.ToolTip>
+                                <TextBlock Text="{Binding ItemName}" Foreground="White"/>
+                            </CheckBox.ToolTip>
+                        </CheckBox>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Viewbox x:Key="MaximizeIcon" x:Shared="False" Stretch="Uniform">
+            <Canvas Width="256" Height="256">
+                <Path Fill="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="m 0 210.06511 c 0 -27.42595 0.39297 -46.96848 0.97525 -48.5 1.96701 -5.17363 4.57523 -3.49264 22.75688 14.66674 l 17.25297 17.23184 25.75745 -25.65606 c 22.40844 -22.32023 26.25757 -25.74775 29.60391 -26.36123 10.92965 -2.00372 20.44197 7.81186 18.14689 18.72544 -0.54883 2.60979 -6.23178 8.88787 -26.32847 29.08562 l -25.62856 25.75745 17.32108 17.34232 c 14.03341 14.05062 17.25669 17.79012 16.98184 19.70156 -0.21713 1.51 -1.23914 2.60808 -2.83924 3.05055 -1.375 0.38022 -23.0875 0.73617 -48.25 0.79099 L 0 256.00003 0 210.06513 Z m 161.25 44.90374 c -4.79921 -1.92905 -2.91867 -4.77851 14.98184 -22.70097 l 17.23184 -17.25297 -25.65606 -25.75745 c -22.32023 -22.40844 -25.74775 -26.25757 -26.36123 -29.60391 -2.00372 -10.92965 7.81186 -20.44197 18.72544 -18.14689 2.60979 0.54883 8.88787 6.23178 29.08562 26.32847 l 25.75745 25.62856 17.34232 -17.32108 c 14.05062 -14.03341 17.79012 -17.25669 19.70156 -16.98184 1.51 0.21713 2.60808 1.23914 3.05055 2.83924 0.38022 1.375 0.73617 23.0875 0.79099 48.25 l 0.0997 45.75 -46.25 -0.0634 c -25.4375 -0.0349 -47.2625 -0.47036 -48.5 -0.96777 z M 94 113.8956 C 92.625 113.3579 80.13826 101.57798 66.25168 87.71801 L 41.00337 62.51807 23.74126 79.75904 C 5.55021 97.9278 2.9424 99.6089 0.97525 94.4349 0.39297 92.90338 0 73.36085 0 45.9349 L 0 0 45.9349 0 c 27.42595 0 46.96848 0.39297 48.5 0.97525 5.17363 1.96701 3.49264 4.57523 -14.66674 22.75688 L 62.53632 40.9851 88.19238 66.74255 c 22.0215 22.10853 25.75322 26.28776 26.3419 29.50088 2.15878 11.78306 -9.62931 21.91662 -20.53428 17.65217 z m 56.17963 -0.57735 c -6.43524 -3.17116 -9.98636 -10.12955 -8.71391 -17.07482 0.58868 -3.21312 4.3204 -7.39235 26.3419 -29.50088 L 193.46368 40.9851 176.23184 23.73213 C 158.07246 5.55048 156.39147 2.94226 161.5651 0.97525 163.09662 0.39297 182.63915 0 210.0651 0 L 256 0 l 0 45.9349 c 0 27.42595 -0.39297 46.96848 -0.97525 48.5 -1.96715 5.174 -4.57496 3.4929 -22.76601 -14.67586 L 214.99663 62.51807 189.74832 87.71171 c -13.88658 13.8565 -26.51511 25.66494 -28.06342 26.24097 -3.95694 1.47214 -7.64288 1.26889 -11.50527 -0.63443 z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Viewbox>
+
+        <Viewbox x:Key="RestoreIcon" x:Shared="False" Stretch="Uniform">
+            <Canvas Width="256.00003" Height="256.00003">
+                <Path Fill="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="m 114.83814 187.11961 c 0 27.42595 -0.39297 46.96848 -0.97525 48.5 -1.96701 5.17363 -4.57523 3.49264 -22.75688 -14.66674 L 73.85304 203.72103 48.09559 229.37709 C 25.68715 251.69732 21.83802 255.12484 18.49168 255.73832 7.5620301 257.74204 -1.9502899 247.92646 0.34479007 237.01288 0.89362007 234.40309 6.5765701 228.12501 26.67326 207.92726 L 52.30182 182.16981 34.98074 164.82749 C 20.94733 150.77687 17.72405 147.03737 17.9989 145.12593 c 0.21713 -1.51 1.23914 -2.60808 2.83924 -3.05055 1.375 -0.38022 23.0875 -0.73617 48.25 -0.79099 l 45.75 -0.0997 0 45.9349 z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path Fill="#FF000000">
+                    <Path.Data>
+                        <PathGeometry Figures="m 247.0297 1.6025076 c 6.43524 3.17116 9.98636 10.1295504 8.71391 17.0748204 -0.58868 3.21312 -4.3204 7.39235 -26.3419 29.50088 l -25.65606 25.75745 17.23184 17.25297 c 18.15938 18.181652 19.84037 20.789872 14.66674 22.756882 -1.53152 0.58228 -21.07405 0.97525 -48.5 0.97525 l -45.9349 0 0 -45.934902 c 0 -27.42595 0.39297 -46.96848 0.97525 -48.5 1.96715 -5.174 4.57496 -3.4929 22.76601 14.67586 l 17.26211 17.24097 25.24831 -25.19364 c 13.88658 -13.8565 26.51511 -25.6649404 28.06342 -26.24097038 3.95694 -1.47214 7.64288 -1.26889 11.50527 0.63442998 z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Viewbox>
 
     </src:OverlayWindow.Resources>
 
@@ -111,6 +185,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -170,8 +245,15 @@
                                         FontSize="17"
                                         Text="[[Map]]" />
 
-                <Button Name="CollapseExpandButton"
+                <Button Name="MaximizeButton"
                         Grid.Column="2"
+                        Margin="3"
+                        Click="MaximizeButton_Click"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource MaximizeIcon}" />
+
+                <Button Name="CollapseExpandButton"
+                        Grid.Column="3"
                         Margin="3"
                         Click="CollapseExpandButton_Click">
                     <Button.Style>
@@ -189,7 +271,7 @@
                 </Button>
 
                 <Button Name="CloseWindowButton"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Margin="3,3,5,3"
                         Style="{StaticResource TitleBarButtonStyle}"
                         Content="{StaticResource CloseGraphic}"
@@ -198,6 +280,7 @@
             <Border.Style>
                 <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
                     <Setter Property="Opacity" Value="1" />
+                    <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -225,6 +308,9 @@
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>
                         </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
@@ -256,9 +342,7 @@
                 <ctrls:Map.TileLayer>
                     <map:TileLayer SourceName="GuildWars2" 
                                    TileSource="{Binding MapTileSourceString}"
-                                   MaxZoomLevel="7"
-                                   MaxParallelDownloads="20"
-                                   UpdateInterval="0:0:0.15"/>
+                                   MaxZoomLevel="7" />
                 </ctrls:Map.TileLayer>
 
                 <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
@@ -305,6 +389,27 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+
+                <Button Name="RestoreButton"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="3"
+                        Height="30" Width="30"
+                        Click="RestoreButton_Click"
+                        Content="{StaticResource RestoreIcon}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
                 <StackPanel Grid.Column="0">
                     <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
                               IsChecked="{Binding SnapToCharacter}">
@@ -331,6 +436,37 @@
                         <core:OutlinedTextBlock Text="[[Hero Points]]" />
                     </CheckBox>
                 </StackPanel>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Opacity" Value="1" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
             </Grid>
             
         </Grid>
@@ -341,6 +477,7 @@
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Opacity" Value="1" />
+                    <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -366,6 +503,9 @@
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>
                         </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
