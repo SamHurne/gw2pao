@@ -166,6 +166,16 @@ namespace GW2PAO.Modules.Map.Views
         private void MapItemTouchDown(object sender, TouchEventArgs e)
         {
         }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+        }
+
+        private void RestoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Normal;
+        }
     }
 }
 
