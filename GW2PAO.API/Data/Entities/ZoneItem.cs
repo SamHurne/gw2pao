@@ -83,5 +83,10 @@ namespace GW2PAO.API.Data.Entities
                 return hash;
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}_{1}", this.ID, this.Name);
+        }
     }
 }
