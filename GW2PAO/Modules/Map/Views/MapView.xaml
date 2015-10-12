@@ -177,15 +177,16 @@
     <Grid Name="MainPanel">
 
         <ctrls:Map x:Name="Map"
-                 MinZoomLevel="2" ZoomLevel="4" MaxZoomLevel="10"
-                 MouseLeftButtonDown="MapMouseLeftButtonDown"
-                 MouseRightButtonDown="MapMouseRightButtonDown"
-                 MouseLeftButtonUp="TestMap_MouseLeftButtonUp"
-                 MouseMove="MapMouseMove"
-                 MouseLeave="MapMouseLeave"
-                 ManipulationInertiaStarting="MapManipulationInertiaStarting"
-                 TileLayer="{StaticResource GuildWars2TileLayer}"
-                 TargetCenter="{Binding MapCenter}">
+                   MinZoomLevel="2" ZoomLevel="4" MaxZoomLevel="10"
+                   MouseWheelZoomDelta="0.5"
+                   MouseLeftButtonDown="MapMouseLeftButtonDown"
+                   MouseRightButtonDown="MapMouseRightButtonDown"
+                   MouseLeftButtonUp="TestMap_MouseLeftButtonUp"
+                   MouseMove="MapMouseMove"
+                   MouseLeave="MapMouseLeave"
+                   ManipulationInertiaStarting="MapManipulationInertiaStarting"
+                   TileLayer="{StaticResource GuildWars2TileLayer}"
+                   TargetCenter="{Binding MapCenter}">
             <ctrls:Map.Style>
                 <Style TargetType="ctrls:Map">
                     <Setter Property="ManipulationMode" Value="All" />
