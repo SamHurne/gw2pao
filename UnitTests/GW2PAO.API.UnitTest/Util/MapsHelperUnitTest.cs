@@ -4,9 +4,6 @@ using GW2NET.Maps;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Map = GW2NET.Maps.Map;
-using Continent = GW2NET.Maps.Continent;
-using Rectangle = GW2NET.Common.Drawing.Rectangle;
 
 namespace GW2PAO.API.UnitTest.Util
 {
@@ -18,21 +15,19 @@ namespace GW2PAO.API.UnitTest.Util
         [TestMethod]
         public void ConvertToMapPos_ConvertToWorldPos_Equals_OriginalInput_NoZoom()
         {
-            Map testMap = new Map();
             int x = random.Next();
             int y = random.Next();
-            testMap.MapRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            var mapRectangle = new Data.Entities.Rectangle() { X = x, Y = y, Width = 100, Height = 100 };
             x = random.Next();
             y = random.Next();
-            testMap.ContinentRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
-            testMap.Continent = new Continent();
+            var continentRectangle = new Data.Entities.Rectangle() { X = x, Y = y, Width = 100, Height = 100 };
 
             Point inputPoint = new Point(
-                random.Next((int)testMap.ContinentRectangle.X, (int)(testMap.ContinentRectangle.X + testMap.ContinentRectangle.Width)),
-                random.Next((int)testMap.ContinentRectangle.Y, (int)(testMap.ContinentRectangle.Y + testMap.ContinentRectangle.Height)));
+                random.Next((int)continentRectangle.X, (int)(continentRectangle.X + continentRectangle.Width)),
+                random.Next((int)continentRectangle.Y, (int)(continentRectangle.Y + continentRectangle.Height)));
 
-            Point mapPos = MapsHelper.ConvertToMapPos(testMap, inputPoint);
-            Point worldPos = MapsHelper.ConvertToWorldPos(testMap, mapPos);
+            Point mapPos = MapsHelper.ConvertToMapPos(continentRectangle, mapRectangle, inputPoint);
+            Point worldPos = MapsHelper.ConvertToWorldPos(continentRectangle, mapRectangle, mapPos);
 
             Assert.AreEqual(inputPoint.X, worldPos.X, 0.5);
             Assert.AreEqual(inputPoint.Y, worldPos.Y, 0.5);
@@ -42,23 +37,21 @@ namespace GW2PAO.API.UnitTest.Util
         [TestMethod]
         public void ConvertToMapPos_ConvertToWorldPos_Equals_OriginalInput_WithZoom()
         {
-            Map testMap = new Map();
             int x = random.Next();
             int y = random.Next();
-            testMap.MapRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
+            var mapRectangle = new Data.Entities.Rectangle() { X = x, Y = y, Width = 100, Height = 100 };
             x = random.Next();
             y = random.Next();
-            testMap.ContinentRectangle = new Rectangle(new Vector2D(x, y), new Vector2D(random.Next(x, int.MaxValue), random.Next(y, int.MaxValue)));
-            testMap.Continent = new Continent();
+            var continentRectangle = new Data.Entities.Rectangle() { X = x, Y = y, Width = 100, Height = 100 };
 
-            testMap.MaximumLevel = random.Next();
+            int maxZoom = random.Next();
 
             Point inputPoint = new Point(
-                random.Next((int)testMap.ContinentRectangle.X, (int)(testMap.ContinentRectangle.X + testMap.ContinentRectangle.Width)),
-                random.Next((int)testMap.ContinentRectangle.Y, (int)(testMap.ContinentRectangle.Y + testMap.ContinentRectangle.Height)));
+                random.Next((int)continentRectangle.X, (int)(continentRectangle.X + continentRectangle.Width)),
+                random.Next((int)continentRectangle.Y, (int)(continentRectangle.Y + continentRectangle.Height)));
 
-            Point mapPos = MapsHelper.ConvertToMapPos(testMap, inputPoint, testMap.MaximumLevel / 2);
-            Point worldPos = MapsHelper.ConvertToWorldPos(testMap, mapPos, testMap.MaximumLevel / 2);
+            Point mapPos = MapsHelper.ConvertToMapPos(continentRectangle, mapRectangle, inputPoint, maxZoom / 2, maxZoom);
+            Point worldPos = MapsHelper.ConvertToWorldPos(continentRectangle, mapRectangle, mapPos, maxZoom / 2, maxZoom);
 
             Assert.AreEqual(inputPoint.X, worldPos.X, 0.5);
             Assert.AreEqual(inputPoint.Y, worldPos.Y, 0.5);
