@@ -31,6 +31,12 @@ namespace GW2PAO.API.Services.Interfaces
         Data.Entities.Continent GetContinentByMap(int mapId);
 
         /// <summary>
+        /// Retrieves continent information for all continents
+        /// </summary>
+        /// <returns>a collection of continents</returns>
+        IEnumerable<Data.Entities.Continent> GetContinents();
+
+        /// <summary>
         /// Retrieves the map information for the given map ID
         /// </summary>
         /// <param name="mapId">The ID of a zone</param>

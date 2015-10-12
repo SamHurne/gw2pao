@@ -145,6 +145,39 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// Retrieves continent information for all continents
+        /// </summary>
+        /// <returns>a collection of continents</returns>
+        public IEnumerable<Data.Entities.Continent> GetContinents()
+        {
+            List<Data.Entities.Continent> continents = new List<Data.Entities.Continent>();
+
+            try
+            {
+                var data = GW2.V2.Continents.ForCurrentUICulture().FindAll();
+                foreach (var continent in data.Values)
+                {
+                    Data.Entities.Continent cont = new Data.Entities.Continent(continent.ContinentId);
+                    cont.Name = continent.Name;
+                    cont.Height = continent.ContinentDimensions.Height;
+                    cont.Width = continent.ContinentDimensions.Width;
+                    cont.FloorIds = continent.FloorIds;
+                    cont.MaxZoom = continent.MaximumZoom;
+                    cont.MinZoom = continent.MinimumZoom;
+
+                    continents.Add(cont);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Don't crash if something goes wrong, but log the error
+                logger.Error(ex);
+            }
+
+            return continents;
+        }
+
+        /// <summary>
         /// Retrieves the map information for the given map ID
         /// </summary>
         /// <param name="mapId">The ID of a zone</param>
@@ -350,8 +383,9 @@ namespace GW2PAO.API.Services
         /// <returns></returns>
         public IEnumerable<ZoneItem> GetZoneItemsByContinent(int continentId)
         {
-            ConcurrentDictionary<int, ZoneItem> zoneItems = new ConcurrentDictionary<int, ZoneItem>();
-            ConcurrentDictionary<int, GW2NET.Maps.Map> maps = new ConcurrentDictionary<int, GW2NET.Maps.Map>();
+            ConcurrentDictionary<int, ZoneItem> pointsOfInterest = new ConcurrentDictionary<int, ZoneItem>();
+            ConcurrentDictionary<int, ZoneItem> tasks = new ConcurrentDictionary<int, ZoneItem>();
+            ConcurrentDictionary<int, ZoneItem> heroPoints = new ConcurrentDictionary<int, ZoneItem>();
             try
             {
                 // Get the continents (used later in determining the location of items)
@@ -387,7 +421,7 @@ namespace GW2PAO.API.Services
                                 foreach (var item in subRegion.Value.PointsOfInterest)
                                 {
                                     // If we haven't already added the item, get it's info and add it
-                                    if (!zoneItems.ContainsKey(item.PointOfInterestId))
+                                    if (!pointsOfInterest.ContainsKey(item.PointOfInterestId))
                                     {
                                         // Determine the location
                                         var location = MapsHelper.ConvertToMapPos(
@@ -416,7 +450,10 @@ namespace GW2PAO.API.Services
                                         else
                                             zoneItem.Type = ZoneItemType.PointOfInterest;
 
-                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                        if (!pointsOfInterest.TryAdd(zoneItem.ID, zoneItem))
+                                        {
+                                            logger.Warn("Failed to add {0} to PointsOfInterest collection", zoneItem);
+                                        }
                                     }
                                 }
 
@@ -424,7 +461,7 @@ namespace GW2PAO.API.Services
                                 foreach (var task in subRegion.Value.Tasks)
                                 {
                                     // If we haven't already added the item, get it's info and add it
-                                    if (!zoneItems.ContainsKey(task.TaskId))
+                                    if (!tasks.ContainsKey(task.TaskId))
                                     {
                                         // Determine the location
                                         var location = MapsHelper.ConvertToMapPos(
@@ -442,7 +479,10 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = ZoneItemType.HeartQuest;
 
-                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                        if (!tasks.TryAdd(zoneItem.ID, zoneItem))
+                                        {
+                                            logger.Warn("Failed to add {0} to Tasks collection", zoneItem);
+                                        }
                                     }
                                 }
 
@@ -459,7 +499,7 @@ namespace GW2PAO.API.Services
                                     int id = (int)(subRegion.Value.MapId + location.X + location.Y);
 
                                     // If we havn't already added the item, get it's info and add it
-                                    if (!zoneItems.ContainsKey(id))
+                                    if (!heroPoints.ContainsKey(id))
                                     {
                                         ZoneItem zoneItem = new ZoneItem();
                                         zoneItem.ID = id;
@@ -469,7 +509,10 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = Data.Enums.ZoneItemType.HeroPoint;
 
-                                        zoneItems.TryAdd(zoneItem.ID, zoneItem);
+                                        if (!heroPoints.TryAdd(zoneItem.ID, zoneItem))
+                                        {
+                                            logger.Warn("Failed to add {0} to HeroPoints collection", zoneItem);
+                                        }
                                     }
                                 }
                             }
@@ -484,7 +527,7 @@ namespace GW2PAO.API.Services
                 // Don't crash if something goes wrong, but log the error
                 logger.Error(ex);
             }
-            return zoneItems.Values;
+            return pointsOfInterest.Values.Concat(tasks.Values).Concat(heroPoints.Values);
         }
 
         /// <summary>
