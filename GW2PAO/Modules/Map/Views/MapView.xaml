@@ -18,7 +18,7 @@
         Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
         MinWidth="150"
         Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
-        Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"           
+        Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -32,7 +32,14 @@
         <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
         <lconverters:ZoomToItemSizeConverter x:Key="ZoomToSizeConverter" />
-    
+
+        <map:TileLayer x:Key="GuildWars2TileLayer"
+                       SourceName="GuildWars2"
+                       TileSource="{Binding MapTileSourceString}"
+                       MinZoomLevel="0"
+                       MaxZoomLevel="7">
+        </map:TileLayer>
+
         <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation}"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -168,223 +175,216 @@
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
-        <Grid.Background>
-            <SolidColorBrush Color="#01000000" />
-        </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Border Name="TitleBar"
-                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                Grid.Row="0">
-            <Grid Margin="5,0,0,0"
-                  Height="30">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Image Name="TitleImage"
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Height="30" Width="30"
-                        Margin="0,0,0,0"
-                        Source="/Images/Title/zone.png"
-                        MouseDown="TitleImage_MouseDown">
-                    <Image.ContextMenu>
-                        <ContextMenu Name="MainMenu">
-                            <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
-                        </ContextMenu>
-                    </Image.ContextMenu>
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0"
-                                                Color="Goldenrod"
-                                                Opacity="0"
-                                                BlurRadius="10"/>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="1"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:00.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation To="0"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:0.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-
-                <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod"
-                                        FontFamily="./Style/Fonts/#Menomonia"
-                                        FontSize="17"
-                                        Text="[[Map]]" />
-
-                <Button Name="MaximizeButton"
-                        Grid.Column="2"
-                        Margin="3"
-                        Click="MaximizeButton_Click"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource MaximizeIcon}" />
-
-                <Button Name="CollapseExpandButton"
-                        Grid.Column="3"
-                        Margin="3"
-                        Click="CollapseExpandButton_Click">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
-                            <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Visibility, ElementName=MapContainer}" Value="Collapsed">
-                                    <DataTrigger.Setters>
-                                        <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
-                                    </DataTrigger.Setters>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <Button Name="CloseWindowButton"
-                        Grid.Column="4"
-                        Margin="3,3,5,3"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource CloseGraphic}"
-                        Click="CloseWindowButton_Click" />
-            </Grid>
-            <Border.Style>
-                <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
-                    <Setter Property="Opacity" Value="1" />
-                    <Setter Property="Visibility" Value="Visible" />
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MapContainer, Path=Visibility}" Value="Visible" />
-                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.ExitActions>
-                        </MultiDataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-        </Border>
-
-        <Grid Name="MapContainer"
-              Grid.Row="1">
-
-            <ctrls:Map x:Name="Map"
-                 MinZoomLevel="1" MaxZoomLevel="10"
+        <ctrls:Map x:Name="Map"
+                 MinZoomLevel="2" ZoomLevel="4" MaxZoomLevel="10"
                  MouseLeftButtonDown="MapMouseLeftButtonDown"
                  MouseRightButtonDown="MapMouseRightButtonDown"
                  MouseLeftButtonUp="TestMap_MouseLeftButtonUp"
                  MouseMove="MapMouseMove"
                  MouseLeave="MapMouseLeave"
                  ManipulationInertiaStarting="MapManipulationInertiaStarting"
+                 TileLayer="{StaticResource GuildWars2TileLayer}"
                  TargetCenter="{Binding MapCenter}">
-                <ctrls:Map.Style>
-                    <Style TargetType="ctrls:Map">
-                        <Setter Property="ManipulationMode" Value="All" />
-                        <Style.Triggers>
-                            <!--<DataTrigger Binding="{Binding PenEnabled}" Value="True">
+            <ctrls:Map.Style>
+                <Style TargetType="ctrls:Map">
+                    <Setter Property="ManipulationMode" Value="All" />
+                    <Style.Triggers>
+                        <!--<DataTrigger Binding="{Binding PenEnabled}" Value="True">
                                 <Setter Property="ManipulationMode" Value="None" />
                             </DataTrigger>-->
-                        </Style.Triggers>
-                    </Style>
-                </ctrls:Map.Style>
+                    </Style.Triggers>
+                </Style>
+            </ctrls:Map.Style>
 
-                <ctrls:Map.TileLayer>
-                    <map:TileLayer SourceName="GuildWars2" 
-                                   TileSource="{Binding MapTileSourceString}"
-                                   MaxZoomLevel="7" />
-                </ctrls:Map.TileLayer>
+            <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"
+                                 Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}"/>
 
-                <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
-                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                     IsSynchronizedWithCurrentItem="True"
-                                     SelectionMode="Extended"
-                                     Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}"/>
+            <map:MapItemsControl ItemsSource="{Binding POIs}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"
+                                 Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}"/>
 
-                <map:MapItemsControl ItemsSource="{Binding POIs}" 
-                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                     IsSynchronizedWithCurrentItem="True"
-                                     SelectionMode="Extended"
-                                     Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}"/>
+            <map:MapItemsControl ItemsSource="{Binding Vistas}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"
+                                 Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}"/>
 
-                <map:MapItemsControl ItemsSource="{Binding Vistas}" 
-                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                     IsSynchronizedWithCurrentItem="True"
-                                     SelectionMode="Extended"
-                                     Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}"/>
+            <map:MapItemsControl ItemsSource="{Binding HeartQuests}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"
+                                 Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}"/>
 
-                <map:MapItemsControl ItemsSource="{Binding HeartQuests}" 
-                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                     IsSynchronizedWithCurrentItem="True"
-                                     SelectionMode="Extended"
-                                     Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}"/>
+            <map:MapItemsControl ItemsSource="{Binding HeroPoints}" 
+                                 ItemContainerStyle="{StaticResource ZoneItemStyle}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Extended"
+                                 Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}"/>
 
-                <map:MapItemsControl ItemsSource="{Binding HeroPoints}" 
-                                     ItemContainerStyle="{StaticResource ZoneItemStyle}"
-                                     IsSynchronizedWithCurrentItem="True"
-                                     SelectionMode="Extended"
-                                     Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}"/>
+            <map:MapItem Name="CharacterMarker"
+                         Style="{StaticResource CharacterPositionMarkerStyle}" />
 
-                <map:MapItem Name="CharacterMarker"
-                             Style="{StaticResource CharacterPositionMarkerStyle}" />
-
-                <!--<map:MapItemsControl Name="PenLinesControl"
+            <!--<map:MapItemsControl Name="PenLinesControl"
                                  ItemsSource="{Binding PenLines}"
                                  ItemTemplate="{StaticResource PolylineItemTemplate}"
                                  IsSynchronizedWithCurrentItem="True"/>-->
-            </ctrls:Map>
+        </ctrls:Map>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <Grid Margin="10">
+            <Border Name="TitleBar"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                    Grid.Row="0"
+                    Background="#80000000">
+                <Grid Margin="5,0,0,0"
+                      Height="30">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Name="TitleImage"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Height="30" Width="30"
+                           Margin="0,0,0,0"
+                           Source="/Images/Title/zone.png"
+                           MouseDown="TitleImage_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu Name="MainMenu">
+                                <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0"
+                                                          Color="Goldenrod"
+                                                          Opacity="0"
+                                                          BlurRadius="10"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:00.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0"
+                                                            Storyboard.TargetProperty="(Effect).Opacity"
+                                                            Duration="00:00:0.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Fill="PaleGoldenrod"
+                                        FontFamily="./Style/Fonts/#Menomonia"
+                                        FontSize="17"
+                                        Text="[[Map]]" />
+
+                    <Button Name="MaximizeButton"
+                        Grid.Column="2"
+                        Margin="3"
+                        Click="MaximizeButton_Click"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource MaximizeIcon}" />
+
+                    <Button Name="CollapseExpandButton"
+                        Grid.Column="3"
+                        Margin="3"
+                        Click="CollapseExpandButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=ControlsPanel}" Value="Collapsed">
+                                        <DataTrigger.Setters>
+                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                        </DataTrigger.Setters>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Name="CloseWindowButton"
+                        Grid.Column="4"
+                        Margin="3,3,5,3"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        Content="{StaticResource CloseGraphic}"
+                        Click="CloseWindowButton_Click" />
+                </Grid>
+                <Border.Style>
+                    <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
+                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
+                                    <Condition Binding="{Binding ElementName=ControlsPanel, Path=Visibility}" Value="Visible" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                    <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+
+            <Grid Name="ControlsPanel" Margin="10"
+                  Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -471,7 +471,7 @@
             
         </Grid>
 
-        <Grid Name="ResizeGripper" Grid.Row="1">
+        <Grid Name="ResizeGripper">
             <ResizeGrip HorizontalAlignment="Right"
                         VerticalAlignment="Bottom" />
             <Grid.Style>
