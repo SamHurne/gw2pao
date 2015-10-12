@@ -5,7 +5,7 @@
     <Color x:Key="AltHighlightedBackgroundColor">#A0FFFFCC</Color>
     <Color x:Key="AltPressedBackgroundColor">#E0FFFFCC</Color>
     <Color x:Key="AltDisabledBackgroundColor">#25FFFFCC</Color>
-    <Color x:Key="AltGlyphColor">#FF000000</Color>
+    <Color x:Key="AltCheckboxGlyphColor">#FF000000</Color>
 
     <Style x:Key="AlternateCheckboxStyle" TargetType="CheckBox">
         <Setter Property="Foreground" Value="Black" />
@@ -37,7 +37,7 @@
                                                 StrokeThickness="2"
                                                 Data="M 1 4 L 4 8 L 9 1">
                                         <Path.Stroke>
-                                            <SolidColorBrush Color="{DynamicResource AltGlyphColor}" />
+                                            <SolidColorBrush Color="{DynamicResource AltCheckboxGlyphColor}" />
                                         </Path.Stroke>
                                     </Path>
                                     <Path x:Name="InderminateMark"
@@ -46,7 +46,7 @@
                                                 StrokeThickness="2"
                                                 Data="M 0 10 L 10 0">
                                         <Path.Stroke>
-                                            <SolidColorBrush Color="{DynamicResource AltGlyphColor}" />
+                                            <SolidColorBrush Color="{DynamicResource AltCheckboxGlyphColor}" />
                                         </Path.Stroke>
                                     </Path>
                                 </Grid>
