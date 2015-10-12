@@ -71,7 +71,7 @@ namespace GW2PAO.Modules.Map.Views
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                if (this.MapContainer.Visibility == System.Windows.Visibility.Visible)
+                if (this.ControlsPanel.Visibility == System.Windows.Visibility.Visible)
                 {
                     Properties.Settings.Default.MapViewHeight = this.ActualHeight;
                 }
@@ -104,16 +104,16 @@ namespace GW2PAO.Modules.Map.Views
 
         private void CollapseExpandButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.MapContainer.Visibility == System.Windows.Visibility.Visible)
+            if (this.ControlsPanel.Visibility == System.Windows.Visibility.Visible)
             {
                 this.beforeCollapseHeight = this.ActualHeight;
                 this.MinHeight = this.TitleBar.ActualHeight;
                 this.Height = this.TitleBar.ActualHeight;
-                this.MapContainer.Visibility = System.Windows.Visibility.Collapsed;
+                this.ControlsPanel.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
-                this.MapContainer.Visibility = System.Windows.Visibility.Visible;
+                this.ControlsPanel.Visibility = System.Windows.Visibility.Visible;
                 this.Height = this.beforeCollapseHeight;
             }
         }
