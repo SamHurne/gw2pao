@@ -1,17 +1,16 @@
-﻿using GW2PAO.API.Data.Entities;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.ComponentModel.Composition;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Modules.ZoneCompletion;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
+using GW2PAO.Modules.ZoneCompletion.Models;
 using GW2PAO.Modules.ZoneCompletion.ViewModels;
-using GW2PAO.Utility;
 using MapControl;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 
 namespace GW2PAO.Modules.Map.ViewModels
 {
@@ -31,6 +30,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private IZoneCompletionController zoneController;
         private IZoneService zoneService;
         private IPlayerService playerService;
+        private ZoneItemsStore zoneItemsStore;
         private int floorId;
         private Continent continentData;
         private Location mapCenter;
@@ -172,8 +172,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Waypoints
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].Waypoints; }
         }
 
         /// <summary>
@@ -190,8 +189,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> POIs
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].POIs; }
         }
 
         /// <summary>
@@ -208,8 +206,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Vistas
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].Vistas; }
         }
 
         /// <summary>
@@ -226,8 +223,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeartQuests
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].HeartQuests; }
         }
 
         /// <summary>
@@ -244,8 +240,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeroPoints
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].HeroPoints; }
         }
 
         /// <summary>
@@ -262,8 +257,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Dungeons
         {
-            get;
-            private set;
+            get { return this.zoneItemsStore.Data[this.ContinentData.Id].Dungeons; }
         }
 
         /// <summary>
@@ -280,23 +274,24 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         [ImportingConstructor]
         public MapViewModel(IZoneCompletionController zoneController, IZoneService zoneService, IPlayerService playerService,
-            MapUserData userData, ZoneCompletionUserData zoneUserData)
+            ZoneItemsStore zoneItemsStore, MapUserData userData, ZoneCompletionUserData zoneUserData)
         {
             this.zoneController = zoneController;
             this.playerService = playerService;
             this.zoneService = zoneService;
             this.zoneUserData = zoneUserData;
+            this.zoneItemsStore = zoneItemsStore;
             this.userData = userData;
             this.FloorId = 1;
             this.SnapToCharacter = false;
             this.DisplayCharacterPointer = true;
 
-            this.Dungeons = new ObservableCollection<ZoneItemViewModel>();
-            this.HeartQuests = new ObservableCollection<ZoneItemViewModel>();
-            this.HeroPoints = new ObservableCollection<ZoneItemViewModel>();
-            this.POIs = new ObservableCollection<ZoneItemViewModel>();
-            this.Vistas = new ObservableCollection<ZoneItemViewModel>();
-            this.Waypoints = new ObservableCollection<ZoneItemViewModel>();
+            this.ShowHeartQuests = true;
+            this.ShowHeroPoints = true;
+            this.ShowPOIs = true;
+            this.ShowVistas = true;
+            this.ShowWaypoints = true;
+            this.ShowDungeons = true;
 
             if (this.playerService.HasValidMapId)
                 this.ContinentData = this.zoneService.GetContinentByMap(this.playerService.MapId);
@@ -305,54 +300,6 @@ namespace GW2PAO.Modules.Map.ViewModels
 
             ((INotifyPropertyChanged)this.zoneController).PropertyChanged += ZoneControllerPropertyChanged;
             this.zoneController.Start();
-
-            // Start a task to retrieve all zone items across all zones
-            Task.Factory.StartNew(this.RebuildZoneItemCollections);
-        }
-
-        /// <summary>
-        /// Rebuilds each of the zone item collections
-        /// </summary>
-        private void RebuildZoneItemCollections()
-        {
-            var zoneItems = this.zoneService.GetZoneItemsByContinent(this.ContinentData.Id);
-            Threading.BeginInvokeOnUI(() =>
-            {
-                this.Dungeons.Clear();
-                this.HeartQuests.Clear();
-                this.HeroPoints.Clear();
-                this.POIs.Clear();
-                this.Vistas.Clear();
-                this.Waypoints.Clear();
-
-                foreach (var entity in zoneItems)
-                {
-                    var vm = new ZoneItemViewModel(entity, this.playerService, this.zoneUserData);
-                    switch (entity.Type)
-                    {
-                        case API.Data.Enums.ZoneItemType.Dungeon:
-                            this.Dungeons.Add(vm);
-                            break;
-                        case API.Data.Enums.ZoneItemType.HeartQuest:
-                            this.HeartQuests.Add(vm);
-                            break;
-                        case API.Data.Enums.ZoneItemType.HeroPoint:
-                            this.HeroPoints.Add(vm);
-                            break;
-                        case API.Data.Enums.ZoneItemType.PointOfInterest:
-                            this.POIs.Add(vm);
-                            break;
-                        case API.Data.Enums.ZoneItemType.Vista:
-                            this.Vistas.Add(vm);
-                            break;
-                        case API.Data.Enums.ZoneItemType.Waypoint:
-                            this.Waypoints.Add(vm);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
         }
 
         /// <summary>
