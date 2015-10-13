@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Linq;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using GW2PAO.API.Data.Entities;
@@ -41,6 +43,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private bool displayCharacterPointer;
         private bool canDisplayCharacterPointer;
 
+        // TODO: Consider moving these to the UserData class
         private bool showWaypoints;
         private bool showPOIs;
         private bool showVistas;
@@ -49,6 +52,8 @@ namespace GW2PAO.Modules.Map.ViewModels
         private bool showDungeons;
 
         private bool snapToCharacter;
+        private bool showPlayerTrail;
+        private int playerTrailLength;
 
         /// <summary>
         /// Data for the displayed continent
@@ -168,6 +173,33 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// Collection of location objects making up the player trail
+        /// </summary>
+        public ObservableCollection<Location> PlayerTrail
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// True if the player trail should be shown, else false
+        /// </summary>
+        public bool ShowPlayerTrail
+        {
+            get { return this.showPlayerTrail; }
+            set { SetProperty(ref this.showPlayerTrail, value); }
+        }
+
+        /// <summary>
+        /// Maximum length of the player trail to show before
+        /// </summary>
+        public int PlayerTrailLength
+        {
+            get { return this.playerTrailLength; }
+            set { SetProperty(ref this.playerTrailLength, value); }
+        }
+
+        /// <summary>
         /// Collection of Waypoints for the current continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Waypoints
@@ -282,9 +314,14 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.zoneUserData = zoneUserData;
             this.zoneItemsStore = zoneItemsStore;
             this.userData = userData;
+            this.PlayerTrail = new ObservableCollection<Location>();
             this.FloorId = 1;
+
             this.SnapToCharacter = false;
+
             this.DisplayCharacterPointer = true;
+            this.ShowPlayerTrail = true;
+            this.PlayerTrailLength = 100;
 
             this.ShowHeartQuests = true;
             this.ShowHeroPoints = true;
@@ -330,7 +367,19 @@ namespace GW2PAO.Modules.Map.ViewModels
                     (charX - (cont.Width / 2)) / cont.Width * 360.0,
                     ((cont.Height / 2) - charY) / cont.Height * 360.0));
 
-                this.CharacterLocation = location;
+                if (this.CharacterLocation != location)
+                {
+                    // Add the new location to the player trail
+                    // The check here is due to the initial CharacterLocation when we are first created - null
+                    if (this.CharacterLocation != null)
+                    {
+                        this.PlayerTrail.Add(location);
+                        if (this.PlayerTrail.Count > this.PlayerTrailLength)
+                            this.PlayerTrail.RemoveAt(0);
+                    }
+
+                    this.CharacterLocation = location;
+                }
 
                 if (this.SnapToCharacter)
                     this.MapCenter = this.CharacterLocation;

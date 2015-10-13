@@ -47,8 +47,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
                         <Grid Height="20" Width="20"
+                              Margin="-10,-10,0,0"
                               RenderTransformOrigin="0.5,0.5">
-                            <ContentPresenter Content="{StaticResource CharacterPointer}" />
+                            <ContentPresenter Content="{StaticResource CharacterPointer}"/>
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="{Binding CameraDirection}" />
                             </Grid.RenderTransform>
@@ -66,6 +67,16 @@
                     <Setter Property="Visibility" Value="Visible" />
                 </MultiDataTrigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PolylineItemStyle" TargetType="map:MapItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="map:MapItem">
+                        <map:MapPolyline Locations="{Binding Locations}" Stroke="Red" StrokeThickness="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="ZoneItemStyle" TargetType="map:MapItem">
@@ -230,6 +241,14 @@
 
             <map:MapItem Name="CharacterMarker"
                          Style="{StaticResource CharacterPositionMarkerStyle}" />
+
+            <!--TODO: Make stroke color configurable-->
+            <map:MapPolyline Locations="{Binding PlayerTrail}"
+                             Stroke="White" 
+                             StrokeThickness="3"
+                             Opacity="0.85"
+                             Visibility="{Binding ShowPlayerTrail, Converter={StaticResource BoolToVisibility}}">
+            </map:MapPolyline>
 
             <!--<map:MapItemsControl Name="PenLinesControl"
                                  ItemsSource="{Binding PenLines}"
@@ -413,7 +432,18 @@
 
                 <StackPanel Grid.Column="0">
                     <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding SnapToCharacter}">
+                              IsChecked="{Binding DisplayCharacterPointer}"
+                              IsEnabled="{Binding CanDisplayCharacterPointer}">
+                        <core:OutlinedTextBlock Text="[[Show Character Pointer]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding ShowPlayerTrail}"
+                              IsEnabled="{Binding CanDisplayCharacterPointer}">
+                        <core:OutlinedTextBlock Text="[[Show Character Trail]]" />
+                    </CheckBox>
+                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                              IsChecked="{Binding SnapToCharacter}"
+                              IsEnabled="{Binding CanDisplayCharacterPointer}">
                         <core:OutlinedTextBlock Text="[[Snap To Character]]" />
                     </CheckBox>
                     <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
