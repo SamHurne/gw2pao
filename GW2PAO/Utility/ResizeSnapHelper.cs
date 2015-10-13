@@ -246,11 +246,20 @@ namespace GW2PAO.Utility
         private void ManualResize(object sender, MouseButtonEventArgs e)
         {
             if (sender == this.verticalResizeElement)
+            {
                 ResizeWindow(ResizeDirection.Bottom);
+                e.Handled = true;
+            }
             else if (sender == this.horizontalResizeElement)
+            {
                 ResizeWindow(ResizeDirection.Right);
+                e.Handled = true;
+            }
             else if (sender == this.cornerResizeElement)
+            {
                 ResizeWindow(ResizeDirection.BottomRight);
+                e.Handled = true;
+            }
         }
     }
 }
