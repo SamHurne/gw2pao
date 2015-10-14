@@ -1,31 +1,34 @@
 ﻿<src:OverlayWindow x:Class="GW2PAO.Modules.Map.Views.MapView"
-        x:Name="MapViewWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:src="clr-namespace:GW2PAO.Views"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:resx="clr-namespace:GW2PAO.Properties"
-        xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
-        xmlns:converters="clr-namespace:GW2PAO.Converters"
-        xmlns:lconverters="clr-namespace:GW2PAO.Modules.Map.Converters"
-        xmlns:ctrls="clr-namespace:GW2PAO.Modules.Map.Views.Controls"
-        xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        mc:Ignorable="d" 
-        d:DesignHeight="200"
-        Top="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewY}"
-        Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
-        MinWidth="150"
-        Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
-        Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        ResizeMode="NoResize"
-        Topmost="True"
-        Closed="Window_Closed"
-        UseLayoutRounding="True"
-        SnapsToDevicePixels="True"
-        TextOptions.TextFormattingMode="Display">
+                   x:Name="MapViewWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:src="clr-namespace:GW2PAO.Views"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:fa="http://schemas.fontawesome.io/icons/"
+                   xmlns:resx="clr-namespace:GW2PAO.Properties"
+                   xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
+                   xmlns:converters="clr-namespace:GW2PAO.Converters"
+                   xmlns:lconverters="clr-namespace:GW2PAO.Modules.Map.Converters"
+                   xmlns:ctrls="clr-namespace:GW2PAO.Modules.Map.Views.Controls"
+                   xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+                   xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   mc:Ignorable="d"
+                   d:DesignHeight="200"
+                   Top="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewY}"
+                   Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
+                   MinWidth="150"
+                   Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
+                   Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"
+                   WindowStyle="None"
+                   AllowsTransparency="True"
+                   Background="Transparent"
+                   ResizeMode="NoResize"
+                   Topmost="True"
+                   Closed="Window_Closed"
+                   UseLayoutRounding="True"
+                   SnapsToDevicePixels="True"
+                   TextOptions.TextFormattingMode="Display">
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
@@ -40,16 +43,20 @@
                        MaxZoomLevel="7">
         </map:TileLayer>
 
-        <Style x:Key="CharacterPositionMarkerStyle" TargetType="map:MapItem">
-            <Setter Property="map:MapPanel.Location" Value="{Binding CharacterLocation}"/>
-            <Setter Property="Foreground" Value="Black"/>
+        <Style x:Key="CharacterPositionMarkerStyle"
+               TargetType="map:MapItem">
+            <Setter Property="map:MapPanel.Location"
+                    Value="{Binding CharacterLocation}" />
+            <Setter Property="Foreground"
+                    Value="Black" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <Grid Height="20" Width="20"
+                        <Grid Height="20"
+                              Width="20"
                               Margin="-10,-10,0,0"
                               RenderTransformOrigin="0.5,0.5">
-                            <ContentPresenter Content="{StaticResource CharacterPointer}"/>
+                            <ContentPresenter Content="{StaticResource CharacterPointer}" />
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="{Binding CameraDirection}" />
                             </Grid.RenderTransform>
@@ -57,38 +64,48 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Visibility" Value="Collapsed" />
+            <Setter Property="Visibility"
+                    Value="Collapsed" />
             <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding DisplayCharacterPointer}" Value="True" />
-                        <Condition Binding="{Binding CanDisplayCharacterPointer}" Value="True" />
+                        <Condition Binding="{Binding DisplayCharacterPointer}"
+                                   Value="True" />
+                        <Condition Binding="{Binding CanDisplayCharacterPointer}"
+                                   Value="True" />
                     </MultiDataTrigger.Conditions>
-                    <Setter Property="Visibility" Value="Visible" />
+                    <Setter Property="Visibility"
+                            Value="Visible" />
                 </MultiDataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="PolylineItemStyle" TargetType="map:MapItem">
+        <Style x:Key="PolylineItemStyle"
+               TargetType="map:MapItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <map:MapPolyline Locations="{Binding Locations}" Stroke="Red" StrokeThickness="3"/>
+                        <map:MapPolyline Locations="{Binding Locations}"
+                                         Stroke="Red"
+                                         StrokeThickness="3" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="ZoneItemStyle" TargetType="map:MapItem">
+        <Style x:Key="ZoneItemStyle"
+               TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource CoordConverter}">
-                        <Binding Path="ItemModel.ContinentLocation"/>
-                        <Binding Path="DataContext.ContinentData" ElementName="MainPanel"/>
+                        <Binding Path="ItemModel.ContinentLocation" />
+                        <Binding Path="DataContext.ContinentData"
+                                 ElementName="MainPanel" />
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground"
+                    Value="Black" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
@@ -98,14 +115,15 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type CheckBox}">
+                                                <!-- Disabled for now due to performance...-->
                                                 <!--<Image MaxHeight="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}"
                                                        MaxWidth="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}">-->
                                                 <Image Height="30"
                                                        Width="30">
                                                     <Image.Source>
                                                         <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
-                                                            <Binding Path="ItemType"/>
-                                                            <Binding Path="IsUnlocked"/>
+                                                            <Binding Path="ItemType" />
+                                                            <Binding Path="IsUnlocked" />
                                                         </MultiBinding>
                                                     </Image.Source>
                                                 </Image>
@@ -115,19 +133,34 @@
                                     <Setter Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect ShadowDepth="0"
-                                              Color="Gold"
-                                              Opacity="0"
-                                              BlurRadius="15"/>
+                                                              Color="Gold"
+                                                              Opacity="0"
+                                                              BlurRadius="15" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="ToolTip">
+                                        <Setter.Value>
+                                            <TextBlock Text="{Binding ItemName}"
+                                                       Foreground="White" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="ContextMenu">
+                                        <Setter.Value>
+                                            <ContextMenu>
+                                                <MenuItem Header="{x:Static resx:Resources.CopyChatCode}"
+                                                          Command="{Binding CopyChatCodeCommand}" />
+                                            </ContextMenu>
                                         </Setter.Value>
                                     </Setter>
                                     <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
                                             <Trigger.EnterActions>
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:00.1"/>
+                                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                                         Duration="00:00:00.1" />
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </Trigger.EnterActions>
@@ -135,60 +168,38 @@
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="(Effect).Opacity"
-                                                         Duration="00:00:0.1"/>
+                                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                                         Duration="00:00:0.1" />
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </Trigger.ExitActions>
                                         </Trigger>
+                                        <DataTrigger Binding="{Binding ItemName}"
+                                                     Value="{x:Null}">
+                                            <Setter Property="ToolTip" Value="{x:Null}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemName}"
+                                                     Value="">
+                                            <Setter Property="ToolTip"
+                                                    Value="{x:Null}" />
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </CheckBox.Style>
-                            <CheckBox.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding CopyChatCodeCommand}" />
-                                </ContextMenu>
-                            </CheckBox.ContextMenu>
-                            <CheckBox.ToolTip>
-                                <TextBlock Text="{Binding ItemName}" Foreground="White"/>
-                            </CheckBox.ToolTip>
                         </CheckBox>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Viewbox x:Key="MaximizeIcon" x:Shared="False" Stretch="Uniform">
-            <Canvas Width="256" Height="256">
-                <Path Fill="#FF000000">
-                    <Path.Data>
-                        <PathGeometry Figures="m 0 210.06511 c 0 -27.42595 0.39297 -46.96848 0.97525 -48.5 1.96701 -5.17363 4.57523 -3.49264 22.75688 14.66674 l 17.25297 17.23184 25.75745 -25.65606 c 22.40844 -22.32023 26.25757 -25.74775 29.60391 -26.36123 10.92965 -2.00372 20.44197 7.81186 18.14689 18.72544 -0.54883 2.60979 -6.23178 8.88787 -26.32847 29.08562 l -25.62856 25.75745 17.32108 17.34232 c 14.03341 14.05062 17.25669 17.79012 16.98184 19.70156 -0.21713 1.51 -1.23914 2.60808 -2.83924 3.05055 -1.375 0.38022 -23.0875 0.73617 -48.25 0.79099 L 0 256.00003 0 210.06513 Z m 161.25 44.90374 c -4.79921 -1.92905 -2.91867 -4.77851 14.98184 -22.70097 l 17.23184 -17.25297 -25.65606 -25.75745 c -22.32023 -22.40844 -25.74775 -26.25757 -26.36123 -29.60391 -2.00372 -10.92965 7.81186 -20.44197 18.72544 -18.14689 2.60979 0.54883 8.88787 6.23178 29.08562 26.32847 l 25.75745 25.62856 17.34232 -17.32108 c 14.05062 -14.03341 17.79012 -17.25669 19.70156 -16.98184 1.51 0.21713 2.60808 1.23914 3.05055 2.83924 0.38022 1.375 0.73617 23.0875 0.79099 48.25 l 0.0997 45.75 -46.25 -0.0634 c -25.4375 -0.0349 -47.2625 -0.47036 -48.5 -0.96777 z M 94 113.8956 C 92.625 113.3579 80.13826 101.57798 66.25168 87.71801 L 41.00337 62.51807 23.74126 79.75904 C 5.55021 97.9278 2.9424 99.6089 0.97525 94.4349 0.39297 92.90338 0 73.36085 0 45.9349 L 0 0 45.9349 0 c 27.42595 0 46.96848 0.39297 48.5 0.97525 5.17363 1.96701 3.49264 4.57523 -14.66674 22.75688 L 62.53632 40.9851 88.19238 66.74255 c 22.0215 22.10853 25.75322 26.28776 26.3419 29.50088 2.15878 11.78306 -9.62931 21.91662 -20.53428 17.65217 z m 56.17963 -0.57735 c -6.43524 -3.17116 -9.98636 -10.12955 -8.71391 -17.07482 0.58868 -3.21312 4.3204 -7.39235 26.3419 -29.50088 L 193.46368 40.9851 176.23184 23.73213 C 158.07246 5.55048 156.39147 2.94226 161.5651 0.97525 163.09662 0.39297 182.63915 0 210.0651 0 L 256 0 l 0 45.9349 c 0 27.42595 -0.39297 46.96848 -0.97525 48.5 -1.96715 5.174 -4.57496 3.4929 -22.76601 -14.67586 L 214.99663 62.51807 189.74832 87.71171 c -13.88658 13.8565 -26.51511 25.66494 -28.06342 26.24097 -3.95694 1.47214 -7.64288 1.26889 -11.50527 -0.63443 z" FillRule="NonZero"/>
-                    </Path.Data>
-                </Path>
-            </Canvas>
-        </Viewbox>
-
-        <Viewbox x:Key="RestoreIcon" x:Shared="False" Stretch="Uniform">
-            <Canvas Width="256.00003" Height="256.00003">
-                <Path Fill="#FF000000">
-                    <Path.Data>
-                        <PathGeometry Figures="m 114.83814 187.11961 c 0 27.42595 -0.39297 46.96848 -0.97525 48.5 -1.96701 5.17363 -4.57523 3.49264 -22.75688 -14.66674 L 73.85304 203.72103 48.09559 229.37709 C 25.68715 251.69732 21.83802 255.12484 18.49168 255.73832 7.5620301 257.74204 -1.9502899 247.92646 0.34479007 237.01288 0.89362007 234.40309 6.5765701 228.12501 26.67326 207.92726 L 52.30182 182.16981 34.98074 164.82749 C 20.94733 150.77687 17.72405 147.03737 17.9989 145.12593 c 0.21713 -1.51 1.23914 -2.60808 2.83924 -3.05055 1.375 -0.38022 23.0875 -0.73617 48.25 -0.79099 l 45.75 -0.0997 0 45.9349 z" FillRule="NonZero"/>
-                    </Path.Data>
-                </Path>
-                <Path Fill="#FF000000">
-                    <Path.Data>
-                        <PathGeometry Figures="m 247.0297 1.6025076 c 6.43524 3.17116 9.98636 10.1295504 8.71391 17.0748204 -0.58868 3.21312 -4.3204 7.39235 -26.3419 29.50088 l -25.65606 25.75745 17.23184 17.25297 c 18.15938 18.181652 19.84037 20.789872 14.66674 22.756882 -1.53152 0.58228 -21.07405 0.97525 -48.5 0.97525 l -45.9349 0 0 -45.934902 c 0 -27.42595 0.39297 -46.96848 0.97525 -48.5 1.96715 -5.174 4.57496 -3.4929 22.76601 14.67586 l 17.26211 17.24097 25.24831 -25.19364 c 13.88658 -13.8565 26.51511 -25.6649404 28.06342 -26.24097038 3.95694 -1.47214 7.64288 -1.26889 11.50527 0.63442998 z" FillRule="NonZero"/>
-                    </Path.Data>
-                </Path>
-            </Canvas>
-        </Viewbox>
-
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
 
         <ctrls:Map x:Name="Map"
-                   MinZoomLevel="2" ZoomLevel="4" MaxZoomLevel="10"
+                   MinZoomLevel="2"
+                   ZoomLevel="4"
+                   MaxZoomLevel="10"
                    MouseWheelZoomDelta="0.5"
                    MouseLeftButtonDown="MapMouseLeftButtonDown"
                    MouseRightButtonDown="MapMouseRightButtonDown"
@@ -200,7 +211,8 @@
                    TargetCenter="{Binding MapCenter}">
             <ctrls:Map.Style>
                 <Style TargetType="ctrls:Map">
-                    <Setter Property="ManipulationMode" Value="All" />
+                    <Setter Property="ManipulationMode"
+                            Value="All" />
                     <Style.Triggers>
                         <!--<DataTrigger Binding="{Binding PenEnabled}" Value="True">
                                 <Setter Property="ManipulationMode" Value="None" />
@@ -209,42 +221,42 @@
                 </Style>
             </ctrls:Map.Style>
 
-            <map:MapItemsControl ItemsSource="{Binding Waypoints}" 
+            <map:MapItemsControl ItemsSource="{Binding Waypoints}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}"/>
+                                 Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding POIs}" 
+            <map:MapItemsControl ItemsSource="{Binding POIs}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}"/>
+                                 Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding Vistas}" 
+            <map:MapItemsControl ItemsSource="{Binding Vistas}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}"/>
+                                 Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding HeartQuests}" 
+            <map:MapItemsControl ItemsSource="{Binding HeartQuests}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}"/>
+                                 Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding HeroPoints}" 
+            <map:MapItemsControl ItemsSource="{Binding HeroPoints}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}"/>
+                                 Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}" />
 
             <map:MapItem Name="CharacterMarker"
                          Style="{StaticResource CharacterPositionMarkerStyle}" />
 
             <!--TODO: Make stroke color configurable-->
             <map:MapPolyline Locations="{Binding PlayerTrail}"
-                             Stroke="White" 
+                             Stroke="White"
                              StrokeThickness="3"
                              Opacity="0.85"
                              Visibility="{Binding ShowPlayerTrail, Converter={StaticResource BoolToVisibility}}">
@@ -255,7 +267,7 @@
                                  ItemTemplate="{StaticResource PolylineItemTemplate}"
                                  IsSynchronizedWithCurrentItem="True"/>-->
         </ctrls:Map>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -280,13 +292,15 @@
                     <Image Name="TitleImage"
                            Grid.Column="0"
                            VerticalAlignment="Center"
-                           Height="30" Width="30"
+                           Height="30"
+                           Width="30"
                            Margin="0,0,0,0"
                            Source="/Images/Title/zone.png"
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">
-                                <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                                <MenuItem Header="{x:Static resx:Resources.Close}"
+                                          Click="CloseWindowButton_Click" />
                             </ContextMenu>
                         </Image.ContextMenu>
                         <Image.Style>
@@ -296,17 +310,18 @@
                                         <DropShadowEffect ShadowDepth="0"
                                                           Color="Goldenrod"
                                                           Opacity="0"
-                                                          BlurRadius="10"/>
+                                                          BlurRadius="10" />
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation To="1"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:00.1"/>
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:00.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.EnterActions>
@@ -314,8 +329,8 @@
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation To="0"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:0.1"/>
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.ExitActions>
@@ -325,31 +340,37 @@
                         </Image.Style>
                     </Image>
 
-                    <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Fill="PaleGoldenrod"
-                                        FontFamily="./Style/Fonts/#Menomonia"
-                                        FontSize="17"
-                                        Text="[[Map]]" />
+                    <core:OutlinedTextBlock Grid.Column="1"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Fill="PaleGoldenrod"
+                                            FontFamily="./Style/Fonts/#Menomonia"
+                                            FontSize="17"
+                                            Text="[[Map]]" />
 
                     <Button Name="MaximizeButton"
-                        Grid.Column="2"
-                        Margin="3"
-                        Click="MaximizeButton_Click"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource MaximizeIcon}" />
+                            Grid.Column="2"
+                            Margin="3"
+                            Click="MaximizeButton_Click"
+                            Style="{StaticResource TitleBarButtonStyle}">
+                        <fa:ImageAwesome Icon="ArrowsAlt" />
+                    </Button>
 
                     <Button Name="CollapseExpandButton"
-                        Grid.Column="3"
-                        Margin="3"
-                        Click="CollapseExpandButton_Click">
+                            Grid.Column="3"
+                            Margin="3"
+                            Click="CollapseExpandButton_Click">
                         <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
-                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content"
+                                        Value="{StaticResource CollapseGraphic}" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Visibility, ElementName=ControlsPanel}" Value="Collapsed">
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=ControlsPanel}"
+                                                 Value="Collapsed">
                                         <DataTrigger.Setters>
-                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                            <Setter Property="Content"
+                                                    Value="{StaticResource ExpandGraphic}" />
                                         </DataTrigger.Setters>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -358,30 +379,41 @@
                     </Button>
 
                     <Button Name="CloseWindowButton"
-                        Grid.Column="4"
-                        Margin="3,3,5,3"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource CloseGraphic}"
-                        Click="CloseWindowButton_Click" />
+                            Grid.Column="4"
+                            Margin="3,3,5,3"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Content="{StaticResource CloseGraphic}"
+                            Click="CloseWindowButton_Click" />
                 </Grid>
                 <Border.Style>
-                    <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
-                        <Setter Property="Opacity" Value="1" />
-                        <Setter Property="Visibility" Value="Visible" />
+                    <Style TargetType="Border"
+                           BasedOn="{StaticResource TitleBarStyle}">
+                        <Setter Property="Opacity"
+                                Value="1" />
+                        <Setter Property="Visibility"
+                                Value="Visible" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                    <Condition Binding="{Binding ElementName=ControlsPanel, Path=Visibility}" Value="Visible" />
-                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                    <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=ControlsPanel, Path=Visibility}"
+                                               Value="Visible" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding ElementName=ZoneItemSettingsPopup, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=CharacterPointerSettingsPopup, Path=IsMouseOver}"
+                                               Value="False" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:0.2"/>
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.EnterActions>
@@ -389,21 +421,24 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.2"/>
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.ExitActions>
                             </MultiDataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                                <Setter Property="Visibility" Value="Collapsed" />
+                            <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}"
+                                         Value="Maximized">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
             </Border>
 
-            <Grid Name="ControlsPanel" Margin="10"
+            <Grid Name="ControlsPanel"
+                  Margin="10"
                   Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -415,15 +450,20 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Margin="3"
-                        Height="30" Width="30"
-                        Click="RestoreButton_Click"
-                        Content="{StaticResource RestoreIcon}">
+                        Height="30"
+                        Width="30"
+                        Click="RestoreButton_Click">
+                    <fa:ImageAwesome Icon="Compress" />
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}"
+                                             Value="Maximized">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -431,57 +471,276 @@
                 </Button>
 
                 <StackPanel Grid.Column="0">
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding DisplayCharacterPointer}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Show Character Pointer]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowPlayerTrail}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Show Character Trail]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding SnapToCharacter}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Snap To Character]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowWaypoints}">
-                        <core:OutlinedTextBlock Text="[[Waypoints]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowPOIs}">
-                        <core:OutlinedTextBlock Text="[[POIs]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowVistas}">
-                        <core:OutlinedTextBlock Text="[[Vistas]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowHeartQuests}">
-                        <core:OutlinedTextBlock Text="[[Heart Quests]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowHeroPoints}">
-                        <core:OutlinedTextBlock Text="[[Hero Points]]" />
-                    </CheckBox>
+                    <StackPanel.Resources>
+                        <Style TargetType="fa:ImageAwesome">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black"
+                                                      BlurRadius="3"
+                                                      ShadowDepth="0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid Name="ZoneItemsSettingsIcon"
+                          Height="20"
+                          Width="20">
+                        <fa:ImageAwesome Icon="Eye"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Foreground="#FFFFCC"
+                                         Opacity="0.85" />
+                        <Popup Name="ZoneItemSettingsPopup"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="None"
+                               PlacementTarget="{Binding ElementName=ZoneItemsSettingsIcon}"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True"
+                               HorizontalAlignment="Left"
+                               Placement="Bottom"
+                               VerticalOffset="-23"
+                               HorizontalOffset="-7">
+                            <Border BorderThickness="2"
+                                    CornerRadius="2"
+                                    Padding="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Images/Backgrounds/Tooltip1.png"
+                                                Viewbox="0,0,942,942"
+                                                ViewboxUnits="Absolute"
+                                                Viewport="0,0,942,942"
+                                                ViewportUnits="Absolute" />
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="Black"
+                                                     Opacity="0.85" />
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <fa:ImageAwesome Icon="Eye"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Top"
+                                                     Foreground="White"
+                                                     Height="20"
+                                                     Width="20"
+                                                     Opacity="0.85" />
+
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowWaypoints}"
+                                              ToolTip="[[Show Waypoints]]">
+                                        <Image Source="/Images/Zone/waypoints.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="1"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowPOIs}"
+                                              ToolTip="[[Show Points of Interest]]">
+                                        <Image Source="/Images/Zone/poi.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="2"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowVistas}"
+                                              ToolTip="[[Show Vistas]]">
+                                        <Image Source="/Images/Zone/vistas.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="3"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowHeartQuests}"
+                                              ToolTip="[[Show Heart Quests]]">
+                                        <Image Source="/Images/Zone/hearts.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="4"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowHeroPoints}"
+                                              ToolTip="[[Show Hero Points]]">
+                                        <Image Source="/Images/Zone/heropoint.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Popup.Style>
+                                <Style TargetType="Popup">
+                                    <Setter Property="IsOpen"
+                                            Value="False" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=ZoneItemsSettingsIcon, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ZoneItemSettingsPopup, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Popup.Style>
+                        </Popup>
+                    </Grid>
+
+                    <Grid Name="CharacterPointerSettingsIcon"
+                          Margin="0,20,0,0"
+                          Height="20"
+                          Width="20"
+                          IsEnabled="{Binding CanDisplayCharacterPointer}">
+                        <fa:ImageAwesome Icon="LocationArrow"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Foreground="#FFFFCC"
+                                         Opacity="0.85" />
+                        <Popup Name="CharacterPointerSettingsPopup"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="None"
+                               PlacementTarget="{Binding ElementName=CharacterPointerSettingsIcon}"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True"
+                               HorizontalAlignment="Left"
+                               Placement="Bottom"
+                               VerticalOffset="-27"
+                               HorizontalOffset="-7">
+                            <Border BorderThickness="2"
+                                    CornerRadius="2"
+                                    Padding="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Images/Backgrounds/Tooltip1.png"
+                                                Viewbox="0,0,942,942"
+                                                ViewboxUnits="Absolute"
+                                                Viewport="0,0,942,942"
+                                                ViewportUnits="Absolute" />
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="Black"
+                                                     Opacity="0.85" />
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <fa:ImageAwesome Icon="LocationArrow"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Top"
+                                                     Foreground="White"
+                                                     Height="20"
+                                                     Width="20"
+                                                     Opacity="0.85" />
+
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding DisplayCharacterPointer}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center"
+                                              ToolTip="[[Show Character Pointer]]">
+                                        <ContentPresenter Content="{StaticResource CharacterPointer}" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="2"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding SnapToCharacter}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center">
+                                        <core:OutlinedTextBlock Text="[[Snap]]" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="2"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowPlayerTrail}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              ToolTip="[[Show Character Trail]]">
+                                        <core:OutlinedTextBlock Text="[[Trail]]" />
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Popup.Style>
+                                <Style TargetType="Popup">
+                                    <Setter Property="IsOpen"
+                                            Value="False" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=CharacterPointerSettingsIcon, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=CharacterPointerSettingsPopup, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Popup.Style>
+                        </Popup>
+                    </Grid>
                 </StackPanel>
                 <Grid.Style>
                     <Style TargetType="Grid">
-                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="Opacity"
+                                Value="1" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=ZoneItemSettingsPopup, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=CharacterPointerSettingsPopup, Path=IsMouseOver}"
+                                               Value="False" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation To="0"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:0.2"/>
+                                                             Duration="00:00:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.EnterActions>
@@ -490,7 +749,7 @@
                                         <Storyboard>
                                             <DoubleAnimation To="1"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:00.2"/>
+                                                             Duration="00:00:00.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.ExitActions>
@@ -499,7 +758,7 @@
                     </Style>
                 </Grid.Style>
             </Grid>
-            
+
         </Grid>
 
         <Grid Name="ResizeGripper">
@@ -507,20 +766,24 @@
                         VerticalAlignment="Bottom" />
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Opacity" Value="1" />
-                    <Setter Property="Visibility" Value="Visible" />
+                    <Setter Property="Opacity"
+                            Value="1" />
+                    <Setter Property="Visibility"
+                            Value="Visible" />
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                           Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                           Value="False" />
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation To="0"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:0.2"/>
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiDataTrigger.EnterActions>
@@ -528,14 +791,16 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation To="1"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:00.2"/>
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>
                         </MultiDataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                        <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}"
+                                     Value="Maximized">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
