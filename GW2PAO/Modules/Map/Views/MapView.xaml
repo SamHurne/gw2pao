@@ -119,7 +119,8 @@
                                                 <!--<Image MaxHeight="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}"
                                                        MaxWidth="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}">-->
                                                 <Image Height="30"
-                                                       Width="30">
+                                                       Width="30"
+                                                       Margin="-15,-15,0,0">
                                                     <Image.Source>
                                                         <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
                                                             <Binding Path="ItemType" />
