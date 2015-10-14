@@ -46,7 +46,7 @@
         <Style x:Key="CharacterPositionMarkerStyle"
                TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location"
-                    Value="{Binding CharacterLocation}" />
+                    Value="{Binding CharacterPointer.CharacterLocation}" />
             <Setter Property="Foreground"
                     Value="Black" />
             <Setter Property="Template">
@@ -58,7 +58,7 @@
                               RenderTransformOrigin="0.5,0.5">
                             <ContentPresenter Content="{StaticResource CharacterPointer}" />
                             <Grid.RenderTransform>
-                                <RotateTransform Angle="{Binding CameraDirection}" />
+                                <RotateTransform Angle="{Binding CharacterPointer.CameraDirection}" />
                             </Grid.RenderTransform>
                         </Grid>
                     </ControlTemplate>
@@ -69,9 +69,9 @@
             <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding DisplayCharacterPointer}"
+                        <Condition Binding="{Binding CharacterPointer.DisplayCharacterPointer}"
                                    Value="True" />
-                        <Condition Binding="{Binding CanDisplayCharacterPointer}"
+                        <Condition Binding="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                    Value="True" />
                     </MultiDataTrigger.Conditions>
                     <Setter Property="Visibility"
@@ -255,11 +255,11 @@
                          Style="{StaticResource CharacterPositionMarkerStyle}" />
 
             <!--TODO: Make stroke color configurable-->
-            <map:MapPolyline Locations="{Binding PlayerTrail}"
+            <map:MapPolyline Locations="{Binding CharacterPointer.PlayerTrail}"
                              Stroke="White"
                              StrokeThickness="3"
                              Opacity="0.85"
-                             Visibility="{Binding ShowPlayerTrail, Converter={StaticResource BoolToVisibility}}">
+                             Visibility="{Binding CharacterPointer.ShowPlayerTrail, Converter={StaticResource BoolToVisibility}}">
             </map:MapPolyline>
 
             <!--<map:MapItemsControl Name="PenLinesControl"
@@ -346,7 +346,7 @@
                                             Fill="PaleGoldenrod"
                                             FontFamily="./Style/Fonts/#Menomonia"
                                             FontSize="17"
-                                            Text="[[Map]]" />
+                                            Text="Map" />
 
                     <Button Name="MaximizeButton"
                             Grid.Column="2"
@@ -615,12 +615,25 @@
                           Margin="0,20,0,0"
                           Height="20"
                           Width="20"
-                          IsEnabled="{Binding CanDisplayCharacterPointer}">
+                          IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}">
                         <fa:ImageAwesome Icon="LocationArrow"
                                          HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
-                                         Foreground="#FFFFCC"
-                                         Opacity="0.85" />
+                                         Foreground="#FFFFCC">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="fa:ImageAwesome">
+                                    <Setter Property="Opacity"
+                                            Value="0.85" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled"
+                                                 Value="False">
+                                            <Setter Property="Opacity"
+                                                    Value="0.25" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
                         <Popup Name="CharacterPointerSettingsPopup"
                                AllowsTransparency="True"
                                StaysOpen="True"
@@ -666,14 +679,14 @@
                                                      Foreground="White"
                                                      Height="20"
                                                      Width="20"
-                                                     Opacity="0.85" />
+                                                     Opacity="0.85"/>
 
                                     <CheckBox Grid.Row="1"
                                               Grid.Column="0"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding DisplayCharacterPointer}"
-                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
+                                              IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                               VerticalAlignment="Center"
                                               ToolTip="[[Show Character Pointer]]">
                                         <ContentPresenter Content="{StaticResource CharacterPointer}" />
@@ -682,20 +695,20 @@
                                               Grid.Column="1"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding SnapToCharacter}"
-                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              IsChecked="{Binding CharacterPointer.SnapToCharacter}"
+                                              IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                               VerticalAlignment="Center">
-                                        <core:OutlinedTextBlock Text="[[Snap]]" />
+                                        <core:OutlinedTextBlock Text="Center Map on Character" />
                                     </CheckBox>
                                     <CheckBox Grid.Row="2"
                                               Grid.Column="0"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowPlayerTrail}"
-                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              IsChecked="{Binding CharacterPointer.ShowPlayerTrail}"
+                                              IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                               VerticalAlignment="Center"
                                               ToolTip="[[Show Character Trail]]">
-                                        <core:OutlinedTextBlock Text="[[Trail]]" />
+                                        <core:OutlinedTextBlock Text="Trail" />
                                     </CheckBox>
                                     <Slider Name="TrailLength" VerticalAlignment="Center"
                                             Grid.Row="2"
@@ -703,7 +716,7 @@
                                             Margin="5"
                                             Width="100"
                                             Minimum="5"
-                                            Value="{Binding PlayerTrailLength}"
+                                            Value="{Binding CharacterPointer.PlayerTrailLength}"
                                             Maximum="1000"
                                             ToolTip="[[Trail Length]]">
                                     </Slider>
