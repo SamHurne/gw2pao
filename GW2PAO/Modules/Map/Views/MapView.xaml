@@ -221,35 +221,35 @@
                 </Style>
             </ctrls:Map.Style>
 
-            <map:MapItemsControl ItemsSource="{Binding Waypoints}"
+            <map:MapItemsControl ItemsSource="{Binding ZoneItems.Waypoints}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowWaypoints, Converter={StaticResource BoolToVisibility}}" />
+                                 Visibility="{Binding ZoneItems.ShowWaypoints, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding POIs}"
+            <map:MapItemsControl ItemsSource="{Binding ZoneItems.POIs}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowPOIs, Converter={StaticResource BoolToVisibility}}" />
+                                 Visibility="{Binding ZoneItems.ShowPOIs, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding Vistas}"
+            <map:MapItemsControl ItemsSource="{Binding ZoneItems.Vistas}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowVistas, Converter={StaticResource BoolToVisibility}}" />
+                                 Visibility="{Binding ZoneItems.ShowVistas, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding HeartQuests}"
+            <map:MapItemsControl ItemsSource="{Binding ZoneItems.HeartQuests}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowHeartQuests, Converter={StaticResource BoolToVisibility}}" />
+                                 Visibility="{Binding ZoneItems.ShowHeartQuests, Converter={StaticResource BoolToVisibility}}" />
 
-            <map:MapItemsControl ItemsSource="{Binding HeroPoints}"
+            <map:MapItemsControl ItemsSource="{Binding ZoneItems.HeroPoints}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
                                  IsSynchronizedWithCurrentItem="True"
                                  SelectionMode="Extended"
-                                 Visibility="{Binding ShowHeroPoints, Converter={StaticResource BoolToVisibility}}" />
+                                 Visibility="{Binding ZoneItems.ShowHeroPoints, Converter={StaticResource BoolToVisibility}}" />
 
             <map:MapItem Name="CharacterMarker"
                          Style="{StaticResource CharacterPositionMarkerStyle}" />
@@ -542,7 +542,7 @@
                                               Grid.Column="0"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowWaypoints}"
+                                              IsChecked="{Binding ZoneItems.ShowWaypoints}"
                                               ToolTip="[[Show Waypoints]]">
                                         <Image Source="/Images/Zone/waypoints.png"
                                                Height="25"
@@ -552,7 +552,7 @@
                                               Grid.Column="1"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowPOIs}"
+                                              IsChecked="{Binding ZoneItems.ShowPOIs}"
                                               ToolTip="[[Show Points of Interest]]">
                                         <Image Source="/Images/Zone/poi.png"
                                                Height="25"
@@ -562,7 +562,7 @@
                                               Grid.Column="2"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowVistas}"
+                                              IsChecked="{Binding ZoneItems.ShowVistas}"
                                               ToolTip="[[Show Vistas]]">
                                         <Image Source="/Images/Zone/vistas.png"
                                                Height="25"
@@ -572,7 +572,7 @@
                                               Grid.Column="3"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowHeartQuests}"
+                                              IsChecked="{Binding ZoneItems.ShowHeartQuests}"
                                               ToolTip="[[Show Heart Quests]]">
                                         <Image Source="/Images/Zone/hearts.png"
                                                Height="25"
@@ -582,7 +582,7 @@
                                               Grid.Column="4"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
-                                              IsChecked="{Binding ShowHeroPoints}"
+                                              IsChecked="{Binding ZoneItems.ShowHeroPoints}"
                                               ToolTip="[[Show Hero Points]]">
                                         <Image Source="/Images/Zone/heropoint.png"
                                                Height="25"
@@ -698,7 +698,7 @@
                                               IsChecked="{Binding CharacterPointer.SnapToCharacter}"
                                               IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                               VerticalAlignment="Center">
-                                        <core:OutlinedTextBlock Text="Center Map on Character" />
+                                        <core:OutlinedTextBlock Text="[[Center Map on Character]]" />
                                     </CheckBox>
                                     <CheckBox Grid.Row="2"
                                               Grid.Column="0"
@@ -708,7 +708,7 @@
                                               IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}"
                                               VerticalAlignment="Center"
                                               ToolTip="[[Show Character Trail]]">
-                                        <core:OutlinedTextBlock Text="Trail" />
+                                        <core:OutlinedTextBlock Text="[[Trail]]" />
                                     </CheckBox>
                                     <Slider Name="TrailLength" VerticalAlignment="Center"
                                             Grid.Row="2"
