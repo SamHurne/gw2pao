@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="ThumbBorderColor">#FF000000</Color>
-    <Color x:Key="ThumbColor">#FFEEE8AA</Color>
+    <Color x:Key="SliderThumbBorderColor">#FF000000</Color>
+    <Color x:Key="SliderThumbColor">#FFEEE8AA</Color>
 
-    <Color x:Key="TrackBorderColor">#75000000</Color>
-    <Color x:Key="TrackColor">#FFEEE8AA</Color>
+    <Color x:Key="SliderTrackBorderColor">#75000000</Color>
+    <Color x:Key="SliderTrackColor">#FFEEE8AA</Color>
 
     <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -18,10 +18,10 @@
                     <Rectangle Height="5" Opacity="0.15"
                                StrokeThickness="1">
                         <Rectangle.Stroke>
-                            <SolidColorBrush Color="{StaticResource TrackBorderColor}"/>
+                            <SolidColorBrush Color="{StaticResource SliderTrackBorderColor}"/>
                         </Rectangle.Stroke>
                         <Rectangle.Fill>
-                            <SolidColorBrush Color="{StaticResource TrackColor}"/>
+                            <SolidColorBrush Color="{StaticResource SliderTrackColor}"/>
                         </Rectangle.Fill>
                     </Rectangle>
                     <!--<Border Background="Transparent" />-->
@@ -42,10 +42,10 @@
                                Opacity="0.5"
                                StrokeThickness="1">
                         <Rectangle.Stroke>
-                            <SolidColorBrush Color="{StaticResource ThumbBorderColor}"/>
+                            <SolidColorBrush Color="{StaticResource SliderThumbBorderColor}"/>
                         </Rectangle.Stroke>
                         <Rectangle.Fill>
-                            <SolidColorBrush Color="{StaticResource ThumbColor}" />
+                            <SolidColorBrush Color="{StaticResource SliderThumbColor}" />
                         </Rectangle.Fill>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">

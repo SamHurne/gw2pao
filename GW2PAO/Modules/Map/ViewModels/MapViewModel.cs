@@ -196,7 +196,16 @@ namespace GW2PAO.Modules.Map.ViewModels
         public int PlayerTrailLength
         {
             get { return this.playerTrailLength; }
-            set { SetProperty(ref this.playerTrailLength, value); }
+            set
+            {
+                if (SetProperty(ref this.playerTrailLength, value))
+                {
+                    while (this.PlayerTrail.Count > value)
+                    {
+                        this.PlayerTrail.RemoveAt(0);
+                    }
+                }
+            }
         }
 
         /// <summary>

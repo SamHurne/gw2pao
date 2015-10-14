@@ -431,41 +431,264 @@
                 </Button>
 
                 <StackPanel Grid.Column="0">
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding DisplayCharacterPointer}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Show Character Pointer]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowPlayerTrail}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Show Character Trail]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding SnapToCharacter}"
-                              IsEnabled="{Binding CanDisplayCharacterPointer}">
-                        <core:OutlinedTextBlock Text="[[Snap To Character]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowWaypoints}">
-                        <core:OutlinedTextBlock Text="[[Waypoints]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowPOIs}">
-                        <core:OutlinedTextBlock Text="[[POIs]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowVistas}">
-                        <core:OutlinedTextBlock Text="[[Vistas]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowHeartQuests}">
-                        <core:OutlinedTextBlock Text="[[Heart Quests]]" />
-                    </CheckBox>
-                    <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
-                              IsChecked="{Binding ShowHeroPoints}">
-                        <core:OutlinedTextBlock Text="[[Hero Points]]" />
-                    </CheckBox>
+                    <StackPanel.Resources>
+                        <Style TargetType="fa:ImageAwesome">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black"
+                                                      BlurRadius="3"
+                                                      ShadowDepth="0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid Name="ZoneItemsSettingsIcon"
+                          Height="20"
+                          Width="20">
+                        <fa:ImageAwesome Icon="Eye"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Foreground="#FFFFCC"
+                                         Opacity="0.85" />
+                        <Popup Name="ZoneItemSettingsPopup"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="None"
+                               PlacementTarget="{Binding ElementName=ZoneItemsSettingsIcon}"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True"
+                               HorizontalAlignment="Left"
+                               Placement="Bottom"
+                               VerticalOffset="-23"
+                               HorizontalOffset="-7">
+                            <Border BorderThickness="2"
+                                    CornerRadius="2"
+                                    Padding="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Images/Backgrounds/Tooltip1.png"
+                                                Viewbox="0,0,942,942"
+                                                ViewboxUnits="Absolute"
+                                                Viewport="0,0,942,942"
+                                                ViewportUnits="Absolute" />
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="Black"
+                                                     Opacity="0.85" />
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <fa:ImageAwesome Icon="Eye"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Top"
+                                                     Foreground="White"
+                                                     Height="20"
+                                                     Width="20"
+                                                     Opacity="0.85" />
+
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowWaypoints}"
+                                              ToolTip="[[Show Waypoints]]">
+                                        <Image Source="/Images/Zone/waypoints.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="1"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowPOIs}"
+                                              ToolTip="[[Show Points of Interest]]">
+                                        <Image Source="/Images/Zone/poi.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="2"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowVistas}"
+                                              ToolTip="[[Show Vistas]]">
+                                        <Image Source="/Images/Zone/vistas.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="3"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowHeartQuests}"
+                                              ToolTip="[[Show Heart Quests]]">
+                                        <Image Source="/Images/Zone/hearts.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="4"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowHeroPoints}"
+                                              ToolTip="[[Show Hero Points]]">
+                                        <Image Source="/Images/Zone/heropoint.png"
+                                               Height="25"
+                                               Width="25" />
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Popup.Style>
+                                <Style TargetType="Popup">
+                                    <Setter Property="IsOpen"
+                                            Value="False" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=ZoneItemsSettingsIcon, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=ZoneItemSettingsPopup, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Popup.Style>
+                        </Popup>
+                    </Grid>
+
+                    <Grid Name="CharacterPointerSettingsIcon"
+                          Margin="0,20,0,0"
+                          Height="20"
+                          Width="20"
+                          IsEnabled="{Binding CanDisplayCharacterPointer}">
+                        <fa:ImageAwesome Icon="LocationArrow"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Foreground="#FFFFCC"
+                                         Opacity="0.85" />
+                        <Popup Name="CharacterPointerSettingsPopup"
+                               AllowsTransparency="True"
+                               StaysOpen="True"
+                               PopupAnimation="None"
+                               PlacementTarget="{Binding ElementName=CharacterPointerSettingsIcon}"
+                               SnapsToDevicePixels="True"
+                               UseLayoutRounding="True"
+                               HorizontalAlignment="Left"
+                               Placement="Bottom"
+                               VerticalOffset="-27"
+                               HorizontalOffset="-7">
+                            <Border BorderThickness="2"
+                                    CornerRadius="2"
+                                    Padding="5">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Images/Backgrounds/Tooltip1.png"
+                                                Viewbox="0,0,942,942"
+                                                ViewboxUnits="Absolute"
+                                                Viewport="0,0,942,942"
+                                                ViewportUnits="Absolute" />
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="Black"
+                                                     Opacity="0.85" />
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <fa:ImageAwesome Icon="LocationArrow"
+                                                     Grid.Column="0"
+                                                     Grid.Row="0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Top"
+                                                     Foreground="White"
+                                                     Height="20"
+                                                     Width="20"
+                                                     Opacity="0.85" />
+
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding DisplayCharacterPointer}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center"
+                                              ToolTip="[[Show Character Pointer]]">
+                                        <ContentPresenter Content="{StaticResource CharacterPointer}" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="1"
+                                              Grid.Column="1"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding SnapToCharacter}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center">
+                                        <core:OutlinedTextBlock Text="[[Snap]]" />
+                                    </CheckBox>
+                                    <CheckBox Grid.Row="2"
+                                              Grid.Column="0"
+                                              Style="{StaticResource AlternateCheckboxStyle}"
+                                              Margin="5"
+                                              IsChecked="{Binding ShowPlayerTrail}"
+                                              IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center"
+                                              ToolTip="[[Show Character Trail]]">
+                                        <core:OutlinedTextBlock Text="[[Trail]]" />
+                                    </CheckBox>
+                                    <Slider Name="TrailLength" VerticalAlignment="Center"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Width="100"
+                                            Minimum="5"
+                                            Value="{Binding PlayerTrailLength}"
+                                            Maximum="1000"
+                                            ToolTip="[[Trail Length]]">
+                                    </Slider>
+                                </Grid>
+                            </Border>
+                            <Popup.Style>
+                                <Style TargetType="Popup">
+                                    <Setter Property="IsOpen"
+                                            Value="False" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=CharacterPointerSettingsIcon, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=CharacterPointerSettingsPopup, Path=IsMouseOver}"
+                                                     Value="True">
+                                            <Setter Property="IsOpen"
+                                                    Value="True" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Popup.Style>
+                        </Popup>
+                    </Grid>
                 </StackPanel>
                 <Grid.Style>
                     <Style TargetType="Grid">
