@@ -679,7 +679,7 @@
                                         <ContentPresenter Content="{StaticResource CharacterPointer}" />
                                     </CheckBox>
                                     <CheckBox Grid.Row="1"
-                                              Grid.Column="2"
+                                              Grid.Column="1"
                                               Style="{StaticResource AlternateCheckboxStyle}"
                                               Margin="5"
                                               IsChecked="{Binding SnapToCharacter}"
@@ -693,9 +693,20 @@
                                               Margin="5"
                                               IsChecked="{Binding ShowPlayerTrail}"
                                               IsEnabled="{Binding CanDisplayCharacterPointer}"
+                                              VerticalAlignment="Center"
                                               ToolTip="[[Show Character Trail]]">
                                         <core:OutlinedTextBlock Text="[[Trail]]" />
                                     </CheckBox>
+                                    <Slider Name="TrailLength" VerticalAlignment="Center"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Width="100"
+                                            Minimum="5"
+                                            Value="{Binding PlayerTrailLength}"
+                                            Maximum="1000"
+                                            ToolTip="[[Trail Length]]">
+                                    </Slider>
                                 </Grid>
                             </Border>
                             <Popup.Style>
