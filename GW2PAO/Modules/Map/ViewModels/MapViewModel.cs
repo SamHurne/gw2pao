@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
@@ -10,6 +10,7 @@ using GW2PAO.Modules.ZoneCompletion;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.Modules.ZoneCompletion.Models;
 using GW2PAO.Modules.ZoneCompletion.ViewModels;
+using GW2PAO.Utility;
 using MapControl;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -36,12 +37,8 @@ namespace GW2PAO.Modules.Map.ViewModels
         private int floorId;
         private Continent continentData;
         private Location mapCenter;
-        private Location charLocation;
-        private double cameraDirection;
-        private MercatorTransform locationTransform = new MercatorTransform();
-
-        private bool displayCharacterPointer;
-        private bool canDisplayCharacterPointer;
+        
+        
 
         // TODO: Consider moving these to the UserData class
         private bool showWaypoints;
@@ -50,10 +47,6 @@ namespace GW2PAO.Modules.Map.ViewModels
         private bool showHeartQuests;
         private bool showHeroPoints;
         private bool showDungeons;
-
-        private bool snapToCharacter;
-        private bool showPlayerTrail;
-        private int playerTrailLength;
 
         /// <summary>
         /// Data for the displayed continent
@@ -106,106 +99,12 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
-        /// The player character's location on the map
+        /// ViewModel object containing all data associated with the character pointer
         /// </summary>
-        public Location CharacterLocation
-        {
-            get { return this.charLocation; }
-            set { SetProperty(ref this.charLocation, value); }
-        }
-
-        /// <summary>
-        /// Direction of the player's camera, in degrees
-        /// </summary>
-        public double CameraDirection
-        {
-            get { return this.cameraDirection; }
-            set { SetProperty(ref this.cameraDirection, value); }
-        }
-
-        /// <summary>
-        /// True if the map should snap to the active character's position, else false
-        /// </summary>
-        public bool SnapToCharacter
-        {
-            get { return this.snapToCharacter; }
-            set
-            {
-                if (SetProperty(ref this.snapToCharacter, value))
-                {
-                    this.RefreshCharacterLocation();
-                }
-            }
-        }
-
-        /// <summary>
-        /// True if the character pointer should be displayed (user-selectable), else false
-        /// </summary>
-        public bool DisplayCharacterPointer
-        {
-            get
-            {
-                if (this.CanDisplayCharacterPointer)
-                    return this.displayCharacterPointer;
-                else
-                    return false;
-            }
-            set
-            {
-                SetProperty(ref this.displayCharacterPointer, value);
-            }
-        }
-
-        /// <summary>
-        /// True if we can display the character pointer, else false
-        /// Can be false if the player is not in-game
-        /// </summary>
-        public bool CanDisplayCharacterPointer
-        {
-            get { return this.canDisplayCharacterPointer; }
-            set
-            {
-                if (SetProperty(ref this.canDisplayCharacterPointer, value))
-                {
-                    this.OnPropertyChanged(() => this.DisplayCharacterPointer);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Collection of location objects making up the player trail
-        /// </summary>
-        public ObservableCollection<Location> PlayerTrail
+        public CharacterPointerViewModel CharacterPointer
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// True if the player trail should be shown, else false
-        /// </summary>
-        public bool ShowPlayerTrail
-        {
-            get { return this.showPlayerTrail; }
-            set { SetProperty(ref this.showPlayerTrail, value); }
-        }
-
-        /// <summary>
-        /// Maximum length of the player trail to show before
-        /// </summary>
-        public int PlayerTrailLength
-        {
-            get { return this.playerTrailLength; }
-            set
-            {
-                if (SetProperty(ref this.playerTrailLength, value))
-                {
-                    while (this.PlayerTrail.Count > value)
-                    {
-                        this.PlayerTrail.RemoveAt(0);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -323,14 +222,11 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.zoneUserData = zoneUserData;
             this.zoneItemsStore = zoneItemsStore;
             this.userData = userData;
-            this.PlayerTrail = new ObservableCollection<Location>();
+
+            this.CharacterPointer = new CharacterPointerViewModel(zoneController, userData);
+            this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
+
             this.FloorId = 1;
-
-            this.SnapToCharacter = false;
-
-            this.DisplayCharacterPointer = true;
-            this.ShowPlayerTrail = true;
-            this.PlayerTrailLength = 100;
 
             this.ShowHeartQuests = true;
             this.ShowHeroPoints = true;
@@ -353,56 +249,29 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveMap")
-                this.ContinentData = this.zoneService.GetContinentByMap(this.zoneController.CurrentMapID);
-
-            this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
-            this.RefreshCharacterLocation();
-            this.RefreshCharacterDirection();
-        }
-
-        private void RefreshCharacterLocation()
-        {
-            var charPos = this.zoneController.CharacterPosition;
-            var cont = this.zoneController.ActiveContinent;
-            var map = this.zoneController.ActiveMap;
-
-            if (cont != null && map != null)
+            if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap))
             {
-                double charX = map.ContinentRectangle.X + (charPos.X - map.MapRectangle.X) * MapsHelper.MapToWorldRatio;
-                double charY = map.ContinentRectangle.Y + ((map.MapRectangle.Y + map.MapRectangle.Height) - charPos.Y) * MapsHelper.MapToWorldRatio;
-
-                var location = this.locationTransform.Transform(new System.Windows.Point(
-                    (charX - (cont.Width / 2)) / cont.Width * 360.0,
-                    ((cont.Height / 2) - charY) / cont.Height * 360.0));
-
-                if (this.CharacterLocation != location)
-                {
-                    // Add the new location to the player trail
-                    // The check here is due to the initial CharacterLocation when we are first created - null
-                    if (this.CharacterLocation != null)
-                    {
-                        this.PlayerTrail.Add(location);
-                        if (this.PlayerTrail.Count > this.PlayerTrailLength)
-                            this.PlayerTrail.RemoveAt(0);
-                    }
-
-                    this.CharacterLocation = location;
-                }
-
-                if (this.SnapToCharacter)
-                    this.MapCenter = this.CharacterLocation;
+                this.ContinentData = this.zoneService.GetContinentByMap(this.zoneController.CurrentMapID);
             }
         }
 
-        private void RefreshCharacterDirection()
+        /// <summary>
+        /// Handles the PropertyChanged event of the CharacterPointer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CharacterPointer_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var camDir = this.zoneController.CameraDirection;
-
-            var zeroPoint = new API.Data.Entities.Point(0, 0);
-            var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(zeroPoint, camDir),
-                                                   CalcUtil.Vector.CreateVector(zeroPoint, zeroPoint));
-            this.CameraDirection = newAngle;
+            if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.CharacterPointer.CharacterLocation))
+            {
+                if (this.CharacterPointer.SnapToCharacter)
+                    this.MapCenter = this.CharacterPointer.CharacterLocation;
+            }
+            else if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.CharacterPointer.SnapToCharacter))
+            {
+                if (this.CharacterPointer.SnapToCharacter)
+                    this.MapCenter = this.CharacterPointer.CharacterLocation;
+            }
         }
     }
 }

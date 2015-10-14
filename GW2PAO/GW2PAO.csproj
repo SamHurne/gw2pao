@@ -270,6 +270,8 @@
     <Compile Include="Modules\Map\MapModule.cs" />
     <Compile Include="Modules\Map\MapUserData.cs" />
     <Compile Include="Modules\Map\MapViewController.cs" />
+    <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
     <Compile Include="Modules\ZoneCompletion\Models\ZoneItemsStore.cs" />
     <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
     <Compile Include="Modules\Map\Views\Controls\Map.cs" />
