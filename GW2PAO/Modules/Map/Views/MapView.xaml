@@ -123,7 +123,7 @@
                                                             <Setter Property="Width"
                                                                     Value="30" />
                                                             <Setter Property="Margin"
-                                                                    Value="-15,-15,0,0"/>
+                                                                    Value="-15,-15,0,0" />
                                                             <Style.Triggers>
                                                                 <Trigger Property="IsMouseOver"
                                                                          Value="True">
@@ -191,12 +191,50 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <Grid Width="26"
-                              Height="26"
-                              Margin="-13,-13,0,0">
-                            <Image Name="MarkerIcon"
-                                   Source="{Binding Icon}" />
-                        </Grid>
+                        <Image Source="{Binding Icon}">
+                            <Image.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="{x:Static resx:Resources.Remove}"
+                                              Command="{Binding RemoveMarkerCommand}" />
+                                    <!--Command="{Binding Path=DataContext.MapMarkers.RemoveMarkerCommand,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type ContentControl},
+                                                                Mode=FindAncestor}}"-->
+                                </ContextMenu>
+                            </Image.ContextMenu>
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Height"
+                                            Value="28" />
+                                    <Setter Property="Width"
+                                            Value="28" />
+                                    <Setter Property="Margin"
+                                            Value="-14,-14,0,0" />
+                                    <Setter Property="ToolTip"
+                                            Value="{Binding Name}" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
+                                            <Setter Property="Height"
+                                                    Value="34" />
+                                            <Setter Property="Width"
+                                                    Value="34" />
+                                            <Setter Property="Margin"
+                                                    Value="-17,-17,0,0" />
+                                        </Trigger>
+                                        <DataTrigger Binding="{Binding Name}"
+                                                     Value="{x:Null}">
+                                            <Setter Property="ToolTip"
+                                                    Value="{x:Null}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Name}"
+                                                     Value="">
+                                            <Setter Property="ToolTip"
+                                                    Value="{x:Null}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -423,10 +461,14 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                    <Condition Binding="{Binding ElementName=ControlsPanel, Path=Visibility}" Value="Visible" />
-                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
-                                    <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=ControlsPanel, Path=Visibility}"
+                                               Value="Visible" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding Source={x:Static resx:Settings.Default}, Path=AutoHideTitleBars}"
+                                               Value="True" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.EnterActions>
                                     <BeginStoryboard>
@@ -508,7 +550,7 @@
                                          VerticalAlignment="Top"
                                          HorizontalAlignment="Left"
                                          Icon="Eye">
-                    <Grid>
+                    <Grid Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -629,7 +671,7 @@
                                   Margin="0,10,0,0">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel MaxWidth="350"/>
+                                <WrapPanel MaxWidth="350" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
@@ -653,8 +695,10 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
+                                    <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                               Value="False" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.EnterActions>
                                     <BeginStoryboard>
