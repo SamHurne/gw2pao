@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Util;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
+using GW2PAO.Utility;
 using MapControl;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -150,6 +151,7 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.SnapToCharacter = false;
             this.ShowPlayerTrail = true;
             this.PlayerTrailLength = 100;
+            this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
 
             ((INotifyPropertyChanged)this.zoneController).PropertyChanged += ZoneControllerPropertyChanged;
         }
@@ -159,9 +161,14 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
-            this.RefreshCharacterLocation();
-            this.RefreshCharacterDirection();
+            if ((e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ValidMapID))
+                || (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.CharacterPosition))
+                || (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.CameraDirection)))
+            {
+                this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
+                this.RefreshCharacterLocation();
+                this.RefreshCharacterDirection();
+            }
         }
 
         private void RefreshCharacterLocation()
