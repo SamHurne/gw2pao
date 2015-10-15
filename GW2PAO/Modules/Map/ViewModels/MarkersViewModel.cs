@@ -33,30 +33,12 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
-        /// Template MapMarker for the Mining Marker
+        /// The collection of map markers to show on the map
         /// </summary>
-        public MapMarker MiningMarkerTemplate
+        public List<MapMarker> MarkerTemplates
         {
-            get { return this.miningMarkerTemplate; }
-            set { SetProperty(ref this.miningMarkerTemplate, value); }
-        }
-
-        /// <summary>
-        /// Template MapMarker for the Harvesting Marker
-        /// </summary>
-        public MapMarker HarvestingMarkerTemplate
-        {
-            get { return this.harvestingMarkerTemplate; }
-            set { SetProperty(ref this.harvestingMarkerTemplate, value); }
-        }
-
-        /// <summary>
-        /// Template MapMarker for the Logging Marker
-        /// </summary>
-        public MapMarker LoggingMarkerTemplate
-        {
-            get { return this.loggingMarkerTemplate; }
-            set { SetProperty(ref this.loggingMarkerTemplate, value); }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -67,51 +49,59 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.Markers = new ObservableCollection<MapMarker>();
             this.userData = userData;
 
-            this.MiningMarkerTemplate = new MapMarker()
-            {
-                Icon = @"/Images/Map/Markers/miningNode.png"
-            };
-
-            this.HarvestingMarkerTemplate = new MapMarker()
-            {
-                Icon = @"/Images/Map/Markers/harvestingNode.png"
-            };
-
-            this.LoggingMarkerTemplate = new MapMarker()
-            {
-                Icon = @"/Images/Map/Markers/loggingNode.png"
-            };
+            this.InitializeTemplates();
 
             this.Markers.CollectionChanged += Markers_CollectionChanged;
+        }
+
+        private void InitializeTemplates()
+        {
+            this.MarkerTemplates = new List<MapMarker>()
+            {
+                new MapMarker() { Icon = @"/Images/Map/Markers/miningNode.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/harvestingNode.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/loggingNode.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/activity.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/adventure.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/anvil.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/book.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/parchment.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/dragon.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/greenFlag.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/quaggan.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/trophy.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/pointA.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/pointB.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/pointC.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/orangeShield.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/redShield.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/blueStar.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/greenStar.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/yellowStar.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/yellowStar2.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/downedAlly.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/downedEnemy.png" },
+
+                new MapMarker() { Icon = @"/Images/Map/Markers/blueSiege.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/redSiege.png" },
+                new MapMarker() { Icon = @"/Images/Map/Markers/swords.png" },
+            };
         }
 
         private void Markers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (var newItem in e.NewItems)
+                foreach (MapMarker newItem in e.NewItems)
                 {
-                    if (newItem == this.MiningMarkerTemplate)
-                    {
-                        this.MiningMarkerTemplate = new MapMarker()
-                        {
-                            Icon = @"/Images/Map/Markers/miningNode.png"
-                        };
-                    }
-                    else if (newItem == this.HarvestingMarkerTemplate)
-                    {
-                        this.HarvestingMarkerTemplate = new MapMarker()
-                        {
-                            Icon = @"/Images/Map/Markers/harvestingNode.png"
-                        };
-                    }
-                    else if (newItem == this.LoggingMarkerTemplate)
-                    {
-                        this.LoggingMarkerTemplate = new MapMarker()
-                        {
-                            Icon = @"/Images/Map/Markers/loggingNode.png"
-                        };
-                    }
+                    var template = this.MarkerTemplates.FirstOrDefault(m => m == newItem);
+                    if (template != null)
+                        template = new MapMarker() { Icon = newItem.Icon };
                 }
             }
         }

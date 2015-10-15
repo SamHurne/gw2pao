@@ -913,6 +913,30 @@
     <Resource Include="Images\Map\Markers\harvestingNode.png" />
     <Resource Include="Images\Map\Markers\loggingNode.png" />
     <Resource Include="Images\Map\Markers\miningNode.png" />
+    <Resource Include="Images\Map\Markers\activity.png" />
+    <Resource Include="Images\Map\Markers\adventure.png" />
+    <Resource Include="Images\Map\Markers\anvil.png" />
+    <Resource Include="Images\Map\Markers\blueSiege.png" />
+    <Resource Include="Images\Map\Markers\blueStar.png" />
+    <Resource Include="Images\Map\Markers\book.png" />
+    <Resource Include="Images\Map\Markers\downedAlly.png" />
+    <Resource Include="Images\Map\Markers\downedEnemy.png" />
+    <Resource Include="Images\Map\Markers\dragon.png" />
+    <Resource Include="Images\Map\Markers\greenFlag.png" />
+    <Resource Include="Images\Map\Markers\greenStar.png" />
+    <Resource Include="Images\Map\Markers\orangeShield.png" />
+    <Resource Include="Images\Map\Markers\orangeStar.png" />
+    <Resource Include="Images\Map\Markers\parchment.png" />
+    <Resource Include="Images\Map\Markers\pointA.png" />
+    <Resource Include="Images\Map\Markers\pointB.png" />
+    <Resource Include="Images\Map\Markers\pointC.png" />
+    <Resource Include="Images\Map\Markers\quaggan.png" />
+    <Resource Include="Images\Map\Markers\redShield.png" />
+    <Resource Include="Images\Map\Markers\redSiege.png" />
+    <Resource Include="Images\Map\Markers\swords.png" />
+    <Resource Include="Images\Map\Markers\trophy.png" />
+    <Resource Include="Images\Map\Markers\yellowStar.png" />
+    <Resource Include="Images\Map\Markers\yellowStar2.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
