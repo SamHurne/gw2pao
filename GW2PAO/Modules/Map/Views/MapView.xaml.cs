@@ -7,6 +7,9 @@ using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GW2PAO.PresentationCore.DragDrop;
+using GW2PAO.Modules.Map.Interfaces;
+using MapControl;
 
 namespace GW2PAO.Modules.Map.Views
 {
@@ -19,11 +22,6 @@ namespace GW2PAO.Modules.Map.Views
         /// Default logger
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        /// <summary>
-        /// Actual height of an event in the list
-        /// </summary>
-        private double eventHeight;
 
         /// <summary>
         /// Height before collapsing the control
@@ -53,8 +51,6 @@ namespace GW2PAO.Modules.Map.Views
         {
             logger.Debug("New MapView created");
             InitializeComponent();
-
-            this.eventHeight = new WorldEventView().Height;
 
             this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
             this.Loaded += EventTrackerView_Loaded;
@@ -175,6 +171,25 @@ namespace GW2PAO.Modules.Map.Views
         private void RestoreButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Normal;
+        }
+
+        private void Map_OnDrop(object sender, RoutedEventArgs e)
+        {
+            // Calculate and set the dropped item's location on the actual map
+            var dropArgs = e as OnDropEventArgs;
+            if (dropArgs != null)
+            {
+                var locationHolder = dropArgs.Data as IHasMapLocation;
+                if (locationHolder != null)
+                {
+                    var location = this.Map.ViewportPointToLocation(dropArgs.GetPosition(this.Map));
+                    locationHolder.Location = new Location(location.Latitude, Location.NormalizeLongitude(location.Longitude));
+                }
+
+                // TODO:
+                // Open pop-up or other controls to let a user enter a name/description
+                //  - Maybe make this just bound to a bool on the view model of the object, something like "IsEditingName"?
+            }
         }
     }
 }

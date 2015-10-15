@@ -263,13 +263,19 @@
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
     <Compile Include="Modules\Map\Converters\ContinentCoordToTileCoordConverter.cs" />
     <Compile Include="Modules\Map\Converters\ZoomToItemSizeConverter.cs" />
+    <Compile Include="Modules\Map\Interfaces\IHasMapLocation.cs" />
     <Compile Include="Modules\Map\Interfaces\IMapViewController.cs" />
     <Compile Include="Modules\Map\MapMenu.cs" />
     <Compile Include="Modules\Map\MapModule.cs" />
     <Compile Include="Modules\Map\MapUserData.cs" />
     <Compile Include="Modules\Map\MapViewController.cs" />
+    <Compile Include="Modules\Map\Models\MapMarker.cs" />
     <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\MarkersViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
+    <Compile Include="Modules\Map\Views\Controls\MapSettingControl.xaml.cs">
+      <DependentUpon>MapSettingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\ZoneCompletion\Models\ZoneItemsStore.cs" />
     <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
     <Compile Include="Modules\Map\Views\Controls\Map.cs" />
@@ -547,6 +553,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Map\Views\Controls\MapSettingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -900,6 +910,9 @@
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Resource Include="Images\Backgrounds\Tooltip1.png" />
+    <Resource Include="Images\Map\Markers\harvestingNode.png" />
+    <Resource Include="Images\Map\Markers\loggingNode.png" />
+    <Resource Include="Images\Map\Markers\miningNode.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -922,7 +935,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Tasks\" />
-    <Folder Include="Modules\Map\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />

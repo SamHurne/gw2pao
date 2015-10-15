@@ -97,6 +97,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// ViewModel object containing all data associated with map markers
+        /// </summary>
+        public MarkersViewModel MapMarkers
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// ViewModel object containing all data associated with zone items
         /// </summary>
         public ZoneItemsViewModel ZoneItems
@@ -119,6 +128,7 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.CharacterPointer = new CharacterPointerViewModel(zoneController, userData);
             this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
 
+            this.MapMarkers = new MarkersViewModel(userData);
             this.ZoneItems = new ZoneItemsViewModel(zoneItemsStore);
 
             if (playerService.HasValidMapId)
