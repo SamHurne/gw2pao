@@ -172,15 +172,6 @@
                     <Setter Property="Margin"
                             Value="-18,-18,0,0" />
                 </Trigger>
-                <Trigger Property=""
-                         Value="True">
-                    <Setter Property="Height"
-                            Value="36" />
-                    <Setter Property="Width"
-                            Value="36" />
-                    <Setter Property="Margin"
-                            Value="-18,-18,0,0" />
-                </Trigger>
             </Style.Triggers>
         </Style>
 
