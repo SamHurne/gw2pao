@@ -97,7 +97,14 @@
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground"
+                    Value="Black" />
+            <Setter Property="Height"
+                    Value="30" />
+            <Setter Property="Width"
+                    Value="30" />
+            <Setter Property="Margin"
+                    Value="-15,-15,0,0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
@@ -116,27 +123,6 @@
                                                             <Binding Path="IsUnlocked"/>
                                                         </MultiBinding>
                                                     </Image.Source>
-                                                    <Image.Style>
-                                                        <Style TargetType="Image">
-                                                            <Setter Property="Height"
-                                                                    Value="30" />
-                                                            <Setter Property="Width"
-                                                                    Value="30" />
-                                                            <Setter Property="Margin"
-                                                                    Value="-15,-15,0,0" />
-                                                            <Style.Triggers>
-                                                                <Trigger Property="IsMouseOver"
-                                                                         Value="True">
-                                                                    <Setter Property="Height"
-                                                                            Value="36" />
-                                                                    <Setter Property="Width"
-                                                                            Value="36" />
-                                                                    <Setter Property="Margin"
-                                                                            Value="-18,-18,0,0" />
-                                                                </Trigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Image.Style>
                                                 </Image>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -176,6 +162,26 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                            Value="True">
+                    <Setter Property="Height"
+                            Value="36" />
+                    <Setter Property="Width"
+                            Value="36" />
+                    <Setter Property="Margin"
+                            Value="-18,-18,0,0" />
+                </Trigger>
+                <Trigger Property=""
+                         Value="True">
+                    <Setter Property="Height"
+                            Value="36" />
+                    <Setter Property="Width"
+                            Value="36" />
+                    <Setter Property="Margin"
+                            Value="-18,-18,0,0" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <DataTemplate x:Key="MarkerDragTemplate">
