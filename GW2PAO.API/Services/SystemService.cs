@@ -45,9 +45,16 @@ namespace GW2PAO.API.Services
         /// </summary>
         public Process Gw2Process
         {
+
             get
             {
-                this.gw2Process = Process.GetProcessesByName("Gw2").FirstOrDefault();
+                string[] processNames = new string[2] { "Gw2", "Gw2-64" };
+                foreach (string processName in processNames)
+                {
+                    this.gw2Process = Process.GetProcessesByName(processName).FirstOrDefault();
+                    if (gw2Process != null)
+                        return this.gw2Process;
+                }
                 return this.gw2Process;
             }
         }
