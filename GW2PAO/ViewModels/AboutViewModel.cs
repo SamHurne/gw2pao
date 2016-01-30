@@ -96,11 +96,11 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Opens the GW2.NET page (https://gw2dotnet.codeplex.com/) using the default browser
+        /// Opens the GW2.NET page (https://github.com/Ruhrpottpatriot/GW2.NET) using the default browser
         /// </summary>
         private void OpenGW2NetPage()
         {
-            Process.Start("https://gw2dotnet.codeplex.com/");
+            Process.Start("https://github.com/Ruhrpottpatriot/GW2.NET");
         }
     }
 }
