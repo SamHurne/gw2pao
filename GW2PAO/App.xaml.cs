@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Awesomium.Core;
 using GW2PAO.Infrastructure;
 using GW2PAO.Utility;
 using Hardcodet.Wpf.TaskbarNotification;
