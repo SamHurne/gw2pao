@@ -4,6 +4,8 @@ A stand-alone .NET/WPF informational overlay utility package for Guild Wars 2.
 
 GitHub Pages Site: http://samhurne.github.io/gw2pao/
 
+### **NOTICE:** Development is now on HOLD. I have moved on from this project for now, although I may return to it in the future.
+
 # Features
 ### Events Tracker
 The Events Tracker utility tracks active and inactive world events and helps users keep track of which events have been completed for the day.
