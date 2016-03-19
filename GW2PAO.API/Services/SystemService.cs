@@ -47,7 +47,7 @@ namespace GW2PAO.API.Services
         {
             get
             {
-                this.gw2Process = Process.GetProcessesByName("Gw2").FirstOrDefault();
+                this.gw2Process = Process.GetProcessesByName("Gw2").FirstOrDefault() ?? Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                 return this.gw2Process;
             }
         }
