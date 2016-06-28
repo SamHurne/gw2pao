@@ -1,0 +1,15 @@
+.faq-section {
+   min-height: 100%;
+   padding: 70px 20px;
+}
+
+.faq-section .feature {
+   text-align: left;
+   margin-top: 30px;
+}
+
+@media(min-width:767px) {
+   .faq-section {
+      padding: 100px 0;
+   }
+}

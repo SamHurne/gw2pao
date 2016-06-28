@@ -1,0 +1,92 @@
+.navbar-custom {
+   margin-bottom: 0;
+   border-bottom: 1px solid rgba(255, 255, 255, .3);
+   text-transform: uppercase;
+   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+   background-color: #000;
+   -webkit-transition: margin .2s ease-in-out;
+   -moz-transition: margin .2s ease-in-out;
+   transition: margin .2s ease-in-out;
+}
+
+.navbar-custom .navbar-brand {
+   font-size: 14px;
+   font-weight: 700;
+}
+
+.navbar-custom .navbar-brand:focus {
+   outline: 0;
+}
+
+.navbar-custom .navbar-brand .navbar-toggle {
+   padding: 4px 6px;
+   font-size: 16px;
+   color: #fff;
+}
+
+.navbar-custom .navbar-brand .navbar-toggle:focus,
+.navbar-custom .navbar-brand .navbar-toggle:active {
+   outline: 0;
+}
+
+.navbar-custom a {
+   color: #fff;
+}
+
+.navbar-custom .nav li.active {
+   outline: none;
+   background-color: #3b321c;
+}
+
+.navbar-custom .nav li a {
+   -webkit-transition: background .2s ease-in-out;
+   -moz-transition: background .2s ease-in-out;
+   transition: background .2s ease-in-out;
+}
+
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li a.active,
+.navbar-custom .nav li a:active {
+   outline: none;
+   background-color: #60512a;
+}
+
+.navbar-custom .nav li a:focus {
+   outline: none;
+   background-color: inherit;
+}
+
+@media(min-width:1000px) {
+   .navbar {
+      padding: 10px 0;
+      border-bottom: 0;
+      letter-spacing: 1px;
+      background: 0 0;
+      -webkit-transition: background .2s ease-in-out, padding .5s ease-in-out;
+      -moz-transition: background .2s ease-in-out, padding .5s ease-in-out;
+      transition: background .2s ease-in-out, padding .5s ease-in-out;
+   }
+   .navbar-custom .navbar-brand {
+      font-size: 20px;
+   }
+   .top-nav-collapse {
+      padding: 0;
+      background-color: #000;
+   }
+   .navbar-custom.top-nav-collapse {
+      border-bottom: 1px solid rgba(255, 255, 255, .3);
+   }
+}
+
+@media(max-width:400px) {
+   .navbar-custom .navbar-brand {
+      font-size: 12px;
+      padding-top: 18px;
+   }
+   .top-nav-collapse {
+      padding: 0;
+      margin: 0;
+      height: 0;
+      margin-top: -50px;
+   }
+}
