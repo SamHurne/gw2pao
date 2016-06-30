@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>8c5e5c42-2cfd-41e5-8a64-6f1d5b77085e</ID>
+    <Name>Diving Goggles</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>false</IsDailyReset>
+    <Location>
+      <X>1072.6923828125</X>
+      <Y>-486.90158081054688</Y>
+      <Z>87.921295166015625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>23</MapID>
+    <IconUri>https://render.guildwars2.com/file/230FBA9ED0EAC4AE747302CF57E06EAA70097F01/220575.png</IconUri>
+    <WaypointCode>[&amp;BBIAAAA=]</WaypointCode>
+  </PlayerTask>  
+</ArrayOfPlayerTask>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>f2a55bfa-4dc1-4098-a4d3-d4d3b4633b69</ID>
+    <Name>Cypress Saplings</Name>
+    <Description>Great for Foxfire Clusters</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-333.8377685546875</X>
+      <Y>-633.14886474609375</Y>
+      <Z>23.768650054931641</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>51</MapID>
+    <IconUri>https://render.guildwars2.com/file/205871B734054D0206986FB44D6DC5425E572B0B/220465.png</IconUri>
+    <WaypointCode>[&amp;BPgCAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>82db2e77-9ed1-4b68-bde5-df70449a3da4</ID>
+    <Name>Cypress Saplings</Name>
+    <Description>Great for Foxfire Clusters</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>848.96588134765625</X>
+      <Y>-452.61453247070312</Y>
+      <Z>64.07525634765625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>65</MapID>
+    <IconUri>https://render.guildwars2.com/file/205871B734054D0206986FB44D6DC5425E572B0B/220465.png</IconUri>
+    <WaypointCode>[&amp;BKYCAAA=]</WaypointCode>
+  </PlayerTask>
+</ArrayOfPlayerTask>
