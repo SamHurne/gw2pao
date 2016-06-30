@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>5d34b99d-16b4-4598-ae9a-36c22d59ab9d</ID>
+    <Name>Rich Copper Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-7.8397235870361328</X>
+      <Y>376.04730224609375</Y>
+      <Z>11.624161720275879</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>34</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BDwBAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>232fe3ba-c708-40d8-8465-27569a43ab61</ID>
+    <Name>Rich Copper Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-228.47882080078125</X>
+      <Y>1214.9268798828125</Y>
+      <Z>1.726594090461731</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>34</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BEEBAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>80f795dd-01b9-45a1-a66f-15c99255c49f</ID>
+    <Name>Rich Copper Vein</Name>
+    <Description>Use /threaten to enter</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>688.22674560546875</X>
+      <Y>-642.4158935546875</Y>
+      <Z>60.392845153808594</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>15</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BPcAAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>34015530-e886-402f-815b-6ce3151e53f2</ID>
+    <Name>Rich Copper Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>70.490386962890625</X>
+      <Y>-107.08773040771484</Y>
+      <Z>24.685115814208984</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>15</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BPMAAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ec298226-1e54-4e5d-b402-29641cc25d4c</ID>
+    <Name>Rich Copper Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>252.10671997070313</X>
+      <Y>-336.26077270507812</Y>
+      <Z>-15.610968589782715</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>19</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BIQBAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>1d58be0f-bb6f-42d6-86eb-c3e3153c96f8</ID>
+    <Name>Rich Copper Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-831.588623046875</X>
+      <Y>-472.07546997070312</Y>
+      <Z>58.933879852294922</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>19</MapID>
+    <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
+    <WaypointCode>[&amp;BPgGAAA=]</WaypointCode>
+  </PlayerTask>
+</ArrayOfPlayerTask>

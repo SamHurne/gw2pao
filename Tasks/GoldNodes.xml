@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>2261d2a0-1290-438e-a6d9-5fd241daef5b</ID>
+    <Name>Rich Gold Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>949.44110107421875</X>
+      <Y>591.4420166015625</Y>
+      <Z>185.92636108398438</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>17</MapID>
+    <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
+    <WaypointCode>[&amp;BLEAAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e76991e0-9764-4ace-b4d3-3ed4617ab021</ID>
+    <Name>Rich Gold Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>879.491455078125</X>
+      <Y>271.19534301757812</Y>
+      <Z>18.033731460571289</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>21</MapID>
+    <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
+    <WaypointCode>[&amp;BEwBAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>0976ec10-9170-4f43-96f6-c95b886d62ad</ID>
+    <Name>Rich Gold Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-330.17218017578125</X>
+      <Y>-345.965576171875</Y>
+      <Z>118.42558288574219</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>26</MapID>
+    <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
+    <WaypointCode>[&amp;BFsCAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>f736ffba-4f7a-418e-97d8-b427dd825bbe</ID>
+    <Name>Rich Gold Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-395.495849609375</X>
+      <Y>-1364.8829345703125</Y>
+      <Z>59.998851776123047</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>27</MapID>
+    <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
+    <WaypointCode>[&amp;BOYAAAA=]</WaypointCode>
+  </PlayerTask>
+</ArrayOfPlayerTask>

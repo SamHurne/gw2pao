@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>2f10e730-d375-4733-a285-eb3370a5b5cb</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-483.92010498046875</X>
+      <Y>311.31536865234375</Y>
+      <Z>60.211112976074219</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>22</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BB8CAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>d3cdc674-5d84-4a3a-9097-b85264048e7b</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>891.2489013671875</X>
+      <Y>4.19807767868042</Y>
+      <Z>44.303379058837891</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>22</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BBoCAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e2d57ad7-b69c-4317-a6c7-7eb8b49cafa9</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>-249.10858154296875</X>
+      <Y>1124.7137451171875</Y>
+      <Z>21.254007339477539</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>25</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BO4BAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e4edce83-549f-4b95-b1d6-0418eebb257f</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>563.51702880859375</X>
+      <Y>1164.6864013671875</Y>
+      <Z>0.77070337533950806</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>25</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BO8BAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e3e52fed-94eb-495a-9ffb-5080f033745c</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>27.733739852905273</X>
+      <Y>-405.96112060546875</Y>
+      <Z>74.897903442382812</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>73</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BK0BAAA=]</WaypointCode>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>af1cc22e-2980-4e03-92e2-91edc1beb712</ID>
+    <Name>Rich Platinum Vein</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsCompleted>false</IsCompleted>
+    <IsDailyReset>true</IsDailyReset>
+    <Location>
+      <X>476.9345703125</X>
+      <Y>228.13783264160156</Y>
+      <Z>71.096435546875</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>53</MapID>
+    <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
+    <WaypointCode>[&amp;BMwBAAA=]</WaypointCode>
+  </PlayerTask>
+</ArrayOfPlayerTask>
