@@ -119,24 +119,12 @@
       <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDbCache.WPF.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FontAwesome.WPF, Version=4.3.0.35981, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome.WPF.4.4.0.5\lib\FontAwesome.WPF.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ImageFileCache.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
-      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\ImageFileCache.WPF.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Intellibox">
       <HintPath>..\lib\Intellibox\Intellibox.dll</HintPath>
-    </Reference>
-    <Reference Include="MapControl.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
-      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\MapControl.WPF.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -267,27 +255,6 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
-    <Compile Include="Modules\Map\Converters\ContinentCoordToTileCoordConverter.cs" />
-    <Compile Include="Modules\Map\Converters\ZoomToItemSizeConverter.cs" />
-    <Compile Include="Modules\Map\Interfaces\IHasMapLocation.cs" />
-    <Compile Include="Modules\Map\Interfaces\IMapViewController.cs" />
-    <Compile Include="Modules\Map\MapMenu.cs" />
-    <Compile Include="Modules\Map\MapModule.cs" />
-    <Compile Include="Modules\Map\MapUserData.cs" />
-    <Compile Include="Modules\Map\MapViewController.cs" />
-    <Compile Include="Modules\Map\Models\MapMarker.cs" />
-    <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
-    <Compile Include="Modules\Map\ViewModels\MarkersViewModel.cs" />
-    <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
-    <Compile Include="Modules\Map\Views\Controls\MapSettingControl.xaml.cs">
-      <DependentUpon>MapSettingControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\ZoneCompletion\Models\ZoneItemsStore.cs" />
-    <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
-    <Compile Include="Modules\Map\Views\Controls\Map.cs" />
-    <Compile Include="Modules\Map\Views\MapView.xaml.cs">
-      <DependentUpon>MapView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksController.cs" />
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksViewController.cs" />
     <Compile Include="Modules\Tasks\Models\PlayerTask.cs" />
@@ -562,14 +529,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Map\Views\Controls\MapSettingControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Map\Views\MapView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Modules\Tasks\Views\AddNewTaskDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -615,10 +574,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\Images\Spinners.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Style\Images\CharacterPointer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -916,33 +871,6 @@
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Resource Include="Images\Backgrounds\Tooltip1.png" />
-    <Resource Include="Images\Map\Markers\harvestingNode.png" />
-    <Resource Include="Images\Map\Markers\loggingNode.png" />
-    <Resource Include="Images\Map\Markers\miningNode.png" />
-    <Resource Include="Images\Map\Markers\activity.png" />
-    <Resource Include="Images\Map\Markers\adventure.png" />
-    <Resource Include="Images\Map\Markers\anvil.png" />
-    <Resource Include="Images\Map\Markers\blueSiege.png" />
-    <Resource Include="Images\Map\Markers\blueStar.png" />
-    <Resource Include="Images\Map\Markers\book.png" />
-    <Resource Include="Images\Map\Markers\downedAlly.png" />
-    <Resource Include="Images\Map\Markers\downedEnemy.png" />
-    <Resource Include="Images\Map\Markers\dragon.png" />
-    <Resource Include="Images\Map\Markers\greenFlag.png" />
-    <Resource Include="Images\Map\Markers\greenStar.png" />
-    <Resource Include="Images\Map\Markers\orangeShield.png" />
-    <Resource Include="Images\Map\Markers\orangeStar.png" />
-    <Resource Include="Images\Map\Markers\parchment.png" />
-    <Resource Include="Images\Map\Markers\pointA.png" />
-    <Resource Include="Images\Map\Markers\pointB.png" />
-    <Resource Include="Images\Map\Markers\pointC.png" />
-    <Resource Include="Images\Map\Markers\quaggan.png" />
-    <Resource Include="Images\Map\Markers\redShield.png" />
-    <Resource Include="Images\Map\Markers\redSiege.png" />
-    <Resource Include="Images\Map\Markers\swords.png" />
-    <Resource Include="Images\Map\Markers\trophy.png" />
-    <Resource Include="Images\Map\Markers\yellowStar.png" />
-    <Resource Include="Images\Map\Markers\yellowStar2.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
