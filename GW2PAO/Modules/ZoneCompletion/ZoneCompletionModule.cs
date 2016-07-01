@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.Infrastructure;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
-using GW2PAO.Modules.ZoneCompletion.Models;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
@@ -70,11 +74,6 @@ namespace GW2PAO.Modules.ZoneCompletion
 
             this.zoneCompletionController = this.Container.GetExportedValue<IZoneCompletionController>();
             this.viewController = this.Container.GetExportedValue<IZoneCompletionViewController>();
-
-            // Initialize the zone items store on a background thread
-            var zoneItemsStore = this.Container.GetExportedValue<ZoneItemsStore>();
-            Task.Factory.StartNew(zoneItemsStore.InitializeStore);
-
 
             // Register for shutdown
             Commands.ApplicationShutdownCommand.RegisterCommand(new DelegateCommand(this.Shutdown));
