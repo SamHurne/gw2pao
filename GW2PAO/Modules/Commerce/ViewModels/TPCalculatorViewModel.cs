@@ -26,6 +26,11 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         private int quantity;
 
         /// <summary>
+        /// Backing-field for the Return on Investment (ROI) property
+        /// </summary>
+        private double roi;
+
+        /// <summary>
         /// User-entered Buy-Price
         /// </summary>
         public Price BuyPrice { get; private set; }
@@ -90,6 +95,15 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         public Price Profit { get; private set; }
 
         /// <summary>
+        /// Return on Investment Percentage
+        /// </summary>
+        public double ROI
+        {
+            get { return this.roi; }
+            set { SetProperty(ref this.roi, value); }
+        }
+
+        /// <summary>
         /// Command to reset all values
         /// </summary>
         public DelegateCommand ResetCommand { get { return new DelegateCommand(this.ResetValues); } }
@@ -123,6 +137,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.BuyPrice.Value = 0.0;
             this.SellPrice.Value = 0.0;
             this.Quantity = 1;
+            this.ROI = 0;
         }
 
         /// <summary>
@@ -137,6 +152,7 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             this.CalculateListingFee();
             this.CalculateSaleFee();
             this.CalculateProfit();
+            this.CalculateReturnOnInvestment();
         }
 
         /// <summary>
@@ -191,6 +207,16 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         {
             this.Profit.Value = this.Revenue.Value - (this.ListingFee.Value + this.SaleFee.Value) - this.Cost.Value;
             logger.Debug("Profit: {0}", this.Profit.Value);
+        }
+
+        /// <summary>
+        /// Calculates return on investment (profit / investment cost)
+        /// </summary>
+        private void CalculateReturnOnInvestment()
+        {
+            var totalCost = this.Cost.Value + this.ListingFee.Value + this.SaleFee.Value;
+            this.ROI = ((this.Revenue.Value - totalCost) / totalCost);
+            logger.Debug("ROI: {0}", this.ROI);
         }
     }
 }

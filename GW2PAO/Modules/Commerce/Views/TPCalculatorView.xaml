@@ -345,6 +345,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0"
@@ -378,6 +379,16 @@
                             <view:ReadonlyPriceView Grid.Row="3" Grid.Column="1"
                                                     Margin="3,0,0,0"
                                                     Price="{Binding SaleFee}" />
+
+                            <core:OutlinedTextBlock Grid.Row="4"
+                                                    Grid.Column="0"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,0,0,1"
+                                                    Text="{x:Static resx:Resources.ROI}" />
+                            <core:OutlinedTextBlock Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding ROI, StringFormat=P}" />
                         </Grid>
                     </ToolTip>
                 </StackPanel.ToolTip>
