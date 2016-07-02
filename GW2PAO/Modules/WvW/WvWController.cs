@@ -436,64 +436,62 @@ namespace GW2PAO.Modules.WvW
             {
                 // Refresh all team colors
                 var teamColors = this.wvwService.GetTeamColors();
-                if (teamColors.Count == this.Worlds.Count)
+                Threading.InvokeOnUI(() =>
+                {
+                    foreach (var team in this.Worlds)
+                    {
+                        if (teamColors.ContainsKey(team.WorldId))
+                            team.Color = teamColors[team.WorldId];
+                    }
+                });
+
+                // Refresh state of all objectives
+                var latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
+                while (latestObjectivesData.Count() != this.AllObjectives.Count
+                    && !this.isStopped)
+                {
+                    // We were unable to pull data for all objectives - this can happen if we are
+                    // in the middle of a reset. As such, loop until we actually get a full set
+                    logger.Warn("Unable to retrieve data for all objectives! Trying again...");
+                    latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
+                }
+
+                ConcurrentDictionary<Guid, API.Data.Entities.Guild> guildDict = new ConcurrentDictionary<Guid, API.Data.Entities.Guild>();
+                Parallel.ForEach(latestObjectivesData.Where(o => o.GuildOwner.HasValue), (objective) =>
+                {
+                    var guildInfo = this.guildService.GetGuild(objective.GuildOwner.Value);
+                    guildDict.TryAdd(guildInfo.ID, guildInfo);
+                });
+
+                if (latestObjectivesData.Count() >= this.AllObjectives.Count)
                 {
                     Threading.InvokeOnUI(() =>
                     {
-                        foreach (var team in this.Worlds)
+                        foreach (var objective in this.AllObjectives)
                         {
-                            team.Color = teamColors[team.WorldId];
-                        }
-                    });
+                            objective.RefreshForMatchReset(this.Worlds);
+                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
+                            objective.ModelData.MatchId = this.MatchID;
+                            objective.PrevWorldOwner = latestData.WorldOwner;
+                            objective.WorldOwner = latestData.WorldOwner;
+                            objective.FlipTime = DateTime.UtcNow;
+                            objective.DistanceFromPlayer = 0;
+                            objective.TimerValue = TimeSpan.Zero;
+                            objective.IsRIActive = false;
 
-                    // Refresh state of all objectives
-                    var latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
-                    while (latestObjectivesData.Count() != this.AllObjectives.Count
-                        && !this.isStopped)
-                    {
-                        // We were unable to pull data for all objectives - this can happen if we are
-                        // in the middle of a reset. As such, loop until we actually get a full set
-                        logger.Warn("Unable to retrieve data for all objectives! Trying again...");
-                        latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
-                    }
-
-                    ConcurrentDictionary<Guid, API.Data.Entities.Guild> guildDict = new ConcurrentDictionary<Guid, API.Data.Entities.Guild>();
-                    Parallel.ForEach(latestObjectivesData.Where(o => o.GuildOwner.HasValue), (objective) =>
-                    {
-                        var guildInfo = this.guildService.GetGuild(objective.GuildOwner.Value);
-                        guildDict.TryAdd(guildInfo.ID, guildInfo);
-                    });
-
-                    if (latestObjectivesData.Count() >= this.AllObjectives.Count)
-                    {
-                        Threading.InvokeOnUI(() =>
-                        {
-                            foreach (var objective in this.AllObjectives)
+                            if (latestData.GuildOwner.HasValue)
                             {
-                                objective.RefreshForMatchReset(this.Worlds);
-                                var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                                objective.ModelData.MatchId = this.MatchID;
-                                objective.PrevWorldOwner = latestData.WorldOwner;
-                                objective.WorldOwner = latestData.WorldOwner;
-                                objective.FlipTime = DateTime.UtcNow;
-                                objective.DistanceFromPlayer = 0;
-                                objective.TimerValue = TimeSpan.Zero;
-                                objective.IsRIActive = false;
-
-                                if (latestData.GuildOwner.HasValue)
+                                objective.GuildClaimer.ID = latestData.GuildOwner.Value;
+                                API.Data.Entities.Guild guildInfo;
+                                if (guildDict.TryGetValue(objective.GuildClaimer.ID.Value, out guildInfo)
+                                    && guildInfo != null)
                                 {
-                                    objective.GuildClaimer.ID = latestData.GuildOwner.Value;
-                                    API.Data.Entities.Guild guildInfo;
-                                    if (guildDict.TryGetValue(objective.GuildClaimer.ID.Value, out guildInfo)
-                                        && guildInfo != null)
-                                    {
-                                        objective.GuildClaimer.Name = guildInfo.Name;
-                                        objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
-                                    }
+                                    objective.GuildClaimer.Name = guildInfo.Name;
+                                    objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
                                 }
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             }
         }

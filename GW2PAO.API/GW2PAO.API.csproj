@@ -230,6 +230,7 @@
     <Compile Include="Data\Entities\DynamicEvent.cs" />
     <Compile Include="Data\Entities\Map.cs" />
     <Compile Include="Data\Entities\Rectangle.cs" />
+    <Compile Include="Data\Entities\WvWObjectiveId.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
     <Compile Include="Data\Enums\ItemFlags.cs" />
@@ -242,7 +243,7 @@
     <Compile Include="Data\Enums\Units.cs" />
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
-    <Compile Include="Data\Enums\WvWObjectiveID.cs" />
+    <Compile Include="Data\WvWObjectiveIDs.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
     <Compile Include="Data\Entities\Guild.cs" />
     <Compile Include="Data\Entities\Item.cs" />

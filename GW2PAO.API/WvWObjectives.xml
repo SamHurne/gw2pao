@@ -2,11 +2,8 @@
 <WvWObjectivesTable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Objectives>
     <Objective>
-      <ID>1</ID>
+      <ID ObjectiveId="1" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOsDAAA=]</ChatCode>
-      <Name>Overlook</Name>
-      <FullName>Overlook</FullName>
-      <Location>N</Location>
       <MapLocation>
         <X>4548</X>
         <Y>17078.4</Y>
@@ -14,14 +11,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>2</ID>
+      <ID ObjectiveId="2" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOIDAAA=]</ChatCode>
-      <Name>Valley</Name>
-      <FullName>Valley</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>25620</X>
         <Y>-20251.2</Y>
@@ -29,14 +22,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>3</ID>
+      <ID ObjectiveId="3" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPMDAAA=]</ChatCode>
-      <Name>Lowlands</Name>
-      <FullName>Lowlands</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-19802.4</X>
         <Y>-17690.4</Y>
@@ -44,14 +33,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>4</ID>
+      <ID ObjectiveId="4" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPUDAAA=]</ChatCode>
-      <Name>Golanta</Name>
-      <FullName>Golanta Clearing</FullName>
-      <Location>SSW</Location>
       <MapLocation>
         <X>-7497.6</X>
         <Y>-25468.8</Y>
@@ -59,14 +44,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>5</ID>
+      <ID ObjectiveId="5" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPADAAA=]</ChatCode>
-      <Name>Pangloss</Name>
-      <FullName>Pangloss Rise</FullName>
-      <Location>NNE</Location>
       <MapLocation>
         <X>18393.6</X>
         <Y>13939.2</Y>
@@ -74,14 +55,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>6</ID>
+      <ID ObjectiveId="6" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BO0DAAA=]</ChatCode>
-      <Name>Speldan</Name>
-      <FullName>Speldan Clearcut</FullName>
-      <Location>NNW</Location>
       <MapLocation>
         <X>-16848.72</X>
         <Y>19048.8</Y>
@@ -89,14 +66,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>7</ID>
+      <ID ObjectiveId="7" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOcDAAA=]</ChatCode>
-      <Name>Danelon</Name>
-      <FullName>Danelon Passage</FullName>
-      <Location>SSE</Location>
       <MapLocation>
         <X>13310.4</X>
         <Y>-28867.2</Y>
@@ -104,14 +77,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>8</ID>
+      <ID ObjectiveId="8" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOQDAAA=]</ChatCode>
-      <Name>Umberglade</Name>
-      <FullName>Umberglade Woods</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>25802.4</X>
         <Y>-2716.8</Y>
@@ -119,14 +88,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>9</ID>
+      <ID ObjectiveId="9" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BN4DAAA=]</ChatCode>
-      <Name>Stonemist</Name>
-      <FullName>Stonemist Castle</FullName>
-      <Location>C</Location>
       <MapLocation>
         <X>2690.4</X>
         <Y>-5174.4</Y>
@@ -134,14 +99,10 @@
       </MapLocation>
       <Type>Castle</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>35</Points>
     </Objective>
     <Objective>
-      <ID>10</ID>
+      <ID ObjectiveId="10" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPgDAAA=]</ChatCode>
-      <Name>Rogue's</Name>
-      <FullName>Rogue's Quarry</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-22010.16</X>
         <Y>-2349.6</Y>
@@ -149,14 +110,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>11</ID>
+      <ID ObjectiveId="11" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPcDAAA=]</ChatCode>
-      <Name>Aldon's</Name>
-      <FullName>Aldon's Ledge</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-26110.56</X>
         <Y>-12943.2</Y>
@@ -164,14 +121,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>12</ID>
+      <ID ObjectiveId="12" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPkDAAA=]</ChatCode>
-      <Name>Wildcreek</Name>
-      <FullName>Wildcreek Run</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-12559.92</X>
         <Y>-5227.2</Y>
@@ -179,14 +132,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>13</ID>
+      <ID ObjectiveId="13" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPYDAAA=]</ChatCode>
-      <Name>Jerrifer's</Name>
-      <FullName>Jerrifer's Slough</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>15682.08</X>
         <Y>-25161.6</Y>
@@ -194,14 +143,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>14</ID>
+      <ID ObjectiveId="14" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPQDAAA=]</ChatCode>
-      <Name>Klovan</Name>
-      <FullName>Klovan Gully</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-5013.6</X>
         <Y>-17596.8</Y>
@@ -209,14 +154,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>15</ID>
+      <ID ObjectiveId="15" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOUDAAA=]</ChatCode>
-      <Name>Langor</Name>
-      <FullName>Langor Gulch</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>21544.8</X>
         <Y>-27280.8</Y>
@@ -224,14 +165,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>16</ID>
+      <ID ObjectiveId="16" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOgDAAA=]</ChatCode>
-      <Name>Quentin</Name>
-      <FullName>Quentin Lake</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>10137.6</X>
         <Y>-21256.8</Y>
@@ -239,14 +176,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>17</ID>
+      <ID ObjectiveId="17" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BO8DAAA=]</ChatCode>
-      <Name>Mendon's</Name>
-      <FullName>Mendon's Gap</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-5599.2</X>
         <Y>22768.8</Y>
@@ -254,14 +187,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>18</ID>
+      <ID ObjectiveId="18" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOwDAAA=]</ChatCode>
-      <Name>Anzalias</Name>
-      <FullName>Anzalias Pass</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-6684</X>
         <Y>7200</Y>
@@ -269,14 +198,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>19</ID>
+      <ID ObjectiveId="19" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BPEDAAA=]</ChatCode>
-      <Name>Ogrewatch</Name>
-      <FullName>Ogrewatch Cut</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>12072</X>
         <Y>10622.4</Y>
@@ -284,14 +209,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>20</ID>
+      <ID ObjectiveId="20" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BO4DAAA=]</ChatCode>
-      <Name>Veloka</Name>
-      <FullName>Veloka Slope</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>13173.6</X>
         <Y>2058</Y>
@@ -299,14 +220,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>21</ID>
+      <ID ObjectiveId="21" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOMDAAA=]</ChatCode>
-      <Name>Durios</Name>
-      <FullName>Durios Gulch</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>17412</X>
         <Y>-5109.6</Y>
@@ -314,14 +231,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>22</ID>
+      <ID ObjectiveId="22" Map="EternalBattlegrounds" />
       <ChatCode>[&amp;BOYDAAA=]</ChatCode>
-      <Name>Bravost</Name>
-      <FullName>Bravost Escarpment</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>29232</X>
         <Y>-11200.8</Y>
@@ -329,14 +242,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>EternalBattlegrounds</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>23</ID>
+      <ID ObjectiveId="37" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCQFAAA=]</ChatCode>
-      <Name>Garrison</Name>
-      <FullName>Garrison</FullName>
-      <Location>C</Location>
       <MapLocation>
         <X>-441.6</X>
         <Y>9160.8</Y>
@@ -344,14 +253,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>24</ID>
+      <ID ObjectiveId="34" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCUFAAA=]</ChatCode>
-      <Name>Orchard</Name>
-      <FullName>Champion's Demense</FullName>
-      <Location>S</Location>
       <MapLocation>
         <X>-648</X>
         <Y>-32762.4</Y>
@@ -359,14 +264,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>25</ID>
+      <ID ObjectiveId="35" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCoFAAA=]</ChatCode>
-      <Name>Redbriar</Name>
-      <FullName>Redbriar</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-7545.6</X>
         <Y>-17548.8</Y>
@@ -374,14 +275,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>26</ID>
+      <ID ObjectiveId="36" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCYFAAA=]</ChatCode>
-      <Name>Greenlake</Name>
-      <FullName>Greenlake</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>11155.2</X>
         <Y>-16648.8</Y>
@@ -389,14 +286,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>27</ID>
+      <ID ObjectiveId="33" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCgFAAA=]</ChatCode>
-      <Name>Bay</Name>
-      <FullName>Ascension Bay</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-22857.6</X>
         <Y>-6789.6</Y>
@@ -404,14 +297,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>28</ID>
+      <ID ObjectiveId="38" Map="BlueBorderlands" />
       <ChatCode>[&amp;BC0FAAA=]</ChatCode>
-      <Name>Dawn's</Name>
-      <FullName>Dawn's Eyrie</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>12969.6</X>
         <Y>12840</Y>
@@ -419,14 +308,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>29</ID>
+      <ID ObjectiveId="39" Map="BlueBorderlands" />
       <ChatCode>[&amp;BB8FAAA=]</ChatCode>
-      <Name>Spiritholme</Name>
-      <FullName>The Spiritholme</FullName>
-      <Location>N</Location>
       <MapLocation>
         <X>232.8</X>
         <Y>34180.8</Y>
@@ -434,14 +319,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>30</ID>
+      <ID ObjectiveId="40" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCwFAAA=]</ChatCode>
-      <Name>Woodhaven</Name>
-      <FullName>Woodhaven</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-14152.8</X>
         <Y>14712</Y>
@@ -449,14 +330,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>BlueBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>31</ID>
+      <ID ObjectiveId="32" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCAFAAA=]</ChatCode>
-      <Name>Hills</Name>
-      <FullName>Askalion Hills</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>22420.8</X>
         <Y>-5016</Y>
@@ -464,14 +341,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>BlueBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>32</ID>
+      <ID ObjectiveId="32" Map="RedBorderlands" />
       <ChatCode>[&amp;BA8FAAA=]</ChatCode>
-      <Name>Hills</Name>
-      <FullName>Etheron Hills</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>22420.8</X>
         <Y>-5016</Y>
@@ -479,14 +352,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>33</ID>
+      <ID ObjectiveId="33" Map="RedBorderlands" />
       <ChatCode>[&amp;BBMFAAA=]</ChatCode>
-      <Name>Bay</Name>
-      <FullName>Dreaming Bay</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-22857.36</X>
         <Y>-6789.6</Y>
@@ -494,14 +363,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>34</ID>
+      <ID ObjectiveId="34" Map="RedBorderlands" />
       <ChatCode>[&amp;BBgFAAA=]</ChatCode>
-      <Name>Orchard</Name>
-      <FullName>Victors's Lodge</FullName>
-      <Location>S</Location>
       <MapLocation>
         <X>-648</X>
         <Y>-32762.4</Y>
@@ -509,14 +374,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>35</ID>
+      <ID ObjectiveId="35" Map="RedBorderlands" />
       <ChatCode>[&amp;BB4FAAA=]</ChatCode>
-      <Name>Greenbriar</Name>
-      <FullName>Greenbriar</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-7545.6</X>
         <Y>-17548.8</Y>
@@ -524,14 +385,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>36</ID>
+      <ID ObjectiveId="36" Map="RedBorderlands" />
       <ChatCode>[&amp;BBkFAAA=]</ChatCode>
-      <Name>Bluelake</Name>
-      <FullName>Bluelake</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>11155.2</X>
         <Y>-16648.8</Y>
@@ -539,14 +396,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>37</ID>
+      <ID ObjectiveId="37" Map="RedBorderlands" />
       <ChatCode>[&amp;BBYFAAA=]</ChatCode>
-      <Name>Garrison</Name>
-      <FullName>Garrison</FullName>
-      <Location>C</Location>
       <MapLocation>
         <X>-441.6</X>
         <Y>9160.8</Y>
@@ -554,14 +407,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>RedBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>38</ID>
+      <ID ObjectiveId="38" Map="RedBorderlands" />
       <ChatCode>[&amp;BBoFAAA=]</ChatCode>
-      <Name>Longview</Name>
-      <FullName>Longview</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-14153.28</X>
         <Y>14712</Y>
@@ -569,14 +418,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>39</ID>
+      <ID ObjectiveId="39" Map="RedBorderlands" />
       <ChatCode>[&amp;BBIFAAA=]</ChatCode>
-      <Name>Godsword</Name>
-      <FullName>The Godsword</FullName>
-      <Location>N</Location>
       <MapLocation>
         <X>232.8</X>
         <Y>34180.08</Y>
@@ -584,14 +429,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>40</ID>
+      <ID ObjectiveId="40" Map="RedBorderlands" />
       <ChatCode>[&amp;BBsFAAA=]</ChatCode>
-      <Name>Cliffside</Name>
-      <FullName>Cliffside</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>12969.6</X>
         <Y>12840</Y>
@@ -599,14 +440,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>RedBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>41</ID>
+      <ID ObjectiveId="32" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDAFAAA=]</ChatCode>
-      <Name>Hills</Name>
-      <FullName>Shadaran Hills</FullName>
-      <Location>E</Location>
       <MapLocation>
         <X>22421.04</X>
         <Y>-5016</Y>
@@ -614,14 +451,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>42</ID>
+      <ID ObjectiveId="36" Map="GreenBorderlands" />
       <ChatCode>[&amp;BD4FAAA=]</ChatCode>
-      <Name>Redlake</Name>
-      <FullName>Redlake</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>11154.72</X>
         <Y>-16648.8</Y>
@@ -629,14 +462,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>43</ID>
+      <ID ObjectiveId="34" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDkFAAA=]</ChatCode>
-      <Name>Orchard</Name>
-      <FullName>Hero's Lodge</FullName>
-      <Location>S</Location>
       <MapLocation>
         <X>-648</X>
         <Y>-32762.4</Y>
@@ -644,14 +473,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>44</ID>
+      <ID ObjectiveId="33" Map="GreenBorderlands" />
       <ChatCode>[&amp;BC8FAAA=]</ChatCode>
-      <Name>Bay</Name>
-      <FullName>Dreadfall Bay</FullName>
-      <Location>W</Location>
       <MapLocation>
         <X>-22857.36</X>
         <Y>-6789.6</Y>
@@ -659,14 +484,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>45</ID>
+      <ID ObjectiveId="35" Map="GreenBorderlands" />
       <ChatCode>[&amp;BD0FAAA=]</ChatCode>
-      <Name>Bluebriar</Name>
-      <FullName>Bluebriar</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-7544.64</X>
         <Y>-17548.8</Y>
@@ -674,14 +495,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>46</ID>
+      <ID ObjectiveId="37" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDIFAAA=]</ChatCode>
-      <Name>Garrison</Name>
-      <FullName>Garrison</FullName>
-      <Location>C</Location>
       <MapLocation>
         <X>-441.6</X>
         <Y>9160.8</Y>
@@ -689,14 +506,10 @@
       </MapLocation>
       <Type>Keep</Type>
       <Map>GreenBorderlands</Map>
-      <Points>25</Points>
     </Objective>
     <Objective>
-      <ID>47</ID>
+      <ID ObjectiveId="38" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDYFAAA=]</ChatCode>
-      <Name>Sunnyhill</Name>
-      <FullName>Sunnyhill</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-14153.52</X>
         <Y>14712</Y>
@@ -704,14 +517,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>48</ID>
+      <ID ObjectiveId="39" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDwFAAA=]</ChatCode>
-      <Name>Faithleap</Name>
-      <FullName>Faithleap</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-21083.28</X>
         <Y>11462.4</Y>
@@ -719,14 +528,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>49</ID>
+      <ID ObjectiveId="53" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDgFAAA=]</ChatCode>
-      <Name>Bluevale</Name>
-      <FullName>Bluevale Refuge</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-19053.12</X>
         <Y>-18657.6</Y>
@@ -734,14 +539,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>50</ID>
+      <ID ObjectiveId="50" Map="RedBorderlands" />
       <ChatCode>[&amp;BBcFAAA=]</ChatCode>
-      <Name>Bluewater</Name>
-      <FullName>Bluewater Lowlands</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>22442.4</X>
         <Y>-19444.8</Y>
@@ -749,14 +550,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>51</ID>
+      <ID ObjectiveId="51" Map="RedBorderlands" />
       <ChatCode>[&amp;BBQFAAA=]</ChatCode>
-      <Name>Astralholme</Name>
-      <FullName>Astralholme</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>23253.6</X>
         <Y>12273.6</Y>
@@ -764,14 +561,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>52</ID>
+      <ID ObjectiveId="52" Map="RedBorderlands" />
       <ChatCode>[&amp;BB0FAAA=]</ChatCode>
-      <Name>Arah's</Name>
-      <FullName>Arah's Hope</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-21083.28</X>
         <Y>11462.4</Y>
@@ -779,14 +572,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>53</ID>
+      <ID ObjectiveId="53" Map="RedBorderlands" />
       <ChatCode>[&amp;BBwFAAA=]</ChatCode>
-      <Name>Greenvale</Name>
-      <FullName>Greenvale Refuge</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-19053.12</X>
         <Y>-18657.6</Y>
@@ -794,14 +583,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>RedBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>54</ID>
+      <ID ObjectiveId="51" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDMFAAA=]</ChatCode>
-      <Name>Foghaven</Name>
-      <FullName>Foghaven</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>23253.36</X>
         <Y>12273.6</Y>
@@ -809,14 +594,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>55</ID>
+      <ID ObjectiveId="50" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDoFAAA=]</ChatCode>
-      <Name>Redwater</Name>
-      <FullName>Redwater Lowlands</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>22442.16</X>
         <Y>-19444.8</Y>
@@ -824,14 +605,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>56</ID>
+      <ID ObjectiveId="52" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDEFAAA=]</ChatCode>
-      <Name>Titanpaw</Name>
-      <FullName>The Titanpaw</FullName>
-      <Location>N</Location>
       <MapLocation>
         <X>232.8</X>
         <Y>34180.8</Y>
@@ -839,14 +616,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>GreenBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>57</ID>
+      <ID ObjectiveId="40" Map="GreenBorderlands" />
       <ChatCode>[&amp;BDcFAAA=]</ChatCode>
-      <Name>Cragtop</Name>
-      <FullName>Cragtop</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>12969.6</X>
         <Y>12840</Y>
@@ -854,14 +627,10 @@
       </MapLocation>
       <Type>Tower</Type>
       <Map>GreenBorderlands</Map>
-      <Points>10</Points>
     </Objective>
     <Objective>
-      <ID>58</ID>
+      <ID ObjectiveId="51" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCkFAAA=]</ChatCode>
-      <Name>Godslore</Name>
-      <FullName>Godslore</FullName>
-      <Location>NW</Location>
       <MapLocation>
         <X>-21084</X>
         <Y>11462.4</Y>
@@ -869,14 +638,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>59</ID>
+      <ID ObjectiveId="53" Map="BlueBorderlands" />
       <ChatCode>[&amp;BC4FAAA=]</ChatCode>
-      <Name>Redvale</Name>
-      <FullName>Redvale Refuge</FullName>
-      <Location>SW</Location>
       <MapLocation>
         <X>-19053.6</X>
         <Y>-18657.6</Y>
@@ -884,14 +649,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>60</ID>
+      <ID ObjectiveId="52" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCEFAAA=]</ChatCode>
-      <Name>Stargrove</Name>
-      <FullName>Stargrove</FullName>
-      <Location>NE</Location>
       <MapLocation>
         <X>23253.6</X>
         <Y>12273.6</Y>
@@ -899,14 +660,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>61</ID>
+      <ID ObjectiveId="50" Map="BlueBorderlands" />
       <ChatCode>[&amp;BCYFAAA=]</ChatCode>
-      <Name>Greenwater</Name>
-      <FullName>Greenwater Lowlands</FullName>
-      <Location>SE</Location>
       <MapLocation>
         <X>22442.4</X>
         <Y>-19444.8</Y>
@@ -914,14 +671,10 @@
       </MapLocation>
       <Type>Camp</Type>
       <Map>BlueBorderlands</Map>
-      <Points>5</Points>
     </Objective>
     <Objective>
-      <ID>62</ID>
+      <ID ObjectiveId="62" Map="RedBorderlands" />
       <ChatCode />
-      <Name>Temple</Name>
-      <FullName>Temple of Lost Prayers</FullName>
-      <Location />
       <MapLocation>
         <X>-279.59</X>
         <Y>-16015.255</Y>
@@ -929,14 +682,10 @@
       </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>RedBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>63</ID>
+      <ID ObjectiveId="63" Map="RedBorderlands" />
       <ChatCode />
-      <Name>Hollow</Name>
-      <FullName>Battle's Hollow</FullName>
-      <Location />
       <MapLocation>
         <X>-7939.68</X>
         <Y>-9885.6</Y>
@@ -944,14 +693,10 @@
       </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>RedBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>64</ID>
+      <ID ObjectiveId="64" Map="RedBorderlands" />
       <ChatCode />
-      <Name>Estate</Name>
-      <FullName>Bauer's Estate</FullName>
-      <Location />
       <MapLocation>
         <X>-5251.525</X>
         <Y>-783.006</Y>
@@ -959,14 +704,10 @@
       </MapLocation>
       <Type>BauersEstate</Type>
       <Map>RedBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>65</ID>
+      <ID ObjectiveId="65" Map="RedBorderlands" />
       <ChatCode />
-      <Name>Orchard</Name>
-      <FullName>Orchard Overlook</FullName>
-      <Location />
       <MapLocation>
         <X>5983.413</X>
         <Y>-2110.027</Y>
@@ -974,14 +715,10 @@
       </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>RedBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>66</ID>
+      <ID ObjectiveId="66" Map="RedBorderlands" />
       <ChatCode />
-      <Name>Carver's</Name>
-      <FullName>Carver's Ascent</FullName>
-      <Location />
       <MapLocation>
         <X>6802.815</X>
         <Y>-10643.904</Y>
@@ -989,14 +726,10 @@
       </MapLocation>
       <Type>CarversAscent</Type>
       <Map>RedBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>67</ID>
+      <ID ObjectiveId="66" Map="BlueBorderlands" />
       <ChatCode />
-      <Name>Carver's</Name>
-      <FullName>Carver's Ascent</FullName>
-      <Location />
       <MapLocation>
         <X>6802.815</X>
         <Y>-10643.904</Y>
@@ -1004,14 +737,10 @@
       </MapLocation>
       <Type>CarversAscent</Type>
       <Map>BlueBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>68</ID>
+      <ID ObjectiveId="65" Map="BlueBorderlands" />
       <ChatCode />
-      <Name>Orchard</Name>
-      <FullName>Orchard Overlook</FullName>
-      <Location />
       <MapLocation>
         <X>5983.413</X>
         <Y>-2110.027</Y>
@@ -1019,14 +748,10 @@
       </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>BlueBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>69</ID>
+      <ID ObjectiveId="64" Map="BlueBorderlands" />
       <ChatCode />
-      <Name>Estate</Name>
-      <FullName>Bauer's Estate</FullName>
-      <Location />
       <MapLocation>
         <X>-5251.525</X>
         <Y>-783.006</Y>
@@ -1034,14 +759,10 @@
       </MapLocation>
       <Type>BauersEstate</Type>
       <Map>BlueBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>70</ID>
+      <ID ObjectiveId="63" Map="BlueBorderlands" />
       <ChatCode />
-      <Name>Hollow</Name>
-      <FullName>Battle's Hollow</FullName>
-      <Location />
       <MapLocation>
         <X>-7939.68</X>
         <Y>-9885.6</Y>
@@ -1049,14 +770,10 @@
       </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>BlueBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>71</ID>
+      <ID ObjectiveId="62" Map="BlueBorderlands" />
       <ChatCode />
-      <Name>Temple</Name>
-      <FullName>Temple of Lost Prayers</FullName>
-      <Location />
       <MapLocation>
         <X>-279.59</X>
         <Y>-16015.255</Y>
@@ -1064,14 +781,10 @@
       </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>BlueBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>72</ID>
+      <ID ObjectiveId="66" Map="GreenBorderlands" />
       <ChatCode />
-      <Name>Carver's</Name>
-      <FullName>Carver's Ascent</FullName>
-      <Location />
       <MapLocation>
         <X>6802.815</X>
         <Y>-10643.904</Y>
@@ -1079,14 +792,10 @@
       </MapLocation>
       <Type>CarversAscent</Type>
       <Map>GreenBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>73</ID>
+      <ID ObjectiveId="65" Map="GreenBorderlands" />
       <ChatCode />
-      <Name>Orchard</Name>
-      <FullName>Orchard Overlook</FullName>
-      <Location />
       <MapLocation>
         <X>5983.413</X>
         <Y>-2110.027</Y>
@@ -1094,14 +803,10 @@
       </MapLocation>
       <Type>OrchardOverlook</Type>
       <Map>GreenBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>74</ID>
+      <ID ObjectiveId="64" Map="GreenBorderlands" />
       <ChatCode />
-      <Name>Estate</Name>
-      <FullName>Bauer's Estate</FullName>
-      <Location />
       <MapLocation>
         <X>-5251.525</X>
         <Y>-783.006</Y>
@@ -1109,14 +814,10 @@
       </MapLocation>
       <Type>BauersEstate</Type>
       <Map>GreenBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>75</ID>
+      <ID ObjectiveId="63" Map="GreenBorderlands" />
       <ChatCode />
-      <Name>Hollow</Name>
-      <FullName>Battle's Hollow</FullName>
-      <Location />
       <MapLocation>
         <X>-7939.68</X>
         <Y>-9885.6</Y>
@@ -1124,14 +825,10 @@
       </MapLocation>
       <Type>BattlesHollow</Type>
       <Map>GreenBorderlands</Map>
-      <Points>0</Points>
     </Objective>
     <Objective>
-      <ID>76</ID>
+      <ID ObjectiveId="62" Map="GreenBorderlands" />
       <ChatCode />
-      <Name>Temple</Name>
-      <FullName>Temple of Lost Prayers</FullName>
-      <Location />
       <MapLocation>
         <X>-279.59</X>
         <Y>-16015.255</Y>
@@ -1139,7 +836,6 @@
       </MapLocation>
       <Type>TempleofLostPrayers</Type>
       <Map>GreenBorderlands</Map>
-      <Points>0</Points>
     </Objective>
   </Objectives>
 </WvWObjectivesTable>

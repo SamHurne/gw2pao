@@ -67,7 +67,7 @@ namespace GW2PAO.Modules.WvW
         private Units distanceUnits;
         private bool autoOpenCloseTracker;
         private uint notificationDuration;
-        private ObservableCollection<int> hiddenObjectives = new ObservableCollection<int>();
+        private ObservableCollection<WvWObjectiveId> hiddenObjectives = new ObservableCollection<WvWObjectiveId>();
 
         /// <summary>
         /// The user's world selection for WvW
@@ -351,7 +351,7 @@ namespace GW2PAO.Modules.WvW
         /// <summary>
         /// Collection of user-configured Hidden Objectives
         /// </summary>
-        public ObservableCollection<int> HiddenObjectives { get { return this.hiddenObjectives; } }
+        public ObservableCollection<WvWObjectiveId> HiddenObjectives { get { return this.hiddenObjectives; } }
 
         /// <summary>
         /// Default constructor

@@ -29,7 +29,7 @@ namespace GW2PAO.API.Services
         /// <summary>
         /// String provider that provides objective names
         /// </summary>
-        private IStringProvider<int, WvWObjectiveNameEnum> objectiveNamesProvider;
+        private IStringProvider<WvWObjectiveId, WvWObjectiveNameEnum> objectiveNamesProvider;
 
         /// <summary>
         /// Internal cache of the current WvW matchup
@@ -68,7 +68,7 @@ namespace GW2PAO.API.Services
         /// Alternate constructor
         /// </summary>
         /// <param name="objectiveNamesProvider">The StringProvider that supplies localized objective names. If null, a default implementation is used</param>
-        public WvWService(IStringProvider<int, WvWObjectiveNameEnum> objectiveNamesProvider)
+        public WvWService(IStringProvider<WvWObjectiveId, WvWObjectiveNameEnum> objectiveNamesProvider)
         {
             this.objectiveNamesProvider = objectiveNamesProvider;
         }
@@ -226,6 +226,9 @@ namespace GW2PAO.API.Services
         /// <returns>The current WvW for the given world</returns>
         public int GetWorldScore(string matchId, int worldId)
         {
+            if (string.IsNullOrEmpty(matchId))
+                return -1;
+
             try
             {
                 var details = this.matchService.Find(new Matchup { MatchId = matchId });
@@ -294,7 +297,7 @@ namespace GW2PAO.API.Services
                         {
                             var objData = new WvWObjective();
 
-                            objData.ID = objective.ObjectiveId;
+                            objData.ID = new WvWObjectiveId(objective.ObjectiveId, map);
                             objData.MatchId = matchId;
                             objData.Map = map;
                             objData.GuildOwner = objective.OwnerGuildId;
@@ -375,7 +378,18 @@ namespace GW2PAO.API.Services
                         {
                             var objData = new WvWObjective();
 
-                            objData.ID = objective.ObjectiveId;
+                            if (mapDetails is BlueBorderlands)
+                                objData.Map = WvWMap.BlueBorderlands;
+                            else if (mapDetails is GreenBorderlands)
+                                objData.Map = WvWMap.GreenBorderlands;
+                            else if (mapDetails is RedBorderlands)
+                                objData.Map = WvWMap.RedBorderlands;
+                            else if (mapDetails is EternalBattlegrounds)
+                                objData.Map = WvWMap.EternalBattlegrounds;
+                            else
+                                objData.Map = WvWMap.Unknown;
+
+                            objData.ID = new WvWObjectiveId(objective.ObjectiveId, objData.Map);
                             objData.MatchId = matchId;
                             objData.GuildOwner = objective.OwnerGuildId;
 
@@ -393,31 +407,20 @@ namespace GW2PAO.API.Services
                             switch (objData.Type)
                             {
                                 case ObjectiveType.Castle:
-                                    objData.Points = 35;
+                                    objData.Points = 12;
                                     break;
                                 case ObjectiveType.Keep:
-                                    objData.Points = 25;
+                                    objData.Points = 8;
                                     break;
                                 case ObjectiveType.Tower:
-                                    objData.Points = 10;
+                                    objData.Points = 4;
                                     break;
                                 case ObjectiveType.Camp:
-                                    objData.Points = 5;
+                                    objData.Points = 2;
                                     break;
                                 default:
                                     break;
                             }
-
-                            if (mapDetails is BlueBorderlands)
-                                objData.Map = WvWMap.BlueBorderlands;
-                            else if (mapDetails is GreenBorderlands)
-                                objData.Map = WvWMap.GreenBorderlands;
-                            else if (mapDetails is RedBorderlands)
-                                objData.Map = WvWMap.RedBorderlands;
-                            else if (mapDetails is EternalBattlegrounds)
-                                objData.Map = WvWMap.EternalBattlegrounds;
-                            else
-                                objData.Map = WvWMap.Unknown;
 
                             switch (objective.Owner)
                             {
