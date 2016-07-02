@@ -80,7 +80,13 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         /// </summary>
         public string ItemName
         {
-            get { return this.Data.ItemName; }
+            get
+            {
+                if (this.Data == null)
+                    return string.Empty;
+                else
+                    return this.Data.ItemName;
+            }
         }
 
         /// <summary>
@@ -206,22 +212,26 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         /// <param name="newItemID">The ID to set this item as</param>
         public void SetItem(int newItemID)
         {
-            this.ItemData = this.commerceService.GetItem(newItemID);
-            this.Data.ItemID = this.ItemData.ID;
-            this.Data.ItemName = this.ItemData.Name;
-            if (this.ItemData.Prices != null)
+            var newItemData = this.commerceService.GetItem(newItemID);
+            if (newItemData != null)
             {
-                this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // +1 so we don't immediately do a notification
-                this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // +1 so we don't immediately do a notification
-                this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // -1 so we don't immediately do a notification
-                this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // -1 so we don't immediately do a notification
-                this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
-                this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
-            }
+                this.ItemData = newItemData;
+                this.Data.ItemID = this.ItemData.ID;
+                this.Data.ItemName = this.ItemData.Name;
+                if (this.ItemData.Prices != null)
+                {
+                    this.Data.BuyOrderUpperLimit.Value = this.ItemData.Prices.HighestBuyOrder + 1; // default to +1 so we don't immediately do a notification
+                    this.Data.BuyOrderLowerLimit.Value = this.ItemData.Prices.HighestBuyOrder - 1; // default to +1 so we don't immediately do a notification
+                    this.Data.SellListingUpperLimit.Value = this.ItemData.Prices.LowestSellListing + 1; // default to -1 so we don't immediately do a notification
+                    this.Data.SellListingLowerLimit.Value = this.ItemData.Prices.LowestSellListing - 1; // default to -1 so we don't immediately do a notification
+                    this.CurrentBuyOrder.Value = this.ItemData.Prices.HighestBuyOrder;
+                    this.CurrentSellListing.Value = this.ItemData.Prices.LowestSellListing;
+                }
 
-            // Raise property-changed events for each of the info display properties
-            this.OnPropertyChanged(() => this.ItemName);
-            this.OnPropertyChanged(() => this.IconUrl);
+                // Raise property-changed events for each of the info display properties
+                this.OnPropertyChanged(() => this.ItemName);
+                this.OnPropertyChanged(() => this.IconUrl);
+            }
         }
 
         /// <summary>

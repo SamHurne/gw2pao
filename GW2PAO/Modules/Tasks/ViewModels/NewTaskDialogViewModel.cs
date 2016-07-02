@@ -57,7 +57,13 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         public string MapName
         {
-            get { return this.zoneService.GetZoneName(this.Task.MapID); }
+            get
+            {
+                if (this.Task != null)
+                    return this.zoneService.GetZoneName(this.Task.MapID);
+                else
+                    return string.Empty;
+            }
         }
 
         /// <summary>
@@ -79,7 +85,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             {
                 if (this.SetProperty(ref this.selectedItem, value))
                 {
-                    this.Task.IconUri = this.commerceService.GetItem(this.selectedItem.ID).Icon.ToString();
+                    if (this.selectedItem == null)
+                        return;
+                    
+                    var itemData = this.commerceService.GetItem(this.selectedItem.ID);
+                    if (itemData == null)
+                        return;
+
+                    this.Task.IconUri = itemData.Icon.ToString();
                 }
             }
         }
