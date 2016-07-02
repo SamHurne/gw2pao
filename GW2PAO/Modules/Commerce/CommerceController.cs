@@ -317,11 +317,14 @@ namespace GW2PAO.Modules.Commerce
 
                 // Additionally, update the Ectoplasm Salvage Threshold tracker data
                 var ectoPrices = this.commerceService.GetItemPrices(EctoSalvageHelperViewModel.EctoplasmItemID);
-                Threading.BeginInvokeOnUI(() =>
+                if (ectoPrices != null)
                 {
-                    this.EcoSalvageData.EctoplasmBuyOrder.Value = ectoPrices.HighestBuyOrder;
-                    this.EcoSalvageData.EctoplasmSellListing.Value = ectoPrices.LowestSellListing;
-                });
+                    Threading.BeginInvokeOnUI(() =>
+                    {
+                        this.EcoSalvageData.EctoplasmBuyOrder.Value = ectoPrices.HighestBuyOrder;
+                        this.EcoSalvageData.EctoplasmSellListing.Value = ectoPrices.LowestSellListing;
+                    });
+                }
 
                 this.refreshTimer.Change(this.RefreshInterval, Timeout.Infinite);
             }
