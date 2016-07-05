@@ -4,7 +4,7 @@
 
     <Color x:Key="TreeViewExpandCollapseGlyphColor">PaleGoldenrod</Color>
 
-    <Color x:Key="TreeViewSelectedItemBackgroundColor">PaleGoldenrod</Color>
+    <Color x:Key="TreeViewSelectedItemBackgroundColor">#40EEE8AA</Color>
     <Color x:Key="TreeViewForegroundColor">White</Color>
 
     <Style x:Key="{x:Type TreeView}" TargetType="TreeView">
@@ -112,8 +112,6 @@
         </Setter>
         <Setter Property="FontFamily" Value="Trebuchet MS"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="TextBlock.LineHeight" Value="14" />
-        <Setter Property="TextBlock.LineStackingStrategy" Value="BlockLineHeight" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
         <Setter Property="Template">
             <Setter.Value>
