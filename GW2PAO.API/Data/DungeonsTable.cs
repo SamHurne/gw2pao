@@ -78,7 +78,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 33,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/ACS",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 EndPoint = new DetectionPoint(99.5, -62.5, 43.5, 75),
                                 EndCutsceneCount = 2
                             },
@@ -89,7 +89,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/AC1",
-                                GoldReward = 1.55,
+                                GoldReward = 0.76,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(99, -222, 15, 50), new DetectionPoint(-87, 98, 54, 50) },
                                 EndPoint = new DetectionPoint(-322.01, 195.11, 0.87, 75),
                                 EndCutsceneCount = 1
@@ -101,7 +101,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/AC2",
-                                GoldReward = 1.55,
+                                GoldReward = 0.76,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(315, -185, 0, 50) },
                                 EndPoint = new DetectionPoint(106, 148, 67, 75),
                                 EndCutsceneCount = 1
@@ -113,7 +113,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 36,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/AC3",
-                                GoldReward = 1.55,
+                                GoldReward = 0.76,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(328, -60, 19.4, 50) },
                                 EndPoint = new DetectionPoint(-317, 193, 0, 75),
                                 EndCutsceneCount = 1
@@ -136,7 +136,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 75,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/CMS",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 EndPoint = new DetectionPoint(252.10, 163.32, 37.48, 75),
                                 EndCutsceneCount = 1
                             },
@@ -147,7 +147,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/CM1",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-5.07, 111.11, 20.61, 7.50)
@@ -162,7 +162,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/CM2",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> 
                                 { 
                                     new DetectionPoint(88.20, 96.87, 40.08, 5.00),
@@ -179,7 +179,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 76,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/CM3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 { 
                                     new DetectionPoint(15.41, 26.50, 16.28, 10.00),
@@ -208,7 +208,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 68,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/TAS",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 IdentifyingPoints = new List<DetectionPoint>() {},
                                 EndPoint = new DetectionPoint(68.70, -0.59, 45.21, 75),
                                 EndCutsceneCount = 2
@@ -220,7 +220,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "F",
                                 GuideUrl = "http://gw2dungeons.net/TAF",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-55.25, -137.32, 2.77, 35) },
                                 EndPoint = new DetectionPoint(57.02, -0.15, 45.16, 75),
                                 EndCutsceneCount = 2
@@ -232,7 +232,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "U",
                                 GuideUrl = "http://gw2dungeons.net/TAU",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(42.90, -176.14, 32.26, 35) },
                                 EndPoint = new DetectionPoint(65.51, 1.04, 45.51, 75),
                                 EndCutsceneCount = 2
@@ -244,7 +244,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 67,
                                 PathDisplayText = "AE",
                                 GuideUrl = "http://gw2dungeons.net/TAAE",
-                                GoldReward = 2.05,
+                                GoldReward = 0.92,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-31.42, -262.85, -0.54, 35) },
                                 EndPoint = new DetectionPoint(-201.52, 249.99, 20.56, 75),
                                 EndCutsceneCount = 1
@@ -267,7 +267,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 63,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/SES",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 IdentifyingPoints = new List<DetectionPoint>() { },
                                 EndPoint = new DetectionPoint(127.33, -278.88, 93.87, 100),
                                 EndCutsceneCount = 2
@@ -279,7 +279,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/SE1",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-127.39, -66.08, 162.89, 35) },
                                 EndPoint = new DetectionPoint(351.03, -105, 143.36, 100),
                                 EndCutsceneCount = 2
@@ -291,7 +291,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/SE2",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-85.47, 157.55, 211.13, 35) },
                                 EndPoint = new DetectionPoint(144.48, 41.61, 143.45, 100),  // TODO: Retest this
                                 EndCutsceneCount = 1
@@ -303,7 +303,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 64,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/SE3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-244.83, 19.78, 204.50, 35.00),
@@ -332,7 +332,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 66,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/CoFS",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 IdentifyingPoints = new List<DetectionPoint>() { },
                                 EndPoint = new DetectionPoint(76.62, 69.63, 146.58, 100),
                                 EndCutsceneCount = 3
@@ -344,7 +344,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/CoF1",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 { 
                                     new DetectionPoint(-227.21, 42.86, 72.88, 35.00),
@@ -363,7 +363,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/CoF2",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-9.03, -147.03, 73.00, 35) },
                                 EndPoint = new DetectionPoint(328.02, -17.45, 101.33, 100),
                                 EndCutsceneCount = 2
@@ -375,7 +375,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 69,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/CoF3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-25.65, -79.68, 8.89, 35) },
                                 EndPoint = new DetectionPoint(255.89, 278.00, 128.17, 100),
                                 EndCutsceneCount = 2
@@ -398,7 +398,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 70,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/HotWS",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 IdentifyingPoints = new List<DetectionPoint>() { },
                                 EndPoint = new DetectionPoint(106.65, 25.35, 5.11, 75),
                                 EndCutsceneCount = 1
@@ -410,7 +410,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/HotW1",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-86.37, 160.04, 37.12, 15.00),
@@ -427,7 +427,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/HotW2",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-10.70, 4.73, 55.70, 35) },
                                 EndPoint = new DetectionPoint(-158.60, 141.23, -36.51, 75),
                                 EndCutsceneCount = 2
@@ -439,7 +439,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 71,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/HotW3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-198.64, 197.05, 44.08, 20.00),
@@ -467,7 +467,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 81,
                                 PathDisplayText = "S",
                                 GuideUrl = "http://gw2dungeons.net/CoES",
-                                GoldReward = 0.5,
+                                GoldReward = 0.26,
                                 IdentifyingPoints = new List<DetectionPoint>() { },
                                 EndPoint = new DetectionPoint(34.60, 37.36, 115.80, 50),
                                 EndCutsceneCount = 3
@@ -479,7 +479,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/CoE1",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(170.98, -94.73, 176.74, 35) },
                                 EndPoint = new DetectionPoint(131.17, 126.65, 188.48, 50),
                                 EndCutsceneCount = 1
@@ -491,7 +491,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/CoE2",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(21.56, 379.84, 225.42, 35) },
                                 EndPoint = new DetectionPoint(-64.27, 356.45, 226.15, 40),
                                 EndCutsceneCount = 1
@@ -503,7 +503,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 82,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/CoE3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.61,
                                 IdentifyingPoints = new List<DetectionPoint> { new DetectionPoint(-137.85, 280.19, 228.39, 35) },
                                 EndPoint = new DetectionPoint(76.29, 1.29, 233.99, 50),
                                 EndCutsceneCount = 1
@@ -518,19 +518,7 @@ namespace GW2PAO.API.Data
                 MinimumLevel = 80,
                 WaypointCode = "[&BCADAAA=]",
                 Paths = new List<DungeonPath>() 
-                        { 
-                            new DungeonPath()
-                            {
-                                PathNumber = 0,
-                                ID = RuinedCityOfArahPathID.Story,
-                                InstanceMapID = 111,
-                                PathDisplayText = "S",
-                                GuideUrl = "http://gw2dungeons.net/ArahS",
-                                GoldReward = 0.5,
-                                IdentifyingPoints = new List<DetectionPoint>() {},
-                                EndPoint = new DetectionPoint(232.46, 380.78, 267.93, 100),
-                                EndCutsceneCount = 1
-                            },
+                        {
                             new DungeonPath()
                             {
                                 PathNumber = 1,
@@ -538,7 +526,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P1",
                                 GuideUrl = "http://gw2dungeons.net/Arah1",
-                                GoldReward = 3.05,
+                                GoldReward = 1.26,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-403.28, 125.72, 3.90, 35),
@@ -554,7 +542,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P2",
                                 GuideUrl = "http://gw2dungeons.net/Arah2",
-                                GoldReward = 3.05,
+                                GoldReward = 1.26,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-233.35, 113.28, -0.30, 35.00),
@@ -572,7 +560,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P3",
                                 GuideUrl = "http://gw2dungeons.net/Arah3",
-                                GoldReward = 1.05,
+                                GoldReward = 0.76,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-400.14, -37.66, -0.18, 35),
@@ -588,7 +576,7 @@ namespace GW2PAO.API.Data
                                 InstanceMapID = 112,
                                 PathDisplayText = "P4",
                                 GuideUrl = "http://gw2dungeons.net/Arah4",
-                                GoldReward = 3.05,
+                                GoldReward = 1.26,
                                 IdentifyingPoints = new List<DetectionPoint>
                                 {
                                     new DetectionPoint(-209.09, -49.55, 0.45, 35.00),
@@ -598,57 +586,6 @@ namespace GW2PAO.API.Data
                                 EndPoint = new DetectionPoint(34.37, -536.42, 1.25, 100),
                                 EndCutsceneCount = 2
                             }
-                        }
-            });
-            dTable.Dungeons.Add(new Dungeon()
-            {
-                Name = "Fractals of the Mists",
-                ID = DungeonID.FractalsOfTheMists,
-                WorldMapID = 50,
-                MinimumLevel = 1,
-                WaypointCode = "[TBD]",
-                Paths = new List<DungeonPath>() 
-                        { 
-                            new DungeonPath()
-                            {
-                                PathNumber = 0,
-                                ID = FractalsOfTheMistsPathID.Tier0,
-                                PathDisplayText = "10",
-                                GoldReward = 0,
-                                GuideUrl = "http://gw2dungeons.net/",
-                            },
-                            new DungeonPath()
-                            {
-                                PathNumber = 1,
-                                ID = FractalsOfTheMistsPathID.Tier1,
-                                PathDisplayText = "20",
-                                GuideUrl = "http://gw2dungeons.net/",
-                                GoldReward = 0
-                            },
-                            new DungeonPath()
-                            {
-                                PathNumber = 2,
-                                ID = FractalsOfTheMistsPathID.Tier2,
-                                PathDisplayText = "30",
-                                GuideUrl = "http://gw2dungeons.net/",
-                                GoldReward = 0
-                            },
-                            new DungeonPath()
-                            {
-                                PathNumber = 3,
-                                ID = FractalsOfTheMistsPathID.Tier3,
-                                PathDisplayText = "40",
-                                GuideUrl = "http://gw2dungeons.net/",
-                                GoldReward = 0
-                            },
-                            new DungeonPath()
-                            {
-                                PathNumber = 4,
-                                ID = FractalsOfTheMistsPathID.Tier4,
-                                PathDisplayText = "50",
-                                GuideUrl = "http://gw2dungeons.net/",
-                                GoldReward = 0
-                            },
                         }
             });
 
