@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "3.5"
+#define MyAppVersion "3.6"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -75,6 +75,7 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\GW2PAO.resources.dll
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\ItemDatabase.json"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\fr\WvWObjectiveNames.xml"; DestDir: "{app}\Locale\fr"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\ru\GW2PAO.resources.dll"; DestDir: "{app}\Locale\ru"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Locale\ru\ItemDatabase.json"; DestDir: "{app}\Locale\ru"; Flags: ignoreversion
 ; No Browser files:
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\GW2PAO.exe.config"; DestDir: "{app}"; Flags: ignoreversion
