@@ -1,31 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GW2PAO.Modules.Events.ViewModels.EventTracker;
+using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 using GW2PAO.Views;
-using GW2PAO.Views.Events.EventTracker;
+using GW2PAO.Views.Events.WorldBossTimers;
 using NLog;
-using System.Windows.Controls.Primitives;
 
-namespace GW2PAO.Modules.Events.Views.EventTracker
+namespace GW2PAO.Modules.Events.Views.WorldBossTimers
 {
     /// <summary>
-    /// Interaction logic for EventTrackerView.xaml
+    /// Interaction logic for WorldBossTimersView.xaml
     /// </summary>
-    public partial class EventTrackerView : OverlayWindow
+    public partial class WorldBossTimersView : OverlayWindow
     {
         /// <summary>
         /// Default logger
@@ -53,11 +42,11 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
         /// View model
         /// </summary>
         [Import]
-        public EventTrackerViewModel ViewModel
+        public WorldBossListViewModel ViewModel
         {
             get
             {
-                return this.DataContext as EventTrackerViewModel;
+                return this.DataContext as WorldBossListViewModel;
             }
             set
             {
@@ -68,12 +57,12 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
         /// <summary>
         /// Default constructor
         /// </summary>
-        public EventTrackerView()
+        public WorldBossTimersView()
         {
-            logger.Debug("New EventTrackerView created");
+            logger.Debug("New WorldEventsTrackerView created");
             InitializeComponent();
 
-            this.eventHeight = new WorldEventView().Height;
+            this.eventHeight = new WorldBossTimerView().Height;
 
             this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
             this.Loaded += EventTrackerView_Loaded;
@@ -101,7 +90,7 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
         /// </summary>
         private void RefreshWindowHeights()
         {
-            var visibleObjsCount = this.ViewModel.WorldEvents.Count(o => o.IsVisible);
+            var visibleObjsCount = this.ViewModel.WorldBossEvents.Count(o => o.IsVisible);
             if (this.EventsContainer.Visibility == System.Windows.Visibility.Visible)
             {
                 // Expanded
@@ -119,7 +108,7 @@ namespace GW2PAO.Modules.Events.Views.EventTracker
 
         private void EventsContainer_LayoutUpdated(object sender, EventArgs e)
         {
-            var visibleObjsCount = this.ViewModel.WorldEvents.Count(o => o.IsVisible);
+            var visibleObjsCount = this.ViewModel.WorldBossEvents.Count(o => o.IsVisible);
             if (prevVisibleEventsCount != visibleObjsCount)
             {
                 prevVisibleEventsCount = visibleObjsCount;

@@ -1,19 +1,18 @@
-﻿using GW2PAO.API.Data.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Data.Enums;
-using GW2PAO.Modules.Events;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace GW2PAO.Modules.Events.ViewModels
+namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
 {
     /// <summary>
     /// View model for an event shown by the event tracker
     /// </summary>
-    public class EventViewModel : BindableBase
+    public class WorldBossEventViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -26,7 +25,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         private bool isVisible;
         private bool isNotificationShown;
         private bool isRemovingNotification;
-        private ICollection<EventViewModel> displayedNotifications;
+        private ICollection<WorldBossEventViewModel> displayedNotifications;
 
         /// <summary>
         /// The general events-related user settings/data
@@ -165,7 +164,7 @@ namespace GW2PAO.Modules.Events.ViewModels
         /// <param name="eventData">The event's details/data</param>
         /// <param name="userData">Event tracker user data</param>
         /// <param name="displayedNotificationsCollection">Collection of displayed event notifications</param>
-        public EventViewModel(WorldEvent eventData, EventsUserData userData, ICollection<EventViewModel> displayedNotificationsCollection)
+        public WorldBossEventViewModel(WorldEvent eventData, EventsUserData userData, ICollection<WorldBossEventViewModel> displayedNotificationsCollection)
         {
             this.EventModel = eventData;
             this.UserData = userData;

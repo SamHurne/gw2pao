@@ -1285,6 +1285,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open World Boss Timers.
+        /// </summary>
+        public static string OpenWorldBossTimers {
+            get {
+                return ResourceManager.GetString("OpenWorldBossTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open WvW Tracker.
         /// </summary>
         public static string OpenWvWTracker {
@@ -2200,6 +2209,15 @@ namespace GW2PAO.Properties {
             get {
                 object obj = ResourceManager.GetObject("World_Completion2", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World Boss Timers.
+        /// </summary>
+        public static string WorldBossTimers {
+            get {
+                return ResourceManager.GetString("WorldBossTimers", resourceCulture);
             }
         }
         

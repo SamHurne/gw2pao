@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
-using GW2PAO.Modules.Events.ViewModels;
+using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 
 namespace GW2PAO.Modules.Events.Interfaces
 {
@@ -14,12 +14,12 @@ namespace GW2PAO.Modules.Events.Interfaces
         /// <summary>
         /// The collection of World Events
         /// </summary>
-        ObservableCollection<EventViewModel> WorldEvents { get; }
+        ObservableCollection<WorldBossEventViewModel> WorldBossEvents { get; }
 
         /// <summary>
         /// The collection of events for event notifications
         /// </summary>
-        ObservableCollection<EventViewModel> EventNotifications { get; }
+        ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get; }
 
         /// <summary>
         /// The interval by which to refresh events (in ms)

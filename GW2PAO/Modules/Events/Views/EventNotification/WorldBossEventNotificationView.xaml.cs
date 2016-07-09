@@ -21,7 +21,7 @@ namespace GW2PAO.Modules.Events.Views.EventNotification
     /// <summary>
     /// Interaction logic for EventNotificationView.xaml
     /// </summary>
-    public partial class EventNotificationView : UserControl
+    public partial class WorldBossEventNotificationView : UserControl
     {
         /// <summary>
         /// Default logger
@@ -31,7 +31,7 @@ namespace GW2PAO.Modules.Events.Views.EventNotification
         /// <summary>
         /// Default constructor
         /// </summary>
-        public EventNotificationView()
+        public WorldBossEventNotificationView()
         {
             InitializeComponent();
         }

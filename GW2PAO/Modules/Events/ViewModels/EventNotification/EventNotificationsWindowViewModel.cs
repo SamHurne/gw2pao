@@ -1,9 +1,10 @@
-﻿using GW2PAO.Modules.Events.Interfaces;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
+using GW2PAO.Modules.Events.Interfaces;
+using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
 
 namespace GW2PAO.Modules.Events.ViewModels.EventNotification
 {
@@ -23,7 +24,7 @@ namespace GW2PAO.Modules.Events.ViewModels.EventNotification
         /// <summary>
         /// Collection of active event notifications
         /// </summary>
-        public ObservableCollection<EventViewModel> EventNotifications { get { return this.controller.EventNotifications; } }
+        public ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get { return this.controller.WorldBossEventNotifications; } }
 
         /// <summary>
         /// Default constructor

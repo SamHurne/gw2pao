@@ -988,4 +988,10 @@
     <value>ROI:</value>
     <comment>Return on Investment</comment>
   </data>
+  <data name="OpenWorldBossTimers" xml:space="preserve">
+    <value>Open World Boss Timers</value>
+  </data>
+  <data name="WorldBossTimers" xml:space="preserve">
+    <value>World Boss Timers</value>
+  </data>
 </root>

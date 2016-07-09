@@ -1,18 +1,18 @@
-﻿using GW2PAO.Modules.Events.Interfaces;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
+using GW2PAO.Infrastructure;
+using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using GW2PAO.Infrastructure;
 
-namespace GW2PAO.Modules.Events.ViewModels.EventTracker
+namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
 {
     /// <summary>
     /// Primary Event Tracker view model class
     /// </summary>
-    [Export(typeof(EventTrackerViewModel))]
-    public class EventTrackerViewModel : BindableBase
+    [Export(typeof(WorldBossListViewModel))]
+    public class WorldBossListViewModel : BindableBase
     {
         /// <summary>
         /// Default logger
@@ -27,9 +27,9 @@ namespace GW2PAO.Modules.Events.ViewModels.EventTracker
         /// <summary>
         /// Collection of all World Events
         /// </summary>
-        public ObservableCollection<EventViewModel> WorldEvents
+        public ObservableCollection<WorldBossEventViewModel> WorldBossEvents
         {
-            get { return this.controller.WorldEvents; }
+            get { return this.controller.WorldBossEvents; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace GW2PAO.Modules.Events.ViewModels.EventTracker
         /// </summary>
         /// <param name="eventTrackerController">The event tracker controller</param>
         [ImportingConstructor]
-        public EventTrackerViewModel(IEventsController eventTrackerController)
+        public WorldBossListViewModel(IEventsController eventTrackerController)
         {
             this.controller = eventTrackerController;
             this.ResetHiddenEventsCommand = new DelegateCommand(this.ResetHiddenEvents);

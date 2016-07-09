@@ -64,11 +64,11 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <View:EventNotificationView DataContext="{Binding}">
-                        <View:EventNotificationView.LayoutTransform>
+                    <View:WorldBossEventNotificationView DataContext="{Binding}">
+                        <View:WorldBossEventNotificationView.LayoutTransform>
                             <RotateTransform Angle="180"/>
-                        </View:EventNotificationView.LayoutTransform>
-                    </View:EventNotificationView>
+                        </View:WorldBossEventNotificationView.LayoutTransform>
+                    </View:WorldBossEventNotificationView>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
 

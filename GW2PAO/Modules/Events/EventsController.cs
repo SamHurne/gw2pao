@@ -6,9 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
-using GW2PAO.Data.UserData;
 using GW2PAO.Modules.Events.Interfaces;
-using GW2PAO.Modules.Events.ViewModels;
+using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 using GW2PAO.Utility;
 using NLog;
 
@@ -70,22 +69,22 @@ namespace GW2PAO.Modules.Events
         /// <summary>
         /// Backing store of the World Events collection
         /// </summary>
-        private ObservableCollection<EventViewModel> worldEvents = new ObservableCollection<EventViewModel>();
+        private ObservableCollection<WorldBossEventViewModel> worldEvents = new ObservableCollection<WorldBossEventViewModel>();
 
         /// <summary>
         /// The collection of World Events
         /// </summary>
-        public ObservableCollection<EventViewModel> WorldEvents { get { return this.worldEvents; } }
+        public ObservableCollection<WorldBossEventViewModel> WorldBossEvents { get { return this.worldEvents; } }
 
         /// <summary>
         /// Backing store of the Event Notifications collection
         /// </summary>
-        private ObservableCollection<EventViewModel> eventNotifications = new ObservableCollection<EventViewModel>();
+        private ObservableCollection<WorldBossEventViewModel> worldBossEventNotifications = new ObservableCollection<WorldBossEventViewModel>();
 
         /// <summary>
         /// The collection of events for event notifications
         /// </summary>
-        public ObservableCollection<EventViewModel> EventNotifications { get { return this.eventNotifications; } }
+        public ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get { return this.worldBossEventNotifications; } }
 
         /// <summary>
         /// The interval by which to refresh events (in ms)
@@ -208,7 +207,7 @@ namespace GW2PAO.Modules.Events
                         worldEvent.Name = this.eventsService.GetLocalizedName(worldEvent.ID);
 
                         logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                        this.WorldEvents.Add(new EventViewModel(worldEvent, this.userData, this.EventNotifications));
+                        this.WorldBossEvents.Add(new WorldBossEventViewModel(worldEvent, this.userData, this.WorldBossEventNotifications));
 
                         // If the user data does not contain this event, add it to that collection as well
                         var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == worldEvent.ID);
@@ -254,7 +253,7 @@ namespace GW2PAO.Modules.Events
                     return; // Immediately return if we are supposed to be stopped
 
                 // Refresh the state of all world events
-                foreach (var worldEvent in this.WorldEvents)
+                foreach (var worldEvent in this.WorldBossEvents)
                 {
                     var newState = this.eventsService.GetState(worldEvent.EventModel);
                     Threading.BeginInvokeOnUI(() => worldEvent.State = newState);
@@ -327,7 +326,7 @@ namespace GW2PAO.Modules.Events
                     this.userData.LastResetDateTime = DateTime.UtcNow;
                     Threading.BeginInvokeOnUI(() =>
                     {
-                        foreach (var worldEvent in WorldEvents)
+                        foreach (var worldEvent in WorldBossEvents)
                         {
                             worldEvent.IsTreasureObtained = false;
                         }
@@ -341,18 +340,18 @@ namespace GW2PAO.Modules.Events
         /// <summary>
         /// Adds an event to the event notifications collection, and then removes the event 10 seconds later
         /// </summary>
-        private void DisplayEventNotification(EventViewModel eventData)
+        private void DisplayEventNotification(WorldBossEventViewModel eventData)
         {
             const int SLEEP_TIME = 250;
 
             if (this.UserData.AreEventNotificationsEnabled)
             {
-                if (!this.EventNotifications.Contains(eventData))
+                if (!this.WorldBossEventNotifications.Contains(eventData))
                 {
                     Task.Factory.StartNew(() =>
                     {
                         logger.Info("Displaying notification for \"{0}\"", eventData.EventName);
-                        Threading.BeginInvokeOnUI(() => this.EventNotifications.Add(eventData));
+                        Threading.BeginInvokeOnUI(() => this.WorldBossEventNotifications.Add(eventData));
 
                         if (this.UserData.NotificationDuration > 0)
                         {
@@ -363,7 +362,7 @@ namespace GW2PAO.Modules.Events
                                 if (!this.UserData.AreEventNotificationsEnabled)
                                 {
                                     logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-                                    Threading.BeginInvokeOnUI(() => this.EventNotifications.Remove(eventData));
+                                    Threading.BeginInvokeOnUI(() => this.WorldBossEventNotifications.Remove(eventData));
                                 }
                             }
 
@@ -375,7 +374,7 @@ namespace GW2PAO.Modules.Events
                             System.Threading.Thread.Sleep(SLEEP_TIME);
                             Threading.BeginInvokeOnUI(() =>
                             {
-                                this.EventNotifications.Remove(eventData);
+                                this.WorldBossEventNotifications.Remove(eventData);
                                 eventData.IsRemovingNotification = false;
                             });
                         }
@@ -399,7 +398,7 @@ namespace GW2PAO.Modules.Events
                         this.eventsService.LoadTable(this.UserData.UseAdjustedTimeTable);
                         Threading.InvokeOnUI(() =>
                         {
-                            foreach (var worldEvent in this.WorldEvents)
+                            foreach (var worldEvent in this.WorldBossEvents)
                             {
                                 var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
                                 worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
