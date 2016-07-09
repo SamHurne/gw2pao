@@ -40,7 +40,7 @@ namespace GW2PAO.Modules.WvW.ViewModels
         /// <summary>
         /// ID of the objective
         /// </summary>
-        public int ID { get { return this.ModelData.ID; } }
+        public WvWObjectiveId ID { get { return this.ModelData.ID; } }
 
         /// <summary>
         /// The type of the objective

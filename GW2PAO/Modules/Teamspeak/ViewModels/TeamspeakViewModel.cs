@@ -223,18 +223,26 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
         /// </summary>
         private void TeamspeakService_ConnectionRefused(object sender, EventArgs e)
         {
+            this.TeamspeakService.ConnectionRefused -= TeamspeakService_ConnectionRefused;
+
             Task.Factory.StartNew(() =>
                 {
-                    this.TeamspeakService.ConnectionRefused -= TeamspeakService_ConnectionRefused;
-
                     var cannotConnectNotification = new TSNotificationViewModel(0, Properties.Resources.StartTeamspeak, TSNotificationType.CannotConnect);
                     Threading.InvokeOnUI(() => this.Notifications.Add(cannotConnectNotification));
 
-                    // Start a loop attempting to connect
+                    // Start a loop attempting to connect once every 5 seconds
+                    int sleepTime = 250; // ms
+                    int retryInterval = 5000 / sleepTime;
+                    int i = 0;
                     while (!this.isShuttingDown && this.TeamspeakService.ConnectionState != TS3.Data.Enums.ConnectionState.Connected)
                     {
-                        Threading.InvokeOnUI(() => this.TeamspeakService.Connect());
-                        Thread.Sleep(5000); // attempt to connect once every 5 seconds
+                        Thread.Sleep(250);
+                        i++;
+                        if (i > retryInterval)
+                        {
+                            Threading.InvokeOnUI(() => this.TeamspeakService.Connect());
+                            i = 0;
+                        }
                     }
 
                     if (!this.isShuttingDown)
@@ -242,7 +250,7 @@ namespace GW2PAO.Modules.Teamspeak.ViewModels
                         this.TeamspeakService.ConnectionRefused += TeamspeakService_ConnectionRefused;
                         Threading.InvokeOnUI(() => this.Notifications.Remove(cannotConnectNotification));
                     }
-                });
+                }, TaskCreationOptions.LongRunning);
         }
 
         /// <summary>

@@ -84,7 +84,7 @@ namespace GW2PAO.Modules.ZoneCompletion
         /// <summary>
         /// Dictionary of counters for auto-unlock purposes
         /// </summary>
-        private Dictionary<int, int> distanceCounters = new Dictionary<int, int>();
+        private Dictionary<int, int> playerInProximityCounters = new Dictionary<int, int>();
 
         /// <summary>
         /// Backing store for the zone items collection
@@ -171,7 +171,7 @@ namespace GW2PAO.Modules.ZoneCompletion
                     this.isStopped = false;
                     logger.Debug("Starting refresh timers");
                     this.RefreshZone();
-                    this.RefreshLocations(null);
+                    this.RefreshLocations();
                 }
 
                 this.startCallCount++;
@@ -252,14 +252,14 @@ namespace GW2PAO.Modules.ZoneCompletion
                             Threading.InvokeOnUI(() =>
                             {
                                 this.ZoneItems.Clear();
-                                this.distanceCounters.Clear();
+                                this.playerInProximityCounters.Clear();
                                 foreach (var item in zoneItems)
                                 {
                                     // Ignore dungeons for now
                                     if (item.Type != API.Data.Enums.ZoneItemType.Dungeon)
                                     {
                                         this.ZoneItems.Add(new ZoneItemViewModel(item, this.playerService, this.UserData));
-                                        this.distanceCounters.Add(item.ID, 0);
+                                        this.playerInProximityCounters.Add(item.ID, 0);
                                     }
                                 }
                             });
@@ -290,8 +290,19 @@ namespace GW2PAO.Modules.ZoneCompletion
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped
 
-                var playerPos = this.playerService.PlayerPosition;
-                var cameraDir = this.playerService.CameraDirection;
+                API.Data.Entities.Point playerPos = null;
+                API.Data.Entities.Point cameraDir = null;
+                try
+                {
+                    playerPos = this.playerService.PlayerPosition;
+                    cameraDir = this.playerService.CameraDirection;
+                }
+                catch (ObjectDisposedException)
+                {
+                    // The player service is disposed!
+                    return;
+                }
+
                 if (playerPos != null && cameraDir != null)
                 {
                     var playerMapPosition = CalcUtil.ConvertToMapPosition(playerPos);
@@ -340,57 +351,57 @@ namespace GW2PAO.Modules.ZoneCompletion
                                         if (this.UserData.AutoUnlockVistas
                                             && ftDistance >= 0 && ftDistance < 8)
                                         {
-                                            if (this.distanceCounters[item.ItemId] > 4)
+                                            if (this.playerInProximityCounters[item.ItemId] > 4)
                                             {
-                                                this.distanceCounters[item.ItemId] = 0;
+                                                this.playerInProximityCounters[item.ItemId] = 0;
                                                 Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
-                                                this.distanceCounters[item.ItemId] += 1;
+                                                this.playerInProximityCounters[item.ItemId] += 1;
                                             }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] = 0;
+                                            this.playerInProximityCounters[item.ItemId] = 0;
                                         }
                                         break;
                                     case API.Data.Enums.ZoneItemType.HeartQuest:
                                         if (this.UserData.AutoUnlockHeartQuests
                                             && ftDistance >= 0 && ftDistance < 400)
                                         {
-                                            if (this.distanceCounters[item.ItemId] > 90)
+                                            if (this.playerInProximityCounters[item.ItemId] > 90)
                                             {
-                                                this.distanceCounters[item.ItemId] = 0;
+                                                this.playerInProximityCounters[item.ItemId] = 0;
                                                 Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
-                                                this.distanceCounters[item.ItemId] += 1;
+                                                this.playerInProximityCounters[item.ItemId] += 1;
                                             }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] = 0;
+                                            this.playerInProximityCounters[item.ItemId] = 0;
                                         }
                                         break;
                                     case API.Data.Enums.ZoneItemType.HeroPoint:
                                         if (this.UserData.AutoUnlockSkillChallenges
                                             && ftDistance >= 0 && ftDistance < 25)
                                         {
-                                            if (this.distanceCounters[item.ItemId] > 15)
+                                            if (this.playerInProximityCounters[item.ItemId] > 15)
                                             {
-                                                this.distanceCounters[item.ItemId] = 0;
+                                                this.playerInProximityCounters[item.ItemId] = 0;
                                                 Threading.InvokeOnUI(() => item.IsUnlocked = true);
                                             }
                                             else
                                             {
-                                                this.distanceCounters[item.ItemId] += 1;
+                                                this.playerInProximityCounters[item.ItemId] += 1;
                                             }
                                         }
                                         else
                                         {
-                                            this.distanceCounters[item.ItemId] = 0;
+                                            this.playerInProximityCounters[item.ItemId] = 0;
                                         }
                                         break;
                                     default:

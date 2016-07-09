@@ -984,4 +984,8 @@
   <data name="CompletedPerChar" xml:space="preserve">
     <value>Completed Per Character</value>
   </data>
+  <data name="ROI" xml:space="preserve">
+    <value>ROI:</value>
+    <comment>Return on Investment</comment>
+  </data>
 </root>

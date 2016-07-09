@@ -1,12 +1,8 @@
 This software makes use of the following Libraries:
 
 GW2.Net:
-https://gw2dotnet.codeplex.com/
-https://gw2dotnet.codeplex.com/license
-
-GwApiNET:
-https://gwapinet.codeplex.com/
-https://gwapinet.codeplex.com/license
+https://github.com/Ruhrpottpatriot/GW2.NET
+https://github.com/Ruhrpottpatriot/GW2.NET/blob/master/LICENSE
 
 Awesomium.Core:
 http://www.awesomium.com/

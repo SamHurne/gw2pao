@@ -9,7 +9,7 @@ namespace GW2PAO.API.Data.Entities
 {
     public class WvWObjective
     {
-        public int ID { get; set; }
+        public WvWObjectiveId ID { get; set; }
         public ObjectiveType Type { get; set; }
         public WvWMap Map { get; set; }
         public string MatchId { get; set; }
