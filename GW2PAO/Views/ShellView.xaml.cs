@@ -116,6 +116,8 @@ namespace GW2PAO.Views
                     this.Dispatcher.Invoke(() => this.NowRunningPopup.IsOpen = true);
                 });
             }
+
+            User32.HideFromTaskbar(this);
         }
 
         private void CleanupTrayIcon()

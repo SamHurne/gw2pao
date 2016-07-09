@@ -51,7 +51,11 @@ namespace GW2PAO.Modules.WvW.Views.WvWNotification
         public WvWNotificationWindow()
         {
             InitializeComponent();
-            this.Loaded += (o, e) => this.LoadWindowLocation();
+            this.Loaded += (o, e) =>
+            {
+                Utility.User32.HideFromTaskbar(this);
+                this.LoadWindowLocation();
+            };
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

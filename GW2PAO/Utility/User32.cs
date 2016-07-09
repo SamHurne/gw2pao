@@ -94,7 +94,19 @@ namespace GW2PAO.Utility
         }
 
         /// <summary>
-        /// Sets the NoActivate attribute for the given wpf window, preventing the system from brining the window
+        /// Hides the provided window from the taskbar
+        /// </summary>
+        /// <param name="window">The window to hide from the taskbar</param>
+        public static void HideFromTaskbar(System.Windows.Window window)
+        {
+            var handle = new System.Windows.Interop.WindowInteropHelper(window).Handle;
+            var extendedStyle = GetWindowLong(handle, GWL_EXSTYLE);
+
+            SetWindowLong(handle, GWL_EXSTYLE, (extendedStyle | ExtendedWindowStyles.WS_EX_TOOLWINDOW) & ~ExtendedWindowStyles.WS_EX_APPWINDOW);
+        }
+
+        /// <summary>
+        /// Sets the NoActivate attribute for the given wpf window, preventing the system from bringing the window
         /// to the foreground when clicked - particularly useful for prevent the taskbar from appearing
         /// </summary>
         /// <param name="window">The window to set NoActivate on</param>
@@ -105,7 +117,7 @@ namespace GW2PAO.Utility
             var extendedStyle = GetWindowLong(handle, GWL_EXSTYLE);
 
             if (noActivate)
-                SetWindowLong(handle, GWL_EXSTYLE, extendedStyle | ExtendedWindowStyles.WS_EX_NOACTIVATE | ExtendedWindowStyles.WS_EX_APPWINDOW);
+                SetWindowLong(handle, GWL_EXSTYLE, extendedStyle | ExtendedWindowStyles.WS_EX_NOACTIVATE);
             else
                 SetWindowLong(handle, GWL_EXSTYLE, extendedStyle & ~ExtendedWindowStyles.WS_EX_NOACTIVATE);
         }

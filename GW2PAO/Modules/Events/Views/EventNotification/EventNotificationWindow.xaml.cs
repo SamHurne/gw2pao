@@ -51,7 +51,11 @@ namespace GW2PAO.Modules.Events.Views.EventNotification
         public EventNotificationWindow()
         {
             InitializeComponent();
-            this.Loaded += (o, e) => this.LoadWindowLocation();
+            this.Loaded += (o, e) =>
+            {
+                Utility.User32.HideFromTaskbar(this);
+                this.LoadWindowLocation();
+            };
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
