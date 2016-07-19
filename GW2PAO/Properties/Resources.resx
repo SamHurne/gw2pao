@@ -988,10 +988,23 @@
     <value>ROI:</value>
     <comment>Return on Investment</comment>
   </data>
+  <data name="MetaEventTimers" xml:space="preserve">
+    <value>Meta Event Timers</value>
+  </data>
+  <data name="OpenMetaEventTimers" xml:space="preserve">
+    <value>Open Meta Event Timers</value>
+  </data>
   <data name="OpenWorldBossTimers" xml:space="preserve">
     <value>Open World Boss Timers</value>
   </data>
   <data name="WorldBossTimers" xml:space="preserve">
     <value>World Boss Timers</value>
+  </data>
+  <data name="ActiveFor" xml:space="preserve">
+    <value>active for</value>
+    <comment>Example: "active for 00:10:07"</comment>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>in</value>
   </data>
 </root>

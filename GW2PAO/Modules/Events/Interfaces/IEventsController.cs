@@ -5,12 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data;
+using GW2PAO.Modules.Events.ViewModels.MetaEventTimers;
 using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 
 namespace GW2PAO.Modules.Events.Interfaces
 {
     public interface IEventsController
     {
+        /// <summary>
+        /// The collection of World Events
+        /// </summary>
+        ObservableCollection<MetaEventViewModel> MetaEvents { get; }
+
         /// <summary>
         /// The collection of World Events
         /// </summary>

@@ -22,46 +22,46 @@ namespace GW2PAO.API.UnitTest
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(false);
+            es.LoadTables(false);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
         public void EventsService_LoadTable_Standard_MissingFile()
         {
-            File.Delete(MegaserverEventTimeTable.StandardFilename);
+            File.Delete(WorldBossEventTimeTable.StandardFilename);
 
             EventsService es = new EventsService();
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(false);
+            es.LoadTables(false);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
         public void EventsService_LoadTable_Standard_InvalidFile()
         {
-            File.WriteAllText(MegaserverEventTimeTable.StandardFilename, "invalid contents");
+            File.WriteAllText(WorldBossEventTimeTable.StandardFilename, "invalid contents");
 
             EventsService es = new EventsService();
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(false);
+            es.LoadTables(false);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
@@ -71,46 +71,46 @@ namespace GW2PAO.API.UnitTest
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(true);
+            es.LoadTables(true);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
         public void EventsService_LoadTable_Adjusted_MissingFile()
         {
-            File.Delete(MegaserverEventTimeTable.AdjustedFilename);
+            File.Delete(WorldBossEventTimeTable.AdjustedFilename);
 
             EventsService es = new EventsService();
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(true);
+            es.LoadTables(true);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
         public void EventsService_LoadTable_Adjusted_InvalidFile()
         {
-            File.WriteAllText(MegaserverEventTimeTable.AdjustedFilename, "invalid contents");
+            File.WriteAllText(WorldBossEventTimeTable.AdjustedFilename, "invalid contents");
 
             EventsService es = new EventsService();
 
             var sw = new Stopwatch();
             sw.Start();
-            es.LoadTable(true);
+            es.LoadTables(true);
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
-            Assert.IsNotNull(es.EventTimeTable);
-            Assert.IsTrue(es.EventTimeTable.WorldEvents.Count > 0);
+            Assert.IsNotNull(es.WorldBossEventTimeTable);
+            Assert.IsTrue(es.WorldBossEventTimeTable.WorldEvents.Count > 0);
         }
 
         [TestMethod]
@@ -119,9 +119,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(false);
+            es.LoadTables(false);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes(1);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -140,9 +140,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(true);
+            es.LoadTables(true);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes((validEvent.WarmupDuration.Time.TotalMinutes * - 1) + 1);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -161,9 +161,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(false);
+            es.LoadTables(false);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes(-10);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -180,7 +180,7 @@ namespace GW2PAO.API.UnitTest
         public void EventsService_GetState_Id_Invalid()
         {
             EventsService es = new EventsService();
-            es.LoadTable(false);
+            es.LoadTables(false);
 
             var sw = new Stopwatch();
             sw.Start();
@@ -197,9 +197,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(false);
+            es.LoadTables(false);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes(1);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -218,9 +218,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(true);
+            es.LoadTables(true);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes((validEvent.WarmupDuration.Time.TotalMinutes * -1) + 1);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -239,9 +239,9 @@ namespace GW2PAO.API.UnitTest
             var timeMock = new Mock<ITimeProvider>();
 
             EventsService es = new EventsService(null, timeMock.Object);
-            es.LoadTable(false);
+            es.LoadTables(false);
 
-            var validEvent = es.EventTimeTable.WorldEvents[0];
+            var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
             var activeTime = DateTimeOffset.UtcNow.Date.Add(validEvent.ActiveTimes[0].Time).AddMinutes(-10);
             timeMock.Setup(t => t.CurrentTime).Returns(activeTime);
 
@@ -258,7 +258,7 @@ namespace GW2PAO.API.UnitTest
         public void EventsService_GetState_WorldEvent_Null_Invalid()
         {
             EventsService es = new EventsService();
-            es.LoadTable(false);
+            es.LoadTables(false);
 
             var sw = new Stopwatch();
             sw.Start();
@@ -273,11 +273,11 @@ namespace GW2PAO.API.UnitTest
         public void EventsService_GetState_WorldEvent_Blank_Inactive()
         {
             EventsService es = new EventsService();
-            es.LoadTable(false);
+            es.LoadTables(false);
 
             var sw = new Stopwatch();
             sw.Start();
-            var state = es.GetState(new WorldEvent());
+            var state = es.GetState(new WorldBossEvent());
             sw.Stop();
             Console.WriteLine("{0}ms", sw.ElapsedMilliseconds);
 
@@ -287,8 +287,8 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void EventsService_GetState_GetTimeUntilActive_Success()
         {
-            var testEvent = new WorldEvent();
-            testEvent.ActiveTimes.Add(new EventTimespan(2, 0, 0));
+            var testEvent = new WorldBossEvent();
+            testEvent.ActiveTimes.Add(new SerializableTimespan(2, 0, 0));
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 0, 0, 0)));
@@ -302,8 +302,8 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void EventsService_GetState_GetTimeUntilActive_Success_RollOver()
         {
-            var testEvent = new WorldEvent();
-            testEvent.ActiveTimes.Add(new EventTimespan(2, 0, 0));
+            var testEvent = new WorldBossEvent();
+            testEvent.ActiveTimes.Add(new SerializableTimespan(2, 0, 0));
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 3, 0, 0)));
@@ -329,7 +329,7 @@ namespace GW2PAO.API.UnitTest
         {
             EventsService es = new EventsService();
 
-            var timeUntilActive = es.GetTimeUntilActive(new WorldEvent());
+            var timeUntilActive = es.GetTimeUntilActive(new WorldBossEvent());
 
             Assert.AreEqual(TimeSpan.MinValue, timeUntilActive);
         }
@@ -337,8 +337,8 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void EventsService_GetState_GetTimeSinceActive_Success()
         {
-            var testEvent = new WorldEvent();
-            testEvent.ActiveTimes.Add(new EventTimespan(2, 0, 0));
+            var testEvent = new WorldBossEvent();
+            testEvent.ActiveTimes.Add(new SerializableTimespan(2, 0, 0));
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 4, 0, 0)));
@@ -352,8 +352,8 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void EventsService_GetState_GetTimeSinceActive_Success_RollOver()
         {
-            var testEvent = new WorldEvent();
-            testEvent.ActiveTimes.Add(new EventTimespan(1, 0, 0));
+            var testEvent = new WorldBossEvent();
+            testEvent.ActiveTimes.Add(new SerializableTimespan(1, 0, 0));
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 23, 0, 0)));
@@ -379,7 +379,7 @@ namespace GW2PAO.API.UnitTest
         {
             EventsService es = new EventsService();
 
-            var timeUntilActive = es.GetTimeSinceActive(new WorldEvent());
+            var timeUntilActive = es.GetTimeSinceActive(new WorldBossEvent());
 
             Assert.AreEqual(TimeSpan.MinValue, timeUntilActive);
         }

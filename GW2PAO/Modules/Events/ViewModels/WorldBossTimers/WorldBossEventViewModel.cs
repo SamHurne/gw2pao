@@ -35,7 +35,7 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         /// <summary>
         /// The primary model object containing the event information
         /// </summary>
-        public WorldEvent EventModel { get; private set; }
+        public WorldBossEvent EventModel { get; private set; }
 
         /// <summary>
         /// The event's ID
@@ -164,7 +164,7 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         /// <param name="eventData">The event's details/data</param>
         /// <param name="userData">Event tracker user data</param>
         /// <param name="displayedNotificationsCollection">Collection of displayed event notifications</param>
-        public WorldBossEventViewModel(WorldEvent eventData, EventsUserData userData, ICollection<WorldBossEventViewModel> displayedNotificationsCollection)
+        public WorldBossEventViewModel(WorldBossEvent eventData, EventsUserData userData, ICollection<WorldBossEventViewModel> displayedNotificationsCollection)
         {
             this.EventModel = eventData;
             this.UserData = userData;

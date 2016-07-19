@@ -13,7 +13,7 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void MegaserverEventTimeTable_Constructor()
         {
-            MegaserverEventTimeTable mett = new MegaserverEventTimeTable();
+            WorldBossEventTimeTable mett = new WorldBossEventTimeTable();
             Assert.IsNotNull(mett);
             Assert.IsNotNull(mett.WorldEvents);
         }
@@ -21,7 +21,7 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void MegaserverEventTimeTable_LoadTable_Standard_Success()
         {
-            MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(false);
+            WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(false);
             Assert.IsNotNull(mett);
             Assert.IsNotNull(mett.WorldEvents);
         }
@@ -29,7 +29,7 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void MegaserverEventTimeTable_LoadTable_Adjusted_Success()
         {
-            MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(true);
+            WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(true);
             Assert.IsNotNull(mett);
             Assert.IsNotNull(mett.WorldEvents);
         }
@@ -39,15 +39,15 @@ namespace GW2PAO.API.UnitTest
         public void MegaserverEventTimeTable_LoadTable_Standard_MissingFile()
         {
             string renamedFilename = "renamedFile.xml";
-            File.Move(MegaserverEventTimeTable.StandardFilename, renamedFilename);
+            File.Move(WorldBossEventTimeTable.StandardFilename, renamedFilename);
 
             try
             {
-                MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(false);
+                WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(false);
             }
             finally
             {
-                File.Move(renamedFilename, MegaserverEventTimeTable.StandardFilename);
+                File.Move(renamedFilename, WorldBossEventTimeTable.StandardFilename);
             }
         }
 
@@ -56,15 +56,15 @@ namespace GW2PAO.API.UnitTest
         public void MegaserverEventTimeTable_LoadTable_Adjusted_MissingFile()
         {
             string renamedFilename = "renamedFile.xml";
-            File.Move(MegaserverEventTimeTable.AdjustedFilename, renamedFilename);
+            File.Move(WorldBossEventTimeTable.AdjustedFilename, renamedFilename);
 
             try
             {
-                MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(true);
+                WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(true);
             }
             finally
             {
-                File.Move(renamedFilename, MegaserverEventTimeTable.AdjustedFilename);
+                File.Move(renamedFilename, WorldBossEventTimeTable.AdjustedFilename);
             }
         }
 
@@ -73,17 +73,17 @@ namespace GW2PAO.API.UnitTest
         public void MegaserverEventTimeTable_LoadTable_Standard_InvalidFile()
         {
             string renamedFilename = "renamedFile.xml";
-            File.Move(MegaserverEventTimeTable.StandardFilename, renamedFilename);
-            File.WriteAllText(MegaserverEventTimeTable.StandardFilename, "invalid data");
+            File.Move(WorldBossEventTimeTable.StandardFilename, renamedFilename);
+            File.WriteAllText(WorldBossEventTimeTable.StandardFilename, "invalid data");
 
             try
             {
-                MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(false);
+                WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(false);
             }
             finally
             {
-                File.Delete(MegaserverEventTimeTable.StandardFilename);
-                File.Move(renamedFilename, MegaserverEventTimeTable.StandardFilename);
+                File.Delete(WorldBossEventTimeTable.StandardFilename);
+                File.Move(renamedFilename, WorldBossEventTimeTable.StandardFilename);
             }
         }
 
@@ -92,40 +92,40 @@ namespace GW2PAO.API.UnitTest
         public void MegaserverEventTimeTable_LoadTable_Adjusted_InvalidFile()
         {
             string renamedFilename = "renamedFile.xml";
-            File.Move(MegaserverEventTimeTable.AdjustedFilename, renamedFilename);
-            File.WriteAllText(MegaserverEventTimeTable.AdjustedFilename, "invalid data");
+            File.Move(WorldBossEventTimeTable.AdjustedFilename, renamedFilename);
+            File.WriteAllText(WorldBossEventTimeTable.AdjustedFilename, "invalid data");
 
             try
             {
-                MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(true);
+                WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(true);
             }
             finally
             {
-                File.Delete(MegaserverEventTimeTable.AdjustedFilename);
-                File.Move(renamedFilename, MegaserverEventTimeTable.AdjustedFilename);
+                File.Delete(WorldBossEventTimeTable.AdjustedFilename);
+                File.Move(renamedFilename, WorldBossEventTimeTable.AdjustedFilename);
             }
         }
 
         [TestMethod]
         public void MegaserverEventTimeTable_CreateTable_Standard_Success()
         {
-            File.Delete(MegaserverEventTimeTable.StandardFilename);
-            MegaserverEventTimeTable.CreateTable(false);
-            Assert.IsTrue(File.Exists(MegaserverEventTimeTable.StandardFilename));
+            File.Delete(WorldBossEventTimeTable.StandardFilename);
+            WorldBossEventTimeTable.CreateTable(false);
+            Assert.IsTrue(File.Exists(WorldBossEventTimeTable.StandardFilename));
         }
 
         [TestMethod]
         public void MegaserverEventTimeTable_CreateTable_Adjusted_Success()
         {
-            File.Delete(MegaserverEventTimeTable.AdjustedFilename);
-            MegaserverEventTimeTable.CreateTable(true);
-            Assert.IsTrue(File.Exists(MegaserverEventTimeTable.AdjustedFilename));
+            File.Delete(WorldBossEventTimeTable.AdjustedFilename);
+            WorldBossEventTimeTable.CreateTable(true);
+            Assert.IsTrue(File.Exists(WorldBossEventTimeTable.AdjustedFilename));
         }
 
         [TestMethod]
         public void MegaserverEventTimeTable_LoadTable_Standard_UniqueTimes()
         {
-            MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(false);
+            WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(false);
 
             foreach (var worldEvent in mett.WorldEvents)
             {
@@ -136,7 +136,7 @@ namespace GW2PAO.API.UnitTest
         [TestMethod]
         public void MegaserverEventTimeTable_LoadTable_Adjusted_UniqueTimes()
         {
-            MegaserverEventTimeTable mett = MegaserverEventTimeTable.LoadTable(true);
+            WorldBossEventTimeTable mett = WorldBossEventTimeTable.LoadTable(true);
 
             foreach (var worldEvent in mett.WorldEvents)
             {

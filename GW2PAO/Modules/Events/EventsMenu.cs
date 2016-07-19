@@ -70,6 +70,7 @@ namespace GW2PAO.Modules.Events
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenWorldBossTimers, viewFactory.DisplayWorldBossTimers, viewFactory.CanDisplayWorldBossTimers));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenMetaEventTimers, viewFactory.DisplayMetaEventTimers, viewFactory.CanDisplayMetaEventTimers));
             this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EventNotifications, false, () => userData.AreEventNotificationsEnabled, userData));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenEventSettingsCommand.Execute(null)));
         }

@@ -222,14 +222,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\DungeonID.cs" />
+    <Compile Include="Constants\MetaEventID.cs" />
     <Compile Include="Constants\Paths.cs" />
-    <Compile Include="Constants\WorldEventID.cs" />
+    <Compile Include="Constants\WorldBossID.cs" />
     <Compile Include="Data\Entities\Continent.cs" />
     <Compile Include="Data\Entities\DetectionPoint.cs" />
     <Compile Include="Data\Entities\Dungeon.cs" />
     <Compile Include="Data\Entities\DynamicEvent.cs" />
     <Compile Include="Data\Entities\Map.cs" />
+    <Compile Include="Data\Entities\MetaEvent.cs" />
     <Compile Include="Data\Entities\Rectangle.cs" />
+    <Compile Include="Utility\SerializableTimespan.cs" />
     <Compile Include="Data\Entities\WvWObjectiveId.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="Data\Enums\Units.cs" />
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
+    <Compile Include="Data\MetaEventsTable.cs" />
     <Compile Include="Data\WvWObjectiveIDs.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
     <Compile Include="Data\Entities\Guild.cs" />
@@ -262,7 +266,7 @@
     <Compile Include="Services\DungeonsService.cs" />
     <Compile Include="Data\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
-    <Compile Include="Data\Entities\WorldEvent.cs" />
+    <Compile Include="Data\Entities\WorldBossEvent.cs" />
     <Compile Include="Services\GuildService.cs" />
     <Compile Include="Services\Interfaces\ICommerceService.cs" />
     <Compile Include="Services\Interfaces\IDungeonsService.cs" />
@@ -273,7 +277,7 @@
     <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
     <Compile Include="Data\ItemsDatabaseBuilder.cs" />
-    <Compile Include="Data\MegaserverEventTimeTable.cs" />
+    <Compile Include="Data\WorldBossEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
     <Compile Include="Data\WvWObjectivesTable.cs" />

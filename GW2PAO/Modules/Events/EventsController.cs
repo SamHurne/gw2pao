@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Modules.Events.Interfaces;
+using GW2PAO.Modules.Events.ViewModels.MetaEventTimers;
 using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 using GW2PAO.Utility;
 using NLog;
@@ -67,22 +68,32 @@ namespace GW2PAO.Modules.Events
         private int startCallCount;
 
         /// <summary>
-        /// Backing store of the World Events collection
+        /// Backing store of the Meta Events collection
+        /// </summary>
+        private ObservableCollection<MetaEventViewModel> metaEvents = new ObservableCollection<MetaEventViewModel>();
+
+        /// <summary>
+        /// The collection of Meta Events
+        /// </summary>
+        public ObservableCollection<MetaEventViewModel> MetaEvents { get { return this.metaEvents; } }
+
+        /// <summary>
+        /// Backing store of the World Boss Events collection
         /// </summary>
         private ObservableCollection<WorldBossEventViewModel> worldEvents = new ObservableCollection<WorldBossEventViewModel>();
 
         /// <summary>
-        /// The collection of World Events
+        /// The collection of World Boss Events
         /// </summary>
         public ObservableCollection<WorldBossEventViewModel> WorldBossEvents { get { return this.worldEvents; } }
 
         /// <summary>
-        /// Backing store of the Event Notifications collection
+        /// Backing store of the World Boss Event Notifications collection
         /// </summary>
         private ObservableCollection<WorldBossEventViewModel> worldBossEventNotifications = new ObservableCollection<WorldBossEventViewModel>();
 
         /// <summary>
-        /// The collection of events for event notifications
+        /// The collection of events for world boss event notifications
         /// </summary>
         public ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get { return this.worldBossEventNotifications; } }
 
@@ -123,10 +134,10 @@ namespace GW2PAO.Modules.Events
             this.UserData.PropertyChanged += UserData_PropertyChanged;
 
             // Initialize the WorldEvents collection
-            this.InitializeWorldEvents();
+            this.InitializeEvents();
 
             // Do this on a background thread since it takes awhile
-            Task.Factory.StartNew(this.InitializeWorldEventZoneNames);
+            Task.Factory.StartNew(this.InitializEventZoneNames);
 
             logger.Info("Event Tracker Controller initialized");
         }
@@ -190,18 +201,20 @@ namespace GW2PAO.Modules.Events
         }
 
         /// <summary>
-        /// Initializes the collection of world events
+        /// Initializes the collection of world boss events and meta events
         /// </summary>
-        private void InitializeWorldEvents()
+        private void InitializeEvents()
         {
             lock (refreshTimerLock)
             {
-                logger.Debug("Initializing world events");
-                this.eventsService.LoadTable(this.UserData.UseAdjustedTimeTable);
+                logger.Debug("Initializing local event data caches");
+                this.eventsService.LoadTables(this.UserData.UseAdjustedTimeTable);
 
+
+                logger.Debug("Initializing World Boss events");
                 Threading.InvokeOnUI(() =>
                 {
-                    foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+                    foreach (var worldEvent in this.eventsService.WorldBossEventTimeTable.WorldEvents)
                     {
                         logger.Debug("Loading localized name for {0}", worldEvent.ID);
                         worldEvent.Name = this.eventsService.GetLocalizedName(worldEvent.ID);
@@ -224,19 +237,42 @@ namespace GW2PAO.Modules.Events
                         }
                     }
                 });
+
+                logger.Debug("Initializing Meta Events");
+                Threading.InvokeOnUI(() =>
+                {
+                    foreach (var metaEvent in this.eventsService.MetaEventsTable.MetaEvents)
+                    {
+                        logger.Debug("Initializing view model for {0}", metaEvent.ID);
+                        this.MetaEvents.Add(new MetaEventViewModel(metaEvent));
+                    }
+                });
             }
         }
 
-        private void InitializeWorldEventZoneNames()
+        /// <summary>
+        /// Initialized all event zone/map names
+        /// </summary>
+        private void InitializEventZoneNames()
         {
             this.zoneService.Initialize();
-            foreach (var worldEvent in this.eventsService.EventTimeTable.WorldEvents)
+            foreach (var worldEvent in this.eventsService.WorldBossEventTimeTable.WorldEvents)
             {
                 logger.Debug("Loading localized zone location for {0}", worldEvent.ID);
                 var name = this.zoneService.GetZoneName(worldEvent.MapID);
                 Threading.BeginInvokeOnUI(() =>
                 {
                     worldEvent.MapName = name;
+                });
+            }
+
+            foreach (var metaEvent in this.MetaEvents)
+            {
+                logger.Debug("Loading localized zone location for {0}", metaEvent.MapID);
+                var name = this.zoneService.GetZoneName(metaEvent.MapID);
+                Threading.BeginInvokeOnUI(() =>
+                {
+                    metaEvent.MapName = name;
                 });
             }
         }
@@ -333,6 +369,12 @@ namespace GW2PAO.Modules.Events
                     });
                 }
 
+                // Refresh the timer and stages for all meta events
+                foreach (var metaEvent in this.MetaEvents)
+                {
+                    metaEvent.Update(DateTime.UtcNow.TimeOfDay);
+                }
+
                 this.eventRefreshTimer.Change(this.EventRefreshInterval, Timeout.Infinite);
             }
         }
@@ -395,15 +437,15 @@ namespace GW2PAO.Modules.Events
                     // Load a different table
                     lock (refreshTimerLock)
                     {
-                        this.eventsService.LoadTable(this.UserData.UseAdjustedTimeTable);
+                        this.eventsService.LoadTables(this.UserData.UseAdjustedTimeTable);
                         Threading.InvokeOnUI(() =>
                         {
-                            foreach (var worldEvent in this.WorldBossEvents)
+                            foreach (var worldBossEvent in this.WorldBossEvents)
                             {
-                                var newData = this.eventsService.EventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldEvent.EventId);
-                                worldEvent.EventModel.ActiveTimes = newData.ActiveTimes;
-                                worldEvent.EventModel.Duration = newData.Duration;
-                                worldEvent.EventModel.WarmupDuration = newData.WarmupDuration;
+                                var newData = this.eventsService.WorldBossEventTimeTable.WorldEvents.FirstOrDefault(evt => evt.ID == worldBossEvent.EventId);
+                                worldBossEvent.EventModel.ActiveTimes = newData.ActiveTimes;
+                                worldBossEvent.EventModel.Duration = newData.Duration;
+                                worldBossEvent.EventModel.WarmupDuration = newData.WarmupDuration;
                             }
                         });
                     }

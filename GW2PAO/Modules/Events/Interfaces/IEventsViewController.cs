@@ -14,6 +14,9 @@ namespace GW2PAO.Modules.Events.Interfaces
         void DisplayWorldBossTimers();
         bool CanDisplayWorldBossTimers();
 
+        void DisplayMetaEventTimers();
+        bool CanDisplayMetaEventTimers();
+
         void DisplayEventNotificationsWindow();
         bool CanDisplayEventNotificationsWindow();
     }

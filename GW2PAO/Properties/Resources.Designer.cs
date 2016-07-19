@@ -70,6 +70,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to active for.
+        /// </summary>
+        public static string ActiveFor {
+            get {
+                return ResourceManager.GetString("ActiveFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to active in.
         /// </summary>
         public static string ActiveIn {
@@ -997,6 +1006,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in.
+        /// </summary>
+        public static string In {
+            get {
+                return ResourceManager.GetString("In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Include Location.
         /// </summary>
         public static string IncludeLocation {
@@ -1150,6 +1168,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meta Event Timers.
+        /// </summary>
+        public static string MetaEventTimers {
+            get {
+                return ResourceManager.GetString("MetaEventTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meters.
         /// </summary>
         public static string Meters {
@@ -1272,6 +1299,15 @@ namespace GW2PAO.Properties {
         public static string OpenGuide {
             get {
                 return ResourceManager.GetString("OpenGuide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Meta Event Timers.
+        /// </summary>
+        public static string OpenMetaEventTimers {
+            get {
+                return ResourceManager.GetString("OpenMetaEventTimers", resourceCulture);
             }
         }
         

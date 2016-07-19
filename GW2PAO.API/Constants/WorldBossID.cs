@@ -9,7 +9,7 @@ namespace GW2PAO.API.Constants
     /// <summary>
     /// Static GUIDs corresponding to the world-boss dynamic events
     /// </summary>
-    public static class WorldEventID
+    public static class WorldBossID
     {
         public static readonly Guid Megadestroyer = new Guid("C876757A-EF3E-4FBE-A484-07FF790D9B05");
         public static readonly Guid Tequatl = new Guid("568A30CF-8512-462F-9D67-647D69BEFAED");

@@ -59,27 +59,46 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
-        /// The World Events time table
+        /// The World Boss Event time table
         /// </summary>
-        public MegaserverEventTimeTable EventTimeTable { get; private set; }
+        public WorldBossEventTimeTable WorldBossEventTimeTable { get; private set; }
 
         /// <summary>
-        /// Loads the events time table and initializes all cached event information
+        /// The Meta Events data table
         /// </summary>
-        public void LoadTable(bool isAdjustedTable)
+        public MetaEventsTable MetaEventsTable { get; private set; }
+
+        /// <summary>
+        /// Loads the events time tables and initializes all cached event information
+        /// </summary>
+        public void LoadTables(bool isAdjustedBossTimersTable)
         {
-            logger.Info("Loading Event Time Table");
+            logger.Info("Loading World Boss Events Time Table");
             try
             {
-                this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
+                this.WorldBossEventTimeTable = WorldBossEventTimeTable.LoadTable(isAdjustedBossTimersTable);
             }
             catch (Exception ex)
             {
                 logger.Error(ex);
                 logger.Info("Error loading Event Time Table, re-creating table");
                 
-                MegaserverEventTimeTable.CreateTable(isAdjustedTable);
-                this.EventTimeTable = MegaserverEventTimeTable.LoadTable(isAdjustedTable);
+                WorldBossEventTimeTable.CreateTable(isAdjustedBossTimersTable);
+                this.WorldBossEventTimeTable = WorldBossEventTimeTable.LoadTable(isAdjustedBossTimersTable);
+            }
+
+            logger.Info("Loading Meta Events Data Table");
+            try
+            {
+                this.MetaEventsTable = MetaEventsTable.LoadTable();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                logger.Info("Error loading Event Time Table, re-creating table");
+
+                MetaEventsTable.CreateTable();
+                this.MetaEventsTable = MetaEventsTable.LoadTable();
             }
         }
 
@@ -106,9 +125,9 @@ namespace GW2PAO.API.Services
         /// <returns>The current state of the input event</returns>
         public Data.Enums.EventState GetState(Guid id)
         {
-            if (this.EventTimeTable.WorldEvents.Any(evt => evt.ID == id))
+            if (this.WorldBossEventTimeTable.WorldEvents.Any(evt => evt.ID == id))
             {
-                WorldEvent worldEvent = this.EventTimeTable.WorldEvents.First(evt => evt.ID == id);
+                WorldBossEvent worldEvent = this.WorldBossEventTimeTable.WorldEvents.First(evt => evt.ID == id);
                 return this.GetState(worldEvent);
             }
             else
@@ -122,7 +141,7 @@ namespace GW2PAO.API.Services
         /// </summary>
         /// <param name="evt">The event to retrieve the state of</param>
         /// <returns>The current state of the input event</returns>
-        public Data.Enums.EventState GetState(WorldEvent evt)
+        public Data.Enums.EventState GetState(WorldBossEvent evt)
         {
             var state = Data.Enums.EventState.Unknown;
             if (evt != null)
@@ -154,7 +173,7 @@ namespace GW2PAO.API.Services
         /// </summary>
         /// <param name="evt">The event to retrieve the time for</param>
         /// <returns>Timespan containing the amount of time until the event is next active</returns>
-        public TimeSpan GetTimeUntilActive(WorldEvent evt)
+        public TimeSpan GetTimeUntilActive(WorldBossEvent evt)
         {
             TimeSpan timeUntilActive = TimeSpan.MinValue;
             if (evt != null)
@@ -183,7 +202,7 @@ namespace GW2PAO.API.Services
         /// </summary>
         /// <param name="evt">The event to retrieve the time for</param>
         /// <returns>Timespan containing the amount of time since the event was last active</returns>
-        public TimeSpan GetTimeSinceActive(WorldEvent evt)
+        public TimeSpan GetTimeSinceActive(WorldBossEvent evt)
         {
             TimeSpan timeSinceActive = TimeSpan.MinValue;
             if (evt != null)
