@@ -13,12 +13,31 @@
         Topmost="True" ShowInTaskbar="False"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        MinHeight="130" Height="Auto" SizeToContent="Height" Width="230" 
+        MinHeight="200" Height="Auto" SizeToContent="Height" Width="230" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
         <core:AutoRefreshCollectionViewSource Source="{Binding EventNotifications}" x:Key="EventNotificationsCollection" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+        <DataTemplate x:Key="WorldBossEventDataTemplate">
+            <View:WorldBossEventNotificationView DataContext="{Binding}">
+                <View:WorldBossEventNotificationView.LayoutTransform>
+                    <RotateTransform Angle="180" />
+                </View:WorldBossEventNotificationView.LayoutTransform>
+            </View:WorldBossEventNotificationView>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MetaEventDataTemplate">
+            <View:MetaEventNotificationView DataContext="{Binding}">
+                <View:MetaEventNotificationView.LayoutTransform>
+                    <RotateTransform Angle="180" />
+                </View:MetaEventNotificationView.LayoutTransform>
+            </View:MetaEventNotificationView>
+        </DataTemplate>
+
+        <View:NotificationViewDataTemplateSelector x:Key="NotificationDataTemplateSelector" />
+
     </src:OverlayWindow.Resources>
 
     <Grid>
@@ -38,6 +57,7 @@
             </Border.ToolTip>
         </Border>
         <ItemsControl ItemsSource="{Binding Source={StaticResource EventNotificationsCollection}}"
+                      ItemTemplateSelector="{StaticResource NotificationDataTemplateSelector}"
                       Margin="0,0,0,5">
 
             <ItemsControl.ItemsPanel>
@@ -61,16 +81,6 @@
                     </StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <View:WorldBossEventNotificationView DataContext="{Binding}">
-                        <View:WorldBossEventNotificationView.LayoutTransform>
-                            <RotateTransform Angle="180"/>
-                        </View:WorldBossEventNotificationView.LayoutTransform>
-                    </View:WorldBossEventNotificationView>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
 
         </ItemsControl>
     </Grid>

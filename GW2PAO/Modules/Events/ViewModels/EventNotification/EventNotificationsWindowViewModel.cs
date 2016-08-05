@@ -24,7 +24,7 @@ namespace GW2PAO.Modules.Events.ViewModels.EventNotification
         /// <summary>
         /// Collection of active event notifications
         /// </summary>
-        public ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get { return this.controller.WorldBossEventNotifications; } }
+        public ObservableCollection<IEventNotification> EventNotifications { get { return this.controller.EventNotifications; } }
 
         /// <summary>
         /// Default constructor

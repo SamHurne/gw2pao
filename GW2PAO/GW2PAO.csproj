@@ -255,8 +255,16 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
+    <Compile Include="Modules\Events\Interfaces\IEventNotification.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\MetaEventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\WorldBossEventNotificationViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventListViewModel.cs" />
+    <Compile Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml.cs">
+      <DependentUpon>MetaEventNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\EventNotification\NotificationViewDataTemplateSelector.cs" />
     <Compile Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml.cs">
       <DependentUpon>MetaEventTimersView.xaml</DependentUpon>
     </Compile>
@@ -532,6 +540,10 @@
     <Page Include="Modules\Dungeons\Views\DungeonTimer\DungeonTimerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
       <SubType>Designer</SubType>

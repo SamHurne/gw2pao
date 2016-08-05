@@ -30,6 +30,14 @@ namespace GW2PAO.Modules.Events.ViewModels.MetaEventTimers
         private bool isVisible;
 
         /// <summary>
+        /// ID of the meta event
+        /// </summary>
+        public Guid EventId
+        {
+            get { return this.metaEventData.ID; }
+        }
+
+        /// <summary>
         /// ID of the zone for the meta event
         /// </summary>
         public int MapID

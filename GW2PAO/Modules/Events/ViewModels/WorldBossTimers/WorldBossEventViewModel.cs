@@ -23,9 +23,6 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         private TimeSpan timeSinceActive;
         private TimeSpan timerValue;
         private bool isVisible;
-        private bool isNotificationShown;
-        private bool isRemovingNotification;
-        private ICollection<WorldBossEventViewModel> displayedNotifications;
 
         /// <summary>
         /// The general events-related user settings/data
@@ -120,25 +117,6 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         }
 
         /// <summary>
-        /// True if the notification for this event has already been shown, else false
-        /// </summary>
-        public bool IsNotificationShown
-        {
-            get { return this.isNotificationShown; }
-            set { SetProperty(ref this.isNotificationShown, value); }
-        }
-
-        /// <summary>
-        /// True if the notification for this event is about to be removed, else false
-        /// TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
-        /// </summary>
-        public bool IsRemovingNotification
-        {
-            get { return this.isRemovingNotification; }
-            set { SetProperty(ref this.isRemovingNotification, value); }
-        }
-
-        /// <summary>
         /// Command to hide the event
         /// </summary>
         public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenEvents); } }
@@ -154,24 +132,15 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         public DelegateCommand CopyDataCommand { get { return new DelegateCommand(this.CopyEventData); } }
 
         /// <summary>
-        /// Closes the displayed notification
-        /// </summary>
-        public DelegateCommand CloseNotificationCommand { get { return new DelegateCommand(this.CloseNotification); } }
-
-        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="eventData">The event's details/data</param>
         /// <param name="userData">Event tracker user data</param>
-        /// <param name="displayedNotificationsCollection">Collection of displayed event notifications</param>
-        public WorldBossEventViewModel(WorldBossEvent eventData, EventsUserData userData, ICollection<WorldBossEventViewModel> displayedNotificationsCollection)
+        public WorldBossEventViewModel(WorldBossEvent eventData, EventsUserData userData)
         {
             this.EventModel = eventData;
             this.UserData = userData;
-            this.displayedNotifications = displayedNotificationsCollection;
             this.IsVisible = true;
-            this.IsNotificationShown = false;
-            this.IsRemovingNotification = false;
 
             this.State = EventState.Unknown;
             this.TimerValue = TimeSpan.Zero;
@@ -222,14 +191,6 @@ namespace GW2PAO.Modules.Events.ViewModels.WorldBossTimers
         {
             logger.Debug("Copying waypoint code of \"{0}\" as \"{1}\"", this.EventName, this.EventModel.WaypointCode);
             System.Windows.Clipboard.SetDataObject(this.EventModel.WaypointCode);
-        }
-
-        /// <summary>
-        /// Removes this event from the collection of displayed notifications
-        /// </summary>
-        private void CloseNotification()
-        {
-            this.displayedNotifications.Remove(this);
         }
 
         /// <summary>

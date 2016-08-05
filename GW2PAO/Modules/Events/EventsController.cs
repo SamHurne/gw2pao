@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.API.Util;
 using GW2PAO.Modules.Events.Interfaces;
+using GW2PAO.Modules.Events.ViewModels.EventNotification;
 using GW2PAO.Modules.Events.ViewModels.MetaEventTimers;
 using GW2PAO.Modules.Events.ViewModels.WorldBossTimers;
 using GW2PAO.Utility;
@@ -88,14 +90,20 @@ namespace GW2PAO.Modules.Events
         public ObservableCollection<WorldBossEventViewModel> WorldBossEvents { get { return this.worldEvents; } }
 
         /// <summary>
-        /// Backing store of the World Boss Event Notifications collection
+        /// Dictionary containing a mapping of what events have 'armed' notifications
+        /// An event is considered 'armed' if it's notification has not already been shown
         /// </summary>
-        private ObservableCollection<WorldBossEventViewModel> worldBossEventNotifications = new ObservableCollection<WorldBossEventViewModel>();
+        private Dictionary<Guid, bool> armedEventNotifications = new Dictionary<Guid, bool>();
 
         /// <summary>
-        /// The collection of events for world boss event notifications
+        /// Backing store of the collection of notifications for world boss and meta event notifications
         /// </summary>
-        public ObservableCollection<WorldBossEventViewModel> WorldBossEventNotifications { get { return this.worldBossEventNotifications; } }
+        private ObservableCollection<IEventNotification> eventNotifications = new ObservableCollection<IEventNotification>();
+
+        /// <summary>
+        /// The collection of notifications for world boss and meta event notifications
+        /// </summary>
+        public ObservableCollection<IEventNotification> EventNotifications { get { return this.eventNotifications; } }
 
         /// <summary>
         /// The interval by which to refresh events (in ms)
@@ -135,10 +143,8 @@ namespace GW2PAO.Modules.Events
 
             // Initialize the WorldEvents collection
             this.InitializeEvents();
-
-            // Do this on a background thread since it takes awhile
-            Task.Factory.StartNew(this.InitializEventZoneNames);
-
+            this.InitializeEventZoneNames();
+            this.InitializeNotifications();
             logger.Info("Event Tracker Controller initialized");
         }
 
@@ -210,7 +216,6 @@ namespace GW2PAO.Modules.Events
                 logger.Debug("Initializing local event data caches");
                 this.eventsService.LoadTables(this.UserData.UseAdjustedTimeTable);
 
-
                 logger.Debug("Initializing World Boss events");
                 Threading.InvokeOnUI(() =>
                 {
@@ -220,21 +225,7 @@ namespace GW2PAO.Modules.Events
                         worldEvent.Name = this.eventsService.GetLocalizedName(worldEvent.ID);
 
                         logger.Debug("Initializing view model for {0}", worldEvent.ID);
-                        this.WorldBossEvents.Add(new WorldBossEventViewModel(worldEvent, this.userData, this.WorldBossEventNotifications));
-
-                        // If the user data does not contain this event, add it to that collection as well
-                        var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == worldEvent.ID);
-                        if (ens == null)
-                        {
-                            this.UserData.NotificationSettings.Add(new EventNotificationSettings(worldEvent.ID)
-                            {
-                                EventName = worldEvent.Name
-                            });
-                        }
-                        else
-                        {
-                            ens.EventName = worldEvent.Name;
-                        }
+                        this.WorldBossEvents.Add(new WorldBossEventViewModel(worldEvent, this.userData));
                     }
                 });
 
@@ -243,7 +234,7 @@ namespace GW2PAO.Modules.Events
                 {
                     foreach (var metaEvent in this.eventsService.MetaEventsTable.MetaEvents)
                     {
-                        logger.Debug("Initializing view model for {0}", metaEvent.ID);
+                        logger.Debug("Initializing view models for {0}", metaEvent.ID);
                         this.MetaEvents.Add(new MetaEventViewModel(metaEvent));
                     }
                 });
@@ -253,7 +244,7 @@ namespace GW2PAO.Modules.Events
         /// <summary>
         /// Initialized all event zone/map names
         /// </summary>
-        private void InitializEventZoneNames()
+        private void InitializeEventZoneNames()
         {
             this.zoneService.Initialize();
             foreach (var worldEvent in this.eventsService.WorldBossEventTimeTable.WorldEvents)
@@ -275,6 +266,58 @@ namespace GW2PAO.Modules.Events
                     metaEvent.MapName = name;
                 });
             }
+        }
+
+        /// <summary>
+        /// Initializes all data for event notifications
+        /// </summary>
+        private void InitializeNotifications()
+        {
+            logger.Debug("Initializing World Boss Event Notifications");
+            Threading.InvokeOnUI(() =>
+            {
+                foreach (var worldEvent in this.WorldBossEvents)
+                {
+                    // If the user data does not contain this event, add it to that collection as well
+                    var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == worldEvent.EventId);
+                    if (ens == null)
+                    {
+                        this.UserData.NotificationSettings.Add(new EventNotificationSettings(worldEvent.EventId)
+                        {
+                            EventName = worldEvent.EventName
+                        });
+                    }
+                    else
+                    {
+                        ens.EventName = worldEvent.EventName;
+                    }
+
+                    this.armedEventNotifications.Add(worldEvent.EventId, true);
+                }
+            });
+
+            logger.Debug("Initializing Meta Event Notifications");
+            Threading.InvokeOnUI(() =>
+            {
+                foreach (var metaEvent in this.MetaEvents)
+                {
+                    // If the user data does not contain this event, add it to that collection as well
+                    var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == metaEvent.EventId);
+                    if (ens == null)
+                    {
+                        this.UserData.NotificationSettings.Add(new EventNotificationSettings(metaEvent.EventId)
+                        {
+                            EventName = metaEvent.MapName
+                        });
+                    }
+                    else
+                    {
+                        ens.EventName = metaEvent.MapName;
+                    }
+
+                    this.armedEventNotifications.Add(metaEvent.EventId, true);
+                }
+            });
         }
 
         /// <summary>
@@ -314,16 +357,13 @@ namespace GW2PAO.Modules.Events
                             if (ens.IsNotificationEnabled
                                 && timeUntilActive.CompareTo(ens.NotificationInterval) < 0)
                             {
-                                if (!worldEvent.IsNotificationShown)
-                                {
-                                    worldEvent.IsNotificationShown = true;
-                                    this.DisplayEventNotification(worldEvent);
-                                }
+                                var notification = new WorldBossEventNotificationViewModel(worldEvent, this.EventNotifications);
+                                this.DisplayEventNotification(notification, this.EventNotifications);
+                                this.armedEventNotifications[worldEvent.EventId] = false;
                             }
                             else
                             {
-                                // Reset the IsNotificationShown state
-                                worldEvent.IsNotificationShown = false;
+                                this.armedEventNotifications[worldEvent.EventId] = true;
                             }
                         }
                     }
@@ -369,10 +409,28 @@ namespace GW2PAO.Modules.Events
                     });
                 }
 
-                // Refresh the timer and stages for all meta events
+                // Update meta events
                 foreach (var metaEvent in this.MetaEvents)
                 {
+                    // Refresh the timer and stages for the event
                     metaEvent.Update(DateTime.UtcNow.TimeOfDay);
+
+                    // Check to see if we need to display a notification for this event
+                    var ens = this.UserData.NotificationSettings.FirstOrDefault(ns => ns.EventID == metaEvent.EventId);
+                    if (ens != null)
+                    {
+                        if (ens.IsNotificationEnabled
+                            && metaEvent.TimeUntilNextStage.CompareTo(ens.NotificationInterval) < 0)
+                        {
+                            var notification = new MetaEventNotificationViewModel(metaEvent, this.EventNotifications);
+                            this.DisplayEventNotification(notification, this.EventNotifications);
+                            this.armedEventNotifications[metaEvent.EventId] = false;
+                        }
+                        else
+                        {
+                            this.armedEventNotifications[metaEvent.EventId] = true;
+                        }
+                    }
                 }
 
                 this.eventRefreshTimer.Change(this.EventRefreshInterval, Timeout.Infinite);
@@ -380,48 +438,49 @@ namespace GW2PAO.Modules.Events
         }
 
         /// <summary>
-        /// Adds an event to the event notifications collection, and then removes the event 10 seconds later
+        /// Displays an event notification, and then removes the event some time later (user-configurable)
         /// </summary>
-        private void DisplayEventNotification(WorldBossEventViewModel eventData)
+        private void DisplayEventNotification(IEventNotification notification, ICollection<IEventNotification> notificationCollection)
         {
             const int SLEEP_TIME = 250;
 
-            if (this.UserData.AreEventNotificationsEnabled)
+            if (this.UserData.AreEventNotificationsEnabled
+                && (this.armedEventNotifications[notification.EventId] == true)
+                && !notificationCollection.Any((n) => n.EventId == notification.EventId))
             {
-                if (!this.WorldBossEventNotifications.Contains(eventData))
+                Task.Factory.StartNew(() =>
                 {
-                    Task.Factory.StartNew(() =>
+                    logger.Info("Displaying notification for \"{0}\"", notification.EventName);
+                    Threading.BeginInvokeOnUI(() =>
                     {
-                        logger.Info("Displaying notification for \"{0}\"", eventData.EventName);
-                        Threading.BeginInvokeOnUI(() => this.WorldBossEventNotifications.Add(eventData));
-
-                        if (this.UserData.NotificationDuration > 0)
-                        {
-                            // For X seconds, loop and sleep, with checks to see if notifications have been disabled
-                            for (int i = 0; i < (this.UserData.NotificationDuration * 1000 / SLEEP_TIME); i++)
-                            {
-                                System.Threading.Thread.Sleep(SLEEP_TIME);
-                                if (!this.UserData.AreEventNotificationsEnabled)
-                                {
-                                    logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-                                    Threading.BeginInvokeOnUI(() => this.WorldBossEventNotifications.Remove(eventData));
-                                }
-                            }
-
-                            logger.Debug("Removing notification for \"{0}\"", eventData.EventName);
-
-                            // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
-                            // This makes it so that the notifications can fade out before they are removed from the notification window
-                            Threading.BeginInvokeOnUI(() => eventData.IsRemovingNotification = true);
-                            System.Threading.Thread.Sleep(SLEEP_TIME);
-                            Threading.BeginInvokeOnUI(() =>
-                            {
-                                this.WorldBossEventNotifications.Remove(eventData);
-                                eventData.IsRemovingNotification = false;
-                            });
-                        }
+                        notificationCollection.Add(notification);
                     });
-                }
+
+                    if (this.UserData.NotificationDuration > 0)
+                    {
+                        // For X seconds, loop and sleep, with checks to see if notifications have been disabled
+                        for (int i = 0; i < (this.UserData.NotificationDuration * 1000 / SLEEP_TIME); i++)
+                        {
+                            System.Threading.Thread.Sleep(SLEEP_TIME);
+                            if (!this.UserData.AreEventNotificationsEnabled)
+                            {
+                                logger.Debug("Removing notification for \"{0}\"", notification.EventName);
+                                Threading.BeginInvokeOnUI(() => notificationCollection.Remove(notification));
+                            }
+                        }
+
+                        logger.Debug("Removing notification for \"{0}\"", notification.EventName);
+
+                        // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
+                        // This makes it so that the notifications can fade out before they are removed from the notification window
+                        Threading.BeginInvokeOnUI(() => notification.IsRemovingNotification = true);
+                        System.Threading.Thread.Sleep(SLEEP_TIME);
+                        Threading.BeginInvokeOnUI(() =>
+                        {
+                            notificationCollection.Remove(notification);
+                        });
+                    }
+                });
             }
         }
 
