@@ -659,8 +659,8 @@
                                 Margin="5"
                                 Width="100"
                                 Minimum="5"
-                                Value="{Binding CharacterPointer.PlayerTrailLength}"
-                                Maximum="1000"
+                                Value="{Binding CharacterPointer.PlayerTrailMaxLength}"
+                                Maximum="2500"
                                 ToolTip="[[Trail Length]]">
                         </Slider>
                     </Grid>

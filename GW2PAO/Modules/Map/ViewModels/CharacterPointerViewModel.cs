@@ -27,12 +27,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private double cameraDirection;
         private MercatorTransform locationTransform = new MercatorTransform();
 
-        // TODO: Consider moving these to the UserData class
-        private bool displayCharacterPointer;
         private bool canDisplayCharacterPointer;
-        private bool snapToCharacter;
-        private bool showPlayerTrail;
-        private int playerTrailLength;
 
         /// <summary>
         /// The player character's location on the map
@@ -57,11 +52,13 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool SnapToCharacter
         {
-            get { return this.snapToCharacter; }
+            get { return this.userData.SnapMapToCharacter; }
             set
             {
-                if (SetProperty(ref this.snapToCharacter, value))
+                if (this.userData.SnapMapToCharacter != value)
                 {
+                    this.userData.SnapMapToCharacter = value;
+                    this.OnPropertyChanged(() => this.SnapToCharacter);
                     this.RefreshCharacterLocation();
                 }
             }
@@ -75,13 +72,17 @@ namespace GW2PAO.Modules.Map.ViewModels
             get
             {
                 if (this.CanDisplayCharacterPointer)
-                    return this.displayCharacterPointer;
+                    return this.userData.ShowCharacterPointer;
                 else
                     return false;
             }
             set
             {
-                SetProperty(ref this.displayCharacterPointer, value);
+                if (this.userData.ShowCharacterPointer != value)
+                {
+                    this.userData.ShowCharacterPointer = value;
+                    this.OnPropertyChanged(() => this.DisplayCharacterPointer);
+                }
             }
         }
 
@@ -115,20 +116,29 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowPlayerTrail
         {
-            get { return this.showPlayerTrail; }
-            set { SetProperty(ref this.showPlayerTrail, value); }
+            get { return this.userData.ShowPlayerTrail; }
+            set
+            {
+                if (this.userData.ShowPlayerTrail != value)
+                {
+                    this.userData.ShowPlayerTrail = value;
+                    this.OnPropertyChanged(() => this.ShowPlayerTrail);
+                }
+            }
         }
 
         /// <summary>
         /// Maximum length of the player trail to show before
         /// </summary>
-        public int PlayerTrailLength
+        public int PlayerTrailMaxLength
         {
-            get { return this.playerTrailLength; }
+            get { return this.userData.PlayerTrailMaxLength; }
             set
             {
-                if (SetProperty(ref this.playerTrailLength, value))
+                if (this.userData.PlayerTrailMaxLength != value)
                 {
+                    this.userData.PlayerTrailMaxLength = value;
+                    this.OnPropertyChanged(() => this.PlayerTrailMaxLength);
                     while (this.PlayerTrail.Count > value)
                     {
                         this.PlayerTrail.RemoveAt(0);
@@ -146,11 +156,6 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.userData = userData;
 
             this.PlayerTrail = new ObservableCollection<Location>();
-
-            this.DisplayCharacterPointer = true;
-            this.SnapToCharacter = false;
-            this.ShowPlayerTrail = true;
-            this.PlayerTrailLength = 100;
             this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
             this.RefreshCharacterLocation();
             this.RefreshCharacterDirection();
@@ -215,7 +220,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         {
                             // Add the new location to the player trail
                             this.PlayerTrail.Add(location);
-                            if (this.PlayerTrail.Count > this.PlayerTrailLength)
+                            if (this.PlayerTrail.Count > this.PlayerTrailMaxLength)
                                 this.PlayerTrail.RemoveAt(0);
                         }
                     }
