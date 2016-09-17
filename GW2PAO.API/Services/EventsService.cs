@@ -35,6 +35,11 @@ namespace GW2PAO.API.Services
         private IStringProvider<Guid> worldEventStringProvider;
 
         /// <summary>
+        /// String provider for meta event stage names
+        /// </summary>
+        private IStringProvider<Guid> metaEventStageNamesProvider;
+
+        /// <summary>
         /// Helper class for retrieving the current system time
         /// </summary>
         private ITimeProvider timeProvider;
@@ -45,6 +50,7 @@ namespace GW2PAO.API.Services
         public EventsService()
         {
             this.worldEventStringProvider = new WorldEventNamesProvider();
+            this.metaEventStageNamesProvider = new MetaEventStageNamesProvider();
             this.timeProvider = new DefaultTimeProvider();
         }
 
@@ -52,9 +58,10 @@ namespace GW2PAO.API.Services
         /// Alternate constructor
         /// </summary>
         /// <param name="currentTimeProvider">A time provider for determining the current name. If null, the EventsServer will use the DefaultTimeProvider</param>
-        public EventsService(IStringProvider<Guid> worldEventNamesProvider, ITimeProvider currentTimeProvider)
+        public EventsService(IStringProvider<Guid> worldEventNamesProvider, IStringProvider<Guid> metaEventNamesProvider, ITimeProvider currentTimeProvider)
         {
             this.worldEventStringProvider = worldEventNamesProvider;
+            this.metaEventStageNamesProvider = metaEventNamesProvider;
             this.timeProvider = currentTimeProvider;
         }
 
@@ -103,19 +110,18 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
-        /// Returns the localized name for the given event
+        /// Returns the localized name for the given event or meta event stage
         /// </summary>
-        /// <param name="id">ID of the event to return the name of</param>
-        /// <returns>The localized name</returns>
+        /// <param name="id">ID of the event or meta event stage to return the name of</param>
+        /// <returns>The localized name, or string.empty if not found</returns>
         public string GetLocalizedName(Guid id)
         {
-            string evtName = this.worldEventStringProvider.GetString(id);
-            if (string.IsNullOrEmpty(evtName))
-            {
-                var allNames = GW2.V1.EventNames.ForCurrentUICulture().FindAll();
-                return allNames[id].Name;
-            }
-            return evtName;
+            string name = this.worldEventStringProvider.GetString(id);
+            if (string.IsNullOrEmpty(name))
+                name = this.metaEventStageNamesProvider.GetString(id);
+            if (name == null)
+                name = string.Empty;
+            return name;
         }
 
         /// <summary>

@@ -63,6 +63,9 @@ namespace GW2PAO.API.Data
         {
             MetaEventsTable met = new MetaEventsTable();
 
+            // Note: Names actually come from a localized names provider, but are left here for reference
+            // in the xml file
+
             met.MetaEvents.Add(new MetaEvent()
             {
                 Name = "Dry Top",
@@ -71,8 +74,8 @@ namespace GW2PAO.API.Data
                 StartOffset = new SerializableTimespan(0, 0, 0),
                 Stages = new List<MetaEventStage>()
                 {
-                    new MetaEventStage() { Name = "Crash Site", Duration = new SerializableTimespan(0, 40, 0) },
-                    new MetaEventStage() { Name = "Sandstorm", Duration = new SerializableTimespan(0, 20, 0) }
+                    new MetaEventStage() { ID = MetaEventStageID.DryTop_CrashSite, Name = "Crash Site", Duration = new SerializableTimespan(0, 40, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.DryTop_Sandstorm, Name = "Sandstorm", Duration = new SerializableTimespan(0, 20, 0) }
                 }
             });
 
@@ -84,9 +87,9 @@ namespace GW2PAO.API.Data
                 StartOffset = new SerializableTimespan(0, 10, 0),
                 Stages = new List<MetaEventStage>()
                 {
-                    new MetaEventStage() { Name = "Night Bosses", Duration = new SerializableTimespan(0, 20, 0) },
-                    new MetaEventStage() { Name = "Daytime", Duration = new SerializableTimespan(1, 15, 0) },
-                    new MetaEventStage() { Name = "Night", Duration = new SerializableTimespan(0, 25, 0) }
+                    new MetaEventStage() { ID = MetaEventStageID.VerdantBrink_NightBosses, Name = "Night Bosses", Duration = new SerializableTimespan(0, 20, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.VerdantBrink_Daytime, Name = "Daytime", Duration = new SerializableTimespan(1, 15, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.VerdantBrink_Night, Name = "Night", Duration = new SerializableTimespan(0, 25, 0) }
                 }
             });
 
@@ -98,10 +101,10 @@ namespace GW2PAO.API.Data
                 StartOffset = new SerializableTimespan(0, 45, 0),
                 Stages = new List<MetaEventStage>()
                 {
-                    new MetaEventStage() { Name = "Challenges", Duration = new SerializableTimespan(0, 15, 0) },
-                    new MetaEventStage() { Name = "Octovine", Duration = new SerializableTimespan(0, 20, 0) },
-                    new MetaEventStage() { Name = "Reset", Duration = new SerializableTimespan(0, 10, 0) },
-                    new MetaEventStage() { Name = "Pylons", Duration = new SerializableTimespan(1, 15, 0) }
+                    new MetaEventStage() { ID = MetaEventStageID.AuricBasin_Challenges, Name = "Challenges", Duration = new SerializableTimespan(0, 15, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.AuricBasin_Octovine, Name = "Octovine", Duration = new SerializableTimespan(0, 20, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.AuricBasin_Reset, Name = "Reset", Duration = new SerializableTimespan(0, 10, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.AuricBasin_Pylons, Name = "Pylons", Duration = new SerializableTimespan(1, 15, 0) }
                 }
             });
 
@@ -113,9 +116,9 @@ namespace GW2PAO.API.Data
                 StartOffset = new SerializableTimespan(0, 25, 0),
                 Stages = new List<MetaEventStage>()
                 {
-                    new MetaEventStage() { Name = "Preparation", Duration = new SerializableTimespan(0, 5, 0) },
-                    new MetaEventStage() { Name = "Chak Gerent", Duration = new SerializableTimespan(0, 20, 0) },
-                    new MetaEventStage() { Name = "Help Outposts", Duration = new SerializableTimespan(1, 35, 0) }
+                    new MetaEventStage() { ID = MetaEventStageID.TangledDepths_Preparation, Name = "Preparation", Duration = new SerializableTimespan(0, 5, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.TangledDepths_ChakGerent, Name = "Chak Gerent", Duration = new SerializableTimespan(0, 20, 0) },
+                    new MetaEventStage() { ID = MetaEventStageID.TangledDepths_HelpOutposts, Name = "Help Outposts", Duration = new SerializableTimespan(1, 35, 0) }
                 }
             });
 
@@ -127,7 +130,7 @@ namespace GW2PAO.API.Data
                 StartOffset = new SerializableTimespan(1, 30, 0),
                 Stages = new List<MetaEventStage>()
                 {
-                    new MetaEventStage() { Name = "Map Active", Duration = new SerializableTimespan(2, 0, 0) }
+                    new MetaEventStage() { ID = MetaEventStageID.DragonsStand_MapActive, Name = "Map Active", Duration = new SerializableTimespan(2, 0, 0) }
                 }
             });
 

@@ -232,6 +232,7 @@
     <Compile Include="Data\Entities\Map.cs" />
     <Compile Include="Data\Entities\MetaEvent.cs" />
     <Compile Include="Data\Entities\Rectangle.cs" />
+    <Compile Include="Providers\MetaEventStageNamesProvider.cs" />
     <Compile Include="Utility\SerializableTimespan.cs" />
     <Compile Include="Data\Entities\WvWObjectiveId.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />

@@ -18,6 +18,7 @@ namespace GW2PAO.API.Data.Entities
 
     public class MetaEventStage
     {
+        public Guid ID { get; set; }
         public string Name { get; set; }
         public SerializableTimespan Duration { get; set; }
     }

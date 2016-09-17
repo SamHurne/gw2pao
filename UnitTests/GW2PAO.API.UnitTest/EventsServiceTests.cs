@@ -118,7 +118,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(false);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -139,7 +139,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(true);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -160,7 +160,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(false);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -196,7 +196,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(false);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -217,7 +217,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(true);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -238,7 +238,7 @@ namespace GW2PAO.API.UnitTest
         {
             var timeMock = new Mock<ITimeProvider>();
 
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
             es.LoadTables(false);
 
             var validEvent = es.WorldBossEventTimeTable.WorldEvents[0];
@@ -292,7 +292,7 @@ namespace GW2PAO.API.UnitTest
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 0, 0, 0)));
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
 
             var timeUntilActive = es.GetTimeUntilActive(testEvent);
 
@@ -307,7 +307,7 @@ namespace GW2PAO.API.UnitTest
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 3, 0, 0)));
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
 
             var timeUntilActive = es.GetTimeUntilActive(testEvent);
 
@@ -342,7 +342,7 @@ namespace GW2PAO.API.UnitTest
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 4, 0, 0)));
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
 
             var timeUntilActive = es.GetTimeSinceActive(testEvent);
 
@@ -357,7 +357,7 @@ namespace GW2PAO.API.UnitTest
 
             var timeMock = new Mock<ITimeProvider>();
             timeMock.Setup(t => t.CurrentTime).Returns(new DateTimeOffset(new DateTime(2014, 10, 22, 23, 0, 0)));
-            EventsService es = new EventsService(null, timeMock.Object);
+            EventsService es = new EventsService(null, null, timeMock.Object);
 
             var timeUntilActive = es.GetTimeSinceActive(testEvent);
 

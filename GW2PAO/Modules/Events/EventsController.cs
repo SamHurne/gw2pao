@@ -234,6 +234,12 @@ namespace GW2PAO.Modules.Events
                 {
                     foreach (var metaEvent in this.eventsService.MetaEventsTable.MetaEvents)
                     {
+                        logger.Debug("Loading localized stage names for {0}", metaEvent.ID);
+                        foreach (var stage in metaEvent.Stages)
+                        {
+                            stage.Name = this.eventsService.GetLocalizedName(stage.ID);
+                        }
+
                         logger.Debug("Initializing view models for {0}", metaEvent.ID);
                         this.MetaEvents.Add(new MetaEventViewModel(metaEvent));
                     }
