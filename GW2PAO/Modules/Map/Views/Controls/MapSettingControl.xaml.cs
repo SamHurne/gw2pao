@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FontAwesome.WPF;
+using FontAwesome.Sharp;
 
 namespace GW2PAO.Modules.Map.Views.Controls
 {
@@ -24,13 +24,13 @@ namespace GW2PAO.Modules.Map.Views.Controls
     public partial class MapSettingControl : UserControl
     {
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon",
-            typeof(FontAwesomeIcon),
+            typeof(IconChar),
             typeof(MapSettingControl),
-            new PropertyMetadata(FontAwesomeIcon.MapMarker));
+            new PropertyMetadata(IconChar.MapMarker));
 
-        public FontAwesomeIcon Icon
+        public IconChar Icon
         {
-            get { return (FontAwesomeIcon)GetValue(IconProperty); }
+            get { return (IconChar)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 

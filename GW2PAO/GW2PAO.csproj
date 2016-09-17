@@ -119,6 +119,10 @@
       <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDbCache.WPF.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=4.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.4.6.3\lib\net40\FontAwesome.Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>

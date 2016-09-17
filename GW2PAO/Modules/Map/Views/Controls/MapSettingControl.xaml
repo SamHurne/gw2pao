@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:GW2PAO.Modules.Map.Views.Controls">
 
     <UserControl.Resources>
@@ -54,11 +54,11 @@
                   Width="20"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top">
-                <fa:ImageAwesome Icon="{Binding ElementName=RootUserControl, Path=Icon}"
+                <fa:IconImage Icon="{Binding ElementName=RootUserControl, Path=Icon}"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center">
-                    <fa:ImageAwesome.Style>
-                        <Style TargetType="fa:ImageAwesome">
+                    <fa:IconImage.Style>
+                        <Style TargetType="fa:IconImage">
                             <Setter Property="Opacity"
                                     Value="0.85" />
                             <Setter Property="Foreground"
@@ -76,8 +76,8 @@
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </fa:ImageAwesome.Style>
-                </fa:ImageAwesome>
+                    </fa:IconImage.Style>
+                </fa:IconImage>
             </Grid>
         </Grid>
         <Border.Style>

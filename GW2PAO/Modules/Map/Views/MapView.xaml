@@ -4,7 +4,7 @@
                    xmlns:src="clr-namespace:GW2PAO.Views"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:fa="http://schemas.fontawesome.io/icons/"
+                   xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
                    xmlns:resx="clr-namespace:GW2PAO.Properties"
                    xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
                    xmlns:converters="clr-namespace:GW2PAO.Converters"
@@ -26,6 +26,7 @@
                    Background="Transparent"
                    ResizeMode="NoResize"
                    Topmost="True"
+                   ShowInTaskbar="False"
                    Closed="Window_Closed"
                    UseLayoutRounding="True"
                    SnapsToDevicePixels="True"
@@ -420,11 +421,14 @@
                                             Text="[[Map]]" />
 
                     <Button Name="MaximizeButton"
-                        Grid.Column="2"
-                        Margin="3"
-                        Click="MaximizeButton_Click"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource MaximizeIcon}" />
+                            Grid.Column="2"
+                            Margin="3"
+                            Click="MaximizeButton_Click"
+                            Style="{StaticResource TitleBarButtonStyle}">
+                        <Button.Content>
+                            <fa:IconBlock Icon="Expand" />
+                        </Button.Content>
+                    </Button>
 
                     <Button Name="CollapseExpandButton"
                         Grid.Column="3"
@@ -498,7 +502,7 @@
                   Margin="5"
                   Grid.Row="1">
                 <Grid.Resources>
-                    <Style TargetType="fa:ImageAwesome">
+                    <Style TargetType="fa:IconImage">
                         <Setter Property="Effect">
                             <Setter.Value>
                                 <DropShadowEffect Color="Black"
@@ -527,9 +531,12 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Margin="3"
-                        Height="30" Width="30"
-                        Click="RestoreButton_Click"
-                        Content="{StaticResource RestoreIcon}">
+                        Height="30"
+                        Width="30"
+                        Click="RestoreButton_Click">
+                    <Button.Content>
+                        <fa:IconBlock Icon="Compress" />
+                    </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                             <Setter Property="Visibility" Value="Collapsed" />
