@@ -14,6 +14,8 @@
         ResizeMode="CanResizeWithGrip"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True"
+        Topmost="True"
+        ShowInTaskbar="False"
         Height="700" Width="1200">
 
     <src:OverlayWindow.Resources>
