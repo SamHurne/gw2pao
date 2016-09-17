@@ -898,5 +898,17 @@ namespace GW2PAO.Properties {
                 this["MapViewWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsMapOpen {
+            get {
+                return ((bool)(this["IsMapOpen"]));
+            }
+            set {
+                this["IsMapOpen"] = value;
+            }
+        }
     }
 }

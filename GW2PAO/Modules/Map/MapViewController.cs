@@ -29,9 +29,9 @@ namespace GW2PAO.Modules.Map
         private CompositionContainer Container { get; set; }
 
         /// <summary>
-        /// Collection of open map windows
+        /// The map window, if open
         /// </summary>
-        private List<MapView> openMapViews = new List<MapView>();
+        private MapView mapView;
 
         /// <summary>
         /// Displays all previously-opened windows and other windows
@@ -41,17 +41,14 @@ namespace GW2PAO.Modules.Map
         {
             logger.Debug("Initializing");
 
-            logger.Debug("Registering hotkey commands");
+            //logger.Debug("Registering hotkey commands");
             //HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
 
-            //Threading.BeginInvokeOnUI(() =>
-            //{
-            //    if (Properties.Settings.Default.IsEventTrackerOpen && this.CanDisplayEventsTracker())
-            //        this.DisplayEventsTracker();
-
-            //    if (this.CanDisplayEventNotificationsWindow())
-            //        this.DisplayEventNotificationsWindow();
-            //});
+            Threading.BeginInvokeOnUI(() =>
+            {
+                if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
+                    this.OpenMap();
+            });
         }
 
         /// <summary>
@@ -61,18 +58,13 @@ namespace GW2PAO.Modules.Map
         {
             logger.Debug("Shutting down");
 
-            foreach (var mapView in this.openMapViews)
+            if (this.mapView != null)
             {
-                Threading.InvokeOnUI(() => mapView.Close());
+                Properties.Settings.Default.IsMapOpen = this.mapView.IsVisible;
+                Threading.InvokeOnUI(() => this.mapView.Close());
             }
 
-            //if (this.eventTrackerView != null)
-            //{
-            //    Properties.Settings.Default.IsEventTrackerOpen = this.eventTrackerView.IsVisible;
-            //    Threading.InvokeOnUI(() => this.eventTrackerView.Close());
-            //}
-            //
-            //Properties.Settings.Default.Save();
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>
@@ -80,25 +72,16 @@ namespace GW2PAO.Modules.Map
         /// </summary>
         public void OpenMap()
         {
-            var mapView = new MapView();
-            this.Container.ComposeParts(mapView);
-            mapView.Show();
-            openMapViews.Add(mapView);
-            //mapView.Closed += (o, e) =>
-            //{
-            //    if (this.openMapViews.Contains(mapView))
-            //        this.openMapViews.Remove(mapView);
-            //};
-            //if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
-            //{
-            //    this.eventTrackerView = new EventTrackerView();
-            //    this.Container.ComposeParts(this.eventTrackerView);
-            //    this.eventTrackerView.Show();
-            //}
-            //else
-            //{
-            //    this.eventTrackerView.Focus();
-            //}
+            if (this.mapView == null || !this.mapView.IsVisible)
+            {
+                this.mapView = new MapView();
+                this.Container.ComposeParts(this.mapView);
+                this.mapView.Show();
+            }
+            else
+            {
+                this.mapView.Focus();
+            }
         }
 
         /// <summary>
