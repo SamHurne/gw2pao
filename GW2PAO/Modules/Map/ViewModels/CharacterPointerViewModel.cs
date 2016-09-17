@@ -198,13 +198,26 @@ namespace GW2PAO.Modules.Map.ViewModels
 
                 if (this.CharacterLocation != location)
                 {
-                    // Add the new location to the player trail
-                    // The check here is due to the initial CharacterLocation when we are first created - null
                     if (this.CharacterLocation != null)
                     {
-                        this.PlayerTrail.Add(location);
-                        if (this.PlayerTrail.Count > this.PlayerTrailLength)
-                            this.PlayerTrail.RemoveAt(0);
+                        // If the location changed by a large amount, the player probably changed map or used a waypoint
+                        // In that case, reset the player trail
+                        var distance = CalcUtil.CalculateDistance(
+                            new API.Data.Entities.Point(location.Longitude, location.Latitude),
+                            new API.Data.Entities.Point(this.CharacterLocation.Longitude, this.CharacterLocation.Latitude));
+                        if (distance > 1)
+                        {
+                            // Since we are dealing with lat/lng values, even a distance of 1 can be considered a 
+                            // warp/teleport
+                            this.PlayerTrail.Clear();
+                        }
+                        else
+                        {
+                            // Add the new location to the player trail
+                            this.PlayerTrail.Add(location);
+                            if (this.PlayerTrail.Count > this.PlayerTrailLength)
+                                this.PlayerTrail.RemoveAt(0);
+                        }
                     }
 
                     this.CharacterLocation = location;
