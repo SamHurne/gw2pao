@@ -8,6 +8,7 @@
         SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
+        ShowInTaskbar="False"
         Topmost="True"
         TextOptions.TextFormattingMode="Display"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">

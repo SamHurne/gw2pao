@@ -11,6 +11,7 @@
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
+        ShowInTaskbar="False"
         TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
