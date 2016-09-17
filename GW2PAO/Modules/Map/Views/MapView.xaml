@@ -426,7 +426,7 @@
                             Click="MaximizeButton_Click"
                             Style="{StaticResource TitleBarButtonStyle}">
                         <Button.Content>
-                            <fa:IconBlock Icon="Expand" />
+                            <fa:IconBlock Icon="ArrowsAlt" />
                         </Button.Content>
                     </Button>
 
@@ -535,7 +535,7 @@
                         Width="30"
                         Click="RestoreButton_Click">
                     <Button.Content>
-                        <fa:IconBlock Icon="Compress" />
+                        <fa:IconBlock Icon="Compress" FontSize="24" />
                     </Button.Content>
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -637,7 +637,7 @@
                                   IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
                                   VerticalAlignment="Center"
                                   ToolTip="[[Show Character Pointer]]">
-                            <ContentPresenter Content="{StaticResource CharacterPointer}" />
+                            <ContentPresenter Content="{StaticResource CharacterPointer}" Height="20" />
                         </CheckBox>
                         <CheckBox Grid.Column="1"
                                   Style="{StaticResource AlternateCheckboxStyle}"

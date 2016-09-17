@@ -55,14 +55,21 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top">
                 <fa:IconImage Icon="{Binding ElementName=RootUserControl, Path=Icon}"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Center">
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              UseLayoutRounding="True"
+                              SnapsToDevicePixels="True">
                     <fa:IconImage.Style>
                         <Style TargetType="fa:IconImage">
-                            <Setter Property="Opacity"
-                                    Value="0.85" />
                             <Setter Property="Foreground"
                                     Value="LightGoldenrodYellow" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black"
+                                                      BlurRadius="5"
+                                                      ShadowDepth="0" />
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsEnabled"
                                          Value="False">
