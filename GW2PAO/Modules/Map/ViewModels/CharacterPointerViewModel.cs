@@ -152,23 +152,33 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.ShowPlayerTrail = true;
             this.PlayerTrailLength = 100;
             this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
+            this.RefreshCharacterLocation();
+            this.RefreshCharacterDirection();
 
-            ((INotifyPropertyChanged)this.zoneController).PropertyChanged += ZoneControllerPropertyChanged;
-        }
-
-        /// <summary>
-        /// Handles the PropertyChanged event of the Zone Controller
-        /// </summary>
-        private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if ((e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ValidMapID))
-                || (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.CharacterPosition))
-                || (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.CameraDirection)))
+            string validMapProp = ReflectionUtility.GetPropertyName(() => this.zoneController.ValidMapID);
+            string activeMapProp = ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap);
+            string charPosProp = ReflectionUtility.GetPropertyName(() => this.zoneController.CharacterPosition);
+            string camDirProp = ReflectionUtility.GetPropertyName(() => this.zoneController.CameraDirection);
+            ((INotifyPropertyChanged)this.zoneController).PropertyChanged += (o, e) =>
             {
-                this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
-                this.RefreshCharacterLocation();
-                this.RefreshCharacterDirection();
-            }
+                if (e.PropertyName == validMapProp)
+                {
+                    this.CanDisplayCharacterPointer = this.zoneController.ValidMapID;
+                }
+                else if (e.PropertyName == activeMapProp)
+                {
+                    this.RefreshCharacterLocation();
+                    this.RefreshCharacterDirection();
+                }
+                else if (e.PropertyName == charPosProp)
+                {
+                    this.RefreshCharacterLocation();
+                }
+                else if (e.PropertyName == camDirProp)
+                {
+                    this.RefreshCharacterDirection();
+                }
+            };
         }
 
         private void RefreshCharacterLocation()

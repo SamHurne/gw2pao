@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using GW2PAO.API.Services.Interfaces;
@@ -14,6 +15,11 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         private IZoneService zoneService;
         private IPlayerService playerService;
         private ZoneCompletionUserData zoneUserData;
+
+        /// <summary>
+        /// Event raised when all data is finished loading
+        /// </summary>
+        public event EventHandler DataLoaded;
 
         /// <summary>
         /// Dictionary containing all zone items for each continent
@@ -58,50 +64,31 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
             {
                 var zoneItems = this.zoneService.GetZoneItemsByContinent(continent.Key);
 
-                Threading.BeginInvokeOnUI(() =>
-                {
-                    continent.Value.Dungeons.Clear();
-                    continent.Value.HeartQuests.Clear();
-                    continent.Value.HeroPoints.Clear();
-                    continent.Value.POIs.Clear();
-                    continent.Value.Vistas.Clear();
-                    continent.Value.Waypoints.Clear();
-                });
+                Threading.InvokeOnUI(() => continent.Value.Clear());
 
                 foreach (var entity in zoneItems)
                 {
-                    var vm = new ZoneItemViewModel(entity, this.playerService, this.zoneUserData);
-                    Threading.BeginInvokeOnUI(() =>
+                    var zoneItem = new ZoneItemViewModel(entity, this.playerService, this.zoneUserData);
+                    Threading.InvokeOnUI(() =>
                     {
-                        switch (entity.Type)
-                        {
-                            case API.Data.Enums.ZoneItemType.Dungeon:
-                                continent.Value.Dungeons.Add(vm);
-                                break;
-                            case API.Data.Enums.ZoneItemType.HeartQuest:
-                                continent.Value.HeartQuests.Add(vm);
-                                break;
-                            case API.Data.Enums.ZoneItemType.HeroPoint:
-                                continent.Value.HeroPoints.Add(vm);
-                                break;
-                            case API.Data.Enums.ZoneItemType.PointOfInterest:
-                                continent.Value.POIs.Add(vm);
-                                break;
-                            case API.Data.Enums.ZoneItemType.Vista:
-                                continent.Value.Vistas.Add(vm);
-                                break;
-                            case API.Data.Enums.ZoneItemType.Waypoint:
-                                continent.Value.Waypoints.Add(vm);
-                                break;
-                            default:
-                                break;
-                        }
+                        continent.Value.Add(zoneItem);
                     });
                 }
             }
+
+            Threading.BeginInvokeOnUI(() => this.RaiseDataLoadedEvent());
+        }
+
+        private void RaiseDataLoadedEvent()
+        {
+            if (this.DataLoaded != null)
+                this.DataLoaded(this, new EventArgs());
         }
     }
 
+    /// <summary>
+    /// Zone items container for an entire continent
+    /// </summary>
     public class ContinentZoneItems
     {
         public int ContinentId
@@ -111,7 +98,16 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Waypoints for the current continent
+        /// Zone items organized by map ID
+        /// </summary>
+        public ObservableDictionary<int, ZoneItems> ZoneItemsByMap
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Waypoints for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Waypoints
         {
@@ -120,7 +116,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Points of Interest for the current continent
+        /// Collection of Points of Interest for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> POIs
         {
@@ -129,7 +125,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Vistas for the current continent
+        /// Collection of Vistas for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Vistas
         {
@@ -138,7 +134,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Heart Quests for the current continent
+        /// Collection of Heart Quests for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeartQuests
         {
@@ -147,7 +143,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Hero Points for the current continent
+        /// Collection of Hero Points for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeroPoints
         {
@@ -156,7 +152,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         }
 
         /// <summary>
-        /// Collection of Dungeons for the current continent
+        /// Collection of Dungeons for the continent
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Dungeons
         {
@@ -164,9 +160,147 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
             private set;
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="continentId">ID of the continent</param>
         public ContinentZoneItems(int continentId)
         {
             this.ContinentId = continentId;
+            this.ZoneItemsByMap = new ObservableDictionary<int, ZoneItems>();
+
+            this.Waypoints = new ObservableCollection<ZoneItemViewModel>();
+            this.Vistas = new ObservableCollection<ZoneItemViewModel>();
+            this.POIs = new ObservableCollection<ZoneItemViewModel>();
+            this.HeroPoints = new ObservableCollection<ZoneItemViewModel>();
+            this.HeartQuests = new ObservableCollection<ZoneItemViewModel>();
+            this.Dungeons = new ObservableCollection<ZoneItemViewModel>();
+        }
+
+        /// <summary>
+        /// Adds a new zone item/objective various collections 
+        /// </summary>
+        /// <param name="zoneItem">The zone item/objective to add</param>
+        public void Add(ZoneItemViewModel zoneItem)
+        {
+            var mapId = zoneItem.ItemModel.MapId;
+            if (!this.ZoneItemsByMap.ContainsKey(mapId))
+                this.ZoneItemsByMap.Add(mapId, new ZoneItems(mapId));
+
+            switch (zoneItem.ItemType)
+            {
+                case API.Data.Enums.ZoneItemType.Dungeon:
+                    this.Dungeons.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].Dungeons.Add(zoneItem);
+                    break;
+                case API.Data.Enums.ZoneItemType.HeartQuest:
+                    this.HeartQuests.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].HeartQuests.Add(zoneItem);
+                    break;
+                case API.Data.Enums.ZoneItemType.HeroPoint:
+                    this.HeroPoints.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].HeroPoints.Add(zoneItem);
+                    break;
+                case API.Data.Enums.ZoneItemType.PointOfInterest:
+                    this.POIs.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].POIs.Add(zoneItem);
+                    break;
+                case API.Data.Enums.ZoneItemType.Vista:
+                    this.Vistas.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].Vistas.Add(zoneItem);
+                    break;
+                case API.Data.Enums.ZoneItemType.Waypoint:
+                    this.Waypoints.Add(zoneItem);
+                    this.ZoneItemsByMap[mapId].Waypoints.Add(zoneItem);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Clears out all zone items/objectives
+        /// </summary>
+        public void Clear()
+        {
+            this.ZoneItemsByMap.Clear();
+            this.Waypoints.Clear();
+            this.Vistas.Clear();
+            this.POIs.Clear();
+            this.HeroPoints.Clear();
+            this.HeartQuests.Clear();
+            this.Dungeons.Clear();
+        }
+    }
+
+    /// <summary>
+    /// Zone items container for a single zone
+    /// </summary>
+    public class ZoneItems
+    {
+        public int MapId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Waypoints for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> Waypoints
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Points of Interest for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> POIs
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Vistas for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> Vistas
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Heart Quests for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> HeartQuests
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Hero Points for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> HeroPoints
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Collection of Dungeons for the zone
+        /// </summary>
+        public ObservableCollection<ZoneItemViewModel> Dungeons
+        {
+            get;
+            private set;
+        }
+
+        public ZoneItems(int mapId)
+        {
+            this.MapId = mapId;
 
             this.Waypoints = new ObservableCollection<ZoneItemViewModel>();
             this.Vistas = new ObservableCollection<ZoneItemViewModel>();
@@ -176,5 +310,4 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
             this.Dungeons = new ObservableCollection<ZoneItemViewModel>();
         }
     }
-
 }

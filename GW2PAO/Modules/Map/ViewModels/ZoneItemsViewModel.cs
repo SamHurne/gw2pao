@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GW2PAO.API.Data.Entities;
+using GW2PAO.API.Services.Interfaces;
+using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.Modules.ZoneCompletion.Models;
 using GW2PAO.Modules.ZoneCompletion.ViewModels;
+using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
 
@@ -20,15 +24,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private ZoneItemsStore zoneItemsStore;
+        private MapUserData userData;
+        private IZoneCompletionController zoneController;
         private int continentId;
-
-        // TODO: Consider moving these to the UserData class
-        private bool showWaypoints;
-        private bool showPOIs;
-        private bool showVistas;
-        private bool showHeartQuests;
-        private bool showHeroPoints;
-        private bool showDungeons;
 
         /// <summary>
         /// Continent ID of the continent for which to show zone items
@@ -44,7 +42,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Waypoints
         {
-            get { return this.zoneItemsStore.Data[this.continentId].Waypoints; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].Waypoints;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].Waypoints;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -52,8 +64,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowWaypoints
         {
-            get { return this.showWaypoints; }
-            set { SetProperty(ref this.showWaypoints, value); }
+            get { return this.userData.AreWaypointsVisible; }
+            set
+            {
+                if (this.userData.AreWaypointsVisible != value)
+                {
+                    this.userData.AreWaypointsVisible = value;
+                    this.OnPropertyChanged(() => this.ShowWaypoints);
+                }
+            }
         }
 
         /// <summary>
@@ -61,7 +80,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> POIs
         {
-            get { return this.zoneItemsStore.Data[this.continentId].POIs; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].POIs;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].POIs;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -69,8 +102,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowPOIs
         {
-            get { return this.showPOIs; }
-            set { SetProperty(ref this.showPOIs, value); }
+            get { return this.userData.ArePoisVisible; }
+            set
+            {
+                if (this.userData.ArePoisVisible != value)
+                {
+                    this.userData.ArePoisVisible = value;
+                    this.OnPropertyChanged(() => this.ShowPOIs);
+                }
+            }
         }
 
         /// <summary>
@@ -78,7 +118,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Vistas
         {
-            get { return this.zoneItemsStore.Data[this.continentId].Vistas; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].Vistas;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].Vistas;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -86,8 +140,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowVistas
         {
-            get { return this.showVistas; }
-            set { SetProperty(ref this.showVistas, value); }
+            get { return this.userData.AreVistasVisible; }
+            set
+            {
+                if (this.userData.AreVistasVisible != value)
+                {
+                    this.userData.AreVistasVisible = value;
+                    this.OnPropertyChanged(() => this.ShowVistas);
+                }
+            }
         }
 
         /// <summary>
@@ -95,7 +156,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeartQuests
         {
-            get { return this.zoneItemsStore.Data[this.continentId].HeartQuests; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].HeartQuests;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].HeartQuests;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -103,8 +178,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowHeartQuests
         {
-            get { return this.showHeartQuests; }
-            set { SetProperty(ref this.showHeartQuests, value); }
+            get { return this.userData.AreHeartsVisible; }
+            set
+            {
+                if (this.userData.AreHeartsVisible != value)
+                {
+                    this.userData.AreHeartsVisible = value;
+                    this.OnPropertyChanged(() => this.ShowHeartQuests);
+                }
+            }
         }
 
         /// <summary>
@@ -112,7 +194,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> HeroPoints
         {
-            get { return this.zoneItemsStore.Data[this.continentId].HeroPoints; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].HeroPoints;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].HeroPoints;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -120,8 +216,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowHeroPoints
         {
-            get { return this.showHeroPoints; }
-            set { SetProperty(ref this.showHeroPoints, value); }
+            get { return this.userData.AreHeroPointsVisible; }
+            set
+            {
+                if (this.userData.AreHeroPointsVisible != value)
+                {
+                    this.userData.AreHeroPointsVisible = value;
+                    this.OnPropertyChanged(() => this.ShowHeroPoints);
+                }
+            }
         }
 
         /// <summary>
@@ -129,7 +232,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public ObservableCollection<ZoneItemViewModel> Dungeons
         {
-            get { return this.zoneItemsStore.Data[this.continentId].Dungeons; }
+            get
+            {
+                if (this.userData.ShowEntireContinent)
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].Dungeons;
+                }
+                else if (this.zoneController.ValidMapID && this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap.ContainsKey(this.zoneController.CurrentMapID))
+                {
+                    return this.zoneItemsStore.Data[this.ContinentID].ZoneItemsByMap[this.zoneController.CurrentMapID].Dungeons;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -137,16 +254,25 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public bool ShowDungeons
         {
-            get { return this.showDungeons; }
-            set { SetProperty(ref this.showDungeons, value); }
+            get { return this.userData.AreDungeonsVisible; }
+            set
+            {
+                if (this.userData.AreDungeonsVisible != value)
+                {
+                    this.userData.AreDungeonsVisible = value;
+                    this.OnPropertyChanged(() => this.ShowDungeons);
+                }
+            }
         }
 
         /// <summary>
         /// Constructs a new ZoneItemsViewModel object
         /// </summary>
-        public ZoneItemsViewModel(ZoneItemsStore zoneItemsStore)
+        public ZoneItemsViewModel(ZoneItemsStore zoneItemsStore, IZoneCompletionController zoneController, MapUserData userData)
         {
             this.zoneItemsStore = zoneItemsStore;
+            this.zoneController = zoneController;
+            this.userData = userData;
 
             this.ShowHeartQuests = true;
             this.ShowHeroPoints = true;
@@ -154,6 +280,29 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.ShowVistas = true;
             this.ShowWaypoints = true;
             this.ShowDungeons = true;
+
+            ((INotifyPropertyChanged)this.zoneController).PropertyChanged += (o, e) =>
+            {
+                if (!this.userData.ShowEntireContinent && e.PropertyName.ToLower().Contains("map"))
+                {
+                    this.OnPropertyChanged(() => this.Waypoints);
+                    this.OnPropertyChanged(() => this.POIs);
+                    this.OnPropertyChanged(() => this.Vistas);
+                    this.OnPropertyChanged(() => this.HeartQuests);
+                    this.OnPropertyChanged(() => this.HeroPoints);
+                    this.OnPropertyChanged(() => this.Dungeons);
+                }
+            };
+
+            this.zoneItemsStore.DataLoaded += (o, e) =>
+            {
+                this.OnPropertyChanged(() => this.Waypoints);
+                this.OnPropertyChanged(() => this.POIs);
+                this.OnPropertyChanged(() => this.Vistas);
+                this.OnPropertyChanged(() => this.HeartQuests);
+                this.OnPropertyChanged(() => this.HeroPoints);
+                this.OnPropertyChanged(() => this.Dungeons);
+            };
         }
     }
 }

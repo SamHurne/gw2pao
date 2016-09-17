@@ -129,7 +129,7 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
 
             this.MapMarkers = new MarkersViewModel(userData);
-            this.ZoneItems = new ZoneItemsViewModel(zoneItemsStore);
+            this.ZoneItems = new ZoneItemsViewModel(zoneItemsStore, zoneController, userData);
 
             if (playerService.HasValidMapId)
                 this.ContinentData = this.zoneService.GetContinentByMap(playerService.MapId);
@@ -147,9 +147,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private void ZoneControllerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap))
+            if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveContinent))
             {
-                this.ContinentData = this.zoneService.GetContinentByMap(this.zoneController.CurrentMapID);
+                this.ContinentData = this.zoneController.ActiveContinent;
             }
         }
 
