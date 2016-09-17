@@ -7,6 +7,7 @@
         xmlns:regions="http://www.codeplex.com/CompositeWPF"
         Title="Settings"
         Topmost="True"
+        ShowInTaskbar="False"
         WindowStyle="None" AllowsTransparency="true"
         Background="Transparent"
         ResizeMode="NoResize"

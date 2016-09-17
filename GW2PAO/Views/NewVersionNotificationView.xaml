@@ -10,6 +10,7 @@
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         SizeToContent="Height"
         Topmost="True"
+        ShowInTaskbar="False"
         TextOptions.TextFormattingMode="Display"
         SnapsToDevicePixels="True"
         UseLayoutRounding="True"
