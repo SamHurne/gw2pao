@@ -12,7 +12,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        Height="500" Width="700">
+        Height="550" Width="700">
     
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>
