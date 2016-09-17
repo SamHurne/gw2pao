@@ -108,16 +108,24 @@ namespace GW2PAO.Modules.Events.ViewModels.MetaEventTimers
         }
 
         /// <summary>
+        /// Command to hide the event
+        /// </summary>
+        public DelegateCommand HideCommand { get { return new DelegateCommand(this.AddToHiddenEvents); } }
+
+        /// <summary>
         /// Default Constructor
         /// </summary>
-        public MetaEventViewModel(MetaEvent metaEventData)
+        public MetaEventViewModel(MetaEvent metaEventData, EventsUserData userData)
         {
             this.metaEventData = metaEventData;
+            this.UserData = userData;
             this.IsVisible = true;
 
             var currentTime = DateTime.UtcNow.TimeOfDay;
             this.InitializeStagesAndTimers(currentTime);
             this.prevUpdateTimeUtc = currentTime;
+
+            this.UserData.HiddenMetaEvents.CollectionChanged += (o, e) => this.RefreshVisibility();
         }
 
         /// <summary>
@@ -209,6 +217,32 @@ namespace GW2PAO.Modules.Events.ViewModels.MetaEventTimers
 
             logger.Info("Meta Event {0} - Current Stage: {1} - Next Stage: {2} - Next stage in {3}",
                 this.metaEventData.Name, this.CurrentStage.Name, this.NextStage.Name, this.TimeUntilNextStage);
+        }
+
+        /// <summary>
+        /// Adds the meta event to the list of hidden meta events
+        /// </summary>
+        private void AddToHiddenEvents()
+        {
+            logger.Debug("Adding \"{0}\" to hidden meta events", this.MapName);
+            this.UserData.HiddenMetaEvents.Add(this.EventId);
+        }
+
+        /// <summary>
+        /// Refreshes the visibility of the meta event
+        /// </summary>
+        private void RefreshVisibility()
+        {
+            logger.Trace("Refreshing visibility of meta event \"{0}\"", this.MapName);
+            if (this.UserData.HiddenMetaEvents.Any(id => id == this.EventId))
+            {
+                this.IsVisible = false;
+            }
+            else
+            {
+                this.IsVisible = true;
+            }
+            logger.Trace("IsVisible = {0}", this.IsVisible);
         }
     }
 }

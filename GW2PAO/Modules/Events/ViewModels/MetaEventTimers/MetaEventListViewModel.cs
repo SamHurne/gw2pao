@@ -72,8 +72,8 @@ namespace GW2PAO.Modules.Events.ViewModels.MetaEventTimers
         /// </summary>
         private void ResetHiddenEvents()
         {
-            logger.Debug("Resetting hidden events");
-            this.UserData.HiddenEvents.Clear();
+            logger.Debug("Resetting hidden meta events");
+            this.UserData.HiddenMetaEvents.Clear();
         }
     }
 }

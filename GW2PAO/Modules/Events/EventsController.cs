@@ -241,7 +241,7 @@ namespace GW2PAO.Modules.Events
                         }
 
                         logger.Debug("Initializing view models for {0}", metaEvent.ID);
-                        this.MetaEvents.Add(new MetaEventViewModel(metaEvent));
+                        this.MetaEvents.Add(new MetaEventViewModel(metaEvent, this.userData));
                     }
                 });
             }
