@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using GW2PAO.Modules.Map.Models;
 
 namespace GW2PAO.Modules.Map
 {
@@ -36,6 +38,8 @@ namespace GW2PAO.Modules.Map
         private bool showCharacterPointer;
         private bool showPlayerTrail;
         private int playerTrailMaxLength;
+
+        private ObservableCollection<MapMarker> mapMarkers = new ObservableCollection<MapMarker>();
 
         /// <summary>
         /// True if Heart Quests are shown on the map, else false
@@ -137,6 +141,11 @@ namespace GW2PAO.Modules.Map
         }
 
         /// <summary>
+        /// Collection of player-created map markers 
+        /// </summary>
+        public ObservableCollection<MapMarker> MapMarkers { get { return this.mapMarkers; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public MapUserData()
@@ -161,6 +170,7 @@ namespace GW2PAO.Modules.Map
         {
             logger.Info("Enabling auto save");
             this.PropertyChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
+            this.MapMarkers.CollectionChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
         }
     }
 }

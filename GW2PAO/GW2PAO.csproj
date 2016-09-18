@@ -277,6 +277,7 @@
     <Compile Include="Modules\Map\MapViewController.cs" />
     <Compile Include="Modules\Map\Models\MapMarker.cs" />
     <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\MapMarkerViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\MarkersViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
     <Compile Include="Modules\Map\Views\Controls\MapSettingControl.xaml.cs">

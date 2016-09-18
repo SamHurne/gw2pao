@@ -193,10 +193,7 @@
                             <Image.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="{x:Static resx:Resources.Remove}"
-                                              Command="{Binding RemoveMarkerCommand}" />
-                                    <!--Command="{Binding Path=DataContext.MapMarkers.RemoveMarkerCommand,
-                                                                RelativeSource={RelativeSource AncestorType={x:Type ContentControl},
-                                                                Mode=FindAncestor}}"-->
+                                              Command="{Binding RemoveMarkerCommand}"/>
                                 </ContextMenu>
                             </Image.ContextMenu>
                             <Image.Style>
