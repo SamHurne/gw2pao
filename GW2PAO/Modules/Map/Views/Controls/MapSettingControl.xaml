@@ -20,96 +20,98 @@
                          Opacity="0.85" />
     </UserControl.Resources>
 
-    <Border Name="RootPanel"
-            BorderThickness="2"
-            CornerRadius="2"
-            Padding="5">
-        <Grid>
-            <Grid Name="ControlsGrid"
-                  Background="#01000000">
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Setter Property="Visibility"
-                                Value="Collapsed" />
-                        <Setter Property="Background" Value="Transparent" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ControlsIcon, Path=IsMouseOver}"
-                                         Value="True">
-                                <Setter Property="Visibility"
-                                        Value="Visible" />
-                            </DataTrigger>
-                            <Trigger Property="IsMouseOver"
+    <Grid Name="MainPanel">
+        <fa:IconImage Name="ControlsIcon"
+                      Icon="{Binding ElementName=RootUserControl, Path=Icon}"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Width="20"
+                      UseLayoutRounding="True"
+                      SnapsToDevicePixels="True">
+            <fa:IconImage.Style>
+                <Style TargetType="fa:IconImage">
+                    <Setter Property="Foreground"
+                            Value="LightGoldenrodYellow" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black"
+                                              BlurRadius="5"
+                                              ShadowDepth="0" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Opacity"
+                                    Value="0.35" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </fa:IconImage.Style>
+        </fa:IconImage>
+
+        <Popup Name="ControlsPopup"
+               PlacementTarget="{Binding ElementName=MainPanel}"
+               AllowsTransparency="True"
+               HorizontalOffset="0"
+               VerticalOffset="-20">
+            <Popup.Style>
+                <Style TargetType="Popup">
+                    <Setter Property="IsOpen"
+                            Value="False" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ControlsIcon, Path=IsMouseOver}"
                                      Value="True">
-                                <Setter Property="Visibility"
-                                        Value="Visible" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <ContentPresenter Margin="0,10,0,0"
-                                  Content="{Binding ElementName=RootUserControl, Path=PanelContent}" />
-            </Grid>
-            <Grid Name="ControlsIcon"
-                  Height="20"
-                  Width="20"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top">
+                            <Setter Property="IsOpen"
+                                    Value="True" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=ControlsPopup, Path=IsMouseOver}"
+                                     Value="True">
+                            <Setter Property="IsOpen"
+                                    Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Popup.Style>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Background="#01000000"
+                      Grid.Column="0"
+                      Height="30"
+                      Width="20"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Center" />
                 <fa:IconImage Icon="{Binding ElementName=RootUserControl, Path=Icon}"
+                              Grid.Column="0"
+                              Height="20"
+                              Width="20"
+                              VerticalAlignment="Top"
                               HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
                               UseLayoutRounding="True"
-                              SnapsToDevicePixels="True">
-                    <fa:IconImage.Style>
-                        <Style TargetType="fa:IconImage">
-                            <Setter Property="Foreground"
-                                    Value="LightGoldenrodYellow" />
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Color="Black"
-                                                      BlurRadius="5"
-                                                      ShadowDepth="0" />
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled"
-                                         Value="False">
-                                    <Setter Property="Opacity"
-                                            Value="0.35" />
-                                </Trigger>
-                                <DataTrigger Binding="{Binding ElementName=ControlsGrid, Path=Visibility}"
-                                             Value="Visible">
-                                    <Setter Property="Foreground"
-                                            Value="White" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </fa:IconImage.Style>
+                              SnapsToDevicePixels="True"
+                              Foreground="LightGoldenrodYellow">
+                    <fa:IconImage.Effect>
+                        <DropShadowEffect Color="Black"
+                                          BlurRadius="5"
+                                          ShadowDepth="0" />
+                    </fa:IconImage.Effect>
                 </fa:IconImage>
+                <Border Name="RootPanel"
+                        Grid.Column="1"
+                        BorderThickness="2"
+                        CornerRadius="2"
+                        Padding="5"
+                        Background="{StaticResource ControlPopupsBackground}"
+                        BorderBrush="{StaticResource ControlPopupsBorderBrush}">
+                    <ContentPresenter Margin="0,0,0,0"
+                                      Content="{Binding ElementName=RootUserControl, Path=PanelContent}" />
+                </Border>
             </Grid>
-        </Grid>
-        <Border.Style>
-            <Style TargetType="Border">
-                <Setter Property="Background"
-                        Value="Transparent" />
-                <Setter Property="BorderBrush"
-                        Value="Transparent" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding ElementName=ControlsIcon, Path=IsMouseOver}"
-                                 Value="True">
-                        <Setter Property="Background"
-                                Value="{StaticResource ControlPopupsBackground}" />
-                        <Setter Property="BorderBrush"
-                                Value="{StaticResource ControlPopupsBorderBrush}" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding ElementName=ControlsGrid, Path=IsMouseOver}"
-                                 Value="True">
-                        <Setter Property="Background"
-                                Value="{StaticResource ControlPopupsBackground}" />
-                        <Setter Property="BorderBrush"
-                                Value="{StaticResource ControlPopupsBorderBrush}" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Border.Style>
-    </Border>
+            
+        </Popup>
+    </Grid>
 </UserControl>
