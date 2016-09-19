@@ -45,12 +45,32 @@ namespace GW2PAO.PresentationCore.DragDrop
 
                 if (itemsSource == null)
                 {
-                    itemsControl.Items.Insert(insertionIndex, itemToInsert);
+                    if (itemsControl.Items.Contains(itemToInsert))
+                    {
+                        var oldIndex = itemsControl.Items.IndexOf(itemToInsert);
+                        itemsControl.Items.RemoveAt(oldIndex);
+                        if (insertionIndex > oldIndex) insertionIndex--;
+                        itemsControl.Items.Insert(insertionIndex, itemToInsert);
+                    }
+                    else
+                    {
+                        itemsControl.Items.Insert(insertionIndex, itemToInsert);
+                    }
                 }
                 // Is the ItemsSource IList or IList<T>? If so, insert the dragged item in the list.
                 else if (itemsSource is IList)
                 {
-                    ((IList)itemsSource).Insert(insertionIndex, itemToInsert);
+                    if (((IList)itemsSource).Contains(itemToInsert))
+                    {
+                        var oldIndex = ((IList)itemsSource).IndexOf(itemToInsert);
+                        ((IList)itemsSource).RemoveAt(oldIndex);
+                        if (insertionIndex > oldIndex) insertionIndex--;
+                        ((IList)itemsSource).Insert(insertionIndex, itemToInsert);
+                    }
+                    else
+                    {
+                        ((IList)itemsSource).Insert(insertionIndex, itemToInsert);
+                    }
                 }
                 else
                 {

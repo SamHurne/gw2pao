@@ -186,50 +186,125 @@
                TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location"
                     Value="{Binding Location}" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="Width"
+                    Value="50" />
+            <Setter Property="Margin"
+                    Value="-25,-25,0,0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
-                        <Image Source="{Binding Icon}">
-                            <Image.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="{x:Static resx:Resources.Remove}"
-                                              Command="{Binding RemoveMarkerCommand}"/>
-                                </ContextMenu>
-                            </Image.ContextMenu>
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Height"
-                                            Value="28" />
-                                    <Setter Property="Width"
-                                            Value="28" />
-                                    <Setter Property="Margin"
-                                            Value="-14,-14,0,0" />
-                                    <Setter Property="ToolTip"
-                                            Value="{Binding Name}" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver"
-                                                 Value="True">
-                                            <Setter Property="Height"
-                                                    Value="34" />
-                                            <Setter Property="Width"
-                                                    Value="34" />
-                                            <Setter Property="Margin"
-                                                    Value="-17,-17,0,0" />
-                                        </Trigger>
-                                        <DataTrigger Binding="{Binding Name}"
-                                                     Value="{x:Null}">
-                                            <Setter Property="ToolTip"
-                                                    Value="{x:Null}" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Name}"
-                                                     Value="">
-                                            <Setter Property="ToolTip"
-                                                    Value="{x:Null}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
+                        <Grid Name="MarkerPanel">
+                            <Image Name="MarkerIconImage"
+                                   Source="{Binding Icon}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Height"
+                                                Value="28" />
+                                        <Setter Property="Width"
+                                                Value="28" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MoveButton}"
+                                                         Value="True">
+                                                <Setter Property="Height"
+                                                        Value="34" />
+                                                <Setter Property="Width"
+                                                        Value="34" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=DeleteButton}"
+                                                         Value="True">
+                                                <Setter Property="Height"
+                                                        Value="34" />
+                                                <Setter Property="Width"
+                                                        Value="34" />
+                                            </DataTrigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Height"
+                                                        Value="34" />
+                                                <Setter Property="Width"
+                                                        Value="34" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <fa:IconImage Name="DeleteButton"
+                                          Icon="TimesCircle"
+                                          Foreground="Red"
+                                          Width="18"
+                                          Height="18"
+                                          Margin="30,-35,0,0">
+                                <fa:IconImage.Effect>
+                                    <DropShadowEffect Color="Black"
+                                                      ShadowDepth="0"
+                                                      BlurRadius="3" />
+                                </fa:IconImage.Effect>
+                                <fa:IconImage.ToolTip>
+                                    <TextBlock Text="{x:Static resx:Resources.Remove}" />
+                                </fa:IconImage.ToolTip>
+                                <fa:IconImage.InputBindings>
+                                    <MouseBinding Command="{Binding RemoveMarkerCommand}"
+                                                  MouseAction="LeftClick" />
+                                </fa:IconImage.InputBindings>
+                                <fa:IconImage.Style>
+                                    <Style TargetType="fa:IconImage">
+                                        <Setter Property="Opacity"
+                                                Value="0" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MarkerIconImage}"
+                                                         Value="True">
+                                                <Setter Property="Opacity"
+                                                        Value=".75" />
+                                            </DataTrigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Opacity"
+                                                        Value="1" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:IconImage.Style>
+                            </fa:IconImage>
+                            <fa:IconImage Name="MoveButton"
+                                          Icon="Arrows"
+                                          Foreground="White"
+                                          Width="18"
+                                          Height="18"
+                                          Margin="-30,-35,0,0"
+                                          dd:DragDropHelper.IsDragSource="True"
+                                          dd:DragDropHelper.DragDropTemplate="{StaticResource MarkerDragTemplate}">
+                                <fa:IconImage.Effect>
+                                    <DropShadowEffect Color="Black"
+                                                      ShadowDepth="0"
+                                                      BlurRadius="3" />
+                                </fa:IconImage.Effect>
+                                <fa:IconImage.ToolTip>
+                                    <TextBlock Text="[[Move]]" />
+                                </fa:IconImage.ToolTip>
+                                <fa:IconImage.Style>
+                                    <Style TargetType="fa:IconImage">
+                                        <Setter Property="Opacity"
+                                                Value="0" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MarkerIconImage}"
+                                                         Value="True">
+                                                <Setter Property="Opacity"
+                                                        Value=".75" />
+                                            </DataTrigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Opacity"
+                                                        Value="1" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </fa:IconImage.Style>
+                            </fa:IconImage>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -267,7 +342,7 @@
     <Grid Name="MainPanel">
 
         <ctrls:Map x:Name="Map"
-                   MinZoomLevel="2" ZoomLevel="4" MaxZoomLevel="10"
+                   MinZoomLevel="2" ZoomLevel="6" MaxZoomLevel="10"
                    MouseWheelZoomDelta="0.5"
                    MouseLeftButtonDown="MapMouseLeftButtonDown"
                    MouseRightButtonDown="MapMouseRightButtonDown"
