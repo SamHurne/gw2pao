@@ -44,11 +44,17 @@ namespace GW2PAO.Modules.Map
             //logger.Debug("Registering hotkey commands");
             //HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
 
-            Threading.BeginInvokeOnUI(() =>
-            {
-                if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
-                    this.OpenMap();
-            });
+            // The delay here is to work around an issue where the map would sometimes fail to load
+            // map tiles if started immediately at startup. The issue appears to be somwhere in the map control library,
+            // otherwise I'd fix the issue and not work around it...
+            Task.Delay(2000).ContinueWith((o) =>
+                {
+                    Threading.BeginInvokeOnUI(() =>
+                    {
+                        if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
+                            this.OpenMap();
+                    });
+                });
         }
 
         /// <summary>
