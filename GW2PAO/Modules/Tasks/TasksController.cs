@@ -306,7 +306,7 @@ namespace GW2PAO.Modules.Tasks
                 Threading.InvokeOnUI(() =>
                 {
                     this.PlayerTasks.Clear();
-                    foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
+                    foreach (var task in (ICollection<PlayerTask>)loadedTasks)
                     {
                         task.IsAccountCompleted = false;
                         this.UserData.Tasks.Add(task);

@@ -169,7 +169,6 @@ namespace GW2PAO.Modules.Map.ViewModels
                     }                    
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                case NotifyCollectionChangedAction.Reset:
                     foreach (PlayerTaskViewModel taskVm in e.OldItems)
                     {
                         taskVm.PropertyChanged -= Task_PropertyChanged;
@@ -195,6 +194,13 @@ namespace GW2PAO.Modules.Map.ViewModels
                         var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                         if (playerMarker != null)
                             this.PlayerMarkers.Remove(playerMarker);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    foreach (var marker in this.PlayerMarkers)
+                    {
+                        marker.TaskViewModel.PropertyChanged -= Task_PropertyChanged;
+                        this.PlayerMarkers.Remove(marker);
                     }
                     break;
                 default:
