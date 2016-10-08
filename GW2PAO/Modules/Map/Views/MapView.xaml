@@ -421,7 +421,7 @@
                                                       BlurRadius="3" />
                                 </fa:IconImage.Effect>
                                 <fa:IconImage.ToolTip>
-                                    <TextBlock Text="[[Move]]" />
+                                    <TextBlock Text="{x:Static resx:Resources.Move}" />
                                 </fa:IconImage.ToolTip>
                                 <fa:IconImage.Style>
                                     <Style TargetType="fa:IconImage">
@@ -686,7 +686,7 @@
                                             Fill="PaleGoldenrod"
                                             FontFamily="./Style/Fonts/#Menomonia"
                                             FontSize="17"
-                                            Text="[[Map]]" />
+                                            Text="{x:Static resx:Resources.Map}" />
 
                     <Button Name="MaximizeButton"
                             Grid.Column="2"
@@ -853,7 +853,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding ZoneItems.ShowWaypoints}"
-                                  ToolTip="[[Show Waypoints]]">
+                                  ToolTip="{x:Static resx:Resources.Waypoints}">
                             <Image Source="/Images/Zone/waypoints.png"
                                    Height="25"
                                    Width="25" />
@@ -863,7 +863,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding ZoneItems.ShowPOIs}"
-                                  ToolTip="[[Show Points of Interest]]">
+                                  ToolTip="{x:Static resx:Resources.ShowPointsOfInterest}">
                             <Image Source="/Images/Zone/poi.png"
                                    Height="25"
                                    Width="25" />
@@ -873,7 +873,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding ZoneItems.ShowVistas}"
-                                  ToolTip="[[Show Vistas]]">
+                                  ToolTip="{x:Static resx:Resources.ShowVistas}">
                             <Image Source="/Images/Zone/vistas.png"
                                    Height="25"
                                    Width="25" />
@@ -883,7 +883,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding ZoneItems.ShowHeartQuests}"
-                                  ToolTip="[[Show Heart Quests]]">
+                                  ToolTip="{x:Static resx:Resources.ShowHeartQuests}">
                             <Image Source="/Images/Zone/hearts.png"
                                    Height="25"
                                    Width="25" />
@@ -893,7 +893,7 @@
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding ZoneItems.ShowHeroPoints}"
-                                  ToolTip="[[Show Hero Points]]">
+                                  ToolTip="{x:Static resx:Resources.ShowHeroPoints}">
                             <Image Source="/Images/Zone/heropoint.png"
                                    Height="25"
                                    Width="25" />
@@ -913,7 +913,7 @@
                                       Width="150"
                                       SelectedIndex="{Binding ZoneItems.ShowEntireContinent, Converter={StaticResource BoolIndexConverter}}">
                                 <ComboBoxItem>
-                                    <TextBlock Text="[[Entire Continent]]" />
+                                    <TextBlock Text="{x:Static resx:Resources.EntireContinent}" />
                                 </ComboBoxItem>
                                 <ComboBoxItem>
                                     <TextBlock Text="{x:Static resx:Resources.CurrentZone}" />
@@ -944,7 +944,7 @@
                                   Margin="5"
                                   IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
                                   VerticalAlignment="Center"
-                                  ToolTip="[[Show Character Pointer]]">
+                                  ToolTip="{x:Static resx:Resources.ShowCharPointer}">
                             <ContentPresenter Content="{StaticResource CharacterPointer}"
                                               Height="20" />
                         </CheckBox>
@@ -953,15 +953,15 @@
                                   Margin="5"
                                   IsChecked="{Binding CharacterPointer.SnapToCharacter}"
                                   VerticalAlignment="Center">
-                            <core:OutlinedTextBlock Text="[[Center Map on Character]]" />
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CenterOnChar}" />
                         </CheckBox>
                         <CheckBox Grid.Column="2"
                                   Style="{StaticResource AlternateCheckboxStyle}"
                                   Margin="5"
                                   IsChecked="{Binding CharacterPointer.ShowPlayerTrail}"
                                   VerticalAlignment="Center"
-                                  ToolTip="[[Show Character Trail]]">
-                            <core:OutlinedTextBlock Text="[[Trail]]" />
+                                  ToolTip="{x:Static resx:Resources.ShowTrail}">
+                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.Trail}" />
                         </CheckBox>
                         <Slider VerticalAlignment="Center"
                                 Grid.Column="3"
@@ -970,7 +970,7 @@
                                 Minimum="5"
                                 Value="{Binding CharacterPointer.PlayerTrailMaxLength}"
                                 Maximum="2500"
-                                ToolTip="[[Trail Length]]">
+                                ToolTip="{x:Static resx:Resources.Length}">
                         </Slider>
                     </Grid>
                 </ctrls:MapSettingControl>

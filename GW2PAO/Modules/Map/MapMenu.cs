@@ -26,7 +26,7 @@ namespace GW2PAO.Modules.Map
         /// </summary>
         public string Header
         {
-            get { return "[[Map Overlay]]"; }
+            get { return Properties.Resources.MapOverlay; }
         }
 
         /// <summary>
