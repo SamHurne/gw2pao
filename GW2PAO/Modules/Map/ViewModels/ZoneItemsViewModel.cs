@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ using NLog;
 
 namespace GW2PAO.Modules.Map.ViewModels
 {
+    [Export(typeof(ZoneItemsViewModel))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class ZoneItemsViewModel : BindableBase
     {
         /// <summary>
@@ -44,6 +47,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Waypoints;
@@ -82,6 +88,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].POIs;
@@ -120,6 +129,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Vistas;
@@ -158,6 +170,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].HeartQuests;
@@ -196,6 +211,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].HeroPoints;
@@ -234,6 +252,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             get
             {
+                if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
+                    return null;
+
                 if (this.userData.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Dungeons;
@@ -268,6 +289,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// <summary>
         /// Constructs a new ZoneItemsViewModel object
         /// </summary>
+        [ImportingConstructor]
         public ZoneItemsViewModel(ZoneItemsStore zoneItemsStore, IZoneCompletionController zoneController, MapUserData userData)
         {
             this.zoneItemsStore = zoneItemsStore;

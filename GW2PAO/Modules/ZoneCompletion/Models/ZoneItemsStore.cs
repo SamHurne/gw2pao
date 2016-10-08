@@ -44,13 +44,7 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
             this.playerService = playerService;
             this.zoneUserData = zoneUserData;
 
-            this.Data = new Dictionary<int, ContinentZoneItems>();
-
-            var continents = this.zoneService.GetContinents();
-            foreach (var continent in continents)
-            {
-                this.Data.Add(continent.Id, new ContinentZoneItems(continent.Id));
-            }
+            this.Data = new Dictionary<int, ContinentZoneItems>(); 
         }
 
         /// <summary>
@@ -59,6 +53,12 @@ namespace GW2PAO.Modules.ZoneCompletion.Models
         public void InitializeStore()
         {
             this.zoneService.Initialize();
+
+            var continents = this.zoneService.GetContinents();
+            foreach (var continent in continents)
+            {
+                this.Data.Add(continent.Id, new ContinentZoneItems(continent.Id));
+            }
 
             foreach (var continent in this.Data)
             {

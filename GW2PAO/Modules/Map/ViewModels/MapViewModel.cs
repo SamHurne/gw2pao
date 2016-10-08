@@ -5,11 +5,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
-using GW2PAO.API.Util;
-using GW2PAO.Modules.ZoneCompletion;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
-using GW2PAO.Modules.ZoneCompletion.Models;
-using GW2PAO.Modules.ZoneCompletion.ViewModels;
 using GW2PAO.Utility;
 using MapControl;
 using Microsoft.Practices.Prism.Mvvm;
@@ -18,7 +14,7 @@ using NLog;
 namespace GW2PAO.Modules.Map.ViewModels
 {
     [Export(typeof(MapViewModel))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class MapViewModel : BindableBase
     {
         /// <summary>
@@ -99,7 +95,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// <summary>
         /// ViewModel object containing all data associated with map markers
         /// </summary>
-        public MarkersViewModel MapMarkers
+        public PlayerMarkersViewModel MapMarkers
         {
             get;
             private set;
@@ -119,7 +115,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         [ImportingConstructor]
         public MapViewModel(IZoneCompletionController zoneController, IZoneService zoneService, IPlayerService playerService,
-            ZoneItemsStore zoneItemsStore, MapUserData userData)
+            PlayerMarkersViewModel mapMarkers, ZoneItemsViewModel zoneItems, MapUserData userData)
         {
             this.zoneController = zoneController;
             this.zoneService = zoneService;
@@ -128,8 +124,8 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.CharacterPointer = new CharacterPointerViewModel(zoneController, userData);
             this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
 
-            this.MapMarkers = new MarkersViewModel(userData);
-            this.ZoneItems = new ZoneItemsViewModel(zoneItemsStore, zoneController, userData);
+            this.MapMarkers = mapMarkers;
+            this.ZoneItems = zoneItems;
 
             if (playerService.HasValidMapId)
                 this.ContinentData = this.zoneService.GetContinentByMap(playerService.MapId);
