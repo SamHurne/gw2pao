@@ -209,6 +209,30 @@
                    Height="26" />
         </DataTemplate>
 
+        <ToolTip x:Key="PlayerTaskTooltip">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Description}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Description}"
+                                             Value="{x:Null}">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Description}"
+                                             Value="">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        
         <Style x:Key="PlayerTaskStyle"
                TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location">
@@ -226,8 +250,6 @@
                     Value="50" />
             <Setter Property="Margin"
                     Value="-25,-25,0,0" />
-            <Setter Property="ToolTip"
-                    Value="{Binding Name}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="map:MapItem">
@@ -474,6 +496,8 @@
             </Setter>
             <Setter Property="Visibility"
                     Value="Visible" />
+            <Setter Property="ToolTip"
+                    Value="{StaticResource PlayerTaskTooltip}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding HasContinentLocation}"
                              Value="False">
@@ -481,6 +505,16 @@
                         <Setter Property="Visibility"
                                 Value="Collapsed" />
                     </DataTrigger.Setters>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Name}"
+                             Value="{x:Null}">
+                    <Setter Property="ToolTip"
+                            Value="{x:Null}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Name}"
+                             Value="">
+                    <Setter Property="ToolTip"
+                            Value="{x:Null}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
