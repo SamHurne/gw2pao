@@ -167,7 +167,7 @@
                             <ControlTemplate>
                                 <Rectangle Margin="2"
                                            SnapsToDevicePixels="True"
-                                           Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                           Stroke="Black"
                                            StrokeDashArray="1 2"
                                            StrokeThickness="1" />
                             </ControlTemplate>
@@ -178,7 +178,7 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border x:Name="Bd"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"

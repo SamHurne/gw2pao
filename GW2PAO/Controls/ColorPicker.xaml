@@ -19,6 +19,16 @@
                          Color="Black"
                          Opacity="0.85" />
 
+        <Style TargetType="{x:Type ComboBoxItem}"
+               BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="Padding"
+                    Value="2" />
+            <Setter Property="Margin"
+                    Value="1" />
+        </Style>
+
         <Style TargetType="{x:Type ComboBox}"
                x:Key="ColorPickerComboBox">
             <Setter Property="UIElement.SnapsToDevicePixels"
@@ -71,7 +81,7 @@
                                             Background="{StaticResource ControlPopupsBackground}"
                                             BorderBrush="Black">
                                     </Border>
-                                    <ScrollViewer Margin="2"
+                                    <ScrollViewer Margin="2,5"
                                                   SnapsToDevicePixels="True">
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
                                     </ScrollViewer>
