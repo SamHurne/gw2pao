@@ -633,9 +633,21 @@
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">
-                                <MenuItem Header="{x:Static resx:Resources.ShowPlayerMarkers}"
-                                          IsCheckable="True"
-                                          IsChecked="{Binding UserData.ShowPlayerMarkers}" />
+                                <MenuItem Header="{x:Static resx:Resources.PlayerMarkers}">
+                                    <MenuItem Header="{x:Static resx:Resources.ShowPlayerMarkers}"
+                                              IsCheckable="True"
+                                              IsChecked="{Binding UserData.ShowPlayerMarkers}" />
+                                    <Separator />
+                                    <MenuItem Header="{x:Static resx:Resources.Load}"
+                                              Command="{Binding MapMarkers.LoadCommand}" />
+                                    <MenuItem Header="{x:Static resx:Resources.Import}"
+                                              Command="{Binding MapMarkers.ImportCommand}" />
+                                    <MenuItem Header="{x:Static resx:Resources.Export}"
+                                              Command="{Binding MapMarkers.ExportCommand}" />
+                                    <Separator />
+                                    <MenuItem Header="{x:Static resx:Resources.DeleteAll}"
+                                              Command="{Binding MapMarkers.DeleteAllCommand}" />
+                                </MenuItem>
                                 <Separator />
                                 <MenuItem Header="{x:Static resx:Resources.Close}"
                                           Click="CloseWindowButton_Click" />

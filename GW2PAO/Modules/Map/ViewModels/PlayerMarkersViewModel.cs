@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Input;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Tasks;
 using GW2PAO.Modules.Tasks.Interfaces;
@@ -47,6 +48,27 @@ namespace GW2PAO.Modules.Map.ViewModels
             get;
             private set;
         }
+
+        /// <summary>
+        /// Command to load tasks/markers
+        /// </summary>
+        public ICommand LoadCommand { get { return this.taskTrackerVm.LoadTasksCommand; } }
+
+        /// <summary>
+        /// Command to import tasks/markers
+        /// </summary>
+        public ICommand ImportCommand { get { return this.taskTrackerVm.ImportTasksCommand; } }
+
+        /// <summary>
+        /// Command to export all current tasks/markers
+        /// </summary>
+        public ICommand ExportCommand { get { return this.taskTrackerVm.ExportTasksCommand; } }
+
+        /// <summary>
+        /// Command to delete all current tasks/markers
+        /// </summary>
+        public ICommand DeleteAllCommand { get { return this.taskTrackerVm.DeleteAllCommand; } }
+
 
         /// <summary>
         /// Constructs a new MarkersViewModel object
@@ -200,8 +222,8 @@ namespace GW2PAO.Modules.Map.ViewModels
                     foreach (var marker in this.PlayerMarkers)
                     {
                         marker.TaskViewModel.PropertyChanged -= Task_PropertyChanged;
-                        this.PlayerMarkers.Remove(marker);
                     }
+                    this.PlayerMarkers.Clear();
                     break;
                 default:
                     break;

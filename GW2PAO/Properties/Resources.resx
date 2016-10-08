@@ -1033,4 +1033,7 @@
   <data name="ShowPlayerMarkers" xml:space="preserve">
     <value>Show Player Markers</value>
   </data>
+  <data name="PlayerMarkers" xml:space="preserve">
+    <value>Player Markers</value>
+  </data>
 </root>

@@ -1393,6 +1393,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Markers.
+        /// </summary>
+        public static string PlayerMarkers {
+            get {
+                return ResourceManager.GetString("PlayerMarkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Points: {0}.
         /// </summary>
         public static string Points {
