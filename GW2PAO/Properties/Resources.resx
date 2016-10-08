@@ -1030,4 +1030,7 @@
   <data name="Trail" xml:space="preserve">
     <value>Trail</value>
   </data>
+  <data name="ShowPlayerMarkers" xml:space="preserve">
+    <value>Show Player Markers</value>
+  </data>
 </root>

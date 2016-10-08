@@ -581,7 +581,8 @@
                                  SelectionMode="Extended"
                                  Visibility="{Binding ZoneItems.ShowHeroPoints, Converter={StaticResource BoolToVisibility}}" />
 
-            <ContentControl Content="{StaticResource PlayerTaskItemsControl}" />
+            <ContentControl Content="{StaticResource PlayerTaskItemsControl}"
+                            Visibility="{Binding UserData.ShowPlayerMarkers, Converter={StaticResource BoolToVisibility}}" />
 
             <map:MapPolyline Locations="{Binding CharacterPointer.PlayerTrail}"
                              Stroke="{Binding CharacterPointer.PlayerTrailColor, Converter={StaticResource StringColorConverter}}"
@@ -632,6 +633,10 @@
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">
+                                <MenuItem Header="{x:Static resx:Resources.ShowPlayerMarkers}"
+                                          IsCheckable="True"
+                                          IsChecked="{Binding UserData.ShowPlayerMarkers}" />
+                                <Separator />
                                 <MenuItem Header="{x:Static resx:Resources.Close}"
                                           Click="CloseWindowButton_Click" />
                             </ContextMenu>
@@ -979,7 +984,8 @@
                                          VerticalAlignment="Top"
                                          HorizontalAlignment="Left"
                                          Margin="0,10,0,0"
-                                         Icon="MapMarker">
+                                         Icon="MapMarker"
+                                         IsEnabled="{Binding UserData.ShowPlayerMarkers}">
                     <ItemsControl ItemsSource="{Binding MapMarkers.MarkerTemplates}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

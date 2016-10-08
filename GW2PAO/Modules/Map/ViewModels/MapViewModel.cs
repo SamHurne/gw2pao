@@ -111,6 +111,14 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// The maps user data
+        /// </summary>
+        public MapUserData UserData
+        {
+            get { return this.userData; }
+        }
+
+        /// <summary>
         /// Constructs a new MapViewModel
         /// </summary>
         [ImportingConstructor]

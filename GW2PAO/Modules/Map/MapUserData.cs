@@ -39,6 +39,8 @@ namespace GW2PAO.Modules.Map
         private int playerTrailMaxLength;
         private string playerTrailColor;
 
+        private bool showPlayerMarkers;
+
         /// <summary>
         /// True if Heart Quests are shown on the map, else false
         /// </summary>
@@ -148,6 +150,15 @@ namespace GW2PAO.Modules.Map
         }
 
         /// <summary>
+        /// True if player markers are visible on the map, else false
+        /// </summary>
+        public bool ShowPlayerMarkers
+        {
+            get { return this.showPlayerMarkers; }
+            set { SetProperty(ref this.showPlayerMarkers, value); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public MapUserData()
@@ -164,6 +175,7 @@ namespace GW2PAO.Modules.Map
             this.ShowPlayerTrail = true;
             this.PlayerTrailMaxLength = 100;
             this.PlayerTrailColor = "#FFF";
+            this.ShowPlayerMarkers = true;
         }
 
         /// <summary>
