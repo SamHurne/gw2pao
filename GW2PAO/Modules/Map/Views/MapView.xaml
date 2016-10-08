@@ -35,6 +35,7 @@
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
+        <converters:BoolToIndexConverter x:Key="BoolIndexConverter" />
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
         <lconverters:ZoomToItemSizeConverter x:Key="ZoomToSizeConverter" />
 
@@ -606,7 +607,7 @@
 
             
         </ctrls:Map>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -631,13 +632,15 @@
                     <Image Name="TitleImage"
                            Grid.Column="0"
                            VerticalAlignment="Center"
-                           Height="30" Width="30"
+                           Height="30"
+                           Width="30"
                            Margin="0,0,0,0"
                            Source="/Images/Title/zone.png"
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">
-                                <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
+                                <MenuItem Header="{x:Static resx:Resources.Close}"
+                                          Click="CloseWindowButton_Click" />
                             </ContextMenu>
                         </Image.ContextMenu>
                         <Image.Style>
@@ -647,17 +650,18 @@
                                         <DropShadowEffect ShadowDepth="0"
                                                           Color="Goldenrod"
                                                           Opacity="0"
-                                                          BlurRadius="10"/>
+                                                          BlurRadius="10" />
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation To="1"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:00.1"/>
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:00.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.EnterActions>
@@ -665,8 +669,8 @@
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <DoubleAnimation To="0"
-                                                            Storyboard.TargetProperty="(Effect).Opacity"
-                                                            Duration="00:00:0.1"/>
+                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                     Duration="00:00:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </Trigger.ExitActions>
@@ -695,16 +699,20 @@
                     </Button>
 
                     <Button Name="CollapseExpandButton"
-                        Grid.Column="3"
-                        Margin="3"
-                        Click="CollapseExpandButton_Click">
+                            Grid.Column="3"
+                            Margin="3"
+                            Click="CollapseExpandButton_Click">
                         <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource TitleBarButtonStyle}">
-                                <Setter Property="Content" Value="{StaticResource CollapseGraphic}" />
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource TitleBarButtonStyle}">
+                                <Setter Property="Content"
+                                        Value="{StaticResource CollapseGraphic}" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Visibility, ElementName=ControlsPanel}" Value="Collapsed">
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=ControlsPanel}"
+                                                 Value="Collapsed">
                                         <DataTrigger.Setters>
-                                            <Setter Property="Content" Value="{StaticResource ExpandGraphic}" />
+                                            <Setter Property="Content"
+                                                    Value="{StaticResource ExpandGraphic}" />
                                         </DataTrigger.Setters>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -713,16 +721,19 @@
                     </Button>
 
                     <Button Name="CloseWindowButton"
-                        Grid.Column="4"
-                        Margin="3,3,5,3"
-                        Style="{StaticResource TitleBarButtonStyle}"
-                        Content="{StaticResource CloseGraphic}"
-                        Click="CloseWindowButton_Click" />
+                            Grid.Column="4"
+                            Margin="3,3,5,3"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Content="{StaticResource CloseGraphic}"
+                            Click="CloseWindowButton_Click" />
                 </Grid>
                 <Border.Style>
-                    <Style TargetType="Border" BasedOn="{StaticResource TitleBarStyle}">
-                        <Setter Property="Opacity" Value="1" />
-                        <Setter Property="Visibility" Value="Visible" />
+                    <Style TargetType="Border"
+                           BasedOn="{StaticResource TitleBarStyle}">
+                        <Setter Property="Opacity"
+                                Value="1" />
+                        <Setter Property="Visibility"
+                                Value="Visible" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
@@ -739,8 +750,8 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation To="0"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:0.2"/>
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.EnterActions>
@@ -748,14 +759,16 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation To="1"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         Duration="00:00:00.2"/>
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.ExitActions>
                             </MultiDataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                                <Setter Property="Visibility" Value="Collapsed" />
+                            <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}"
+                                         Value="Maximized">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -799,14 +812,19 @@
                         Width="30"
                         Click="RestoreButton_Click">
                     <Button.Content>
-                        <fa:IconBlock Icon="Compress" FontSize="24" />
+                        <fa:IconBlock Icon="Compress"
+                                      FontSize="24" />
                     </Button.Content>
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                        <Style TargetType="Button"
+                               BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}" Value="Maximized">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                <DataTrigger Binding="{Binding ElementName=MapViewWindow, Path=WindowState}"
+                                             Value="Maximized">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -816,9 +834,12 @@
                 <ctrls:MapSettingControl Grid.Row="0"
                                          Grid.Column="0"
                                          VerticalAlignment="Top"
-                                         HorizontalAlignment="Left"
                                          Icon="Eye">
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -877,6 +898,29 @@
                                    Height="25"
                                    Width="25" />
                         </CheckBox>
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.ColumnSpan="5"
+                                    Margin="5,2,0,0"
+                                    Orientation="Horizontal">
+                            <core:OutlinedTextBlock VerticalAlignment="Center"
+                                                    FontSize="13"
+                                                    Text="{x:Static resx:Resources.Show}" />
+                            <ComboBox HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      Margin="5,4,0,0"
+                                      Height="20"
+                                      Width="150"
+                                      SelectedIndex="{Binding ZoneItems.ShowEntireContinent, Converter={StaticResource BoolIndexConverter}}">
+                                <ComboBoxItem>
+                                    <TextBlock Text="[[Entire Continent]]" />
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="{x:Static resx:Resources.CurrentZone}" />
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
                     </Grid>
                 </ctrls:MapSettingControl>
 
@@ -901,7 +945,8 @@
                                   IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
                                   VerticalAlignment="Center"
                                   ToolTip="[[Show Character Pointer]]">
-                            <ContentPresenter Content="{StaticResource CharacterPointer}" Height="20" />
+                            <ContentPresenter Content="{StaticResource CharacterPointer}"
+                                              Height="20" />
                         </CheckBox>
                         <CheckBox Grid.Column="1"
                                   Style="{StaticResource AlternateCheckboxStyle}"
@@ -959,7 +1004,8 @@
 
                 <Grid.Style>
                     <Style TargetType="Grid">
-                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="Opacity"
+                                Value="1" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
@@ -973,7 +1019,7 @@
                                         <Storyboard>
                                             <DoubleAnimation To="0"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:0.2"/>
+                                                             Duration="00:00:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.EnterActions>
@@ -982,7 +1028,7 @@
                                         <Storyboard>
                                             <DoubleAnimation To="1"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="00:00:00.2"/>
+                                                             Duration="00:00:00.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.ExitActions>
@@ -991,7 +1037,7 @@
                     </Style>
                 </Grid.Style>
             </Grid>
-            
+
         </Grid>
 
         <Grid Name="ResizeGripper">

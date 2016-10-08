@@ -50,7 +50,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Waypoints;
                 }
@@ -91,7 +91,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].POIs;
                 }
@@ -132,7 +132,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Vistas;
                 }
@@ -173,7 +173,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].HeartQuests;
                 }
@@ -214,7 +214,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].HeroPoints;
                 }
@@ -255,7 +255,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (!this.zoneItemsStore.Data.ContainsKey(this.ContinentID))
                     return null;
 
-                if (this.userData.ShowEntireContinent)
+                if (this.ShowEntireContinent)
                 {
                     return this.zoneItemsStore.Data[this.ContinentID].Dungeons;
                 }
@@ -282,6 +282,28 @@ namespace GW2PAO.Modules.Map.ViewModels
                 {
                     this.userData.AreDungeonsVisible = value;
                     this.OnPropertyChanged(() => this.ShowDungeons);
+                }
+            }
+        }
+
+        /// <summary>
+        /// True if the entire continent should be shown, or just the current map
+        /// </summary>
+        public bool ShowEntireContinent
+        {
+            get { return this.userData.ShowEntireContinent; }
+            set
+            {
+                if (this.userData.ShowEntireContinent != value)
+                {
+                    this.userData.ShowEntireContinent = value;
+                    this.OnPropertyChanged(() => this.ShowEntireContinent);
+                    this.OnPropertyChanged(() => this.Waypoints);
+                    this.OnPropertyChanged(() => this.POIs);
+                    this.OnPropertyChanged(() => this.Vistas);
+                    this.OnPropertyChanged(() => this.HeartQuests);
+                    this.OnPropertyChanged(() => this.HeroPoints);
+                    this.OnPropertyChanged(() => this.Dungeons);
                 }
             }
         }

@@ -243,6 +243,7 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="Controllers\SettingsViewController.cs" />
+    <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
