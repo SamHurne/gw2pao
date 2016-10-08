@@ -924,54 +924,53 @@
                                          Icon="LocationArrow"
                                          IsEnabled="{Binding CharacterPointer.CanDisplayCharacterPointer}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                        <CheckBox Grid.Column="0"
-                                  Style="{StaticResource AlternateCheckboxStyle}"
-                                  Margin="5"
-                                  IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
-                                  VerticalAlignment="Center"
-                                  ToolTip="{x:Static resx:Resources.ShowCharPointer}">
-                            <ContentPresenter Content="{StaticResource CharacterPointer}"
-                                              Height="20" />
-                        </CheckBox>
-                        <CheckBox Grid.Column="1"
-                                  Style="{StaticResource AlternateCheckboxStyle}"
-                                  Margin="5"
-                                  IsChecked="{Binding CharacterPointer.SnapToCharacter}"
-                                  VerticalAlignment="Center">
-                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.CenterOnChar}" />
-                        </CheckBox>
-                        <CheckBox Grid.Column="2"
-                                  Style="{StaticResource AlternateCheckboxStyle}"
-                                  Margin="5"
-                                  IsChecked="{Binding CharacterPointer.ShowPlayerTrail}"
-                                  VerticalAlignment="Center"
-                                  ToolTip="{x:Static resx:Resources.ShowTrail}">
-                            <core:OutlinedTextBlock Text="{x:Static resx:Resources.Trail}" />
-                        </CheckBox>
-                        <Slider VerticalAlignment="Center"
-                                Grid.Column="3"
-                                Margin="5"
-                                Width="100"
-                                Minimum="5"
-                                Value="{Binding CharacterPointer.PlayerTrailMaxLength}"
-                                Maximum="2500"
-                                ToolTip="{x:Static resx:Resources.Length}">
-                        </Slider>
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                            <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                                      Margin="5"
+                                      IsChecked="{Binding CharacterPointer.DisplayCharacterPointer}"
+                                      VerticalAlignment="Center"
+                                      ToolTip="{x:Static resx:Resources.ShowCharPointer}">
+                                <ContentPresenter Content="{StaticResource CharacterPointer}"
+                                                  Height="20" />
+                            </CheckBox>
+                            <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                                      Margin="5"
+                                      IsChecked="{Binding CharacterPointer.SnapToCharacter}"
+                                      VerticalAlignment="Center">
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.CenterOnChar}" />
+                            </CheckBox>
+                        </StackPanel>
 
-                        <ctrl:ColorPicker Grid.Column="4"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          SelectedColor="{Binding CharacterPointer.PlayerTrailColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          ColorOptions="{Binding CharacterPointer.PlayerTrailColorOptions}" />
+                        <StackPanel Grid.Row="1"
+                                    Orientation="Horizontal">
+                            <CheckBox Style="{StaticResource AlternateCheckboxStyle}"
+                                      Margin="5"
+                                      IsChecked="{Binding CharacterPointer.ShowPlayerTrail}"
+                                      VerticalAlignment="Center"
+                                      ToolTip="{x:Static resx:Resources.ShowTrail}">
+                                <core:OutlinedTextBlock Text="{x:Static resx:Resources.Trail}" />
+                            </CheckBox>
+                            <Slider VerticalAlignment="Center"
+                                    Margin="5"
+                                    Width="100"
+                                    Minimum="5"
+                                    Value="{Binding CharacterPointer.PlayerTrailMaxLength}"
+                                    Maximum="2500"
+                                    ToolTip="{x:Static resx:Resources.Length}">
+                            </Slider>
+
+                            <ctrl:ColorPicker VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              SelectedColor="{Binding CharacterPointer.PlayerTrailColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              ColorOptions="{Binding CharacterPointer.PlayerTrailColorOptions}" />
+                        </StackPanel>
+
                     </Grid>
                 </ctrls:MapSettingControl>
 
