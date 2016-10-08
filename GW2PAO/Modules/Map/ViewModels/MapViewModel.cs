@@ -127,6 +127,9 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.MapMarkers = mapMarkers;
             this.ZoneItems = zoneItems;
 
+            // Make sure the zone service is ready
+            this.zoneService.Initialize();
+
             if (playerService.HasValidMapId)
                 this.ContinentData = this.zoneService.GetContinentByMap(playerService.MapId);
             else
