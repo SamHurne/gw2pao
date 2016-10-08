@@ -9,6 +9,7 @@
                    xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
                    xmlns:converters="clr-namespace:GW2PAO.Converters"
                    xmlns:lconverters="clr-namespace:GW2PAO.Modules.Map.Converters"
+                   xmlns:ctrl="clr-namespace:GW2PAO.Controls"
                    xmlns:ctrls="clr-namespace:GW2PAO.Modules.Map.Views.Controls"
                    xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
                    xmlns:dd="clr-namespace:GW2PAO.PresentationCore.DragDrop;assembly=GW2PAO.PresentationCore"
@@ -34,6 +35,7 @@
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:StringToColorConverter x:Key="StringColorConverter" />
         <converters:ZoneItemTypeImageSrcConverter x:Key="ItemTypeImgConverter" />
         <converters:BoolToIndexConverter x:Key="BoolIndexConverter" />
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
@@ -500,13 +502,6 @@
             <Setter Property="ToolTip"
                     Value="{StaticResource PlayerTaskTooltip}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding HasContinentLocation}"
-                             Value="False">
-                    <DataTrigger.Setters>
-                        <Setter Property="Visibility"
-                                Value="Collapsed" />
-                    </DataTrigger.Setters>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Name}"
                              Value="{x:Null}">
                     <Setter Property="ToolTip"
@@ -586,19 +581,17 @@
                                  SelectionMode="Extended"
                                  Visibility="{Binding ZoneItems.ShowHeroPoints, Converter={StaticResource BoolToVisibility}}" />
 
-            <!--<ContentControl Content="{StaticResource MapMarkerItemsControl}" />-->
             <ContentControl Content="{StaticResource PlayerTaskItemsControl}" />
 
-            <map:MapItem Name="CharacterMarker"
-                         Style="{StaticResource CharacterPositionMarkerStyle}" />
-
-            <!--TODO: Make stroke color configurable-->
             <map:MapPolyline Locations="{Binding CharacterPointer.PlayerTrail}"
-                             Stroke="White"
+                             Stroke="{Binding CharacterPointer.PlayerTrailColor, Converter={StaticResource StringColorConverter}}"
                              StrokeThickness="3"
                              Opacity="0.85"
                              Visibility="{Binding CharacterPointer.ShowPlayerTrail, Converter={StaticResource BoolToVisibility}}">
             </map:MapPolyline>
+
+            <map:MapItem Name="CharacterMarker"
+                         Style="{StaticResource CharacterPositionMarkerStyle}" />
 
             <!--<map:MapItemsControl Name="PenLinesControl"
                                  ItemsSource="{Binding PenLines}"
@@ -937,6 +930,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <CheckBox Grid.Column="0"
@@ -972,6 +966,12 @@
                                 Maximum="2500"
                                 ToolTip="{x:Static resx:Resources.Length}">
                         </Slider>
+
+                        <ctrl:ColorPicker Grid.Column="4"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          SelectedColor="{Binding CharacterPointer.PlayerTrailColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ColorOptions="{Binding CharacterPointer.PlayerTrailColorOptions}" />
                     </Grid>
                 </ctrls:MapSettingControl>
 

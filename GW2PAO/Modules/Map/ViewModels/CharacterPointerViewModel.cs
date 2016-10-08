@@ -148,6 +148,31 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// The color of the player trail
+        /// </summary>
+        public string PlayerTrailColor
+        {
+            get { return this.userData.PlayerTrailColor; }
+            set
+            {
+                if (this.userData.PlayerTrailColor != value)
+                {
+                    this.userData.PlayerTrailColor = value;
+                    this.OnPropertyChanged(() => this.PlayerTrailColor);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The list of color options for the player trail
+        /// </summary>
+        public List<string> PlayerTrailColorOptions
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Constructs a new CharacterPointerViewModel
         /// </summary>
         public CharacterPointerViewModel(IZoneCompletionController zoneController, MapUserData userData)
@@ -183,6 +208,18 @@ namespace GW2PAO.Modules.Map.ViewModels
                 {
                     this.RefreshCharacterDirection();
                 }
+            };
+
+            this.PlayerTrailColorOptions = new List<string>()
+            {
+                "#FFFFFF",
+                "#000000",
+                "#DD2C00",
+                "#6200EA",
+                "#2962FF",
+                "#00C853",
+                "#FFEA00",
+                "#FF6D00"
             };
         }
 

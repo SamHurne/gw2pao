@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="GW2PAO.Controls.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GW2PAO.Modules.Map.Views.Controls"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <converters:StringToColorConverter x:Key="StringToColor" />
+        <ImageBrush x:Key="ControlPopupsBackground"
+                    ImageSource="/Images/Backgrounds/Tooltip1.png"
+                    Viewbox="0,0,942,942"
+                    ViewboxUnits="Absolute"
+                    Viewport="0,0,942,942"
+                    ViewportUnits="Absolute" />
+
+        <SolidColorBrush x:Key="ControlPopupsBorderBrush"
+                         Color="Black"
+                         Opacity="0.85" />
+
+        <Style TargetType="{x:Type ComboBox}"
+               x:Key="ColorPickerComboBox">
+            <Setter Property="UIElement.SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="FrameworkElement.OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll"
+                    Value="True" />
+            <Setter Property="FrameworkElement.FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton"
+                                          Grid.Column="0"
+                                          ClickMode="Press"
+                                          Focusable="False"
+                                          Background="Transparent"
+                                          BorderBrush="Transparent"
+                                          IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                <ContentPresenter Name="ContentSite"
+                                                  IsHitTestVisible="False"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding ComboBox.SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" />
+                            </ToggleButton>
+
+                            <!-- Popup showing items -->
+                            <Popup Name="Popup"
+                                   Placement="Bottom"
+                                   Focusable="False"
+                                   AllowsTransparency="True"
+                                   IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
+                                   PopupAnimation="Slide">
+                                <Grid Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
+                                      MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                    <Border Name="DropDownBorder"
+                                            Margin="0,1,0,0"
+                                            CornerRadius="0"
+                                            BorderThickness="1"
+                                            Background="{StaticResource ControlPopupsBackground}"
+                                            BorderBrush="Black">
+                                    </Border>
+                                    <ScrollViewer Margin="2"
+                                                  SnapsToDevicePixels="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.HasItems"
+                                     Value="False">
+                                <Setter Property="FrameworkElement.MinHeight"
+                                        TargetName="DropDownBorder"
+                                        Value="95" />
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled"
+                                     Value="False">
+                                <Setter Property="TextElement.Foreground"
+                                        Value="{StaticResource ComboBoxDisabledForegroundBrush}" />
+                            </Trigger>
+                            <Trigger Property="ItemsControl.IsGrouping"
+                                     Value="True">
+                                <Setter Property="ScrollViewer.CanContentScroll"
+                                        Value="False" />
+                            </Trigger>
+                            <Trigger Property="ComboBox.IsEditable"
+                                     Value="True">
+                                <Setter Property="KeyboardNavigation.IsTabStop"
+                                        Value="False" />
+                                <Setter Property="UIElement.Visibility"
+                                        TargetName="ContentSite"
+                                        Value="Hidden" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+    </UserControl.Resources>
+
+    <Border Name="MainPanel"
+            BorderBrush="Black"
+            BorderThickness="1"
+            CornerRadius="1">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0"
+                                          Color="White"
+                                          Opacity="0"
+                                          BlurRadius="5" />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                     Duration="00:00:00.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                     Duration="00:00:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <ComboBox SelectedItem="{Binding SelectedColor}"
+                      ItemsSource="{Binding ColorOptions}"
+                      Style="{StaticResource ColorPickerComboBox}"
+                      IsSynchronizedWithCurrentItem="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="20"
+                                   Width="20"
+                                   Fill="{Binding Path=., Converter={StaticResource StringToColor}}">
+                        </Rectangle>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"
+                                   MaxWidth="75" />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </Grid>
+    </Border>
+</UserControl>

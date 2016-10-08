@@ -246,6 +246,7 @@
     <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
@@ -280,6 +281,9 @@
     <Compile Include="Modules\Map\ViewModels\PlayerMarkerViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\PlayerMarkersViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
+    <Compile Include="Controls\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Map\Views\Controls\MapSettingControl.xaml.cs">
       <DependentUpon>MapSettingControl.xaml</DependentUpon>
     </Compile>
@@ -561,6 +565,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
