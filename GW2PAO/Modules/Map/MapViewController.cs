@@ -41,8 +41,8 @@ namespace GW2PAO.Modules.Map
         {
             logger.Debug("Initializing");
 
-            //logger.Debug("Registering hotkey commands");
-            //HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleMapOverlayCommand.RegisterCommand(new DelegateCommand(this.ToggleMap));
 
             // Delay a moment to allow the WPF Map Control library to initialize.
             // If we immediately open up the map, it will often fail to load the map tiles. This appears to be
@@ -98,6 +98,21 @@ namespace GW2PAO.Modules.Map
         public bool CanOpenMap()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the map overlay window is visible
+        /// </summary>
+        private void ToggleMap()
+        {
+            if (this.mapView == null || !this.mapView.IsVisible)
+            {
+                this.OpenMap();
+            }
+            else
+            {
+                this.mapView.Close();
+            }
         }
     }
 }

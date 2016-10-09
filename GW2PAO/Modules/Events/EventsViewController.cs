@@ -55,6 +55,7 @@ namespace GW2PAO.Modules.Events
 
             logger.Debug("Registering hotkey commands");
             HotkeyCommands.ToggleWorldBossTimersCommand.RegisterCommand(new DelegateCommand(this.ToggleWorldBossTimers));
+            HotkeyCommands.ToggleMetaEventTimersCommand.RegisterCommand(new DelegateCommand(this.ToggleMetaEventTimers));
 
             Threading.BeginInvokeOnUI(() =>
             {
@@ -177,6 +178,21 @@ namespace GW2PAO.Modules.Events
         public bool CanDisplayMetaEventTimers()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Toggles whether or not the meta event timers window is visible
+        /// </summary>
+        private void ToggleMetaEventTimers()
+        {
+            if (this.metaEventTimersView == null || !this.metaEventTimersView.IsVisible)
+            {
+                this.DisplayMetaEventTimers();
+            }
+            else
+            {
+                this.metaEventTimersView.Close();
+            }
         }
     }
 }

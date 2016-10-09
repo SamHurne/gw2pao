@@ -2131,6 +2131,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toggle Map Overlay.
+        /// </summary>
+        public static string ToggleMap {
+            get {
+                return ResourceManager.GetString("ToggleMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Meta Event Timers.
+        /// </summary>
+        public static string ToggleMetaEventTimers {
+            get {
+                return ResourceManager.GetString("ToggleMetaEventTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Non-Interactive Windows.
         /// </summary>
         public static string ToggleNonInteractiveWindow {
@@ -2190,6 +2208,15 @@ namespace GW2PAO.Properties {
         public static string ToggleWebBrowser {
             get {
                 return ResourceManager.GetString("ToggleWebBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle World Boss Timers.
+        /// </summary>
+        public static string ToggleWorldBossTimers {
+            get {
+                return ResourceManager.GetString("ToggleWorldBossTimers", resourceCulture);
             }
         }
         

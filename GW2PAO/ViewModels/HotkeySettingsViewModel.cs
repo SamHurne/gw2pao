@@ -33,7 +33,8 @@ namespace GW2PAO.ViewModels
         private Hotkey toggleNotificationWindowBordersHotkey;
         private Hotkey toggleAutoFadeBordersHotkey;
         private Hotkey toggleOverlayMenuIconHotkey;
-        private Hotkey toggleEventTrackerHotkey;
+        private Hotkey toggleWorldBossTimerHotkey;
+        private Hotkey toggleMetaEventTimerHotkey;
         private Hotkey toggleDungeonsTrackerHotkey;
         private Hotkey toggleDungeonTimerHotkey;
         private Hotkey togglePriceTrackerHotkey;
@@ -42,6 +43,7 @@ namespace GW2PAO.ViewModels
         private Hotkey toggleTaskTrackerHotkey;
         private Hotkey toggleTeamspeakTrackerHotkey;
         private Hotkey toggleWebBrowserHotkey;
+        private Hotkey toggleMapHotkey;
 
         /// <summary>
         /// Header for the settings
@@ -108,12 +110,21 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
-        /// Hotkey to toggle the event tracker on/off
+        /// Hotkey to toggle the world boss timers on/off
         /// </summary>
-        public Hotkey ToggleEventTrackerHotkey
+        public Hotkey ToggleWorldBossTimerHotkey
         {
-            get { return this.toggleEventTrackerHotkey; }
-            set { this.SetProperty(ref this.toggleEventTrackerHotkey, value); }
+            get { return this.toggleWorldBossTimerHotkey; }
+            set { this.SetProperty(ref this.toggleWorldBossTimerHotkey, value); }
+        }
+
+        /// <summary>
+        /// Hotkey to toggle the meta event timers on/off
+        /// </summary>
+        public Hotkey ToggleMetaEventTimerHotkey
+        {
+            get { return this.toggleMetaEventTimerHotkey; }
+            set { this.SetProperty(ref this.toggleMetaEventTimerHotkey, value); }
         }
 
         /// <summary>
@@ -189,6 +200,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Hotkey to toggle the map overlay on/off
+        /// </summary>
+        public Hotkey ToggleMapHotkey
+        {
+            get { return this.toggleMapHotkey; }
+            set { this.SetProperty(ref this.toggleMapHotkey, value); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="globalHotkeyManager">The global hotkey manager</param>
@@ -204,7 +224,8 @@ namespace GW2PAO.ViewModels
         public void InitializeHotkeys()
         {
             // Initialize as blank at first
-            this.ToggleEventTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleWorldBossTimerHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleMetaEventTimerHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleDungeonsTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleDungeonTimerHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.TogglePriceTrackerHotkey = new Hotkey(Key.None, KeyModifier.None);
@@ -218,6 +239,7 @@ namespace GW2PAO.ViewModels
             this.ToggleNotificationWindowBordersHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleAutoFadeBordersHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleMapHotkey = new Hotkey(Key.None, KeyModifier.None);
 
             // Try to load the hotkeys from user settings
             if (!string.IsNullOrEmpty(Properties.Settings.Default.Hotkeys))
@@ -243,8 +265,11 @@ namespace GW2PAO.ViewModels
                         if (loadedHotkeys.ToggleOverlayMenuIconHotkey != null)
                             this.ToggleOverlayMenuIconHotkey = loadedHotkeys.ToggleOverlayMenuIconHotkey;
 
-                        if (loadedHotkeys.ToggleEventTrackerHotkey != null)
-                            this.ToggleEventTrackerHotkey = loadedHotkeys.ToggleEventTrackerHotkey;
+                        if (loadedHotkeys.ToggleWorldBossTimerHotkey != null)
+                            this.ToggleWorldBossTimerHotkey = loadedHotkeys.ToggleWorldBossTimerHotkey;
+
+                        if (loadedHotkeys.ToggleMetaEventTimerHotkey != null)
+                            this.ToggleMetaEventTimerHotkey = loadedHotkeys.ToggleMetaEventTimerHotkey;
 
                         if (loadedHotkeys.ToggleDungeonsTrackerHotkey != null)
                             this.ToggleDungeonsTrackerHotkey = loadedHotkeys.ToggleDungeonsTrackerHotkey;
@@ -269,6 +294,9 @@ namespace GW2PAO.ViewModels
 
                         if (loadedHotkeys.ToggleWebBrowserHotkey != null)
                             this.ToggleWebBrowserHotkey = loadedHotkeys.ToggleWebBrowserHotkey;
+
+                        if (loadedHotkeys.ToggleMapHotkey != null)
+                            this.ToggleMapHotkey = loadedHotkeys.ToggleMapHotkey;
                     }
                     else
                     {
@@ -291,7 +319,8 @@ namespace GW2PAO.ViewModels
             this.ToggleNotificationWindowBordersHotkey.Pressed += (o, e) => HotkeyCommands.ToggleNotificationWindowBordersCommand.Execute(null);
             this.ToggleAutoFadeBordersHotkey.Pressed += (o, e) => HotkeyCommands.ToggleAutoFadeBordersCommand.Execute(null);
             this.ToggleOverlayMenuIconHotkey.Pressed += (o, e) => HotkeyCommands.ToggleOverlayMenuIconCommand.Execute(null);
-            this.ToggleEventTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWorldBossTimersCommand.Execute(null);
+            this.ToggleWorldBossTimerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWorldBossTimersCommand.Execute(null);
+            this.ToggleMetaEventTimerHotkey.Pressed += (e, r) => HotkeyCommands.ToggleMetaEventTimersCommand.Execute(null);
             this.ToggleDungeonsTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleDungeonsTrackerCommand.Execute(null);
             this.ToggleDungeonTimerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleDungeonTimerCommand.Execute(null);
             this.TogglePriceTrackerHotkey.Pressed += (o, e) => HotkeyCommands.TogglePriceTrackerCommand.Execute(null);
@@ -300,6 +329,7 @@ namespace GW2PAO.ViewModels
             this.ToggleTaskTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleTaskTrackerCommand.Execute(null);
             this.ToggleTeamspeakTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleTeamspeakOverlayCommand.Execute(null);
             this.ToggleWebBrowserHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWebBrowserCommand.Execute(null);
+            this.ToggleMapHotkey.Pressed += (o, e) => HotkeyCommands.ToggleMapOverlayCommand.Execute(null);
 
             // Register all hotkeys that are enabled
             if (this.ToggleAllWindowsHotkey.Key != Key.None)
@@ -312,8 +342,10 @@ namespace GW2PAO.ViewModels
                 this.GlobalHotkeyManager.Register(this.ToggleAutoFadeBordersHotkey);
             if (this.ToggleOverlayMenuIconHotkey.Key != Key.None)
                 this.GlobalHotkeyManager.Register(this.ToggleOverlayMenuIconHotkey);
-            if (this.ToggleEventTrackerHotkey.Key != Key.None)
-                this.GlobalHotkeyManager.Register(this.ToggleEventTrackerHotkey);
+            if (this.ToggleWorldBossTimerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleWorldBossTimerHotkey);
+            if (this.ToggleMetaEventTimerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleMetaEventTimerHotkey);
             if (this.ToggleDungeonsTrackerHotkey.Key != Key.None)
                 this.GlobalHotkeyManager.Register(this.ToggleDungeonsTrackerHotkey);
             if (this.ToggleDungeonTimerHotkey.Key != Key.None)
@@ -332,6 +364,8 @@ namespace GW2PAO.ViewModels
                 this.GlobalHotkeyManager.Register(this.ToggleTeamspeakTrackerHotkey);
             if (this.ToggleWebBrowserHotkey.Key != Key.None)
                 this.GlobalHotkeyManager.Register(this.ToggleWebBrowserHotkey);
+            if (this.ToggleMapHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleMapHotkey);
         }
 
         /// <summary>

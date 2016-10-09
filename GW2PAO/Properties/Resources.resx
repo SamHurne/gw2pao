@@ -1055,4 +1055,16 @@
   <data name="PlayerMarkers" xml:space="preserve">
     <value>Player Markers</value>
   </data>
+  <data name="ToggleMap" xml:space="preserve">
+    <value>Toggle Map Overlay</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMetaEventTimers" xml:space="preserve">
+    <value>Toggle Meta Event Timers</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWorldBossTimers" xml:space="preserve">
+    <value>Toggle World Boss Timers</value>
+    <comment>Hotkey label</comment>
+  </data>
 </root>
