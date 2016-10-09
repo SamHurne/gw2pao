@@ -45,7 +45,7 @@
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding HasLocation}" Value="False">
+                                        <DataTrigger Binding="{Binding HasZoneLocation}" Value="False">
                                             <Setter Property="Visibility" Value="Collapsed" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -72,14 +72,14 @@
             <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding HasLocation}" Value="False" />
+                        <Condition Binding="{Binding HasZoneLocation}" Value="False" />
                         <Condition Binding="{Binding Task.Description}" Value="{x:Null}" />
                     </MultiDataTrigger.Conditions>
                     <Setter Property="ToolTip" Value="{x:Null}" />
                 </MultiDataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding HasLocation}" Value="False" />
+                        <Condition Binding="{Binding HasZoneLocation}" Value="False" />
                         <Condition Binding="{Binding Task.Description}" Value="" />
                     </MultiDataTrigger.Conditions>
                     <Setter Property="ToolTip" Value="{x:Null}" />

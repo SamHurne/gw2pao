@@ -1006,5 +1006,49 @@
   </data>
   <data name="In" xml:space="preserve">
     <value>in</value>
+  <data name="CenterOnChar" xml:space="preserve">
+    <value>Center on Character</value>
+  </data>
+  <data name="EntireContinent" xml:space="preserve">
+    <value>Entire Continent</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MapOverlay" xml:space="preserve">
+    <value>Map Overlay</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="ShowCharPointer" xml:space="preserve">
+    <value>Show Character Pointer</value>
+  </data>
+  <data name="ShowHeartQuests" xml:space="preserve">
+    <value>Show Heart Quests</value>
+  </data>
+  <data name="ShowHeroPoints" xml:space="preserve">
+    <value>Show Hero Points</value>
+  </data>
+  <data name="ShowPointsOfInterest" xml:space="preserve">
+    <value>Show Points of Interest</value>
+  </data>
+  <data name="ShowTrail" xml:space="preserve">
+    <value>Show Trail</value>
+  </data>
+  <data name="ShowVistas" xml:space="preserve">
+    <value>Show Vistas</value>
+  </data>
+  <data name="ShowWaypoints" xml:space="preserve">
+    <value>Show Waypoints</value>
+  </data>
+  <data name="Trail" xml:space="preserve">
+    <value>Trail</value>
+  </data>
+  <data name="ShowPlayerMarkers" xml:space="preserve">
+    <value>Show Player Markers</value>
   </data>
 </root>

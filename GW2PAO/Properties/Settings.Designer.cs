@@ -862,6 +862,18 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersHeight"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewX {
+            get {
+                return ((double)(this["MapViewX"]));
+            }
+            set {
+               this["MapViewX"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -872,6 +884,18 @@ namespace GW2PAO.Properties {
             }
             set {
                 this["MetaEventTimersWidth"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewY {
+            get {
+                return ((double)(this["MapViewY"]));
+            }
+            set {
+                this["MapViewY"] = value;
             }
         }
         
@@ -886,6 +910,18 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersX"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double MapViewHeight {
+            get {
+                return ((double)(this["MapViewHeight"]));
+            }
+            set {
+                this["MapViewHeight"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -898,6 +934,18 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersY"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double MapViewWidth {
+            get {
+                return ((double)(this["MapViewWidth"]));
+            }
+            set {
+                this["MapViewWidth"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -908,6 +956,18 @@ namespace GW2PAO.Properties {
             }
             set {
                 this["IsMetaEventsTimersOpen"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsMapOpen {
+            get {
+                return ((bool)(this["IsMapOpen"]));
+            }
+            set {
+                this["IsMapOpen"] = value;
             }
         }
     }

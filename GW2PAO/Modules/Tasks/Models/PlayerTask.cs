@@ -20,6 +20,7 @@ namespace GW2PAO.Modules.Tasks.Models
         private bool isCompletedPerCharacter;
         private bool autoComplete;
         private bool isDailyReset;
+        private Point continentLocation;
         private Point location;
         private int mapId;
         private string iconUri;
@@ -98,6 +99,16 @@ namespace GW2PAO.Modules.Tasks.Models
         {
             get { return this.isDailyReset; }
             set { SetProperty(ref this.isDailyReset, value); }
+        }
+
+        /// <summary>
+        /// The location of the task in the corresponding continent, if any
+        /// Null if no location exists
+        /// </summary>
+        public Point ContinentLocation
+        {
+            get { return this.continentLocation; }
+            set { SetProperty(ref this.continentLocation, value); }
         }
 
         /// <summary>
@@ -183,6 +194,7 @@ namespace GW2PAO.Modules.Tasks.Models
             this.IsCompletedPerCharacter = other.IsCompletedPerCharacter;
             this.AutoComplete = other.AutoComplete;
             this.IsDailyReset = other.IsDailyReset;
+            this.ContinentLocation = other.Location;
             this.Location = other.Location;
             this.MapID = other.MapID;
             this.IconUri = other.IconUri;

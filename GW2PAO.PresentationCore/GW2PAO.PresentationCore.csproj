@@ -85,6 +85,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoRefreshCollectionViewSource.cs" />
+    <Compile Include="DragDrop\DragDropHelper.cs" />
+    <Compile Include="DragDrop\DragDropUtilities.cs" />
+    <Compile Include="DragDrop\DraggedAdorner.cs" />
+    <Compile Include="DragDrop\InsertionAdorner.cs" />
+    <Compile Include="DragDrop\OnDropEventArgs.cs" />
     <Compile Include="ExtensionLibrary\Bindings\ContainerBindingExtension.cs" />
     <Compile Include="ExtensionLibrary\Bindings\CustomBindingBase.cs" />
     <Compile Include="DebugConverter.cs" />

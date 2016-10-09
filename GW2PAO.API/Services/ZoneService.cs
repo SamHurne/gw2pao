@@ -32,8 +32,31 @@ namespace GW2PAO.API.Services
 
         /// <summary>
         /// Static collection of zone/map names
+        /// Key: Map ID
+        /// Value: Map Name
         /// </summary>
         private ConcurrentDictionary<int, MapName> MapNamesCache;
+
+        /// <summary>
+        /// Static collection of zone/continent data
+        /// Key: Map ID
+        /// Value: Continent ID
+        /// </summary>
+        private ConcurrentDictionary<int, int> MapContinentsCache;
+
+        /// <summary>
+        /// General cache of continents
+        /// Key: Continent ID
+        /// Value: Continent
+        /// </summary>
+        private ConcurrentDictionary<int, Data.Entities.Continent> ContinentsCache;
+
+        /// <summary>
+        /// General cache of continents
+        /// Key: Continent & Floor ID
+        /// Value: Floor Data
+        /// </summary>
+        private ConcurrentDictionary<Tuple<int, int>, GW2NET.Maps.Floor> FloorCache;
 
         private readonly object initLock = new object();
 
@@ -43,6 +66,9 @@ namespace GW2PAO.API.Services
         public ZoneService()
         {
             this.MapNamesCache = new ConcurrentDictionary<int, MapName>();
+            this.MapContinentsCache = new ConcurrentDictionary<int, int>();
+            this.ContinentsCache = new ConcurrentDictionary<int, Data.Entities.Continent>();
+            this.FloorCache = new ConcurrentDictionary<Tuple<int, int>, Floor>();
         }
 
         /// <summary>
@@ -61,6 +87,23 @@ namespace GW2PAO.API.Services
                             this.MapNamesCache.TryAdd(mapName.Key, mapName.Value);
                         }
                     }
+
+                    if (this.ContinentsCache.IsEmpty)
+                    {
+                        // Get all continents
+                        var continents = GW2.V2.Continents.ForCurrentUICulture().FindAll();
+                        foreach (var continent in continents.Values)
+                        {
+                            Data.Entities.Continent cont = new Data.Entities.Continent(continent.ContinentId);
+                            cont.Name = continent.Name;
+                            cont.Height = continent.ContinentDimensions.Height;
+                            cont.Width = continent.ContinentDimensions.Width;
+                            cont.FloorIds = continent.FloorIds;
+                            cont.MaxZoom = continent.MaximumZoom;
+                            cont.MinZoom = continent.MinimumZoom;
+                            this.ContinentsCache.TryAdd(cont.Id, cont);
+                        }
+                    }
                 }
                 finally
                 {
@@ -76,30 +119,13 @@ namespace GW2PAO.API.Services
         /// <returns>The continent data</returns>
         public Data.Entities.Continent GetContinent(int continentId)
         {
-            try
+            Data.Entities.Continent result = null;
+            if (this.ContinentsCache.ContainsKey(continentId))
             {
-                // Get all continents
-                var continent = GW2.V2.Continents.ForCurrentUICulture().Find(continentId);
-                if (continent != null)
-                {
-                    Data.Entities.Continent cont = new Data.Entities.Continent(continentId);
-                    cont.Name = continent.Name;
-                    cont.Height = continent.ContinentDimensions.Height;
-                    cont.Width = continent.ContinentDimensions.Width;
-                    cont.FloorIds = continent.FloorIds;
-                    cont.MaxZoom = continent.MaximumZoom;
-                    cont.MinZoom = continent.MinimumZoom;
-
-                    return cont;
-                }  
-            }
-            catch (Exception ex)
-            {
-                // Don't crash if something goes wrong, but log the error
-                logger.Error(ex);
+                this.ContinentsCache.TryGetValue(continentId, out result);
             }
 
-            return null;
+            return result;
         }
 
         /// <summary>
@@ -109,39 +135,36 @@ namespace GW2PAO.API.Services
         /// <returns>The continent data</returns>
         public Data.Entities.Continent GetContinentByMap(int mapId)
         {
-            try
+            Data.Entities.Continent result = null;
+
+            if (this.MapContinentsCache.ContainsKey(mapId))
             {
-                // Get all continents
-                var continents = GW2.V2.Continents.ForCurrentUICulture().FindAll();
-
-                // Get the map info
-                var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
-                if (map != null)
+                int continentId;
+                this.MapContinentsCache.TryGetValue(mapId, out continentId);
+                this.ContinentsCache.TryGetValue(continentId, out result);
+            }
+            
+            if (result == null)
+            {
+                // If we didn't get the continent from our cache of Map ID -> Continent ID,
+                // request the map info and add it our cache
+                try
                 {
-                    // Find the map's continent
-                    var continent = continents[map.ContinentId];
-
-                    if (continent != null)
+                    var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
+                    if (map != null)
                     {
-                        Data.Entities.Continent cont = new Data.Entities.Continent(map.ContinentId);
-                        cont.Name = continent.Name;
-                        cont.Height = continent.ContinentDimensions.Height;
-                        cont.Width = continent.ContinentDimensions.Width;
-                        cont.FloorIds = continent.FloorIds;
-                        cont.MaxZoom = continent.MaximumZoom;
-                        cont.MinZoom = continent.MinimumZoom;
-
-                        return cont;
+                        this.MapContinentsCache.TryAdd(mapId, map.ContinentId);
+                        this.ContinentsCache.TryGetValue(map.ContinentId, out result);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Don't crash if something goes wrong, but log the error
-                logger.Error(ex);
+                catch (Exception ex)
+                {
+                    // Don't crash if something goes wrong, but log the error
+                    logger.Error(ex);
+                }
             }
 
-            return null;
+            return result;
         }
 
         /// <summary>
@@ -150,31 +173,7 @@ namespace GW2PAO.API.Services
         /// <returns>a collection of continents</returns>
         public IEnumerable<Data.Entities.Continent> GetContinents()
         {
-            List<Data.Entities.Continent> continents = new List<Data.Entities.Continent>();
-
-            try
-            {
-                var data = GW2.V2.Continents.ForCurrentUICulture().FindAll();
-                foreach (var continent in data.Values)
-                {
-                    Data.Entities.Continent cont = new Data.Entities.Continent(continent.ContinentId);
-                    cont.Name = continent.Name;
-                    cont.Height = continent.ContinentDimensions.Height;
-                    cont.Width = continent.ContinentDimensions.Width;
-                    cont.FloorIds = continent.FloorIds;
-                    cont.MaxZoom = continent.MaximumZoom;
-                    cont.MinZoom = continent.MinimumZoom;
-
-                    continents.Add(cont);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Don't crash if something goes wrong, but log the error
-                logger.Error(ex);
-            }
-
-            return continents;
+            return this.ContinentsCache.Values;
         }
 
         /// <summary>
@@ -223,6 +222,62 @@ namespace GW2PAO.API.Services
         }
 
         /// <summary>
+        /// Retrieves map information using the provided continent coordinates,
+        /// or null if the coordinates do not fall into any current zone
+        /// </summary>
+        /// <param name="continentId">ID of the continent that the coordinates are for</param>
+        /// <param name="continentCoordinates">Continent coordinates to use</param>
+        /// <returns>The map data, or null if not found</returns>
+        public Data.Entities.Map GetMap(int continentId, Point continentCoordinates)
+        {
+            var continent = this.GetContinent(continentId);
+            var floorService = GW2.V1.Floors.ForCurrentUICulture(continentId);
+
+            var floor = this.GetFloor(continentId, continent.FloorIds.First());
+            if (floor != null && floor.Regions != null)
+            {
+                foreach (var region in floor.Regions.Values)
+                {
+                    foreach (var map in region.Maps.Values)
+                    {
+                        if (continentCoordinates.X >= map.ContinentRectangle.X
+                            && continentCoordinates.X <= (map.ContinentRectangle.X + map.ContinentRectangle.Width)
+                            && continentCoordinates.Y >= map.ContinentRectangle.Y
+                            && continentCoordinates.Y <= (map.ContinentRectangle.Y + map.ContinentRectangle.Height))
+                        {
+                            Data.Entities.Map mapData = new Data.Entities.Map(map.MapId);
+
+                            mapData.MaxLevel = map.MaximumLevel;
+                            mapData.MinLevel = map.MinimumLevel;
+                            mapData.DefaultFloor = map.DefaultFloor;
+
+                            mapData.ContinentId = continent.Id;
+                            mapData.RegionId = region.RegionId;
+                            mapData.RegionName = region.Name;
+
+                            mapData.MapRectangle.X = map.MapRectangle.X;
+                            mapData.MapRectangle.Y = map.MapRectangle.Y;
+                            mapData.MapRectangle.Height = map.MapRectangle.Height;
+                            mapData.MapRectangle.Width = map.MapRectangle.Width;
+
+                            mapData.ContinentRectangle.X = map.ContinentRectangle.X;
+                            mapData.ContinentRectangle.Y = map.ContinentRectangle.Y;
+                            mapData.ContinentRectangle.Height = map.ContinentRectangle.Height;
+                            mapData.ContinentRectangle.Width = map.ContinentRectangle.Width;
+
+                            // Done - return the data
+                            return mapData;
+                        }
+                        
+                    }
+                }
+            }
+
+            // Not found
+            return null;
+        }
+
+        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>
@@ -233,22 +288,16 @@ namespace GW2PAO.API.Services
             try
             {
                 // Get the continents (used later in determining the location of items)
-                var continents = GW2.V2.Continents.ForCurrentUICulture().FindAll();
+                var continents = this.GetContinents();
 
                 // Get the current map info
                 var map = GW2.V2.Maps.ForCurrentUICulture().Find(mapId);
                 if (map != null)
                 {
-                    // Find the map's continent
-                    var continent = continents[map.ContinentId];
-                    map.Continent = continent;
-
-                    var floorService = GW2.V1.Floors.ForCurrentUICulture(map.ContinentId);
-
                     // Retrieve details of items on every floor of the map
                     foreach (var floorId in map.Floors)
                     {
-                        var floor = floorService.Find(floorId);
+                        var floor = this.GetFloor(map.ContinentId, floorId);
                         if (floor != null && floor.Regions != null)
                         {
                             // Find the region that this map is located in
@@ -389,13 +438,11 @@ namespace GW2PAO.API.Services
             try
             {
                 // Get the continents (used later in determining the location of items)
-                var continent = GW2.V2.Continents.ForCurrentUICulture().Find(continentId);
+                var continent = this.GetContinent(continentId);
 
                 Parallel.ForEach(continent.FloorIds, floorId =>
                 {
-                    var floorService = GW2.V1.Floors.ForCurrentUICulture(continentId);
-
-                    var floor = floorService.Find(floorId);
+                    var floor = this.GetFloor(continentId, floorId);
                     if (floor != null && floor.Regions != null)
                     {
                         foreach (var region in floor.Regions)
@@ -449,7 +496,7 @@ namespace GW2PAO.API.Services
                                             zoneItem.Type = ZoneItemType.Dungeon;
                                         else
                                             zoneItem.Type = ZoneItemType.PointOfInterest;
-
+                                        
                                         if (!pointsOfInterest.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to PointsOfInterest collection", zoneItem);
@@ -478,7 +525,7 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapId = subRegion.Value.MapId;
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = ZoneItemType.HeartQuest;
-
+                                        
                                         if (!tasks.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to Tasks collection", zoneItem);
@@ -508,7 +555,7 @@ namespace GW2PAO.API.Services
                                         zoneItem.MapId = subRegion.Value.MapId;
                                         zoneItem.MapName = this.MapNamesCache[subRegion.Value.MapId].Name;
                                         zoneItem.Type = Data.Enums.ZoneItemType.HeroPoint;
-
+                                        
                                         if (!heroPoints.TryAdd(zoneItem.ID, zoneItem))
                                         {
                                             logger.Warn("Failed to add {0} to HeroPoints collection", zoneItem);
@@ -517,9 +564,10 @@ namespace GW2PAO.API.Services
                                 }
                             }
                         }
+
                     }
 
-                    logger.Debug("{0} done", floor.FloorId);
+                    logger.Debug("{0}-{1} done", continentId, floorId);
                 });
             }
             catch (Exception ex)
@@ -558,6 +606,36 @@ namespace GW2PAO.API.Services
                 logger.Error(ex);
                 return "Unknown";
             }
+        }
+
+        /// <summary>
+        /// Retrieves the floor data for the given floor ID, using the internal cache when possible
+        /// </summary>
+        /// <param name="continentId">ID of the continent the floor is for</param>
+        /// <param name="floorId">ID of the floor to retrieve</param>
+        /// <returns>The floor data</returns>
+        private GW2NET.Maps.Floor GetFloor(int continentId, int floorId)
+        {
+            GW2NET.Maps.Floor result = null;
+
+            var key = new Tuple<int, int>(continentId, floorId);
+
+            if (this.FloorCache.ContainsKey(key))
+            {
+                this.FloorCache.TryGetValue(key, out result);
+            }
+            else
+            {
+                var floorService = GW2.V1.Floors.ForCurrentUICulture(continentId);
+                var floor = floorService.Find(floorId);
+                if (floor != null)
+                {
+                    this.FloorCache.TryAdd(key, floor);
+                    result = floor;
+                }
+            }
+
+            return result;
         }
     }
 }

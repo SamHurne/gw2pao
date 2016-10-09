@@ -412,6 +412,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Center on Character.
+        /// </summary>
+        public static string CenterOnChar {
+            get {
+                return ResourceManager.GetString("CenterOnChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates at Startup.
         /// </summary>
         public static string CheckForUpdatesAtStartup {
@@ -781,6 +790,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entire Continent.
+        /// </summary>
+        public static string EntireContinent {
+            get {
+                return ResourceManager.GetString("EntireContinent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eternal Battlegrounds.
         /// </summary>
         public static string EternalBattlegrounds {
@@ -1105,6 +1123,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Length.
+        /// </summary>
+        public static string Length {
+            get {
+                return ResourceManager.GetString("Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Listing Fee:.
         /// </summary>
         public static string ListingFee {
@@ -1159,6 +1186,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map Overlay.
+        /// </summary>
+        public static string MapOverlay {
+            get {
+                return ResourceManager.GetString("MapOverlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maps.
         /// </summary>
         public static string Maps {
@@ -1182,6 +1227,15 @@ namespace GW2PAO.Properties {
         public static string Meters {
             get {
                 return ResourceManager.GetString("Meters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move.
+        /// </summary>
+        public static string Move {
+            get {
+                return ResourceManager.GetString("Move", resourceCulture);
             }
         }
         
@@ -1735,6 +1789,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Character Pointer.
+        /// </summary>
+        public static string ShowCharPointer {
+            get {
+                return ResourceManager.GetString("ShowCharPointer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Chat Entry Box.
         /// </summary>
         public static string ShowChatEntryBox {
@@ -1789,6 +1852,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Heart Quests.
+        /// </summary>
+        public static string ShowHeartQuests {
+            get {
+                return ResourceManager.GetString("ShowHeartQuests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Hero Points.
+        /// </summary>
+        public static string ShowHeroPoints {
+            get {
+                return ResourceManager.GetString("ShowHeroPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Inactive Events.
         /// </summary>
         public static string ShowInactiveEvents {
@@ -1816,11 +1897,38 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Player Markers.
+        /// </summary>
+        public static string ShowPlayerMarkers {
+            get {
+                return ResourceManager.GetString("ShowPlayerMarkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Points of Interest.
+        /// </summary>
+        public static string ShowPointsOfInterest {
+            get {
+                return ResourceManager.GetString("ShowPointsOfInterest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Tasks not on Current Map.
         /// </summary>
         public static string ShowTasksNotOnMap {
             get {
                 return ResourceManager.GetString("ShowTasksNotOnMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Trail.
+        /// </summary>
+        public static string ShowTrail {
+            get {
+                return ResourceManager.GetString("ShowTrail", resourceCulture);
             }
         }
         
@@ -1834,11 +1942,29 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Vistas.
+        /// </summary>
+        public static string ShowVistas {
+            get {
+                return ResourceManager.GetString("ShowVistas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Waypoint-Code Copy Buttons.
         /// </summary>
         public static string ShowWaypointCopyButtons {
             get {
                 return ResourceManager.GetString("ShowWaypointCopyButtons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Waypoints.
+        /// </summary>
+        public static string ShowWaypoints {
+            get {
+                return ResourceManager.GetString("ShowWaypoints", resourceCulture);
             }
         }
         
@@ -2100,6 +2226,15 @@ namespace GW2PAO.Properties {
         public static string TrackedItems {
             get {
                 return ResourceManager.GetString("TrackedItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trail.
+        /// </summary>
+        public static string Trail {
+            get {
+                return ResourceManager.GetString("Trail", resourceCulture);
             }
         }
         

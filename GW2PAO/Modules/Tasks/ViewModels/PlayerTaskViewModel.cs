@@ -99,11 +99,19 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
-        /// True if this task has a location, else false
+        /// True if this task has a location in a zone, else false
         /// </summary>
-        public bool HasLocation
+        public bool HasZoneLocation
         {
             get { return this.Task.Location != null; }
+        }
+
+        /// <summary>
+        /// True if this task has a continent location, else false
+        /// </summary>
+        public bool HasContinentLocation
+        {
+            get { return this.Task.ContinentLocation != null; }
         }
 
         /// <summary>
@@ -111,7 +119,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         public bool DisplayLocation
         {
-            get { return this.HasLocation && this.IsPlayerOnMap; }
+            get { return this.HasZoneLocation && this.IsPlayerOnMap; }
         }
 
         /// <summary>
@@ -146,7 +154,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             get
             {
-                if (this.HasLocation && this.IsPlayerOnMap)
+                if (this.HasZoneLocation && this.IsPlayerOnMap)
                 {
                     return this.distanceFromPlayer;
                 }
@@ -218,9 +226,17 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.Task.PropertyChanged += (o, e) =>
                 {
                     if (e.PropertyName == "MapID")
+                    {
                         this.RefreshMapName();
+                    }
+                    else if (e.PropertyName.Contains("Location"))
+                    {
+                        this.OnPropertyChanged(() => this.HasZoneLocation);
+                        this.OnPropertyChanged(() => this.HasContinentLocation);
+                    }
                 };
-            System.Threading.Tasks.Task.Factory.StartNew(this.RefreshMapName);
+            if (this.Task.MapID != -1)
+                System.Threading.Tasks.Task.Factory.StartNew(this.RefreshMapName);
 
             this.CopyWaypointCommand = new DelegateCommand(this.CopyWaypoint);
             this.EditCommand = new DelegateCommand(this.Edit);
@@ -246,14 +262,17 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         private void RefreshMapName()
         {
-            var name = this.zoneService.GetZoneName(this.Task.MapID);
-            Threading.BeginInvokeOnUI(() =>
-                {
-                    if (this.Task.MapID != -1)
-                        this.MapName = name;
-                    else
-                        this.MapName = string.Empty;
-                });
+            if (this.Task.MapID != -1)
+            {
+                var name = this.zoneService.GetZoneName(this.Task.MapID);
+                Threading.BeginInvokeOnUI(() =>
+                    {
+                        if (this.Task.MapID != -1)
+                            this.MapName = name;
+                        else
+                            this.MapName = string.Empty;
+                    });
+            }
         }
 
         /// <summary>
@@ -296,7 +315,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             {
                 this.IsVisible = false;
             }
-            else if (!this.UserData.ShowTasksNotOnMap && this.HasLocation && !this.IsPlayerOnMap)
+            else if (!this.UserData.ShowTasksNotOnMap && this.HasZoneLocation && !this.IsPlayerOnMap)
             {
                 this.IsVisible = false;
             }
