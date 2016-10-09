@@ -290,6 +290,7 @@
     </Compile>
     <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml.cs">
       <DependentUpon>WorldBossTimerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Map\Converters\ContinentCoordToTileCoordConverter.cs" />
     <Compile Include="Modules\Map\Converters\ZoomToItemSizeConverter.cs" />
     <Compile Include="Modules\Map\Interfaces\IHasMapLocation.cs" />
@@ -587,7 +588,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -601,7 +601,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml">
-=======
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -611,7 +613,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Map\Views\MapView.xaml">
->>>>>>> refs/remotes/origin/map-overlay
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -953,9 +954,7 @@
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Resource Include="Images\Backgrounds\Tooltip1.png" />
-<<<<<<< HEAD
     <Resource Include="Images\Title\meta.png" />
-=======
     <Resource Include="Images\Map\Markers\harvestingNode.png" />
     <Resource Include="Images\Map\Markers\loggingNode.png" />
     <Resource Include="Images\Map\Markers\miningNode.png" />
@@ -983,7 +982,6 @@
     <Resource Include="Images\Map\Markers\trophy.png" />
     <Resource Include="Images\Map\Markers\yellowStar.png" />
     <Resource Include="Images\Map\Markers\yellowStar2.png" />
->>>>>>> refs/remotes/origin/map-overlay
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

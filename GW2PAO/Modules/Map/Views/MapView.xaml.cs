@@ -1,6 +1,5 @@
 ﻿using GW2PAO.Modules.Map.ViewModels;
 using GW2PAO.Views;
-using GW2PAO.Views.Events.EventTracker;
 using NLog;
 using System;
 using System.ComponentModel.Composition;
