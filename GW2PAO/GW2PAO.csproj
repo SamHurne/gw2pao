@@ -982,6 +982,9 @@
     <Resource Include="Images\Map\Markers\trophy.png" />
     <Resource Include="Images\Map\Markers\yellowStar.png" />
     <Resource Include="Images\Map\Markers\yellowStar2.png" />
+    <Resource Include="Images\Title\map.png" />
+    <Resource Include="Images\Title\tasks.png" />
+    <Resource Include="Images\Title\browser.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

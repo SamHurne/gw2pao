@@ -30,6 +30,14 @@ namespace GW2PAO.Modules.Map
         }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon
+        {
+            get { return "/Images/Title/map.png"; }
+        }
+
+        /// <summary>
         /// True if the menu item is checkable, else false
         /// </summary>
         public bool IsCheckable

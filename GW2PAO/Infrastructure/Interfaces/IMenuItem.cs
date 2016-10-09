@@ -21,6 +21,11 @@ namespace GW2PAO.Infrastructure.Interfaces
         string Header { get; }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        string Icon { get; }
+
+        /// <summary>
         /// True if the menu item is checkable, else false
         /// </summary>
         bool IsCheckable { get; }
