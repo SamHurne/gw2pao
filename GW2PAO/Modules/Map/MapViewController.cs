@@ -44,10 +44,17 @@ namespace GW2PAO.Modules.Map
             //logger.Debug("Registering hotkey commands");
             //HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
 
-            Threading.BeginInvokeOnUI(() =>
+            // Delay a moment to allow the WPF Map Control library to initialize.
+            // If we immediately open up the map, it will often fail to load the map tiles. This appears to be
+            // an issue with the map control itself, so, as a work-around, we have a hard delay before automatically
+            // opening up the map.
+            Task.Delay(2000).ContinueWith(o =>
             {
-                if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
-                    this.OpenMap();
+                Threading.BeginInvokeOnUI(() =>
+                {
+                    if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
+                        this.OpenMap();
+                });
             });
         }
 
