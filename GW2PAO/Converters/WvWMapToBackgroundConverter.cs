@@ -20,7 +20,8 @@ namespace GW2PAO.Converters
                     return "/Images/Backgrounds/Small1_b.png";
                 case WvWMap.GreenBorderlands:
                     return "/Images/Backgrounds/Small1_g.png";
-                case WvWMap.RedBorderlands:
+                case WvWMap.RedDesertBorderlands:
+                case WvWMap.RedAplineBorderlands:
                     return "/Images/Backgrounds/Small1_r.png";
                 case WvWMap.EternalBattlegrounds:
                 case WvWMap.Unknown:

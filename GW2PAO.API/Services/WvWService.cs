@@ -281,7 +281,8 @@ namespace GW2PAO.API.Services
                         case WvWMap.GreenBorderlands:
                             mapDetails = matchDetails.Maps.FirstOrDefault(m => m is GreenBorderlands);
                             break;
-                        case WvWMap.RedBorderlands:
+                        case WvWMap.RedDesertBorderlands:
+                        case WvWMap.RedAplineBorderlands:
                             mapDetails = matchDetails.Maps.FirstOrDefault(m => m is RedBorderlands);
                             break;
                         case WvWMap.EternalBattlegrounds:
@@ -383,7 +384,7 @@ namespace GW2PAO.API.Services
                             else if (mapDetails is GreenBorderlands)
                                 objData.Map = WvWMap.GreenBorderlands;
                             else if (mapDetails is RedBorderlands)
-                                objData.Map = WvWMap.RedBorderlands;
+                                objData.Map = WvWMap.RedDesertBorderlands;
                             else if (mapDetails is EternalBattlegrounds)
                                 objData.Map = WvWMap.EternalBattlegrounds;
                             else
