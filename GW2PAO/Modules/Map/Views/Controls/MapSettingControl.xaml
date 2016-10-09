@@ -81,7 +81,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid Background="#01000000"
                       Grid.Column="0"
-                      Height="30"
+                      Height="70"
                       Width="20"
                       VerticalAlignment="Top"
                       HorizontalAlignment="Center" />
