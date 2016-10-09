@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Input;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Tasks;
 using GW2PAO.Modules.Tasks.Interfaces;
@@ -47,6 +48,26 @@ namespace GW2PAO.Modules.Map.ViewModels
             get;
             private set;
         }
+
+        /// <summary>
+        /// Command to delete all player markers
+        /// </summary>
+        public ICommand DeleteAllCommand { get { return this.taskTrackerVm.DeleteAllCommand; } }
+
+        /// <summary>
+        /// Command to load markers/tasks from a file
+        /// </summary>
+        public ICommand LoadCommand { get { return this.taskTrackerVm.LoadTasksCommand; } }
+
+        /// <summary>
+        /// Command to import all markers/tasks from a file
+        /// </summary>
+        public ICommand ImportCommand { get { return this.taskTrackerVm.ImportTasksCommand; } }
+
+        /// <summary>
+        /// Command to export all markers/tasks to a file
+        /// </summary>
+        public ICommand ExportCommand { get { return this.taskTrackerVm.ExportTasksCommand; } }
 
         /// <summary>
         /// Constructs a new MarkersViewModel object
@@ -169,7 +190,6 @@ namespace GW2PAO.Modules.Map.ViewModels
                     }                    
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                case NotifyCollectionChangedAction.Reset:
                     foreach (PlayerTaskViewModel taskVm in e.OldItems)
                     {
                         taskVm.PropertyChanged -= Task_PropertyChanged;
@@ -196,6 +216,13 @@ namespace GW2PAO.Modules.Map.ViewModels
                         if (playerMarker != null)
                             this.PlayerMarkers.Remove(playerMarker);
                     }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    foreach (PlayerMarkerViewModel markerVm in this.PlayerMarkers)
+                    {
+                        markerVm.TaskViewModel.PropertyChanged -= Task_PropertyChanged;
+                    }
+                    this.PlayerMarkers.Clear();
                     break;
                 default:
                     break;
