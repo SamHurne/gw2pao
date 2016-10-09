@@ -118,8 +118,6 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                <!--<Image MaxHeight="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}"
-                                                       MaxWidth="{Binding ElementName=Map, Path=ZoomLevel, Converter={StaticResource ZoomToSizeConverter}}">-->
                                                 <Image>
                                                     <Image.Source>
                                                         <MultiBinding Converter="{StaticResource ItemTypeImgConverter}">
@@ -151,6 +149,11 @@
                                             <Setter Property="ToolTip"
                                                     Value="{x:Null}" />
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemName}"
+                                                     Value="">
+                                            <Setter Property="ToolTip"
+                                                    Value="{x:Null}" />
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </CheckBox.Style>
@@ -159,9 +162,6 @@
                                     <MenuItem Header="{x:Static resx:Resources.CopyChatCode}" Command="{Binding CopyChatCodeCommand}" />
                                 </ContextMenu>
                             </CheckBox.ContextMenu>
-                            <CheckBox.ToolTip>
-                                <TextBlock Text="{Binding ItemName}" Foreground="White"/>
-                            </CheckBox.ToolTip>
                         </CheckBox>
                     </ControlTemplate>
                 </Setter.Value>
