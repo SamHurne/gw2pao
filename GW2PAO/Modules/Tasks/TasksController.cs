@@ -218,7 +218,10 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.WaypointCode = task.WaypointCode;
                             foreach (var character in task.CharacterCompletions.Keys)
                             {
-                                existingTask.Task.CharacterCompletions.Add(character, task.CharacterCompletions[character]);
+                                if (!existingTask.Task.CharacterCompletions.ContainsKey(character))
+                                    existingTask.Task.CharacterCompletions.Add(character, task.CharacterCompletions[character]);
+                                else
+                                    existingTask.Task.CharacterCompletions[character] = task.CharacterCompletions[character];
                             }
                         }
                     });
@@ -257,7 +260,10 @@ namespace GW2PAO.Modules.Tasks
                         existingTask.Task.WaypointCode = taskViewModel.Task.WaypointCode;
                         foreach (var character in taskViewModel.Task.CharacterCompletions.Keys)
                         {
-                            existingTask.Task.CharacterCompletions.Add(character, taskViewModel.Task.CharacterCompletions[character]);
+                            if (!existingTask.Task.CharacterCompletions.ContainsKey(character))
+                                existingTask.Task.CharacterCompletions.Add(character, taskViewModel.Task.CharacterCompletions[character]);
+                            else
+                                existingTask.Task.CharacterCompletions[character] = taskViewModel.Task.CharacterCompletions[character];
                         }
                     }
                 });
