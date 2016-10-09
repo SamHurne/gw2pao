@@ -41,6 +41,7 @@ namespace GW2PAO.Modules.Events
         private uint notificationDuration;
         private DateTime lastResetDateTime;
         private ObservableCollection<Guid> hiddenEvents = new ObservableCollection<Guid>();
+        private ObservableCollection<Guid> hiddenMetaEvents = new ObservableCollection<Guid>();
         private ObservableCollection<Guid> eventsWithTreasureObtained = new ObservableCollection<Guid>();
         private ObservableCollection<EventNotificationSettings> notificationSettings = new ObservableCollection<EventNotificationSettings>();
 
@@ -134,9 +135,14 @@ namespace GW2PAO.Modules.Events
         }
 
         /// <summary>
-        /// Collection of user-configured Hidden Events
+        /// Collection of user-configured Hidden World Boss Events
         /// </summary>
         public ObservableCollection<Guid> HiddenEvents { get { return this.hiddenEvents; } }
+
+        /// <summary>
+        /// Collection of user-configured Hidden Meta Events
+        /// </summary>
+        public ObservableCollection<Guid> HiddenMetaEvents { get { return this.hiddenMetaEvents; } }
 
         /// <summary>
         /// Collection of user-configured events with treasures already obtained
@@ -171,6 +177,7 @@ namespace GW2PAO.Modules.Events
             logger.Info("Enabling auto save");
             this.PropertyChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
             this.HiddenEvents.CollectionChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
+            this.HiddenMetaEvents.CollectionChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
             this.EventsWithTreasureObtained.CollectionChanged += (o, e) => EventsUserData.SaveData(this, EventsUserData.Filename);
             this.NotificationSettings.CollectionChanged += (o, e) =>
                 {

@@ -255,6 +255,28 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
+    <Compile Include="Modules\Events\Interfaces\IEventNotification.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\MetaEventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\WorldBossEventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventListViewModel.cs" />
+    <Compile Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml.cs">
+      <DependentUpon>MetaEventNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\EventNotification\NotificationViewDataTemplateSelector.cs" />
+    <Compile Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml.cs">
+      <DependentUpon>MetaEventTimersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\MetaEventTimers\MetaEventTimerView.xaml.cs">
+      <DependentUpon>MetaEventTimerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimersView.xaml.cs">
+      <DependentUpon>WorldBossTimersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml.cs">
+      <DependentUpon>WorldBossTimerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksController.cs" />
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksViewController.cs" />
     <Compile Include="Modules\Tasks\Models\PlayerTask.cs" />
@@ -377,8 +399,8 @@
     <Compile Include="Modules\Dungeons\ViewModels\DungeonViewModel.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\PathViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
-    <Compile Include="Modules\Events\ViewModels\EventTracker\EventListViewModel.cs" />
-    <Compile Include="Modules\Events\ViewModels\EventViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\WorldBossTimers\WorldBossListViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\WorldBossTimers\WorldBossEventViewModel.cs" />
     <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
     <Compile Include="ViewModels\HotkeySettingsViewModel.cs" />
     <Compile Include="ViewModels\RestartPromptViewModel.cs" />
@@ -468,17 +490,11 @@
     <Compile Include="Modules\Dungeons\Views\DungeonView.xaml.cs">
       <DependentUpon>DungeonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Events\Views\EventNotification\EventNotificationView.xaml.cs">
-      <DependentUpon>EventNotificationView.xaml</DependentUpon>
+    <Compile Include="Modules\Events\Views\EventNotification\WorldBossEventNotificationView.xaml.cs">
+      <DependentUpon>WorldBossEventNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\Views\EventNotification\EventNotificationWindow.xaml.cs">
       <DependentUpon>EventNotificationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Events\Views\EventTracker\EventTrackerView.xaml.cs">
-      <DependentUpon>EventTrackerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Events\Views\EventTracker\WorldEventView.xaml.cs">
-      <DependentUpon>WorldEventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OverlayWindow.cs" />
     <Compile Include="Modules\Commerce\Views\TPCalculatorView.xaml.cs">
@@ -525,9 +541,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\MetaEventTimers\MetaEventTimerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\WorldBossTimers\WorldBossTimersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Tasks\Views\AddNewTaskDialog.xaml">
       <SubType>Designer</SubType>
@@ -729,21 +765,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Events\Views\EventNotification\EventNotificationView.xaml">
+    <Page Include="Modules\Events\Views\EventNotification\WorldBossEventNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Events\Views\EventNotification\EventNotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Events\Views\EventTracker\EventTrackerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Events\Views\EventTracker\WorldEventView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Commerce\Views\TPCalculatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -871,6 +899,7 @@
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Resource Include="Images\Backgrounds\Tooltip1.png" />
+    <Resource Include="Images\Title\meta.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

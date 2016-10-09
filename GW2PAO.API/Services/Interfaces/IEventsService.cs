@@ -12,14 +12,19 @@ namespace GW2PAO.API.Services.Interfaces
     public interface IEventsService
     {
         /// <summary>
-        /// The World Events time table
+        /// The World Boss Events time table
         /// </summary>
-        MegaserverEventTimeTable EventTimeTable { get; }
+        WorldBossEventTimeTable WorldBossEventTimeTable { get; }
 
         /// <summary>
-        /// Loads the events time table and initializes all cached event information
+        /// The Meta Events data table
         /// </summary>
-        void LoadTable(bool isAdjustedTable);
+        MetaEventsTable MetaEventsTable { get; }
+
+        /// <summary>
+        /// Loads the events time tables and initializes all cached event information
+        /// </summary>
+        void LoadTables(bool isAdjustedBossTimersTable);
 
         /// <summary>
         /// Returns the localized name for the given event
@@ -40,20 +45,20 @@ namespace GW2PAO.API.Services.Interfaces
         /// </summary>
         /// <param name="evt">The event to retrieve the state of</param>
         /// <returns>The current state of the input event</returns>
-        Data.Enums.EventState GetState(WorldEvent evt);
+        Data.Enums.EventState GetState(WorldBossEvent evt);
 
         /// <summary>
         /// Retrieves the amount of time until the next active time for the given event, using the megaserver timetables
         /// </summary>
         /// <param name="evt">The event to retrieve the time for</param>
         /// <returns>Timespan containing the amount of time until the event is next active</returns>
-        TimeSpan GetTimeUntilActive(WorldEvent evt);
+        TimeSpan GetTimeUntilActive(WorldBossEvent evt);
 
         /// <summary>
         /// Retrieves the amount of time since the last active time for the given event, using the megaserver timetables
         /// </summary>
         /// <param name="evt">The event to retrieve the time for</param>
         /// <returns>Timespan containing the amount of time since the event was last active</returns>
-        TimeSpan GetTimeSinceActive(WorldEvent evt);
+        TimeSpan GetTimeSinceActive(WorldBossEvent evt);
     }
 }

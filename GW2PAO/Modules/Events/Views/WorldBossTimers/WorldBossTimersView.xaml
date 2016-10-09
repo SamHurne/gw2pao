@@ -1,11 +1,11 @@
-﻿<src:OverlayWindow x:Class="GW2PAO.Modules.Events.Views.EventTracker.EventTrackerView"
+﻿<src:OverlayWindow x:Class="GW2PAO.Modules.Events.Views.WorldBossTimers.WorldBossTimersView"
         x:Name="EventTrackerViewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:src="clr-namespace:GW2PAO.Views"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:resx="clr-namespace:GW2PAO.Properties"
-        xmlns:View="clr-namespace:GW2PAO.Views.Events.EventTracker"
+        xmlns:View="clr-namespace:GW2PAO.Views.Events.WorldBossTimers"
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
@@ -29,7 +29,7 @@
         <converters:EventStateConverter x:Key="StateConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
-        <core:AutoRefreshCollectionViewSource Source="{Binding WorldEvents}" x:Key="WorldEventsView">
+        <core:AutoRefreshCollectionViewSource Source="{Binding WorldBossEvents}" x:Key="WorldEventsView">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="State" />
                 <scm:SortDescription PropertyName="TimerValue" />
@@ -120,7 +120,7 @@
                                         Fill="PaleGoldenrod"
                                         FontFamily="./Style/Fonts/#Menomonia"
                                         FontSize="17"
-                                        Text="{x:Static resx:Resources.WorldEvents}" />
+                                        Text="{x:Static resx:Resources.WorldBossTimers}" />
 
                 <Button Name="CollapseExpandButton"
                         Grid.Column="2"
@@ -187,7 +187,7 @@
                       ItemsSource="{Binding Source={StaticResource WorldEventsView}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <View:WorldEventView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" />
+                    <View:WorldBossTimerView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.Style>

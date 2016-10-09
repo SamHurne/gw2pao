@@ -11,8 +11,11 @@ namespace GW2PAO.Modules.Events.Interfaces
         void Initialize();
         void Shutdown();
 
-        void DisplayEventsTracker();
-        bool CanDisplayEventsTracker();
+        void DisplayWorldBossTimers();
+        bool CanDisplayWorldBossTimers();
+
+        void DisplayMetaEventTimers();
+        bool CanDisplayMetaEventTimers();
 
         void DisplayEventNotificationsWindow();
         bool CanDisplayEventNotificationsWindow();

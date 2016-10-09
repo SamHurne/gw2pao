@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using GW2PAO.Infrastructure;
 using GW2PAO.Modules.Events.Interfaces;
 using GW2PAO.Modules.Events.Views.EventNotification;
-using GW2PAO.Modules.Events.Views.EventTracker;
+using GW2PAO.Modules.Events.Views.MetaEventTimers;
+using GW2PAO.Modules.Events.Views.WorldBossTimers;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Commands;
 using NLog;
@@ -30,9 +31,14 @@ namespace GW2PAO.Modules.Events
         private CompositionContainer Container { get; set; }
 
         /// <summary>
-        /// The events tracker view
+        /// The world boss timers view
         /// </summary>
-        private EventTrackerView eventTrackerView;
+        private WorldBossTimersView worldBossTimersView;
+
+        /// <summary>
+        /// The meta event timers view
+        /// </summary>
+        private MetaEventTimersView metaEventTimersView;
 
         /// <summary>
         /// The event notifications window containing all event notifications
@@ -48,12 +54,15 @@ namespace GW2PAO.Modules.Events
             logger.Debug("Initializing");
 
             logger.Debug("Registering hotkey commands");
-            HotkeyCommands.ToggleEventTrackerCommand.RegisterCommand(new DelegateCommand(this.ToggleEventsTracker));
+            HotkeyCommands.ToggleWorldBossTimersCommand.RegisterCommand(new DelegateCommand(this.ToggleWorldBossTimers));
 
             Threading.BeginInvokeOnUI(() =>
             {
-                if (Properties.Settings.Default.IsEventTrackerOpen && this.CanDisplayEventsTracker())
-                    this.DisplayEventsTracker();
+                if (Properties.Settings.Default.IsEventTrackerOpen && this.CanDisplayWorldBossTimers())
+                    this.DisplayWorldBossTimers();
+
+                if (Properties.Settings.Default.IsMetaEventsTimersOpen && this.CanDisplayMetaEventTimers())
+                    this.DisplayMetaEventTimers();
 
                 if (this.CanDisplayEventNotificationsWindow())
                     this.DisplayEventNotificationsWindow();
@@ -67,38 +76,44 @@ namespace GW2PAO.Modules.Events
         {
             logger.Debug("Shutting down");
 
-            if (this.eventTrackerView != null)
+            if (this.worldBossTimersView != null)
             {
-                Properties.Settings.Default.IsEventTrackerOpen = this.eventTrackerView.IsVisible;
-                Threading.InvokeOnUI(() => this.eventTrackerView.Close());
+                Properties.Settings.Default.IsEventTrackerOpen = this.worldBossTimersView.IsVisible;
+                Threading.InvokeOnUI(() => this.worldBossTimersView.Close());
+            }
+
+            if (this.metaEventTimersView != null)
+            {
+                Properties.Settings.Default.IsMetaEventsTimersOpen = this.metaEventTimersView.IsVisible;
+                Threading.InvokeOnUI(() => this.metaEventTimersView.Close());
             }
 
             Properties.Settings.Default.Save();
         }
 
         /// <summary>
-        /// Displays the Event Tracker window, or, if already displayed, sets
+        /// Displays the World Boss Timers window, or, if already displayed, sets
         /// focus to the window
         /// </summary>
-        public void DisplayEventsTracker()
+        public void DisplayWorldBossTimers()
         {
-            if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
+            if (this.worldBossTimersView == null || !this.worldBossTimersView.IsVisible)
             {
-                this.eventTrackerView = new EventTrackerView();
-                this.Container.ComposeParts(this.eventTrackerView);
-                this.eventTrackerView.Show();
+                this.worldBossTimersView = new WorldBossTimersView();
+                this.Container.ComposeParts(this.worldBossTimersView);
+                this.worldBossTimersView.Show();
             }
             else
             {
-                this.eventTrackerView.Focus();
+                this.worldBossTimersView.Focus();
             }
         }
 
         /// <summary>
-        /// Determines if the event tracker can be displayed
+        /// Determines if the world boss timers window can be displayed
         /// </summary>
         /// <returns>Always true</returns>
-        public bool CanDisplayEventsTracker()
+        public bool CanDisplayWorldBossTimers()
         {
             return true;
         }
@@ -123,18 +138,45 @@ namespace GW2PAO.Modules.Events
         }
 
         /// <summary>
-        /// Toggles whether or not the events tracker is visible
+        /// Toggles whether or not the world boss timers window is visible
         /// </summary>
-        private void ToggleEventsTracker()
+        private void ToggleWorldBossTimers()
         {
-            if (this.eventTrackerView == null || !this.eventTrackerView.IsVisible)
+            if (this.worldBossTimersView == null || !this.worldBossTimersView.IsVisible)
             {
-                this.DisplayEventsTracker();
+                this.DisplayWorldBossTimers();
             }
             else
             {
-                this.eventTrackerView.Close();
+                this.worldBossTimersView.Close();
             }
+        }
+
+        /// <summary>
+        /// Displays the Meta Event Timers window, or, if already displayed, sets
+        /// focus to the window
+        /// </summary>
+        public void DisplayMetaEventTimers()
+        {
+            if (this.metaEventTimersView == null || !this.metaEventTimersView.IsVisible)
+            {
+                this.metaEventTimersView = new MetaEventTimersView();
+                this.Container.ComposeParts(this.metaEventTimersView);
+                this.metaEventTimersView.Show();
+            }
+            else
+            {
+                this.metaEventTimersView.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Determines if the Meta Event Timers window can be displayed
+        /// </summary>
+        /// <returns>Always true</returns>
+        public bool CanDisplayMetaEventTimers()
+        {
+            return true;
         }
     }
 }

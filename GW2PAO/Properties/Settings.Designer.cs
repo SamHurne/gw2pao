@@ -850,5 +850,65 @@ namespace GW2PAO.Properties {
                 this["IsEctoHelperOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public double MetaEventTimersHeight {
+            get {
+                return ((double)(this["MetaEventTimersHeight"]));
+            }
+            set {
+                this["MetaEventTimersHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("275")]
+        public double MetaEventTimersWidth {
+            get {
+                return ((double)(this["MetaEventTimersWidth"]));
+            }
+            set {
+                this["MetaEventTimersWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public double MetaEventTimersX {
+            get {
+                return ((double)(this["MetaEventTimersX"]));
+            }
+            set {
+                this["MetaEventTimersX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public double MetaEventTimersY {
+            get {
+                return ((double)(this["MetaEventTimersY"]));
+            }
+            set {
+                this["MetaEventTimersY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsMetaEventsTimersOpen {
+            get {
+                return ((bool)(this["IsMetaEventsTimersOpen"]));
+            }
+            set {
+                this["IsMetaEventsTimersOpen"] = value;
+            }
+        }
     }
 }
