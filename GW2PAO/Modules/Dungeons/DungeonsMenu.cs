@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GW2PAO.Infrastructure;
 using GW2PAO.Infrastructure.Interfaces;
 using GW2PAO.Infrastructure.ViewModels;
 using GW2PAO.Modules.Dungeons.Interfaces;
@@ -77,6 +78,9 @@ namespace GW2PAO.Modules.Dungeons
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.DungeonsTracker, viewFactory.DisplayDungeonTracker, viewFactory.CanDisplayDungeonTracker));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.DungeonTimer, viewFactory.DisplayDungeonTimer, viewFactory.CanDisplayDungeonTimer));
+
+            this.SubMenuItems.Add(null); // Null for a seperator
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenDungeonSettingsCommand.Execute(null)));
         }
     }
 }

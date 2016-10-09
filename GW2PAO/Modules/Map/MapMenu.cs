@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace GW2PAO.Modules.Map
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 9)]
+    [ExportMetadata("Order", 8)]
     public class MapMenu : IMenuItem
     {
         /// <summary>
