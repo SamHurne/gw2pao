@@ -166,7 +166,7 @@ namespace GW2PAO.API.Services
                     // TODO: Finish this up, get all details, such as Type, SkinID
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding item with id {0}: {1}", itemID, ex);
@@ -215,7 +215,7 @@ namespace GW2PAO.API.Services
                     items.Add(item.ID, item);
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding item: {0}", ex);
@@ -246,7 +246,7 @@ namespace GW2PAO.API.Services
                     };
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding prices for itemId {0}: {1}", ex);
@@ -282,7 +282,7 @@ namespace GW2PAO.API.Services
                     }
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding prices: {0}", ex);

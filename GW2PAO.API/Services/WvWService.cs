@@ -93,7 +93,7 @@ namespace GW2PAO.API.Services
                         });
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 logger.Error("Failed to load worlds data: ");
                 logger.Error(ex);

@@ -50,7 +50,7 @@ namespace GW2PAO.API.Services
                     };
                 }
             }
-            catch (Exception ex) when (ex is AggregateException || ex is GW2NET.Common.ServiceException || ex is System.Runtime.Serialization.SerializationException)
+            catch (Exception ex)
             {
                 // Don't crash on a service exception... just log it
                 logger.Warn(ex);
