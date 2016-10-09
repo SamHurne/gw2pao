@@ -585,6 +585,9 @@ namespace GW2PAO.API.Services
         /// <returns>the name of the zone</returns>
         public string GetZoneName(int mapId)
         {
+            if (mapId <= 0)
+                return "Unknown";
+
             try
             {
                 if (MapNamesCache.ContainsKey(mapId))
