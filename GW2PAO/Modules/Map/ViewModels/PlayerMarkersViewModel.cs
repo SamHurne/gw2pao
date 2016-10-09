@@ -31,6 +31,64 @@ namespace GW2PAO.Modules.Map.ViewModels
         private IPlayerService playerService;
         private MapUserData userData;
 
+        private static readonly List<string> TemplateIcons = new List<string>()
+        {
+            @"/Images/Map/nodeMining.png",
+            @"/Images/Map/nodeLogging.png",
+            @"/Images/Map/nodeHarvesting.png",
+            @"/Images/Map/pointA.png",
+            @"/Images/Map/pointB.png",
+            @"/Images/Map/pointC.png",
+            @"/Images/Map/siegeBlue.png",
+            @"/Images/Map/siegeRed.png",
+            @"/Images/Map/bookBlue.png",
+            @"/Images/Map/bookBrown.png",
+            @"/Images/Map/asuraGateBlue.png",
+            @"/Images/Map/asuraGatePurple.png",
+            @"/Images/Map/flagGreen.png",
+            @"/Images/Map/flagRed.png",
+            @"/Images/Map/redCog.png",
+            @"/Images/Map/redShield.png",
+            @"/Images/Map/bossGreen.png",
+            @"/Images/Map/bossBlue.png",
+            @"/Images/Map/bossPurple.png",
+            @"/Images/Map/bossRed.png",
+            @"/Images/Map/fancySquare.png",
+            @"/Images/Map/fancyCircle.png",
+            @"/Images/Map/fancyTriangle.png",
+            @"/Images/Map/fancyX.png",
+            @"/Images/Map/fancySpiral.png",
+            @"/Images/Map/fancyArrow.png",
+            @"/Images/Map/fancyHeart.png",
+            @"/Images/Map/fancyStar.png",
+            @"/Images/Map/shieldBlue.png",
+            @"/Images/Map/shieldGrey.png",
+            @"/Images/Map/shieldDarkBlue.png",
+            @"/Images/Map/shieldGreen.png",
+            @"/Images/Map/shieldRed.png",
+            @"/Images/Map/shieldOrange.png",
+            @"/Images/Map/starBlue.png",
+            @"/Images/Map/starGreen.png",
+            @"/Images/Map/starYellow.png",
+            @"/Images/Map/starYellow2.png",
+            @"/Images/Map/whiteOrb.png",
+            @"/Images/Map/downedAlly.png",
+            @"/Images/Map/downedEnemy.png",
+            @"/Images/Map/enslaved.png",
+            @"/Images/Map/activity.png",
+            @"/Images/Map/adventure.png",
+            @"/Images/Map/dialog.png",
+            @"/Images/Map/quaggan.png",
+            @"/Images/Map/ship.png",
+            @"/Images/Map/scout.png",
+            @"/Images/Map/anvil.png",
+            @"/Images/Map/mentor.png",
+            @"/Images/Map/multitag.png",
+            @"/Images/Map/swirlDiamond.png",
+            @"/Images/Map/swords.png",
+            @"/Images/Map/updraft.png",
+        };
+
         /// <summary>
         /// The collection of player markers to show on the map
         /// </summary>
@@ -104,38 +162,8 @@ namespace GW2PAO.Modules.Map.ViewModels
 
         private void InitializeTemplates()
         {
-            List<string> templateIcons = new List<string>()
-            {
-                @"/Images/Map/Markers/miningNode.png",
-                @"/Images/Map/Markers/harvestingNode.png",
-                @"/Images/Map/Markers/loggingNode.png",
-                @"/Images/Map/Markers/activity.png",
-                @"/Images/Map/Markers/adventure.png",
-                @"/Images/Map/Markers/anvil.png",
-                @"/Images/Map/Markers/book.png",
-                @"/Images/Map/Markers/parchment.png",
-                @"/Images/Map/Markers/dragon.png",
-                @"/Images/Map/Markers/greenFlag.png",
-                @"/Images/Map/Markers/quaggan.png",
-                @"/Images/Map/Markers/trophy.png",
-                @"/Images/Map/Markers/pointA.png",
-                @"/Images/Map/Markers/pointB.png",
-                @"/Images/Map/Markers/pointC.png",
-                @"/Images/Map/Markers/orangeShield.png",
-                @"/Images/Map/Markers/redShield.png",
-                @"/Images/Map/Markers/blueStar.png",
-                @"/Images/Map/Markers/greenStar.png",
-                @"/Images/Map/Markers/yellowStar.png",
-                @"/Images/Map/Markers/yellowStar2.png",
-                @"/Images/Map/Markers/downedAlly.png",
-                @"/Images/Map/Markers/downedEnemy.png",
-                @"/Images/Map/Markers/blueSiege.png",
-                @"/Images/Map/Markers/redSiege.png",
-                @"/Images/Map/Markers/swords.png"
-            };
-
             this.MarkerTemplates = new ObservableCollection<PlayerMarkerViewModel>();
-            foreach (var icon in templateIcons)
+            foreach (var icon in TemplateIcons)
             {
                 var task = this.playerTaskFactory.GetPlayerTask();
                 task.IconUri = icon;
