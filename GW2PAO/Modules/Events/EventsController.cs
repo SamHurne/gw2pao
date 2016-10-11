@@ -457,7 +457,7 @@ namespace GW2PAO.Modules.Events
                 Task.Factory.StartNew(() =>
                 {
                     logger.Info("Displaying notification for \"{0}\"", notification.EventName);
-                    Threading.BeginInvokeOnUI(() =>
+                    Threading.InvokeOnUI(() =>
                     {
                         notificationCollection.Add(notification);
                     });
@@ -471,7 +471,7 @@ namespace GW2PAO.Modules.Events
                             if (!this.UserData.AreEventNotificationsEnabled)
                             {
                                 logger.Debug("Removing notification for \"{0}\"", notification.EventName);
-                                Threading.BeginInvokeOnUI(() => notificationCollection.Remove(notification));
+                                Threading.InvokeOnUI(() => notificationCollection.Remove(notification));
                             }
                         }
 
@@ -479,12 +479,13 @@ namespace GW2PAO.Modules.Events
 
                         // TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
                         // This makes it so that the notifications can fade out before they are removed from the notification window
-                        Threading.BeginInvokeOnUI(() => notification.IsRemovingNotification = true);
+                        Threading.InvokeOnUI(() => notification.IsRemovingNotification = true);
                         System.Threading.Thread.Sleep(SLEEP_TIME);
-                        Threading.BeginInvokeOnUI(() =>
+                        Threading.InvokeOnUI(() =>
                         {
                             notificationCollection.Remove(notification);
                         });
+                        notification.Cleanup();
                     }
                 });
             }

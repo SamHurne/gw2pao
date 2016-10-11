@@ -28,5 +28,10 @@ namespace GW2PAO.Modules.Events.Interfaces
         /// TODO: I hate having this here, but due to a limitation in WPF, there's no reasonable way around this at this time
         /// </summary>
         bool IsRemovingNotification { get; set; }
+
+        /// <summary>
+        /// Cleans up the notification
+        /// </summary>
+        void Cleanup();
     }
 }

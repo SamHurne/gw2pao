@@ -68,9 +68,9 @@ namespace GW2PAO.Modules.Events.ViewModels.EventNotification
         }
 
         /// <summary>
-        /// Closes the notification
+        /// Cleans up the notification
         /// </summary>
-        public void Close()
+        public void Cleanup()
         {
             this.CleanupNotification();
         }
