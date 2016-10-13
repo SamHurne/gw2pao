@@ -1080,9 +1080,9 @@
     <value>Show Timer Value</value>
   </data>
   <data name="TimeUntilDay" xml:space="preserve">
-    <value>Time until night</value>
+    <value>Time until daytime</value>
   </data>
   <data name="TimeUntilNight" xml:space="preserve">
-    <value>Time until daytime</value>
+    <value>Time until night</value>
   </data>
 </root>

@@ -2113,7 +2113,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time until night.
+        ///   Looks up a localized string similar to Time until daytime.
         /// </summary>
         public static string TimeUntilDay {
             get {
@@ -2122,7 +2122,7 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time until daytime.
+        ///   Looks up a localized string similar to Time until night.
         /// </summary>
         public static string TimeUntilNight {
             get {
