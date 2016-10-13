@@ -172,7 +172,7 @@ namespace GW2PAO.Modules.DayNight.ViewModels
         {
             const int SCHEDULE_OFFSET_MINUTES = 25;
             const int CYCLE_LENGTH_MINUTES = 120;
-            const int NIGHT_START_MINUTES = 90;
+            const int NIGHT_START_MINUTES = 80;
 
             // First, check to see if the current zone actually cycles day/night
             if (this.playerService.HasValidMapId)
@@ -204,7 +204,8 @@ namespace GW2PAO.Modules.DayNight.ViewModels
             {
                 // Day starts on the quarter of every hour, every other hour, beginning with 00:25
                 // Therefore, we can just offset our time and then mod it so we are comparing against 00:00-02:00,
-                TimeSpan offsetAdjustedTime = DateTimeOffset.UtcNow.AddMinutes(SCHEDULE_OFFSET_MINUTES * -1).TimeOfDay;
+                DateTimeOffset utcNow = DateTimeOffset.UtcNow;
+                TimeSpan offsetAdjustedTime = utcNow.AddMinutes(SCHEDULE_OFFSET_MINUTES * -1).TimeOfDay;
                 offsetAdjustedTime = TimeSpan.FromMinutes(offsetAdjustedTime.TotalMinutes % CYCLE_LENGTH_MINUTES);
 
                 // Figure out if we are in day or night by comparing against 01:30
