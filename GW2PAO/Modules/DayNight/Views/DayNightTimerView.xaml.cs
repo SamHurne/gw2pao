@@ -29,6 +29,14 @@ namespace GW2PAO.Modules.DayNight.Views
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
+        /// Height before collapsing the control
+        /// </summary>
+        private double beforeCollapseHeight;
+
+        private const double MIN_WIDTH = 100;
+        private const double MIN_HEIGHT = 75;
+
+        /// <summary>
         /// View model
         /// </summary>
         [Import]
@@ -52,19 +60,32 @@ namespace GW2PAO.Modules.DayNight.Views
             logger.Debug("New DayNightTimerView created");
             InitializeComponent();
 
+            this.ResizeHelper.InitializeResizeElements(null, null, this.ResizeGripper);
+            this.MinHeight = MIN_HEIGHT;
+            this.MinWidth = MIN_WIDTH;
+
             // Set the window size and location
-            this.Closing += TPCalculatorView_Closing;
-            //this.Left = Properties.Settings.Default.EctoHelperX;
-            //this.Top = Properties.Settings.Default.EctoHelperY;
+            this.Closing += DayNightTimerView_Closing;
+            this.Left = Properties.Settings.Default.DayNightX;
+            this.Top = Properties.Settings.Default.DayNightY;
+            this.Height = Properties.Settings.Default.DayNightHeight;
+            this.Width = Properties.Settings.Default.DayNightWidth;
+            this.beforeCollapseHeight = this.Height;
         }
 
-        private void TPCalculatorView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void DayNightTimerView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                //Properties.Settings.Default.EctoHelperX = this.Left;
-                //Properties.Settings.Default.EctoHelperY = this.Top;
-                //Properties.Settings.Default.Save();
+                if (this.OverlayContents.Visibility == System.Windows.Visibility.Visible)
+                    Properties.Settings.Default.DayNightHeight = this.ActualHeight;
+                else
+                    Properties.Settings.Default.DayNightHeight = this.beforeCollapseHeight;
+
+                Properties.Settings.Default.DayNightWidth = this.Width;
+                Properties.Settings.Default.DayNightX = this.Left;
+                Properties.Settings.Default.DayNightY = this.Top;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -88,11 +109,15 @@ namespace GW2PAO.Modules.DayNight.Views
         {
             if (this.OverlayContents.Visibility == System.Windows.Visibility.Visible)
             {
+                this.beforeCollapseHeight = this.ActualHeight;
+                this.MinHeight = this.TitleBar.ActualHeight;
+                this.Height = this.TitleBar.ActualHeight;
                 this.OverlayContents.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
                 this.OverlayContents.Visibility = System.Windows.Visibility.Visible;
+                this.Height = this.beforeCollapseHeight;
             }
         }
 

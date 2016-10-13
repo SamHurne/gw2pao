@@ -27,6 +27,7 @@ namespace GW2PAO.Infrastructure
         public static readonly CompositeCommand ToggleTeamspeakOverlayCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleWebBrowserCommand = new CompositeCommand();
         public static readonly CompositeCommand ToggleMapOverlayCommand = new CompositeCommand();
+        public static readonly CompositeCommand ToggleDayNightTimerCommand = new CompositeCommand();
 
         // This isn't really a hotkey, but is related to hotkeys
         public static readonly CompositeCommand PauseHotkeys = new CompositeCommand();

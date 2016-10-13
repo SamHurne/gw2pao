@@ -13,7 +13,7 @@ using GW2PAO.PresentationCore;
 namespace GW2PAO.Modules.DayNight
 {
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 10)]
+    [ExportMetadata("Order", 9)]
     public class DayNightMenu : IMenuItem
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace GW2PAO.Modules.DayNight
         /// </summary>
         public string Header
         {
-            get { return "[[Day-Night Timer]]"; }
+            get { return Properties.Resources.DayNightTimer; }
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GW2PAO.Modules.DayNight
         /// </summary>
         public string Icon
         {
-            get { return "/Images/Title/map.png"; }
+            get { return "/Images/Title/daynight.png"; }
         }
 
         /// <summary>

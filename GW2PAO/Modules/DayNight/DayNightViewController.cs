@@ -5,8 +5,10 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GW2PAO.Infrastructure;
 using GW2PAO.Modules.DayNight.Interfaces;
 using GW2PAO.Modules.DayNight.Views;
+using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
 using NLog;
 
@@ -39,11 +41,11 @@ namespace GW2PAO.Modules.DayNight
         {
             logger.Debug("Initializing");
 
-            //logger.Debug("Registering hotkey commands");
-            //HotkeyCommands.ToggleMapOverlayCommand.RegisterCommand(new DelegateCommand(this.ToggleMap));
+            logger.Debug("Registering hotkey commands");
+            HotkeyCommands.ToggleDayNightTimerCommand.RegisterCommand(new DelegateCommand(this.ToggleDayNightTimer));
 
-            //if (Properties.Settings.Default.IsMapOpen && this.CanOpenMap())
-            //    this.OpenMap();
+            if (Properties.Settings.Default.IsDayNightOpen && this.CanOpenDayNightTimer())
+                this.OpenDayNightTimer();
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace GW2PAO.Modules.DayNight
 
             if (this.dayNightTimerView != null)
             {
-                //Properties.Settings.Default.IsMapOpen = this.mapView.IsVisible;
+                Properties.Settings.Default.IsDayNightOpen = this.dayNightTimerView.IsVisible;
                 Threading.InvokeOnUI(() => this.dayNightTimerView.Close());
             }
 

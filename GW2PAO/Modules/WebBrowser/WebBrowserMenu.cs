@@ -14,7 +14,7 @@ namespace GW2PAO.Modules.WebBrowser
 {
 #if !NO_BROWSER
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 9)]
+    [ExportMetadata("Order", 10)]
 #endif
     public class WebBrowserMenu : IMenuItem
     {

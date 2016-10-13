@@ -6,7 +6,6 @@
         xmlns:converters="clr-namespace:GW2PAO.Converters"
         xmlns:properties="clr-namespace:GW2PAO.Properties"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
-        Width="165" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
@@ -18,6 +17,46 @@
 
     <src:OverlayWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:ProgressToAngleConverter x:Key="ProgressToAngleConverter" />
+
+        <Style TargetType="{x:Type ProgressBar}"
+               x:Key="CircularProgressBarStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid>
+                            <Ellipse Stroke="Transparent"
+                                     Fill="Transparent"
+                                     Margin="40" />
+                            <core:Arc StrokeThickness="2"
+                                       Stroke="{TemplateBinding BorderBrush}"
+                                       Margin="0">
+                                <core:Arc.StartAngle>
+                                    <MultiBinding Converter="{StaticResource ProgressToAngleConverter}">
+                                        <Binding Path="Minimum"
+                                                 RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="."
+                                                 RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </core:Arc.StartAngle>
+                                <core:Arc.EndAngle>
+                                    <MultiBinding Converter="{StaticResource ProgressToAngleConverter}">
+                                        <Binding Path="Value"
+                                                 RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="."
+                                                 RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </core:Arc.EndAngle>
+                            </core:Arc>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
     </src:OverlayWindow.Resources>
 
     <Grid Name="MainPanel">
@@ -27,7 +66,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Border Name="TitleBar"
@@ -45,10 +84,14 @@
                 <Image Name="TitleImage" Grid.Column="0"
                         VerticalAlignment="Center"
                         Height="30" Width="30"
-                        Source="/Images/Title/merchant.png"
+                        Source="/Images/Title/daynight.png"
                         MouseDown="TitleImage_MouseDown">
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
+                            <MenuItem Header="{x:Static resx:Resources.ShowTimerValue}"
+                                      IsCheckable="True"
+                                      IsChecked="{Binding ShowDayNightTime}"/>
+                            <Separator />
                             <MenuItem Header="{x:Static resx:Resources.Close}" Click="CloseWindowButton_Click" />
                         </ContextMenu>
                     </Image.ContextMenu>
@@ -91,7 +134,7 @@
                 <core:OutlinedTextBlock Grid.Column="1" Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         Fill="PaleGoldenrod" FontFamily="./Style/Fonts/#Menomonia" FontSize="12"
-                                        Text="[[Day-Night]]" />
+                                        Text="{x:Static resx:Resources.DayNight}" />
 
                 <Button Name="CollapseExpandButton"
                         Grid.Column="2"
@@ -125,7 +168,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}" Value="False" />
-                                <Condition Binding="{Binding ElementName=ThresholdDisplay, Path=Visibility}" Value="Visible" />
+                                <Condition Binding="{Binding ElementName=OverlayContents, Path=Visibility}" Value="Visible" />
                                 <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}" Value="False" />
                                 <Condition Binding="{Binding Source={x:Static properties:Settings.Default}, Path=AutoHideTitleBars}" Value="True" />
                             </MultiDataTrigger.Conditions>
@@ -153,11 +196,218 @@
             </Border.Style>
         </Border>
 
-        <Grid Name="OverlayContents"
-              Grid.Row="1" 
-              Margin="7"
-              HorizontalAlignment="Center">
-            
+        <Viewbox Name="OverlayContents"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 Stretch="Uniform"
+                 Grid.Row="1">
+            <Grid Background="#01000000">
+
+                <!-- TODO: Flash when day changes -->
+
+                <Image HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Height="55"
+                       Width="55"
+                       Opacity="0.8">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source"
+                                    Value="/Images/Misc/day.png" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="0"
+                                                      Color="White"
+                                                      Opacity="0"
+                                                      BlurRadius="15" />
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsDaytime}"
+                                             Value="False">
+                                    <Setter Property="Source"
+                                            Value="/Images/Misc/night.png" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:0.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:02" />
+                                                <DoubleAnimation To="0"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:02.5" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:0.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01" />
+                                                <DoubleAnimation To="0.25"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:01.5" />
+                                                <DoubleAnimation To="1"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:02" />
+                                                <DoubleAnimation To="0"
+                                                                 Storyboard.TargetProperty="(Effect).Opacity"
+                                                                 Duration="00:00:00.5"
+                                                                 BeginTime="00:00:02.5" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+
+                <ProgressBar HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Width="50"
+                             Height="50"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="{Binding DayNightCyclePercentage}"
+                             Opacity="0.8"
+                             Background="Transparent">
+                    <ProgressBar.Style>
+                        <Style TargetType="ProgressBar"
+                               BasedOn="{StaticResource CircularProgressBarStyle}">
+                            <Setter Property="BorderBrush"
+                                    Value="Goldenrod" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsDaytime}"
+                                             Value="False">
+                                    <Setter Property="BorderBrush"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ProgressBar.Style>
+                </ProgressBar>
+            </Grid>
+        </Viewbox>
+
+        <core:OutlinedTextBlock Grid.Row="1"
+                                FontSize="18"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,3"
+                                Fill="White"
+                                FontFamily="./Style/Fonts/#Menomonia"
+                                Visibility="{Binding ShowDayNightTime, Converter={StaticResource BoolToVisibility}}">
+            <core:OutlinedTextBlock.Style>
+                <Style TargetType="core:OutlinedTextBlock"
+                       BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                    <Setter Property="Text"
+                            Value="{Binding TimeUntilNight, StringFormat=\{0:h\\:mm\\:ss\}}" />
+                    <Setter Property="ToolTip"
+                            Value="{x:Static resx:Resources.TimeUntilNight}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDaytime}"
+                                     Value="False">
+                            <Setter Property="Text"
+                                    Value="{Binding TimeUntilDay, StringFormat=\{0:h\\:mm\\:ss\}}" />
+                            <Setter Property="ToolTip"
+                                    Value="{x:Static resx:Resources.TimeUntilDay}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DoesCurrentZoneCycle}"
+                                     Value="False">
+                            <Setter Property="Text"
+                                    Value="∞" />
+                            <Setter Property="ToolTip"
+                                    Value="{x:Null}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </core:OutlinedTextBlock.Style>
+        </core:OutlinedTextBlock>
+
+        <Grid Name="ResizeGripper"
+              Grid.Row="1"
+              Grid.Column="1">
+            <ResizeGrip HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" />
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity"
+                            Value="1" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=MainPanel, Path=IsMouseOver}"
+                                           Value="False" />
+                                <Condition Binding="{Binding ElementName=MainMenu, Path=IsOpen}"
+                                           Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="00:00:00.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
         </Grid>
     </Grid>
 </src:OverlayWindow>

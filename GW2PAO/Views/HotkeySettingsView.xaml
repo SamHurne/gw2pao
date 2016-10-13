@@ -52,6 +52,9 @@
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleMap}"
                                  Hotkey="{Binding ToggleMapHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}" />
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDayNightTimer}"
+                                 Hotkey="{Binding ToggleDayNightTimerHotkey}"
+                                 HotkeyManager="{Binding GlobalHotkeyManager}" />
 
         <views:HotkeyUserControl Margin="5,20,1,1"
                                  Label="{x:Static resx:Resources.ToggleNonInteractiveWindow}"

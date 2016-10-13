@@ -246,6 +246,7 @@
     <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Converters\ProgressToAngleConverter.cs" />
     <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
@@ -1024,6 +1025,9 @@
     <Resource Include="Images\Map\swords.png" />
     <Resource Include="Images\Map\updraft.png" />
     <Resource Include="Images\Map\whiteOrb.png" />
+    <Resource Include="Images\Misc\day.png" />
+    <Resource Include="Images\Misc\night.png" />
+    <Resource Include="Images\Title\daynight.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

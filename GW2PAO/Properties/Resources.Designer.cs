@@ -619,6 +619,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day-Night.
+        /// </summary>
+        public static string DayNight {
+            get {
+                return ResourceManager.GetString("DayNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day-Night Timer.
+        /// </summary>
+        public static string DayNightTimer {
+            get {
+                return ResourceManager.GetString("DayNightTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -1933,6 +1951,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Timer Value.
+        /// </summary>
+        public static string ShowTimerValue {
+            get {
+                return ResourceManager.GetString("ShowTimerValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Trail.
         /// </summary>
         public static string ShowTrail {
@@ -2086,6 +2113,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time until night.
+        /// </summary>
+        public static string TimeUntilDay {
+            get {
+                return ResourceManager.GetString("TimeUntilDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time until daytime.
+        /// </summary>
+        public static string TimeUntilNight {
+            get {
+                return ResourceManager.GetString("TimeUntilNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle All Windows.
         /// </summary>
         public static string ToggleAllWindows {
@@ -2100,6 +2145,15 @@ namespace GW2PAO.Properties {
         public static string ToggleAutoFadeBorders {
             get {
                 return ResourceManager.GetString("ToggleAutoFadeBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Day-Night Timer.
+        /// </summary>
+        public static string ToggleDayNightTimer {
+            get {
+                return ResourceManager.GetString("ToggleDayNightTimer", resourceCulture);
             }
         }
         
