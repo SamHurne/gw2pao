@@ -246,6 +246,7 @@
     <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Converters\ProgressToAngleConverter.cs" />
     <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
@@ -261,6 +262,14 @@
     <Compile Include="Modules\Commerce\ViewModels\EctoSalvageHelperViewModel.cs" />
     <Compile Include="Modules\Commerce\Views\EctoSalvageHelperView.xaml.cs">
       <DependentUpon>EctoSalvageHelperView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DayNight\DayNightMenu.cs" />
+    <Compile Include="Modules\DayNight\DayNightModule.cs" />
+    <Compile Include="Modules\DayNight\DayNightViewController.cs" />
+    <Compile Include="Modules\DayNight\Interfaces\IDayNightViewController.cs" />
+    <Compile Include="Modules\DayNight\ViewModels\DayNightTimerViewModel.cs" />
+    <Compile Include="Modules\DayNight\Views\DayNightTimerView.xaml.cs">
+      <DependentUpon>DayNightTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Dungeons\Data\PathCompletionData.cs" />
     <Compile Include="Modules\Dungeons\Data\PathTime.cs" />
@@ -569,6 +578,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Commerce\Views\EctoSalvageHelperView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DayNight\Views\DayNightTimerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1012,6 +1025,9 @@
     <Resource Include="Images\Map\swords.png" />
     <Resource Include="Images\Map\updraft.png" />
     <Resource Include="Images\Map\whiteOrb.png" />
+    <Resource Include="Images\Misc\day.png" />
+    <Resource Include="Images\Misc\night.png" />
+    <Resource Include="Images\Title\daynight.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

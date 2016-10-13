@@ -862,18 +862,6 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersHeight"] = value;
             }
         }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public double MapViewX {
-            get {
-                return ((double)(this["MapViewX"]));
-            }
-            set {
-               this["MapViewX"] = value;
-            }
-        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -884,18 +872,6 @@ namespace GW2PAO.Properties {
             }
             set {
                 this["MetaEventTimersWidth"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public double MapViewY {
-            get {
-                return ((double)(this["MapViewY"]));
-            }
-            set {
-                this["MapViewY"] = value;
             }
         }
         
@@ -910,18 +886,6 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersX"] = value;
             }
         }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public double MapViewHeight {
-            get {
-                return ((double)(this["MapViewHeight"]));
-            }
-            set {
-                this["MapViewHeight"] = value;
-            }
-        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -934,7 +898,55 @@ namespace GW2PAO.Properties {
                 this["MetaEventTimersY"] = value;
             }
         }
-
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsMetaEventsTimersOpen {
+            get {
+                return ((bool)(this["IsMetaEventsTimersOpen"]));
+            }
+            set {
+                this["IsMetaEventsTimersOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewX {
+            get {
+                return ((double)(this["MapViewX"]));
+            }
+            set {
+                this["MapViewX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double MapViewY {
+            get {
+                return ((double)(this["MapViewY"]));
+            }
+            set {
+                this["MapViewY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double MapViewHeight {
+            get {
+                return ((double)(this["MapViewHeight"]));
+            }
+            set {
+                this["MapViewHeight"] = value;
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
@@ -950,24 +962,84 @@ namespace GW2PAO.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsMetaEventsTimersOpen {
-            get {
-                return ((bool)(this["IsMetaEventsTimersOpen"]));
-            }
-            set {
-                this["IsMetaEventsTimersOpen"] = value;
-            }
-        }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsMapOpen {
             get {
                 return ((bool)(this["IsMapOpen"]));
             }
             set {
                 this["IsMapOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DayNightX {
+            get {
+                return ((double)(this["DayNightX"]));
+            }
+            set {
+                this["DayNightX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public double DayNightY {
+            get {
+                return ((double)(this["DayNightY"]));
+            }
+            set {
+                this["DayNightY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("115")]
+        public double DayNightHeight {
+            get {
+                return ((double)(this["DayNightHeight"]));
+            }
+            set {
+                this["DayNightHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("125")]
+        public double DayNightWidth {
+            get {
+                return ((double)(this["DayNightWidth"]));
+            }
+            set {
+                this["DayNightWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDayNightOpen {
+            get {
+                return ((bool)(this["IsDayNightOpen"]));
+            }
+            set {
+                this["IsDayNightOpen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowDayNightTime {
+            get {
+                return ((bool)(this["ShowDayNightTime"]));
+            }
+            set {
+                this["ShowDayNightTime"] = value;
             }
         }
     }

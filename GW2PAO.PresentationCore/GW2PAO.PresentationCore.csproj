@@ -84,6 +84,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arc.cs" />
     <Compile Include="AutoRefreshCollectionViewSource.cs" />
     <Compile Include="DragDrop\DragDropHelper.cs" />
     <Compile Include="DragDrop\DragDropUtilities.cs" />

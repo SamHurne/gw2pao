@@ -44,6 +44,7 @@ namespace GW2PAO.ViewModels
         private Hotkey toggleTeamspeakTrackerHotkey;
         private Hotkey toggleWebBrowserHotkey;
         private Hotkey toggleMapHotkey;
+        private Hotkey toggleDayNightTimerHotkey;
 
         /// <summary>
         /// Header for the settings
@@ -209,6 +210,15 @@ namespace GW2PAO.ViewModels
         }
 
         /// <summary>
+        /// Hotkey to toggle the day/night timer on/off
+        /// </summary>
+        public Hotkey ToggleDayNightTimerHotkey
+        {
+            get { return this.toggleDayNightTimerHotkey; }
+            set { this.SetProperty(ref this.toggleDayNightTimerHotkey, value); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="globalHotkeyManager">The global hotkey manager</param>
@@ -240,6 +250,7 @@ namespace GW2PAO.ViewModels
             this.ToggleAutoFadeBordersHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleOverlayMenuIconHotkey = new Hotkey(Key.None, KeyModifier.None);
             this.ToggleMapHotkey = new Hotkey(Key.None, KeyModifier.None);
+            this.ToggleDayNightTimerHotkey = new Hotkey(Key.None, KeyModifier.None);
 
             // Try to load the hotkeys from user settings
             if (!string.IsNullOrEmpty(Properties.Settings.Default.Hotkeys))
@@ -297,6 +308,9 @@ namespace GW2PAO.ViewModels
 
                         if (loadedHotkeys.ToggleMapHotkey != null)
                             this.ToggleMapHotkey = loadedHotkeys.ToggleMapHotkey;
+
+                        if (loadedHotkeys.ToggleDayNightTimerHotkey != null)
+                            this.ToggleDayNightTimerHotkey = loadedHotkeys.ToggleDayNightTimerHotkey;
                     }
                     else
                     {
@@ -330,6 +344,7 @@ namespace GW2PAO.ViewModels
             this.ToggleTeamspeakTrackerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleTeamspeakOverlayCommand.Execute(null);
             this.ToggleWebBrowserHotkey.Pressed += (o, e) => HotkeyCommands.ToggleWebBrowserCommand.Execute(null);
             this.ToggleMapHotkey.Pressed += (o, e) => HotkeyCommands.ToggleMapOverlayCommand.Execute(null);
+            this.ToggleDayNightTimerHotkey.Pressed += (o, e) => HotkeyCommands.ToggleDayNightTimerCommand.Execute(null);
 
             // Register all hotkeys that are enabled
             if (this.ToggleAllWindowsHotkey.Key != Key.None)
@@ -366,6 +381,8 @@ namespace GW2PAO.ViewModels
                 this.GlobalHotkeyManager.Register(this.ToggleWebBrowserHotkey);
             if (this.ToggleMapHotkey.Key != Key.None)
                 this.GlobalHotkeyManager.Register(this.ToggleMapHotkey);
+            if (this.ToggleDayNightTimerHotkey.Key != Key.None)
+                this.GlobalHotkeyManager.Register(this.ToggleDayNightTimerHotkey);
         }
 
         /// <summary>

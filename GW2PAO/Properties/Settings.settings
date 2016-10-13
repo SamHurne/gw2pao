@@ -222,6 +222,8 @@
       <Value Profile="(Default)">250</Value>
     </Setting>
     <Setting Name="IsMetaEventsTimersOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="MapViewX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
@@ -236,6 +238,24 @@
     </Setting>
     <Setting Name="IsMapOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DayNightX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="DayNightY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="DayNightHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">115</Value>
+    </Setting>
+    <Setting Name="DayNightWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">125</Value>
+    </Setting>
+    <Setting Name="IsDayNightOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowDayNightTime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
