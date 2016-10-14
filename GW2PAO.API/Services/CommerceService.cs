@@ -218,7 +218,7 @@ namespace GW2PAO.API.Services
             catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding item: {0}", ex);
+                logger.Warn(ex, "Error finding item");
             }
 
             return items;
@@ -249,7 +249,7 @@ namespace GW2PAO.API.Services
             catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding prices for itemId {0}: {1}", ex);
+                logger.Warn(ex, "Error finding prices for itemId {0}", itemId);
             }
 
             return itemPrices;
@@ -285,7 +285,7 @@ namespace GW2PAO.API.Services
             catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding prices: {0}", ex);
+                logger.Warn(ex, "Error finding prices");
             }
 
             return prices;

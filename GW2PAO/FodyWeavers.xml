@@ -7,6 +7,7 @@
       awesomium
       avcodec-53
       avformat-53
+      avutil-51
       icudt
       inspector
       libEGL
