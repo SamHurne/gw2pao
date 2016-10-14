@@ -120,6 +120,10 @@
   <data name="About" xml:space="preserve">
     <value>A propos</value>
   </data>
+  <data name="ActiveFor" xml:space="preserve">
+    <value>actif pour</value>
+    <comment>Example: "active for 00:10:07"</comment>
+  </data>
   <data name="ActiveIn" xml:space="preserve">
     <value>démarre dans</value>
     <comment>Used to communicate when an in-game event will be active - example: "active in 08:00:01"</comment>
@@ -150,8 +154,17 @@
   <data name="AutoFadeBorders" xml:space="preserve">
     <value>Fondu automatique des Bordures</value>
   </data>
+  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
+    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas lancé</value>
+  </data>
+  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
+    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas au 1er plan</value>
+  </data>
   <data name="AutoHideBorder" xml:space="preserve">
     <value>Masquer automatiquement les Bordures</value>
+  </data>
+  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
+    <value>Masquer auto. l'icône de l'overlay quand GW2 n'est pas au 1er plan</value>
   </data>
   <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
     <value>Masquer automatiquement l'icône de l'overlay quand GW2 ne s'éxécute pas</value>
@@ -167,6 +180,18 @@
   </data>
   <data name="AutoStop" xml:space="preserve">
     <value>Arrêt automatique</value>
+  </data>
+  <data name="AverageTime" xml:space="preserve">
+    <value>Temps moyen</value>
+  </data>
+  <data name="BasedOnBuyOrder" xml:space="preserve">
+    <value>Basé sur le prix d'achat max.</value>
+  </data>
+  <data name="BasedOnSellListing" xml:space="preserve">
+    <value>Basé sur le prix de vente mini.</value>
+  </data>
+  <data name="BestTime" xml:space="preserve">
+    <value>Meilleur Temps</value>
   </data>
   <data name="BestTimes" xml:space="preserve">
     <value>Meilleur Temps:</value>
@@ -217,6 +242,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Château</value>
   </data>
+  <data name="CenterOnChar" xml:space="preserve">
+    <value>Centrer sur le Personnage</value>
+  </data>
   <data name="CheckForUpdatesAtStartup" xml:space="preserve">
     <value>Vérifier les mises à jour au démarrage</value>
   </data>
@@ -230,8 +258,15 @@
   <data name="Commerce" xml:space="preserve">
     <value>Commerce</value>
   </data>
+  <data name="CompletedPerChar" xml:space="preserve">
+    <value>Validé par le personnage</value>
+    <comment>for the tasks tracker</comment>
+  </data>
   <data name="CompletionOptions" xml:space="preserve">
     <value>Option d'achèvement</value>
+  </data>
+  <data name="CompletionTime" xml:space="preserve">
+    <value>Temps de réalisation</value>
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Configurer</value>
@@ -284,6 +319,15 @@
   <data name="CustomIcon" xml:space="preserve">
     <value>Icône personnalisée</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DayNight" xml:space="preserve">
+    <value>Jour Nuit</value>
+  </data>
+  <data name="DayNightTimer" xml:space="preserve">
+    <value>Jour-Nuit Minuteur</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -318,6 +362,12 @@
     <value>Ne plus montrer</value>
     <comment>Shown in New Version Available popup</comment>
   </data>
+  <data name="DungeonCompletion" xml:space="preserve">
+    <value>Achèvement de donjon</value>
+  </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Chemins</value>
+  </data>
   <data name="Dungeons" xml:space="preserve">
     <value>Donjons</value>
   </data>
@@ -326,6 +376,9 @@
   </data>
   <data name="DungeonTimer" xml:space="preserve">
     <value>Chronomètre Donjon:</value>
+  </data>
+  <data name="EctoSalvageHelper" xml:space="preserve">
+    <value>Assistant de recyclage d'ecto</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
@@ -336,6 +389,9 @@
   <data name="EnableLogging" xml:space="preserve">
     <value>Activer le log</value>
     <comment>Shown in About window</comment>
+  </data>
+  <data name="EntireContinent" xml:space="preserve">
+    <value>Continent Entier</value>
   </data>
   <data name="EternalBattlegrounds" xml:space="preserve">
     <value>Champs de Bataille Eternels</value>
@@ -409,6 +465,10 @@
     <value>Aide</value>
     <comment>Shown in About window</comment>
   </data>
+  <data name="HeroChallenges" xml:space="preserve">
+    <value>Défis de héros</value>
+    <comment>what used to be called Skill Challenges</comment>
+  </data>
   <data name="Hide" xml:space="preserve">
     <value>Masquer</value>
     <comment>Used in several places, hides something from view</comment>
@@ -421,6 +481,9 @@
   </data>
   <data name="Import" xml:space="preserve">
     <value>Import...</value>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>dans</value>
   </data>
   <data name="IncludeLocation" xml:space="preserve">
     <value>Inclure la position</value>
@@ -452,11 +515,14 @@
     <comment>Shown in the general settings, next to the dropdown that allows selection of the current language.</comment>
   </data>
   <data name="LastActiveXAgo" xml:space="preserve">
-    <value>Dernière activation il y a {0}</value>
+    <value>Dernière apparition il y a {0}</value>
     <comment>Describes how long ago something was active (time) - example: "Last Active 01:23:45 ago"</comment>
   </data>
   <data name="Later" xml:space="preserve">
     <value>Plus tard</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Longueur</value>
   </data>
   <data name="ListingFee" xml:space="preserve">
     <value>Taxes:</value>
@@ -465,7 +531,7 @@
     <value>Chargement...</value>
   </data>
   <data name="LocatedInX" xml:space="preserve">
-    <value>Localisé à {0}</value>
+    <value>Localisation: {0}</value>
     <comment>Describes location of something - example: "Located in Lion's Arch"</comment>
   </data>
   <data name="Location" xml:space="preserve">
@@ -477,12 +543,24 @@
   <data name="Lower" xml:space="preserve">
     <value>Inférieur</value>
   </data>
+  <data name="Map" xml:space="preserve">
+    <value>Carte</value>
+  </data>
+  <data name="MapOverlay" xml:space="preserve">
+    <value>Overlay sur Carte</value>
+  </data>
   <data name="Maps" xml:space="preserve">
     <value>Cartes</value>
+  </data>
+  <data name="MetaEventTimers" xml:space="preserve">
+    <value>Planning des méta-évènements HoT</value>
   </data>
   <data name="Meters" xml:space="preserve">
     <value>Mètres</value>
     <comment>Meters, as in "m"</comment>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Mouvement</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nom</value>
@@ -501,6 +579,9 @@
   <data name="NonInteractiveWindows" xml:space="preserve">
     <value>Fenêtres non-interactives</value>
     <comment>Non-interactive windows, or windows that do not receive any mouse-clicks</comment>
+  </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>Aucun résultat</value>
   </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Durée des Notifications (sec)</value>
@@ -527,9 +608,15 @@
   <data name="OpenGuide" xml:space="preserve">
     <value>Ouvrir le guide</value>
   </data>
+  <data name="OpenMetaEventTimers" xml:space="preserve">
+    <value>Ouvrir le planning des méta-évènements HoT</value>
+  </data>
   <data name="OpenWikiPage" xml:space="preserve">
     <value>Ouvrir la page du Wiki</value>
     <comment>Opens the web browser to the GW2 Wiki</comment>
+  </data>
+  <data name="OpenWorldBossTimers" xml:space="preserve">
+    <value>Ouvrir le planning des World Boss</value>
   </data>
   <data name="OpenWvWTracker" xml:space="preserve">
     <value>Ouvrir les évènements McM</value>
@@ -550,6 +637,9 @@
   <data name="Owner" xml:space="preserve">
     <value>Propriétaire</value>
     <comment>Owner, as in World Owner</comment>
+  </data>
+  <data name="PlayerMarkers" xml:space="preserve">
+    <value>Marques personnelles</value>
   </data>
   <data name="Points" xml:space="preserve">
     <value>Points: {0}</value>
@@ -589,6 +679,9 @@
   </data>
   <data name="RedObjectives" xml:space="preserve">
     <value>Objectifs frontaliers Rouges</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Remise à zéro</value>
@@ -632,6 +725,10 @@
   <data name="Reward" xml:space="preserve">
     <value>Récompense:</value>
     <comment>Dungeons path reward</comment>
+  </data>
+  <data name="ROI" xml:space="preserve">
+    <value>Retour sur Investissement:</value>
+    <comment>Return on Investment</comment>
   </data>
   <data name="SaleFee" xml:space="preserve">
     <value>Taxes de vente:</value>
@@ -682,6 +779,9 @@
     <value>Montrer salon TS</value>
     <comment>Show teamspeak channel information box</comment>
   </data>
+  <data name="ShowCharPointer" xml:space="preserve">
+    <value>Montrer le Personnage</value>
+  </data>
   <data name="ShowChatEntryBox" xml:space="preserve">
     <value>Montrer chatbox TS</value>
     <comment>Show text-chat entry box</comment>
@@ -702,6 +802,12 @@
   <data name="ShowGoldToGemsExchange" xml:space="preserve">
     <value>Montrer le change Gemmes/Or</value>
   </data>
+  <data name="ShowHeartQuests" xml:space="preserve">
+    <value>Montrer les Coeurs</value>
+  </data>
+  <data name="ShowHeroPoints" xml:space="preserve">
+    <value>Montrer les Points de Héros</value>
+  </data>
   <data name="ShowInactiveEvents" xml:space="preserve">
     <value>Montrer les évènements inactifs</value>
     <comment>Show world events even if they are inactive</comment>
@@ -713,12 +819,34 @@
     <value>Montrer les bordures sur fenêtre de notifications</value>
     <comment>Show window borders for notification windows</comment>
   </data>
+  <data name="ShowPlayerMarkers" xml:space="preserve">
+    <value>Montrer les tâches personnelles</value>
+    <comment>Show/Hide option to toggle visiblity of player tasks on the map</comment>
+  </data>
+  <data name="ShowPointsOfInterest" xml:space="preserve">
+    <value>Montrer les Points d'intérêt</value>
+  </data>
   <data name="ShowTasksNotOnMap" xml:space="preserve">
     <value>Montrer les tâches situées sur d'autres cartes</value>
+  </data>
+  <data name="ShowTimerValue" xml:space="preserve">
+    <value>Afficher la valeur Minuteur</value>
+  </data>
+  <data name="ShowTrail" xml:space="preserve">
+    <value>Montrer les chemins</value>
   </data>
   <data name="ShowUnlockedZonePoints" xml:space="preserve">
     <value>Montrer les sites débloqués</value>
     <comment>Show unlocked points, as in locations on the map</comment>
+  </data>
+  <data name="ShowVistas" xml:space="preserve">
+    <value>Montrer les Panoramas</value>
+  </data>
+  <data name="ShowWaypointCopyButtons" xml:space="preserve">
+    <value>Montrer les boutons "Copier le point de passage"</value>
+  </data>
+  <data name="ShowWaypoints" xml:space="preserve">
+    <value>Montrer les Points de passage</value>
   </data>
   <data name="SkillChallenges" xml:space="preserve">
     <value>Point de compétence</value>
@@ -763,12 +891,25 @@
     <value>Temps de trajet</value>
     <comment>Time-distances, which are estimated time to travel based on distanced</comment>
   </data>
+  <data name="TimeUntilDay" xml:space="preserve">
+    <value>Temps jusqu'à la nuit</value>
+  </data>
+  <data name="TimeUntilNight" xml:space="preserve">
+    <value>Temps jusqu'à la journée</value>
+  </data>
+  <data name="Toggle World Boss Timers" xml:space="preserve">
+    <value>Montrer/Masquer le planning des World Boss</value>
+    <comment>Hotkey label</comment>
+  </data>
   <data name="ToggleAllWindows" xml:space="preserve">
     <value>Montrer/Masquer les Fenêtres</value>
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleAutoFadeBorders" xml:space="preserve">
     <value>Activer/Couper fondu auto. des bordures</value>
+  </data>
+  <data name="ToggleDayNight" xml:space="preserve">
+    <value>Basculer jour-nuit Minuteur</value>
   </data>
   <data name="ToggleDungeonsTracker" xml:space="preserve">
     <value>Montrer/Masquer la Liste de Donjons</value>
@@ -780,6 +921,14 @@
   </data>
   <data name="ToggleEventsTracker" xml:space="preserve">
     <value>Montrer/Masquer les Evènements Mondiaux</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMap" xml:space="preserve">
+    <value>Montrer/Masquer la carte</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMetaEventTimers" xml:space="preserve">
+    <value>Montrer/Masquer le planning des méta-évènements HoT</value>
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleNonInteractiveWindow" xml:space="preserve">
@@ -827,6 +976,9 @@
   </data>
   <data name="TrackedItems" xml:space="preserve">
     <value>Objets suivis</value>
+  </data>
+  <data name="Trail" xml:space="preserve">
+    <value>Chemins</value>
   </data>
   <data name="TranslationsBy" xml:space="preserve">
     <value>Traductions par:</value>
@@ -880,6 +1032,9 @@
 Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
     <comment>As in when a world other than the home world takes an objective from another world that is not the home world</comment>
   </data>
+  <data name="WorldBossTimers" xml:space="preserve">
+    <value>Planning des World Boss</value>
+  </data>
   <data name="WorldEvents" xml:space="preserve">
     <value>Evènements Mondiaux</value>
   </data>
@@ -931,54 +1086,5 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Assistant d'exploration</value>
-  </data>
-  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
-    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas lancé</value>
-  </data>
-  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
-    <value>Masquer auto. toutes les fenêtres quand GW2 n'est pas au 1er plan</value>
-  </data>
-  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
-    <value>Masquer auto. l'icône de l'overlay quand GW2 n'est pas au 1er plan</value>
-  </data>
-  <data name="AverageTime" xml:space="preserve">
-    <value>Temps moyen</value>
-  </data>
-  <data name="BestTime" xml:space="preserve">
-    <value>Meilleur Temps</value>
-  </data>
-  <data name="CompletionTime" xml:space="preserve">
-    <value>Temps de réalisation</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="DungeonCompletion" xml:space="preserve">
-    <value>Achèvement de donjon</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="ShowWaypointCopyButtons" xml:space="preserve">
-    <value>Montrer les boutons "Copier le point de passage"</value>
-  </data>
-  <data name="DungeonPaths" xml:space="preserve">
-    <value>Chemins</value>
-  </data>
-  <data name="HeroChallenges" xml:space="preserve">
-    <value>Défis de héros</value>
-  </data>
-  <data name="BasedOnBuyOrder" xml:space="preserve">
-    <value>Basé sur le prix d'achat max.</value>
-  </data>
-  <data name="BasedOnSellListing" xml:space="preserve">
-    <value>Basé sur le prix de vente mini.</value>
-  </data>
-  <data name="CompletedPerChar" xml:space="preserve">
-    <value>Validé par le personnage</value>
-    <comment>for the tasks tracker</comment>
-  </data>
-  <data name="EctoSalvageHelper" xml:space="preserve">
-    <value>Assistant de recyclage d'ecto</value>
   </data>
 </root>
