@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "3.6"
+#define MyAppVersion "4.0Beta1"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -42,6 +42,7 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\AdjustedEventTimeTable.xml"; D
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\AnetCopyright.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Dungeons.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\MetaEventTable.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\StandardEventTimeTable.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\ThirdPartyLicenses.txt"; DestDir: "{app}"; Flags: ignoreversion
