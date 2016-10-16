@@ -98,6 +98,7 @@
                     <Image.ContextMenu>
                         <ContextMenu Name="MainMenu">
                             <MenuItem Header="{x:Static resx:Resources.ShowChannelBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChannelName}" />
+                            <MenuItem Header="{x:Static resx:Resources.ShowChat}" IsCheckable="True" IsChecked="{Binding UserData.ShowChat}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowChatEntryBox}" IsCheckable="True" IsChecked="{Binding UserData.ShowChatEntryBox}" />
                             <MenuItem Header="{x:Static resx:Resources.ShowEnterExitChannelNotifications}" IsCheckable="True" IsChecked="{Binding UserData.ShowEnterExitChannelNotifications}" />
                             <Separator />
@@ -372,12 +373,26 @@
                     </Style>
                 </ScrollViewer.Style>
             </ScrollViewer>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Grid.RowSpan"
+                            Value="1" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserData.ShowChat}"
+                                     Value="False">
+                            <Setter Property="Grid.RowSpan"
+                                    Value="3" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
         </Grid>
 
         <GridSplitter Grid.Row="3"
                       Height="2"
                       HorizontalAlignment="Stretch"
-                      Background="Black">
+                      Background="Black"
+                      Visibility="{Binding UserData.ShowChat, Converter={StaticResource BoolToVisibility}}">
             <GridSplitter.Style>
                 <Style TargetType="GridSplitter">
                     <Setter Property="Opacity" Value="0.25" />
@@ -414,7 +429,9 @@
             </GridSplitter.Style>
         </GridSplitter>
 
-        <Grid Name="ChatContainer" Grid.Row="4">
+        <Grid Name="ChatContainer"
+              Grid.Row="4"
+              Visibility="{Binding UserData.ShowChat, Converter={StaticResource BoolToVisibility}}">
             <Grid.Background>
                 <LinearGradientBrush Opacity="1" StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#00000000" Offset="0"/>

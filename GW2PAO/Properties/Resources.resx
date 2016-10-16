@@ -1085,4 +1085,7 @@
   <data name="TimeUntilNight" xml:space="preserve">
     <value>Time until night</value>
   </data>
+  <data name="ShowChat" xml:space="preserve">
+    <value>Show Chat</value>
+  </data>
 </root>

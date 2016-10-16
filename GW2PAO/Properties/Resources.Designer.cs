@@ -1825,6 +1825,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Chat.
+        /// </summary>
+        public static string ShowChat {
+            get {
+                return ResourceManager.GetString("ShowChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Chat Entry Box.
         /// </summary>
         public static string ShowChatEntryBox {
