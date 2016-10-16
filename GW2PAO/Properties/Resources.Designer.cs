@@ -1825,15 +1825,6 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Chat.
-        /// </summary>
-        public static string ShowChat {
-            get {
-                return ResourceManager.GetString("ShowChat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show Chat Entry Box.
         /// </summary>
         public static string ShowChatEntryBox {
@@ -1958,6 +1949,15 @@ namespace GW2PAO.Properties {
                 return ResourceManager.GetString("ShowTasksNotOnMap", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show Text Chat.
+        /// </summary>
+        public static string ShowTextChat {
+            get {
+                return ResourceManager.GetString("ShowTextChat", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Show Timer Value.
@@ -1992,6 +1992,15 @@ namespace GW2PAO.Properties {
         public static string ShowVistas {
             get {
                 return ResourceManager.GetString("ShowVistas", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show Voice Chat.
+        /// </summary>
+        public static string ShowVoiceChat {
+            get {
+                return ResourceManager.GetString("ShowVoiceChat", resourceCulture);
             }
         }
         
