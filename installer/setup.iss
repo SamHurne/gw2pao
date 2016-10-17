@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "4.0Beta1"
+#define MyAppVersion "4.0"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -50,6 +50,10 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\WvWObjectives.xml"; DestDir: "
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\CopperNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\CypressNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\DailyCrafting.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\Ember Bay - Camis Journal.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\Ember Bay - Mursaat Lore Tablets.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\Ember Bay - Mursaat Tokens.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\Ember Bay - Skritt Stash.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\GoldNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\IronNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\OrichalcumNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion

@@ -281,7 +281,7 @@ namespace GW2PAO.Modules.Tasks
             {
                 Threading.InvokeOnUI(() =>
                 {
-                    var taskToRemove = this.PlayerTasks.FirstOrDefault(t => t.Task == task);
+                    var taskToRemove = this.PlayerTasks.FirstOrDefault(t => t.Task.ID == task.ID);
                     if (taskToRemove != null)
                     {
                         this.PlayerTasks.Remove(taskToRemove);
@@ -312,6 +312,7 @@ namespace GW2PAO.Modules.Tasks
                 Threading.InvokeOnUI(() =>
                 {
                     this.PlayerTasks.Clear();
+                    this.UserData.Tasks.Clear();
                     foreach (var task in (ObservableCollection<PlayerTask>)loadedTasks)
                     {
                         task.IsAccountCompleted = false;

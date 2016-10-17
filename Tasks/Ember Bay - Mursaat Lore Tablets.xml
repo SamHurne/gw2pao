@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>21070a62-d795-48e4-8bdb-c214e0045a19</ID>
+    <Name>Mursaat Lore Tablet - #1</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5194.9490792561846</X>
+      <Y>29162.76719022929</Y>
+      <Z>1259.8631746067047</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-811.408203125</X>
+      <Y>-66.304443359375</Y>
+      <Z>32.000507354736328</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>dea75237-7a49-4312-aece-d7e0ea3ef5ad</ID>
+    <Name>Mursaat Lore Tablet - #2</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5241.0642885518391</X>
+      <Y>29107.399332602312</Y>
+      <Z>2472.8603650386813</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-783.29638671875</X>
+      <Y>-32.552215576171875</Y>
+      <Z>62.810619354248047</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>335c01e7-b279-4368-8297-fe339879072c</ID>
+    <Name>Mursaat Lore Tablet - #3</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5413.50842236557</X>
+      <Y>29146.248121649696</Y>
+      <Z>3583.7216843589786</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-678.17449951171875</X>
+      <Y>-56.234424591064453</Y>
+      <Z>91.026481628417969</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ec7e9cc3-ed7b-4d26-9f51-64bae75c3e1d</ID>
+    <Name>Mursaat Lore Tablet - #4</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5433.0661154747013</X>
+      <Y>29183.796683948611</Y>
+      <Z>5462.1790547439577</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-666.25213623046875</X>
+      <Y>-79.124015808105469</Y>
+      <Z>138.73927307128906</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>78c509e2-832e-49dc-b431-59b4e986cf0c</ID>
+    <Name>Mursaat Lore Tablet - #5</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5476.9097263898211</X>
+      <Y>29034.116130073864</Y>
+      <Z>5983.142028684998</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-639.52508544921875</X>
+      <Y>12.121200561523438</Y>
+      <Z>151.97172546386719</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>52307fed-30b3-4746-90d3-99b13e39ff23</ID>
+    <Name>Mursaat Lore Tablet - #6</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5379.1756278188068</X>
+      <Y>28990.096765147497</Y>
+      <Z>4483.2980719123843</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-699.103759765625</X>
+      <Y>38.955390930175781</Y>
+      <Z>113.87570953369141</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>57ee0d6f-4fa1-4bfb-9294-69ea98aa90c0</ID>
+    <Name>Mursaat Lore Tablet - #7</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5283.9921713821414</X>
+      <Y>29124.937644286809</Y>
+      <Z>2485.7327224872588</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-757.1275634765625</X>
+      <Y>-43.243564605712891</Y>
+      <Z>63.137577056884766</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>17f440df-ba37-4a21-827b-d00496f7dac5</ID>
+    <Name>Mursaat Lore Tablet - #8</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5126.767886890666</X>
+      <Y>29082.817371976369</Y>
+      <Z>934.3059208423615</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-852.971435546875</X>
+      <Y>-17.567060470581055</Y>
+      <Z>23.731357574462891</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>9ec2b85b-a2c4-4058-8d7a-294b1a11d8ee</ID>
+    <Name>Mursaat Lore Tablet - #9</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5049.5047064300534</X>
+      <Y>29086.054491031176</Y>
+      <Z>340.78011930227279</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-900.071044921875</X>
+      <Y>-19.540407180786133</Y>
+      <Z>8.6558103561401367</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>acb6cf1d-0100-4468-a2e8-7fca0c67195f</ID>
+    <Name>Mursaat Lore Tablet - #10</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5076.7928226422628</X>
+      <Y>29288.122540401775</Y>
+      <Z>662.91950009117124</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-883.43621826171875</X>
+      <Y>-142.72102355957031</Y>
+      <Z>16.838146209716797</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>https://render.guildwars2.com/file/7AB751C57D97983CBFBBB310DDBBCFB9910197CC/1302003.png</IconUri>
+  </PlayerTask>
+</ArrayOfPlayerTask>
