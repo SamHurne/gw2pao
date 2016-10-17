@@ -1312,6 +1312,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notifications Duration (sec).
         /// </summary>
         public static string NotificationsDuration {
@@ -1949,7 +1958,7 @@ namespace GW2PAO.Properties {
                 return ResourceManager.GetString("ShowTasksNotOnMap", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show Text Chat.
         /// </summary>
@@ -1994,7 +2003,7 @@ namespace GW2PAO.Properties {
                 return ResourceManager.GetString("ShowVistas", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show Voice Chat.
         /// </summary>

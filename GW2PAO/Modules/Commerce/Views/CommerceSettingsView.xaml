@@ -46,7 +46,7 @@
     <StackPanel Orientation="Vertical"
                 Margin="15,5,10,0">
         <!-- Tracked Items Configuration -->
-        <GroupBox Height="330">
+        <GroupBox Height="400">
             <GroupBox.Header>
                 <core:OutlinedTextBlock Text="{x:Static resx:Resources.TrackedItems}" />
             </GroupBox.Header>
@@ -232,7 +232,19 @@
                                 <view:PriceView DataContext="{Binding Data.SellListingLowerLimit}"/>
                             </Grid>
                         </Grid>
-                        
+
+
+                        <!-- Notes -->
+                        <core:OutlinedTextBlock Margin="0,10,0,0"
+                                                Text="{x:Static resx:Resources.Notes}" />
+                        <TextBox Name="NotesTextBox"
+                                 HorizontalAlignment="Stretch"
+                                 Height="50"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 Text="{Binding Data.Notes}" />
+
+
                         <StackPanel.Style>
                             <Style TargetType="StackPanel" >
                                 <Style.Triggers>

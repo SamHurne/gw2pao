@@ -1091,4 +1091,7 @@
   <data name="ShowVoiceChat" xml:space="preserve">
     <value>Show Voice Chat</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
 </root>
