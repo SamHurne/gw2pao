@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>f4cd4995-9c8c-4543-81ab-7841fcbd8be8</ID>
+    <Name>Mursaat Token - #1</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6392.8504481556574</X>
+      <Y>29806.163389579266</Y>
+      <Z>203.16200639052391</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-81.167922973632812</X>
+      <Y>-458.5185546875</Y>
+      <Z>5.1603121757507324</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>04a2e669-8047-42fe-bd52-b3a28d811276</ID>
+    <Name>Mursaat Token - #2</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6948.0601856619514</X>
+      <Y>30136.864279785921</Y>
+      <Z>1282.5128767597198</Z>
+    </ContinentLocation>
+    <Location>
+      <X>257.28775024414062</X>
+      <Y>-660.11370849609375</Y>
+      <Z>32.575809478759766</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>1afc86d4-bc13-4c0f-95e4-753bd26b8194</ID>
+    <Name>Mursaat Token - #3</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6904.4059580479934</X>
+      <Y>30148.549474769847</Y>
+      <Z>727.2684465154648</Z>
+    </ContinentLocation>
+    <Location>
+      <X>230.6761474609375</X>
+      <Y>-667.23699951171875</Y>
+      <Z>18.47260856628418</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>afcafa84-6bed-425d-9c87-7a9e95e72525</ID>
+    <Name>Mursaat Token - #4</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6938.977146271769</X>
+      <Y>30487.446361619313</Y>
+      <Z>1405.9283121524811</Z>
+    </ContinentLocation>
+    <Location>
+      <X>251.750732421875</X>
+      <Y>-873.82843017578125</Y>
+      <Z>35.7105598449707</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>545cb4bb-6aee-4593-86d0-5fbf1291467b</ID>
+    <Name>Mursaat Token - #5</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6717.3176465815541</X>
+      <Y>29438.733327730497</Y>
+      <Z>1827.2101890163422</Z>
+    </ContinentLocation>
+    <Location>
+      <X>116.62717437744141</X>
+      <Y>-234.53330993652344</Y>
+      <Z>46.411113739013672</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>4ad4143b-e2b5-4212-b074-434d946bacca</ID>
+    <Name>Mursaat Token - #6</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7024.0706228689833</X>
+      <Y>29180.62382530616</Y>
+      <Z>3630.4676707084654</Z>
+    </ContinentLocation>
+    <Location>
+      <X>303.62368774414062</X>
+      <Y>-77.1898422241211</Y>
+      <Z>92.213829040527344</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>0686cf5a-82d3-4803-9c5e-32a3dd932cee</ID>
+    <Name>Mursaat Token - #7</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6563.1629779227806</X>
+      <Y>29259.89400318556</Y>
+      <Z>2581.5797463722229</Z>
+    </ContinentLocation>
+    <Location>
+      <X>22.654539108276367</X>
+      <Y>-125.51291656494141</Y>
+      <Z>65.572090148925781</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>b0aa91c5-7449-4d84-8f65-30cefeec4571</ID>
+    <Name>Mursaat Token - #7 - ENTRANCE</Name>
+    <Description>Drop down the hole!!!</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6616.910117112795</X>
+      <Y>29253.09637919709</Y>
+      <Z>4331.6292311683656</Z>
+    </ContinentLocation>
+    <Location>
+      <X>55.418777465820312</X>
+      <Y>-121.36908721923828</Y>
+      <Z>110.02332305908203</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/starGreen.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ed8224f0-bcec-49ad-8100-ce258624a841</ID>
+    <Name>Mursaat Token - #8</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6626.8985718835829</X>
+      <Y>29413.166456919353</Y>
+      <Z>1298.4685325214387</Z>
+    </ContinentLocation>
+    <Location>
+      <X>61.507736206054688</X>
+      <Y>-218.94775390625</Y>
+      <Z>32.981082916259766</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>5754baa1-bc0c-4aeb-bdb4-6a328c03ec71</ID>
+    <Name>Mursaat Token - #9</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5065.9454597831727</X>
+      <Y>29073.350077973184</Y>
+      <Z>203.91388888406755</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-890.04876708984375</X>
+      <Y>-11.795801162719727</Y>
+      <Z>5.1794099807739258</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>06a29ec5-b55b-4567-9a58-daa0bdad0075</ID>
+    <Name>Mursaat Token - #10</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6951.9655967352546</X>
+      <Y>30471.32570259018</Y>
+      <Z>4798.9848662643435</Z>
+    </ContinentLocation>
+    <Location>
+      <X>259.66848754882812</X>
+      <Y>-864.00128173828125</Y>
+      <Z>121.89414978027344</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>f7e6c681-4e1f-40ef-9f67-e612fbb2ef24</ID>
+    <Name>Mursaat Token - #11</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6684.2853165761944</X>
+      <Y>29797.060726014075</Y>
+      <Z>-1655.1236957798005</Z>
+    </ContinentLocation>
+    <Location>
+      <X>96.490676879882812</X>
+      <Y>-452.96957397460938</Y>
+      <Z>-42.040119171142578</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>98ae1c21-7166-4aa4-b1f7-6535b98a5bde</ID>
+    <Name>Mursaat Token - #12</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5438.86365746282</X>
+      <Y>30416.329252499898</Y>
+      <Z>1373.9365014621735</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-662.71795654296875</X>
+      <Y>-830.4754638671875</Y>
+      <Z>34.897968292236328</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>0f75e20d-7878-4d91-a116-a308ff3dbe06</ID>
+    <Name>Mursaat Token - #13</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5414.1479101501463</X>
+      <Y>29296.669319172859</Y>
+      <Z>1553.7004525539398</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-677.78466796875</X>
+      <Y>-147.93113708496094</Y>
+      <Z>39.463970184326172</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>cbcfe79c-2cd2-47c6-b1a8-1a94646feb35</ID>
+    <Name>Mursaat Token - #14</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6193.5040985201522</X>
+      <Y>29715.606232277423</Y>
+      <Z>5207.2802450698855</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-202.68939208984375</X>
+      <Y>-403.31494140625</Y>
+      <Z>132.26484680175781</Z>
+    </Location>
+    <AutoComplete>false</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>2f9acf75-dc05-450d-9dbe-a2365aa8bf82</ID>
+    <Name>Mursaat Token - #17</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7422.0021844950352</X>
+      <Y>29758.011971879831</Y>
+      <Z>1504.8346047485352</Z>
+    </ContinentLocation>
+    <Location>
+      <X>546.20263671875</X>
+      <Y>-429.16546630859375</Y>
+      <Z>38.2227783203125</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>83061dbe-ee89-4a6d-abe3-aea3edc0ac57</ID>
+    <Name>Mursaat Token - #18</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7074.4305612435655</X>
+      <Y>30683.762202973685</Y>
+      <Z>60.021116536033155</Z>
+    </ContinentLocation>
+    <Location>
+      <X>334.32308959960938</X>
+      <Y>-993.50250244140625</Y>
+      <Z>1.5245355367660523</Z>
+    </Location>
+    <AutoComplete>false</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>a71482b4-d8b0-4aaf-9a3a-c12fa55877e2</ID>
+    <Name>Mursaat Token - #19</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7136.349989746348</X>
+      <Y>30537.746326112112</Y>
+      <Z>-13.619706232047081</Z>
+    </ContinentLocation>
+    <Location>
+      <X>372.06915283203125</X>
+      <Y>-904.49127197265625</Y>
+      <Z>-0.34594035148620605</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>474dce92-c7ea-4ebe-991d-c12efab9069a</ID>
+    <Name>Mursaat Token - #26</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5581.6047000582375</X>
+      <Y>29744.162160306169</Y>
+      <Z>4557.2993340179446</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-575.70306396484375</X>
+      <Y>-420.72262573242188</Y>
+      <Z>115.75534057617188</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ee3fc4b4-a150-427b-baf4-8f78ac45f0c4</ID>
+    <Name>Mursaat Token - #27</Name>
+    <Description>Use the Updrafts @ Burning Grotto after the Molten Destroyer-Event to get on top of the Burning Grotto, then use the Thermal Tube to get here.</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6232.5655933496473</X>
+      <Y>29764.617158805209</Y>
+      <Z>7387.1063714248658</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-178.87751770019531</X>
+      <Y>-433.19198608398438</Y>
+      <Z>187.63240051269531</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>0278ae36-b55e-4d08-a38a-d919a282be81</ID>
+    <Name>Mursaat Token - #28</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5673.9838018122355</X>
+      <Y>29811.384371303175</Y>
+      <Z>165.33811741685867</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-519.3887939453125</X>
+      <Y>-461.70126342773438</Y>
+      <Z>4.1995859146118164</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>47eaf493-bf19-4dea-9e52-1f32cb6de937</ID>
+    <Name>Mursaat Token - #30</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7463.3158788075762</X>
+      <Y>29597.050934084447</Y>
+      <Z>657.03374943885808</Z>
+    </ContinentLocation>
+    <Location>
+      <X>571.387451171875</X>
+      <Y>-331.04367065429688</Y>
+      <Z>16.688648223876953</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>97a14ae2-fa45-440b-937a-4b54b6f0a0f3</ID>
+    <Name>Mursaat Token - #35</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7146.8055699686684</X>
+      <Y>30667.523999141184</Y>
+      <Z>-146.31641584534646</Z>
+    </ContinentLocation>
+    <Location>
+      <X>378.44287109375</X>
+      <Y>-983.60369873046875</Y>
+      <Z>-3.7164349555969238</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>955b5698-97c5-4e07-8b6f-eac42c30b8e2</ID>
+    <Name>Mursaat Token - #36</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7090.387768917084</X>
+      <Y>30415.539079085796</Y>
+      <Z>3669.2033892143249</Z>
+    </ContinentLocation>
+    <Location>
+      <X>344.05059814453125</X>
+      <Y>-829.9937744140625</Y>
+      <Z>93.197715759277344</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>c88f0e8b-b578-4006-93a2-8f6cf66b72c3</ID>
+    <Name>Mursaat Token - #37</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6933.9419934703819</X>
+      <Y>30290.368281263225</Y>
+      <Z>3404.6251554641726</Z>
+    </ContinentLocation>
+    <Location>
+      <X>248.68130493164063</X>
+      <Y>-753.689697265625</Y>
+      <Z>86.477432250976562</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>8d7a6632-3cee-4b8d-99dc-764229bf3bee</ID>
+    <Name>Mursaat Token - #40</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7865.7508381663</X>
+      <Y>28741.735020980072</Y>
+      <Z>195.29276227393152</Z>
+    </ContinentLocation>
+    <Location>
+      <X>816.711669921875</X>
+      <Y>190.35662841796875</Y>
+      <Z>4.9604334831237793</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>145a5a06-319f-4f37-8b31-193ed42c8d3b</ID>
+    <Name>Mursaat Token - #22</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6683.9840329250655</X>
+      <Y>29278.077490911994</Y>
+      <Z>699.02112365722655</Z>
+    </ContinentLocation>
+    <Location>
+      <X>96.307014465332031</X>
+      <Y>-136.59756469726563</Y>
+      <Z>17.755126953125</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>aaf99bea-bf1d-4aee-b19b-823e06031770</ID>
+    <Name>Mursaat Token - #16 - ENTRANCE</Name>
+    <Description>Follow the underwater tunnel! Yeah, its a really long tunnel!</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5898.9432792428333</X>
+      <Y>29952.035789691923</Y>
+      <Z>-469.93446195106509</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-382.25357055664062</X>
+      <Y>-547.44232177734375</Y>
+      <Z>-11.936328887939453</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/starGreen.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>8e70fc04-698f-4d61-8507-24c1a8fee308</ID>
+    <Name>Mursaat Token - #16</Name>
+    <Description>Entrance is off to the coast to the west!</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6199.646089835167</X>
+      <Y>29756.27297961642</Y>
+      <Z>-3434.5092696846009</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-198.94523620605469</X>
+      <Y>-428.10537719726562</Y>
+      <Z>-87.236488342285156</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>11d3337c-a0e7-4dbf-ae90-6ea23f0731ab</ID>
+    <Name>Mursaat Token - #21 - ENTRANCE</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6130.8088893336608</X>
+      <Y>29474.779207625961</Y>
+      <Z>1085.9992417434692</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-240.90837097167969</X>
+      <Y>-256.50686645507812</Y>
+      <Z>27.584365844726562</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/starGreen.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>050a46c9-1987-492d-8706-1206a1a8c299</ID>
+    <Name>Mursaat Token - #21</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6110.0648597774507</X>
+      <Y>29474.871871778869</Y>
+      <Z>499.92257929286956</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-253.55392456054688</X>
+      <Y>-256.5633544921875</Y>
+      <Z>12.698026657104492</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>a684ab60-ebc7-45fd-964f-b12a41d1519d</ID>
+    <Name>Mursaat Token - #39 - SWIM UP!!!!!</Name>
+    <Description>To get to #39, swim upwards from #16 and do the mini JP !!!!
+
+YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6199.6195321187333</X>
+      <Y>29754.465803357187</Y>
+      <Z>-3254.5837195190429</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-198.96142578125</X>
+      <Y>-427.00372314453125</Y>
+      <Z>-82.6663818359375</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/starGreen.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>11c2d690-5b49-4566-bec1-fc8f92b611e2</ID>
+    <Name>Mursaat Token - #39</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6243.6054933951691</X>
+      <Y>29615.728442895124</Y>
+      <Z>1860.2837823539735</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-172.14759826660156</X>
+      <Y>-342.42947387695312</Y>
+      <Z>47.251182556152344</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>9332e647-2bee-47a0-b6ea-0d75c61d76b4</ID>
+    <Name>Mursaat Token - #15</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6254.3789652279538</X>
+      <Y>29035.861811828057</Y>
+      <Z>5934.6941457702642</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-165.58009338378906</X>
+      <Y>11.057033538818359</Y>
+      <Z>150.74114990234375</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>d2e9446f-4983-4064-bd3e-785e0936a93d</ID>
+    <Name>Mursaat Token - #34</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5240.89908503774</X>
+      <Y>28876.7935494915</Y>
+      <Z>5111.1462176254272</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-783.3970947265625</X>
+      <Y>108.02499389648438</Y>
+      <Z>129.82304382324219</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>b0fa4d99-add8-44ea-ae67-78ea0b16cc14</ID>
+    <Name>Mursaat Token - #38</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5082.5619296012874</X>
+      <Y>28920.497525890954</Y>
+      <Z>1399.1636788051605</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-879.91937255859375</X>
+      <Y>81.383064270019531</Y>
+      <Z>35.538738250732422</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>87a17982-1d0f-41b7-a525-93f0ea26e8f2</ID>
+    <Name>Mursaat Token - #32</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5362.0480283404031</X>
+      <Y>29026.868354669165</Y>
+      <Z>3510.0015685974122</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-709.54473876953125</X>
+      <Y>16.53944206237793</Y>
+      <Z>89.15399169921875</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>7ec54e7a-e86f-45c7-9fe0-4c3a0398e7c5</ID>
+    <Name>Mursaat Token - #33</Name>
+    <Description>VERY precise gliding required. Check this YT-Video: https://www.youtube.com/watch?v=9iuISdq0zk4</Description>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5537.1374208465577</X>
+      <Y>29053.198156985516</Y>
+      <Z>2955.9501330024718</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-602.810302734375</X>
+      <Y>0.48880323767662048</Y>
+      <Z>75.081092834472656</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>7bdf9ac0-0113-43c0-917d-453c95aeef16</ID>
+    <Name>Mursaat Token - #20</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5455.711312077332</X>
+      <Y>29087.921149942049</Y>
+      <Z>3540.4026196319583</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-652.4476318359375</X>
+      <Y>-20.678321838378906</Y>
+      <Z>89.926177978515625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>254d1b0e-7931-4b04-a43b-4526d7525465</ID>
+    <Name>Mursaat Token - #25</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5572.4237901013694</X>
+      <Y>29006.53185527409</Y>
+      <Z>4365.66145544281</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-581.29974365234375</X>
+      <Y>28.936565399169922</Y>
+      <Z>110.88774108886719</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>c053d446-7471-4dd4-ac6f-8637de0a4628</ID>
+    <Name>Mursaat Token - #24</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6147.7604719770425</X>
+      <Y>29134.017260710239</Y>
+      <Z>7138.2173652236943</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-230.57469177246094</X>
+      <Y>-48.778495788574219</Y>
+      <Z>181.31062316894531</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e3497680-122b-4e47-a97c-8ee0a17a3199</ID>
+    <Name>Mursaat Token - #23</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6116.8739979502352</X>
+      <Y>29125.269121383222</Y>
+      <Z>5982.5899485778809</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-249.403076171875</X>
+      <Y>-43.445632934570312</Y>
+      <Z>151.95770263671875</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>8e8c9f8d-8194-4530-8b31-9d8c47b4b183</ID>
+    <Name>Mursaat Token - #29</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5792.6542919100448</X>
+      <Y>29173.190117726739</Y>
+      <Z>7077.1341168106082</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-447.04730224609375</X>
+      <Y>-72.658256530761719</Y>
+      <Z>179.75910949707031</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>810c265f-b1f6-4332-bcde-b510237460ff</ID>
+    <Name>Mursaat Token - #31</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5652.1242730733229</X>
+      <Y>29357.126671545029</Y>
+      <Z>6984.3540210723877</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-532.71435546875</X>
+      <Y>-184.78591918945313</Y>
+      <Z>177.40249633789063</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/whiteOrb.png</IconUri>
+  </PlayerTask>
+</ArrayOfPlayerTask>

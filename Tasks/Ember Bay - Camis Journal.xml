@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>8dc7c2e4-acea-49fd-8a3b-bf51d7869b03</ID>
+    <Name>Cami's Journal - Day 1</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6234.4210540905</X>
+      <Y>30251.196825973511</Y>
+      <Z>173.05111280074121</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-177.74642944335938</X>
+      <Y>-729.810791015625</Y>
+      <Z>4.3954958915710449</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>717d5892-796f-42ca-906c-8b6b416e1c07</ID>
+    <Name>Cami's Journal - Day 2</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5388.1345643267314</X>
+      <Y>29689.581922948073</Y>
+      <Z>363.73090485973358</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-693.64239501953125</X>
+      <Y>-387.45053100585938</Y>
+      <Z>9.2387599945068359</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>e274882c-d483-4097-8fc8-71071f977ea1</ID>
+    <Name>Cami's Journal - Day 3</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6175.972601480611</X>
+      <Y>29418.079334089471</Y>
+      <Z>1199.6178083801269</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-213.3765869140625</X>
+      <Y>-221.94264221191406</Y>
+      <Z>30.47027587890625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>d879ce7c-e32b-47b4-bbfd-a2ece8ece2b0</ID>
+    <Name>Cami's Journal - Day 4</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7112.9701881843566</X>
+      <Y>29667.869074905015</Y>
+      <Z>529.68770943689344</Z>
+    </ContinentLocation>
+    <Location>
+      <X>357.81683349609375</X>
+      <Y>-374.21438598632812</Y>
+      <Z>13.454060554504395</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>4e79c7ff-95f1-467d-9eb5-64ff925e9d67</ID>
+    <Name>Cami's Journal - Day 5</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7431.4212878822327</X>
+      <Y>29311.556458630053</Y>
+      <Z>1242.6154020872116</Z>
+    </ContinentLocation>
+    <Location>
+      <X>551.94451904296875</X>
+      <Y>-157.00633239746094</Y>
+      <Z>31.562414169311523</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ff4f6d95-95af-4399-923e-814cdb67a593</ID>
+    <Name>Cami's Journal - Day 6</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6983.0671106695809</X>
+      <Y>28931.163627954993</Y>
+      <Z>2431.9208316547392</Z>
+    </ContinentLocation>
+    <Location>
+      <X>278.62796020507812</X>
+      <Y>74.881011962890625</Y>
+      <Z>61.770755767822266</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>2e152829-19fb-44af-954e-47f663974705</ID>
+    <Name>Cami's Journal - Day 7</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5252.1738744433087</X>
+      <Y>29134.746621709568</Y>
+      <Z>2219.3357482318879</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-776.52398681640625</X>
+      <Y>-49.223114013671875</Y>
+      <Z>56.371097564697266</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <MapID>1175</MapID>
+    <IconUri>/Images/Map/bookBrown.png</IconUri>
+  </PlayerTask>
+</ArrayOfPlayerTask>
