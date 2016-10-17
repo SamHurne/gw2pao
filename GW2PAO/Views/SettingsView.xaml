@@ -7,11 +7,12 @@
         xmlns:regions="http://www.codeplex.com/CompositeWPF"
         Title="Settings"
         Topmost="True"
+        ShowInTaskbar="False"
         WindowStyle="None" AllowsTransparency="true"
         Background="Transparent"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        Height="500" Width="700">
+        Height="550" Width="700">
     
     <Border BorderBrush="Black" BorderThickness="2">
         <Border.Background>

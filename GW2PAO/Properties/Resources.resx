@@ -988,4 +988,110 @@
     <value>ROI:</value>
     <comment>Return on Investment</comment>
   </data>
+  <data name="MetaEventTimers" xml:space="preserve">
+    <value>Meta Event Timers</value>
+  </data>
+  <data name="OpenMetaEventTimers" xml:space="preserve">
+    <value>Open Meta Event Timers</value>
+  </data>
+  <data name="OpenWorldBossTimers" xml:space="preserve">
+    <value>Open World Boss Timers</value>
+  </data>
+  <data name="WorldBossTimers" xml:space="preserve">
+    <value>World Boss Timers</value>
+  </data>
+  <data name="ActiveFor" xml:space="preserve">
+    <value>active for</value>
+    <comment>Example: "active for 00:10:07"</comment>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="CenterOnChar" xml:space="preserve">
+    <value>Center on Character</value>
+  </data>
+  <data name="EntireContinent" xml:space="preserve">
+    <value>Entire Continent</value>
+  </data>
+  <data name="Length" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MapOverlay" xml:space="preserve">
+    <value>Map Overlay</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="ShowCharPointer" xml:space="preserve">
+    <value>Show Character Pointer</value>
+  </data>
+  <data name="ShowHeartQuests" xml:space="preserve">
+    <value>Show Heart Quests</value>
+  </data>
+  <data name="ShowHeroPoints" xml:space="preserve">
+    <value>Show Hero Points</value>
+  </data>
+  <data name="ShowPointsOfInterest" xml:space="preserve">
+    <value>Show Points of Interest</value>
+  </data>
+  <data name="ShowTrail" xml:space="preserve">
+    <value>Show Trail</value>
+  </data>
+  <data name="ShowVistas" xml:space="preserve">
+    <value>Show Vistas</value>
+  </data>
+  <data name="ShowWaypoints" xml:space="preserve">
+    <value>Show Waypoints</value>
+  </data>
+  <data name="Trail" xml:space="preserve">
+    <value>Trail</value>
+  </data>
+  <data name="ShowPlayerMarkers" xml:space="preserve">
+    <value>Show Player Markers</value>
+  </data>
+  <data name="PlayerMarkers" xml:space="preserve">
+    <value>Player Markers</value>
+  </data>
+  <data name="ToggleMap" xml:space="preserve">
+    <value>Toggle Map Overlay</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMetaEventTimers" xml:space="preserve">
+    <value>Toggle Meta Event Timers</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleWorldBossTimers" xml:space="preserve">
+    <value>Toggle World Boss Timers</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="DayNight" xml:space="preserve">
+    <value>Day-Night</value>
+  </data>
+  <data name="DayNightTimer" xml:space="preserve">
+    <value>Day-Night Timer</value>
+  </data>
+  <data name="ToggleDayNightTimer" xml:space="preserve">
+    <value>Toggle Day-Night Timer</value>
+  </data>
+  <data name="ShowTimerValue" xml:space="preserve">
+    <value>Show Timer Value</value>
+  </data>
+  <data name="TimeUntilDay" xml:space="preserve">
+    <value>Time until daytime</value>
+  </data>
+  <data name="TimeUntilNight" xml:space="preserve">
+    <value>Time until night</value>
+  </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Show Text Chat</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Show Voice Chat</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
 </root>

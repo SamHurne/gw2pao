@@ -19,9 +19,12 @@
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleAllWindows}"
                                  Hotkey="{Binding ToggleAllWindowsHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}"/>
-        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleEventsTracker}"
-                                 Hotkey="{Binding ToggleEventTrackerHotkey}"
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWorldBossTimers}"
+                                 Hotkey="{Binding ToggleWorldBossTimerHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}"/>
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleMetaEventTimers}"
+                                 Hotkey="{Binding ToggleMetaEventTimerHotkey}"
+                                 HotkeyManager="{Binding GlobalHotkeyManager}" />
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDungeonsTracker}"
                                  Hotkey="{Binding ToggleDungeonsTrackerHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}"/>
@@ -46,6 +49,12 @@
         <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleWebBrowser}"
                                  Hotkey="{Binding ToggleWebBrowserHotkey}"
                                  HotkeyManager="{Binding GlobalHotkeyManager}"/>
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleMap}"
+                                 Hotkey="{Binding ToggleMapHotkey}"
+                                 HotkeyManager="{Binding GlobalHotkeyManager}" />
+        <views:HotkeyUserControl Label="{x:Static resx:Resources.ToggleDayNightTimer}"
+                                 Hotkey="{Binding ToggleDayNightTimerHotkey}"
+                                 HotkeyManager="{Binding GlobalHotkeyManager}" />
 
         <views:HotkeyUserControl Margin="5,20,1,1"
                                  Label="{x:Static resx:Resources.ToggleNonInteractiveWindow}"

@@ -37,6 +37,14 @@ namespace GW2PAO.Modules.Commerce
         }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon
+        {
+            get { return "/Images/Title/merchant.png"; }
+        }
+
+        /// <summary>
         /// True if the menu item is checkable, else false
         /// </summary>
         public bool IsCheckable
@@ -76,16 +84,17 @@ namespace GW2PAO.Modules.Commerce
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
 
             // Build up the sub menu items
-            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenCommerceSettingsCommand.Execute(null)));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.PriceTracker, viewFactory.DisplayPriceTracker, viewFactory.CanDisplayPriceTracker));
-
-            this.SubMenuItems.Add(null); // Null for a seperator
-            this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BuyOrderPriceNotifications, true, () => userData.AreBuyOrderPriceNotificationsEnabled, userData));
-            this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.SellListingPriceNotifications, true, () => userData.AreSellListingPriceNotificationsEnabled, userData));
 
             this.SubMenuItems.Add(null); // Null for a seperator
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.TPCalculator, viewFactory.DisplayTPCalculator, viewFactory.CanDisplayTPCalculator));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.EctoSalvageHelper, viewFactory.DisplayEctoSalvageTracker, viewFactory.CanDisplayEctoSalvageTracker));
+
+            this.SubMenuItems.Add(null); // Null for a seperator
+            this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.BuyOrderPriceNotifications, true, () => userData.AreBuyOrderPriceNotificationsEnabled, userData));
+            this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.SellListingPriceNotifications, true, () => userData.AreSellListingPriceNotificationsEnabled, userData));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenCommerceSettingsCommand.Execute(null)));
+
         }
     }
 }

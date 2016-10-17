@@ -43,6 +43,12 @@ namespace GW2PAO.Modules.Tasks.Interfaces
         void AddOrUpdateTask(PlayerTask task);
 
         /// <summary>
+        /// Adds a new task to the collection of player tasks
+        /// </summary>
+        /// <param name="task">The task and viewmodel to add</param>
+        void AddOrUpdateTask(PlayerTaskViewModel taskViewModel);
+
+        /// <summary>
         /// Deletes a task from the collection of player tasks
         /// </summary>
         /// <param name="task">The task to delete</param>

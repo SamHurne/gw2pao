@@ -23,7 +23,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
     /// <summary>
     /// Task Tracker view model class
     /// </summary>
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     [Export]
     public class TaskTrackerViewModel : BindableBase
     {

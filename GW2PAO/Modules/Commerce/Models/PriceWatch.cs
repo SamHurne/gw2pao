@@ -24,6 +24,7 @@ namespace GW2PAO.Modules.Commerce.Models
         private bool isSellListingLowerLimitEnabled;
         private Price sellListingUpperLimit;
         private Price sellListingLowerLimit;
+        private string notes;
 
         /// <summary>
         /// ID of the item
@@ -116,12 +117,22 @@ namespace GW2PAO.Modules.Commerce.Models
         }
 
         /// <summary>
+        /// User-entered notes about the price watch
+        /// </summary>
+        public string Notes
+        {
+            get { return this.notes; }
+            set { this.SetProperty(ref this.notes, value); }
+        }
+
+        /// <summary>
         /// Default constructor for serialization/deserialization
         /// </summary>
         public PriceWatch()
         {
             this.itemId = 0;
             this.itemName = string.Empty;
+            this.notes = string.Empty;
             this.isBuyOrderUpperLimitEnabled = false;
             this.isBuyOrderLowerLimitEnabled = false;
             this.isSellListingUpperLimitEnabled = false;

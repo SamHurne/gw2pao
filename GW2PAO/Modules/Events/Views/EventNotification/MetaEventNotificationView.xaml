@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="GW2PAO.Modules.Events.Views.EventNotification.MetaEventNotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
+             mc:Ignorable="d" 
+             TextOptions.TextFormattingMode="Display"
+             UseLayoutRounding="True"
+             Height="60" Width="230">
+
+    <UserControl.Resources>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
+
+        <Storyboard x:Key="AddAnimation">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+        </Storyboard>
+        <Storyboard x:Key="RemoveAnimation">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="Opacity" Duration="00:00:00.25"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Opacity" Value="1" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource AddAnimation}" Name="AddStoryboard" />
+                </EventTrigger>
+                <DataTrigger Binding="{Binding IsRemovingNotification}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <StopStoryboard  BeginStoryboardName="AddStoryboard" />
+                        <BeginStoryboard Storyboard="{StaticResource RemoveAnimation}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+
+    <UserControl.ToolTip>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding CurrentStage.Name}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static resx:Resources.ActiveFor}" />
+                <TextBlock Text="{Binding TimeSinceStageStarted, Converter={StaticResource TimeConverter}}"
+                           Margin="3,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip>
+
+    <!--See code-behind for DataContext/ViewModel details-->
+    <Grid Background="Transparent">
+        
+        <Border Name="Border"
+                BorderThickness="2"
+                CornerRadius="0"
+                Margin="5"
+                Padding="5,5,5,2">
+
+            <Border.Background>
+                <VisualBrush Viewport="0,0,230,50" ViewportUnits="Absolute" Opacity="0.75">
+                    <VisualBrush.Visual>
+                        <Grid>
+                            <Image Source="../../../../Images/Backgrounds/Small1.png"
+                                   Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   SnapsToDevicePixels="True" UseLayoutRounding="True">
+                            </Image>
+                        </Grid>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Border.Background>
+
+            <Border.BorderBrush>
+                <SolidColorBrush Color="Black" Opacity="0.75" />
+            </Border.BorderBrush>
+
+            <Border.Effect>
+                <DropShadowEffect Direction="0" BlurRadius="10" ShadowDepth="0" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Row="0" Grid.Column="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Height="40" Width="40"
+                       Source="/Images/Title/meta.png" />
+                
+                <Grid Grid.Row="0" Grid.Column="1"
+                      Margin="5,0,0,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Event Name -->
+                    <core:OutlinedTextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Margin="0,0,0,0"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                                            Fill="Orange"
+                                            FontSize="14"
+                                            Text="{Binding EventName}" />
+                    
+                    <!-- Close button -->
+                    <Button Grid.Row="0" Grid.Column="1"
+                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Width="13" Height="13"
+                            Margin="0,2,1,0"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Content="{StaticResource CloseGraphic}"
+                            Command="{Binding CloseNotificationCommand}"/>
+
+                    <!-- Time until active -->
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="2,0,0,0"
+                                Orientation="Horizontal">
+                        <core:OutlinedTextBlock FontSize="12"
+                                                Text="{Binding NextStage.Name}" />
+                        <core:OutlinedTextBlock FontSize="12"
+                                                Margin="3,0,0,0"
+                                                Text="{x:Static resx:Resources.In}" />
+                        <core:OutlinedTextBlock Margin="3,0,0,0"
+                                                FontSize="12"
+                                                Text="{Binding TimeUntilNextStage, Converter={StaticResource TimeConverter}}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -86,7 +86,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GW2NET.MumbleLink, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GW2NET.MumbleLink.1.2.0\lib\net452\GW2NET.MumbleLink.dll</HintPath>
+      <HintPath>..\packages\GW2NET.MumbleLink.1.4.0\lib\net452\GW2NET.MumbleLink.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GW2NET.Newtonsoft, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -201,12 +201,12 @@
       <HintPath>..\packages\GW2NET.V2.Worlds.1.4.0\lib\portable-net45+win+wpa81\GW2NET.V2.Worlds.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -222,14 +222,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\DungeonID.cs" />
+    <Compile Include="Constants\MetaEventID.cs" />
     <Compile Include="Constants\Paths.cs" />
-    <Compile Include="Constants\WorldEventID.cs" />
+    <Compile Include="Constants\WorldBossID.cs" />
     <Compile Include="Data\Entities\Continent.cs" />
     <Compile Include="Data\Entities\DetectionPoint.cs" />
     <Compile Include="Data\Entities\Dungeon.cs" />
     <Compile Include="Data\Entities\DynamicEvent.cs" />
     <Compile Include="Data\Entities\Map.cs" />
+    <Compile Include="Data\Entities\MetaEvent.cs" />
     <Compile Include="Data\Entities\Rectangle.cs" />
+    <Compile Include="Providers\MetaEventStageNamesProvider.cs" />
+    <Compile Include="Utility\SerializableTimespan.cs" />
     <Compile Include="Data\Entities\WvWObjectiveId.cs" />
     <Compile Include="Data\Enums\EventFlag.cs" />
     <Compile Include="Data\Enums\EventState.cs" />
@@ -243,6 +247,7 @@
     <Compile Include="Data\Enums\Units.cs" />
     <Compile Include="Data\Enums\WorldColor.cs" />
     <Compile Include="Data\Enums\WvWMap.cs" />
+    <Compile Include="Data\MetaEventsTable.cs" />
     <Compile Include="Data\WvWObjectiveIDs.cs" />
     <Compile Include="Data\Enums\ZoneItemType.cs" />
     <Compile Include="Data\Entities\Guild.cs" />
@@ -262,7 +267,7 @@
     <Compile Include="Services\DungeonsService.cs" />
     <Compile Include="Data\DungeonsTable.cs" />
     <Compile Include="Services\EventsService.cs" />
-    <Compile Include="Data\Entities\WorldEvent.cs" />
+    <Compile Include="Data\Entities\WorldBossEvent.cs" />
     <Compile Include="Services\GuildService.cs" />
     <Compile Include="Services\Interfaces\ICommerceService.cs" />
     <Compile Include="Services\Interfaces\IDungeonsService.cs" />
@@ -273,7 +278,7 @@
     <Compile Include="Services\Interfaces\IWvWService.cs" />
     <Compile Include="Services\Interfaces\IZoneService.cs" />
     <Compile Include="Data\ItemsDatabaseBuilder.cs" />
-    <Compile Include="Data\MegaserverEventTimeTable.cs" />
+    <Compile Include="Data\WorldBossEventTimeTable.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SystemService.cs" />
     <Compile Include="Data\WvWObjectivesTable.cs" />

@@ -32,7 +32,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>1649f440</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -111,20 +112,32 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Awesomium.NetWrapper.Unofficial.1.7.5.0\lib\Awesomium.Windows.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="FileDb, Version=5.0.1.0, Culture=neutral, PublicKeyToken=ba3f58a0e60cd01d, processorArchitecture=MSIL">
-      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDb.dll</HintPath>
+    <Reference Include="FileDb, Version=6.1.0.0, Culture=neutral, PublicKeyToken=ba3f58a0e60cd01d, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.13.0\lib\net45\FileDb.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FileDbCache.WPF, Version=2.5.1.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
-      <HintPath>..\packages\XAML.MapControl.2.5.1\lib\net45\FileDbCache.WPF.dll</HintPath>
+    <Reference Include="FileDbCache.WPF, Version=2.13.0.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.13.0\lib\net45\FileDbCache.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=4.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.4.6.3\lib\net40\FontAwesome.Sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageFileCache.WPF, Version=2.13.0.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.13.0\lib\net45\ImageFileCache.WPF.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Intellibox">
       <HintPath>..\lib\Intellibox\Intellibox.dll</HintPath>
+    </Reference>
+    <Reference Include="MapControl.WPF, Version=2.13.0.0, Culture=neutral, PublicKeyToken=f26fcf0059638459, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAML.MapControl.2.13.0\lib\net45\MapControl.WPF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -159,12 +172,12 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OxyPlot, Version=2014.1.546.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
@@ -199,28 +212,28 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.DataGrid, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=2.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -231,8 +244,11 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationBootstrapper.cs" />
     <Compile Include="Controllers\SettingsViewController.cs" />
+    <Compile Include="Converters\BoolToIndexConverter.cs" />
     <Compile Include="Converters\DateTimeGraphValueConverter.cs" />
     <Compile Include="Converters\DoubleToPriceConverter.cs" />
+    <Compile Include="Converters\ProgressToAngleConverter.cs" />
+    <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\TabSizeConverter.cs" />
     <Compile Include="Converters\WvWMapToBackgroundConverter.cs" />
     <Compile Include="Infrastructure\AggregateEvents.cs" />
@@ -248,6 +264,14 @@
     <Compile Include="Modules\Commerce\Views\EctoSalvageHelperView.xaml.cs">
       <DependentUpon>EctoSalvageHelperView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\DayNight\DayNightMenu.cs" />
+    <Compile Include="Modules\DayNight\DayNightModule.cs" />
+    <Compile Include="Modules\DayNight\DayNightViewController.cs" />
+    <Compile Include="Modules\DayNight\Interfaces\IDayNightViewController.cs" />
+    <Compile Include="Modules\DayNight\ViewModels\DayNightTimerViewModel.cs" />
+    <Compile Include="Modules\DayNight\Views\DayNightTimerView.xaml.cs">
+      <DependentUpon>DayNightTimerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Dungeons\Data\PathCompletionData.cs" />
     <Compile Include="Modules\Dungeons\Data\PathTime.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\DungeonTimer\DungeonTimerViewModel.cs" />
@@ -255,6 +279,53 @@
       <DependentUpon>DungeonTimerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\EventNotificationSettings.cs" />
+    <Compile Include="Modules\Events\Interfaces\IEventNotification.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\MetaEventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\EventNotification\WorldBossEventNotificationViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\MetaEventTimers\MetaEventListViewModel.cs" />
+    <Compile Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml.cs">
+      <DependentUpon>MetaEventNotificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\EventNotification\NotificationViewDataTemplateSelector.cs" />
+    <Compile Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml.cs">
+      <DependentUpon>MetaEventTimersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\MetaEventTimers\MetaEventTimerView.xaml.cs">
+      <DependentUpon>MetaEventTimerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimersView.xaml.cs">
+      <DependentUpon>WorldBossTimersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml.cs">
+      <DependentUpon>WorldBossTimerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Map\Converters\ContinentCoordToTileCoordConverter.cs" />
+    <Compile Include="Modules\Map\Converters\ZoomToItemSizeConverter.cs" />
+    <Compile Include="Modules\Map\Interfaces\IHasMapLocation.cs" />
+    <Compile Include="Modules\Map\Interfaces\IMapViewController.cs" />
+    <Compile Include="Modules\Map\MapMenu.cs" />
+    <Compile Include="Modules\Map\MapModule.cs" />
+    <Compile Include="Modules\Map\MapUserData.cs" />
+    <Compile Include="Modules\Map\MapViewController.cs" />
+    <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\PlayerMarkerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\PlayerMarkersViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
+    <Compile Include="Controls\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Map\Views\Controls\MapSettingControl.xaml.cs">
+      <DependentUpon>MapSettingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tasks\PlayerTasksFactory.cs" />
+    <Compile Include="Modules\ZoneCompletion\Models\ZoneItemsStore.cs" />
+    <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
+    <Compile Include="Modules\Map\Views\Controls\Map.cs" />
+    <Compile Include="Modules\Map\Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksController.cs" />
     <Compile Include="Modules\Tasks\Interfaces\IPlayerTasksViewController.cs" />
     <Compile Include="Modules\Tasks\Models\PlayerTask.cs" />
@@ -377,8 +448,8 @@
     <Compile Include="Modules\Dungeons\ViewModels\DungeonViewModel.cs" />
     <Compile Include="Modules\Dungeons\ViewModels\PathViewModel.cs" />
     <Compile Include="Modules\Events\ViewModels\EventNotification\EventNotificationsWindowViewModel.cs" />
-    <Compile Include="Modules\Events\ViewModels\EventTracker\EventListViewModel.cs" />
-    <Compile Include="Modules\Events\ViewModels\EventViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\WorldBossTimers\WorldBossListViewModel.cs" />
+    <Compile Include="Modules\Events\ViewModels\WorldBossTimers\WorldBossEventViewModel.cs" />
     <Compile Include="ViewModels\GeneralSettingsViewModel.cs" />
     <Compile Include="ViewModels\HotkeySettingsViewModel.cs" />
     <Compile Include="ViewModels\RestartPromptViewModel.cs" />
@@ -468,17 +539,11 @@
     <Compile Include="Modules\Dungeons\Views\DungeonView.xaml.cs">
       <DependentUpon>DungeonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Events\Views\EventNotification\EventNotificationView.xaml.cs">
-      <DependentUpon>EventNotificationView.xaml</DependentUpon>
+    <Compile Include="Modules\Events\Views\EventNotification\WorldBossEventNotificationView.xaml.cs">
+      <DependentUpon>WorldBossEventNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Events\Views\EventNotification\EventNotificationWindow.xaml.cs">
       <DependentUpon>EventNotificationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Events\Views\EventTracker\EventTrackerView.xaml.cs">
-      <DependentUpon>EventTrackerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Events\Views\EventTracker\WorldEventView.xaml.cs">
-      <DependentUpon>WorldEventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OverlayWindow.cs" />
     <Compile Include="Modules\Commerce\Views\TPCalculatorView.xaml.cs">
@@ -517,6 +582,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\DayNight\Views\DayNightTimerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Dungeons\Views\DungeonSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -525,9 +594,41 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Events\Views\EventNotification\MetaEventNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Events\Views\EventSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Events\Views\MetaEventTimers\MetaEventTimersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\MetaEventTimers\MetaEventTimerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\WorldBossTimers\WorldBossTimersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Map\Views\Controls\MapSettingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Map\Views\MapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Tasks\Views\AddNewTaskDialog.xaml">
       <SubType>Designer</SubType>
@@ -574,6 +675,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\Images\Spinners.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Images\CharacterPointer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -729,21 +834,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Events\Views\EventNotification\EventNotificationView.xaml">
+    <Page Include="Modules\Events\Views\EventNotification\WorldBossEventNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Events\Views\EventNotification\EventNotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Events\Views\EventTracker\EventTrackerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Events\Views\EventTracker\WorldEventView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Commerce\Views\TPCalculatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -871,6 +968,67 @@
     <Resource Include="Images\Zone\heropoint.png" />
     <Resource Include="Images\Zone\Gray\heropoint.png" />
     <Resource Include="Images\Backgrounds\Tooltip1.png" />
+    <Resource Include="Images\Title\meta.png" />
+    <Resource Include="Images\Title\map.png" />
+    <Resource Include="Images\Title\tasks.png" />
+    <Resource Include="Images\Title\browser.png" />
+    <Resource Include="Images\Map\activity.png" />
+    <Resource Include="Images\Map\adventure.png" />
+    <Resource Include="Images\Map\anvil.png" />
+    <Resource Include="Images\Map\asuraGateBlue.png" />
+    <Resource Include="Images\Map\asuraGatePurple.png" />
+    <Resource Include="Images\Map\bookBlue.png" />
+    <Resource Include="Images\Map\bookBrown.png" />
+    <Resource Include="Images\Map\bossBlue.png" />
+    <Resource Include="Images\Map\bossGreen.png" />
+    <Resource Include="Images\Map\bossPurple.png" />
+    <Resource Include="Images\Map\bossRed.png" />
+    <Resource Include="Images\Map\dialog.png" />
+    <Resource Include="Images\Map\downedAlly.png" />
+    <Resource Include="Images\Map\downedEnemy.png" />
+    <Resource Include="Images\Map\enslaved.png" />
+    <Resource Include="Images\Map\fancyArrow.png" />
+    <Resource Include="Images\Map\fancyCircle.png" />
+    <Resource Include="Images\Map\fancyHeart.png" />
+    <Resource Include="Images\Map\fancySpiral.png" />
+    <Resource Include="Images\Map\fancySquare.png" />
+    <Resource Include="Images\Map\fancyStar.png" />
+    <Resource Include="Images\Map\fancyTriangle.png" />
+    <Resource Include="Images\Map\fancyX.png" />
+    <Resource Include="Images\Map\flagGreen.png" />
+    <Resource Include="Images\Map\flagRed.png" />
+    <Resource Include="Images\Map\mentor.png" />
+    <Resource Include="Images\Map\multitag.png" />
+    <Resource Include="Images\Map\nodeHarvesting.png" />
+    <Resource Include="Images\Map\nodeLogging.png" />
+    <Resource Include="Images\Map\nodeMining.png" />
+    <Resource Include="Images\Map\pointA.png" />
+    <Resource Include="Images\Map\pointB.png" />
+    <Resource Include="Images\Map\pointC.png" />
+    <Resource Include="Images\Map\quaggan.png" />
+    <Resource Include="Images\Map\redCog.png" />
+    <Resource Include="Images\Map\redShield.png" />
+    <Resource Include="Images\Map\scout.png" />
+    <Resource Include="Images\Map\shieldBlue.png" />
+    <Resource Include="Images\Map\shieldDarkBlue.png" />
+    <Resource Include="Images\Map\shieldGreen.png" />
+    <Resource Include="Images\Map\shieldGrey.png" />
+    <Resource Include="Images\Map\shieldOrange.png" />
+    <Resource Include="Images\Map\shieldRed.png" />
+    <Resource Include="Images\Map\ship.png" />
+    <Resource Include="Images\Map\siegeBlue.png" />
+    <Resource Include="Images\Map\siegeRed.png" />
+    <Resource Include="Images\Map\starBlue.png" />
+    <Resource Include="Images\Map\starGreen.png" />
+    <Resource Include="Images\Map\starYellow.png" />
+    <Resource Include="Images\Map\starYellow2.png" />
+    <Resource Include="Images\Map\swirlDiamond.png" />
+    <Resource Include="Images\Map\swords.png" />
+    <Resource Include="Images\Map\updraft.png" />
+    <Resource Include="Images\Map\whiteOrb.png" />
+    <Resource Include="Images\Misc\day.png" />
+    <Resource Include="Images\Misc\night.png" />
+    <Resource Include="Images\Title\daynight.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -893,6 +1051,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Tasks\" />
+    <Folder Include="Modules\Map\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />
@@ -995,9 +1154,12 @@ del xinput9_1_0.dll</PostBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Fody.1.28.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.1\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <Error Condition="!Exists('..\packages\Fody.1.28.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.1\build\Fody.targets'))" />
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

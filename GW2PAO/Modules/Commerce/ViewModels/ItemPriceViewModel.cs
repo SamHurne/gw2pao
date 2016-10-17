@@ -162,6 +162,21 @@ namespace GW2PAO.Modules.Commerce.ViewModels
         }
 
         /// <summary>
+        /// Notes for the price watch
+        /// </summary>
+        public string Notes
+        {
+            get { return this.Data.Notes; }
+            set
+            {
+                if (this.Data.Notes != value)
+                {
+                    this.Data.Notes = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Removes the price watch
         /// </summary>
         public DelegateCommand RemoveCommand { get { return new DelegateCommand(this.Remove); } }
@@ -246,6 +261,10 @@ namespace GW2PAO.Modules.Commerce.ViewModels
             else if (e.PropertyName == "IsSellListingUpperLimitEnabled" || e.PropertyName == "IsSellListingLowerLimitEnabled")
             {
                 this.IsSellListingNotificationShown = false;
+            }
+            else if (e.PropertyName == "Notes")
+            {
+                this.OnPropertyChanged(() => this.Notes);
             }
             else
             {

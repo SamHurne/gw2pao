@@ -101,12 +101,12 @@ namespace GW2PAO.Modules.WvW.ViewModels.WvWTracker
         /// </summary>
         public bool IsUsingRedBorderlands
         {
-            get { return this.controller.MapOverride == WvWMap.RedBorderlands; }
+            get { return this.controller.MapOverride == WvWMap.RedDesertBorderlands; }
             set
             {
                 if (value)
                 {
-                    this.controller.MapOverride = WvWMap.RedBorderlands;
+                    this.controller.MapOverride = WvWMap.RedDesertBorderlands;
                     this.NotifyMapSelectionChanged();
                 }
             }

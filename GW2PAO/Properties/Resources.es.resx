@@ -120,6 +120,10 @@
   <data name="About" xml:space="preserve">
     <value>Acerca de</value>
   </data>
+  <data name="ActiveFor" xml:space="preserve">
+    <value>activo para</value>
+    <comment>Example: "active for 00:10:07"</comment>
+  </data>
   <data name="ActiveIn" xml:space="preserve">
     <value>activo en</value>
     <comment>Used to communicate when an in-game event will be active - example: "active in 08:00:01"</comment>
@@ -135,7 +139,7 @@
     <value>Ajustado</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>GW2 Personal Assistant Overlay</value>
+    <value>Asistente Personal de Guild Wars 2</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Aplicar</value>
@@ -145,16 +149,25 @@
     <value>Autocompletar</value>
   </data>
   <data name="AutoCompleteTasks" xml:space="preserve">
-    <value>Completar automáticamente Basado en Ubicación</value>
+    <value>Auto completar basado en localización</value>
   </data>
   <data name="AutoFadeBorders" xml:space="preserve">
     <value>Atenuar bordes de ventana</value>
   </data>
+  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
+    <value>Auto ocultar todas las ventanas cuando GW2 no se ejecute</value>
+  </data>
+  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
+    <value>Auto ocultar todas las ventanas cuando GW2 piedra el foco</value>
+  </data>
   <data name="AutoHideBorder" xml:space="preserve">
-    <value>Autoocultar límites</value>
+    <value>Auto ocultar límites</value>
+  </data>
+  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
+    <value>Auto ocultar el icono del Menú cuando GW2 pierda el foco</value>
   </data>
   <data name="AutoHideOverlayIconWhenGW2NotRunning" xml:space="preserve">
-    <value>Autoocultar Icono de Menu cuando GW2 no esté en ejecución</value>
+    <value>Auto ocultar Icono de Menu cuando GW2 no esté en ejecución</value>
   </data>
   <data name="AutomaticUnlock" xml:space="preserve">
     <value>Desbloqueo automático</value>
@@ -168,12 +181,24 @@
   <data name="AutoStop" xml:space="preserve">
     <value>Parada automática</value>
   </data>
+  <data name="AverageTime" xml:space="preserve">
+    <value>Tiempo medio</value>
+  </data>
+  <data name="BasedOnBuyOrder" xml:space="preserve">
+    <value>Basado en precios de compra</value>
+  </data>
+  <data name="BasedOnSellListing" xml:space="preserve">
+    <value>Basado en precios de venta</value>
+  </data>
+  <data name="BestTime" xml:space="preserve">
+    <value>Mejor tiempo</value>
+  </data>
   <data name="BestTimes" xml:space="preserve">
     <value>Mejores tiempos</value>
     <comment>Best dungeon path completion times</comment>
   </data>
   <data name="BloodlustObjectives" xml:space="preserve">
-    <value>Sed de sangre de las ruinas</value>
+    <value>Objetivos de Sed de Sangre</value>
   </data>
   <data name="BlueBorderlands" xml:space="preserve">
     <value>Tierras fronterizas azules</value>
@@ -219,6 +244,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Castillos</value>
   </data>
+  <data name="CenterOnChar" xml:space="preserve">
+    <value>Centro de Carácter</value>
+  </data>
   <data name="CheckForUpdatesAtStartup" xml:space="preserve">
     <value>Comprobar actualizaciones al inicio</value>
   </data>
@@ -232,8 +260,15 @@
   <data name="Commerce" xml:space="preserve">
     <value>Comercio</value>
   </data>
+  <data name="CompletedPerChar" xml:space="preserve">
+    <value>Completar por personaje</value>
+    <comment>for the tasks tracker</comment>
+  </data>
   <data name="CompletionOptions" xml:space="preserve">
     <value>Opciones de finalización</value>
+  </data>
+  <data name="CompletionTime" xml:space="preserve">
+    <value>Tiempo para completar</value>
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Configurar</value>
@@ -270,7 +305,7 @@
     <value>Precio:</value>
   </data>
   <data name="CostOfGems" xml:space="preserve">
-    <value>Costo de 100 Gemas</value>
+    <value>Coste de 100 Gemas</value>
   </data>
   <data name="CurrentHighestBuyOrder" xml:space="preserve">
     <value>Orden de compra más alta:</value>
@@ -286,6 +321,15 @@
   </data>
   <data name="CustomIcon" xml:space="preserve">
     <value>Icono personalizado</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="DayNight" xml:space="preserve">
+    <value>Día-Noche</value>
+  </data>
+  <data name="DayNightTimer" xml:space="preserve">
+    <value>Día-Noche temporizador</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Borrar</value>
@@ -321,6 +365,12 @@
     <value>No volver a mostrar</value>
     <comment>Shown in New Version Available popup</comment>
   </data>
+  <data name="DungeonCompletion" xml:space="preserve">
+    <value>Dungeon Finalización</value>
+  </data>
+  <data name="DungeonPaths" xml:space="preserve">
+    <value>Caminos</value>
+  </data>
   <data name="Dungeons" xml:space="preserve">
     <value>Mazmorras</value>
   </data>
@@ -329,6 +379,9 @@
   </data>
   <data name="DungeonTimer" xml:space="preserve">
     <value>Temporizador de mazmorras</value>
+  </data>
+  <data name="EctoSalvageHelper" xml:space="preserve">
+    <value>Asistente de reciclaje de Ectoplasmas</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editar</value>
@@ -341,6 +394,9 @@
 </value>
     <comment>Shown in About window</comment>
   </data>
+  <data name="EntireContinent" xml:space="preserve">
+    <value>Todo el Continente</value>
+  </data>
   <data name="EternalBattlegrounds" xml:space="preserve">
     <value>Campos de Batalla eternos</value>
   </data>
@@ -349,7 +405,7 @@
     <comment>Instructions shown describing what the entry box for notifications means</comment>
   </data>
   <data name="EventNotifications" xml:space="preserve">
-    <value>Notoficaciones de evento</value>
+    <value>Notificaciones de evento</value>
   </data>
   <data name="EventNotificationSettings" xml:space="preserve">
     <value>Ajustes de monitor de eventos</value>
@@ -377,10 +433,10 @@
     <comment>Feet as in "ft"</comment>
   </data>
   <data name="File" xml:space="preserve">
-    <value>Expediente</value>
+    <value>Archivo</value>
   </data>
   <data name="GemsToGoldExchange" xml:space="preserve">
-    <value>Gemas para Gold Exchange</value>
+    <value>Cambio de Gemas a Oro</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
@@ -394,7 +450,7 @@
     <value>Global</value>
   </data>
   <data name="GoldToGemsExchange" xml:space="preserve">
-    <value>Oro para Gems Cambio</value>
+    <value>Cambio de Oro a Gemas</value>
   </data>
   <data name="GoToDownloadPage" xml:space="preserve">
     <value>Ir a la página de descarga</value>
@@ -413,6 +469,10 @@
     <value>Ayuda</value>
     <comment>Shown in About window</comment>
   </data>
+  <data name="HeroChallenges" xml:space="preserve">
+    <value>Desafíos de héroe</value>
+    <comment>what used to be called Skill Challenges</comment>
+  </data>
   <data name="Hide" xml:space="preserve">
     <value>Ocultar</value>
     <comment>Used in several places, hides something from view</comment>
@@ -425,6 +485,9 @@
   </data>
   <data name="Import" xml:space="preserve">
     <value>Importar...</value>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>en</value>
   </data>
   <data name="IncludeLocation" xml:space="preserve">
     <value>Incluir localización</value>
@@ -462,6 +525,9 @@
   <data name="Later" xml:space="preserve">
     <value>Más tarde</value>
   </data>
+  <data name="Length" xml:space="preserve">
+    <value>Longitud</value>
+  </data>
   <data name="ListingFee" xml:space="preserve">
     <value>Impuestos</value>
   </data>
@@ -482,12 +548,24 @@
   <data name="Lower" xml:space="preserve">
     <value>Inferior</value>
   </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="MapOverlay" xml:space="preserve">
+    <value>mapa superpuesto</value>
+  </data>
   <data name="Maps" xml:space="preserve">
     <value>Mapas</value>
+  </data>
+  <data name="MetaEventTimers" xml:space="preserve">
+    <value>Meta temporizadores de eventos</value>
   </data>
   <data name="Meters" xml:space="preserve">
     <value>Metros</value>
     <comment>Meters, as in "m"</comment>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Movimiento</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
@@ -506,6 +584,9 @@
   <data name="NonInteractiveWindows" xml:space="preserve">
     <value>Ventanas no interactivas</value>
     <comment>Non-interactive windows, or windows that do not receive any mouse-clicks</comment>
+  </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>No se han encontrado resultados</value>
   </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Duración de las notificaciones</value>
@@ -530,11 +611,17 @@
     <comment>Performs an action - Opens the events tracker</comment>
   </data>
   <data name="OpenGuide" xml:space="preserve">
-    <value>Guía abierto</value>
+    <value>Abrir guía</value>
+  </data>
+  <data name="OpenMetaEventTimers" xml:space="preserve">
+    <value>Abrir Meta temporizadores de eventos</value>
   </data>
   <data name="OpenWikiPage" xml:space="preserve">
     <value>Abrir página de la Wiki</value>
     <comment>Opens the web browser to the GW2 Wiki</comment>
+  </data>
+  <data name="OpenWorldBossTimers" xml:space="preserve">
+    <value>Jefe temporizadores Open World</value>
   </data>
   <data name="OpenWvWTracker" xml:space="preserve">
     <value>Abrir monitor MvM</value>
@@ -555,6 +642,9 @@
   <data name="Owner" xml:space="preserve">
     <value>Propietario</value>
     <comment>Owner, as in World Owner</comment>
+  </data>
+  <data name="PlayerMarkers" xml:space="preserve">
+    <value>Los marcadores del jugador</value>
   </data>
   <data name="Points" xml:space="preserve">
     <value>Puntos: {0}</value>
@@ -594,6 +684,9 @@
   <data name="RedObjectives" xml:space="preserve">
     <value>Objetivos rojos</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Quitar</value>
+  </data>
   <data name="Reset" xml:space="preserve">
     <value>Reiniciar</value>
     <comment>Start over, shown in a button</comment>
@@ -605,7 +698,7 @@
     <value>Reiniciar rutas completadas</value>
   </data>
   <data name="ResetDaily" xml:space="preserve">
-    <value>Reiciar a diario</value>
+    <value>Reiniciar a diario</value>
   </data>
   <data name="ResetHiddenDungeons" xml:space="preserve">
     <value>Reiniciar mazmorras ocultas</value>
@@ -636,6 +729,10 @@
   <data name="Reward" xml:space="preserve">
     <value>Recompensa:</value>
     <comment>Dungeons path reward</comment>
+  </data>
+  <data name="ROI" xml:space="preserve">
+    <value>ROI:</value>
+    <comment>Return on Investment</comment>
   </data>
   <data name="SaleFee" xml:space="preserve">
     <value>Impuesto de venta:</value>
@@ -669,7 +766,7 @@
     <comment>Teamspeak server name</comment>
   </data>
   <data name="SetActivePath" xml:space="preserve">
-    <value>Establecer como Sendero Activo</value>
+    <value>Marcar como ruta activa</value>
     <comment>Used to override the currently detected dungeon path</comment>
   </data>
   <data name="Settings" xml:space="preserve">
@@ -688,6 +785,9 @@
     <value>Mostrar canal de TS</value>
     <comment>Show teamspeak channel information box</comment>
   </data>
+  <data name="ShowCharPointer" xml:space="preserve">
+    <value>Mostrar puntero de caracteres</value>
+  </data>
   <data name="ShowChatEntryBox" xml:space="preserve">
     <value>Mostrar entrada de chat de TS</value>
     <comment>Show text-chat entry box</comment>
@@ -696,17 +796,23 @@
     <value>Mostrar eventos completados</value>
   </data>
   <data name="ShowCompletedTasks" xml:space="preserve">
-    <value>Mostrar completadas Tareas</value>
+    <value>Mostrar tareas completadas</value>
   </data>
   <data name="ShowDistances" xml:space="preserve">
     <value>Mostrar distancias</value>
   </data>
   <data name="ShowEnterExitChannelNotifications" xml:space="preserve">
-    <value>Mostrar Enter / Exit Channel Notificaciones</value>
+    <value>Mostrar notificaciones de entrada/salida del canal</value>
     <comment>For the Teamspeak Overlay</comment>
   </data>
   <data name="ShowGoldToGemsExchange" xml:space="preserve">
-    <value>Mostrar Oro-to-Gems Cambio</value>
+    <value>Mostrar cambio de Oro a Gemas</value>
+  </data>
+  <data name="ShowHeartQuests" xml:space="preserve">
+    <value>Mostrar Misiones del corazón</value>
+  </data>
+  <data name="ShowHeroPoints" xml:space="preserve">
+    <value>Mostrar puntos de héroe</value>
   </data>
   <data name="ShowInactiveEvents" xml:space="preserve">
     <value>Mostrar eventos inactivos</value>
@@ -719,12 +825,34 @@
     <value>Mostrar bordes de ventana</value>
     <comment>Show window borders for notification windows</comment>
   </data>
+  <data name="ShowPlayerMarkers" xml:space="preserve">
+    <value>Mostrar marcadores jugador</value>
+    <comment>Show/Hide option to toggle visiblity of player tasks on the map</comment>
+  </data>
+  <data name="ShowPointsOfInterest" xml:space="preserve">
+    <value>Mostrar Puntos de interés</value>
+  </data>
   <data name="ShowTasksNotOnMap" xml:space="preserve">
-    <value>Mostrar no Tareas en mapa actual</value>
+    <value>Mostrar tareas de otros mapas</value>
+  </data>
+  <data name="ShowTimerValue" xml:space="preserve">
+    <value>Mostrar temporizador Valor</value>
+  </data>
+  <data name="ShowTrail" xml:space="preserve">
+    <value>Mostrar Trail</value>
   </data>
   <data name="ShowUnlockedZonePoints" xml:space="preserve">
     <value>Mostrar puntos desbloqueados</value>
     <comment>Show unlocked points, as in locations on the map</comment>
+  </data>
+  <data name="ShowVistas" xml:space="preserve">
+    <value>Mostrar Vistas</value>
+  </data>
+  <data name="ShowWaypointCopyButtons" xml:space="preserve">
+    <value>Mostrar botones para copiar los Puntos de ruta</value>
+  </data>
+  <data name="ShowWaypoints" xml:space="preserve">
+    <value>Mostrar waypoints</value>
   </data>
   <data name="SkillChallenges" xml:space="preserve">
     <value>Puntos de habilidad</value>
@@ -770,12 +898,25 @@
     <value>Duración de trayecto</value>
     <comment>Time-distances, which are estimated time to travel based on distanced</comment>
   </data>
+  <data name="TimeUntilDay" xml:space="preserve">
+    <value>Tiempo hasta la noche</value>
+  </data>
+  <data name="TimeUntilNight" xml:space="preserve">
+    <value>Tiempo hasta el día</value>
+  </data>
+  <data name="Toggle World Boss Timers" xml:space="preserve">
+    <value>Alternar Mundial de Boss temporizadores</value>
+    <comment>Hotkey label</comment>
+  </data>
   <data name="ToggleAllWindows" xml:space="preserve">
     <value>Activar/ocultar todas las ventanas</value>
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleAutoFadeBorders" xml:space="preserve">
     <value>Activar/desactivar bordes de ventana</value>
+  </data>
+  <data name="ToggleDayNight" xml:space="preserve">
+    <value>Alternar Día-Noche temporizador</value>
   </data>
   <data name="ToggleDungeonsTracker" xml:space="preserve">
     <value>Activar/ocultar Monitor de mazmorras
@@ -789,6 +930,14 @@
   <data name="ToggleEventsTracker" xml:space="preserve">
     <value>Activar/ocultar Monotor de eventos
 </value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMap" xml:space="preserve">
+    <value>Alternar de visitas por ubicación</value>
+    <comment>Hotkey label</comment>
+  </data>
+  <data name="ToggleMetaEventTimers" xml:space="preserve">
+    <value>Alternar Meta temporizadores de eventos</value>
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleNonInteractiveWindow" xml:space="preserve">
@@ -809,7 +958,7 @@
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleTasksTracker" xml:space="preserve">
-    <value>Activar/ocultar Monotor de misiones</value>
+    <value>Activar/ocultar Monitor de misiones</value>
   </data>
   <data name="ToggleTeamspeakOverlay" xml:space="preserve">
     <value>Activar/ocultar Ventana de Teamspeak</value>
@@ -824,7 +973,7 @@
     <comment>Hotkey label</comment>
   </data>
   <data name="ToggleZoneCompletionAssistant" xml:space="preserve">
-    <value> Activar/ocultar Asistente de exploración</value>
+    <value>Activar/ocultar Asistente de exploración</value>
     <comment>Hotkey label</comment>
   </data>
   <data name="Towers" xml:space="preserve">
@@ -837,6 +986,9 @@
   </data>
   <data name="TrackedItems" xml:space="preserve">
     <value>Objetos monitorizados</value>
+  </data>
+  <data name="Trail" xml:space="preserve">
+    <value>Sendero</value>
   </data>
   <data name="TranslationsBy" xml:space="preserve">
     <value>Traducciones por:</value>
@@ -878,7 +1030,7 @@
     <value>Navegador web</value>
   </data>
   <data name="WhenHomeWorldLosesObjective" xml:space="preserve">
-    <value>Cuando tu  mundo pierda un objetivo</value>
+    <value>Cuando tu mundo pierda un objetivo</value>
     <comment>As in when the home world loses an objective to another world</comment>
   </data>
   <data name="WhenHomeWorldTakesObjective" xml:space="preserve">
@@ -888,6 +1040,9 @@
   <data name="WhenOtherWorldTakesOtherWorldsObjective" xml:space="preserve">
     <value>Cuando otro mundo tome un objetivo de otro mundo</value>
     <comment>As in when a world other than the home world takes an objective from another world that is not the home world</comment>
+  </data>
+  <data name="WorldBossTimers" xml:space="preserve">
+    <value>Jefe temporizadores mundo</value>
   </data>
   <data name="WorldEvents" xml:space="preserve">
     <value>Eventos mundiales</value>
@@ -899,23 +1054,23 @@
     <value>Mundo vs Mundo</value>
   </data>
   <data name="WvWEnemyHeadedAltClipboardText" xml:space="preserve">
-    <value>Enemigo dirigió a {0}</value>
+    <value>Enemigos en camino a {0}</value>
     <comment>Example: Enemy headed to Garrison</comment>
   </data>
   <data name="WvWEnemyHeadedClipboardText" xml:space="preserve">
-    <value>Enemigo dirigido a {0} ({1} {2})</value>
+    <value>Enemigos en camino a {0} ({1} {2})</value>
     <comment>Example: Enemy headed to Garrison (C Keep)</comment>
   </data>
   <data name="WvWGeneralClipboardText" xml:space="preserve">
-    <value>{0} ({1} {2}) - Poseído por {3} - RI: {4}</value>
+    <value>{0} ({1} {2}) - Propiedad Por {3} - RI: {4}</value>
     <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI: 3:14</comment>
   </data>
   <data name="WvWGeneralNoRIClipboardText" xml:space="preserve">
-    <value>{0} ({1} {2}) - Propiedad de {3} - RI NO está activo</value>
+    <value>{0} ({1} {2}) - Propiedad de {3} - RI no está activo</value>
     <comment>Example: Garrison (C Keep) - Owned by Sea of Sorrows - RI is NOT active</comment>
   </data>
   <data name="WvWNoRIClipboardText" xml:space="preserve">
-    <value>{0} ({1} {2}) - RI NO está activo</value>
+    <value>{0} ({1} {2}) - RI no está activo</value>
     <comment>Example: Garrison (C Keep) - RI is NOT active</comment>
   </data>
   <data name="WvWNotifications" xml:space="preserve">
@@ -923,11 +1078,11 @@
     <comment>World vs World Notifications</comment>
   </data>
   <data name="WvWPlayerHeadedAltClipboardText" xml:space="preserve">
-    <value>Me dirijo a {0} - Distancia estimada: {1} {2}</value>
+    <value>Me dirijo hacia {0} - Distancia estimada: {3}{4}</value>
     <comment>Example: I'm headed to Garrison - Estimated Distance: 314m</comment>
   </data>
   <data name="WvWPlayerHeadedClipboardText" xml:space="preserve">
-    <value>Me dirijo a {0} ({1} {2}) - Distancia estimada: {3} {4}</value>
+    <value>Me dirijo hacia {0} ({1} {2}) - Distancia estimada: {3}{4}</value>
     <comment>Example: I'm headed to Garrison (C Keep) - Estimated Distance: 314m</comment>
   </data>
   <data name="WvWRIClipboardText" xml:space="preserve">
@@ -935,59 +1090,19 @@
     <comment>Example: Garrison (C Keep) - RI: 3:14</comment>
   </data>
   <data name="WvWUnderAttackClipboardText" xml:space="preserve">
-    <value>{0} está bajo ataque !! ({1} {2})</value>
+    <value>¡{0} esta bajo ataque! ({1} {2})</value>
     <comment>Example: Garrison is under attack!! (C Keep)</comment>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Asistente de exploración de mapa</value>
   </data>
-  <data name="AutoHideAllWindowsGW2Closed" xml:space="preserve">
-    <value>Auto-ocultar todas las ventanas cuando GW2 no se está ejecutando</value>
+  <data name="Notes" xml:space="preserve">
+    <value>notas</value>
   </data>
-  <data name="AutoHideAllWindowsGW2LoseFocus" xml:space="preserve">
-    <value>Auto-ocultar todas las ventanas cuando GW2 pierde el foco</value>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Mostrar charla de texto</value>
   </data>
-  <data name="AutoHideOverlayIconGW2LoseFocus" xml:space="preserve">
-    <value>Auto-Ocultar Overlay Menu Icon cuando GW2 pierde el foco</value>
-  </data>
-  <data name="AverageTime" xml:space="preserve">
-    <value>Tiempo Promedio</value>
-  </data>
-  <data name="BestTime" xml:space="preserve">
-    <value>Mejor Tiempo</value>
-  </data>
-  <data name="CompletionTime" xml:space="preserve">
-    <value>Tiempo De Finalización</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="DungeonCompletion" xml:space="preserve">
-    <value>Dungeon Finalización</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Quitar</value>
-  </data>
-  <data name="ShowWaypointCopyButtons" xml:space="preserve">
-    <value>Mostrar Waypoint-Código Copiar Botones</value>
-  </data>
-  <data name="DungeonPaths" xml:space="preserve">
-    <value>Caminos</value>
-  </data>
-  <data name="HeroChallenges" xml:space="preserve">
-    <value>Desafíos de héroe</value>
-  </data>
-  <data name="BasedOnBuyOrder" xml:space="preserve">
-    <value>En base a la Orden de Compra Precio</value>
-  </data>
-  <data name="BasedOnSellListing" xml:space="preserve">
-    <value>Basado en Venta Precio de listado</value>
-  </data>
-  <data name="CompletedPerChar" xml:space="preserve">
-    <value>Completado por carácter</value>
-    <comment>for the tasks tracker</comment>
-  </data>
-  <data name="EctoSalvageHelper" xml:space="preserve">
-    <value>Ectoplasma Salvamento Ayudante</value>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Mostrar chat de voz</value>
   </data>
 </root>

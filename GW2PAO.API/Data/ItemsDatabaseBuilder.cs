@@ -80,7 +80,7 @@ namespace GW2PAO.API.Data
                             }
                             else if (task.IsFaulted)
                             {
-                                logger.ErrorException("One or more errors occurred when retrieving item names.", task.Exception);
+                                logger.Error(task.Exception, "One or more errors occurred when retrieving item names.");
                             }
                             else
                             {

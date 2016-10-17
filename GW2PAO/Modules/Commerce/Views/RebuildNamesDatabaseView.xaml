@@ -11,6 +11,7 @@
         SizeToContent="Width"
         ResizeMode="NoResize"
         Topmost="True"
+        ShowInTaskbar="False"
         TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 

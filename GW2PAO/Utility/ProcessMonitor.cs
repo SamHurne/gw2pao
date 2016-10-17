@@ -194,9 +194,10 @@ namespace GW2PAO.Utility
         private bool IsWvWMap(int mapId)
         {
             return mapId == WvWMapIDs.EternalBattlegrounds
-                || mapId == WvWMapIDs.RedBorderlands
-                || mapId == WvWMapIDs.GreenBorderlands
-                || mapId == WvWMapIDs.BlueBorderlands;
+                || mapId == WvWMapIDs.RedDesertBorderlands
+                || mapId == WvWMapIDs.RedAplineBorderlands
+                || mapId == WvWMapIDs.GreenAplineBorderlands
+                || mapId == WvWMapIDs.BlueAplineBorderlands;
         }
 
         #region IDisposable Implementation

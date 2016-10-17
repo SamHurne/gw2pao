@@ -166,7 +166,7 @@ namespace GW2PAO.API.Services
                     // TODO: Finish this up, get all details, such as Type, SkinID
                 }
             }
-            catch (GW2NET.Common.ServiceException ex)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
                 logger.Warn("Error finding item with id {0}: {1}", itemID, ex);
@@ -215,10 +215,10 @@ namespace GW2PAO.API.Services
                     items.Add(item.ID, item);
                 }
             }
-            catch (GW2NET.Common.ServiceException ex)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding item: {0}", ex);
+                logger.Warn(ex, "Error finding item");
             }
 
             return items;
@@ -246,10 +246,10 @@ namespace GW2PAO.API.Services
                     };
                 }
             }
-            catch (GW2NET.Common.ServiceException ex)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding prices for itemId {0}: {1}", ex);
+                logger.Warn(ex, "Error finding prices for itemId {0}", itemId);
             }
 
             return itemPrices;
@@ -282,10 +282,10 @@ namespace GW2PAO.API.Services
                     }
                 }
             }
-            catch (GW2NET.Common.ServiceException ex)
+            catch (Exception ex)
             {
                 // Don't crash, just return null
-                logger.Warn("Error finding prices: {0}", ex);
+                logger.Warn(ex, "Error finding prices");
             }
 
             return prices;

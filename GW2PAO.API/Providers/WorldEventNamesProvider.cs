@@ -113,73 +113,73 @@ namespace GW2PAO.API.Providers
             // English
             List<EventName> english = new List<EventName>()
             {
-                new EventName() { ID = WorldEventID.Megadestroyer, Name = "Megadestroyer" },
-                new EventName() { ID = WorldEventID.Tequatl, Name = "Tequatl" },
-                new EventName() { ID = WorldEventID.KarkaQueen, Name = "Karka Queen" },
-                new EventName() { ID = WorldEventID.EvolvedJungleWurm, Name = "Evolved Jungle Wurm" },
-                new EventName() { ID = WorldEventID.Shatterer, Name = "Shatterer" },
-                new EventName() { ID = WorldEventID.ClawOfJormag, Name = "Claw of Jormag" },
-                new EventName() { ID = WorldEventID.ModniirUlgoth, Name = "Modniir Ulgoth" },
-                new EventName() { ID = WorldEventID.InquestGolemMarkII, Name = "Inquest Golem Mark II" },
-                new EventName() { ID = WorldEventID.TaidhaCovington, Name = "Taidha Covington" },
-                new EventName() { ID = WorldEventID.JungleWurm, Name = "Jungle Wurm" },
-                new EventName() { ID = WorldEventID.ShadowBehemoth, Name = "Shadow Behemoth" },
-                new EventName() { ID = WorldEventID.FireElemental, Name = "Fire Elemental" },
-                new EventName() { ID = WorldEventID.FrozenMaw, Name = "Frozen Maw" }
+                new EventName() { ID = WorldBossID.Megadestroyer, Name = "Megadestroyer" },
+                new EventName() { ID = WorldBossID.Tequatl, Name = "Tequatl" },
+                new EventName() { ID = WorldBossID.KarkaQueen, Name = "Karka Queen" },
+                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Evolved Jungle Wurm" },
+                new EventName() { ID = WorldBossID.Shatterer, Name = "Shatterer" },
+                new EventName() { ID = WorldBossID.ClawOfJormag, Name = "Claw of Jormag" },
+                new EventName() { ID = WorldBossID.ModniirUlgoth, Name = "Modniir Ulgoth" },
+                new EventName() { ID = WorldBossID.InquestGolemMarkII, Name = "Inquest Golem Mark II" },
+                new EventName() { ID = WorldBossID.TaidhaCovington, Name = "Taidha Covington" },
+                new EventName() { ID = WorldBossID.JungleWurm, Name = "Jungle Wurm" },
+                new EventName() { ID = WorldBossID.ShadowBehemoth, Name = "Shadow Behemoth" },
+                new EventName() { ID = WorldBossID.FireElemental, Name = "Fire Elemental" },
+                new EventName() { ID = WorldBossID.FrozenMaw, Name = "Frozen Maw" }
             };
 
             // Spanish
             List<EventName> spanish = new List<EventName>()
             {
-                new EventName() { ID = WorldEventID.Megadestroyer, Name = "Megadestructor" },
-                new EventName() { ID = WorldEventID.Tequatl, Name = "Tequatl" },
-                new EventName() { ID = WorldEventID.KarkaQueen, Name = "La Reina Karka" },
-                new EventName() { ID = WorldEventID.EvolvedJungleWurm, Name = "Tres Cabezas de la Serpiente" },
-                new EventName() { ID = WorldEventID.Shatterer, Name = "El Asolador" },
-                new EventName() { ID = WorldEventID.ClawOfJormag, Name = "La Garra de Jormag" },
-                new EventName() { ID = WorldEventID.ModniirUlgoth, Name = "Ulgoth el Modniir" },
-                new EventName() { ID = WorldEventID.InquestGolemMarkII, Name = "Gólem Serie II de la Inquisa" },
-                new EventName() { ID = WorldEventID.TaidhaCovington, Name = "Taidha Covington" },
-                new EventName() { ID = WorldEventID.JungleWurm, Name = "Gran Sierpe de la Selva" },
-                new EventName() { ID = WorldEventID.ShadowBehemoth, Name = "Behemot de las Sombras" },
-                new EventName() { ID = WorldEventID.FireElemental, Name = "Elemental de Fuego" },
-                new EventName() { ID = WorldEventID.FrozenMaw, Name = "Jefe Chamán Svanir" }
+                new EventName() { ID = WorldBossID.Megadestroyer, Name = "Megadestructor" },
+                new EventName() { ID = WorldBossID.Tequatl, Name = "Tequatl" },
+                new EventName() { ID = WorldBossID.KarkaQueen, Name = "La Reina Karka" },
+                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Tres Cabezas de la Serpiente" },
+                new EventName() { ID = WorldBossID.Shatterer, Name = "El Asolador" },
+                new EventName() { ID = WorldBossID.ClawOfJormag, Name = "La Garra de Jormag" },
+                new EventName() { ID = WorldBossID.ModniirUlgoth, Name = "Ulgoth el Modniir" },
+                new EventName() { ID = WorldBossID.InquestGolemMarkII, Name = "Gólem Serie II de la Inquisa" },
+                new EventName() { ID = WorldBossID.TaidhaCovington, Name = "Taidha Covington" },
+                new EventName() { ID = WorldBossID.JungleWurm, Name = "Gran Sierpe de la Selva" },
+                new EventName() { ID = WorldBossID.ShadowBehemoth, Name = "Behemot de las Sombras" },
+                new EventName() { ID = WorldBossID.FireElemental, Name = "Elemental de Fuego" },
+                new EventName() { ID = WorldBossID.FrozenMaw, Name = "Jefe Chamán Svanir" }
             };
 
             // French
             List<EventName> french = new List<EventName>()
             {
-                new EventName() { ID = WorldEventID.Megadestroyer, Name = "Mégadestructeur" },
-                new EventName() { ID = WorldEventID.Tequatl, Name = "Tequatl" },
-                new EventName() { ID = WorldEventID.KarkaQueen, Name = "La Reine Karka" },
-                new EventName() { ID = WorldEventID.EvolvedJungleWurm, Name = "Trois têtes Guivre" },
-                new EventName() { ID = WorldEventID.Shatterer, Name = "Le Destructeur" },
-                new EventName() { ID = WorldEventID.ClawOfJormag, Name = "La Griffe de Jormag" },
-                new EventName() { ID = WorldEventID.ModniirUlgoth, Name = "Ulgoth le Modniir" },
-                new EventName() { ID = WorldEventID.InquestGolemMarkII, Name = "Golem Marque II de l'Enqueste" },
-                new EventName() { ID = WorldEventID.TaidhaCovington, Name = "Taidha Covington" },
-                new EventName() { ID = WorldEventID.JungleWurm, Name = "La Grande Guivre de la Jungle" },
-                new EventName() { ID = WorldEventID.ShadowBehemoth, Name = "Béhémoth des Ombres" },
-                new EventName() { ID = WorldEventID.FireElemental, Name = "L'élémentaire de Feu" },
-                new EventName() { ID = WorldEventID.FrozenMaw, Name = "Chef Chamane de Svanir" }
+                new EventName() { ID = WorldBossID.Megadestroyer, Name = "Mégadestructeur" },
+                new EventName() { ID = WorldBossID.Tequatl, Name = "Tequatl" },
+                new EventName() { ID = WorldBossID.KarkaQueen, Name = "La Reine Karka" },
+                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Trois têtes Guivre" },
+                new EventName() { ID = WorldBossID.Shatterer, Name = "Le Destructeur" },
+                new EventName() { ID = WorldBossID.ClawOfJormag, Name = "La Griffe de Jormag" },
+                new EventName() { ID = WorldBossID.ModniirUlgoth, Name = "Ulgoth le Modniir" },
+                new EventName() { ID = WorldBossID.InquestGolemMarkII, Name = "Golem Marque II de l'Enqueste" },
+                new EventName() { ID = WorldBossID.TaidhaCovington, Name = "Taidha Covington" },
+                new EventName() { ID = WorldBossID.JungleWurm, Name = "La Grande Guivre de la Jungle" },
+                new EventName() { ID = WorldBossID.ShadowBehemoth, Name = "Béhémoth des Ombres" },
+                new EventName() { ID = WorldBossID.FireElemental, Name = "L'élémentaire de Feu" },
+                new EventName() { ID = WorldBossID.FrozenMaw, Name = "Chef Chamane de Svanir" }
             };
 
             // German
             List<EventName> german = new List<EventName>()
             {
-                new EventName() { ID = WorldEventID.Megadestroyer, Name = "Megazerstörer" },
-                new EventName() { ID = WorldEventID.Tequatl, Name = "Tequatl" },
-                new EventName() { ID = WorldEventID.KarkaQueen, Name = "Die Karka-Königin" },
-                new EventName() { ID = WorldEventID.EvolvedJungleWurm, Name = "Dreiköpfige Wurm" },
-                new EventName() { ID = WorldEventID.Shatterer, Name = "Zerschmetterer" },
-                new EventName() { ID = WorldEventID.ClawOfJormag, Name = "Die Klaue Jormags" },
-                new EventName() { ID = WorldEventID.ModniirUlgoth, Name = "Ulgoth den Modniir" },
-                new EventName() { ID = WorldEventID.InquestGolemMarkII, Name = "Inquestur-Golem Typ II" },
-                new EventName() { ID = WorldEventID.TaidhaCovington, Name = "Taidha Covington" },
-                new EventName() { ID = WorldEventID.JungleWurm, Name = "Großen Dschungelwurm" },
-                new EventName() { ID = WorldEventID.ShadowBehemoth, Name = "Schatten-Behemoth" },
-                new EventName() { ID = WorldEventID.FireElemental, Name = "Feuerelementar" },
-                new EventName() { ID = WorldEventID.FrozenMaw, Name = "Schamanenoberhaupt der Svanir" }
+                new EventName() { ID = WorldBossID.Megadestroyer, Name = "Megazerstörer" },
+                new EventName() { ID = WorldBossID.Tequatl, Name = "Tequatl" },
+                new EventName() { ID = WorldBossID.KarkaQueen, Name = "Die Karka-Königin" },
+                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Dreiköpfige Wurm" },
+                new EventName() { ID = WorldBossID.Shatterer, Name = "Zerschmetterer" },
+                new EventName() { ID = WorldBossID.ClawOfJormag, Name = "Die Klaue Jormags" },
+                new EventName() { ID = WorldBossID.ModniirUlgoth, Name = "Ulgoth den Modniir" },
+                new EventName() { ID = WorldBossID.InquestGolemMarkII, Name = "Inquestur-Golem Typ II" },
+                new EventName() { ID = WorldBossID.TaidhaCovington, Name = "Taidha Covington" },
+                new EventName() { ID = WorldBossID.JungleWurm, Name = "Großen Dschungelwurm" },
+                new EventName() { ID = WorldBossID.ShadowBehemoth, Name = "Schatten-Behemoth" },
+                new EventName() { ID = WorldBossID.FireElemental, Name = "Feuerelementar" },
+                new EventName() { ID = WorldBossID.FrozenMaw, Name = "Schamanenoberhaupt der Svanir" }
             };
 
             Serialization.SerializeToXml(english, this.GetFilePath("en"));

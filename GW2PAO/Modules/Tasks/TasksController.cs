@@ -120,6 +120,7 @@ namespace GW2PAO.Modules.Tasks
                 taskVm.OnNewCharacterDetected(this.CharacterName);
                 this.PlayerTasks.Add(taskVm);
             }
+            this.EnsureTasksHaveContinentLocation();
 
             // Initialize refresh timers
             this.refreshTimer = new Timer(this.Refresh);
@@ -217,10 +218,55 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.WaypointCode = task.WaypointCode;
                             foreach (var character in task.CharacterCompletions.Keys)
                             {
-                                existingTask.Task.CharacterCompletions.Add(character, task.CharacterCompletions[character]);
+                                if (!existingTask.Task.CharacterCompletions.ContainsKey(character))
+                                    existingTask.Task.CharacterCompletions.Add(character, task.CharacterCompletions[character]);
+                                else
+                                    existingTask.Task.CharacterCompletions[character] = task.CharacterCompletions[character];
                             }
                         }
                     });
+            }
+        }
+
+        /// <summary>
+        /// Adds a new task to the collection of player tasks
+        /// </summary>
+        /// <param name="task">The task and viewmodel to add</param>
+        public void AddOrUpdateTask(PlayerTaskViewModel taskViewModel)
+        {
+            // Lock so the refresh thread doesn't use the collection while we are modifying it
+            lock (this.refreshLock)
+            {
+                Threading.InvokeOnUI(() =>
+                {
+                    var existingTask = this.PlayerTasks.FirstOrDefault(t => t.Task.ID == taskViewModel.Task.ID);
+                    if (existingTask == null)
+                    {
+                        this.UserData.Tasks.Add(taskViewModel.Task);
+                        this.PlayerTasks.Add(taskViewModel);
+                    }
+                    else
+                    {
+                        existingTask.Task.Name = taskViewModel.Task.Name;
+                        existingTask.Task.Description = taskViewModel.Task.Description;
+                        existingTask.Task.IsCompletable = taskViewModel.Task.IsCompletable;
+                        existingTask.Task.IsAccountCompleted = taskViewModel.Task.IsAccountCompleted;
+                        existingTask.Task.IsCompletedPerCharacter = taskViewModel.Task.IsCompletedPerCharacter;
+                        existingTask.Task.IsDailyReset = taskViewModel.Task.IsDailyReset;
+                        existingTask.Task.AutoComplete = taskViewModel.Task.AutoComplete;
+                        existingTask.Task.Location = taskViewModel.Task.Location;
+                        existingTask.Task.MapID = taskViewModel.Task.MapID;
+                        existingTask.Task.IconUri = taskViewModel.Task.IconUri;
+                        existingTask.Task.WaypointCode = taskViewModel.Task.WaypointCode;
+                        foreach (var character in taskViewModel.Task.CharacterCompletions.Keys)
+                        {
+                            if (!existingTask.Task.CharacterCompletions.ContainsKey(character))
+                                existingTask.Task.CharacterCompletions.Add(character, taskViewModel.Task.CharacterCompletions[character]);
+                            else
+                                existingTask.Task.CharacterCompletions[character] = taskViewModel.Task.CharacterCompletions[character];
+                        }
+                    }
+                });
             }
         }
 
@@ -272,6 +318,7 @@ namespace GW2PAO.Modules.Tasks
                         this.UserData.Tasks.Add(task);
                         this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                     }
+                    this.EnsureTasksHaveContinentLocation();
                 });
 
                 logger.Info("Successfully loaded tasks from {0}", path);
@@ -325,6 +372,7 @@ namespace GW2PAO.Modules.Tasks
                             this.UserData.Tasks.Add(task);
                             this.PlayerTasks.Add(new PlayerTaskViewModel(task, this.zoneService, this, this.container));
                         }
+                        this.EnsureTasksHaveContinentLocation();
                     });
 
                 logger.Info("Successfully imported tasks from {0}", path);
@@ -445,5 +493,18 @@ namespace GW2PAO.Modules.Tasks
             }
         }
 
+        /// <summary>
+        /// Loops through the collection of tasks and ensure that they all
+        /// have a corresponding continent location
+        /// </summary>
+        private void EnsureTasksHaveContinentLocation()
+        {
+            foreach (var ptask in this.PlayerTasks.Where(pt => pt.Task.Location != null && pt.Task.ContinentLocation == null))
+            {
+                var continent = this.zoneService.GetContinentByMap(ptask.Task.MapID);
+                var map = this.zoneService.GetMap(ptask.Task.MapID);
+                ptask.Task.ContinentLocation = API.Util.MapsHelper.ConvertToWorldPos(map.ContinentRectangle, map.MapRectangle, CalcUtil.ConvertToMapPosition(ptask.Task.Location));
+            }
+        }
     }
 }

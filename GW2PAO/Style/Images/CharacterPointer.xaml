@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Viewbox Stretch="Uniform" x:Shared="false"
+             x:Key="CharacterPointer">
+        <Canvas Width="17.595022" Height="22.23107">
+            <Ellipse Canvas.Left="5.3" Canvas.Top="9.9" Width="7" Height="7" Fill="#FFEEE8AA" StrokeThickness="0.7" Stroke="#FF000000" StrokeMiterLimit="4" StrokeLineJoin="Bevel" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Opacity="0.98299997"/>
+            <Path Fill="#FBEEE8AA" StrokeThickness="0.7" Stroke="#FF000000" StrokeMiterLimit="4" StrokeLineJoin="Bevel" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Opacity="0.98299997">
+                <Path.Data>
+                    <PathGeometry Figures="M 8.7975107 0.21650635 C 3.6473043 3.1899794 0.25 8.7254342 0.25 13.433559 c 0 4.708125 3.8393857 8.547511 8.5475107 8.547511 4.7081243 0 8.5475113 -3.839386 8.5475113 -8.547511 0 -4.7081248 -2.926897 -9.9719896 -8.5475113 -13.21705265 z m 0 6.74330505 c 3.5868893 0 6.4714923 2.8868578 6.4714943 6.4737476 0 3.586889 -2.884605 6.471494 -6.4714943 6.471494 -3.5868896 0 -6.4714934 -2.884605 -6.4714934 -6.471494 0 -3.5868898 2.8846038 -6.4737476 6.4714934 -6.4737476 z" FillRule="nonzero"/>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+
+
+</ResourceDictionary>

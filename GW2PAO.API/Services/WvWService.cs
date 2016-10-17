@@ -93,7 +93,7 @@ namespace GW2PAO.API.Services
                         });
                 }
             }
-            catch (GW2NET.Common.ServiceException ex)
+            catch (Exception ex)
             {
                 logger.Error("Failed to load worlds data: ");
                 logger.Error(ex);
@@ -281,7 +281,8 @@ namespace GW2PAO.API.Services
                         case WvWMap.GreenBorderlands:
                             mapDetails = matchDetails.Maps.FirstOrDefault(m => m is GreenBorderlands);
                             break;
-                        case WvWMap.RedBorderlands:
+                        case WvWMap.RedDesertBorderlands:
+                        case WvWMap.RedAplineBorderlands:
                             mapDetails = matchDetails.Maps.FirstOrDefault(m => m is RedBorderlands);
                             break;
                         case WvWMap.EternalBattlegrounds:
@@ -315,16 +316,16 @@ namespace GW2PAO.API.Services
                             switch (objData.Type)
                             {
                                 case ObjectiveType.Castle:
-                                    objData.Points = 35;
+                                    objData.Points = 12;
                                     break;
                                 case ObjectiveType.Keep:
-                                    objData.Points = 25;
+                                    objData.Points = 8;
                                     break;
                                 case ObjectiveType.Tower:
-                                    objData.Points = 10;
+                                    objData.Points = 4;
                                     break;
                                 case ObjectiveType.Camp:
-                                    objData.Points = 5;
+                                    objData.Points = 2;
                                     break;
                                 default:
                                     break;
@@ -383,7 +384,7 @@ namespace GW2PAO.API.Services
                             else if (mapDetails is GreenBorderlands)
                                 objData.Map = WvWMap.GreenBorderlands;
                             else if (mapDetails is RedBorderlands)
-                                objData.Map = WvWMap.RedBorderlands;
+                                objData.Map = WvWMap.RedDesertBorderlands;
                             else if (mapDetails is EternalBattlegrounds)
                                 objData.Map = WvWMap.EternalBattlegrounds;
                             else

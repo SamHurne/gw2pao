@@ -44,6 +44,15 @@ namespace GW2PAO.API.Services.Interfaces
         Data.Entities.Map GetMap(int mapId);
 
         /// <summary>
+        /// Retrieves map information using the provided continent coordinates,
+        /// or null if the coordinates do not fall into any current zone
+        /// </summary>
+        /// <param name="continentId">ID of the continent that the coordinates are for</param>
+        /// <param name="continentCoordinates">Continent coordinates to use</param>
+        /// <returns>The map data, or null if not found</returns>
+        Data.Entities.Map GetMap(int continentId, Point continentCoordinates);
+
+        /// <summary>
         /// Retrieves a collection of ZoneItems located in the zone with the given mapID
         /// </summary>
         /// <param name="mapId">The mapID of the zone to retrieve zone items for</param>

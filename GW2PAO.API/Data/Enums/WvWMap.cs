@@ -11,7 +11,8 @@ namespace GW2PAO.API.Data.Enums
         Unknown,
         BlueBorderlands,
         GreenBorderlands,
-        RedBorderlands,
+        RedAplineBorderlands,
+        RedDesertBorderlands,
         EternalBattlegrounds
     }
 }

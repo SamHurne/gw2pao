@@ -47,6 +47,14 @@ namespace GW2PAO.Infrastructure.ViewModels
         public string Header { get; private set; }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon
+        {
+            get { return null; }
+        }
+
+        /// <summary>
         /// The on-click command
         /// Always null.
         /// </summary>

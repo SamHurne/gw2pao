@@ -28,6 +28,9 @@
     <UserControl.Style>
         <Style TargetType="UserControl">
             <Setter Property="Opacity" Value="1" />
+            <Setter Property="ToolTip"
+                    Value="{Binding PriceWatch.Notes}">
+            </Setter>
             <Style.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard Storyboard="{StaticResource AddAnimation}" Name="AddStoryboard" />
@@ -37,6 +40,16 @@
                         <StopStoryboard  BeginStoryboardName="AddStoryboard" />
                         <BeginStoryboard Storyboard="{StaticResource RemoveAnimation}" />
                     </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PriceWatch.Notes}"
+                             Value="{x:Null}">
+                    <Setter Property="ToolTip"
+                            Value="{x:Null}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PriceWatch.Notes}"
+                             Value="">
+                    <Setter Property="ToolTip"
+                            Value="{x:Null}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

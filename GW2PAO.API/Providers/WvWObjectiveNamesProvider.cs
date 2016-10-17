@@ -213,7 +213,21 @@ namespace GW2PAO.API.Providers
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Orchard, Cardinal = "", Full = "Orchard Overlook", Short = "Orchard" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Estate, Cardinal = "", Full = "Bauer's Estate", Short = "Estate" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Hollow, Cardinal = "", Full = "Battle's Hollow", Short = "Hollow" },
-                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Temple of Lost Prayers", Short = "Temple" }
+                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Temple of Lost Prayers", Short = "Temple" },
+
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_HammsLab,       Cardinal = "N", Full = "Hamm's Lab", Short = "Hamm" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_BauerFarmstead, Cardinal = "SE", Full = "Bauer Farmstead", Short = "Bauer" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_McLains,        Cardinal = "SW", Full = "McLain's Encampment", Short = "McLain" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_OdelAcademy,   Cardinal = "NW", Full = "O'del Academy", Short = "O'del" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_EternalNecro,  Cardinal = "NE", Full = "Eternal Necropolis", Short = "Necro" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Crankshaft,    Cardinal = "SE", Full = "Crankshaft Depot", Short = "Crank" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Blistering,     Cardinal = "W", Full = "Blistering Undercroft", Short = "Undercroft" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_RoysRefuge,     Cardinal = "NE", Full = "Roy's Refuge", Short = "Refuge" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Parched,       Cardinal = "SW", Full = "Parched Outpost", Short = "Parched" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Stoic,          Cardinal = "C", Full = "Stoic Rampart", Short = "Stoic" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Ospreys,        Cardinal = "E", Full = "Osprey's Palace", Short = "Osprey's" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Boettigers,     Cardinal = "NW", Full = "Boettiger's Hideaway", Short = "Boettiger's" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Dustwhisper,    Cardinal = "S", Full = "Dustwhisper Well", Short = "Dustwhisper" }
             };
 
             // Spanish
@@ -299,7 +313,21 @@ namespace GW2PAO.API.Providers
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Orchard, Cardinal = "", Full = "Mirador del Huerto", Short = "Huerto" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Estate, Cardinal = "", Full = "Hacienda de Bauer", Short = "Hacienda" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Hollow, Cardinal = "", Full = "Hondonada de la batalla", Short = "Hondonada" },
-                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Templo de las Plegarias Perdidas", Short = "Templo" }
+                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Templo de las Plegarias Perdidas", Short = "Templo" },
+
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_HammsLab,       Cardinal = "N", Full = "Laboratorio de Hamm", Short = "Hamm" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_BauerFarmstead, Cardinal = "SE", Full = "Hacienda de Bauer", Short = "Bauer" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_McLains,        Cardinal = "SO", Full = "Campamento de McLain", Short = "McLain" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_OdelAcademy,   Cardinal = "NO", Full = "Academia O'del", Short = "O'del" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_EternalNecro,  Cardinal = "NE", Full = "Necrópolis Eterna", Short = "Necró" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Crankshaft,    Cardinal = "SE", Full = "Depósito de Palancamanijas", Short = "Depósito" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Blistering,     Cardinal = "O", Full = "Sótano Achicharrante", Short = "Sótano" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_RoysRefuge,     Cardinal = "NE", Full = "Refugio de Roy", Short = "Roy" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Parched,       Cardinal = "SO", Full = "Puesto Avanzado Abrasado", Short = "Puesto" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Stoic,          Cardinal = "C", Full = "Muralla Estoica", Short = "Estoica" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Ospreys,        Cardinal = "E", Full = "Palacio del Águila Pescadora", Short = "Águila" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Boettigers,     Cardinal = "NO", Full = "Escondrijo de Boettiger", Short = "Boettiger" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Dustwhisper,    Cardinal = "S", Full = "Pozo del Murmullo de Polvo", Short = "Pozo" }
             };
 
             // French
@@ -385,7 +413,21 @@ namespace GW2PAO.API.Providers
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Orchard, Cardinal = "", Full = "Belvédère du Berger", Short = "Verger" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Estate, Cardinal = "", Full = "Domaine de Bauer", Short = "Bauer" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Hollow, Cardinal = "", Full = "Vallon de bataille", Short = "Vallon" },
-                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Temple des Prières Perdues", Short = "Temple" }
+                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Temple des Prières Perdues", Short = "Temple" },
+
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_HammsLab,       Cardinal = "N", Full = "Laboratoire de Hamm", Short = "Hamm" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_BauerFarmstead, Cardinal = "SE", Full = "Ferme Bauer", Short = "Bauer" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_McLains,        Cardinal = "SO", Full = "Campement de McLain", Short = "McLain" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_OdelAcademy,   Cardinal = "NO", Full = "Académie de O'del", Short = "O'del" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_EternalNecro,  Cardinal = "NE", Full = "Nécropole éternelle", Short = "Nécro" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Crankshaft,    Cardinal = "SE", Full = "Dépôt Vilebrequin", Short = "Dépôt" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Blistering,     Cardinal = "O", Full = "Crypte embrasée", Short = "Crypte" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_RoysRefuge,     Cardinal = "NE", Full = "Refuge de Roy", Short = "Roy" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Parched,       Cardinal = "SO", Full = "Avant-poste dévasté", Short = "Avant" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Stoic,          Cardinal = "C", Full = "Rempart stoïque", Short = "Stoïque" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Ospreys,        Cardinal = "E", Full = "Palais du balbuzard", Short = "Balbuzard" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Boettigers,     Cardinal = "NO", Full = "Antre de Boettiger", Short = "Boettiger" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Dustwhisper,    Cardinal = "S", Full = "Puits du Souffle-poussière", Short = "Poussière" }
             };
 
             // German
@@ -471,7 +513,21 @@ namespace GW2PAO.API.Providers
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Orchard, Cardinal = "", Full = "Obstgarten-Aussichtspunkt", Short = "Obstgarten" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Estate, Cardinal = "", Full = "Bauers Anwesen", Short = "Anwesen" },
                 new ObjectiveNames() { ID = WvWObjectiveIds.GB_Hollow, Cardinal = "", Full = "Schlachten-Senke", Short = "Senke" },
-                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Tempel der Verlorenen Gebete", Short = "Tempel" }
+                new ObjectiveNames() { ID = WvWObjectiveIds.GB_Temple, Cardinal = "", Full = "Tempel der Verlorenen Gebete", Short = "Tempel" },
+
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_HammsLab,       Cardinal = "N", Full = "Hamms Labor", Short = "Hamms" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_BauerFarmstead, Cardinal = "SO", Full = "Bauer-Gehöft", Short = "Bauer" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_McLains,        Cardinal = "SW", Full = "McLains Lager", Short = "McLains" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_OdelAcademy,   Cardinal = "NW", Full = "O'del-Akademie", Short = "O'del" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_EternalNecro,  Cardinal = "NO", Full = "Ewige Nekropole", Short = "Nekro" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Crankshaft,    Cardinal = "SO", Full = "Kurbelwellen-Depot", Short = "Depot" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Blistering,     Cardinal = "W", Full = "Brennende Gruft", Short = "Brennende" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_RoysRefuge,     Cardinal = "NO", Full = "Roys Zuflucht", Short = "Roys" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Tower_Parched,       Cardinal = "SW", Full = "Verdörrter Außenposten", Short = "Außenposten" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Stoic,          Cardinal = "C", Full = "Stoischer Festungswall", Short = "Stoischer" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Keep_Ospreys,        Cardinal = "O", Full = "Fischadler-Palast", Short = "Fischadler" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Boettigers,     Cardinal = "NW", Full = "Boettigers Versteck", Short = "Boettigers" },
+                new ObjectiveNames() { ID = WvWObjectiveIds.RB_Camp_Dustwhisper,    Cardinal = "S", Full = "Brunnen des Staubflüsterns", Short = "Staub" }
             };
 
             Serialization.SerializeToXml(english, this.GetFilePath("en"));

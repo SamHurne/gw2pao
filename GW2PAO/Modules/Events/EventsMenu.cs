@@ -33,6 +33,14 @@ namespace GW2PAO.Modules.Events
         }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon
+        {
+            get { return "/Images/Title/meta.png"; }
+        }
+
+        /// <summary>
         /// True if the menu item is checkable, else false
         /// </summary>
         public bool IsCheckable
@@ -69,7 +77,9 @@ namespace GW2PAO.Modules.Events
         public EventsMenu(IEventsViewController viewFactory, EventsUserData userData)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
-            this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenEventsTracker, viewFactory.DisplayEventsTracker, viewFactory.CanDisplayEventsTracker));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenWorldBossTimers, viewFactory.DisplayWorldBossTimers, viewFactory.CanDisplayWorldBossTimers));
+            this.SubMenuItems.Add(new MenuItem(Properties.Resources.OpenMetaEventTimers, viewFactory.DisplayMetaEventTimers, viewFactory.CanDisplayMetaEventTimers));
+            this.SubMenuItems.Add(null); // Null for a seperator
             this.SubMenuItems.Add(new CheckableMenuItem(Properties.Resources.EventNotifications, false, () => userData.AreEventNotificationsEnabled, userData));
             this.SubMenuItems.Add(new MenuItem(Properties.Resources.Configure, () => Commands.OpenEventSettingsCommand.Execute(null)));
         }

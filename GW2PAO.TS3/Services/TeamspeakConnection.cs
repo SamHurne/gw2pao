@@ -333,7 +333,7 @@ namespace GW2PAO.TS3.Services
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception thrown from TS Poll thread", ex);
+                    logger.Warn(ex, "Exception thrown from TS Poll thread");
                 }
                 finally
                 {

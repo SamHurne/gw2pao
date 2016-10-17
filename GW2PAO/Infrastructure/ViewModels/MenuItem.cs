@@ -27,6 +27,11 @@ namespace GW2PAO.Infrastructure.ViewModels
         public string Header { get; private set; }
 
         /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon { get; private set; }
+
+        /// <summary>
         /// The on-click command
         /// </summary>
         public ICommand OnClickCommand { get; private set; }
@@ -59,10 +64,11 @@ namespace GW2PAO.Infrastructure.ViewModels
         /// <param name="header">Header text to use for the menu item</param>
         /// <param name="action">Action to perform when clicking the menu item, if any</param>
         /// <param name="canClick">Function used to determine if the menu item can be clicked or not</param>
-        public MenuItem(string header, Action action = null, Func<bool> canClick = null)
+        public MenuItem(string header, Action action = null, Func<bool> canClick = null, string iconSrc = null)
         {
             this.SubMenuItems = new ObservableCollection<IMenuItem>();
             this.Header = header;
+            this.Icon = iconSrc;
 
             if (action != null)
             {

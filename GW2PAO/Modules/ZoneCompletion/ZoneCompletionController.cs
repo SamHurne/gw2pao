@@ -16,6 +16,8 @@ using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.Modules.ZoneCompletion.ViewModels;
 using GW2PAO.Utility;
 using NLog;
+using Microsoft.Practices.Prism.Mvvm;
+using GW2PAO.API.Data.Entities;
 
 namespace GW2PAO.Modules.ZoneCompletion
 {
@@ -23,8 +25,15 @@ namespace GW2PAO.Modules.ZoneCompletion
     /// The Zone Completion Assistant controller. Handles refresh of current zone and zone point locations
     /// </summary>
     [Export(typeof(IZoneCompletionController))]
-    public class ZoneCompletionController : IZoneCompletionController
+    public class ZoneCompletionController : BindableBase, IZoneCompletionController
     {
+        private bool validMapId;
+        private int currentMapId;
+        private API.Data.Entities.Point characterPosition;
+        private API.Data.Entities.Point cameraDirection;
+        private API.Data.Entities.Continent continent;
+        private API.Data.Entities.Map map;
+
         /// <summary>
         /// Default logger
         /// </summary>
@@ -107,6 +116,42 @@ namespace GW2PAO.Modules.ZoneCompletion
         public string CharacterName { get; private set; }
 
         /// <summary>
+        /// The current character's position
+        /// </summary>
+        public API.Data.Entities.Point CharacterPosition
+        {
+            get { return this.characterPosition; }
+            private set { SetProperty(ref this.characterPosition, value); }
+        }
+
+        /// <summary>
+        /// The current player's camera direction
+        /// </summary>
+        public API.Data.Entities.Point CameraDirection
+        {
+            get { return this.cameraDirection; }
+            private set { SetProperty(ref this.cameraDirection, value); }
+        }
+
+        /// <summary>
+        /// The active continent that the player is in
+        /// </summary>
+        public API.Data.Entities.Continent ActiveContinent
+        {
+            get { return this.continent; }
+            private set { SetProperty(ref this.continent, value); }
+        }
+
+        /// <summary>
+        /// The active map that the player is in
+        /// </summary>
+        public API.Data.Entities.Map ActiveMap
+        {
+            get { return this.map; }
+            set { SetProperty(ref this.map, value); }
+        }
+
+        /// <summary>
         /// The zone completion user data
         /// </summary>
         public ZoneCompletionUserData UserData { get; private set; }
@@ -122,9 +167,22 @@ namespace GW2PAO.Modules.ZoneCompletion
         public int LocationsRefreshInterval { get; set; }
 
         /// <summary>
+        /// True if a valid map ID for the player is available, else false
+        /// </summary>
+        public bool ValidMapID
+        {
+            get { return this.validMapId; }
+            set { SetProperty(ref this.validMapId, value); }
+        }
+
+        /// <summary>
         /// The ID of the current map/zone
         /// </summary>
-        public int CurrentMapID { get; private set; }
+        public int CurrentMapID
+        {
+            get { return this.currentMapId; }
+            set { SetProperty(ref this.currentMapId, value); }
+        }
 
         /// <summary>
         /// Default constructor
@@ -143,6 +201,9 @@ namespace GW2PAO.Modules.ZoneCompletion
             this.systemService = systemService;
             this.zoneNameObject = zoneNameObject;
             this.isStopped = false;
+
+            this.CharacterPosition = new API.Data.Entities.Point();
+            this.CameraDirection = new API.Data.Entities.Point();
 
             this.UserData = userData;
 
@@ -236,6 +297,8 @@ namespace GW2PAO.Modules.ZoneCompletion
                 if (this.isStopped)
                     return; // Immediately return if we are supposed to be stopped
 
+                Threading.BeginInvokeOnUI(() => this.ValidMapID = this.playerService.HasValidMapId);
+
                 if (this.systemService.IsGw2Running && this.playerService.HasValidMapId)
                 {
                     // Check to see if the MapId or Character Name has changed, if so, we need to clear our zone items and add the new ones
@@ -245,6 +308,14 @@ namespace GW2PAO.Modules.ZoneCompletion
                         logger.Info("Map/Character change detected, resetting zone events. New MapID = {0} | Character Name = {1}", this.playerService.MapId, this.CharacterName);
                         this.CurrentMapID = this.playerService.MapId;
                         this.CharacterName = this.playerService.CharacterName;
+
+                        var continent = this.zoneService.GetContinentByMap(this.CurrentMapID);
+                        var map = this.zoneService.GetMap(this.CurrentMapID);
+                        Threading.BeginInvokeOnUI(() =>
+                        {
+                            this.ActiveContinent = continent;
+                            this.ActiveMap = map;
+                        });
 
                         var zoneItems = this.zoneService.GetZoneItems(this.playerService.MapId);
                         lock (zoneItemsLock)
@@ -307,6 +378,14 @@ namespace GW2PAO.Modules.ZoneCompletion
                 {
                     var playerMapPosition = CalcUtil.ConvertToMapPosition(playerPos);
                     var cameraDirectionMapPosition = CalcUtil.ConvertToMapPosition(cameraDir);
+
+                    Threading.BeginInvokeOnUI(() =>
+                    {
+                        if (playerMapPosition.X != this.CharacterPosition.X && playerMapPosition.Y != this.CharacterPosition.Y)
+                            this.CharacterPosition = playerMapPosition;
+                        if (cameraDirectionMapPosition.X != this.CameraDirection.X && cameraDirectionMapPosition.Y != this.CameraDirection.Y)
+                            this.CameraDirection = cameraDirectionMapPosition;
+                    });
 
                     lock (this.zoneItemsLock)
                     {

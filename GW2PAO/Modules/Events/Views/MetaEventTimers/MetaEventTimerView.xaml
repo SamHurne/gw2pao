@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="GW2PAO.Views.Events.MetaEventTimers.MetaEventTimerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:src="clr-namespace:GW2PAO.Views"
+             xmlns:resx="clr-namespace:GW2PAO.Properties"
+             xmlns:converters="clr-namespace:GW2PAO.Converters"
+             xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             mc:Ignorable="d" d:DesignWidth="200"
+             Height="20"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             TextOptions.TextFormattingMode="Display"
+             ToolTipService.InitialShowDelay="0">
+
+    <UserControl.Resources>
+        <converters:EventStateConverter x:Key="StateConverter" />
+        <converters:TimespanConverter x:Key="TimeConverter" />
+        <converters:TreasureCheckboxConverter x:Key="TreasureConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisiblityConverter" />
+    </UserControl.Resources>
+
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="{x:Static resx:Resources.Hide}" Command="{Binding HideCommand}" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    
+    <UserControl.ToolTip>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding CurrentStage.Name}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static resx:Resources.ActiveFor}" />
+                <TextBlock Text="{Binding TimeSinceStageStarted, Converter={StaticResource TimeConverter}}"
+                           Margin="3,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip>
+
+    <!--Note: DataContext is set by the MetaEventTimersView-->
+    <Border Name="EventMainPanel" CornerRadius="0" Margin="0,0,0,0" Padding="15,0,5,1"
+            Background="{StaticResource ItemMouseOverBackground}">
+
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=EventMainPanel, Path=IsMouseOver}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Background.Opacity"
+                                                     Duration="00:00:00.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <Grid Margin="0,1,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <core:OutlinedTextBlock Name="MapName"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Fill="White"
+                                    FontSize="13"
+                                    Text="{Binding MapName}" />
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,5,0">
+                <core:OutlinedTextBlock Name="EventName"
+                                        VerticalAlignment="Center"
+                                        Fill="White"
+                                        FontSize="13"
+                                        Text="{Binding NextStage.Name}" />
+                <core:OutlinedTextBlock Margin="3,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Fill="White"
+                                        FontSize="13"
+                                        Text="{x:Static resx:Resources.In}" />
+            </StackPanel>
+
+            <core:OutlinedTextBlock Name="TimerValue"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Fill="White"
+                                    FontSize="13"
+                                    Text="{Binding TimeUntilNextStage, Converter={StaticResource TimeConverter}}" />
+        </Grid>
+    </Border>
+</UserControl>

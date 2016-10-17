@@ -89,15 +89,15 @@ namespace GW2PAO.API.Data
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Tower_Woodhaven, ChatCode = @"[&BCwFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.BlueBorderlands, MapLocation = new Point(-14152.8, 14712) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Keep_Hills, ChatCode = @"[&BCAFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.BlueBorderlands, MapLocation = new Point(22420.8, -5016) });
 
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Hills, ChatCode = @"[&BA8FAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedBorderlands, MapLocation = new Point(22420.8, -5016) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Bay, ChatCode = @"[&BBMFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedBorderlands, MapLocation = new Point(-22857.36, -6789.6) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Orchard, ChatCode = @"[&BBgFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(-648, -32762.4) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Greenbriar, ChatCode = @"[&BB4FAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedBorderlands, MapLocation = new Point(-7545.6, -17548.8) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Bluelake, ChatCode = @"[&BBkFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedBorderlands, MapLocation = new Point(11155.2, -16648.8) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Garrison, ChatCode = @"[&BBYFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedBorderlands, MapLocation = new Point(-441.6, 9160.8) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Longview, ChatCode = @"[&BBoFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedBorderlands, MapLocation = new Point(-14153.28, 14712) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Godsword, ChatCode = @"[&BBIFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(232.8, 34180.08) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Cliffside, ChatCode = @"[&BBsFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedBorderlands, MapLocation = new Point(12969.6, 12840) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Hills, ChatCode = @"[&BA8FAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(22420.8, -5016) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Bay, ChatCode = @"[&BBMFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-22857.36, -6789.6) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Orchard, ChatCode = @"[&BBgFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-648, -32762.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Greenbriar, ChatCode = @"[&BB4FAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-7545.6, -17548.8) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Bluelake, ChatCode = @"[&BBkFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(11155.2, -16648.8) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Garrison, ChatCode = @"[&BBYFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-441.6, 9160.8) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Longview, ChatCode = @"[&BBoFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-14153.28, 14712) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Godsword, ChatCode = @"[&BBIFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(232.8, 34180.08) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Cliffside, ChatCode = @"[&BBsFAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(12969.6, 12840) });
 
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Keep_Hills, ChatCode = @"[&BDAFAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.GreenBorderlands, MapLocation = new Point(22421.04, -5016) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Tower_Redlake, ChatCode = @"[&BD4FAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.GreenBorderlands, MapLocation = new Point(11154.72, -16648.8) });
@@ -109,10 +109,10 @@ namespace GW2PAO.API.Data
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Camp_Faithleap, ChatCode = @"[&BDwFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.GreenBorderlands, MapLocation = new Point(-21083.28, 11462.4) });
 
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Camp_Bluevale, ChatCode = @"[&BDgFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.GreenBorderlands, MapLocation = new Point(-19053.12, -18657.6) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Bluewater, ChatCode = @"[&BBcFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(22442.4, -19444.8) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Astralholme, ChatCode = @"[&BBQFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(23253.6, 12273.6) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Arahs, ChatCode = @"[&BB0FAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(-21083.28, 11462.4) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Greenvale, ChatCode = @"[&BBwFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedBorderlands, MapLocation = new Point(-19053.12, -18657.6) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Bluewater, ChatCode = @"[&BBcFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(22442.4, -19444.8) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Astralholme, ChatCode = @"[&BBQFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(23253.6, 12273.6) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Arahs, ChatCode = @"[&BB0FAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-21083.28, 11462.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Greenvale, ChatCode = @"[&BBwFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-19053.12, -18657.6) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Camp_Foghaven, ChatCode = @"[&BDMFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.GreenBorderlands, MapLocation = new Point(23253.36, 12273.6) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Camp_Redwater, ChatCode = @"[&BDoFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.GreenBorderlands, MapLocation = new Point(22442.16, -19444.8) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Camp_Titanpaw, ChatCode = @"[&BDEFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.GreenBorderlands, MapLocation = new Point(232.8, 34180.8) });
@@ -122,11 +122,11 @@ namespace GW2PAO.API.Data
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Camp_Stargrove, ChatCode = @"[&BCEFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.BlueBorderlands, MapLocation = new Point(23253.6, 12273.6) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Camp_Greenwater, ChatCode = @"[&BCYFAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.BlueBorderlands, MapLocation = new Point(22442.4, -19444.8) });
 
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Temple, ChatCode = @"", Type = ObjectiveType.TempleofLostPrayers, Map = WvWMap.RedBorderlands, MapLocation = new Point(-279.59, -16015.255) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Hollow, ChatCode = @"", Type = ObjectiveType.BattlesHollow, Map = WvWMap.RedBorderlands, MapLocation = new Point(-7939.68, -9885.6) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Estate, ChatCode = @"", Type = ObjectiveType.BauersEstate, Map = WvWMap.RedBorderlands, MapLocation = new Point(-5251.525, -783.006) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Orchard, ChatCode = @"", Type = ObjectiveType.OrchardOverlook, Map = WvWMap.RedBorderlands, MapLocation = new Point(5983.413, -2110.027) });
-            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Carvers, ChatCode = @"", Type = ObjectiveType.CarversAscent, Map = WvWMap.RedBorderlands, MapLocation = new Point(6802.815, -10643.904) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Temple, ChatCode = @"", Type = ObjectiveType.TempleofLostPrayers, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-279.59, -16015.255) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Hollow, ChatCode = @"", Type = ObjectiveType.BattlesHollow, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-7939.68, -9885.6) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Estate, ChatCode = @"", Type = ObjectiveType.BauersEstate, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(-5251.525, -783.006) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Orchard, ChatCode = @"", Type = ObjectiveType.OrchardOverlook, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(5983.413, -2110.027) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Carvers, ChatCode = @"", Type = ObjectiveType.CarversAscent, Map = WvWMap.RedAplineBorderlands, MapLocation = new Point(6802.815, -10643.904) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Carvers, ChatCode = @"", Type = ObjectiveType.CarversAscent, Map = WvWMap.BlueBorderlands, MapLocation = new Point(6802.815, -10643.904) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Orchard, ChatCode = @"", Type = ObjectiveType.OrchardOverlook, Map = WvWMap.BlueBorderlands, MapLocation = new Point(5983.413, -2110.027) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.BB_Estate, ChatCode = @"", Type = ObjectiveType.BauersEstate, Map = WvWMap.BlueBorderlands, MapLocation = new Point(-5251.525, -783.006) });
@@ -137,6 +137,21 @@ namespace GW2PAO.API.Data
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Estate, ChatCode = @"", Type = ObjectiveType.BauersEstate, Map = WvWMap.GreenBorderlands, MapLocation = new Point(-5251.525, -783.006) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Hollow, ChatCode = @"", Type = ObjectiveType.BattlesHollow, Map = WvWMap.GreenBorderlands, MapLocation = new Point(-7939.68, -9885.6) });
             table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.GB_Temple, ChatCode = @"", Type = ObjectiveType.TempleofLostPrayers, Map = WvWMap.GreenBorderlands, MapLocation = new Point(-279.59, -16015.255) });
+
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_HammsLab,       ChatCode = @"[&BLEIAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-148.8, 24035.76) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_BauerFarmstead, ChatCode = @"[&BPMIAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(27326.4, -19123.2) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_McLains,        ChatCode = @"[&BI4IAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-27981.12, -19224) });      
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_OdelAcademy,   ChatCode = @"[&BN8IAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-22036.32, 23671.92) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_EternalNecro,  ChatCode = @"[&BJUIAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(23740.8, 20152.08) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Crankshaft,    ChatCode = @"[&BI8IAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(12165.6, -25370.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Blistering,     ChatCode = @"[&BIYIAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-34134.72, -3362.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_RoysRefuge,     ChatCode = @"[&BPYIAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(32404.8, 11390.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Tower_Parched,       ChatCode = @"[&BEUIAAA=]", Type = ObjectiveType.Tower, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-12146.4, -20095.2) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Stoic,          ChatCode = @"[&BK8IAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(638.4, 8966.4) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Keep_Ospreys,        ChatCode = @"[&BEMIAAA=]", Type = ObjectiveType.Keep, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(34872, -5092.8) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Boettigers,     ChatCode = @"[&BCkIAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-34496.4, 11993.76) });
+            table.Objectives.Add(new Objective() { ID = WvWObjectiveIds.RB_Camp_Dustwhisper,    ChatCode = @"[&BNMIAAA=]", Type = ObjectiveType.Camp, Map = WvWMap.RedDesertBorderlands, MapLocation = new Point(-64.8, -32637.6) });
+
 
             XmlSerializer serializer = new XmlSerializer(typeof(WvWObjectivesTable));
             TextWriter textWriter = new StreamWriter(FileName);

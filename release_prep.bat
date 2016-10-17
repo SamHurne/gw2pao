@@ -40,6 +40,9 @@ del /Q System.Windows.Interactivity.dll
 del /Q TS3QueryLib.Core.Framework.dll
 del /Q Xceed.Wpf.*
 del /Q FileDb*
+del /Q ImageFileCache.WPF.*
+del /Q MapControl.WPF.*
+del /Q FontAwesome.Sharp.*
 del /Q *.vshost.*
 del /Q Logs/*
 del /Q UserData/*
@@ -100,6 +103,9 @@ del /Q libGLESv2.dll
 del /Q xinput9_1_0.dll
 del /Q pdf_js.pak
 del /Q FileDb*
+del /Q ImageFileCache.WPF.*
+del /Q MapControl.WPF.*
+del /Q FontAwesome.Sharp.*
 del /Q *.vshost.*
 del /Q Logs/*
 del /Q UserData/*

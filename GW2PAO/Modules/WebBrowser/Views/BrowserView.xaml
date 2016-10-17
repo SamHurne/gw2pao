@@ -14,6 +14,8 @@
         ResizeMode="CanResizeWithGrip"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True"
+        Topmost="True"
+        ShowInTaskbar="False"
         Height="700" Width="1200">
 
     <src:OverlayWindow.Resources>
@@ -127,7 +129,7 @@
                            VerticalAlignment="Center"
                            Height="30" Width="30"
                            Margin="5,0,0,0"
-                           Source="/Images/Title/community.png"
+                           Source="/Images/Title/browser.png"
                            MouseDown="TitleImage_MouseDown">
                         <Image.ContextMenu>
                             <ContextMenu Name="MainMenu">

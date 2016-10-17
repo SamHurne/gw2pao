@@ -35,3 +35,7 @@ http://oxyplot.org/documentation/license
 Extended WPF Toolkip:
 https://wpftoolkit.codeplex.com/
 https://wpftoolkit.codeplex.com/license
+
+XAML Map Control:
+https://xamlmapcontrol.codeplex.com/
+https://xamlmapcontrol.codeplex.com/license

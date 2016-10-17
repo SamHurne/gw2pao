@@ -29,9 +29,29 @@ namespace GW2PAO.Modules.Teamspeak
         /// </summary>
         public const string Filename = "TeamspeakUserData.xml";
 
+        private bool showVoiceChat;
+        private bool showTextChat;
         private bool showChatEntryBox;
         private bool showChannelName;
         private bool showEnterExitChannelNotifications;
+
+        /// <summary>
+        /// True to show the voice chat, else false
+        /// </summary>
+        public bool ShowVoiceChat
+        {
+            get { return this.showVoiceChat; }
+            set { this.SetProperty(ref this.showVoiceChat, value); }
+        }
+
+        /// <summary>
+        /// True to show the text chat, else false
+        /// </summary>
+        public bool ShowTextChat
+        {
+            get { return this.showTextChat; }
+            set { this.SetProperty(ref this.showTextChat, value); }
+        }
 
         /// <summary>
         /// True to show the chat entry box, else false
@@ -65,6 +85,8 @@ namespace GW2PAO.Modules.Teamspeak
         /// </summary>
         public TeamspeakUserData()
         {
+            this.ShowVoiceChat = true;
+            this.ShowTextChat = true;
             this.ShowChatEntryBox = true;
             this.ShowChannelName = true;
             this.ShowEnterExitChannelNotifications = true;

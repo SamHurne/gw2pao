@@ -70,6 +70,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to active for.
+        /// </summary>
+        public static string ActiveFor {
+            get {
+                return ResourceManager.GetString("ActiveFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to active in.
         /// </summary>
         public static string ActiveIn {
@@ -403,6 +412,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Center on Character.
+        /// </summary>
+        public static string CenterOnChar {
+            get {
+                return ResourceManager.GetString("CenterOnChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates at Startup.
         /// </summary>
         public static string CheckForUpdatesAtStartup {
@@ -601,6 +619,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day-Night.
+        /// </summary>
+        public static string DayNight {
+            get {
+                return ResourceManager.GetString("DayNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day-Night Timer.
+        /// </summary>
+        public static string DayNightTimer {
+            get {
+                return ResourceManager.GetString("DayNightTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -768,6 +804,15 @@ namespace GW2PAO.Properties {
         public static string EnableLogging {
             get {
                 return ResourceManager.GetString("EnableLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entire Continent.
+        /// </summary>
+        public static string EntireContinent {
+            get {
+                return ResourceManager.GetString("EntireContinent", resourceCulture);
             }
         }
         
@@ -997,6 +1042,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in.
+        /// </summary>
+        public static string In {
+            get {
+                return ResourceManager.GetString("In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Include Location.
         /// </summary>
         public static string IncludeLocation {
@@ -1087,6 +1141,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Length.
+        /// </summary>
+        public static string Length {
+            get {
+                return ResourceManager.GetString("Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Listing Fee:.
         /// </summary>
         public static string ListingFee {
@@ -1141,6 +1204,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map Overlay.
+        /// </summary>
+        public static string MapOverlay {
+            get {
+                return ResourceManager.GetString("MapOverlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maps.
         /// </summary>
         public static string Maps {
@@ -1150,11 +1231,29 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meta Event Timers.
+        /// </summary>
+        public static string MetaEventTimers {
+            get {
+                return ResourceManager.GetString("MetaEventTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meters.
         /// </summary>
         public static string Meters {
             get {
                 return ResourceManager.GetString("Meters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move.
+        /// </summary>
+        public static string Move {
+            get {
+                return ResourceManager.GetString("Move", resourceCulture);
             }
         }
         
@@ -1209,6 +1308,15 @@ namespace GW2PAO.Properties {
         public static string NoResultsFound {
             get {
                 return ResourceManager.GetString("NoResultsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
             }
         }
         
@@ -1276,11 +1384,29 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Meta Event Timers.
+        /// </summary>
+        public static string OpenMetaEventTimers {
+            get {
+                return ResourceManager.GetString("OpenMetaEventTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Wiki Page.
         /// </summary>
         public static string OpenWikiPage {
             get {
                 return ResourceManager.GetString("OpenWikiPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open World Boss Timers.
+        /// </summary>
+        public static string OpenWorldBossTimers {
+            get {
+                return ResourceManager.GetString("OpenWorldBossTimers", resourceCulture);
             }
         }
         
@@ -1335,6 +1461,15 @@ namespace GW2PAO.Properties {
         public static string Owner {
             get {
                 return ResourceManager.GetString("Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player Markers.
+        /// </summary>
+        public static string PlayerMarkers {
+            get {
+                return ResourceManager.GetString("PlayerMarkers", resourceCulture);
             }
         }
         
@@ -1690,6 +1825,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Character Pointer.
+        /// </summary>
+        public static string ShowCharPointer {
+            get {
+                return ResourceManager.GetString("ShowCharPointer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Chat Entry Box.
         /// </summary>
         public static string ShowChatEntryBox {
@@ -1744,6 +1888,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Heart Quests.
+        /// </summary>
+        public static string ShowHeartQuests {
+            get {
+                return ResourceManager.GetString("ShowHeartQuests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Hero Points.
+        /// </summary>
+        public static string ShowHeroPoints {
+            get {
+                return ResourceManager.GetString("ShowHeroPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Inactive Events.
         /// </summary>
         public static string ShowInactiveEvents {
@@ -1771,11 +1933,56 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Player Markers.
+        /// </summary>
+        public static string ShowPlayerMarkers {
+            get {
+                return ResourceManager.GetString("ShowPlayerMarkers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Points of Interest.
+        /// </summary>
+        public static string ShowPointsOfInterest {
+            get {
+                return ResourceManager.GetString("ShowPointsOfInterest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Tasks not on Current Map.
         /// </summary>
         public static string ShowTasksNotOnMap {
             get {
                 return ResourceManager.GetString("ShowTasksNotOnMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Text Chat.
+        /// </summary>
+        public static string ShowTextChat {
+            get {
+                return ResourceManager.GetString("ShowTextChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Timer Value.
+        /// </summary>
+        public static string ShowTimerValue {
+            get {
+                return ResourceManager.GetString("ShowTimerValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Trail.
+        /// </summary>
+        public static string ShowTrail {
+            get {
+                return ResourceManager.GetString("ShowTrail", resourceCulture);
             }
         }
         
@@ -1789,11 +1996,38 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Vistas.
+        /// </summary>
+        public static string ShowVistas {
+            get {
+                return ResourceManager.GetString("ShowVistas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Voice Chat.
+        /// </summary>
+        public static string ShowVoiceChat {
+            get {
+                return ResourceManager.GetString("ShowVoiceChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Waypoint-Code Copy Buttons.
         /// </summary>
         public static string ShowWaypointCopyButtons {
             get {
                 return ResourceManager.GetString("ShowWaypointCopyButtons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Waypoints.
+        /// </summary>
+        public static string ShowWaypoints {
+            get {
+                return ResourceManager.GetString("ShowWaypoints", resourceCulture);
             }
         }
         
@@ -1906,6 +2140,24 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time until daytime.
+        /// </summary>
+        public static string TimeUntilDay {
+            get {
+                return ResourceManager.GetString("TimeUntilDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time until night.
+        /// </summary>
+        public static string TimeUntilNight {
+            get {
+                return ResourceManager.GetString("TimeUntilNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle All Windows.
         /// </summary>
         public static string ToggleAllWindows {
@@ -1920,6 +2172,15 @@ namespace GW2PAO.Properties {
         public static string ToggleAutoFadeBorders {
             get {
                 return ResourceManager.GetString("ToggleAutoFadeBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Day-Night Timer.
+        /// </summary>
+        public static string ToggleDayNightTimer {
+            get {
+                return ResourceManager.GetString("ToggleDayNightTimer", resourceCulture);
             }
         }
         
@@ -1947,6 +2208,24 @@ namespace GW2PAO.Properties {
         public static string ToggleEventsTracker {
             get {
                 return ResourceManager.GetString("ToggleEventsTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Map Overlay.
+        /// </summary>
+        public static string ToggleMap {
+            get {
+                return ResourceManager.GetString("ToggleMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Meta Event Timers.
+        /// </summary>
+        public static string ToggleMetaEventTimers {
+            get {
+                return ResourceManager.GetString("ToggleMetaEventTimers", resourceCulture);
             }
         }
         
@@ -2014,6 +2293,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toggle World Boss Timers.
+        /// </summary>
+        public static string ToggleWorldBossTimers {
+            get {
+                return ResourceManager.GetString("ToggleWorldBossTimers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle WvW Tracker.
         /// </summary>
         public static string ToggleWvWTracker {
@@ -2055,6 +2343,15 @@ namespace GW2PAO.Properties {
         public static string TrackedItems {
             get {
                 return ResourceManager.GetString("TrackedItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trail.
+        /// </summary>
+        public static string Trail {
+            get {
+                return ResourceManager.GetString("Trail", resourceCulture);
             }
         }
         
@@ -2200,6 +2497,15 @@ namespace GW2PAO.Properties {
             get {
                 object obj = ResourceManager.GetObject("World_Completion2", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World Boss Timers.
+        /// </summary>
+        public static string WorldBossTimers {
+            get {
+                return ResourceManager.GetString("WorldBossTimers", resourceCulture);
             }
         }
         

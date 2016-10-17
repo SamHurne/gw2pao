@@ -16,6 +16,7 @@
         WindowStyle="None" AllowsTransparency="true" Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True"
+        ShowInTaskbar="False"
         Closed="Window_Closed"
         SnapsToDevicePixels="True"
         UseLayoutRounding="True"

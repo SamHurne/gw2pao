@@ -109,11 +109,13 @@ namespace GW2PAO.Modules.WvW
                 {
                     case WvWMapIDs.EternalBattlegrounds:
                         return WvWMap.EternalBattlegrounds;
-                    case WvWMapIDs.RedBorderlands:
-                        return WvWMap.RedBorderlands;
-                    case WvWMapIDs.GreenBorderlands:
+                    case WvWMapIDs.RedDesertBorderlands:
+                        return WvWMap.RedDesertBorderlands;
+                    case WvWMapIDs.RedAplineBorderlands:
+                        return WvWMap.RedAplineBorderlands;
+                    case WvWMapIDs.GreenAplineBorderlands:
                         return WvWMap.GreenBorderlands;
-                    case WvWMapIDs.BlueBorderlands:
+                    case WvWMapIDs.BlueAplineBorderlands:
                         return WvWMap.BlueBorderlands;
                     default:
                         return WvWMap.Unknown;
@@ -436,14 +438,17 @@ namespace GW2PAO.Modules.WvW
             {
                 // Refresh all team colors
                 var teamColors = this.wvwService.GetTeamColors();
-                Threading.InvokeOnUI(() =>
+                if (teamColors != null)
                 {
-                    foreach (var team in this.Worlds)
+                    Threading.InvokeOnUI(() =>
                     {
-                        if (teamColors.ContainsKey(team.WorldId))
-                            team.Color = teamColors[team.WorldId];
-                    }
-                });
+                        foreach (var team in this.Worlds)
+                        {
+                            if (teamColors.ContainsKey(team.WorldId))
+                                team.Color = teamColors[team.WorldId];
+                        }
+                    });
+                }
 
                 // Refresh state of all objectives
                 var latestObjectivesData = this.wvwService.GetAllObjectives(MatchID);
@@ -460,7 +465,8 @@ namespace GW2PAO.Modules.WvW
                 Parallel.ForEach(latestObjectivesData.Where(o => o.GuildOwner.HasValue), (objective) =>
                 {
                     var guildInfo = this.guildService.GetGuild(objective.GuildOwner.Value);
-                    guildDict.TryAdd(guildInfo.ID, guildInfo);
+                    if (guildInfo != null)
+                        guildDict.TryAdd(guildInfo.ID, guildInfo);
                 });
 
                 if (latestObjectivesData.Count() >= this.AllObjectives.Count)
@@ -470,24 +476,27 @@ namespace GW2PAO.Modules.WvW
                         foreach (var objective in this.AllObjectives)
                         {
                             objective.RefreshForMatchReset(this.Worlds);
-                            var latestData = latestObjectivesData.First(obj => obj.ID == objective.ID);
-                            objective.ModelData.MatchId = this.MatchID;
-                            objective.PrevWorldOwner = latestData.WorldOwner;
-                            objective.WorldOwner = latestData.WorldOwner;
-                            objective.FlipTime = DateTime.UtcNow;
-                            objective.DistanceFromPlayer = 0;
-                            objective.TimerValue = TimeSpan.Zero;
-                            objective.IsRIActive = false;
-
-                            if (latestData.GuildOwner.HasValue)
+                            var latestData = latestObjectivesData.FirstOrDefault(obj => obj.ID == objective.ID);
+                            if (latestData != null)
                             {
-                                objective.GuildClaimer.ID = latestData.GuildOwner.Value;
-                                API.Data.Entities.Guild guildInfo;
-                                if (guildDict.TryGetValue(objective.GuildClaimer.ID.Value, out guildInfo)
-                                    && guildInfo != null)
+                                objective.ModelData.MatchId = this.MatchID;
+                                objective.PrevWorldOwner = latestData.WorldOwner;
+                                objective.WorldOwner = latestData.WorldOwner;
+                                objective.FlipTime = DateTime.UtcNow;
+                                objective.DistanceFromPlayer = 0;
+                                objective.TimerValue = TimeSpan.Zero;
+                                objective.IsRIActive = false;
+
+                                if (latestData.GuildOwner.HasValue)
                                 {
-                                    objective.GuildClaimer.Name = guildInfo.Name;
-                                    objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                    objective.GuildClaimer.ID = latestData.GuildOwner.Value;
+                                    API.Data.Entities.Guild guildInfo;
+                                    if (guildDict.TryGetValue(objective.GuildClaimer.ID.Value, out guildInfo)
+                                        && guildInfo != null)
+                                    {
+                                        objective.GuildClaimer.Name = guildInfo.Name;
+                                        objective.GuildClaimer.Tag = string.Format("[{0}]", guildInfo.Tag);
+                                    }
                                 }
                             }
                         }
@@ -751,7 +760,8 @@ namespace GW2PAO.Modules.WvW
                         case WvWMap.GreenBorderlands:
                             canShow = this.UserData.AreGreenBorderlandsNotificationsEnabled;
                             break;
-                        case WvWMap.RedBorderlands:
+                        case WvWMap.RedDesertBorderlands:
+                        case WvWMap.RedAplineBorderlands:
                             canShow = this.UserData.AreRedBorderlandsNotificationsEnabled;
                             break;
                         case WvWMap.EternalBattlegrounds:

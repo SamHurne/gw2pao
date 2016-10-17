@@ -121,10 +121,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.ItemsProvider = new ItemResultsProvider(this.commerceService);
 
             this.Task = new PlayerTask();
-            this.Task.MapID = this.playerService.MapId;
-            this.Task.Location = this.playerService.PlayerPosition;
             this.RefreshLocationCommand = new DelegateCommand(this.RefreshLocation);
             this.ApplyCommand = new DelegateCommand(this.AddOrUpdateTask);
+            this.RefreshLocation();
         }
 
         /// <summary>
@@ -132,10 +131,15 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         private void RefreshLocation()
         {
-            this.Task.MapID = this.playerService.MapId;
-            this.Task.Location = this.playerService.PlayerPosition;
+            if (this.playerService.HasValidMapId)
+            {
+                var map = this.zoneService.GetMap(this.playerService.MapId);
+                this.Task.MapID = this.playerService.MapId;
+                this.Task.Location = this.playerService.PlayerPosition;
+                this.Task.ContinentLocation = API.Util.MapsHelper.ConvertToWorldPos(map.ContinentRectangle, map.MapRectangle, API.Util.CalcUtil.ConvertToMapPosition(this.Task.Location));
 
-            this.OnPropertyChanged(() => this.MapName);
+                this.OnPropertyChanged(() => this.MapName);
+            }
         }
 
         /// <summary>
@@ -147,6 +151,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             {
                 this.Task.MapID = -1;
                 this.Task.Location = null;
+                this.task.ContinentLocation = null;
             }
 
             this.controller.AddOrUpdateTask(this.Task);

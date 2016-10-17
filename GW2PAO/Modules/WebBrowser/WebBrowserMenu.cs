@@ -14,7 +14,7 @@ namespace GW2PAO.Modules.WebBrowser
 {
 #if !NO_BROWSER
     [Export(typeof(IMenuItem))]
-    [ExportMetadata("Order", 8)]
+    [ExportMetadata("Order", 10)]
 #endif
     public class WebBrowserMenu : IMenuItem
     {
@@ -29,6 +29,14 @@ namespace GW2PAO.Modules.WebBrowser
         public string Header
         {
             get { return Properties.Resources.WebBrowser; }
+        }
+
+        /// <summary>
+        /// Icon source string for the menu item, if any
+        /// </summary>
+        public string Icon
+        {
+            get { return "/Images/Title/browser.png"; }
         }
 
         /// <summary>

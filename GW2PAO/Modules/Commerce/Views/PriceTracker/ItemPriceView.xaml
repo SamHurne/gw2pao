@@ -120,10 +120,35 @@
     </UserControl.ContextMenu>-->
     
     <UserControl.ToolTip>
-        <StackPanel Orientation="Horizontal">
-            <core:OutlinedTextBlock Margin="0,0,0,1" Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}" FontSize="12"/>
-            <view:ReadonlyPriceView Margin="5,0,0,0"
-                                    Price="{Binding CurrentProfit}"/>
+        <StackPanel>
+            <core:OutlinedTextBlock Text="{Binding Notes}">
+                <core:OutlinedTextBlock.Style>
+                    <Style TargetType="core:OutlinedTextBlock"
+                           BasedOn="{StaticResource {x:Type core:OutlinedTextBlock}}">
+                        <Setter Property="Visibility"
+                                Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Notes}"
+                                         Value="{x:Null}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Notes}"
+                                         Value="">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </core:OutlinedTextBlock.Style>
+            </core:OutlinedTextBlock>
+            <StackPanel Orientation="Horizontal">
+                <core:OutlinedTextBlock Margin="0,0,0,1"
+                                        Text="{Binding Source={x:Static resx:Resources.Profit}, StringFormat={}{0}:}"
+                                        FontSize="12" />
+                <view:ReadonlyPriceView Margin="5,0,0,0"
+                                        Price="{Binding CurrentProfit}" />
+            </StackPanel>
         </StackPanel>
     </UserControl.ToolTip>
 
