@@ -1085,4 +1085,13 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Помощник открытия зон</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Заметки</value>
+  </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Показать Текстовый чат</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Показать Голосовой чат</value>
+  </data>
 </root>

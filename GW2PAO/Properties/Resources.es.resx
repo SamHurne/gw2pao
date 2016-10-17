@@ -1096,4 +1096,13 @@
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Asistente de exploración de mapa</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>notas</value>
+  </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Mostrar charla de texto</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Mostrar chat de voz</value>
+  </data>
 </root>

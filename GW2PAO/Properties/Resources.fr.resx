@@ -323,10 +323,10 @@
     <value>Date</value>
   </data>
   <data name="DayNight" xml:space="preserve">
-    <value>Jour Nuit</value>
+    <value>Jour-Nuit</value>
   </data>
   <data name="DayNightTimer" xml:space="preserve">
-    <value>Jour-Nuit Minuteur</value>
+    <value>Cycle Jour-Nuit</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
@@ -830,7 +830,7 @@
     <value>Montrer les tâches situées sur d'autres cartes</value>
   </data>
   <data name="ShowTimerValue" xml:space="preserve">
-    <value>Afficher la valeur Minuteur</value>
+    <value>Montrer la durée du cycle</value>
   </data>
   <data name="ShowTrail" xml:space="preserve">
     <value>Montrer les chemins</value>
@@ -892,10 +892,10 @@
     <comment>Time-distances, which are estimated time to travel based on distanced</comment>
   </data>
   <data name="TimeUntilDay" xml:space="preserve">
-    <value>Temps jusqu'à la nuit</value>
+    <value>Durée avant le Jour</value>
   </data>
   <data name="TimeUntilNight" xml:space="preserve">
-    <value>Temps jusqu'à la journée</value>
+    <value>Durée avant la Nuit</value>
   </data>
   <data name="Toggle World Boss Timers" xml:space="preserve">
     <value>Montrer/Masquer le planning des World Boss</value>
@@ -909,7 +909,7 @@
     <value>Activer/Couper fondu auto. des bordures</value>
   </data>
   <data name="ToggleDayNight" xml:space="preserve">
-    <value>Basculer jour-nuit Minuteur</value>
+    <value>Montrer/Masquer le cycle Jour-Nuit</value>
   </data>
   <data name="ToggleDungeonsTracker" xml:space="preserve">
     <value>Montrer/Masquer la Liste de Donjons</value>
@@ -1086,5 +1086,16 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Assistant d'exploration</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Remarques</value>
+  </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Voir le texte chat</value>
+    <comment>For the teamspeak overlay</comment>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Afficher Voice Chat</value>
+    <comment>For the teamspeak overlay</comment>
   </data>
 </root>

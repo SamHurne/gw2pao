@@ -1086,4 +1086,13 @@ Gebietsabschluss-Assistent umschalten</value>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Zonen-Komplettierungs-Assistent</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Zeigen Text-Chat</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Anzeigen Voice Chat</value>
+  </data>
 </root>
