@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -98,6 +99,15 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
+        /// Collection of existing categories the user can optionally choose from
+        /// </summary>
+        public List<string> ExistingCategories
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Command to update the location used for the task
         /// </summary>
         public ICommand RefreshLocationCommand { get; private set; }
@@ -119,6 +129,13 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.controller = controller;
 
             this.ItemsProvider = new ItemResultsProvider(this.commerceService);
+
+            this.ExistingCategories = new List<string>();
+            foreach (var task in controller.PlayerTasks)
+            {
+                if (!this.ExistingCategories.Contains(task.Category))
+                    this.ExistingCategories.Add(task.Category);
+            }
 
             this.Task = new PlayerTask();
             this.RefreshLocationCommand = new DelegateCommand(this.RefreshLocation);

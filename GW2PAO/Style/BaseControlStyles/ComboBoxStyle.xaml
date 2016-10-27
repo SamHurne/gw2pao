@@ -87,10 +87,11 @@
                                           ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
                         <TextBox Name="PART_EditableTextBox"
+                                 MinHeight="0"
                                  Margin="3,3,23,3"
                                  IsReadOnly="{TemplateBinding IsReadOnly}"
                                  Visibility="Hidden" Background="Transparent"
-                                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                                 HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                  Focusable="True" >
                             <TextBox.Template>
                                 <ControlTemplate TargetType="TextBox" >
