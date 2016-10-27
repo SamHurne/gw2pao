@@ -76,10 +76,6 @@ namespace GW2PAO.Modules.Tasks.Views.TaskTracker
 
         private void TaskTrackerView_Loaded(object sender, RoutedEventArgs e)
         {
-            // Set up resize snapping
-            this.ResizeHelper.SnappingHeightOffset = 1;
-            this.ResizeHelper.SnappingThresholdHeight = (int)this.TitleBar.ActualHeight;
-            this.ResizeHelper.SnappingIncrementHeight = (int)this.taskHeight;
             this.MinHeight = this.taskHeight * 3 + (int)this.TitleBar.ActualHeight;
         }
 

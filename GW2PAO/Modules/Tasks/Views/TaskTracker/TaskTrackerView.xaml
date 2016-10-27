@@ -344,7 +344,8 @@
 
         <ItemsControl Name="TasksContainer"
                       Grid.Row="1"
-                      ItemsSource="{Binding TaskCategories.View}">
+                      ItemsSource="{Binding TaskCategories.View}"
+                      VirtualizingPanel.ScrollUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Expander>
@@ -366,7 +367,8 @@
                                            Stroke="{StaticResource CategoryHeaderLineBrush}" />
                             </Grid>
                         </Expander.Header>
-                        <ItemsControl ItemsSource="{Binding PlayerTasks.View}">
+                        <ItemsControl ItemsSource="{Binding PlayerTasks.View}"
+                                      VirtualizingStackPanel.IsVirtualizing="True">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <view:TaskView DataContext="{Binding}"
@@ -395,7 +397,6 @@
                 </Style>
             </ItemsControl.Style>
         </ItemsControl>
-
 
         <Grid Name="ResizeGripper" Grid.Row="1">
             <ResizeGrip HorizontalAlignment="Right"

@@ -191,6 +191,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                 t.PropertyChanged += Task_PropertyChanged;
             }
             this.controller.PlayerTasks.CollectionChanged += PlayerTasks_CollectionChanged;
+            this.TaskCategories.SortDescriptions.Add(new SortDescription("CategoryName", ListSortDirection.Ascending));
         }
 
         private void PlayerTasks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
