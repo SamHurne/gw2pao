@@ -25,6 +25,7 @@ namespace GW2PAO.Modules.Tasks.Models
         private int mapId;
         private string iconUri;
         private string waypointCode;
+        private string category;
 
         private ObservableDictionary<string, bool> characterCompletions = new ObservableDictionary<string, bool>();
 
@@ -173,6 +174,15 @@ namespace GW2PAO.Modules.Tasks.Models
         }
 
         /// <summary>
+        /// Category of the player task
+        /// </summary>
+        public string Category
+        {
+            get { return this.category; }
+            set { SetProperty(ref this.category, value); }
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public PlayerTask()
@@ -199,6 +209,7 @@ namespace GW2PAO.Modules.Tasks.Models
             this.MapID = other.MapID;
             this.IconUri = other.IconUri;
             this.WaypointCode = other.WaypointCode;
+            this.Category = other.Category;
             
             foreach (var character in other.CharacterCompletions.Keys)
             {

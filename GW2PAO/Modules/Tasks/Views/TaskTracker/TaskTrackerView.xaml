@@ -46,6 +46,134 @@
             </Path>
         </DockPanel>
 
+        <LinearGradientBrush x:Key="CategoryHeaderLineBrush">
+            <GradientStop Color="#50EEE8AA"
+                          Offset="0" />
+            <GradientStop Color="#00EEE8AA"
+                          Offset="1" />
+        </LinearGradientBrush>
+
+        <Style x:Key="ExpanderToggleStyle"
+               TargetType="ToggleButton">
+            <Setter Property="Focusable"
+                    Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{StaticResource ItemMouseOverBackground}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Path x:Name="Glyph"
+                                    Grid.Column="0"
+                                    Margin="10,3,5,3"
+                                    VerticalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Data="M 0 0 L 5 5 L 0 10 Z">
+                                <Path.Fill>
+                                    <SolidColorBrush Color="{StaticResource TreeViewExpandCollapseGlyphColor}" />
+                                </Path.Fill>
+                                <Path.RenderTransform>
+                                    <RotateTransform x:Name="GlyphRotation"
+                                                        Angle="0" />
+                                </Path.RenderTransform>
+                            </Path>
+
+                            <ContentPresenter Grid.Column="1"
+                                              HorizontalAlignment="Stretch"
+                                              Margin="5,0,0,0"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="True"
+                                              VerticalAlignment="Center" />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation To="0"
+                                                                Storyboard.TargetProperty="Background.Opacity"
+                                                                Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation To="1"
+                                                                Storyboard.TargetProperty="Background.Opacity"
+                                                                Duration="0" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="GlyphRotation"
+                                                                Storyboard.TargetProperty="Angle"
+                                                                From="0"
+                                                                To="90"
+                                                                Duration="00:00:00.05" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="GlyphRotation"
+                                                                Storyboard.TargetProperty="Angle"
+                                                                From="90"
+                                                                To="0"
+                                                                Duration="00:00:00.05" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <DockPanel>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ToggleButton x:Name="HeaderSite"
+                                          DockPanel.Dock="Top"
+                                          Style="{StaticResource ExpanderToggleStyle}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          Content="{TemplateBinding Header}"
+                                          HorizontalAlignment="Stretch"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter x:Name="ExpandSite"
+                                              DockPanel.Dock="Bottom"
+                                              Focusable="false"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              Visibility="Collapsed"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded"
+                                     Value="True">
+                                <Setter Property="Visibility"
+                                        TargetName="ExpandSite"
+                                        Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </src:OverlayWindow.Resources>
 
     <!--See code-behind for ViewModel details-->
@@ -216,25 +344,58 @@
 
         <ItemsControl Name="TasksContainer"
                       Grid.Row="1"
-                      ItemsSource="{Binding PlayerTasks.View}">
+                      ItemsSource="{Binding TaskCategories.View}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <view:TaskView DataContext="{Binding}" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" />
+                    <Expander>
+                        <Expander.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <core:OutlinedTextBlock Grid.Column="0"
+                                                        Margin="0,3"
+                                                        FontSize="14"
+                                                        Text="{Binding CategoryName}" />
+                                <Rectangle Grid.Column="1"
+                                           Margin="5,0,5,0"
+                                           Height="1"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Center"
+                                           Stroke="{StaticResource CategoryHeaderLineBrush}" />
+                            </Grid>
+                        </Expander.Header>
+                        <ItemsControl ItemsSource="{Binding PlayerTasks.View}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <view:TaskView DataContext="{Binding}"
+                                                   Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Expander>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.Style>
-                <Style TargetType="ItemsControl" BasedOn="{StaticResource VirtualizingItemsControlStyle}">
+                <Style TargetType="ItemsControl"
+                       BasedOn="{StaticResource VirtualizingItemsControlStyle}">
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                        <Trigger Property="IsMouseOver"
+                                 Value="False">
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                                    Value="Hidden" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                                    Value="Visible" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </ItemsControl.Style>
         </ItemsControl>
+
 
         <Grid Name="ResizeGripper" Grid.Row="1">
             <ResizeGrip HorizontalAlignment="Right"

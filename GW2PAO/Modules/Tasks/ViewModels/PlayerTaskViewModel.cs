@@ -44,6 +44,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
+        /// The player task's category
+        /// </summary>
+        public string Category
+        {
+            get { return this.Task.Category; }
+        }
+
+        /// <summary>
         /// The actual player task
         /// </summary>
         public PlayerTask Task
@@ -233,6 +241,10 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                     {
                         this.OnPropertyChanged(() => this.HasZoneLocation);
                         this.OnPropertyChanged(() => this.HasContinentLocation);
+                    }
+                    else if (e.PropertyName.Contains("Category"))
+                    {
+                        this.OnPropertyChanged(() => this.Category);
                     }
                 };
             if (this.Task.MapID != -1)

@@ -216,6 +216,7 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.MapID = task.MapID;
                             existingTask.Task.IconUri = task.IconUri;
                             existingTask.Task.WaypointCode = task.WaypointCode;
+                            existingTask.Task.Category = task.Category;
                             foreach (var character in task.CharacterCompletions.Keys)
                             {
                                 if (!existingTask.Task.CharacterCompletions.ContainsKey(character))
@@ -258,6 +259,7 @@ namespace GW2PAO.Modules.Tasks
                         existingTask.Task.MapID = taskViewModel.Task.MapID;
                         existingTask.Task.IconUri = taskViewModel.Task.IconUri;
                         existingTask.Task.WaypointCode = taskViewModel.Task.WaypointCode;
+                        existingTask.Task.Category = taskViewModel.Task.Category;
                         foreach (var character in taskViewModel.Task.CharacterCompletions.Keys)
                         {
                             if (!existingTask.Task.CharacterCompletions.ContainsKey(character))

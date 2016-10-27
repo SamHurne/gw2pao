@@ -320,6 +320,7 @@
       <DependentUpon>MapSettingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Tasks\PlayerTasksFactory.cs" />
+    <Compile Include="Modules\Tasks\ViewModels\TaskCategoryViewModel.cs" />
     <Compile Include="Modules\ZoneCompletion\Models\ZoneItemsStore.cs" />
     <Compile Include="Modules\Map\ViewModels\MapViewModel.cs" />
     <Compile Include="Modules\Map\Views\Controls\Map.cs" />

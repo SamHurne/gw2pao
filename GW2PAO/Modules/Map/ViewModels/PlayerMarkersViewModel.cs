@@ -147,7 +147,7 @@ namespace GW2PAO.Modules.Map.ViewModels
 
             this.PlayerMarkers = new ObservableCollection<PlayerMarkerViewModel>();
 
-            this.playerTasksCollection = (ObservableCollection<PlayerTaskViewModel>)this.taskTrackerVm.PlayerTasks.Source;
+            this.playerTasksCollection = (ObservableCollection<PlayerTaskViewModel>)this.tasksController.PlayerTasks;
             foreach (var task in this.playerTasksCollection)
             {
                 task.PropertyChanged += Task_PropertyChanged;
