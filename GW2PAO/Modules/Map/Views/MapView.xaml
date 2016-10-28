@@ -44,6 +44,7 @@
         <map:TileLayer x:Key="GuildWars2TileLayer"
                        SourceName="GuildWars2"
                        TileSource="{Binding MapTileSourceString}"
+                       UpdateInterval="00:00:00.25"
                        MinZoomLevel="0"
                        MaxZoomLevel="7">
         </map:TileLayer>

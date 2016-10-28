@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading.Tasks;
 using GW2PAO.API.Data.Entities;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.ZoneCompletion.Interfaces;
 using GW2PAO.Utility;
 using MapControl;
+using MapControl.Caching;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
 
@@ -42,8 +45,10 @@ namespace GW2PAO.Modules.Map.ViewModels
             {
                 if (SetProperty(ref this.continentData, value))
                 {
+                    this.ClearMapCache();
                     this.ZoneItems.ContinentID = value.Id;
                     this.OnPropertyChanged(() => this.MapTileSourceString);
+                    Task.Delay(1000).ContinueWith(o => this.ResetMapCacheExpiration());
                 }
             }
         }
@@ -58,7 +63,9 @@ namespace GW2PAO.Modules.Map.ViewModels
             {
                 if (SetProperty(ref this.floorId, value))
                 {
+                    this.ClearMapCache();
                     this.OnPropertyChanged(() => this.MapTileSourceString);
+                    Task.Delay(1000).ContinueWith(o => this.ResetMapCacheExpiration());
                 }
             }
         }
@@ -183,6 +190,24 @@ namespace GW2PAO.Modules.Map.ViewModels
                 if (this.CharacterPointer.SnapToCharacter)
                     this.MapCenter = this.CharacterPointer.CharacterLocation;
             }
+        }
+
+        /// <summary>
+        /// Clears the in-memory cache of the map tiles
+        /// </summary>
+        private void ClearMapCache()
+        {
+            TileImageLoader.MinimumCacheExpiration = TimeSpan.FromTicks(1);
+            TileImageLoader.DefaultCacheExpiration = TimeSpan.FromTicks(1);
+        }
+
+        /// <summary>
+        /// Resets default in-memory map cache expiration times
+        /// </summary>
+        private void ResetMapCacheExpiration()
+        {
+            TileImageLoader.MinimumCacheExpiration = TimeSpan.FromHours(1);
+            TileImageLoader.DefaultCacheExpiration = TimeSpan.FromHours(1);
         }
     }
 }
