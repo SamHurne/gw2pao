@@ -133,7 +133,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.ExistingCategories = new List<string>();
             foreach (var task in controller.PlayerTasks)
             {
-                if (!this.ExistingCategories.Contains(task.Category))
+                if (!string.IsNullOrEmpty(task.Category) && !this.ExistingCategories.Contains(task.Category))
                     this.ExistingCategories.Add(task.Category);
             }
 
