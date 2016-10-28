@@ -144,6 +144,8 @@ namespace GW2PAO.Modules.Map.ViewModels
                 this.ContinentData = this.zoneService.GetContinent(DEFAULT_CONTINENT_ID);
 
             this.FloorId = 1;
+            if (playerService.HasValidMapId)
+                this.FloorId = this.zoneService.GetMap(playerService.MapId).DefaultFloor;
 
             ((INotifyPropertyChanged)this.zoneController).PropertyChanged += ZoneControllerPropertyChanged;
             this.zoneController.Start();
@@ -157,6 +159,10 @@ namespace GW2PAO.Modules.Map.ViewModels
             if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveContinent))
             {
                 this.ContinentData = this.zoneController.ActiveContinent;
+            }
+            else if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap))
+            {
+                this.FloorId = this.zoneController.ActiveMap.DefaultFloor;
             }
         }
 
