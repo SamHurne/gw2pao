@@ -222,14 +222,15 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    if (e.OldItems != null)
+                    foreach (var category in this.taskCategories)
                     {
-                        foreach (PlayerTaskViewModel t in e.OldItems)
+                        var tasks = (ICollection<PlayerTaskViewModel>)category.PlayerTasks.Source;
+                        foreach (var t in tasks)
                         {
                             t.PropertyChanged -= this.Task_PropertyChanged;
                         }
-                        this.taskCategories.Clear();
                     }
+                    this.taskCategories.Clear();
                     break;
                 default:
                     break;
