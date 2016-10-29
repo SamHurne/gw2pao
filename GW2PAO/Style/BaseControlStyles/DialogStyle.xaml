@@ -25,9 +25,15 @@
             <Border x:Name="PART_WindowRoot"
                     BorderThickness="{TemplateBinding WindowBorderThickness}"
                     BorderBrush="{TemplateBinding WindowBorderBrush}"
-                    CornerRadius="0"
+                    CornerRadius="3"
                     Width="{TemplateBinding Width}"
                     Height="{TemplateBinding Height}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10"
+                                      Color="Black"
+                                      Direction="315"
+                                      Opacity="0.8" />
+                </Border.Effect>
                 <Border.Background>
                     <MultiBinding Converter="{StaticResource WindowControlBackgroundConverter}">
                         <Binding Path="WindowBackground"
@@ -563,7 +569,7 @@
         <Setter Property="WindowBorderBrush"
                 Value="Black" />
         <Setter Property="WindowBorderThickness"
-                Value="1" />
+                Value="2" />
         <Setter Property="WindowThickness"
                 Value="0" />
         <Setter Property="ButtonRegionBackground"
