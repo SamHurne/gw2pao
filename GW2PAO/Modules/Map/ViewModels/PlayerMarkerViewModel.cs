@@ -31,7 +31,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         private IZoneService zoneService;
         private IPlayerService playerService;
         private MapControl.Location location;
+        private bool isVisible;
         private Continent continent;
+        private MapUserData userData;
 
         /// <summary>
         /// The player task's ID
@@ -162,6 +164,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// True if this marker is set as visible, else false
+        /// </summary>
+        public bool IsVisible
+        {
+            get { return this.isVisible; }
+            set { SetProperty(ref this.isVisible, value); }
+        }
+
+        /// <summary>
         /// Command to copy the waypoint code for the marker/task, if any
         /// </summary>
         public ICommand CopyWaypointCommand { get { return this.taskViewModel.CopyWaypointCommand; } }
@@ -180,14 +191,22 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// Constructs a new Player Marker view model
         /// </summary>
         /// <param name="taskViewModel">View model of the marker's corresponding task</param>
-        public PlayerMarkerViewModel(PlayerTaskViewModel taskViewModel, IZoneService zoneService, IPlayerService playerService)
+        public PlayerMarkerViewModel(PlayerTaskViewModel taskViewModel, MapUserData userData, IZoneService zoneService, IPlayerService playerService)
         {
             this.taskViewModel = taskViewModel;
+            this.userData = userData;
             this.zoneService = zoneService;
             this.playerService = playerService;
 
+            this.userData.HiddenMarkerCategories.CollectionChanged += HiddenMarkerCategories_CollectionChanged;
             this.taskViewModel.PropertyChanged += TaskViewModel_PropertyChanged;
             this.taskViewModel.Task.PropertyChanged += Task_PropertyChanged;
+            this.RefreshVisibility();
+        }
+
+        private void HiddenMarkerCategories_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.RefreshVisibility();
         }
 
         private void TaskViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -214,5 +233,12 @@ namespace GW2PAO.Modules.Map.ViewModels
             return cont;
         }
 
+        private void RefreshVisibility()
+        {
+            if (this.userData.HiddenMarkerCategories.Contains(this.TaskViewModel.Category))
+                this.IsVisible = false;
+            else
+                this.IsVisible = true;
+        }
     }
 }

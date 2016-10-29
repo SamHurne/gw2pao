@@ -41,6 +41,8 @@ namespace GW2PAO.Modules.Map
 
         private bool showPlayerMarkers;
 
+        private ObservableCollection<string> hiddenMarkerCategories = new ObservableCollection<string>();
+
         /// <summary>
         /// True if Heart Quests are shown on the map, else false
         /// </summary>
@@ -159,6 +161,11 @@ namespace GW2PAO.Modules.Map
         }
 
         /// <summary>
+        /// Collection of hidden marker categories
+        /// </summary>
+        public ObservableCollection<string> HiddenMarkerCategories { get { return this.hiddenMarkerCategories; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public MapUserData()
@@ -185,6 +192,7 @@ namespace GW2PAO.Modules.Map
         {
             logger.Info("Enabling auto save");
             this.PropertyChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
+            this.HiddenMarkerCategories.CollectionChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
         }
     }
 }

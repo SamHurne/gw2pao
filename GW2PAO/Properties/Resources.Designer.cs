@@ -2455,6 +2455,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visible Categories.
+        /// </summary>
+        public static string VisibleCategories {
+            get {
+                return ResourceManager.GetString("VisibleCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vistas.
         /// </summary>
         public static string Vistas {

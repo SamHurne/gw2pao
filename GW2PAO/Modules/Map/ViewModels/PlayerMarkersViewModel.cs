@@ -8,6 +8,7 @@ using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Tasks;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.Modules.Tasks.ViewModels;
+using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -108,6 +109,14 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// Collection of marker categories
+        /// </summary>
+        public AutoRefreshCollectionViewSource MarkerCategories
+        {
+            get { return this.taskTrackerVm.TaskCategories; }
+        }
+
+        /// <summary>
         /// Command to delete all player markers
         /// </summary>
         public ICommand DeleteAllCommand { get { return this.taskTrackerVm.DeleteAllCommand; } }
@@ -126,6 +135,11 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// Command to export all markers/tasks to a file
         /// </summary>
         public ICommand ExportCommand { get { return this.taskTrackerVm.ExportTasksCommand; } }
+
+        /// <summary>
+        /// Command to change the visibility of a category of markers
+        /// </summary>
+        public ICommand ToggleCategoryVisibiltyCommand { get; private set; }
 
         /// <summary>
         /// Constructs a new MarkersViewModel object
@@ -152,12 +166,14 @@ namespace GW2PAO.Modules.Map.ViewModels
             {
                 task.PropertyChanged += Task_PropertyChanged;
                 if (task.HasContinentLocation)
-                    this.PlayerMarkers.Add(new PlayerMarkerViewModel(task, this.zoneService, this.playerService));
+                    this.PlayerMarkers.Add(new PlayerMarkerViewModel(task, this.userData, this.zoneService, this.playerService));
             }
             this.playerTasksCollection.CollectionChanged += PlayerTasksCollection_CollectionChanged;
 
             this.InitializeTemplates();
             this.PlayerMarkers.CollectionChanged += PlayerMarkers_CollectionChanged;
+
+            this.ToggleCategoryVisibiltyCommand = new DelegateCommand<string>(this.ToggleCategoryVisibility);
         }
 
         private void InitializeTemplates()
@@ -168,7 +184,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 var task = this.playerTaskFactory.GetPlayerTask();
                 task.IconUri = icon;
                 var vm = this.playerTaskFactory.GetPlayerTaskViewModel(task);
-                this.MarkerTemplates.Add(new PlayerMarkerViewModel(vm, this.zoneService, this.playerService));
+                this.MarkerTemplates.Add(new PlayerMarkerViewModel(vm, this.userData, this.zoneService, this.playerService));
             }
         }
 
@@ -191,7 +207,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         var task = this.playerTaskFactory.GetPlayerTask();
                         task.IconUri = newItem.Icon;
                         var vm = this.playerTaskFactory.GetPlayerTaskViewModel(task);
-                        var newTemplate = new PlayerMarkerViewModel(vm, this.zoneService, this.playerService);
+                        var newTemplate = new PlayerMarkerViewModel(vm, this.userData, this.zoneService, this.playerService);
                         this.MarkerTemplates.Insert(idx, newTemplate);
 
                         // Then add the corresponding task
@@ -213,7 +229,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         {
                             var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                             if (playerMarker == null)
-                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.zoneService, this.playerService));
+                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
                         }
                     }                    
                     break;
@@ -234,7 +250,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         {
                             var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                             if (playerMarker == null)
-                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.zoneService, this.playerService));
+                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
                         }
                     }
                     foreach (PlayerTaskViewModel taskVm in e.OldItems)
@@ -267,7 +283,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                     var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                     if (playerMarker == null)
                     {
-                        this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.zoneService, this.playerService));
+                        this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
                     }
                 }
                 else
@@ -278,6 +294,18 @@ namespace GW2PAO.Modules.Map.ViewModels
                         this.PlayerMarkers.Remove(playerMarker);
                     }
                 }
+            }
+        }
+
+        private void ToggleCategoryVisibility(string categoryName)
+        {
+            if (this.userData.HiddenMarkerCategories.Contains(categoryName))
+            {
+                this.userData.HiddenMarkerCategories.Remove(categoryName);
+            }
+            else
+            {
+                this.userData.HiddenMarkerCategories.Add(categoryName);
             }
         }
     }

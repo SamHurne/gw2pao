@@ -40,6 +40,7 @@
         <converters:BoolToIndexConverter x:Key="BoolIndexConverter" />
         <lconverters:ContinentCoordToTileCoordConverter x:Key="CoordConverter" />
         <lconverters:ZoomToItemSizeConverter x:Key="ZoomToSizeConverter" />
+        <lconverters:CategoryToIsVisibleConverter x:Key="CategoryToIsVisibleConverter" />
 
         <map:TileLayer x:Key="GuildWars2TileLayer"
                        SourceName="GuildWars2"
@@ -503,6 +504,11 @@
             <Setter Property="ToolTip"
                     Value="{StaticResource PlayerTaskTooltip}"/>
             <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVisible}"
+                             Value="False">
+                    <Setter Property="Visibility"
+                            Value="Collapsed" />
+                </DataTrigger>
                 <DataTrigger Binding="{Binding Name}"
                              Value="{x:Null}">
                     <Setter Property="ToolTip"
@@ -638,6 +644,35 @@
                                     <MenuItem Header="{x:Static resx:Resources.ShowPlayerMarkers}"
                                               IsCheckable="True"
                                               IsChecked="{Binding UserData.ShowPlayerMarkers}" />
+                                    <Separator />
+                                    <MenuItem Header="{x:Static resx:Resources.VisibleCategories}"
+                                              ItemsSource="{Binding MapMarkers.MarkerCategories.View}">
+                                        <MenuItem.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding CategoryName}" />
+                                            </DataTemplate>
+                                        </MenuItem.ItemTemplate>
+                                        <MenuItem.ItemContainerStyle>
+                                            <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                                <Setter Property="IsCheckable"
+                                                        Value="True" />
+                                                <Setter Property="IsChecked">
+                                                    <Setter.Value>
+                                                        <MultiBinding Converter="{StaticResource CategoryToIsVisibleConverter}"
+                                                                      Mode="OneWay">
+                                                            <Binding Path="CategoryName"/>
+                                                            <Binding Path="DataContext.UserData.HiddenMarkerCategories"
+                                                                     RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=src:OverlayWindow}"/>
+                                                        </MultiBinding>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Command"
+                                                        Value="{Binding DataContext.MapMarkers.ToggleCategoryVisibiltyCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=src:OverlayWindow}}" />
+                                                <Setter Property="CommandParameter"
+                                                        Value="{Binding CategoryName}"/>
+                                            </Style>
+                                        </MenuItem.ItemContainerStyle>
+                                    </MenuItem>
                                     <Separator />
                                     <MenuItem Header="{x:Static resx:Resources.Load}"
                                               Command="{Binding MapMarkers.LoadCommand}"/>

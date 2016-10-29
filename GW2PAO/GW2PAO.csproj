@@ -301,6 +301,7 @@
     <Compile Include="Modules\Events\Views\WorldBossTimers\WorldBossTimerView.xaml.cs">
       <DependentUpon>WorldBossTimerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Map\Converters\CategoryToIsVisibleConverter.cs" />
     <Compile Include="Modules\Map\Converters\ContinentCoordToTileCoordConverter.cs" />
     <Compile Include="Modules\Map\Converters\ZoomToItemSizeConverter.cs" />
     <Compile Include="Modules\Map\Interfaces\IHasMapLocation.cs" />

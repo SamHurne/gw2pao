@@ -1109,4 +1109,7 @@
   <data name="EditCategory" xml:space="preserve">
     <value>Edit Category</value>
   </data>
+  <data name="VisibleCategories" xml:space="preserve">
+    <value>Visible Categories</value>
+  </data>
 </root>
