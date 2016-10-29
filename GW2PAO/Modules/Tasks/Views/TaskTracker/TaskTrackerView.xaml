@@ -67,20 +67,32 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Path x:Name="Glyph"
-                                    Grid.Column="0"
-                                    Margin="10,3,5,3"
-                                    VerticalAlignment="Center"
-                                    RenderTransformOrigin="0.5,0.5"
-                                    Data="M 0 0 L 5 5 L 0 10 Z">
-                                <Path.Fill>
-                                    <SolidColorBrush Color="{StaticResource TreeViewExpandCollapseGlyphColor}" />
-                                </Path.Fill>
-                                <Path.RenderTransform>
+                            <Grid Name="Glyph"
+                                  Grid.Column="0"
+                                  Margin="10,3,5,3"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  VerticalAlignment="Center">
+                                <Path VerticalAlignment="Center"
+                                      Data="M 0 0 L 5 5 L 0 10 Z"
+                                      Fill="Black"
+                                      RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="1.3"
+                                                        ScaleY="1.3" />
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path VerticalAlignment="Center"
+                                      Data="M 0 0 L 5 5 L 0 10 Z">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{StaticResource TreeViewExpandCollapseGlyphColor}" />
+                                    </Path.Fill>
+                                </Path>
+                                <Grid.RenderTransform>
                                     <RotateTransform x:Name="GlyphRotation"
-                                                        Angle="0" />
-                                </Path.RenderTransform>
-                            </Path>
+                                                     Angle="0" />
+                                </Grid.RenderTransform>
+                            </Grid>
+                            
 
                             <ContentPresenter Grid.Column="1"
                                               HorizontalAlignment="Stretch"
@@ -375,7 +387,14 @@
                                                   Icon="Pencil"
                                                   Margin="5,0,5,0"
                                                   FontSize="13"
-                                                  Foreground="PaleGoldenrod">
+                                                  Foreground="PaleGoldenrod"
+                                                  ToolTip="{x:Static resx:Resources.Edit}">
+                                        <fa:IconBlock.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Color="Black"
+                                                              Opacity=".6"
+                                                              BlurRadius="1" />
+                                        </fa:IconBlock.Effect>
                                         <fa:IconBlock.InputBindings>
                                             <MouseBinding Command="{Binding EditCategoryCommand}"
                                                           MouseAction="LeftClick" />
@@ -383,7 +402,7 @@
                                         <fa:IconBlock.Style>
                                             <Style TargetType="fa:IconBlock">
                                                 <Setter Property="Opacity"
-                                                        Value="0.4" />
+                                                        Value="0.6" />
                                                 <Style.Triggers>
                                                     <Trigger Property="IsMouseOver"
                                                              Value="True">
@@ -414,7 +433,14 @@
                                     <fa:IconBlock Icon="Trash"
                                                   Margin="5,0,5,0"
                                                   FontSize="13"
-                                                  Foreground="PaleGoldenrod">
+                                                  Foreground="PaleGoldenrod"
+                                                  ToolTip="{x:Static resx:Resources.Delete}">
+                                        <fa:IconBlock.Effect>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Color="Black"
+                                                              Opacity="0.6"
+                                                              BlurRadius="1" />
+                                        </fa:IconBlock.Effect>
                                         <fa:IconBlock.InputBindings>
                                             <MouseBinding Command="{Binding DeleteAllCommand}"
                                                           MouseAction="LeftClick" />
@@ -422,7 +448,7 @@
                                         <fa:IconBlock.Style>
                                             <Style TargetType="fa:IconBlock">
                                                 <Setter Property="Opacity"
-                                                        Value="0.4" />
+                                                        Value="0.6" />
                                                 <Style.Triggers>
                                                     <Trigger Property="IsMouseOver"
                                                              Value="True">
