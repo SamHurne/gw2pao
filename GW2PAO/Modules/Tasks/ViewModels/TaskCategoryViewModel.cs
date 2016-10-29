@@ -136,7 +136,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
 
         private void DeleteAll()
         {
-            var result = Xceed.Wpf.Toolkit.MessageBox.Show(Properties.Resources.DeleteConfirmation, string.Empty, System.Windows.MessageBoxButton.YesNo);
+            var result = Xceed.Wpf.Toolkit.MessageBox.Show(Properties.Resources.DeleteCategoryConfirmation, string.Empty, System.Windows.MessageBoxButton.YesNo);
             if (result == System.Windows.MessageBoxResult.Yes)
             {
                 var toRemove = new List<PlayerTaskViewModel>(this.playerTasks);

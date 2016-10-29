@@ -666,9 +666,18 @@ namespace GW2PAO.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all tasks in this category?.
         /// </summary>
-        public static string DeleteConfirmation {
+        public static string DeleteCategoryConfirmation {
             get {
-                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+                return ResourceManager.GetString("DeleteCategoryConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all of your tasks?.
+        /// </summary>
+        public static string DeleteTasksConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteTasksConfirmation", resourceCulture);
             }
         }
         

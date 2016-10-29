@@ -274,11 +274,15 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         /// </summary>
         private void DeleteAllTasks()
         {
-            logger.Info("Deleting all tasks");
-            var tasksToDelete = new List<PlayerTaskViewModel>(this.controller.PlayerTasks);
-            foreach (var pt in tasksToDelete)
+            var result = Xceed.Wpf.Toolkit.MessageBox.Show(Properties.Resources.DeleteTasksConfirmation, string.Empty, System.Windows.MessageBoxButton.YesNo);
+            if (result == System.Windows.MessageBoxResult.Yes)
             {
-                this.controller.DeleteTask(pt.Task);
+                logger.Info("Deleting all tasks");
+                var tasksToDelete = new List<PlayerTaskViewModel>(this.controller.PlayerTasks);
+                foreach (var pt in tasksToDelete)
+                {
+                    this.controller.DeleteTask(pt.Task);
+                }
             }
         }
 
