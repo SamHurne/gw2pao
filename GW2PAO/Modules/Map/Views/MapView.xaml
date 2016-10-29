@@ -1014,7 +1014,7 @@
                                     Width="100"
                                     Minimum="5"
                                     Value="{Binding CharacterPointer.PlayerTrailMaxLength}"
-                                    Maximum="2500"
+                                    Maximum="3500"
                                     ToolTip="{x:Static resx:Resources.Length}">
                             </Slider>
 

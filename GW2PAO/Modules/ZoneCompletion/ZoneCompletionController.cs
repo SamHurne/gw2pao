@@ -211,7 +211,7 @@ namespace GW2PAO.Modules.ZoneCompletion
             this.zoneRefreshTimer = new Timer(this.RefreshZone);
             this.ZoneRefreshInterval = 1000;
             this.itemLocationsRefreshTimer = new Timer(this.RefreshLocations);
-            this.LocationsRefreshInterval = 250; // TODO: Tweak this until we get good performance without sucking up the CPU
+            this.LocationsRefreshInterval = 150; // TODO: Tweak this until we get good performance without sucking up the CPU
 
             this.startCallCount = 0;
             this.CurrentMapID = -1;
