@@ -349,7 +349,7 @@
                       VirtualizingPanel.ScrollUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Expander>
+                    <Expander IsExpanded="True">
                         <Expander.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
