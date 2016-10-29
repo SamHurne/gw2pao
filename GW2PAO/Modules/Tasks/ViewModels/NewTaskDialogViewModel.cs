@@ -151,7 +151,8 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             if (this.playerService.HasValidMapId)
             {
                 var map = this.zoneService.GetMap(this.playerService.MapId);
-                this.Task.MapID = this.playerService.MapId;
+                this.task.ContinentId = map.ContinentId;
+                this.Task.MapID = map.Id;
                 this.Task.Location = this.playerService.PlayerPosition;
                 this.Task.ContinentLocation = API.Util.MapsHelper.ConvertToWorldPos(map.ContinentRectangle, map.MapRectangle, API.Util.CalcUtil.ConvertToMapPosition(this.Task.Location));
 
@@ -166,6 +167,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             if (!this.HasLocation)
             {
+                this.task.ContinentId = -1;
                 this.Task.MapID = -1;
                 this.Task.Location = null;
                 this.task.ContinentLocation = null;

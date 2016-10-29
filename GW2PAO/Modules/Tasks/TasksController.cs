@@ -213,6 +213,7 @@ namespace GW2PAO.Modules.Tasks
                             existingTask.Task.IsDailyReset = task.IsDailyReset;
                             existingTask.Task.AutoComplete = task.AutoComplete;
                             existingTask.Task.Location = task.Location;
+                            existingTask.Task.ContinentId = task.ContinentId;
                             existingTask.Task.MapID = task.MapID;
                             existingTask.Task.IconUri = task.IconUri;
                             existingTask.Task.WaypointCode = task.WaypointCode;
@@ -256,6 +257,7 @@ namespace GW2PAO.Modules.Tasks
                         existingTask.Task.IsDailyReset = taskViewModel.Task.IsDailyReset;
                         existingTask.Task.AutoComplete = taskViewModel.Task.AutoComplete;
                         existingTask.Task.Location = taskViewModel.Task.Location;
+                        existingTask.Task.ContinentId = taskViewModel.Task.ContinentId;
                         existingTask.Task.MapID = taskViewModel.Task.MapID;
                         existingTask.Task.IconUri = taskViewModel.Task.IconUri;
                         existingTask.Task.WaypointCode = taskViewModel.Task.WaypointCode;
@@ -506,6 +508,7 @@ namespace GW2PAO.Modules.Tasks
             {
                 var continent = this.zoneService.GetContinentByMap(ptask.Task.MapID);
                 var map = this.zoneService.GetMap(ptask.Task.MapID);
+                ptask.Task.ContinentId = map.ContinentId;
                 ptask.Task.ContinentLocation = API.Util.MapsHelper.ConvertToWorldPos(map.ContinentRectangle, map.MapRectangle, CalcUtil.ConvertToMapPosition(ptask.Task.Location));
             }
         }

@@ -34,6 +34,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private bool isVisible;
         private Continent continent;
         private MapUserData userData;
+        private int currentContinentId;
 
         /// <summary>
         /// The player task's ID
@@ -124,6 +125,8 @@ namespace GW2PAO.Modules.Map.ViewModels
                     }
                     else
                     {
+                        if (this.taskViewModel.Task.ContinentId != map.ContinentId)
+                            this.taskViewModel.Task.ContinentId = map.ContinentId;
                         if (this.taskViewModel.Task.MapID != map.Id)
                             this.taskViewModel.Task.MapID = map.Id;
 
@@ -204,6 +207,12 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.RefreshVisibility();
         }
 
+        public void OnContinentChanged(int currentContinentId)
+        {
+            this.currentContinentId = currentContinentId;
+            this.RefreshVisibility();
+        }
+
         private void HiddenMarkerCategories_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             this.RefreshVisibility();
@@ -223,7 +232,9 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             Continent cont;
 
-            if (this.taskViewModel.Task.MapID > 0)
+            if (this.taskViewModel.Task.ContinentId > 0)
+                cont = this.zoneService.GetContinent(this.taskViewModel.Task.ContinentId);
+            else if (this.taskViewModel.Task.MapID > 0)
                 cont = this.zoneService.GetContinentByMap(this.taskViewModel.Task.MapID);
             else if (this.playerService.HasValidMapId)
                 cont = this.zoneService.GetContinentByMap(this.playerService.MapId);
@@ -235,10 +246,12 @@ namespace GW2PAO.Modules.Map.ViewModels
 
         private void RefreshVisibility()
         {
-            if (this.userData.HiddenMarkerCategories.Contains(this.TaskViewModel.Category))
-                this.IsVisible = false;
-            else
-                this.IsVisible = true;
+            bool isVisible = true;
+
+            isVisible &= this.taskViewModel.Task.ContinentId == currentContinentId;
+            isVisible &= !this.userData.HiddenMarkerCategories.Contains(this.TaskViewModel.Category);
+
+            this.IsVisible = isVisible;
         }
     }
 }

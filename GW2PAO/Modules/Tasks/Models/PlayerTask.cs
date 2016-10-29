@@ -22,6 +22,7 @@ namespace GW2PAO.Modules.Tasks.Models
         private bool isDailyReset;
         private Point continentLocation;
         private Point location;
+        private int continentId;
         private int mapId;
         private string iconUri;
         private string waypointCode;
@@ -133,6 +134,16 @@ namespace GW2PAO.Modules.Tasks.Models
         }
 
         /// <summary>
+        /// The continent ID of the task, if any
+        /// -1 if no location exists
+        /// </summary>
+        public int ContinentId
+        {
+            get { return this.continentId; }
+            set { SetProperty(ref this.continentId, value); }
+        }
+
+        /// <summary>
         /// The map ID of the task, if any
         /// -1 if no location exists
         /// </summary>
@@ -206,6 +217,7 @@ namespace GW2PAO.Modules.Tasks.Models
             this.IsDailyReset = other.IsDailyReset;
             this.ContinentLocation = other.Location;
             this.Location = other.Location;
+            this.ContinentId = other.ContinentId;
             this.MapID = other.MapID;
             this.IconUri = other.IconUri;
             this.WaypointCode = other.WaypointCode;

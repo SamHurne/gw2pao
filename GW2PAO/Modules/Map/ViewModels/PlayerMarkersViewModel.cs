@@ -161,7 +161,7 @@ namespace GW2PAO.Modules.Map.ViewModels
 
             this.PlayerMarkers = new ObservableCollection<PlayerMarkerViewModel>();
 
-            this.playerTasksCollection = (ObservableCollection<PlayerTaskViewModel>)this.tasksController.PlayerTasks;
+            this.playerTasksCollection = this.tasksController.PlayerTasks;
             foreach (var task in this.playerTasksCollection)
             {
                 task.PropertyChanged += Task_PropertyChanged;
@@ -174,6 +174,14 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.PlayerMarkers.CollectionChanged += PlayerMarkers_CollectionChanged;
 
             this.ToggleCategoryVisibiltyCommand = new DelegateCommand<string>(this.ToggleCategoryVisibility);
+        }
+
+        public void OnContinentChanged(int currentContinentId)
+        {
+            foreach (var marker in this.PlayerMarkers)
+            {
+                marker.OnContinentChanged(currentContinentId);
+            }
         }
 
         private void InitializeTemplates()

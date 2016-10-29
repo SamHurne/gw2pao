@@ -165,7 +165,11 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveContinent))
             {
-                this.ContinentData = this.zoneController.ActiveContinent;
+                if (this.ContinentData.Id != this.zoneController.ActiveContinent.Id)
+                {
+                    this.ContinentData = this.zoneController.ActiveContinent;
+                    this.MapMarkers.OnContinentChanged(this.ContinentData.Id);
+                }
             }
             else if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap))
             {
