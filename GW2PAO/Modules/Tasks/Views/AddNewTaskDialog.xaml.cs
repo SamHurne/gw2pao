@@ -49,6 +49,11 @@ namespace GW2PAO.Modules.Tasks.Views
         public AddNewTaskDialog()
         {
             InitializeComponent();
+            this.Loaded += AddNewTaskDialog_Loaded;
+        }
+
+        private void AddNewTaskDialog_Loaded(object sender, RoutedEventArgs e)
+        {
             this.CenterWindowOnScreen();
         }
 
@@ -59,8 +64,8 @@ namespace GW2PAO.Modules.Tasks.Views
         {
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-            this.Left = (screenWidth / 2) - (this.Width / 2);
-            this.Top = (screenHeight / 2) - (this.Height / 2);
+            this.Left = (screenWidth / 2) - (this.ActualWidth / 2);
+            this.Top = (screenHeight / 2) - (this.ActualHeight / 2);
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
