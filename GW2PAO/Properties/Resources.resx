@@ -1106,4 +1106,7 @@
   <data name="YesDeleteAll" xml:space="preserve">
     <value>Yes, Delete All</value>
   </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Edit Category</value>
+  </data>
 </root>

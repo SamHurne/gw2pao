@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GW2PAO.Modules.Tasks.Interfaces;
+using GW2PAO.Modules.Tasks.Views;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
@@ -26,7 +27,6 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private TasksUserData userData;
         IPlayerTasksController playerTasksController;
         private string sortBy;
-        private bool toRemove;
 
         /// <summary>
         /// The category's name
@@ -34,7 +34,18 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         public string CategoryName
         {
             get { return this.categoryName; }
-            set { SetProperty(ref this.categoryName, value); }
+            set
+            {
+                if (SetProperty(ref this.categoryName, value))
+                {
+                    var toEdit = new List<PlayerTaskViewModel>(this.playerTasks);
+                    foreach (var t in toEdit)
+                    {
+                        if (t.Task.Category != value)
+                            t.Task.Category = value;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -75,21 +86,27 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         }
 
         /// <summary>
+        /// Command to edit all tasks' category name under this category
+        /// </summary>
+        public ICommand EditCategoryCommand { get; private set; }
+
+        /// <summary>
         /// Command to delete the all tasks under this category
         /// </summary>
         public ICommand DeleteAllCommand { get; private set; }
 
         public TaskCategoryViewModel(PlayerTaskViewModel initialTask, IPlayerTasksController playerTasksController, TasksUserData userData)
         {
-            this.CategoryName = initialTask.Category;
             this.playerTasks = new ObservableCollection<PlayerTaskViewModel>();
             this.PlayerTasks = new AutoRefreshCollectionViewSource();
             this.PlayerTasks.Source = this.playerTasks;
             this.playerTasks.Add(initialTask);
+            this.CategoryName = initialTask.Category;
 
             this.userData = userData;
             this.playerTasksController = playerTasksController;
             this.SortBy = this.userData.TaskTrackerSortProperty;
+            this.EditCategoryCommand = new DelegateCommand(this.Edit);
             this.DeleteAllCommand = new DelegateCommand(this.DeleteAll);
         }
 
@@ -107,6 +124,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         public bool Contains(PlayerTaskViewModel playerTask)
         {
             return this.playerTasks.Contains(playerTask);
+        }
+
+        private void Edit()
+        {
+            logger.Info("Displaying edit category dialog");
+            EditCategoryViewModel vm = new EditCategoryViewModel(this);
+            EditCategoryDialog dialog = new EditCategoryDialog(vm);
+            dialog.Show();
         }
 
         private void DeleteAll()

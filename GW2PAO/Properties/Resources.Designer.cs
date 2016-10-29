@@ -808,6 +808,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Category.
+        /// </summary>
+        public static string EditCategory {
+            get {
+                return ResourceManager.GetString("EditCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable All.
         /// </summary>
         public static string EnableAll {

@@ -6,6 +6,7 @@
         xmlns:resx="clr-namespace:GW2PAO.Properties"
         xmlns:view="clr-namespace:GW2PAO.Modules.Tasks.Views.TaskTracker"
         xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         Top="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerY}"
         Left="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerX}"
         Width="{Binding Source={x:Static properties:Settings.Default}, Path=TaskTrackerWidth}"
@@ -365,11 +366,90 @@
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Center"
                                            Stroke="{StaticResource CategoryHeaderLineBrush}" />
-                                <Grid.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
-                                    </ContextMenu>
-                                </Grid.ContextMenu>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center">
+                                    <fa:IconBlock Name="EditCategoryNameButton"
+                                                  Icon="Pencil"
+                                                  Margin="5,0,5,0"
+                                                  FontSize="13"
+                                                  Foreground="PaleGoldenrod">
+                                        <fa:IconBlock.InputBindings>
+                                            <MouseBinding Command="{Binding EditCategoryCommand}"
+                                                          MouseAction="LeftClick" />
+                                        </fa:IconBlock.InputBindings>
+                                        <fa:IconBlock.Style>
+                                            <Style TargetType="fa:IconBlock">
+                                                <Setter Property="Opacity"
+                                                        Value="0.4" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver"
+                                                             Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation To="1"
+                                                                                     Storyboard.TargetProperty="Opacity"
+                                                                                     Duration="00:00:00.1" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation To="0.5"
+                                                                                     Storyboard.TargetProperty="Opacity"
+                                                                                     Duration="00:00:0.1" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </fa:IconBlock.Style>
+                                    </fa:IconBlock>
+
+                                    <fa:IconBlock Icon="Trash"
+                                                  Margin="5,0,5,0"
+                                                  FontSize="13"
+                                                  Foreground="PaleGoldenrod">
+                                        <fa:IconBlock.InputBindings>
+                                            <MouseBinding Command="{Binding DeleteAllCommand}"
+                                                          MouseAction="LeftClick" />
+                                        </fa:IconBlock.InputBindings>
+                                        <fa:IconBlock.Style>
+                                            <Style TargetType="fa:IconBlock">
+                                                <Setter Property="Opacity"
+                                                        Value="0.4" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver"
+                                                             Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation To="1"
+                                                                                     Storyboard.TargetProperty="Opacity"
+                                                                                     Duration="00:00:00.1" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation To="0.5"
+                                                                                     Storyboard.TargetProperty="Opacity"
+                                                                                     Duration="00:00:0.1" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </fa:IconBlock.Style>
+                                    </fa:IconBlock>
+                                </StackPanel>
                             </Grid>
                         </Expander.Header>
                         <ItemsControl ItemsSource="{Binding PlayerTasks.View}"
