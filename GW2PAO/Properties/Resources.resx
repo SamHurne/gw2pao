@@ -1097,4 +1097,13 @@
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all tasks in this category?</value>
+  </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Uncategorized</value>
+  </data>
+  <data name="YesDeleteAll" xml:space="preserve">
+    <value>Yes, Delete All</value>
+  </data>
 </root>

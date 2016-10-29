@@ -664,6 +664,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all tasks in this category?.
+        /// </summary>
+        public static string DeleteConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -2374,6 +2383,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uncategorized.
+        /// </summary>
+        public static string Uncategorized {
+            get {
+                return ResourceManager.GetString("Uncategorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown.
         /// </summary>
         public static string Unknown {
@@ -2632,6 +2650,15 @@ namespace GW2PAO.Properties {
         public static string WvWUnderAttackClipboardText {
             get {
                 return ResourceManager.GetString("WvWUnderAttackClipboardText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, Delete All.
+        /// </summary>
+        public static string YesDeleteAll {
+            get {
+                return ResourceManager.GetString("YesDeleteAll", resourceCulture);
             }
         }
         

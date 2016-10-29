@@ -5,10 +5,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GW2PAO.Modules.Tasks.Interfaces;
 using GW2PAO.PresentationCore;
 using Microsoft.Practices.Prism.Mvvm;
 using NLog;
+using Xceed.Wpf.Toolkit;
 
 namespace GW2PAO.Modules.Tasks.ViewModels
 {
@@ -22,7 +24,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private string categoryName;
         private ObservableCollection<PlayerTaskViewModel> playerTasks;
         private TasksUserData userData;
+        IPlayerTasksController playerTasksController;
         private string sortBy;
+        private bool toRemove;
 
         /// <summary>
         /// The category's name
@@ -70,7 +74,12 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             }
         }
 
-        public TaskCategoryViewModel(PlayerTaskViewModel initialTask, TasksUserData userData)
+        /// <summary>
+        /// Command to delete the all tasks under this category
+        /// </summary>
+        public ICommand DeleteAllCommand { get; private set; }
+
+        public TaskCategoryViewModel(PlayerTaskViewModel initialTask, IPlayerTasksController playerTasksController, TasksUserData userData)
         {
             this.CategoryName = initialTask.Category;
             this.playerTasks = new ObservableCollection<PlayerTaskViewModel>();
@@ -79,7 +88,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             this.playerTasks.Add(initialTask);
 
             this.userData = userData;
+            this.playerTasksController = playerTasksController;
             this.SortBy = this.userData.TaskTrackerSortProperty;
+            this.DeleteAllCommand = new DelegateCommand(this.DeleteAll);
         }
 
         public void Add(PlayerTaskViewModel playerTask)
@@ -96,6 +107,19 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         public bool Contains(PlayerTaskViewModel playerTask)
         {
             return this.playerTasks.Contains(playerTask);
+        }
+
+        private void DeleteAll()
+        {
+            var result = Xceed.Wpf.Toolkit.MessageBox.Show(Properties.Resources.DeleteConfirmation, string.Empty, System.Windows.MessageBoxButton.YesNo);
+            if (result == System.Windows.MessageBoxResult.Yes)
+            {
+                var toRemove = new List<PlayerTaskViewModel>(this.playerTasks);
+                foreach (var t in toRemove)
+                {
+                    this.playerTasksController.DeleteTask(t.Task);
+                }
+            }
         }
     }
 }

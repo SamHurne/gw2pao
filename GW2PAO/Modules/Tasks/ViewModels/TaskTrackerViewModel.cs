@@ -185,7 +185,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             {
                 var category = this.taskCategories.FirstOrDefault(c => c.CategoryName == t.Category);
                 if (category == null)
-                    this.taskCategories.Add(new TaskCategoryViewModel(t, this.UserData));
+                    this.taskCategories.Add(new TaskCategoryViewModel(t, this.controller, this.UserData));
                 else
                     category.Add(t);
                 t.PropertyChanged += Task_PropertyChanged;
@@ -203,7 +203,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
                     {
                         var category = this.taskCategories.FirstOrDefault(c => c.CategoryName == t.Category);
                         if (category == null)
-                            this.taskCategories.Add(new TaskCategoryViewModel(t, this.UserData));
+                            this.taskCategories.Add(new TaskCategoryViewModel(t, this.controller, this.UserData));
                         else
                             category.Add(t);
                         t.PropertyChanged += this.Task_PropertyChanged;
@@ -251,7 +251,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
 
                 var category = this.taskCategories.FirstOrDefault(c => c.CategoryName == task.Category);
                 if (category == null)
-                    this.taskCategories.Add(new TaskCategoryViewModel(task, this.UserData));
+                    this.taskCategories.Add(new TaskCategoryViewModel(task, this.controller, this.UserData));
                 else
                     category.Add(task);
             }

@@ -365,6 +365,11 @@
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Center"
                                            Stroke="{StaticResource CategoryHeaderLineBrush}" />
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="{x:Static resx:Resources.DeleteAll}" Command="{Binding DeleteAllCommand}" />
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
                             </Grid>
                         </Expander.Header>
                         <ItemsControl ItemsSource="{Binding PlayerTasks.View}"
