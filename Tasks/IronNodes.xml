@@ -4,160 +4,250 @@
     <ID>5eee78c0-eca2-4bbc-a220-5ad29190681c</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>6327.0589959920244</X>
+      <Y>15041.358683514785</Y>
+      <Z>1420.6384836029054</Z>
+    </ContinentLocation>
     <Location>
       <X>-746.7236328125</X>
       <Y>506.35867309570312</Y>
       <Z>36.084197998046875</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>54</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BGMAAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>3eed8f8f-db2e-4c10-8a2b-cb7daeb59337</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>6845.0052536422727</X>
+      <Y>14714.021286793519</Y>
+      <Z>966.80287882328037</Z>
+    </ContinentLocation>
     <Location>
       <X>-430.9837646484375</X>
       <Y>705.9034423828125</Y>
       <Z>24.556779861450195</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>54</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BGMAAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>0d1ff07c-2626-4bf5-a8ae-4a48679f99c8</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>9583.62846831309</X>
+      <Y>15064.897510919715</Y>
+      <Z>1707.824517887497</Z>
+    </ContinentLocation>
     <Location>
       <X>-1102.3826904296875</X>
       <Y>23.836864471435547</Y>
       <Z>43.378719329833984</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>23</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BAQAAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>73a2d024-422d-4703-9601-43e0382528bf</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>13549.063557946269</X>
+      <Y>11110.7447292785</Y>
+      <Z>5189.9164546279908</Z>
+    </ContinentLocation>
     <Location>
       <X>-869.8599853515625</X>
       <Y>-140.66191101074219</Y>
       <Z>131.82380676269531</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>17</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BKsAAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>c1092fb6-2b72-452c-9513-8e85fa1e11f3</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>16939.633966918183</X>
+      <Y>14021.297483097585</Y>
+      <Z>2565.3324313156127</Z>
+    </ContinentLocation>
     <Location>
       <X>884.91558837890625</X>
       <Y>-432.38751220703125</Y>
       <Z>65.159408569335938</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>24</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BJMBAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>6df0f8e6-8383-46a4-8ac9-a122af5208d4</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>18348.876041536012</X>
+      <Y>13445.193702050781</Y>
+      <Z>4980.1905934791566</Z>
+    </ContinentLocation>
     <Location>
       <X>-128.70109558105469</X>
       <Y>1401.3515625</Y>
       <Z>126.49677276611328</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>27</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BFEGAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>33868125-2832-4266-8146-e32aead7d380</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>20914.92618396581</X>
+      <Y>12446.347981272793</Y>
+      <Z>1519.9897743919373</Z>
+    </ContinentLocation>
     <Location>
       <X>733.30340576171875</X>
       <Y>-96.528877258300781</Y>
       <Z>38.607719421386719</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>31</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BMAAAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>6e2e6d27-df15-402f-97bc-f043ae478193</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>23758.919640559641</X>
+      <Y>12740.462229805056</Y>
+      <Z>3717.0856753707885</Z>
+    </ContinentLocation>
     <Location>
       <X>-966.26446533203125</X>
       <Y>-197.79206848144531</Y>
       <Z>94.413925170898438</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>32</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BF4BAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>d850365c-2711-4e76-a813-7779169f5c2e</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>28962.07895068817</X>
+      <Y>17356.102267873765</Y>
+      <Z>1736.1488105648041</Z>
+    </ContinentLocation>
     <Location>
       <X>-759.5130615234375</X>
       <Y>265.72311401367188</Y>
       <Z>44.0981559753418</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>21</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BEsBAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>869dc5bd-3727-44db-ba91-9b1e619a1a6d</ID>
     <Name>Rich Iron Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>20365.317714854369</X>
+      <Y>15737.52564243927</Y>
+      <Z>1625.1727492286682</Z>
+    </ContinentLocation>
     <Location>
       <X>-147.93904113769531</X>
       <Y>550.1480712890625</Y>
       <Z>41.279365539550781</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>26</MapID>
     <IconUri>https://render.guildwars2.com/file/C1FD07F60E0B74C497761C1C014D03E402E60C6F/65927.png</IconUri>
     <WaypointCode>[&amp;BF0CAAA=]</WaypointCode>
+    <Category>Rich Iron Veins</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

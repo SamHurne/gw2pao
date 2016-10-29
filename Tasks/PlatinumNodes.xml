@@ -4,96 +4,150 @@
     <ID>2f10e730-d375-4733-a285-eb3370a5b5cb</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>24678.167378121187</X>
+      <Y>9345.311783525849</Y>
+      <Z>2370.51753897934</Z>
+    </ContinentLocation>
     <Location>
       <X>-483.92010498046875</X>
       <Y>311.31536865234375</Y>
       <Z>60.211112976074219</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>22</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BB8CAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>d3cdc674-5d84-4a3a-9097-b85264048e7b</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>26934.02326548818</X>
+      <Y>9849.1133859159418</Y>
+      <Z>1744.2284638843537</Z>
+    </ContinentLocation>
     <Location>
       <X>891.2489013671875</X>
       <Y>4.19807767868042</Y>
       <Z>44.303379058837891</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>22</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BBoCAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>e2d57ad7-b69c-4317-a6c7-7eb8b49cafa9</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>27751.3570930748</X>
+      <Y>9674.99614097341</Y>
+      <Z>836.77239435596471</Z>
+    </ContinentLocation>
     <Location>
       <X>-249.10858154296875</X>
       <Y>1124.7137451171875</Y>
       <Z>21.254007339477539</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>25</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BO4BAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>e4edce83-549f-4b95-b1d6-0418eebb257f</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>29084.405073995717</X>
+      <Y>9609.4241628972377</Y>
+      <Z>30.342668957453967</Z>
+    </ContinentLocation>
     <Location>
       <X>563.51702880859375</X>
       <Y>1164.6864013671875</Y>
       <Z>0.77070337533950806</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>25</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BO8BAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>e3e52fed-94eb-495a-9ffb-5080f033745c</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>16429.495004640954</X>
+      <Y>18201.947079764555</Y>
+      <Z>2948.7379483169557</Z>
+    </ContinentLocation>
     <Location>
       <X>27.733739852905273</X>
       <Y>-405.96112060546875</Y>
       <Z>74.897903442382812</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>73</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BK0BAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>af1cc22e-2980-4e03-92e2-91edc1beb712</ID>
     <Name>Rich Platinum Vein</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>17294.373405277507</X>
+      <Y>20361.757946463204</Y>
+      <Z>2799.0737771240233</Z>
+    </ContinentLocation>
     <Location>
       <X>476.9345703125</X>
       <Y>228.13783264160156</Y>
       <Z>71.096435546875</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>53</MapID>
     <IconUri>https://render.guildwars2.com/file/413D7EE8CE04C0BC07C31A4B381EB6344150F849/65930.png</IconUri>
     <WaypointCode>[&amp;BMwBAAA=]</WaypointCode>
+    <Category>Rich Platinum Veins</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

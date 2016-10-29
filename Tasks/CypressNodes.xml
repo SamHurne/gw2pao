@@ -5,33 +5,51 @@
     <Name>Cypress Saplings</Name>
     <Description>Great for Foxfire Clusters</Description>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>15580.365569509379</X>
+      <Y>24846.630588330841</Y>
+      <Z>935.77412952766417</Z>
+    </ContinentLocation>
     <Location>
       <X>-333.8377685546875</X>
       <Y>-633.14886474609375</Y>
       <Z>23.768650054931641</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>51</MapID>
     <IconUri>https://render.guildwars2.com/file/205871B734054D0206986FB44D6DC5425E572B0B/220465.png</IconUri>
     <WaypointCode>[&amp;BPgCAAA=]</WaypointCode>
+    <Category>Cypress Saplings</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>82db2e77-9ed1-4b68-bde5-df70449a3da4</ID>
     <Name>Cypress Saplings</Name>
     <Description>Great for Foxfire Clusters</Description>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>13808.661318551889</X>
+      <Y>24934.478308534366</Y>
+      <Z>2522.6492499328615</Z>
+    </ContinentLocation>
     <Location>
       <X>848.96588134765625</X>
       <Y>-452.61453247070312</Y>
       <Z>64.07525634765625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>65</MapID>
     <IconUri>https://render.guildwars2.com/file/205871B734054D0206986FB44D6DC5425E572B0B/220465.png</IconUri>
     <WaypointCode>[&amp;BKYCAAA=]</WaypointCode>
+    <Category>Cypress Saplings</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

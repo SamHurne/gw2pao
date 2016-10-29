@@ -4,16 +4,25 @@
     <ID>01e86e54-d05c-46ac-b696-1c9f83db1b3f</ID>
     <Name>Orichalcum Ore</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
+    <ContinentLocation>
+      <X>12424.006163442866</X>
+      <Y>19478.673306887118</Y>
+      <Z>6702.2044411926272</Z>
+    </ContinentLocation>
     <Location>
       <X>-229.20571899414063</X>
       <Y>220.26463317871094</Y>
       <Z>170.23590087890625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>873</MapID>
     <IconUri>https://render.guildwars2.com/file/A6E2C82153BA684E2D05D3FCA09F3E02431366ED/220461.png</IconUri>
     <WaypointCode>[&amp;BNgGAAA=]</WaypointCode>
+    <Category>Orichalcum Veins</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

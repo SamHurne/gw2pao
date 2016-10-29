@@ -19,8 +19,10 @@
       <Z>4.3954958915710449</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>717d5892-796f-42ca-906c-8b6b416e1c07</ID>
@@ -41,8 +43,10 @@
       <Z>9.2387599945068359</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>e274882c-d483-4097-8fc8-71071f977ea1</ID>
@@ -63,8 +67,10 @@
       <Z>30.47027587890625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>d879ce7c-e32b-47b4-bbfd-a2ece8ece2b0</ID>
@@ -85,8 +91,10 @@
       <Z>13.454060554504395</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>4e79c7ff-95f1-467d-9eb5-64ff925e9d67</ID>
@@ -107,8 +115,10 @@
       <Z>31.562414169311523</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>ff4f6d95-95af-4399-923e-814cdb67a593</ID>
@@ -129,8 +139,10 @@
       <Z>61.770755767822266</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>2e152829-19fb-44af-954e-47f663974705</ID>
@@ -151,7 +163,9 @@
       <Z>56.371097564697266</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
+    <Category>Cami's Journals</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

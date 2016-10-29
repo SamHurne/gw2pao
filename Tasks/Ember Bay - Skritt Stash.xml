@@ -19,8 +19,10 @@
       <Z>62.550708770751953</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>75b0ea47-0039-4089-b950-a0f8954f732d</ID>
@@ -41,8 +43,10 @@
       <Z>4.5073790550231934</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>58955836-aefd-4ab1-bee7-a4e79a12c8b0</ID>
@@ -63,8 +67,10 @@
       <Z>70.125762939453125</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>7e8a752d-7e5a-4076-a8bf-4d745fa5f6eb</ID>
@@ -85,8 +91,10 @@
       <Z>48.908504486083984</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>54b8cc8a-e2b5-4211-b85c-28dd8340324c</ID>
@@ -107,8 +115,10 @@
       <Z>44.996749877929688</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>46eb8c2e-481a-4dd2-bc84-b37dbd69e2d4</ID>
@@ -129,8 +139,10 @@
       <Z>99.50634765625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>c816c575-81e9-46c8-ad46-9c6f0521734e</ID>
@@ -151,8 +163,10 @@
       <Z>103.29969024658203</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>d530cbf7-e2de-4e9c-9710-741e714c2b72</ID>
@@ -173,8 +187,10 @@
       <Z>172.33120727539063</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>c9678dd6-f5b5-44b7-81a5-a02f86997ab0</ID>
@@ -195,8 +211,10 @@
       <Z>127.86558532714844</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>97a973f0-a0da-4966-90f5-22b12649bc81</ID>
@@ -217,8 +235,10 @@
       <Z>23.597110748291016</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>fdb7376a-88f2-4656-9faa-a028afaad362</ID>
@@ -248,8 +268,10 @@
       <Z>1.894477128982544</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>623fd3b4-0c0b-47bc-a960-91d12d9c8e6f</ID>
@@ -279,8 +301,10 @@
       <Z>78.774238586425781</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>00dca90f-5e5f-4244-873f-0a96a1fc96c2</ID>
@@ -301,8 +325,10 @@
       <Z>36.660049438476562</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>2925947e-4288-4146-8231-4ab467da9733</ID>
@@ -323,8 +349,10 @@
       <Z>12.908947944641113</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>bbf10f95-c59c-48a4-af81-cf5ea36ef23c</ID>
@@ -345,8 +373,10 @@
       <Z>11.685496330261231</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>7417188b-ec40-456b-a578-8264d780b235</ID>
@@ -367,8 +397,10 @@
       <Z>2.7028534412384033</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>30e838f8-2023-4603-801e-d76cd1f6ab4b</ID>
@@ -389,8 +421,10 @@
       <Z>0.79115045070648193</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>29eba40a-1561-4acb-a77e-9a54c597e5c8</ID>
@@ -411,8 +445,10 @@
       <Z>1.6302140951156616</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>1d4f606d-08b8-4def-9568-033fc6704385</ID>
@@ -433,8 +469,10 @@
       <Z>1.3745760917663574</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>36a0af42-cea4-4f5f-a71b-0a876b7b4982</ID>
@@ -455,8 +493,10 @@
       <Z>2.6030561923980713</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>cb7d734f-eddc-4bfd-a366-638172140c8f</ID>
@@ -477,8 +517,10 @@
       <Z>16.081087112426758</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>2425a996-c95c-4b9b-9998-52db74d43d66</ID>
@@ -499,8 +541,10 @@
       <Z>8.8821191787719727</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>dfa12d4e-d499-49a4-8718-0d65fe6cbe0b</ID>
@@ -521,8 +565,10 @@
       <Z>103.04746246337891</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>74dee3d7-9040-4bd9-81c5-79c3103a7400</ID>
@@ -543,8 +589,10 @@
       <Z>64.722091674804688</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>0e0ba2eb-c0cb-49f0-af14-52e3522e899b</ID>
@@ -565,8 +613,10 @@
       <Z>48.209247589111328</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>29a726bc-f65e-4359-9f68-e5a7b66a1ac3</ID>
@@ -587,7 +637,9 @@
       <Z>143.80795288085938</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>1175</MapID>
     <IconUri>https://render.guildwars2.com/file/065CEC6B786D79C1374AC7123F033261AB146703/63114.png</IconUri>
+    <Category>Skritt Stashes</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>

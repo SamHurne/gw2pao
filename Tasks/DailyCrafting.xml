@@ -4,90 +4,126 @@
     <ID>4e6ccd7c-ea44-433b-aa8e-aa568ee960d1</ID>
     <Name>Craft Clay Pot</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/A16C9EFFD44CAD0827F4BB5E80F8C2120934366B/849433.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>01f75ec8-4044-4c02-8f90-8d8ea8c0dca5</ID>
     <Name>Craft Grow Lamp</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/A3F044BBD2AD33A4CAC1F00276A633392A59C7FD/855360.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>7c06b546-2fda-4dc6-80aa-2ce85315c535</ID>
     <Name>Craft Plate of Meaty Plant Food</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/D3AF0F153675FEED2FF155990EA69E1F253BEEE3/849437.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>499f47b0-ed71-4e5c-b8bc-76f6ed7cb1d8</ID>
     <Name>Craft Plate of Piquant Plant Food</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/7102024A5FA50AD002FBE915F7FE69D7CDD919B3/849443.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>234be4aa-6dda-49e4-a07c-62b0406f358b</ID>
     <Name>Craft Glob of Elder Spirit Residue</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/131F51B9177E2AEB75326901021C42CB3169452D/631492.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>e83fbe55-4741-4505-a9b2-9ea276e11854</ID>
     <Name>Craft Lump of Mithrillium</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/BAF140ED460135E04101146CC8CE9EFB5698F077/631490.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>627edf3a-8602-439f-b823-4262a1e86fda</ID>
     <Name>Craft Spool of Silk Weaving Thread</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/45C6FC08BE801CFC31C455A8684A963B51A73759/631488.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>2a2260d4-5f19-4cdb-9e78-e7d47d1a8816</ID>
     <Name>Craft Spool of Thick Elonian Cord</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/643E2343E5B573664DD8010ACBD9B5BD970E305C/631493.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
   <PlayerTask>
     <ID>9a322a85-4c2e-403e-996e-694c9a9ea8c0</ID>
     <Name>Craft Heat Stone</Name>
     <IsCompletable>true</IsCompletable>
-    <IsCompleted>false</IsCompleted>
+    <IsAccountCompleted>false</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
     <IsDailyReset>true</IsDailyReset>
     <AutoComplete>false</AutoComplete>
+    <ContinentId>0</ContinentId>
     <MapID>-1</MapID>
     <IconUri>https://render.guildwars2.com/file/0411420C4FB4B7287A006AD5B7AB0E41171009B6/855375.png</IconUri>
+    <Category>Daily Crafting</Category>
   </PlayerTask>
 </ArrayOfPlayerTask>
