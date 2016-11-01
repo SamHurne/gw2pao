@@ -194,10 +194,11 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// Constructs a new Player Marker view model
         /// </summary>
         /// <param name="taskViewModel">View model of the marker's corresponding task</param>
-        public PlayerMarkerViewModel(PlayerTaskViewModel taskViewModel, MapUserData userData, IZoneService zoneService, IPlayerService playerService)
+        public PlayerMarkerViewModel(PlayerTaskViewModel taskViewModel, MapUserData userData, int currentContinentId, IZoneService zoneService, IPlayerService playerService)
         {
             this.taskViewModel = taskViewModel;
             this.userData = userData;
+            this.currentContinentId = currentContinentId;
             this.zoneService = zoneService;
             this.playerService = playerService;
 

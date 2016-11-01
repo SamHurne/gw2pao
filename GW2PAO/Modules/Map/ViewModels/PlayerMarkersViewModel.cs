@@ -31,6 +31,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private IZoneService zoneService;
         private IPlayerService playerService;
         private MapUserData userData;
+        private int currentContinentId;
 
         private static readonly List<string> TemplateIcons = new List<string>()
         {
@@ -161,12 +162,22 @@ namespace GW2PAO.Modules.Map.ViewModels
 
             this.PlayerMarkers = new ObservableCollection<PlayerMarkerViewModel>();
 
+            if (this.playerService.HasValidMapId)
+            {
+                var continent = this.zoneService.GetContinentByMap(this.playerService.MapId);
+                this.currentContinentId = continent.Id;
+            }
+            else
+            {
+                this.currentContinentId = 1;
+            }
+
             this.playerTasksCollection = this.tasksController.PlayerTasks;
             foreach (var task in this.playerTasksCollection)
             {
                 task.PropertyChanged += Task_PropertyChanged;
                 if (task.HasContinentLocation)
-                    this.PlayerMarkers.Add(new PlayerMarkerViewModel(task, this.userData, this.zoneService, this.playerService));
+                    this.PlayerMarkers.Add(new PlayerMarkerViewModel(task, this.userData, this.currentContinentId, this.zoneService, this.playerService));
             }
             this.playerTasksCollection.CollectionChanged += PlayerTasksCollection_CollectionChanged;
 
@@ -178,6 +189,7 @@ namespace GW2PAO.Modules.Map.ViewModels
 
         public void OnContinentChanged(int currentContinentId)
         {
+            this.currentContinentId = currentContinentId;
             foreach (var marker in this.PlayerMarkers)
             {
                 marker.OnContinentChanged(currentContinentId);
@@ -192,7 +204,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 var task = this.playerTaskFactory.GetPlayerTask();
                 task.IconUri = icon;
                 var vm = this.playerTaskFactory.GetPlayerTaskViewModel(task);
-                this.MarkerTemplates.Add(new PlayerMarkerViewModel(vm, this.userData, this.zoneService, this.playerService));
+                this.MarkerTemplates.Add(new PlayerMarkerViewModel(vm, this.userData, this.currentContinentId, this.zoneService, this.playerService));
             }
         }
 
@@ -215,7 +227,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         var task = this.playerTaskFactory.GetPlayerTask();
                         task.IconUri = newItem.Icon;
                         var vm = this.playerTaskFactory.GetPlayerTaskViewModel(task);
-                        var newTemplate = new PlayerMarkerViewModel(vm, this.userData, this.zoneService, this.playerService);
+                        var newTemplate = new PlayerMarkerViewModel(vm, this.userData, this.currentContinentId, this.zoneService, this.playerService);
                         this.MarkerTemplates.Insert(idx, newTemplate);
 
                         // Then add the corresponding task
@@ -237,7 +249,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         {
                             var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                             if (playerMarker == null)
-                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
+                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.currentContinentId, this.zoneService, this.playerService));
                         }
                     }                    
                     break;
@@ -258,7 +270,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         {
                             var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                             if (playerMarker == null)
-                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
+                                this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.currentContinentId, this.zoneService, this.playerService));
                         }
                     }
                     foreach (PlayerTaskViewModel taskVm in e.OldItems)
@@ -291,7 +303,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                     var playerMarker = this.PlayerMarkers.FirstOrDefault(m => m.ID.Equals(taskVm.Task.ID));
                     if (playerMarker == null)
                     {
-                        this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.zoneService, this.playerService));
+                        this.PlayerMarkers.Add(new PlayerMarkerViewModel(taskVm, this.userData, this.currentContinentId, this.zoneService, this.playerService));
                     }
                 }
                 else
