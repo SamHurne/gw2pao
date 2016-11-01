@@ -152,7 +152,7 @@ namespace GW2PAO.API.Providers
                 new EventName() { ID = WorldBossID.Megadestroyer, Name = "Mégadestructeur" },
                 new EventName() { ID = WorldBossID.Tequatl, Name = "Tequatl" },
                 new EventName() { ID = WorldBossID.KarkaQueen, Name = "La Reine Karka" },
-                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Trois têtes Guivre" },
+                new EventName() { ID = WorldBossID.EvolvedJungleWurm, Name = "Triple Guivre" },
                 new EventName() { ID = WorldBossID.Shatterer, Name = "Le Destructeur" },
                 new EventName() { ID = WorldBossID.ClawOfJormag, Name = "La Griffe de Jormag" },
                 new EventName() { ID = WorldBossID.ModniirUlgoth, Name = "Ulgoth le Modniir" },
