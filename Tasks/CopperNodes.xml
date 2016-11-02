@@ -19,7 +19,7 @@
       <Z>11.624161720275879</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>34</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BDwBAAA=]</WaypointCode>
@@ -44,7 +44,7 @@
       <Z>1.726594090461731</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>34</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BEEBAAA=]</WaypointCode>
@@ -70,7 +70,7 @@
       <Z>60.392845153808594</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>15</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BPcAAAA=]</WaypointCode>
@@ -95,7 +95,7 @@
       <Z>24.685115814208984</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>15</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BPMAAAA=]</WaypointCode>
@@ -120,7 +120,7 @@
       <Z>-15.610968589782715</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>19</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BIQBAAA=]</WaypointCode>
@@ -145,7 +145,7 @@
       <Z>58.933879852294922</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>19</MapID>
     <IconUri>https://render.guildwars2.com/file/6E17C5A65955239640743E48B30A3425FACA5D02/65925.png</IconUri>
     <WaypointCode>[&amp;BPgGAAA=]</WaypointCode>

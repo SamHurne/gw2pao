@@ -19,7 +19,7 @@
       <Z>5.1603121757507324</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -43,7 +43,7 @@
       <Z>32.575809478759766</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -67,7 +67,7 @@
       <Z>18.47260856628418</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -91,7 +91,7 @@
       <Z>35.7105598449707</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -115,7 +115,7 @@
       <Z>46.411113739013672</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -139,7 +139,7 @@
       <Z>92.213829040527344</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -163,7 +163,7 @@
       <Z>65.572090148925781</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -188,7 +188,7 @@
       <Z>110.02332305908203</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/starGreen.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -212,7 +212,7 @@
       <Z>32.981082916259766</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -236,7 +236,7 @@
       <Z>5.1794099807739258</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -260,7 +260,7 @@
       <Z>121.89414978027344</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -284,7 +284,7 @@
       <Z>-42.040119171142578</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -308,7 +308,7 @@
       <Z>34.897968292236328</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -332,7 +332,7 @@
       <Z>39.463970184326172</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -356,7 +356,7 @@
       <Z>132.26484680175781</Z>
     </Location>
     <AutoComplete>false</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -380,7 +380,7 @@
       <Z>38.2227783203125</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -404,7 +404,7 @@
       <Z>1.5245355367660523</Z>
     </Location>
     <AutoComplete>false</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -428,7 +428,7 @@
       <Z>-0.34594035148620605</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -452,7 +452,7 @@
       <Z>115.75534057617188</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -477,7 +477,7 @@
       <Z>187.63240051269531</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -501,7 +501,7 @@
       <Z>4.1995859146118164</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -525,7 +525,7 @@
       <Z>16.688648223876953</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -549,7 +549,7 @@
       <Z>-3.7164349555969238</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -573,7 +573,7 @@
       <Z>93.197715759277344</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -597,7 +597,7 @@
       <Z>86.477432250976562</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -621,7 +621,7 @@
       <Z>4.9604334831237793</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -645,7 +645,7 @@
       <Z>17.755126953125</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -670,7 +670,7 @@
       <Z>-11.936328887939453</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/starGreen.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -695,7 +695,7 @@
       <Z>-87.236488342285156</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -719,7 +719,7 @@
       <Z>27.584365844726562</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/starGreen.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -743,7 +743,7 @@
       <Z>12.698026657104492</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -770,7 +770,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>-82.6663818359375</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/starGreen.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -794,7 +794,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>47.251182556152344</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -818,7 +818,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>150.74114990234375</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -842,7 +842,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>129.82304382324219</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -866,7 +866,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>35.538738250732422</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -890,7 +890,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>89.15399169921875</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -915,7 +915,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>75.081092834472656</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -939,7 +939,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>89.926177978515625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -963,7 +963,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>110.88774108886719</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -987,7 +987,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>181.31062316894531</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -1011,7 +1011,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>151.95770263671875</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -1035,7 +1035,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>179.75910949707031</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>
@@ -1059,7 +1059,7 @@ YT-Video: https://www.youtube.com/watch?v=ejKPsNDmKD4</Description>
       <Z>177.40249633789063</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/whiteOrb.png</IconUri>
     <Category>Mursaat Tokens</Category>

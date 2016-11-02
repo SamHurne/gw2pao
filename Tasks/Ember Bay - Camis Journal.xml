@@ -19,7 +19,7 @@
       <Z>4.3954958915710449</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -43,7 +43,7 @@
       <Z>9.2387599945068359</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -67,7 +67,7 @@
       <Z>30.47027587890625</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -91,7 +91,7 @@
       <Z>13.454060554504395</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -115,7 +115,7 @@
       <Z>31.562414169311523</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -139,7 +139,7 @@
       <Z>61.770755767822266</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>
@@ -163,7 +163,7 @@
       <Z>56.371097564697266</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>1175</MapID>
     <IconUri>/Images/Map/bookBrown.png</IconUri>
     <Category>Cami's Journals</Category>

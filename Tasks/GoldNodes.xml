@@ -19,7 +19,7 @@
       <Z>185.92636108398438</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>17</MapID>
     <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
     <WaypointCode>[&amp;BLEAAAA=]</WaypointCode>
@@ -44,7 +44,7 @@
       <Z>18.033731460571289</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>21</MapID>
     <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
     <WaypointCode>[&amp;BEwBAAA=]</WaypointCode>
@@ -69,7 +69,7 @@
       <Z>118.42558288574219</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>26</MapID>
     <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
     <WaypointCode>[&amp;BFsCAAA=]</WaypointCode>
@@ -94,7 +94,7 @@
       <Z>59.998851776123047</Z>
     </Location>
     <AutoComplete>true</AutoComplete>
-    <ContinentId>0</ContinentId>
+    <ContinentId>1</ContinentId>
     <MapID>27</MapID>
     <IconUri>https://render.guildwars2.com/file/D9C17CE765F921332DEBCA44681DFA2DA8586A36/65926.png</IconUri>
     <WaypointCode>[&amp;BOYAAAA=]</WaypointCode>
