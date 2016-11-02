@@ -353,8 +353,16 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                    <fa:IconImage Icon="Check"
-                                                                  Foreground="White"/>
+                                                    <Grid Background="#00000001">
+                                                        <Path Stretch="Uniform"
+                                                              Stroke="Black"
+                                                              Fill="White"
+                                                              StrokeThickness="1.25"
+                                                              StrokeStartLineCap="Round"
+                                                              StrokeEndLineCap="Round"
+                                                              StrokeLineJoin="Round"
+                                                              Data="M -1,3.318  L4.687,8.863  L 16.328,-2.424  L 14.062,-4.773  4.687,4.318  1.226,0.931 z" />
+                                                    </Grid>
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
@@ -368,7 +376,7 @@
                                             <Trigger Property="IsMouseOver"
                                                      Value="True">
                                                 <Setter Property="Opacity"
-                                                        Value=".20" />
+                                                        Value=".30" />
                                                 <Setter Property="Height"
                                                         Value="35" />
                                                 <Setter Property="Width"
@@ -377,7 +385,7 @@
                                             <DataTrigger Binding="{Binding IsMouseOver, ElementName=TaskIconImage}"
                                                          Value="True">
                                                 <Setter Property="Opacity"
-                                                        Value=".20" />
+                                                        Value=".30" />
                                                 <Setter Property="Height"
                                                         Value="35" />
                                                 <Setter Property="Width"
