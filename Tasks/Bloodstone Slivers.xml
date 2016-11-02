@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerTask>
+    <ID>7bd91514-b7b6-4184-943f-a9fd61a57d8c</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>2848.6633034760789</X>
+      <Y>15084.647918954532</Y>
+      <Z>17164.61627937622</Z>
+    </ContinentLocation>
+    <Location>
+      <X>410.05532836914062</X>
+      <Y>167.85453796386719</Y>
+      <Z>435.98101806640625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>1052</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>35538186-d630-4c72-8361-02f151742de5</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>5302.8500691082</X>
+      <Y>14700.709244501431</Y>
+      <Z>12556.867997332764</Z>
+    </ContinentLocation>
+    <Location>
+      <X>267.52285766601562</X>
+      <Y>167.81715393066406</Y>
+      <Z>318.94427490234375</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>1015</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>5852efa9-d8fd-4345-ae52-b7e9f3955ce5</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>7473.9930220057013</X>
+      <Y>14783.969255649821</Y>
+      <Z>384.49236839284896</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-47.553028106689453</X>
+      <Y>663.26318359375</Y>
+      <Z>9.7661008834838867</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>54</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>399dcc45-2121-4a4c-abca-a36cfd9504de</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>11435.553712559828</X>
+      <Y>12002.059734803264</Y>
+      <Z>2223.8650278484347</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-129.50718688964844</X>
+      <Y>564.452880859375</Y>
+      <Z>56.486141204833984</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>15</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>5ee11889-8e50-484b-bca2-495075264764</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>15309.744739923095</X>
+      <Y>11522.532184971238</Y>
+      <Z>3396.4905344299318</Z>
+    </ContinentLocation>
+    <Location>
+      <X>203.45068359375</X>
+      <Y>-391.68740844726562</Y>
+      <Z>86.27081298828125</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>17</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>ee626421-a598-4f0a-b2d5-9f31227ffc47</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>6111.8492597541808</X>
+      <Y>20746.241288805835</Y>
+      <Z>15743.909311407471</Z>
+    </ContinentLocation>
+    <Location>
+      <X>136.45843505859375</X>
+      <Y>148.59523010253906</Y>
+      <Z>399.89508056640625</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>139</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>d0308c75-deb1-4b91-88da-fdbf1c5da42c</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>19004.214479488117</X>
+      <Y>23330.127256919353</Y>
+      <Z>4716.749560646057</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-431.4658203125</X>
+      <Y>-410.94775390625</Y>
+      <Z>119.80537414550781</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>39</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>c96ec247-2d90-4622-98b5-46c5835c2dda</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>20515.452748561922</X>
+      <Y>20679.211373933285</Y>
+      <Z>3358.3717759567262</Z>
+    </ContinentLocation>
+    <Location>
+      <X>255.69825744628906</X>
+      <Y>-511.58297729492188</Y>
+      <Z>85.302597045898438</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>29</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>54017520-6090-483e-bc0d-c8f4dd082145</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>31176.57939230906</X>
+      <Y>12389.141749731445</Y>
+      <Z>1682.0189780601502</Z>
+    </ContinentLocation>
+    <Location>
+      <X>590.4456787109375</X>
+      <Y>1108.775390625</Y>
+      <Z>42.723258972167969</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>20</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+  <PlayerTask>
+    <ID>c66dd772-0363-4d71-93fb-dd3f8b7f1f37</ID>
+    <Name>Bloodstone Sliver</Name>
+    <IsCompletable>true</IsCompletable>
+    <IsAccountCompleted>true</IsAccountCompleted>
+    <IsCompletedPerCharacter>false</IsCompletedPerCharacter>
+    <CharacterCompletions />
+    <IsDailyReset>false</IsDailyReset>
+    <ContinentLocation>
+      <X>21556.122861429216</X>
+      <Y>8816.1411817283624</Y>
+      <Z>1948.5333969955445</Z>
+    </ContinentLocation>
+    <Location>
+      <X>-436.39846801757812</X>
+      <Y>555.86883544921875</Y>
+      <Z>49.492721557617188</Z>
+    </Location>
+    <AutoComplete>true</AutoComplete>
+    <ContinentId>1</ContinentId>
+    <MapID>30</MapID>
+    <IconUri>https://render.guildwars2.com/file/0DA92F9059C30EF00DBC6CB0D233F235E17F12DD/1465570.png</IconUri>
+    <Category>Bloodstone Slivers</Category>
+  </PlayerTask>
+</ArrayOfPlayerTask>
