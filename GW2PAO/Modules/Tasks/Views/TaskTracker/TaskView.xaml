@@ -6,6 +6,7 @@
              xmlns:resx="clr-namespace:GW2PAO.Properties"
              xmlns:converters="clr-namespace:GW2PAO.Converters"
              xmlns:core="clr-namespace:GW2PAO.PresentationCore;assembly=GW2PAO.PresentationCore"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" d:DesignWidth="225"
              SnapsToDevicePixels="True"
              UseLayoutRounding="True"
@@ -88,7 +89,7 @@
         </Style>
     </UserControl.Style>
 
-    <Border Name="TaskMainPanel" CornerRadius="0" Margin="0" Padding="5,0,5,0"
+    <Border Name="TaskMainPanel" CornerRadius="0" Margin="0" Padding="5,0,0,0"
             Background="{StaticResource ItemMouseOverBackground}">
 
         <Border.Style>
@@ -160,11 +161,11 @@
                       IsChecked="{Binding IsCompleted}" />
 
             <Grid Grid.Column="3"
-                        Margin="0,0,0,0"
-                        Visibility="{Binding DisplayLocation, Converter={StaticResource BoolToVisibilityConverter}}"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="35">
+                  Margin="0,0,5,0"
+                  Visibility="{Binding DisplayLocation, Converter={StaticResource BoolToVisibilityConverter}}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Width="35">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -231,6 +232,47 @@
                         </core:OutlinedTextBlock.Style>
                     </core:OutlinedTextBlock>
                 </StackPanel>
+            </Grid>
+            <Grid Grid.Column="3"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Right"
+                  Margin="0,4,0,0">
+                <Path Stretch="Uniform"
+                      Stroke="Black"
+                      Fill="PaleGreen"
+                      Opacity="0.8"
+                      StrokeThickness=".75"
+                      StrokeStartLineCap="Round"
+                      StrokeEndLineCap="Round"
+                      StrokeLineJoin="Round"
+                      Data="M 5,0  L 10,8  L 5,6  L 0,8  L 5,0"
+                      Visibility="{Binding IsAbovePlayer, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <Path Stretch="Uniform"
+                      Stroke="Black"
+                      Fill="PaleGreen"
+                      Opacity="0.8"
+                      StrokeThickness=".5"
+                      StrokeStartLineCap="Round"
+                      StrokeEndLineCap="Round"
+                      StrokeLineJoin="Round"
+                      Data="M 5,8  L 10,0  L 5,2  L 0,0  L 5,8"
+                      Visibility="{Binding IsBelowPlayer, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <!-- Data="M 5,8  L 8,8  L 8,3  L 6,3  L 9,-1  L 12,3  L 10,3  L 10,10  L 5,10  L 5,8" -->
+                <!--<Path Stretch="Uniform"
+                      Stroke="Black"
+                      Fill="PaleGreen"
+                      StrokeThickness=".5"
+                      StrokeStartLineCap="Round"
+                      StrokeEndLineCap="Round"
+                      Data=" M  "
+                      Visibility="{Binding IsBelowPlayer, Converter={StaticResource BoolToVisibilityConverter}}" />-->
+                <!-- Data="M 5,0  L 10,7  L 5,4  L 0,7  L 5,0" -->
+                    <!--<fa:IconBlock Icon="AngleDoubleUp"
+                              Foreground="White"
+                              Visibility="{Binding IsAbovePlayer, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <fa:IconBlock Icon="AngleDoubleDown"
+                              Foreground="White"
+                              Visibility="{Binding IsBelowPlayer, Converter={StaticResource BoolToVisibilityConverter}}" />-->
             </Grid>
         </Grid>
     </Border>

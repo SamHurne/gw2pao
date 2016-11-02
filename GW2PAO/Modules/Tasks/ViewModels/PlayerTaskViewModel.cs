@@ -33,6 +33,8 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private bool isPlayerOnMap;
         private double distanceFromPlayer;
         private double directionFromPlayer;
+        private bool isAbovePlayer;
+        private bool isBelowPlayer;
         private bool isVisible;
 
         /// <summary>
@@ -181,6 +183,24 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             get { return this.directionFromPlayer; }
             set { SetProperty(ref this.directionFromPlayer, value); }
+        }
+
+        /// <summary>
+        /// True if the task is significantly above the player's position, else false
+        /// </summary>
+        public bool IsAbovePlayer
+        {
+            get { return this.isAbovePlayer; }
+            set { SetProperty(ref this.isAbovePlayer, value); }
+        }
+
+        /// <summary>
+        /// True if the task is significantly below the player's position, else false
+        /// </summary>
+        public bool IsBelowPlayer
+        {
+            get { return this.isBelowPlayer; }
+            set { SetProperty(ref this.isBelowPlayer, value); }
         }
 
         /// <summary>

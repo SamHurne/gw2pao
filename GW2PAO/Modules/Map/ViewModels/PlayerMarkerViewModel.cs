@@ -115,7 +115,8 @@ namespace GW2PAO.Modules.Map.ViewModels
                     var mapPoint = transform.Transform(this.location);
                     this.taskViewModel.Task.ContinentLocation = new Point(
                         ((this.continent.Width * mapPoint.X) / 360.0) + (continent.Width / 2),
-                        (continent.Height / 2) - ((mapPoint.Y * continent.Height) / 360.0));
+                        (continent.Height / 2) - ((mapPoint.Y * continent.Height) / 360.0),
+                        -1);
 
                     // Determine the map and set the map location accordingly
                     var map = zoneService.GetMap(this.continent.Id, this.taskViewModel.Task.ContinentLocation);
@@ -135,6 +136,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                         // Note: we really only do this to keep compatibility with pre-map player tasks (yea, not great I know...)
                         this.taskViewModel.Task.Location.X = this.taskViewModel.Task.Location.X / CalcUtil.MapConversionFactor;
                         this.taskViewModel.Task.Location.Y = this.taskViewModel.Task.Location.Y / CalcUtil.MapConversionFactor;
+                        this.taskViewModel.Task.Location.Z = -1;
                     }
                 }
             }
@@ -249,7 +251,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             bool isVisible = true;
 
-            isVisible &= this.taskViewModel.Task.ContinentId == currentContinentId;
+            //isVisible &= this.taskViewModel.Task.ContinentId == currentContinentId;
             isVisible &= !this.userData.HiddenMarkerCategories.Contains(this.TaskViewModel.Category);
 
             this.IsVisible = isVisible;

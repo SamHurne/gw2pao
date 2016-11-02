@@ -452,6 +452,8 @@ namespace GW2PAO.Modules.Tasks
         /// </summary>
         private void RefreshTaskDistancesAngles()
         {
+            const int ABOVE_BELOW_THRESHOLD = 150;
+
             this.CurrentMapID = this.playerService.MapId;
 
             var playerPos = this.playerService.PlayerPosition;
@@ -470,11 +472,16 @@ namespace GW2PAO.Modules.Tasks
                     var newAngle = CalcUtil.CalculateAngle(CalcUtil.Vector.CreateVector(playerMapPosition, taskMapPosition),
                                                            CalcUtil.Vector.CreateVector(new API.Data.Entities.Point(0, 0), cameraDirectionMapPosition));
 
+                    bool isAbove = (ptask.Task.Location.Z > 0) && (taskMapPosition.Z - playerMapPosition.Z > ABOVE_BELOW_THRESHOLD);
+                    bool isBelow = (ptask.Task.Location.Z > 0) && (playerMapPosition.Z - taskMapPosition.Z > ABOVE_BELOW_THRESHOLD);
+
                     Threading.BeginInvokeOnUI(() =>
                         {
                             ptask.IsPlayerOnMap = true;
                             ptask.DistanceFromPlayer = newDistance;
                             ptask.DirectionFromPlayer = newAngle;
+                            ptask.IsAbovePlayer = isAbove;
+                            ptask.IsBelowPlayer = isBelow;
                         });
 
                     // Check for auto-completion detection

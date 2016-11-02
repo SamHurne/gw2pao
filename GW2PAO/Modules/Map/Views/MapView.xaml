@@ -316,6 +316,34 @@
                                     </Style>
                                 </Image.Style>
                             </Image>
+                            <Grid IsHitTestVisible="False"
+                                  Height="10"
+                                  Margin="0,7,7,0"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Right">
+                                <Path Stretch="Uniform"
+                                      IsHitTestVisible="False"
+                                      Stroke="Black"
+                                      Fill="PaleGreen"
+                                      Opacity="0.8"
+                                      StrokeThickness=".75"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Data="M 5,0  L 10,8  L 5,6  L 0,8  L 5,0"
+                                      Visibility="{Binding TaskViewModel.IsAbovePlayer, Converter={StaticResource BoolToVisibility}}" />
+                                <Path Stretch="Uniform"
+                                      IsHitTestVisible="False"
+                                      Stroke="Black"
+                                      Fill="PaleGreen"
+                                      Opacity="0.8"
+                                      StrokeThickness=".5"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Data="M 5,8  L 10,0  L 5,2  L 0,0  L 5,8"
+                                      Visibility="{Binding TaskViewModel.IsBelowPlayer, Converter={StaticResource BoolToVisibility}}" />
+                            </Grid>
                             <CheckBox Name="IsCompletedCheckbox"
                                       IsChecked="{Binding IsTaskCompleted}"
                                       VerticalAlignment="Center"
