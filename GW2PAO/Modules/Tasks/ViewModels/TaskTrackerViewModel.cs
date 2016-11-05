@@ -39,9 +39,9 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         private IPlayerTasksController controller;
 
         /// <summary>
-        /// Container object for composing parts
+        /// View Model object for creating new tasks
         /// </summary>
-        private CompositionContainer container;
+        private NewTaskDialogViewModel newTaskViewModel;
 
         /// <summary>
         /// The backing collection of task categories
@@ -167,10 +167,10 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         [ImportingConstructor]
         public TaskTrackerViewModel(
             IPlayerTasksController playerTasksController,
-            CompositionContainer container)
+            NewTaskDialogViewModel newTaskVm)
         {
             this.controller = playerTasksController;
-            this.container = container;
+            this.newTaskViewModel = newTaskVm;
 
             this.AddNewTaskCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(this.AddNewTask);
             this.DeleteAllCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(this.DeleteAllTasks);
@@ -265,7 +265,7 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             logger.Info("Displaying add new task dialog");
             AddNewTaskDialog dialog = new AddNewTaskDialog();
-            this.container.ComposeParts(dialog);
+            dialog.TaskData = this.newTaskViewModel;
             dialog.Show();
         }
 

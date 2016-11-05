@@ -19,7 +19,7 @@ using NLog;
 namespace GW2PAO.Modules.Tasks.ViewModels
 {
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    [Export]
+    [Export(typeof(NewTaskDialogViewModel))]
     public class NewTaskDialogViewModel : BindableBase
     {
         /// <summary>
@@ -174,6 +174,11 @@ namespace GW2PAO.Modules.Tasks.ViewModels
             }
 
             this.controller.AddOrUpdateTask(this.Task);
+            this.Task = new PlayerTask(this.Task);
+            this.Task.ID = Guid.NewGuid();
+            this.Task.Name = string.Empty;
+            this.Task.Description = string.Empty;
+            this.Task.CharacterCompletions.Clear();
         }
     }
 }
