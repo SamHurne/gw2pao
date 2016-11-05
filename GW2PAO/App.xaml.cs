@@ -38,18 +38,26 @@ namespace GW2PAO
                 return;
             }
 
-            // Software only mode provides improved performance when using transparent windows
-            System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+            // Log application information
+            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+            logger.Info("Application starting - " + executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version + " - " + fvi.FileVersion + " - " + fvi.ProductVersion);
+
+            // Software only mode provides improved performance when using transparent windows and hardware acceleration is not available
+            if ((System.Windows.Media.RenderCapability.Tier >> 16) == 0)
+            {
+                logger.Info("Hardware acceleration unavailable - setting ProcessRenderMode to SoftwareOnly");
+                System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+            }
+            else
+            {
+                logger.Info("Hardware acceleration available - leaving ProcessRenderMode");
+            }
 
             base.OnStartup(e);
 
             this.InitializeSettings();
             this.InitializeLogging();
-
-            // Log application information
-            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(executingAssembly.Location);
-            logger.Info("Application starting - " + executingAssembly.GetName().Name + " - " + executingAssembly.GetName().Version + " - " + fvi.FileVersion + " - " + fvi.ProductVersion);
 
             // Initialize the last chance exception handlers
             logger.Debug("Registering last chance exception handlers");
