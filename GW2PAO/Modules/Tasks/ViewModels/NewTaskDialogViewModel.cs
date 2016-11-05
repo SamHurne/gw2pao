@@ -60,10 +60,14 @@ namespace GW2PAO.Modules.Tasks.ViewModels
         {
             get
             {
+                string name;
                 if (this.Task != null)
-                    return this.zoneService.GetZoneName(this.Task.MapID);
+                    name = this.zoneService.GetZoneName(this.Task.MapID);
                 else
-                    return string.Empty;
+                    name = string.Empty;
+                if (name.ToLower().Equals("unknown"))
+                    name = Properties.Resources.Unknown;
+                return name;
             }
         }
 
