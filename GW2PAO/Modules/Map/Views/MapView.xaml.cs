@@ -130,14 +130,15 @@ namespace GW2PAO.Modules.Map.Views
 
         private void MapMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
+            if (this.ViewModel.Drawings.PenEnabled)
+            {
+                this.ViewModel.Drawings.NewDrawing.BeginNewPolyline();
+                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Locations.Add(this.Map.ViewportPointToLocation(e.GetPosition(this.Map)));
+            }
+            else if (e.ClickCount == 2)
             {
                 this.Map.ZoomMap(e.GetPosition(this.Map), Math.Floor(this.Map.ZoomLevel + 1.5));
             }
-        }
-
-        private void TestMap_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
         }
 
         private void MapMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -150,19 +151,16 @@ namespace GW2PAO.Modules.Map.Views
 
         private void MapMouseMove(object sender, MouseEventArgs e)
         {
-        }
-
-        private void MapMouseLeave(object sender, MouseEventArgs e)
-        {
+            if (this.ViewModel.Drawings.PenEnabled && e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point mousePosition = e.GetPosition(this.Map);
+                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Locations.Add(this.Map.ViewportPointToLocation(mousePosition));
+            }
         }
 
         private void MapManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 0.0001;
-        }
-
-        private void MapItemTouchDown(object sender, TouchEventArgs e)
-        {
         }
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
@@ -196,6 +194,14 @@ namespace GW2PAO.Modules.Map.Views
                 // Open pop-up or other controls to let a user enter a name/description
                 //  - Maybe make this just bound to a bool on the view model of the object, something like "IsEditingName"?
             }
+        }
+
+        private void CollapseExpandDrawingPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.DrawingPanelContentsOpenIndicator.Visibility == Visibility.Visible)
+                this.DrawingPanelContentsOpenIndicator.Visibility = Visibility.Collapsed;
+            else
+                this.DrawingPanelContentsOpenIndicator.Visibility = Visibility.Visible;
         }
     }
 }

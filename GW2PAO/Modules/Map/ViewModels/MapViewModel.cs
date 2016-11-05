@@ -118,6 +118,15 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// ViewModel object containing all data associated with zone items
+        /// </summary>
+        public DrawingsViewModel Drawings
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// The maps user data
         /// </summary>
         public MapUserData UserData
@@ -136,6 +145,7 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.zoneService = zoneService;
             this.userData = userData;
 
+            this.Drawings = new DrawingsViewModel(zoneService, playerService, userData);
             this.CharacterPointer = new CharacterPointerViewModel(zoneController, userData);
             this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
 
