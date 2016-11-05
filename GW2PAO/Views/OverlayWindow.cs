@@ -106,7 +106,7 @@ namespace GW2PAO.Views
             this.IsClosed = false;
             this.Closed += (o, e) => this.IsClosed = true;
 
-            OverlayWindow.EventAggregator.GetEvent<GW2ProcessFocused>().Subscribe(o => Threading.BeginInvokeOnUI(() => User32.SetTopMost(this, true)));
+            OverlayWindow.EventAggregator.GetEvent<GW2ProcessFocused>().Subscribe(o => Threading.BeginInvokeOnUI(() => User32.SetTopMost(this, this.Topmost)));
         }
 
         /// <summary>

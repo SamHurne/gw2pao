@@ -27,6 +27,9 @@ namespace GW2PAO.Modules.Map.Views
         /// </summary>
         private double beforeCollapseHeight;
 
+        private bool neverClickThrough = false;
+        protected override bool NeverClickThrough { get { return this.neverClickThrough; } }
+
         /// <summary>
         /// View model
         /// </summary>
@@ -165,10 +168,14 @@ namespace GW2PAO.Modules.Map.Views
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Maximized;
+            this.Topmost = false;
+            this.neverClickThrough = true;
         }
 
         private void RestoreButton_Click(object sender, RoutedEventArgs e)
         {
+            this.Topmost = true;
+            this.neverClickThrough = false;
             this.WindowState = WindowState.Normal;
         }
 
