@@ -1155,50 +1155,39 @@
                         <Border Name="CollapseExpandDrawingPanel"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left"
-                                Margin="-15,0,0,20"
-                                Padding="3,3,4,3"
+                                Margin="-25,0,0,36"
+                                Padding="5,8,6,8"
                                 Background="#80FAFAD2"
                                 BorderBrush="Black"
                                 BorderThickness=".5,.5,0,.5"
                                 CornerRadius="2,0,0,2"
                                 MouseLeftButtonUp="CollapseExpandDrawingPanel_MouseLeftButtonUp">
-                            <Path VerticalAlignment="Center"
-                                  Data="M 0 0 L 8 10 L 0 20 Z"
-                                  Fill="Black"
-                                  RenderTransformOrigin="0.5,0.5">
-                                <Path.RenderTransform>
-                                    <RotateTransform x:Name="DrawingPanelToggleButtonRotation" Angle="180" />
-                                </Path.RenderTransform>
-                                <Path.Style>
-                                    <Style TargetType="Path">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"
-                                                         Value="Visible">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle"
-                                                                             From="180"
-                                                                             To="0"
-                                                                             Duration="00:00:00.1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.EnterActions>
-                                                <DataTrigger.ExitActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle"
-                                                                             From="0"
-                                                                             To="180"
-                                                                             Duration="00:00:00.1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </DataTrigger.ExitActions>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Path.Style>
-                            </Path>
+                            <Grid VerticalAlignment="Center">
+                                <fa:IconBlock Icon="Pencil"
+                                              VerticalAlignment="Center"
+                                              FontSize="16"
+                                              Foreground="Black">
+                                    <fa:IconBlock.Style>
+                                        <Style TargetType="fa:IconBlock">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"
+                                                             Value="Visible">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+
+                                        </Style>
+                                    </fa:IconBlock.Style>
+                                </fa:IconBlock>
+                                <fa:IconBlock Icon="Times"
+                                              VerticalAlignment="Center"
+                                              FontSize="16"
+                                              Foreground="Black"
+                                              Visibility="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"/>
+                            </Grid>
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Effect">
