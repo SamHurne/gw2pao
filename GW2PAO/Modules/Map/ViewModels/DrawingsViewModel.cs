@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
@@ -25,10 +26,12 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        private CharacterPointerViewModel charPointerVm;
         private IZoneService zoneService;
         private IPlayerService playerService;
         private MapUserData userData;
         private int currentContinentId;
+        private DrawingViewModel newDrawing;
         private bool penEnabled;
 
         /// <summary>
@@ -45,8 +48,8 @@ namespace GW2PAO.Modules.Map.ViewModels
         /// </summary>
         public DrawingViewModel NewDrawing
         {
-            get;
-            private set;
+            get { return this.newDrawing; }
+            private set { SetProperty(ref this.newDrawing, value); }
         }
 
         /// <summary>
@@ -68,11 +71,27 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
+        /// Command to copy the character's trail into the New Drawing
+        /// </summary>
+        public ICommand CopyCharacterTrailCommand { get; private set; }
+
+        /// <summary>
+        /// Command to clear the new drawing's data
+        /// </summary>
+        public ICommand ClearNewDrawingCommand { get; private set; }
+
+        /// <summary>
+        /// Command to save the new drawing
+        /// </summary>
+        public ICommand SaveNewDrawingCommand { get; private set; }
+
+        /// <summary>
         /// Constructs a new MarkersViewModel object
         /// </summary>
         [ImportingConstructor]
-        public DrawingsViewModel(IZoneService zoneService, IPlayerService playerService, MapUserData userData)
+        public DrawingsViewModel(CharacterPointerViewModel charPointerVm, IZoneService zoneService, IPlayerService playerService, MapUserData userData)
         {
+            this.charPointerVm = charPointerVm;
             this.zoneService = zoneService;
             this.playerService = playerService;
             this.userData = userData;
@@ -87,11 +106,13 @@ namespace GW2PAO.Modules.Map.ViewModels
                 this.currentContinentId = 1;
             }
 
-            this.NewDrawing = new DrawingViewModel(new Drawing(), this.currentContinentId);
-            this.PenEnabled = true;
-
+            this.NewDrawing = new DrawingViewModel(new Drawing(this.currentContinentId), this.currentContinentId, this.userData);
+            this.PenEnabled = false;
             this.Drawings = new ObservableCollection<DrawingViewModel>();
-            this.Drawings.Add(this.NewDrawing);
+            foreach (var drawing in userData.Drawings)
+                this.Drawings.Add(new DrawingViewModel(drawing, this.currentContinentId, this.userData));
+            this.Drawings.CollectionChanged += Drawings_CollectionChanged;
+            this.userData.Drawings.CollectionChanged += UserDataDrawings_CollectionChanged;
 
             this.PenColorOptions = new List<string>()
             {
@@ -104,6 +125,10 @@ namespace GW2PAO.Modules.Map.ViewModels
                 "#FFEA00",
                 "#FF6D00"
             };
+
+            this.CopyCharacterTrailCommand = new DelegateCommand(this.CopyCharacterTrail);
+            this.ClearNewDrawingCommand = new DelegateCommand(this.ClearNewDrawing);
+            this.SaveNewDrawingCommand = new DelegateCommand(this.SaveNewDrawing);
         }
 
         public void OnContinentChanged(int currentContinentId)
@@ -112,6 +137,92 @@ namespace GW2PAO.Modules.Map.ViewModels
             foreach (var drawing in this.Drawings)
             {
                 drawing.OnContinentChanged(currentContinentId);
+            }
+            this.ClearNewDrawing();
+        }
+
+        private void CopyCharacterTrail()
+        {
+            if (this.charPointerVm.PlayerTrail.Count > 1)
+            {
+                logger.Debug("Copying character trail into NewDrawing");
+                if (this.newDrawing.ActivePolyline.Count > 0)
+                    this.NewDrawing.BeginNewPolyline();
+                foreach (var location in this.charPointerVm.PlayerTrail)
+                {
+                    this.NewDrawing.ActivePolyline.Add(location);
+                }
+                this.NewDrawing.BeginNewPolyline();
+                this.charPointerVm.PlayerTrail.Clear();
+            }
+        }
+
+        private void ClearNewDrawing()
+        {
+            logger.Debug("Clearing NewDrawing contents");
+            this.NewDrawing.Polylines.Clear();
+            this.NewDrawing.ActivePolyline.Clear();
+        }
+
+        private void SaveNewDrawing()
+        {
+            logger.Debug("Saving NewDrawing");
+            this.Drawings.Add(this.NewDrawing);
+            this.NewDrawing = new DrawingViewModel(new Drawing(this.currentContinentId), this.currentContinentId, this.userData);
+        }
+
+        private void Drawings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (DrawingViewModel drawingVm in e.NewItems)
+                    {
+                        this.userData.Drawings.Add(drawingVm.Drawing);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (DrawingViewModel drawingVm in e.OldItems)
+                    {
+                        this.userData.Drawings.Remove(drawingVm.Drawing);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.userData.Drawings.Clear();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UserDataDrawings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Drawing drawing in e.NewItems)
+                    {
+                        if (!this.Drawings.Any(vm => vm.Drawing.ID == drawing.ID))
+                        {
+                            this.Drawings.Add(new DrawingViewModel(drawing, this.currentContinentId, this.userData));
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Drawing drawing in e.OldItems)
+                    {
+                        var drawingVm = this.Drawings.FirstOrDefault(vm => vm.Drawing.ID == drawing.ID);
+                        if (drawingVm != null)
+                        {
+                            this.Drawings.Remove(drawingVm);
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.Drawings.Clear();
+                    break;
+                default:
+                    break;
             }
         }
     }

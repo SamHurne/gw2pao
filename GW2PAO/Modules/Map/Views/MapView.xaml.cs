@@ -29,6 +29,7 @@ namespace GW2PAO.Modules.Map.Views
 
         private bool neverClickThrough = false;
         protected override bool NeverClickThrough { get { return this.neverClickThrough; } }
+        protected override bool SetNoFocus { get { return false; } }
 
         /// <summary>
         /// View model
@@ -133,7 +134,7 @@ namespace GW2PAO.Modules.Map.Views
             if (this.ViewModel.Drawings.PenEnabled)
             {
                 this.ViewModel.Drawings.NewDrawing.BeginNewPolyline();
-                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Locations.Add(this.Map.ViewportPointToLocation(e.GetPosition(this.Map)));
+                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(e.GetPosition(this.Map)));
             }
             else if (e.ClickCount == 2)
             {
@@ -154,7 +155,7 @@ namespace GW2PAO.Modules.Map.Views
             if (this.ViewModel.Drawings.PenEnabled && e.LeftButton == MouseButtonState.Pressed)
             {
                 Point mousePosition = e.GetPosition(this.Map);
-                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Locations.Add(this.Map.ViewportPointToLocation(mousePosition));
+                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(mousePosition));
             }
         }
 

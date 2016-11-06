@@ -10,14 +10,7 @@ using Microsoft.Practices.Prism.Mvvm;
 namespace GW2PAO.Modules.Map.Models
 {
     [Serializable]
-    public class PolyLine : BindableBase
-    {
-        private ObservableCollection<Location> locations = new ObservableCollection<Location>();
-        public ObservableCollection<Location> Locations
-        {
-            get { return this.locations; }
-        }
-    }
+    public class PolyLine : ObservableCollection<Location> { }
 
     [Serializable]
     public class Drawing : BindableBase
@@ -78,7 +71,17 @@ namespace GW2PAO.Modules.Map.Models
         public Drawing()
         {
             this.ID = Guid.NewGuid();
-            this.Color = "#000000";
+            this.Color = "#DD2C00";
+        }
+
+        /// <summary>
+        /// Constructs a new Drawing object
+        /// </summary>
+        /// <param name="continentId">ID of the continent the drawing is for</param>
+        public Drawing(int continentId)
+            : this()
+        {
+            this.ContinentId = continentId;
         }
     }
 }

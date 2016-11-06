@@ -145,9 +145,9 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.zoneService = zoneService;
             this.userData = userData;
 
-            this.Drawings = new DrawingsViewModel(zoneService, playerService, userData);
             this.CharacterPointer = new CharacterPointerViewModel(zoneController, userData);
             this.CharacterPointer.PropertyChanged += CharacterPointer_PropertyChanged;
+            this.Drawings = new DrawingsViewModel(this.CharacterPointer, zoneService, playerService, userData);
 
             this.MapMarkers = mapMarkers;
             this.ZoneItems = zoneItems;
@@ -179,6 +179,7 @@ namespace GW2PAO.Modules.Map.ViewModels
                 {
                     this.ContinentData = this.zoneController.ActiveContinent;
                     this.MapMarkers.OnContinentChanged(this.ContinentData.Id);
+                    this.Drawings.OnContinentChanged(this.ContinentData.Id);
                 }
             }
             else if (e.PropertyName == ReflectionUtility.GetPropertyName(() => this.zoneController.ActiveMap))
