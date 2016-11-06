@@ -1115,4 +1115,16 @@
   <data name="DeleteTasksConfirmation" xml:space="preserve">
     <value>Are you sure you want to delete all of your tasks?</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>Clear the current drawing</comment>
+  </data>
+  <data name="CopyCharTrail" xml:space="preserve">
+    <value>Copy Character Trail</value>
+    <comment>Copies the character's trail to the drawing</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>Save a drawing</comment>
+  </data>
 </root>

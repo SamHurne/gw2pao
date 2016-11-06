@@ -1158,6 +1158,8 @@
                                 Margin="-15,0,0,20"
                                 Padding="3,3,4,3"
                                 Background="#80FAFAD2"
+                                BorderBrush="Black"
+                                BorderThickness=".5,.5,0,.5"
                                 CornerRadius="2,0,0,2"
                                 MouseLeftButtonUp="CollapseExpandDrawingPanel_MouseLeftButtonUp">
                             <Path VerticalAlignment="Center"
@@ -1239,6 +1241,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0"
@@ -1363,111 +1366,150 @@
                                         Grid.Row="2"
                                         Margin="2,5,2,2"
                                         Command="{Binding Drawings.CopyCharacterTrailCommand}"
-                                        Content="[[Copy Character Trail]]" />
+                                        Content="{x:Static resx:Resources.CopyCharTrail}" />
 
                                 <Button Grid.Column="0"
                                         Grid.Row="3"
                                         Margin="2"
                                         Command="{Binding Drawings.ClearNewDrawingCommand}"
-                                        Content="[[Clear]]" />
+                                        Content="{x:Static resx:Resources.Clear}" />
 
                                 <Button Grid.Column="1"
                                         Grid.Row="3"
                                         Margin="2"
                                         Command="{Binding Drawings.SaveNewDrawingCommand}"
-                                        Content="[[Save]]" />
+                                        Content="{x:Static resx:Resources.Save}" />
                             </Grid>
 
-                            <ListView Grid.Row="2"
+                            <ListView Grid.Row="1"
                                       Margin="3"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ItemsSource="{Binding Source={StaticResource DrawingsView}}">
                                 <ListView.Resources>
-                                    <Style TargetType="GridViewColumnHeader">
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
                                         <Setter Property="Visibility"
                                                 Value="Collapsed" />
                                     </Style>
-                                    <Style TargetType="{x:Type fa:IconBlock}">
-                                        <Setter Property="Opacity"
-                                                Value="0.75" />
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="0"
-                                                                  Color="White"
-                                                                  Opacity="0"
-                                                                  BlurRadius="10" />
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver"
-                                                     Value="True">
-                                                <Setter Property="Opacity"
-                                                        Value="1" />
-                                                <Trigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation To="1"
-                                                                             Storyboard.TargetProperty="(Effect).Opacity"
-                                                                             Duration="00:00:00.1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </Trigger.EnterActions>
-                                                <Trigger.ExitActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation To="0"
-                                                                             Storyboard.TargetProperty="(Effect).Opacity"
-                                                                             Duration="00:00:0.1" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </Trigger.ExitActions>
-                                            </Trigger>
-                                        </Style.Triggers>
+                                    <Style TargetType="{x:Type ListViewItem}"
+                                           BasedOn="{StaticResource {x:Type ListViewItem}}">
+                                        <Setter Property="Margin"
+                                                Value="0" />
+                                        <Setter Property="Padding"
+                                                Value="1" />
+                                        <Setter Property="VerticalContentAlignment"
+                                                Value="Center" />
                                     </Style>
                                 </ListView.Resources>
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn>
+                                        <GridViewColumn Width="10">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Grid Margin="1">
-                                                        <core:OutlinedTextBlock Text="{Binding Name}" />
+                                                    <Rectangle HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Margin="-3,0,-6,0"
+                                                               Height="10"
+                                                               Width="5"
+                                                               Stroke="Black"
+                                                               StrokeThickness=".5"
+                                                               Fill="{Binding Color}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="110">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,2,0,2"
+                                                          VerticalAlignment="Center"
+                                                          MinHeight="20"
+                                                          MaxHeight="46">
+                                                        <core:OutlinedTextBlock Text="{Binding Name}"
+                                                                                VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Left" />
                                                     </Grid>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn>
+                                        <GridViewColumn Width="26">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Grid Margin="1">
-                                                        <CheckBox IsChecked="{Binding IsConfiguredVisible}"
-                                                                  Style="{StaticResource AlternateCheckboxStyle}"/>
-                                                        <!--<fa:IconBlock Icon="Eye">
-                                                            <fa:IconBlock.InputBindings>
-                                                                <MouseBinding Command="{Binding }"
-                                                                              MouseAction="LeftClick" />
-                                                            </fa:IconBlock.InputBindings>
-                                                        </fa:IconBlock>-->
-                                                    </Grid>
+                                                    <CheckBox VerticalAlignment="Center"
+                                                              IsChecked="{Binding IsConfiguredVisible}"
+                                                              Style="{StaticResource AlternateCheckboxStyle}" />
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn>
+                                        <GridViewColumn Width="24">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Grid Margin="1">
-                                                        <fa:IconBlock Icon="Trash">
-                                                            <fa:IconBlock.InputBindings>
-                                                                <MouseBinding Command="{Binding DeleteCommand}"
-                                                                              MouseAction="LeftClick" />
-                                                            </fa:IconBlock.InputBindings>
-                                                        </fa:IconBlock>
-                                                    </Grid>
+                                                    <fa:IconBlock Icon="Trash"
+                                                                  Margin="0,-2,0,0"
+                                                                  Foreground="LightGoldenrodYellow">
+                                                        <fa:IconBlock.InputBindings>
+                                                            <MouseBinding Command="{Binding DeleteCommand}"
+                                                                          MouseAction="LeftClick" />
+                                                        </fa:IconBlock.InputBindings>
+                                                        <fa:IconBlock.Style>
+                                                            <Style TargetType="{x:Type fa:IconBlock}">
+                                                                <Setter Property="Opacity"
+                                                                        Value="0.65" />
+                                                                <Setter Property="Effect">
+                                                                    <Setter.Value>
+                                                                        <DropShadowEffect ShadowDepth="0"
+                                                                                          Color="Black"
+                                                                                          Opacity="0"
+                                                                                          BlurRadius="4" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver"
+                                                                             Value="True">
+                                                                        <Setter Property="Opacity"
+                                                                                Value="1" />
+                                                                        <Trigger.EnterActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation To="1"
+                                                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                     Duration="00:00:00" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.EnterActions>
+                                                                        <Trigger.ExitActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation To="0"
+                                                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                     Duration="00:00:00" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.ExitActions>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </fa:IconBlock.Style>
+                                                    </fa:IconBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
+
+                            <Grid Grid.Row="2"
+                                  Margin="0,1,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Margin="3,0"
+                                        Content="{x:Static resx:Resources.Import}" />
+                                <Button Grid.Column="1"
+                                        Margin="3,0"
+                                        Content="{x:Static resx:Resources.Export}" />
+                            </Grid>
 
                             <Rectangle Name="DrawingPanelContentsOpenIndicator"
                                        Height="0"

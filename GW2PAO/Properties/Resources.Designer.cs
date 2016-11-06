@@ -448,6 +448,15 @@ namespace GW2PAO.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -498,6 +507,15 @@ namespace GW2PAO.Properties {
         public static string Configure {
             get {
                 return ResourceManager.GetString("Configure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Character Trail.
+        /// </summary>
+        public static string CopyCharTrail {
+            get {
+                return ResourceManager.GetString("CopyCharTrail", resourceCulture);
             }
         }
         
@@ -1740,6 +1758,15 @@ namespace GW2PAO.Properties {
         public static string SaleFee {
             get {
                 return ResourceManager.GetString("SaleFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
