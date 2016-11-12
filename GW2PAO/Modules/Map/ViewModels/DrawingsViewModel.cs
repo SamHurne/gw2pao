@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel.Composition;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
+using System.Xml.Serialization;
 using GW2PAO.API.Services.Interfaces;
 using GW2PAO.Modules.Map.Models;
 using GW2PAO.Modules.Tasks;
@@ -13,6 +15,7 @@ using GW2PAO.Modules.Tasks.ViewModels;
 using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Win32;
 using NLog;
 
 namespace GW2PAO.Modules.Map.ViewModels
@@ -139,6 +142,8 @@ namespace GW2PAO.Modules.Map.ViewModels
             this.CopyCharacterTrailCommand = new DelegateCommand(this.CopyCharacterTrail);
             this.ClearNewDrawingCommand = new DelegateCommand(this.ClearNewDrawing);
             this.SaveNewDrawingCommand = new DelegateCommand(this.SaveNewDrawing);
+            this.ImportDrawingsCommand = new DelegateCommand(this.ImportDrawings);
+            this.ExportDrawingsCommand = new DelegateCommand(this.ExportDrawing);
         }
 
         public void OnContinentChanged(int currentContinentId)
@@ -183,6 +188,7 @@ namespace GW2PAO.Modules.Map.ViewModels
 
         private void Drawings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            this.userData.Drawings.CollectionChanged -= UserDataDrawings_CollectionChanged;
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -203,10 +209,12 @@ namespace GW2PAO.Modules.Map.ViewModels
                 default:
                     break;
             }
+            this.userData.Drawings.CollectionChanged += UserDataDrawings_CollectionChanged;
         }
 
         private void UserDataDrawings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            this.Drawings.CollectionChanged -= Drawings_CollectionChanged;
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -233,6 +241,77 @@ namespace GW2PAO.Modules.Map.ViewModels
                     break;
                 default:
                     break;
+            }
+            this.Drawings.CollectionChanged += Drawings_CollectionChanged;
+        }
+
+        private void ImportDrawings()
+        {
+            logger.Info("Importing drawings");
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.Filter = "Drawing Files (*.xml)|*.xml";
+            openFileDialog.Multiselect = false;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                logger.Info("Importing drawings from {0}", openFileDialog.FileName);
+
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<Drawing>));
+                List<Drawing> loadedDrawings = null;
+
+                try
+                {
+                    using (TextReader reader = new StreamReader(openFileDialog.FileName))
+                    {
+                        loadedDrawings = (List<Drawing>)deserializer.Deserialize(reader);
+                    }
+
+                    Threading.InvokeOnUI(() =>
+                    {
+                        foreach (var drawing in loadedDrawings)
+                        {
+                            if (this.userData.Drawings.All(d => d.ID != drawing.ID))
+                            {
+                                this.userData.Drawings.Add(drawing);
+                            }
+                        }
+                    });
+
+                    logger.Info("Successfully imported drawings from {0}", openFileDialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Unable to import drawings!");
+                    logger.Error(ex);
+                }
+            }
+        }
+
+        private void ExportDrawing()
+        {
+            var toExport = new List<Drawing>(this.Drawings.Where(d => d.IsSelected).Select(d => d.Drawing));
+            if (toExport.Count > 0)
+            {
+                logger.Info("Exporting selected drawings");
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.DefaultExt = ".xml";
+                saveFileDialog.Filter = "Drawing Files (*.xml)|*.xml";
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    logger.Info("Exporting selected drawings to {0}", saveFileDialog.FileName);
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Drawing>));
+
+                    using (TextWriter writer = new StreamWriter(saveFileDialog.FileName))
+                    {
+                        serializer.Serialize(writer, toExport);
+                    }
+                    logger.Info("Successfully exported drawings to {0}", saveFileDialog.FileName);
+
+                }
             }
         }
     }

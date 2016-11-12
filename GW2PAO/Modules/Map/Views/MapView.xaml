@@ -1397,8 +1397,7 @@
                                       Margin="3"
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ItemsSource="{Binding Source={StaticResource DrawingsView}}"
-                                      SelectionMode="Multiple"
-                                      core:ListViewBehaviour.AutoUnselectItem="True">
+                                      SelectionMode="Multiple">
                                 <ListView.Resources>
                                     <Style TargetType="{x:Type GridViewColumnHeader}">
                                         <Setter Property="Visibility"
@@ -1523,10 +1522,12 @@
 
                                 <Button Grid.Column="0"
                                         Margin="3,0"
-                                        Content="{x:Static resx:Resources.Import}" />
+                                        Content="{x:Static resx:Resources.Import}"
+                                        Command="{Binding Drawings.ImportDrawingsCommand}"/>
                                 <Button Grid.Column="1"
                                         Margin="3,0"
-                                        Content="{x:Static resx:Resources.Export}" />
+                                        Content="{x:Static resx:Resources.Export}"
+                                        Command="{Binding Drawings.ExportDrawingsCommand}"/>
                             </Grid>
 
                             <Rectangle Name="DrawingPanelContentsOpenIndicator"
