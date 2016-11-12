@@ -734,6 +734,8 @@
                                             <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
                                                 <Setter Property="IsCheckable"
                                                         Value="True" />
+                                                <Setter Property="StaysOpenOnClick"
+                                                        Value="True" />
                                                 <Setter Property="IsChecked">
                                                     <Setter.Value>
                                                         <MultiBinding Converter="{StaticResource CategoryToIsVisibleConverter}"
