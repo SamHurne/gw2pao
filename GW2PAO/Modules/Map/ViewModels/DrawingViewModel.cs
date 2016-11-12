@@ -23,6 +23,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         private MapUserData userData;
         private int currentContinentId;
         private PolyLine activePolyline;
+        private bool isSelected;
         private bool isVisible;
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
-        /// True if this marker is configured as visible, else false
+        /// True if this drawing is configured as visible, else false
         /// </summary>
         public bool IsConfiguredVisible
         {
@@ -113,12 +114,21 @@ namespace GW2PAO.Modules.Map.ViewModels
         }
 
         /// <summary>
-        /// True if this marker is set as visible, else false
+        /// True if this drawing is set as visible, else false
         /// </summary>
         public bool IsVisible
         {
             get { return this.isVisible; }
             set { SetProperty(ref this.isVisible, value); }
+        }
+
+        /// <summary>
+        /// True if this drawing is selected in the list of drawings, else false
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return this.isSelected; }
+            set { SetProperty(ref this.isSelected, value); }
         }
 
         /// <summary>

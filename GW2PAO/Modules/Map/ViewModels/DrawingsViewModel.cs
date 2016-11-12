@@ -86,6 +86,16 @@ namespace GW2PAO.Modules.Map.ViewModels
         public ICommand SaveNewDrawingCommand { get; private set; }
 
         /// <summary>
+        /// Command to import drawings
+        /// </summary>
+        public ICommand ImportDrawingsCommand { get; private set; }
+
+        /// <summary>
+        /// Command to export drawings
+        /// </summary>
+        public ICommand ExportDrawingsCommand { get; private set; }
+
+        /// <summary>
         /// Constructs a new MarkersViewModel object
         /// </summary>
         [ImportingConstructor]

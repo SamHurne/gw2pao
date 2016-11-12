@@ -212,6 +212,39 @@ namespace GW2PAO.Modules.Map.Views
             else
                 this.DrawingPanelContentsOpenIndicator.Visibility = Visibility.Visible;
         }
+
+        private void OnDrawingDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListViewItem)
+            {
+                var drawing = (DrawingViewModel)((ListViewItem)sender).DataContext;
+
+                // Calculate center point of the drawing
+                double x = 0, y = 0, z = 0;
+                int count = 0;
+                foreach (var polyline in drawing.Polylines)
+                {
+                    foreach (var location in polyline)
+                    {
+                        var latitude = location.Latitude * Math.PI / 180;
+                        var longitude = location.Longitude * Math.PI / 180;
+                        x += Math.Cos(latitude) * Math.Cos(longitude);
+                        y += Math.Cos(latitude) * Math.Sin(longitude);
+                        z += Math.Sin(latitude);
+                        count++;
+                    }
+                }
+                x /= count;
+                y /= count;
+                z /= count;
+                var centralLongitude = Math.Atan2(y, x);
+                var centralSquareRoot = Math.Sqrt(x * x + y * y);
+                var centralLatitude = Math.Atan2(z, centralSquareRoot);
+
+                // Set the maps' center
+                this.Map.TargetCenter = new Location(centralLatitude * 180 / Math.PI, centralLongitude * 180 / Math.PI);
+            }
+        }
     }
 }
 

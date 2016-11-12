@@ -97,6 +97,23 @@
             <ItemsControl ItemsSource="{Binding Polylines}"
                           ItemTemplate="{StaticResource PolyineDataTemplate}"
                           Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}"
+                                         Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="White"
+                                                          Opacity="1"
+                                                          BlurRadius="10"
+                                                          ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
             </ItemsControl>
         </DataTemplate>
 
@@ -1379,7 +1396,9 @@
                             <ListView Grid.Row="1"
                                       Margin="3"
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                      ItemsSource="{Binding Source={StaticResource DrawingsView}}">
+                                      ItemsSource="{Binding Source={StaticResource DrawingsView}}"
+                                      SelectionMode="Multiple"
+                                      core:ListViewBehaviour.AutoUnselectItem="True">
                                 <ListView.Resources>
                                     <Style TargetType="{x:Type GridViewColumnHeader}">
                                         <Setter Property="Visibility"
@@ -1393,6 +1412,10 @@
                                                 Value="1" />
                                         <Setter Property="VerticalContentAlignment"
                                                 Value="Center" />
+                                        <Setter Property="IsSelected"
+                                                Value="{Binding Mode=TwoWay, Path=IsSelected}" />
+                                        <EventSetter Event="MouseDoubleClick"
+                                                     Handler="OnDrawingDoubleClick" />
                                     </Style>
                                 </ListView.Resources>
                                 <ListView.View>
