@@ -9,6 +9,7 @@ using System.Windows.Input;
 using GW2PAO.PresentationCore.DragDrop;
 using GW2PAO.Modules.Map.Interfaces;
 using MapControl;
+using System.Windows.Data;
 
 namespace GW2PAO.Modules.Map.Views
 {
@@ -27,6 +28,7 @@ namespace GW2PAO.Modules.Map.Views
         /// </summary>
         private double beforeCollapseHeight;
 
+        private int mouseMoveThrottleCount = 0;
         private bool neverClickThrough = false;
         protected override bool NeverClickThrough { get { return this.neverClickThrough; } }
         protected override bool SetNoFocus { get { return false; } }
@@ -133,6 +135,7 @@ namespace GW2PAO.Modules.Map.Views
         {
             if (this.ViewModel.Drawings.PenEnabled)
             {
+                mouseMoveThrottleCount = 0;
                 this.ViewModel.Drawings.NewDrawing.BeginNewPolyline();
                 this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(e.GetPosition(this.Map)));
             }
@@ -154,8 +157,13 @@ namespace GW2PAO.Modules.Map.Views
         {
             if (this.ViewModel.Drawings.PenEnabled && e.LeftButton == MouseButtonState.Pressed)
             {
-                Point mousePosition = e.GetPosition(this.Map);
-                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(mousePosition));
+                mouseMoveThrottleCount++;
+                if (mouseMoveThrottleCount % 5 == 0)
+                {
+                    Point mousePosition = e.GetPosition(this.Map);
+                    this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(mousePosition));
+                    this.NewDrawingControl.Items.Refresh(); // Force a refresh so the line updates immediately                
+                }
             }
         }
 
