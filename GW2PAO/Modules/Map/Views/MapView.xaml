@@ -19,8 +19,8 @@
                    d:DesignHeight="200"
                    Top="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewY}"
                    Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
-                   MinWidth="200"
-                   MinHeight="200"
+                   MinWidth="250"
+                   MinHeight="250"
                    Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
                    Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"
                    WindowStyle="None"
@@ -1139,11 +1139,11 @@
                         Grid.Column="2"
                         Grid.RowSpan="5"
                         Margin="0,-16,-5,-5">
-                    <Grid Width="175">
+                    <Grid Width="200">
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Margin"
-                                        Value="0,0,-180,0" />
+                                        Value="0,0,-205,0" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"
                                                  Value="Visible">
@@ -1153,7 +1153,7 @@
                                                     <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
                                                                                       BeginTime="00:00:00">
                                                         <SplineThicknessKeyFrame KeyTime="00:00:00"
-                                                                                 Value="0,0,-180,0" />
+                                                                                 Value="0,0,-205,0" />
                                                         <SplineThicknessKeyFrame KeyTime="00:00:00.1"
                                                                                  Value="0,0,0,0" />
                                                     </ThicknessAnimationUsingKeyFrames>
@@ -1168,7 +1168,7 @@
                                                         <SplineThicknessKeyFrame KeyTime="00:00:00"
                                                                                  Value="0,0,0,0" />
                                                         <SplineThicknessKeyFrame KeyTime="00:00:00.1"
-                                                                                 Value="0,0,-180,0" />
+                                                                                 Value="0,0,-205,0" />
                                                     </ThicknessAnimationUsingKeyFrames>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -1435,7 +1435,7 @@
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Width="110">
+                                        <GridViewColumn Width="135">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="0,2,0,2"
