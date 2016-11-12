@@ -121,7 +121,7 @@
     <value>A propos</value>
   </data>
   <data name="ActiveFor" xml:space="preserve">
-    <value>actif pour</value>
+    <value>depuis</value>
     <comment>Example: "active for 00:10:07"</comment>
   </data>
   <data name="ActiveIn" xml:space="preserve">
@@ -242,6 +242,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Château</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Notes</value>
+  </data>
   <data name="CenterOnChar" xml:space="preserve">
     <value>Centrer sur le Personnage</value>
   </data>
@@ -250,6 +253,10 @@
   </data>
   <data name="ClaimedBy" xml:space="preserve">
     <value>Revendiqué par:</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Effacer</value>
+    <comment>Clear the current drawing</comment>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
@@ -270,6 +277,10 @@
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Configurer</value>
+  </data>
+  <data name="CopyCharTrail" xml:space="preserve">
+    <value>Copier le trajet du personnage</value>
+    <comment>Copies the character's trail to the drawing</comment>
   </data>
   <data name="CopyChatCode" xml:space="preserve">
     <value>Copier dans le chan</value>
@@ -334,6 +345,14 @@
   <data name="DeleteAll" xml:space="preserve">
     <value>Supprimer tout</value>
   </data>
+  <data name="DeleteCategoryConfirmation" xml:space="preserve">
+    <value>Souhaitez-vous supprimer toutes les tâches de cette catégorie ?</value>
+    <comment>Dialog message</comment>
+  </data>
+  <data name="DeleteTasksConfirmation" xml:space="preserve">
+    <value>Souhaitez-vous supprimer toutes vos tâches ?</value>
+    <comment>Dialog message</comment>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -382,6 +401,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
+  </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Editer la catégorie</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
     <value>Activer tout</value>
@@ -583,6 +605,9 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>Aucun résultat</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Durée des Notifications (sec)</value>
     <comment>Amount of time that notifications stay open</comment>
@@ -733,6 +758,10 @@
   <data name="SaleFee" xml:space="preserve">
     <value>Taxes de vente:</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+    <comment>Save a drawing</comment>
+  </data>
   <data name="SellListing" xml:space="preserve">
     <value>Liste de vente</value>
     <comment>A sale listing, where a player is listing an item to sell</comment>
@@ -829,6 +858,10 @@
   <data name="ShowTasksNotOnMap" xml:space="preserve">
     <value>Montrer les tâches situées sur d'autres cartes</value>
   </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Montrer les messages écrits TS</value>
+    <comment>For the teamspeak overlay</comment>
+  </data>
   <data name="ShowTimerValue" xml:space="preserve">
     <value>Montrer la durée du cycle</value>
   </data>
@@ -841,6 +874,10 @@
   </data>
   <data name="ShowVistas" xml:space="preserve">
     <value>Montrer les Panoramas</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Montrer le chat vocal TS</value>
+    <comment>For the teamspeak overlay</comment>
   </data>
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Montrer les boutons "Copier le point de passage"</value>
@@ -984,6 +1021,9 @@
     <value>Traductions par:</value>
     <comment>Followed by a list of names (the translators)</comment>
   </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Non classé</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Inconnu</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
@@ -1003,6 +1043,9 @@
   </data>
   <data name="Vertical" xml:space="preserve">
     <value>Vertical</value>
+  </data>
+  <data name="VisibleCategories" xml:space="preserve">
+    <value>Catégories visibles</value>
   </data>
   <data name="Vistas" xml:space="preserve">
     <value>Panoramas</value>
@@ -1086,16 +1129,5 @@ Lorsqu'un objectif est capturé par un autre monde chez l'ennemi</value>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Assistant d'exploration</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Remarques</value>
-  </data>
-  <data name="ShowTextChat" xml:space="preserve">
-    <value>Voir le texte chat</value>
-    <comment>For the teamspeak overlay</comment>
-  </data>
-  <data name="ShowVoiceChat" xml:space="preserve">
-    <value>Afficher Voice Chat</value>
-    <comment>For the teamspeak overlay</comment>
   </data>
 </root>

@@ -244,6 +244,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Castillos</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
   <data name="CenterOnChar" xml:space="preserve">
     <value>Centro de Carácter</value>
   </data>
@@ -252,6 +255,10 @@
   </data>
   <data name="ClaimedBy" xml:space="preserve">
     <value>Reclamado por:</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Claro</value>
+    <comment>Clear the current drawing</comment>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Cerrar</value>
@@ -272,6 +279,10 @@
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Configurar</value>
+  </data>
+  <data name="CopyCharTrail" xml:space="preserve">
+    <value>Copia Trail Carácter</value>
+    <comment>Copies the character's trail to the drawing</comment>
   </data>
   <data name="CopyChatCode" xml:space="preserve">
     <value>Copiar código de chat</value>
@@ -337,6 +348,14 @@
   <data name="DeleteAll" xml:space="preserve">
     <value>Borrar todo</value>
   </data>
+  <data name="DeleteCategoryConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea borrar todas las tareas en esta categoría?</value>
+    <comment>Dialog message</comment>
+  </data>
+  <data name="DeleteTasksConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea borrar todas las tareas?</value>
+    <comment>Dialog message</comment>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
@@ -385,6 +404,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editar</value>
+  </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Editar categoría</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
     <value>Activar todo</value>
@@ -588,6 +610,9 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>No se han encontrado resultados</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>notas</value>
+  </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Duración de las notificaciones</value>
     <comment>Amount of time that notifications stay open</comment>
@@ -737,6 +762,10 @@
   <data name="SaleFee" xml:space="preserve">
     <value>Impuesto de venta:</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salvar</value>
+    <comment>Save a drawing</comment>
+  </data>
   <data name="SellListing" xml:space="preserve">
     <value>Lista de venta
 </value>
@@ -835,6 +864,10 @@
   <data name="ShowTasksNotOnMap" xml:space="preserve">
     <value>Mostrar tareas de otros mapas</value>
   </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Mostrar charla de texto</value>
+    <comment>For the teamspeak overlay</comment>
+  </data>
   <data name="ShowTimerValue" xml:space="preserve">
     <value>Mostrar temporizador Valor</value>
   </data>
@@ -847,6 +880,10 @@
   </data>
   <data name="ShowVistas" xml:space="preserve">
     <value>Mostrar Vistas</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Mostrar chat de voz</value>
+    <comment>For the teamspeak overlay</comment>
   </data>
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Mostrar botones para copiar los Puntos de ruta</value>
@@ -899,10 +936,10 @@
     <comment>Time-distances, which are estimated time to travel based on distanced</comment>
   </data>
   <data name="TimeUntilDay" xml:space="preserve">
-    <value>Tiempo hasta la noche</value>
+    <value>Tiempo hasta el día</value>
   </data>
   <data name="TimeUntilNight" xml:space="preserve">
-    <value>Tiempo hasta el día</value>
+    <value>Tiempo hasta la noche</value>
   </data>
   <data name="Toggle World Boss Timers" xml:space="preserve">
     <value>Alternar Mundial de Boss temporizadores</value>
@@ -994,6 +1031,9 @@
     <value>Traducciones por:</value>
     <comment>Followed by a list of names (the translators)</comment>
   </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Sin categoría</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Desconocido</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
@@ -1013,6 +1053,9 @@
   </data>
   <data name="Vertical" xml:space="preserve">
     <value>Vertical</value>
+  </data>
+  <data name="VisibleCategories" xml:space="preserve">
+    <value>Categorías visibles</value>
   </data>
   <data name="Vistas" xml:space="preserve">
     <value>Vistas</value>
@@ -1095,14 +1138,5 @@
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Asistente de exploración de mapa</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>notas</value>
-  </data>
-  <data name="ShowTextChat" xml:space="preserve">
-    <value>Mostrar charla de texto</value>
-  </data>
-  <data name="ShowVoiceChat" xml:space="preserve">
-    <value>Mostrar chat de voz</value>
   </data>
 </root>

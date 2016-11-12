@@ -242,6 +242,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Castles</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>категория</value>
+  </data>
   <data name="CenterOnChar" xml:space="preserve">
     <value>Центр по характеру</value>
   </data>
@@ -250,6 +253,10 @@
   </data>
   <data name="ClaimedBy" xml:space="preserve">
     <value>Claimed By:</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+    <comment>Clear the current drawing</comment>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
@@ -270,6 +277,10 @@
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Настройка</value>
+  </data>
+  <data name="CopyCharTrail" xml:space="preserve">
+    <value>Копирование символов Trail</value>
+    <comment>Copies the character's trail to the drawing</comment>
   </data>
   <data name="CopyChatCode" xml:space="preserve">
     <value>Копировать Чат-Код</value>
@@ -334,6 +345,14 @@
   <data name="DeleteAll" xml:space="preserve">
     <value>Удалить все</value>
   </data>
+  <data name="DeleteCategoryConfirmation" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить все задачи в этой категории?</value>
+    <comment>Dialog message</comment>
+  </data>
+  <data name="DeleteTasksConfirmation" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить все ваши задачи?</value>
+    <comment>Dialog message</comment>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
@@ -382,6 +401,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
+  </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Изменение категории</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
     <value>Включить все</value>
@@ -583,6 +605,9 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>Результатов не найдено</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Заметки</value>
+  </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Длительность оповещения (сек)</value>
     <comment>Amount of time that notifications stay open</comment>
@@ -732,6 +757,10 @@
   <data name="SaleFee" xml:space="preserve">
     <value>Налог:</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Save a drawing</comment>
+  </data>
   <data name="SellListing" xml:space="preserve">
     <value>Sell Listing</value>
     <comment>A sale listing, where a player is listing an item to sell</comment>
@@ -828,6 +857,10 @@
   <data name="ShowTasksNotOnMap" xml:space="preserve">
     <value>Показать задачи вне текущей зоны</value>
   </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Показать Текстовый чат</value>
+    <comment>For the teamspeak overlay</comment>
+  </data>
   <data name="ShowTimerValue" xml:space="preserve">
     <value>Показать Таймер Значение</value>
   </data>
@@ -840,6 +873,10 @@
   </data>
   <data name="ShowVistas" xml:space="preserve">
     <value>Показать Vistas</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Показать Голосовой чат</value>
+    <comment>For the teamspeak overlay</comment>
   </data>
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Показать кнопку копирования кода Waypoint</value>
@@ -983,6 +1020,9 @@
     <value>Перевод:</value>
     <comment>Followed by a list of names (the translators)</comment>
   </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Без</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Неизвестно</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
@@ -1002,6 +1042,9 @@
   </data>
   <data name="Vertical" xml:space="preserve">
     <value>Вертикально</value>
+  </data>
+  <data name="VisibleCategories" xml:space="preserve">
+    <value>Видимые Категории</value>
   </data>
   <data name="Vistas" xml:space="preserve">
     <value>Vistas</value>
@@ -1084,14 +1127,5 @@
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Помощник открытия зон</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Заметки</value>
-  </data>
-  <data name="ShowTextChat" xml:space="preserve">
-    <value>Показать Текстовый чат</value>
-  </data>
-  <data name="ShowVoiceChat" xml:space="preserve">
-    <value>Показать Голосовой чат</value>
   </data>
 </root>

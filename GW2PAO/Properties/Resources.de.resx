@@ -242,6 +242,9 @@
   <data name="Castles" xml:space="preserve">
     <value>Schlösser</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
   <data name="CenterOnChar" xml:space="preserve">
     <value>Center auf Zeichen</value>
   </data>
@@ -250,6 +253,10 @@
   </data>
   <data name="ClaimedBy" xml:space="preserve">
     <value>Beansprucht von:</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Klar</value>
+    <comment>Clear the current drawing</comment>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Schließen</value>
@@ -270,6 +277,10 @@
   </data>
   <data name="Configure" xml:space="preserve">
     <value>Konfigurieren</value>
+  </data>
+  <data name="CopyCharTrail" xml:space="preserve">
+    <value>Kopieren Zeichen Trail</value>
+    <comment>Copies the character's trail to the drawing</comment>
   </data>
   <data name="CopyChatCode" xml:space="preserve">
     <value>Kopiere Chat-Code</value>
@@ -334,6 +345,14 @@
   <data name="DeleteAll" xml:space="preserve">
     <value>Alle löschen</value>
   </data>
+  <data name="DeleteCategoryConfirmation" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie alle Aufgaben in dieser Kategorie zu löschen?</value>
+    <comment>Dialog message</comment>
+  </data>
+  <data name="DeleteTasksConfirmation" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie alle Ihre Aufgaben zu löschen?</value>
+    <comment>Dialog message</comment>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
@@ -382,6 +401,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
+  </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Kategorie bearbeiten</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
     <value>Alle aktivieren</value>
@@ -583,6 +605,9 @@
   <data name="NoResultsFound" xml:space="preserve">
     <value>Keine Ergebnisse gefunden</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
   <data name="NotificationsDuration" xml:space="preserve">
     <value>Dauer der Benachrichtigung (sek)</value>
     <comment>Amount of time that notifications stay open</comment>
@@ -732,6 +757,10 @@
   <data name="SaleFee" xml:space="preserve">
     <value>Verkaufsgebühr:</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>sparen</value>
+    <comment>Save a drawing</comment>
+  </data>
   <data name="SellListing" xml:space="preserve">
     <value>Verkaufsangebot</value>
     <comment>A sale listing, where a player is listing an item to sell</comment>
@@ -828,6 +857,10 @@
   <data name="ShowTasksNotOnMap" xml:space="preserve">
     <value>Aufgaben auf aktueller Karte nicht anzeigen</value>
   </data>
+  <data name="ShowTextChat" xml:space="preserve">
+    <value>Zeigen Text-Chat</value>
+    <comment>For the teamspeak overlay</comment>
+  </data>
   <data name="ShowTimerValue" xml:space="preserve">
     <value>Anzeigen Timer-Wert</value>
   </data>
@@ -840,6 +873,10 @@
   </data>
   <data name="ShowVistas" xml:space="preserve">
     <value>Zeige Vistas</value>
+  </data>
+  <data name="ShowVoiceChat" xml:space="preserve">
+    <value>Anzeigen Voice Chat</value>
+    <comment>For the teamspeak overlay</comment>
   </data>
   <data name="ShowWaypointCopyButtons" xml:space="preserve">
     <value>Zeige Button um Wegpunkt-Code zu kopieren</value>
@@ -984,6 +1021,9 @@ Gebietsabschluss-Assistent umschalten</value>
     <value>Übersetzungen von:</value>
     <comment>Followed by a list of names (the translators)</comment>
   </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unbekannt</value>
     <comment>WvW Header when player isn't on a WvW map</comment>
@@ -1003,6 +1043,9 @@ Gebietsabschluss-Assistent umschalten</value>
   </data>
   <data name="Vertical" xml:space="preserve">
     <value>Vertikal</value>
+  </data>
+  <data name="VisibleCategories" xml:space="preserve">
+    <value>Sichtbare Kategorien</value>
   </data>
   <data name="Vistas" xml:space="preserve">
     <value>Vistas</value>
@@ -1085,14 +1128,5 @@ Gebietsabschluss-Assistent umschalten</value>
   </data>
   <data name="ZoneCompletionAssistant" xml:space="preserve">
     <value>Zonen-Komplettierungs-Assistent</value>
-  </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Notizen</value>
-  </data>
-  <data name="ShowTextChat" xml:space="preserve">
-    <value>Zeigen Text-Chat</value>
-  </data>
-  <data name="ShowVoiceChat" xml:space="preserve">
-    <value>Anzeigen Voice Chat</value>
   </data>
 </root>
