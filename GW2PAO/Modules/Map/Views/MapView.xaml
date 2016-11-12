@@ -595,10 +595,16 @@
                    dd:DragDropHelper.OnDrop="Map_OnDrop">
             <ctrls:Map.Style>
                 <Style TargetType="ctrls:Map">
-                    <Setter Property="ManipulationMode" Value="All" />
+                    <Setter Property="ManipulationMode"
+                            Value="All" />
+                    <Setter Property="Cursor"
+                            Value="Arrow" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Drawings.PenEnabled}" Value="True">
-                            <Setter Property="ManipulationMode" Value="None" />
+                            <Setter Property="ManipulationMode"
+                                    Value="None" />
+                            <Setter Property="Cursor"
+                                    Value="Pen" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
