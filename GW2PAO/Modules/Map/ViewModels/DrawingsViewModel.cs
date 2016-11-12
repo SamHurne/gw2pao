@@ -16,6 +16,7 @@ using GW2PAO.PresentationCore;
 using GW2PAO.Utility;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using NLog;
 
 namespace GW2PAO.Modules.Map.ViewModels
@@ -251,20 +252,20 @@ namespace GW2PAO.Modules.Map.ViewModels
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.CheckPathExists = true;
-            openFileDialog.Filter = "Drawing Files (*.xml)|*.xml";
+            openFileDialog.Filter = "Drawing Files (*.json)|*.json";
             openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == true)
             {
                 logger.Info("Importing drawings from {0}", openFileDialog.FileName);
 
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<Drawing>));
+                JsonSerializer deserializer = new JsonSerializer();
                 List<Drawing> loadedDrawings = null;
 
                 try
                 {
                     using (TextReader reader = new StreamReader(openFileDialog.FileName))
                     {
-                        loadedDrawings = (List<Drawing>)deserializer.Deserialize(reader);
+                        loadedDrawings = (List<Drawing>)deserializer.Deserialize(reader, typeof(List<Drawing>));
                     }
 
                     Threading.InvokeOnUI(() =>
@@ -299,11 +300,11 @@ namespace GW2PAO.Modules.Map.ViewModels
                 saveFileDialog.CheckPathExists = true;
                 saveFileDialog.AddExtension = true;
                 saveFileDialog.DefaultExt = ".xml";
-                saveFileDialog.Filter = "Drawing Files (*.xml)|*.xml";
+                saveFileDialog.Filter = "Drawing Files (*.json)|*.json";
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     logger.Info("Exporting selected drawings to {0}", saveFileDialog.FileName);
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<Drawing>));
+                    JsonSerializer serializer = new JsonSerializer();
 
                     using (TextWriter writer = new StreamWriter(saveFileDialog.FileName))
                     {
