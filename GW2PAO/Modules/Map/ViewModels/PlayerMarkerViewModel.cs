@@ -251,7 +251,7 @@ namespace GW2PAO.Modules.Map.ViewModels
         {
             bool isVisible = true;
 
-            //isVisible &= this.taskViewModel.Task.ContinentId == currentContinentId;
+            isVisible &= this.taskViewModel.Task.ContinentId == currentContinentId;
             isVisible &= !this.userData.HiddenMarkerCategories.Contains(this.TaskViewModel.Category);
 
             this.IsVisible = isVisible;
