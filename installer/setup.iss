@@ -3,7 +3,7 @@
 
 #define MyAppName "Guild Wars 2 Personal Assistant Overlay"
 #define MyAppNameShort "GW2 Personal Assistant Overlay"
-#define MyAppVersion "4.0Beta2"
+#define MyAppVersion "4.0Beta3"
 #define MyAppPublisher "Samuel Hurne"
 #define MyAppURL "http://samhurne.github.io/gw2pao/"
 #define MyAppExeName "GW2PAO.exe"
@@ -47,6 +47,8 @@ Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\NLog.config"; DestDir: "{app}"
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\StandardEventTimeTable.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\ThirdPartyLicenses.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\WvWObjectives.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Drawings\Guild Bounty - 2-MULT.json"; DestDir: "{app}\Drawings"; Flags: ignoreversion
+Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Drawings\Guild Bounty - Bookworm Bwikki.json"; DestDir: "{app}\Drawings"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\CopperNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\CypressNodes.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
 Source: "..\GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\DailyCrafting.xml"; DestDir: "{app}\Tasks"; Flags: ignoreversion
@@ -115,6 +117,7 @@ Name: "Browser"; Description: "Include Web Browser Feature"; Types: full
 
 [Dirs]
 Name: "{app}\UserData"; Flags: uninsneveruninstall; Permissions: users-full
+Name: "{app}\Drawings"; Flags: uninsneveruninstall; Permissions: users-full
 Name: "{app}\Tasks"; Flags: uninsneveruninstall; Permissions: users-full
 Name: "{app}\Logs"; Permissions: users-full
 Name: "{app}\Locale"; Flags: uninsalwaysuninstall; Permissions: users-full

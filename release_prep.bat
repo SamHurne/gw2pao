@@ -52,6 +52,7 @@ xcopy AnetCopyright.txt GW2PAO\bin\x86\Release\ /Y
 xcopy LICENSE.txt GW2PAO\bin\x86\Release\ /Y
 xcopy ThirdPartyLicenses.txt GW2PAO\bin\x86\Release\ /Y
 xcopy Tasks GW2PAO\bin\x86\Release\Tasks\ /Y /S /E
+xcopy Drawings GW2PAO\bin\x86\Release\Drawings\ /Y /S /E
 
 REM --------------------- Release_NoBrowser ---------------------
 pushd GW2PAO\bin\x86\Release_WithoutBrowser
@@ -115,3 +116,4 @@ xcopy AnetCopyright.txt GW2PAO\bin\x86\Release_WithoutBrowser\ /Y
 xcopy LICENSE.txt GW2PAO\bin\x86\Release_WithoutBrowser\ /Y
 xcopy ThirdPartyLicenses.txt GW2PAO\bin\x86\Release_WithoutBrowser\ /Y
 xcopy Tasks GW2PAO\bin\x86\Release_WithoutBrowser\Tasks\ /Y /S /E
+xcopy Drawings GW2PAO\bin\x86\Release_WithoutBrowser\Drawings\ /Y /S /E
