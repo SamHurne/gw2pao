@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using GW2PAO.Modules.Map.Models;
+using System.Collections.Specialized;
 
 namespace GW2PAO.Modules.Map
 {
@@ -42,6 +44,9 @@ namespace GW2PAO.Modules.Map
         private bool showPlayerMarkers;
 
         private ObservableCollection<string> hiddenMarkerCategories = new ObservableCollection<string>();
+
+        private ObservableCollection<Drawing> drawings = new ObservableCollection<Drawing>();
+        private ObservableCollection<Guid> hiddenDrawings = new ObservableCollection<Guid>();
 
         /// <summary>
         /// True if Heart Quests are shown on the map, else false
@@ -166,6 +171,16 @@ namespace GW2PAO.Modules.Map
         public ObservableCollection<string> HiddenMarkerCategories { get { return this.hiddenMarkerCategories; } }
 
         /// <summary>
+        /// Collection of map drawings
+        /// </summary>
+        public ObservableCollection<Drawing> Drawings { get { return this.drawings; } }
+
+        /// <summary>
+        /// Collection of hidden drawings' IDs
+        /// </summary>
+        public ObservableCollection<Guid> HiddenDrawings { get { return this.hiddenDrawings; } }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public MapUserData()
@@ -193,6 +208,20 @@ namespace GW2PAO.Modules.Map
             logger.Info("Enabling auto save");
             this.PropertyChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
             this.HiddenMarkerCategories.CollectionChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
+
+            this.Drawings.CollectionChanged += (o, e) =>
+            {
+                MapUserData.SaveData(this, MapUserData.Filename);
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                {
+                    foreach (Drawing drawing in e.NewItems)
+                        drawing.PropertyChanged += (obj, arg) => MapUserData.SaveData(this, MapUserData.Filename);
+                }
+            };
+            foreach (var drawing in this.Drawings)
+                drawing.PropertyChanged += (obj, arg) => MapUserData.SaveData(this, MapUserData.Filename);
+
+            this.HiddenDrawings.CollectionChanged += (o, e) => MapUserData.SaveData(this, MapUserData.Filename);
         }
     }
 }

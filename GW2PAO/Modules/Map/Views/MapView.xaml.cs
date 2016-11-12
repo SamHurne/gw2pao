@@ -9,6 +9,7 @@ using System.Windows.Input;
 using GW2PAO.PresentationCore.DragDrop;
 using GW2PAO.Modules.Map.Interfaces;
 using MapControl;
+using System.Windows.Data;
 
 namespace GW2PAO.Modules.Map.Views
 {
@@ -27,8 +28,10 @@ namespace GW2PAO.Modules.Map.Views
         /// </summary>
         private double beforeCollapseHeight;
 
+        private int mouseMoveThrottleCount = 0;
         private bool neverClickThrough = false;
         protected override bool NeverClickThrough { get { return this.neverClickThrough; } }
+        protected override bool SetNoFocus { get { return false; } }
 
         /// <summary>
         /// View model
@@ -130,14 +133,16 @@ namespace GW2PAO.Modules.Map.Views
 
         private void MapMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
+            if (this.ViewModel.Drawings.PenEnabled)
+            {
+                mouseMoveThrottleCount = 0;
+                this.ViewModel.Drawings.NewDrawing.BeginNewPolyline();
+                this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(e.GetPosition(this.Map)));
+            }
+            else if (e.ClickCount == 2)
             {
                 this.Map.ZoomMap(e.GetPosition(this.Map), Math.Floor(this.Map.ZoomLevel + 1.5));
             }
-        }
-
-        private void TestMap_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
         }
 
         private void MapMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -150,19 +155,21 @@ namespace GW2PAO.Modules.Map.Views
 
         private void MapMouseMove(object sender, MouseEventArgs e)
         {
-        }
-
-        private void MapMouseLeave(object sender, MouseEventArgs e)
-        {
+            if (this.ViewModel.Drawings.PenEnabled && e.LeftButton == MouseButtonState.Pressed)
+            {
+                mouseMoveThrottleCount++;
+                if (mouseMoveThrottleCount % 5 == 0)
+                {
+                    Point mousePosition = e.GetPosition(this.Map);
+                    this.ViewModel.Drawings.NewDrawing.ActivePolyline.Add(this.Map.ViewportPointToLocation(mousePosition));
+                    this.NewDrawingControl.Items.Refresh(); // Force a refresh so the line updates immediately                
+                }
+            }
         }
 
         private void MapManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 0.0001;
-        }
-
-        private void MapItemTouchDown(object sender, TouchEventArgs e)
-        {
         }
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
@@ -195,6 +202,47 @@ namespace GW2PAO.Modules.Map.Views
                 // TODO:
                 // Open pop-up or other controls to let a user enter a name/description
                 //  - Maybe make this just bound to a bool on the view model of the object, something like "IsEditingName"?
+            }
+        }
+
+        private void CollapseExpandDrawingPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.DrawingPanelContentsOpenIndicator.Visibility == Visibility.Visible)
+                this.DrawingPanelContentsOpenIndicator.Visibility = Visibility.Collapsed;
+            else
+                this.DrawingPanelContentsOpenIndicator.Visibility = Visibility.Visible;
+        }
+
+        private void OnDrawingDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListViewItem)
+            {
+                var drawing = (DrawingViewModel)((ListViewItem)sender).DataContext;
+
+                // Calculate center point of the drawing
+                double x = 0, y = 0, z = 0;
+                int count = 0;
+                foreach (var polyline in drawing.Polylines)
+                {
+                    foreach (var location in polyline)
+                    {
+                        var latitude = location.Latitude * Math.PI / 180;
+                        var longitude = location.Longitude * Math.PI / 180;
+                        x += Math.Cos(latitude) * Math.Cos(longitude);
+                        y += Math.Cos(latitude) * Math.Sin(longitude);
+                        z += Math.Sin(latitude);
+                        count++;
+                    }
+                }
+                x /= count;
+                y /= count;
+                z /= count;
+                var centralLongitude = Math.Atan2(y, x);
+                var centralSquareRoot = Math.Sqrt(x * x + y * y);
+                var centralLatitude = Math.Atan2(z, centralSquareRoot);
+
+                // Set the maps' center
+                this.Map.TargetCenter = new Location(centralLatitude * 180 / Math.PI, centralLongitude * 180 / Math.PI);
             }
         }
     }

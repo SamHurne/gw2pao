@@ -19,12 +19,13 @@
                    d:DesignHeight="200"
                    Top="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewY}"
                    Left="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewX}"
-                   MinWidth="150"
+                   MinWidth="200"
+                   MinHeight="200"
                    Width="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewWidth}"
                    Height="{Binding Source={x:Static resx:Settings.Default}, Path=MapViewHeight}"
                    WindowStyle="None"
                    AllowsTransparency="False"
-                   Background="Black"
+                   Background="Transparent"
                    ResizeMode="NoResize"
                    Topmost="True"
                    ShowInTaskbar="False"
@@ -84,15 +85,37 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="PolylineItemStyle" TargetType="map:MapItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="map:MapItem">
-                        <map:MapPolyline Locations="{Binding Locations}" Stroke="Red" StrokeThickness="3"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <DataTemplate x:Key="PolyineDataTemplate">
+            <map:MapPolyline Locations="{Binding}"
+                             Stroke="{Binding DataContext.Color, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                             StrokeThickness="3"
+                             Opacity="0.85">
+            </map:MapPolyline>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DrawingItemTemplate">
+            <ItemsControl ItemsSource="{Binding Polylines}"
+                          ItemTemplate="{StaticResource PolyineDataTemplate}"
+                          Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}"
+                                         Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="White"
+                                                          Opacity="1"
+                                                          BlurRadius="10"
+                                                          ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
+            </ItemsControl>
+        </DataTemplate>
 
         <Style x:Key="ZoneItemStyle" TargetType="map:MapItem">
             <Setter Property="map:MapPanel.Location">
@@ -564,6 +587,12 @@
                              IsSynchronizedWithCurrentItem="True"
                              SelectionMode="Extended" />
 
+        <core:AutoRefreshCollectionViewSource Source="{Binding Drawings.Drawings}"
+                                              x:Key="DrawingsView">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </core:AutoRefreshCollectionViewSource>
 
     </src:OverlayWindow.Resources>
 
@@ -574,9 +603,7 @@
                    MouseWheelZoomDelta="0.5"
                    MouseLeftButtonDown="MapMouseLeftButtonDown"
                    MouseRightButtonDown="MapMouseRightButtonDown"
-                   MouseLeftButtonUp="TestMap_MouseLeftButtonUp"
                    MouseMove="MapMouseMove"
-                   MouseLeave="MapMouseLeave"
                    ManipulationInertiaStarting="MapManipulationInertiaStarting"
                    TileLayer="{StaticResource GuildWars2TileLayer}"
                    TargetCenter="{Binding MapCenter}"
@@ -585,14 +612,31 @@
                    dd:DragDropHelper.OnDrop="Map_OnDrop">
             <ctrls:Map.Style>
                 <Style TargetType="ctrls:Map">
-                    <Setter Property="ManipulationMode" Value="All" />
+                    <Setter Property="ManipulationMode"
+                            Value="All" />
+                    <Setter Property="Cursor"
+                            Value="Arrow" />
                     <Style.Triggers>
-                        <!--<DataTrigger Binding="{Binding PenEnabled}" Value="True">
-                                <Setter Property="ManipulationMode" Value="None" />
-                            </DataTrigger>-->
+                        <DataTrigger Binding="{Binding Drawings.PenEnabled}" Value="True">
+                            <Setter Property="ManipulationMode"
+                                    Value="None" />
+                            <Setter Property="Cursor"
+                                    Value="Pen" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </ctrls:Map.Style>
+
+            <map:MapItemsControl Name="DrawingsControl"
+                                 ItemsSource="{Binding Drawings.Drawings}"
+                                 ItemTemplate="{StaticResource DrawingItemTemplate}"
+                                 IsSynchronizedWithCurrentItem="True" />
+
+            <ItemsControl Name="NewDrawingControl"
+                          DataContext="{Binding Drawings.NewDrawing}"
+                          ItemsSource="{Binding Polylines}"
+                          ItemTemplate="{StaticResource PolyineDataTemplate}">
+            </ItemsControl>
 
             <map:MapItemsControl ItemsSource="{Binding ZoneItems.Waypoints}"
                                  ItemContainerStyle="{StaticResource ZoneItemStyle}"
@@ -636,13 +680,6 @@
 
             <map:MapItem Name="CharacterMarker"
                          Style="{StaticResource CharacterPositionMarkerStyle}" />
-
-            <!--<map:MapItemsControl Name="PenLinesControl"
-                                 ItemsSource="{Binding PenLines}"
-                                 ItemTemplate="{StaticResource PolylineItemTemplate}"
-                                 IsSynchronizedWithCurrentItem="True"/>-->
-
-            
         </ctrls:Map>
 
         <Grid>
@@ -650,10 +687,15 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
             <Border Name="TitleBar"
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                     Grid.Row="0"
+                    Grid.ColumnSpan="2"
                     Background="#80000000">
                 <Grid Margin="5,0,0,0"
                       Height="30">
@@ -881,7 +923,7 @@
                     <RowDefinition Height="35" />
                     <RowDefinition Height="35" />
                     <RowDefinition Height="35" />
-                    <RowDefinition Height="35" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <Button Name="RestoreButton"
@@ -1091,6 +1133,411 @@
                     </ItemsControl>
                 </ctrls:MapSettingControl>
 
+                <Border Name="DrawingPanel"
+                        Grid.Column="2"
+                        Grid.RowSpan="5"
+                        Margin="0,-16,-5,-5">
+                    <Grid Width="175">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin"
+                                        Value="0,0,-180,0" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"
+                                                 Value="Visible">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                                      BeginTime="00:00:00">
+                                                        <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                                 Value="0,0,-180,0" />
+                                                        <SplineThicknessKeyFrame KeyTime="00:00:00.1"
+                                                                                 Value="0,0,0,0" />
+                                                    </ThicknessAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"
+                                                                                      BeginTime="00:00:00">
+                                                        <SplineThicknessKeyFrame KeyTime="00:00:00"
+                                                                                 Value="0,0,0,0" />
+                                                        <SplineThicknessKeyFrame KeyTime="00:00:00.1"
+                                                                                 Value="0,0,-180,0" />
+                                                    </ThicknessAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Border Name="CollapseExpandDrawingPanel"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                Margin="-25,0,0,36"
+                                Padding="5,8,6,8"
+                                Background="#80FAFAD2"
+                                BorderBrush="Black"
+                                BorderThickness=".5,.5,0,.5"
+                                CornerRadius="2,0,0,2"
+                                MouseLeftButtonUp="CollapseExpandDrawingPanel_MouseLeftButtonUp">
+                            <Grid VerticalAlignment="Center">
+                                <fa:IconBlock Icon="Pencil"
+                                              VerticalAlignment="Center"
+                                              FontSize="16"
+                                              Foreground="Black">
+                                    <fa:IconBlock.Style>
+                                        <Style TargetType="fa:IconBlock">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"
+                                                             Value="Visible">
+                                                    <Setter Property="Visibility"
+                                                            Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+
+                                        </Style>
+                                    </fa:IconBlock.Style>
+                                </fa:IconBlock>
+                                <fa:IconBlock Icon="Times"
+                                              VerticalAlignment="Center"
+                                              FontSize="16"
+                                              Foreground="Black"
+                                              Visibility="{Binding Visibility, ElementName=DrawingPanelContentsOpenIndicator}"/>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="0"
+                                                              Color="White"
+                                                              Opacity="0"
+                                                              BlurRadius="3" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation To="1"
+                                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                                         Duration="00:00:00.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation To="0"
+                                                                         Storyboard.TargetProperty="(Effect).Opacity"
+                                                                         Duration="00:00:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        
+                        <Grid Name="DrawingPanelContents"
+                              Background="#80000000">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0"
+                                  Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0"
+                                      Grid.ColumnSpan="2">
+                                    <TextBox Name="DrawingNameTextbox"
+                                             IsReadOnly="False"
+                                             IsHitTestVisible="True"
+                                             Margin="5"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Stretch"
+                                             Text="{Binding Drawings.NewDrawing.Name}" />
+                                    <TextBlock IsHitTestVisible="False"
+                                               Margin="10,0,0,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Foreground="DarkGray"
+                                               Text="{x:Static resx:Resources.Name}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=DrawingNameTextbox}"
+                                                                 Value="">
+                                                        <Setter Property="Visibility"
+                                                                Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Grid>
+
+                                <StackPanel Grid.Row="1"
+                                            Grid.ColumnSpan="2"
+                                            Orientation="Horizontal">
+
+                                    <ToggleButton Name="PenEnabledToggleButton"
+                                                  IsChecked="{Binding Drawings.PenEnabled}"
+                                                  Margin="4,5,5,5"
+                                                  Width="26"
+                                                  Height="26"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left">
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border BorderThickness="1"
+                                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <Border Margin="1"
+                                                            Background="{TemplateBinding Background}">
+                                                        <fa:IconBlock Icon="Pencil"
+                                                                      VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"
+                                                                      FontSize="16"
+                                                                      Foreground="{TemplateBinding Foreground}" />
+                                                    </Border>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="BorderBrush"
+                                                        Value="Transparent" />
+                                                <Setter Property="Background"
+                                                        Value="Transparent" />
+                                                <Setter Property="Foreground"
+                                                        Value="#AAFAFAD2" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+                                                        <Setter Property="BorderBrush"
+                                                                Value="#A0FAFAD2" />
+                                                        <Setter Property="Background"
+                                                                Value="#20FAFAD2" />
+                                                        <Setter Property="Foreground"
+                                                                Value="#FFFAFAD2" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver"
+                                                             Value="True">
+                                                        <Setter Property="BorderBrush"
+                                                                Value="#C0FAFAD2" />
+                                                        <Setter Property="Background"
+                                                                Value="#40FAFAD2" />
+                                                        <Setter Property="Foreground"
+                                                                Value="#FFFAFAD2" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed"
+                                                             Value="True">
+                                                        <Setter Property="BorderBrush"
+                                                                Value="#D0FAFAD2" />
+                                                        <Setter Property="Background"
+                                                                Value="#60FAFAD2" />
+                                                        <Setter Property="Foreground"
+                                                                Value="#FFFAFAD2" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+
+                                    <ctrl:ColorPicker Margin="5,0,5,0"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      SelectedColor="{Binding Drawings.NewDrawing.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      ColorOptions="{Binding Drawings.PenColorOptions}" />
+                                </StackPanel>
+
+                                <Button Grid.ColumnSpan="2"
+                                        Grid.Row="2"
+                                        Margin="2,5,2,2"
+                                        Command="{Binding Drawings.CopyCharacterTrailCommand}"
+                                        Content="{x:Static resx:Resources.CopyCharTrail}" />
+
+                                <Button Grid.Column="0"
+                                        Grid.Row="3"
+                                        Margin="2"
+                                        Command="{Binding Drawings.ClearNewDrawingCommand}"
+                                        Content="{x:Static resx:Resources.Clear}" />
+
+                                <Button Grid.Column="1"
+                                        Grid.Row="3"
+                                        Margin="2"
+                                        Command="{Binding Drawings.SaveNewDrawingCommand}"
+                                        Content="{x:Static resx:Resources.Save}" />
+                            </Grid>
+
+                            <ListView Grid.Row="1"
+                                      Margin="3"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                      ItemsSource="{Binding Source={StaticResource DrawingsView}}"
+                                      SelectionMode="Multiple">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="Visibility"
+                                                Value="Collapsed" />
+                                    </Style>
+                                    <Style TargetType="{x:Type ListViewItem}"
+                                           BasedOn="{StaticResource {x:Type ListViewItem}}">
+                                        <Setter Property="Margin"
+                                                Value="0" />
+                                        <Setter Property="Padding"
+                                                Value="1" />
+                                        <Setter Property="VerticalContentAlignment"
+                                                Value="Center" />
+                                        <Setter Property="IsSelected"
+                                                Value="{Binding Mode=TwoWay, Path=IsSelected}" />
+                                        <EventSetter Event="MouseDoubleClick"
+                                                     Handler="OnDrawingDoubleClick" />
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="10">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Rectangle HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Margin="-3,0,-6,0"
+                                                               Height="10"
+                                                               Width="5"
+                                                               Stroke="Black"
+                                                               StrokeThickness=".5"
+                                                               Fill="{Binding Color}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="110">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,2,0,2"
+                                                          VerticalAlignment="Center"
+                                                          MinHeight="20"
+                                                          MaxHeight="46">
+                                                        <core:OutlinedTextBlock Text="{Binding Name}"
+                                                                                VerticalAlignment="Center"
+                                                                                HorizontalAlignment="Left" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="26">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox VerticalAlignment="Center"
+                                                              IsChecked="{Binding IsConfiguredVisible}"
+                                                              Style="{StaticResource AlternateCheckboxStyle}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="24">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <fa:IconBlock Icon="Trash"
+                                                                  Margin="0,-2,0,0"
+                                                                  Foreground="LightGoldenrodYellow">
+                                                        <fa:IconBlock.InputBindings>
+                                                            <MouseBinding Command="{Binding DeleteCommand}"
+                                                                          MouseAction="LeftClick" />
+                                                        </fa:IconBlock.InputBindings>
+                                                        <fa:IconBlock.Style>
+                                                            <Style TargetType="{x:Type fa:IconBlock}">
+                                                                <Setter Property="Opacity"
+                                                                        Value="0.65" />
+                                                                <Setter Property="Effect">
+                                                                    <Setter.Value>
+                                                                        <DropShadowEffect ShadowDepth="0"
+                                                                                          Color="Black"
+                                                                                          Opacity="0"
+                                                                                          BlurRadius="4" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver"
+                                                                             Value="True">
+                                                                        <Setter Property="Opacity"
+                                                                                Value="1" />
+                                                                        <Trigger.EnterActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation To="1"
+                                                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                     Duration="00:00:00" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.EnterActions>
+                                                                        <Trigger.ExitActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation To="0"
+                                                                                                     Storyboard.TargetProperty="(Effect).Opacity"
+                                                                                                     Duration="00:00:00" />
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.ExitActions>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </fa:IconBlock.Style>
+                                                    </fa:IconBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                            <Grid Grid.Row="2"
+                                  Margin="0,1,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Margin="3,0"
+                                        Content="{x:Static resx:Resources.Import}"
+                                        Command="{Binding Drawings.ImportDrawingsCommand}"/>
+                                <Button Grid.Column="1"
+                                        Margin="3,0"
+                                        Content="{x:Static resx:Resources.Export}"
+                                        Command="{Binding Drawings.ExportDrawingsCommand}"/>
+                            </Grid>
+
+                            <Rectangle Name="DrawingPanelContentsOpenIndicator"
+                                       Height="0"
+                                       Width="0"
+                                       Visibility="Collapsed"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Setter Property="Opacity"
@@ -1126,7 +1573,7 @@
                     </Style>
                 </Grid.Style>
             </Grid>
-
+            
         </Grid>
 
         <Grid Name="ResizeGripper">

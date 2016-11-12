@@ -310,7 +310,10 @@
     <Compile Include="Modules\Map\MapModule.cs" />
     <Compile Include="Modules\Map\MapUserData.cs" />
     <Compile Include="Modules\Map\MapViewController.cs" />
+    <Compile Include="Modules\Map\Models\Drawing.cs" />
     <Compile Include="Modules\Map\ViewModels\CharacterPointerViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\DrawingsViewModel.cs" />
+    <Compile Include="Modules\Map\ViewModels\DrawingViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\PlayerMarkerViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\PlayerMarkersViewModel.cs" />
     <Compile Include="Modules\Map\ViewModels\ZoneItemsViewModel.cs" />
@@ -1065,7 +1068,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Tasks\" />
-    <Folder Include="Modules\Map\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Zone\hearts.png" />
