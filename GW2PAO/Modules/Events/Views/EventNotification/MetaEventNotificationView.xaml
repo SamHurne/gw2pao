@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              TextOptions.TextFormattingMode="Display"
              UseLayoutRounding="True"
-             Height="60" Width="230">
+             Height="60" Width="300">
 
     <UserControl.Resources>
         <converters:EventStateConverter x:Key="StateConverter" />
@@ -61,7 +61,7 @@
                 Padding="5,5,5,2">
 
             <Border.Background>
-                <VisualBrush Viewport="0,0,230,50" ViewportUnits="Absolute" Opacity="0.75">
+                <VisualBrush Viewport="0,0,300,50" ViewportUnits="Absolute" Opacity="0.75">
                     <VisualBrush.Visual>
                         <Grid>
                             <Image Source="../../../../Images/Backgrounds/Small1.png"
