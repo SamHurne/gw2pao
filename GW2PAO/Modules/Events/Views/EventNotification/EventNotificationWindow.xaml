@@ -13,7 +13,7 @@
         Topmost="True" ShowInTaskbar="False"
         ResizeMode="NoResize"
         TextOptions.TextFormattingMode="Display"
-        MinHeight="200" Height="Auto" SizeToContent="Height" Width="230" 
+        MinHeight="200" Height="Auto" SizeToContent="Height" Width="300" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <src:OverlayWindow.Resources>
